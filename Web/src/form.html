@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>表单模版</title>
+	
+	<!-- Le styles -->
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="style/style.css" rel="stylesheet">
+    
+    <!-- Le javascript -->
+    <script src="lib/jquery-min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header"> 
+			<h1>表单模版</h1>
+		</div>	
+		<!-- 表单部分开始 -->
+		<form class="form-horizontal">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="input01">文本输入：</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="input01">
+						<p class="help-block">提示信息 </p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input02">密码输入：</label>
+					<div class="controls">
+						<input type="password" class="input-xlarge" id="input02">
+						<p class="help-block">密码提示 </p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input03">文本域：</label>
+					<div class="controls">
+						<textarea rows="3" id="input03"></textarea>
+						<p class="help-block">提示信息 </p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input04">复选框：</label>				
+					<div class="controls">					
+						<div class="checkbox inline">
+							<input type="checkbox" id="box1"> 1						
+						</div>
+						<div class="checkbox inline">
+							<input type="checkbox" id="box2"> 2						
+						</div>
+						<div class="checkbox inline">
+							<input type="checkbox" id="box3"> 3						
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input05">单选钮：</label>				
+					<div class="controls">					
+						<div class="radio">
+							<input type="radio" name="optionsRadios" id="box1"> 1					
+						</div>
+						<div class="radio">
+							<input type="radio" name="optionsRadios" id="box2"> 2					
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input06">按钮替代文本 ：</label>				
+					<div class="controls">
+						<div class="input-append">
+							<input class="span2" id="appendedInputButtons" type="text">
+							<button class="btn" type="button">选项1</button>
+							<button class="btn" type="button">选项2</button>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input07">按钮式下拉菜单：</label>				
+					<div class="controls">
+						<div class="input-append">
+							<div class="btn-group">
+								<button class="btn dropdown-toggle" data-toggle="dropdown">
+									操作
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li>1</li>
+									<li>2</li>
+									<li>3</li>
+								</ul>
+							</div>
+							<input class="span2" id="appendedDropdownButton" type="text">
+						</div>
+						<div class="input-append">
+							<input class="span2" id="appendedDropdownButton" type="text">
+							<div class="btn-group">
+								<button class="btn dropdown-toggle" data-toggle="dropdown">
+									操作
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li>1</li>
+									<li>2</li>
+									<li>3</li>
+								</ul>
+							</div>
+						</div>																			
+					</div>
+				</div>
+				<div class="control-group">				
+					<label class="control-label" for="input05">按钮：</label>				
+					<div class="controls">
+						<button type="submit" class="btn btn-primary">首要</button>
+						<button type="reset" class="btn btn-inverse">反向</button>
+						<button type="reset" class="btn btn-info">信息</button>
+						<button type="reset" class="btn btn-warning">警告</button>
+						<button type="reset" class="btn btn-danger">危险</button>
+						<button type="reset" class="btn btn-success">成功</button>
+						<button type="reset" class="btn">一般</button>
+						<button type="reset" class="btn btn-link">链接</button>
+					</div>
+					
+				</div>
+			</fieldset>
+		</form>
+		<!-- 表单部分结束 -->
+	</div>	
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cn " >
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Carousel exmple</title>
+		
+		<!-- Le styles -->
+		<link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+	    <link href="lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	    <link href="style/style.css" rel="stylesheet">
+		    
+	    <!-- Le javascript -->    
+	    <script type="text/javascript" src="lib/jquery-min.js"></script>
+	    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script>	     	   
+	</head>
+	<body>
+		<header>
+			<!--导航部分开始 -->
+		    <div class="navbar navbar-inverse navbar-fixed-top">
+		      <div class="navbar-inner">
+		        <div class="container">
+		          <a class="brand" href="#">项目名称 </a>
+		          <div class="nav-collapse">
+		            <ul class="nav navbar-nav">
+		              <li class="active"><a href="#">首页</a></li>
+		              <li><a href="#about">简介</a></li>
+		              <li><a href="#contact">产品</a></li>
+		            </ul>
+		            <ul class="nav navbar-nav pull-right">
+		              <li><a href="#login">登录</a></li>
+		              <li><a href="#siginup">注册</a></li>
+		            </ul>
+		          </div><!--/.nav-collapse -->
+		        </div>
+		      </div>
+		    </div>
+		    <!--导航部分结束 -->
+		    <div class="clear"></div>    
+		</header>
+		
+		<div class="container">    
+			<!--幻灯片部分开始 -->
+		    <div id="myCarousel" class="carousel slide">
+			    <!-- Carousel items -->
+			    <div class="carousel-inner">
+				    <div class="active item">
+				   		<img width="100%" alt="" src="img/sfmoma-01.jpg">
+				   		<div class="carousel-caption">
+	                  		<h4>幻灯片1</h4>
+	                  		<p>本页面用于实现Bootstrap的Carousal组件用例。</p>
+	                  		<a style="margin-top:10px;" href="http://ninghao.net/bootstrap/index.html"
+		      	   			   class="btn btn-primary">去学习一下</a>
+	                	</div>
+				    </div>
+				    <div class="item">
+				    	<img width="100%" alt="" src="img/sfmoma-02.jpg">
+				    	<div class="carousel-caption">
+	                  		<h4>幻灯片2</h4>
+	                  		<p>本页面用于实现Bootstrap的Carousal组件用例。</p>
+	                  		<a style="margin-top:10px;" href="http://ninghao.net/bootstrap/index.html"
+		      	   			   class="btn btn-primary">去学习一下</a>
+	                	</div>
+				    </div>
+				    <div  class="item">
+				    	<img width="100%" alt="" src="img/sfmoma-03.jpg">
+				    	<div class="carousel-caption">
+	                  		<h4>幻灯片3</h4>
+	                  		<p>本页面用于实现Bootstrap的Carousal组件用例。</p>
+	                  		<a style="margin-top:10px;" href="http://ninghao.net/bootstrap/index.html"
+		      	   			   class="btn btn-primary">去学习一下</a>
+	                	</div>
+				    </div>
+				 </div>
+				 <!-- Carousel nav -->
+				 <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+				 <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			 </div>
+			 <script type="text/javascript">
+			 <!--
+				 $('.carousel').carousel({
+					interval: 5000
+				 });
+			 -->
+			 </script>
+			 <!--幻灯片部分结束-->
+		 </div>
+		 <!--页脚部分开始 -->     
+	   	 <footer>
+			<div class="container">
+				<p>© 2002-2014 owlman.org, all rights reserved </p>
+			</div>
+		 </footer>					    	
+	</body>
+</html>
