@@ -4,7 +4,7 @@
 
 var fs = require("fs");
 var str = "你好，Nodejs！";
-fs.writeFile("data/output.txt", str, function(err){
+fs.writeFile("../data/output.txt", str, function(err){
     if(err) {
         console.error(err)
     }

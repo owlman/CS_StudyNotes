@@ -3,4 +3,4 @@
 // 时间：2019年07月03日
 
 var name = "owlman";
-console.log("Hello " + name);
+console.log("你好！", name);
