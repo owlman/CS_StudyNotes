@@ -1,3 +1,3 @@
-const name = "owlman";
+const name = 'multfile_module'
 
-exports.name = name;
+exports.name = name

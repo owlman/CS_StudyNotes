@@ -2,19 +2,19 @@
 // 作者：owlman
 // 时间：2019年07月09日
 
-const func = require("./file1");
-const str = require("./file2");
+const func = require('./file1')
+const str = require('./file2')
 
-class multi_file_module {
+class multiFile_module {
     constructor(){
-        this.func = func.add;
-        this.name = str.name;
+        this.func = func.add
+        this.name = str.name
     }
 
     sayhello(){
-        console.log("Hello，", this.name);
-        console.log("x + y = ", this.func(10,5));
+        console.log('Hello', this.name)
+        console.log('x + y = ', this.func(10,5))
     }
 }
 
-module.exports = multi_file_module;
+module.exports = multiFile_module

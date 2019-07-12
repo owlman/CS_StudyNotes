@@ -2,13 +2,14 @@
 // 作者：owlman
 // 时间：2019年07月09日
 
-class ES6_syntax {
+class singleFile_module {
     constructor() {
-        this.name = "ES6_syntax";    
+        this.name = 'singleFile_module'    
     }
-    sayhello() {
-        console.log("Hello", this.name);
-    }
-};
 
-module.exports = ES6_syntax;
+    sayhello() {
+        console.log('Hello', this.name)
+    }
+}
+
+module.exports = singleFile_module
