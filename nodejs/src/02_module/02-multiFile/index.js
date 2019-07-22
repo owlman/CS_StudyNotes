@@ -2,8 +2,8 @@
 // 作者：owlman
 // 时间：2019年07月09日
 
-const func = require('./file1')
-const str = require('./file2')
+const func = require('./functions')
+const str = require('./dataObj')
 
 class multiFile_module {
     constructor(){
