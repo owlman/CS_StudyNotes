@@ -49,7 +49,7 @@ var server = http.createServer(function(req, res){
         }
         
         var strHtml = null
-        if (obj != null) {
+        if (obj !== null) {
             strHtml = template.render(data.toString(),{
                 name : obj.name,
                 age  : obj.age,
