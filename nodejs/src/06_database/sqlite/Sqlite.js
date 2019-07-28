@@ -63,7 +63,7 @@ class SqliteDB {
 
     close() {
         this.db.close()
-    }    
+    }
 }
-``
+
 module.exports = SqliteDB
