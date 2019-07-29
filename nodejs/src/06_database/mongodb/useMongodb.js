@@ -1,44 +1,159 @@
-const async = require('async')
-const MongoDB = require('./Mongodb')
-const url = 'mongodb://localhost:27017'
-var arr = [
-    ['凌杰', '24', '男', '看书, 看电影, 旅游'],
-    ['蔓儿', '25', '女', '看书, 看电影, 写作'],
-    ['张语', '32', '女', '看书, 旅游, 绘画']
-]   
-var dbObj = null
+// 在Node.js中使用mongodb
+// 作者：owlman
+// 时间：2019年07月21日
 
-async.waterfall([
-    op => {
-        dbObj = new MongoDB(url, 'hrdb')
-        op()
-    },
+var MongoClient = require('mongodb').MongoClient
+var async = require('async')
+const server = 'mongodb://localhost:27017'
+const dbName = 'hrdb'
+const collect = 'hr_table'
+const dbPath = server + '/' + dbName
 
-    op => {
-        async.each(arr, function(item, callback) {
-            dbObj.insertData('hr_table', {
-                name  : item[0],
-                age   : item[1],
-                sex   : item[2],
-                items : item[3]
+MongoClient.connect(dbPath, { useNewUrlParser: true },
+                                    function(err, db) {
+    if ( err !== null ) { 
+        console.log('错误信息：' + err.message)
+        return false
+    }
+    var dbo = db.db(dbName)
+    console.log(dbName + '数据库创建成功')
+            
+    async.waterfall([
+        // 控制程序串行执行
+
+        // callback => {
+        //     // 创建集合
+        //     dbo.createCollection(collect, function(err, coll) {
+        //         if (err !== null ) {
+        //             console.log('错误信息：' + err.message)
+        //             return false            
+        //         }
+        //         console.log(collect + '集合创建成功')            
+        //     })
+        //     callback()
+        // },
+
+        callback => {
+            // 插入单条数据
+            var data = {
+                name  : '杨过',
+                age   : '42',
+                sex   : '男',
+                items : '看书, 喝酒, 习武'
+            }
+
+            dbo.collection(collect).insertOne(data, function(err, res) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log("单条数据插入成功")
+                db.close()
             })
             callback()
-        }) 
-        op()
-    },
+        },
 
-    op => {
-        dbObj.queryAllData('hr_table')
-        op()
-    },
+        callback => {
+            // 查询所有数据
+            dbo.collection(collect). find({}).toArray(function(err, result) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log('查看当前集合中的所有数据：')
+                console.log(result)
+            })
+            callback()
+        },
 
-    op => {
-        dbObj.queryDataFor('hr_table', { 'name' : '蔓儿'})
-        op()
-    },
+        callback => {
+            // 插入多条数据
+            var dataArray = [
+                {
+                    name  : '小龙女',
+                    age   : '24',
+                    sex   : '男',
+                    items : '看书, 唱歌, 习武'
+                },
+                {
+                    name  : '郭靖',
+                    age   : '52',
+                    sex   : '男',
+                    items : '看书, 喝酒, 习武'
+                },
+                {
+                    name  : '黄蓉',
+                    age   : '45',
+                    sex   : '女',
+                    items : '看书, 绘画, 习武'
+                }
+            ]
+            dbo.collection(collect).insertMany(dataArray, function(err, res) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log("数组插入成功")
+                db.close()
+            })
+            callback()
+        },
 
-    op => {
-        dbObj.dropCollection('hr_table')
-        op()
-    }
-])
+        callback => {
+            // 查询所有数据
+            dbo.collection(collect). find({}).toArray(function(err, result) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log('查看当前集合中的所有数据：')
+                console.log(result)
+            })
+            callback()
+        },
+
+        callback => {
+            // 更新单一数据
+            var whereData = {'name' : '小龙女'}
+            var updataValue = { $set: { 'sex' : '女' } }
+            dbo.collection(collect).updateOne(whereData, updataValue,
+                                                function(err, res) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log("数据更新成功")
+            })
+            callback()
+        },
+
+        callback => {
+            // 查询指定数据
+            var querystr = { 'name' : '小龙女' }
+            dbo.collection(collect). find(querystr).toArray(function(err, result) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log('查看更新后的小龙女数据：')
+                console.log(result)
+            })
+            callback()
+        },
+
+        callback => {
+            // 删除所有数据
+            dbo.dropCollection(collect, function(err, delOK) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                if ( delOK !== null ) {
+                    console.log(collect + "集合已删除！")  
+                } 
+            })
+            callback()
+        }
+    ])
+    db.close()
+})
