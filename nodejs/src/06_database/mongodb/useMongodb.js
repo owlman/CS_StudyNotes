@@ -122,7 +122,7 @@ MongoClient.connect(dbPath, { useNewUrlParser: true },
                     console.log('错误信息：' + err.message)
                     return false
                 }
-                console.log("数据更新成功")
+                console.log(whereData['name'] + "的数据更新成功")
             })
             callback()
         },
@@ -135,14 +135,66 @@ MongoClient.connect(dbPath, { useNewUrlParser: true },
                     console.log('错误信息：' + err.message)
                     return false
                 }
-                console.log('查看更新后的小龙女数据：')
+                console.log('查看更新后的' + querystr['name'] + '的数据：')
                 console.log(result)
             })
             callback()
         },
 
         callback => {
-            // 删除所有数据
+            // 删除指定单一数据
+            var whereData = { 'name' : '黄蓉' }
+            dbo.collection(collect).deleteOne(whereData,function(err, result) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log(whereData['name'] + '的数据已被删除')
+            })
+            callback()
+        },
+
+        callback => {
+            // 查询所有数据
+            dbo.collection(collect). find({}).toArray(function(err, result) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log('查看当前集合中的所有数据：')
+                console.log(result)
+            })
+            callback()
+        },
+
+        callback => {
+            // 删除指定多条数据
+            var whereData = { 'age' : '24' }
+            dbo.collection(collect).deleteMany(whereData,function(err, result) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log('年龄为' + whereData['age'] + '的数据已被删除')
+            })
+            callback()
+        },
+
+        callback => {
+            // 查询所有数据
+            dbo.collection(collect). find({}).toArray(function(err, result) {
+                if ( err !== null ) { 
+                    console.log('错误信息：' + err.message)
+                    return false
+                }
+                console.log('查看当前集合中的所有数据：')
+                console.log(result)
+            })
+            callback()
+        },
+
+        callback => {
+            // 删除指定集合
             dbo.dropCollection(collect, function(err, delOK) {
                 if ( err !== null ) { 
                     console.log('错误信息：' + err.message)
