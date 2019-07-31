@@ -20,8 +20,8 @@ function dataDeal(objects, message) {
    }
 }
 
-async.waterfall([
-    callback => {
+async.series([
+    function (callback) {
         // 创建表格
         var createTableSql = `
             create table if not exists HR_TABLE (
@@ -34,7 +34,7 @@ async.waterfall([
         callback()
     },
 
-    callback => {
+    function (callback) {
         // 插入数据
         var insertTileSql = `
             insert into HR_TABLE
@@ -44,28 +44,28 @@ async.waterfall([
         callback()
     },
 
-    callback => {
+    function (callback) {
         // 查询数据
         var querySql = 'select * from HR_TABLE'
         sqliteDB.queryData(querySql, dataDeal, '初始数据')
         callback()
     },
     
-    callback => {
+    function (callback) {
         // 更新数据
         var updateSql = `update HR_TABLE set age = 37 where name = "凌杰"`
         sqliteDB.executeSql(updateSql)
         callback()
     },
      
-    callback => {
+    function (callback) {
         // 查询更新后的数据
         querySql = `select * from HR_TABLE`
         sqliteDB.queryData(querySql, dataDeal, '更新后数据')
         callback()
     },
 
-    callback => { 
+    function (callback) { 
         sqliteDB.close()
         callback()
     }
