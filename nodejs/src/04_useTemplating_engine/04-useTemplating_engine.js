@@ -18,7 +18,7 @@ class human {
 
 var server = http.createServer()
 
-server.on('request', function(req, res){
+server.on('request', function(req, res) {
     var url = req.url
     var boy = null
     if (url === '/') {
@@ -31,12 +31,12 @@ server.on('request', function(req, res){
         return res.end('<h1>404 页面没找到！</h1>')
     }
 
-    fs.readFile('./tpl.htm', function(err, data){
-        if (err) {
+    fs.readFile('./tpl.htm', function(err, data) {
+        if ( err !== null ) {
             return res.end('<h1>404 没找到模版文件！</h1>')
         }
 
-        const strHtml = template.render(data.toString(),{
+        const strHtml = template.render(data.toString(), {
             name : boy.name,
             age  : boy.age,
             sex  : boy.sex,

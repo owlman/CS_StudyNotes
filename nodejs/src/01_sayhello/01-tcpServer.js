@@ -4,8 +4,8 @@
 
 var net = require('net')
 var server = net.createServer(function (socket) {
-  console.log('连接来自' + socket.remoteAddress)
-  socket.end('你好，Nodejs！\n')
+    console.log('连接来自' + socket.remoteAddress)
+    socket.end('你好，Nodejs！\n')
 })
 
 server.listen(7000, 'localhost', function(){

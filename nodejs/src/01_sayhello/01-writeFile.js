@@ -5,10 +5,9 @@
 var fs = require('fs')
 var str = '你好，Nodejs！'
 
-fs.writeFile('../data/output.txt', str, function(err){
-    if(err) {
-        console.error(err)
-    } else {
-        console.log("文件写入成功!")
-    }
+fs.writeFile('./data/output.txt', str, function(err){
+    if ( err !== null ) {
+        return console.error('错误信息：' + err.message)
+     }
+     console.log("文件写入成功!")
 })

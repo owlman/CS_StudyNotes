@@ -11,7 +11,7 @@ class SqliteDB {
         var db_exist = fs.existsSync(file)
     
         if ( !db_exist ) {
-            console.log('数据库文件创建成功！')
+            console.error('数据库文件创建成功！')
             fs.openSync(file, 'w')
         }
     }
@@ -20,10 +20,8 @@ class SqliteDB {
         this.db.serialize(function() {
             this.run(sql, function(err) {
                 if( err !== null ) {
-                    console.log('错误信息：' + err.message)
-                    return false
+                    return console.error('错误信息：' + err.message)                
                 }
-                return true
             })
         })
     }
@@ -40,23 +38,21 @@ class SqliteDB {
     }
     
     queryData(sql, callback, message) {
-        this.db.all(sql, function(err, rows){
+        this.db.all(sql, function(err, rows) {
             if( err !== null ) {
-                console.log('错误信息：' + err.message)
-                return false
+                return console.error('错误信息：' + err.message)
             }
     
             if( callback ) {
                 callback(rows, message)
             }
-            return true
         })
     }
     
     executeSql(sql) {
         this.db.run(sql, function(err) {
             if( err !== null ) {
-                console.log('错误信息：' + err.message)
+                return console.error('错误信息：' + err.message)
             }
         })
     }

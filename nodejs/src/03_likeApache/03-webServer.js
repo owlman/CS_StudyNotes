@@ -14,8 +14,8 @@ server.on('request', function(req, res){
     }
        
     fs.readFile(webRoot+url, function(err, data){
-        if (err) {
-            console.error(err)
+        if ( err !== null ) {
+            console.error('错误信息：' + err.message)
             return res.end('<h1>404 页面没找到！</h1>')
         }
         res.end(data)
@@ -25,4 +25,3 @@ server.on('request', function(req, res){
 server.listen(8080, function(){
     console.log('请访问http://localhost:8080/，按Ctrl+C终止服务！')
 })
-``

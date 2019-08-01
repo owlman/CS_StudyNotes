@@ -27,7 +27,7 @@ var server = http.createServer(function(req, res){
     var query = url.parse(req.url, true)
     var obj = null
     var query_error = false
-    if (query.pathname === '/') {
+    if ( query.pathname === '/' ) {
         query_error = false
     }
     else if (query.pathname === '/query') {
@@ -36,7 +36,7 @@ var server = http.createServer(function(req, res){
                 obj = db[i]
             }
         }
-        if (obj === null ) {
+        if ( obj === null ) {
             query_error = true
         }
     } else  {
@@ -44,13 +44,13 @@ var server = http.createServer(function(req, res){
     }
 
     fs.readFile('./index.htm', function(err, data){
-        if (err) {
+        if ( err !== null ) {
             return res.end('<h1>404 没找到模版文件！</h1>')
         }
         
         var strHtml = null
-        if (obj !== null) {
-            strHtml = template.render(data.toString(),{
+        if ( obj !== null ) {
+            strHtml = template.render(data.toString(), {
                 name : obj.name,
                 age  : obj.age,
                 sex  : obj.sex,
@@ -58,7 +58,7 @@ var server = http.createServer(function(req, res){
                 query_error: query_error
             })
         } else {
-            strHtml = template.render(data.toString(),{
+            strHtml = template.render(data.toString(), {
                 name : false,
                 query_error: query_error
             })

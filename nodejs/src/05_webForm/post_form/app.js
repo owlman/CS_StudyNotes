@@ -24,12 +24,12 @@ var db = [
     new human('张语', '32', '女', ['看书', '旅游','绘画'])
 ]
 
-var server = http.createServer(function(req, res){
+var server = http.createServer(function(req, res) {
     var query = url.parse(req.url, true)
     var obj = null
-    if (query.pathname === '/') {
-        fs.readFile('./index.htm', function(err, data){
-            if (err) {
+    if ( query.pathname === '/' ) {
+        fs.readFile('./index.htm', function(err, data) {
+            if ( err !== null ) {
                 return res.end('<h1>404 没找到模版文件！</h1>')
             }
             
@@ -40,7 +40,7 @@ var server = http.createServer(function(req, res){
             res.end(strHtml)
         })
     }
-    else if (query.pathname === '/add') {
+    else if ( query.pathname === '/add' ) {
         req.on('data', function(chunk) {
             var obj = querystring.parse(chunk.toString())
             db.push(new human(
