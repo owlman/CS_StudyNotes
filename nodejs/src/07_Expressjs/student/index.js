@@ -1,3 +1,7 @@
+// 在Express框架中实现学生管理系统
+// 作者：owlman
+// 时间：2019年07月27日
+
 const fs = require('fs')
 const path = require('path')
 const SqliteDB = require(path.join(__dirname,'./Sqlite'))
@@ -95,7 +99,6 @@ module.exports = function(app) {
             + req.body['name']
             + `'`
 
-        console.log(updateSql)
         studentsDB.executeSql(updateSql)
 
         studentsDB.close()
