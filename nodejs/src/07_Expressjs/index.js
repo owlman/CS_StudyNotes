@@ -4,8 +4,8 @@
 
 const path = require('path')
 const express = require('express')
-const router = require('./router')
 const bodyParser =require('body-parser')
+const router = require(path.join(__dirname, 'router'))
 const app = express()
 
 // 配置public目录

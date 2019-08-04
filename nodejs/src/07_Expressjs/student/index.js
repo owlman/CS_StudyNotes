@@ -4,9 +4,43 @@
 
 const fs = require('fs')
 const path = require('path')
-const SqliteDB = require(path.join(__dirname,'./Sqlite'))
+const async = require('async')
+const SqliteDB = require(path.join(__dirname,'Sqlite'))
 const dbPath = path.join(__dirname, '../public/DB/studentsDB.db')
 
+// 配置数据库
+if ( !fs.existsSync(dbPath) ) {
+    const studentsDB = new SqliteDB(dbPath)
+  
+    async.series([
+        function(callback) {
+            var createTableSql = `
+            create table if not exists STUDENT_TABLE (
+                name  TEXT,
+                age   TEXT,
+                sex   TEXT,
+                items TEXT
+            )`
+            studentsDB.createTable(createTableSql)
+            callback()
+        },
+
+        function(callback) {
+            var insertTileSql = `
+                insert into STUDENT_TABLE
+                    (name, age, sex, items)
+                    values(?, ?, ?, ?)`
+            var arr = [
+                ['凌杰', '24', '男', '看书、看电影、旅游'],
+                ['蔓儿', '25', '女', '看书、看电影、写作'],
+                ['张语', '32', '女', '看书、旅游、绘画']
+            ]
+            studentsDB.insertData(insertTileSql, arr)  
+            callback()
+        }
+    ])
+    studentsDB.close()
+}
 
 module.exports = function(app) {
     app.get('/student', function (req, res) {

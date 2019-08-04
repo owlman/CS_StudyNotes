@@ -7,11 +7,6 @@ var SqliteDB = require('./Sqlite')
 var file = "HRDB.db"
 var sqliteDB = new SqliteDB(file)
 
-var arr = [
-    ['凌杰', '24', '男', '看书, 看电影, 旅游'],
-    ['蔓儿', '25', '女', '看书, 看电影, 写作'],
-    ['张语', '32', '女', '看书, 旅游, 绘画']
-]
 
 function dataDeal(objects, message) {
     console.log(message)
