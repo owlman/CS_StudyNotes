@@ -11,9 +11,9 @@ const app = express()
 // 配置public目录
 app.use('/public/', express.static(path.join(__dirname, 'public')))
 
-//配置body-parser中间件
+//配置body-parser中间件，以便获取post请求数据。
+app.use(bodyParser.urlencoded({ extended : false}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
 
 // 配置模板引擎为art-template
 app.engine('htm', require('express-art-template'))
@@ -21,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'art')
 
 // 调用路由表函数
-router(app)
+app.use(router)
 
 // 监听8080端口
 app.listen(8080, function(){

@@ -1,4 +1,4 @@
-// 在Node.js中使用mongodb
+// 在Node.js中使用mongodb包
 // 作者：owlman
 // 时间：2019年07月21日
 
@@ -65,6 +65,12 @@ MongoClient.connect(dbPath, { useNewUrlParser: true },
                 },
                 {
                     name  : '雅典娜',
+                    age   : '24',
+                    sex   : '女',
+                    items : '看书, 音乐, 被救'
+                },
+                {
+                    name  : '阿波罗',
                     age   : '24',
                     sex   : '女',
                     items : '看书, 音乐, 被救'

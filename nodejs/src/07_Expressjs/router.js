@@ -2,15 +2,19 @@
 // 作者：owlman
 // 时间：2019年07月25日
 
-var sayHello = require('./sayHello')
-var student = require('./student')
-var board = require('./board')
+const path = require('path')
+var express = require('express')
+var sayHello = require(path.join(__dirname, 'sayHello'))
+var student = require(path.join(__dirname, 'student'))
+var board = require(path.join(__dirname, 'board'))
 
-module.exports = function(app) {
-    // Hello，Express！
-    sayHello(app)
-    // 学生管理
-    student(app)
-    // 留言板
-    board(app)
-}
+var router = express.Router()
+
+// Hello，Express！
+sayHello(router)
+// 学生管理
+student(router)
+// 留言板
+board(router)
+
+module.exports = router
