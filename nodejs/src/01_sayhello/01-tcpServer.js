@@ -2,8 +2,8 @@
 // 作者：owlman
 // 时间：2019年07月05日
 
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
     console.log('连接来自' + socket.remoteAddress)
     socket.end('你好，Nodejs！\n')
 })
