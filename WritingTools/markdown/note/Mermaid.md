@@ -1,6 +1,6 @@
-# Mermaid生成图形示例
+# Mermaid 生成图形示例
 
-## 流程图
+## 流程图示例
 
 ```Mermaid
 graph TD
@@ -19,7 +19,7 @@ graph TD
     end
 ```
 
-## 序列图
+## 序列图示例
 
 ```Mermaid
 sequenceDiagram
