@@ -2,10 +2,10 @@
 // 作者：owlman
 // 时间：2019年07月15日
 
-var http = require('http')
-var fs = require('fs')
-var url = require('url')
-var template = require('art-template')
+const http = require('http')
+const fs = require('fs')
+const url = require('url')
+const template = require('art-template')
 
 class human {
     constructor(name, age, sex, items=[])
@@ -17,16 +17,16 @@ class human {
     }
 }
 
-var db = [
+const db = [
     new human('凌杰', '37', '男', ['看书', '看电影','旅游']),
     new human('蔓儿', '25', '女', ['看书', '看电影','写作']),
     new human('张语', '32', '女', ['看书', '旅游','绘画'])
 ]
 
-var server = http.createServer(function(req, res){
-    var query = url.parse(req.url, true)
-    var obj = null
-    var query_error = false
+const server = http.createServer(function(req, res){
+    const query = url.parse(req.url, true)
+    let obj = null
+    let query_error = false
     if ( query.pathname === '/' ) {
         query_error = false
     }
@@ -48,7 +48,7 @@ var server = http.createServer(function(req, res){
             return res.end('<h1>404 没找到模版文件！</h1>')
         }
         
-        var strHtml = null
+        let strHtml = null
         if ( obj !== null ) {
             strHtml = template.render(data.toString(), {
                 name : obj.name,

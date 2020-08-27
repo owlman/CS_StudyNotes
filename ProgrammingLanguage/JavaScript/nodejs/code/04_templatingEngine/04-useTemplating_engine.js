@@ -2,9 +2,9 @@
 // 作者：owlman
 // 时间：2019年07月12日
 
-var http = require('http')
-var fs = require('fs')
-var template = require('art-template')
+const http = require('http')
+const fs = require('fs')
+const template = require('art-template')
 
 class human {
     constructor(name, age, sex, items=[])
@@ -16,11 +16,11 @@ class human {
     }
 }
 
-var server = http.createServer()
+const server = http.createServer()
 
 server.on('request', function(req, res) {
-    var url = req.url
-    var boy = null
+    const url = req.url
+    let boy = null
     if (url === '/') {
         boy = new human('凌杰', '37', '男', ['看书', '看电影','旅游'])
     } else if (url === '/wang') {
@@ -31,7 +31,7 @@ server.on('request', function(req, res) {
         return res.end('<h1>404 页面没找到！</h1>')
     }
 
-    fs.readFile('./tpl.htm', function(err, data) {
+    fs.readFile('./singleTpl.htm', function(err, data) {
         if ( err !== null ) {
             return res.end('<h1>404 没找到模版文件！</h1>')
         }
