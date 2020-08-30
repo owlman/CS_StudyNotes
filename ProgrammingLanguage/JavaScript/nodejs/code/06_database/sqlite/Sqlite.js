@@ -2,13 +2,13 @@
 // 作者：owlman
 // 时间：2019年07月20日
 
-var fs = require('fs')
-var sqlite3 = require('sqlite3').verbose()
+const fs = require('fs')
+const sqlite3 = require('sqlite3').verbose()
 
 class SqliteDB {
     constructor(file) {
         this.db = new sqlite3.Database(file)
-        var db_exist = fs.existsSync(file)
+        const db_exist = fs.existsSync(file)
     
         if ( !db_exist ) {
             console.error('数据库文件创建成功！')
@@ -28,8 +28,8 @@ class SqliteDB {
 
     insertData(sql, objects) {
         this.db.serialize(function() {
-            var stmt = this.prepare(sql)
-            for ( var i = 0; i < objects.length; ++i ) {
+            const stmt = this.prepare(sql)
+            for ( let i = 0; i < objects.length; ++i ) {
                 stmt.run(objects[i])
             }
     

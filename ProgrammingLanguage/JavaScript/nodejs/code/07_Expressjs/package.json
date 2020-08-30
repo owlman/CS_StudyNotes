@@ -16,6 +16,6 @@
     "express": "^4.17.1",
     "express-art-template": "^1.0.1",
     "mongodb": "^3.3.0-beta2",
-    "sqlite3": "^4.0.9"
+    "sqlite3": "^4.2.0"
   }
 }

@@ -2,23 +2,22 @@
 // 作者：owlman
 // 时间：2019年07月20日
 
-var async = require('async')
-var SqliteDB = require('./Sqlite')
-var file = "HRDB.db"
-var sqliteDB = new SqliteDB(file)
-
+const async = require('async')
+const SqliteDB = require('./Sqlite')
+const file = "HRDB.db"
+const sqliteDB = new SqliteDB(file)
 
 function dataDeal(objects, message) {
     console.log(message)
-    for ( var i = 0; i < objects.length; ++i )  {
+    for ( let i = 0; i < objects.length; ++i )  {
         console.log(objects[i])
    }
 }
 
-async.series([
+async.waterfall([
     function (callback) {
         // 创建表格
-        var createTableSql = `
+        const createTableSql = `
             create table if not exists HR_TABLE (
                 name  TEXT,
                 age   TEXT,
@@ -31,24 +30,30 @@ async.series([
 
     function (callback) {
         // 插入数据
-        var insertTileSql = `
+        const insertTileSql = `
             insert into HR_TABLE
                 (name, age, sex, items)
                 values(?, ?, ?, ?)`
+        
+        const arr = [
+            ['凌杰', '24', '男', '看书, 看电影, 旅游'],
+            ['蔓儿', '25', '女', '看书, 看电影, 写作'],
+            ['张语', '32', '女', '看书, 旅游, 绘画']
+        ]
         sqliteDB.insertData(insertTileSql, arr)
         callback()
     },
 
     function (callback) {
         // 查询数据
-        var querySql = 'select * from HR_TABLE'
+        const querySql = 'select * from HR_TABLE'
         sqliteDB.queryData(querySql, dataDeal, '初始数据')
         callback()
     },
     
     function (callback) {
         // 更新数据
-        var updateSql = `update HR_TABLE set age = 37 where name = "凌杰"`
+        const updateSql = `update HR_TABLE set age = 37 where name = "凌杰"`
         sqliteDB.executeSql(updateSql)
         callback()
     },
