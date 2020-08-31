@@ -1,88 +1,48 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+{{ extend './baseTpl.art' }}
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+{{ block 'navbar' }}
+<div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+        <li><a href="/">你好，Express！</a></li>
+        <li><a href="/student">学生管理</a></li>
+        <li class="active"><a href="/board">留言板</a></li>
+    </ul>
+</div>
+{{ /block }}
 
-        <!-- 自定义 CSS -->
-        <link href="/public/css/main.css" rel="stylesheet">
-
-        <title>Express使用示例</title>
-    </head>
-
-    <body>
-        <div class="container">
-            <!-- 导航栏部分开始 -->
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">切换导航栏</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Express使用示例</a>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/">你好，Express！</a></li>
-                            <li><a href="/student">学生管理</a></li>
-                            <li class="active"><a href="/board">留言板</a></li>
-                        </ul>
-                    </div>
-                    <!-- 导航栏部分结束 -->
-                </div>
-            </nav>
-
-            <!-- 主体部分开始 -->
-            <div class="jumbotron">
-                <h2>留言板</h2>
-                <form action="/board" method="POST" class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">你的姓名：</label>
-                        <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" placeholder="请输入名字">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname" class="col-sm-2 control-label">留言信息：</label>
-                        <div class="col-sm-10">
-                        <textarea class="form-control" name="message" placeholder="请输入留言"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">提交留言</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="jumbotron">
-                <h3>最新留言（{{ num }} 则）：</h3>
-                <table class="table">
-                    {{ each db }}
-                    <tr>
-                        <td>{{ $value.name }} </td>
-                        <td>{{ $value.message }} </td>
-                        <td>{{ $value.time }}</td>
-                    </tr>
-                    {{ /each }}
-                </table>
+{{ block 'main' }}
+<div class="jumbotron">
+    <h2>留言板</h2>
+    <form action="/board" method="POST" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">你的姓名：</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" name="name" placeholder="请输入名字">
             </div>
         </div>
-        <!-- 主体部分结束 -->
-
-        <!-- Bootstrap的核心JavaScript
-        ================================================== -->
-        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-        <script> window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </body>
-</html>
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">留言信息：</label>
+            <div class="col-sm-10">
+            <textarea class="form-control" name="message" placeholder="请输入留言"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">提交留言</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="jumbotron">
+    <h3>最新留言（{{ num }} 则）：</h3>
+    <table class="table">
+        {{ each db }}
+        <tr>
+            <td>{{ $value.name }} </td>
+            <td>{{ $value.message }} </td>
+            <td>{{ $value.time }}</td>
+        </tr>
+        {{ /each }}
+    </table>
+</div>
+{{ /block }}

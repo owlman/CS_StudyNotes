@@ -1,79 +1,39 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+{{ extend './baseTpl.art' }}
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+{{ block 'navbar' }}
+<div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+        <li><a href="/">你好，Express！</a></li>
+        <li class="active"><a href="/student">学生管理</a></li>
+        <li><a href="/board">留言板</a></li>
+    </ul>
+</div>
+{{ /block }}
 
-        <!-- 自定义 CSS -->
-        <link href="/public/css/main.css" rel="stylesheet">
-
-        <title>Express使用示例</title>
-    </head>
-
-    <body>
-        <div class="container">
-            <!-- 导航栏部分开始 -->
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">切换导航栏</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Express使用示例</a>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/">你好，Express！</a></li>
-                            <li class="active"><a href="/student">学生管理</a></li>
-                            <li><a href="/board">留言板</a></li>
-                        </ul>
-                    </div>
-                    <!-- 导航栏部分结束 -->
-                </div>
-            </nav>
-
-            <!-- 主体部分开始 -->
-            <div class="jumbotron">
-                <h2>学生信息表</h2>
-                <a class="btn btn-success" href="/student/add">添加学生</a>
-                <table class="table table-striped">
-                    <tr>
-                        <th>姓名</th>
-                        <th>年龄</th>
-                        <th>性别</th>
-                        <th>爱好</th>
-                        <th>操作</th>
-                    </tr>
-                    {{ each db }}
-                    <tr>
-                        <td>{{ $value.name }} </td>
-                        <td>{{ $value.age }} </td>
-                        <td>{{ $value.sex }} </td>
-                        <td>{{ $value.items }}</td>
-                        <td>
-                            <a href="/student/edit?name={{ $value.name}}">编辑</a>
-                            <a href="/student/delete?name={{ $value.name}}">删除</a>
-                        </td>
-                    </tr>
-                    {{ /each }}
-                </table>
-            </div>
-        </div>
-        <!-- 主体部分结束 -->
-
-        <!-- Bootstrap的核心JavaScript
-        ================================================== -->
-        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-        <script> window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </body>
-</html>
+{{ block 'main' }}
+<div class="jumbotron">
+    <h2>学生信息表</h2>
+    <a class="btn btn-success" href="/student/add">添加学生</a>
+    <table class="table table-striped">
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>爱好</th>
+            <th>操作</th>
+        </tr>
+        {{ each db }}
+        <tr>
+            <td>{{ $value.name }} </td>
+            <td>{{ $value.age }} </td>
+            <td>{{ $value.sex }} </td>
+            <td>{{ $value.items }}</td>
+            <td>
+                <a href="/student/edit?name={{ $value.name}}">编辑</a>
+                <a href="/student/delete?name={{ $value.name}}">删除</a>
+            </td>
+        </tr>
+        {{ /each }}
+    </table>
+</div>
+{{ /block }}
