@@ -7,10 +7,10 @@
 
 #ifndef MYSTL_ALGORITHM_ALGORITHM_H_
 #define MYSTL_ALGORITHM_ALGORITHM_H_
-#include <stdio.h>
-#include <stdlib.h>
 
-#include "tools.h"
+#include "../test.h"
+
+#include "AlgorithmTools.h"
 #include "sort.h"
 
 #endif /* MYSTL_ALGORITHM_ALGORITHM_H_ */

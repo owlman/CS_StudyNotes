@@ -1,7 +1,7 @@
 #ifndef TOOL_H
 #define TOOL_H
 
-#include "structure.h"
+#include "../test.h"
 
 namespace owllib {
 	class time_conuter{
