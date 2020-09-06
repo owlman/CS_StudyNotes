@@ -71,3 +71,4 @@ target/
 
 # vscode project
 .vscode/
+node_modules

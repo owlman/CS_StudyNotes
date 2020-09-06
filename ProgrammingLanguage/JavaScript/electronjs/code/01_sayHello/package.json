@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "say-hello",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "My First Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron . --inspect=5858"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "",
   "keywords": [
     "Electron",
     "quick",
@@ -14,7 +14,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "owlman",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^10.1.1"
