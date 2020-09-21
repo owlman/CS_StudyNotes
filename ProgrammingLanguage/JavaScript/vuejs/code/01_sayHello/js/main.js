@@ -9,4 +9,4 @@ const app = new Vue({
         sayHello: '你好，Vue.js！',
         vueLogo: 'img/logo.png'
     }
-})
+});
