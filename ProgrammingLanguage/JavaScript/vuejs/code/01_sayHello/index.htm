@@ -11,7 +11,13 @@
 <body>
     <div id="app">
         <h1> {{ sayHello }} </h1>
+        <!-- 上述模版语法背后政治的 Vue 语法：
+            <h1 v-text="sayHello"></h1>
+        -->
         <img :src="vueLogo" style="width:200px">
+        <!-- 上述简写指令的完整 Vue 语法：
+            <img v-bind:src="vueLogo" style="width:200px">
+        -->
     </div>    
 </body>
 </html>
