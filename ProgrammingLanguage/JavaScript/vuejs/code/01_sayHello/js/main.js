@@ -7,6 +7,12 @@ const app = new Vue({
     el: '#app',
     data:{
         sayHello: '你好，Vue.js！',
-        vueLogo: 'img/logo.png'
+        vueLogo: 'img/logo.png',
+        isShow: true
+    },
+    methods:{
+        toggleShow: function() {
+            this.isShow = !this.isShow;
+        }
     }
 });

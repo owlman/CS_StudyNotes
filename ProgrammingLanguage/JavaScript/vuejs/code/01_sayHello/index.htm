@@ -12,12 +12,16 @@
     <div id="app">
         <h1> {{ sayHello }} </h1>
         <!-- 上述模版语法背后政治的 Vue 语法：
-            <h1 v-text="sayHello"></h1>
+        <h1 v-text="sayHello"></h1>
         -->
-        <img :src="vueLogo" style="width:200px">
+        <img :src="vueLogo" v-show="isShow" style="width:200px">
         <!-- 上述简写指令的完整 Vue 语法：
-            <img v-bind:src="vueLogo" style="width:200px">
+        <img v-bind:src="vueLogo" style="width:200px">
         -->
-    </div>    
+        <input type="button" :value="isShow?'隐藏':'显示'" @click="toggleShow" />
+        <!-- 上述简写指令的完整 Vue 语法：
+        <input type="button" v-bind:value="isShow?'隐藏':'显示'" v-on:click="toggleShow" />
+        -->            
+    </div>
 </body>
 </html>
