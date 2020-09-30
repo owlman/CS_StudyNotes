@@ -16,7 +16,7 @@ const app = new Vue({
                       this.taskList.push(this.newTask);
                       this.newTask = '';
                   }
-              },
+                },
         remove: function(index) {
                   if(index >=  0) {
                       this.taskList.splice(index,1);
