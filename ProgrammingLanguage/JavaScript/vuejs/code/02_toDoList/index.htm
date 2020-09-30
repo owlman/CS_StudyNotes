@@ -13,9 +13,10 @@
         <h1>待办事项</h1>
         <div id="todo">
             <ul>
-                <li v-for="task in taskList">
+                <li v-for="( task,index ) in taskList">
                     <input type="checkbox" v-model="doneList" :value="task">
-                    {{ task }}
+                    <label :for="task">{{ task }}</label>
+                    <input type="button" value="删除" @click="remove(index)">
                 </li>
             </ul>
         </div>
@@ -23,12 +24,12 @@
             <h2>已完成事项</h2>
             <ul>
                 <li v-for="task in doneList">
-                    {{ task }}
+                    <label :for="task">{{ task }}</label>
                 </li>
             </ul>
         </div>
-        <input type="text" v-model="newTask" @keyup.enter="todo">
-        <input type="button" value="添加新任务" @click="todo">
+        <input type="text" v-model="newTask" @keyup.enter="addNew">
+        <input type="button" value="添加新任务" @click="addNew">
     </div>
 </body>
 </html>
