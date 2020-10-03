@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <title>{{ name }}的个人信息</title>
+    </head>
+    <body>
+        <h1>{{ name }}的个人信息</h1>
+        <table>
+            <tr><td>姓名：</td><td>{{ name }}</td></tr>
+            <tr><td>年龄：</td><td>{{ age }}</td></tr>
+            <tr><td>性别：</td><td>{{ sex }}</td></tr>
+            <tr>
+                <td>爱好：</td>
+                <td>{{ each items }} {{ $value }} {{ /each }}</td>
+            </tr>
+        </table>
+    </body>
+</html>
