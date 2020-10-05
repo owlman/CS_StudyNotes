@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer="defer" src="/node_modules/vue/dist/vue.js"></script>
+    <script defer="defer" src="/node_modules/axios/dist/axios.js"></script>
+    <script defer=“defer” src="js/main.js"></script>
+    <title>留言本</title>
+</head>
+<body>
+    <div id="app">
+        <h1>留言本</h1>
+        <div id="showNote" v-for="note in notes">
+            <span>{{ note.userName }} 说：{{ note.noteMessage }}</span>
+            <input type="button" value="删除" @click="remove(note.uid)">
+        </div>
+        <div id="addMessage">
+            <h2>请留言：</h2>
+            <label :for="userName">用户名：</label>
+            <input type="text" v-model="userName">
+            <br>
+            <label :for="message">写留言：</label>
+            <input type="text" v-model="Message"></input>
+            <input type="button" value="添加留言" @click="addNew">
+        </div>
+    </div>
+</body>
+</html>
