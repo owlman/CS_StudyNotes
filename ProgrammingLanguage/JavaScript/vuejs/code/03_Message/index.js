@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express')
 const bodyParser = require('body-parser');
+const knex = require('knex');
 const port = 8080;
 
 // 创建服务器实例
@@ -14,9 +15,6 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 //配置 body-parser 中间件，以便获取 POST 请求数据。
 app.use(bodyParser.urlencoded({ extended : false}));
 app.use(bodyParser.json());
-
-// 创建数据库实例
-const knex = require('knex');
 
 // 创建数据库连接对象：
 const appDB = knex({
