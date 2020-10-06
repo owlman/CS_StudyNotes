@@ -7,9 +7,9 @@ const port = 8080;
 // 创建服务器实例
 const app = express();
 
-// 配置 public 目录
+// 配置 public 目录，将其开放给浏览器端
 app.use('/', express.static(path.join(__dirname, 'public')));
-// 配置 node_modules 目录
+// 配置 node_modules 目录，将其开放给浏览器端
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 //配置 body-parser 中间件，以便获取 POST 请求数据。
