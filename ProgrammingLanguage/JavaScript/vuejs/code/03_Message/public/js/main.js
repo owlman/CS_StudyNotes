@@ -41,11 +41,11 @@ const app = new Vue({
                 });
             }
         },
-        remove: function(uid) {
+        remove: function(id) {
             if(uid > 0) {
                 that = this;
                 axios.post('/data/delete', {
-                    'uid' : uid
+                    uid : id
                 }).catch(function(err) {
                     console.error(err);
                 });

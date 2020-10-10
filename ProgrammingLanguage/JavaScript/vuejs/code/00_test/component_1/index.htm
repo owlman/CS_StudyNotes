@@ -3,25 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>学习 vue 组件实验（1）：基本使用</title>
+    <meta http-equiv="X-UA  -Compatible" content="ie=edge">
+    <title>学习 vue 组件实验（1）：组件注册</title>
 </head>
 <body>
     <div id="app">
-        <sayhello :objname="name"></sayhello>
-        <input v-model="name" type="text" />
+        <say-hello :who="who"></say-hello>
+        <welcome-you :who="who"></welcome-you>
     </div>
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script>
-        Vue.component('sayhello', {
-            props: ['objname'],
-            template: `<h1>你好， {{ objname }}！</h1>`
+        // 全局组件注册
+        Vue.component('say-hello', {
+            props: ['who'],
+            template: `<h1>你好， {{ you }}！</h1>`,
+            data: function() {
+                return {
+                    you: this.who
+                };
+            }
         });
 
         const app = new Vue({
             el: '#app',
+            // 局部组件注册
+            components: {
+                'welcome-you': {
+                    props: ['who'],
+                    template: `<h2>欢迎你， {{ you }}！</h2>`,
+                    data: function() {
+                        return {
+                            you: this.who
+                        };
+                    }
+                }
+            },
             data: {
-                name: 'vue'
+                who: 'vue'
             }
         });
     </script>
