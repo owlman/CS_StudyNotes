@@ -15,8 +15,8 @@
     <script>
         // 全局组件注册
         Vue.component('say-hello', {
-            props: ['who'],
             template: `<h1>你好， {{ you }}！</h1>`,
+            props: ['who'],
             data: function() {
                 return {
                     you: this.who
@@ -29,8 +29,8 @@
             // 局部组件注册
             components: {
                 'welcome-you': {
-                    props: ['who'],
                     template: `<h2>欢迎你， {{ you }}！</h2>`,
+                    props: ['who'],
                     data: function() {
                         return {
                             you: this.who
