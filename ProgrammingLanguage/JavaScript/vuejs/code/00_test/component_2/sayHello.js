@@ -5,7 +5,7 @@ const tpl = `
     </div>
 `;
     
-const sayhello = {
+const sayHello = {
     template: tpl,
     props : ['who'],
     data : function() {
@@ -15,4 +15,4 @@ const sayhello = {
     }
 };
 
-export default sayhello;
+export default sayHello;
