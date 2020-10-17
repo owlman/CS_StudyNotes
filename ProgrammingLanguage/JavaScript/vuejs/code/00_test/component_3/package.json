@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./index.js"
+    "build": "node_modules/.bin/webpack",
+    "dev": "npm run build && nodemon ./index.js"
   },
   "keywords": [],
   "author": "owlman",
