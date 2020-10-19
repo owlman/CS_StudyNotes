@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="box">
         <h1>你好， {{ you }}！</h1>
         <input type="text" v-model="you" />
     </div>
 </template>
 
 <script>
-    export default {
+    const sayHello = {
         name: 'sayHello',
         props : ['who'],
         data : function() {
@@ -15,8 +15,13 @@
             }
         }
     };
+    export default sayHello;
 </script>
 
-<style>
-    /* 如有必要还可以设置一些样式 */
+<style scoped>
+    .box {
+        height: 150px;
+        width: 250px;
+        background-color: #ccc;
+    }
 </style>

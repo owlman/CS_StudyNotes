@@ -3,10 +3,12 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-    entry: path.join(__dirname,'src/main.js'),
+    entry: {
+        main: path.join(__dirname,'src/main.js')
+    },
     output: {
-        path: path.resolve(__dirname,'./public'),
-        filename:'main-bundle.js'
+        path: path.resolve(__dirname,'./public/'),
+        filename:'js/[name]-bundle.js'
     },
     plugins:[
         new VueLoaderPlugin(),
@@ -23,6 +25,13 @@ const config = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.css/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader'
+                ]
             }
         ]
     },
