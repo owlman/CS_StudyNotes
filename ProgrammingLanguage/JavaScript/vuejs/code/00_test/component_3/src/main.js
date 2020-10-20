@@ -8,5 +8,10 @@ new Vue({
     },
     data: {
         who:'vue'
+    },
+    methods: {
+        showMessage : function() {
+            window.alert('Hello, ' + this.who);
+        }
     }
 });

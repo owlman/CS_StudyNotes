@@ -6,7 +6,9 @@
 </head>
 <body>
     <div id="app">
-        <say-hello :who="who"></say-hello>
+        <say-hello @show-message="showMessage"
+                   :who="who">
+        </say-hello>
     </div>
 </body>
 </html>

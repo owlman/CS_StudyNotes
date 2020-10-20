@@ -299,6 +299,7 @@ process.umask = function () {
 //
 //
 //
+//
 
 const sayHello = {
     name: 'sayHello',
@@ -307,6 +308,11 @@ const sayHello = {
         return {
             you: this.who
         };
+    },
+    methods: {
+        showMessage: function () {
+            this.$emit('show-message', this.who);
+        }
     }
 };
 /* harmony default export */ __webpack_exports__["a"] = (sayHello);
@@ -355,6 +361,11 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
     },
     data: {
         who: 'vue'
+    },
+    methods: {
+        showMessage: function () {
+            window.alert('Hello, ' + this.who);
+        }
     }
 });
 
@@ -11468,6 +11479,11 @@ var render = function() {
           _vm.you = $event.target.value
         }
       }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "button", value: "弹出对话框" },
+      on: { click: _vm.showMessage }
     })
   ])
 }
@@ -11494,7 +11510,7 @@ render._withStripped = true
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(14);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.box[data-v-03489600] {\n    height: 150px;\n    width: 250px;\n    background-color: #ccc;\n}\n", ""]);
+exports.push([module.i, "\n.box[data-v-03489600] {\n    height: 130px;\n    width: 250px;\n    background-color: #ccc;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

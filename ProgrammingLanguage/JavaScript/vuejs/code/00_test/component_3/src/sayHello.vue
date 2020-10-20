@@ -2,6 +2,7 @@
     <div class="box">
         <h1>你好， {{ you }}！</h1>
         <input type="text" v-model="you" />
+        <input type="button" value="弹出对话框" @click="showMessage">
     </div>
 </template>
 
@@ -13,6 +14,11 @@
             return {
                 you: this.who
             }
+        },
+        methods: {
+            showMessage: function() {
+                this.$emit('show-message', this.who);
+            }
         }
     };
     export default sayHello;
@@ -20,7 +26,7 @@
 
 <style scoped>
     .box {
-        height: 150px;
+        height: 130px;
         width: 250px;
         background-color: #ccc;
     }
