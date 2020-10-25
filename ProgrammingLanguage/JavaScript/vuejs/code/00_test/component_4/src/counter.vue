@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <input type="button" value="-" @click="changeCounter(-1)">
-        <input type="text" :value="value" @input="changeInput" />
+        <input type="text" :value="value" @input="changeInput" >
         <input type="button" value="+" @click="changeCounter(1)">
     </div>
 </template>
