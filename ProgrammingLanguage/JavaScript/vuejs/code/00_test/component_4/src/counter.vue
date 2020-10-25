@@ -29,7 +29,7 @@
 <style scoped>
     .box {
         width: 340px;
-        padding: 10px;
+        padding: 5px;
         background-color: #ccc;
     }
 </style>

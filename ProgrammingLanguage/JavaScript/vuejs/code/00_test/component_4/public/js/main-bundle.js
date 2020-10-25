@@ -11509,7 +11509,7 @@ render._withStripped = true
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(14);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.box[data-v-39954f9a] {\n    width: 340px;\n    padding: 10px;\n    background-color: #ccc;\n}\n", ""]);
+exports.push([module.i, "\n.box[data-v-39954f9a] {\n    width: 340px;\n    padding: 5px;\n    background-color: #ccc;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
