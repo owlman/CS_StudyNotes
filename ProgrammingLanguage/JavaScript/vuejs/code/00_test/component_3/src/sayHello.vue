@@ -1,4 +1,4 @@
-<template>
+`<template>
     <div class="box">
         <h1>你好， {{ you }}！</h1>
         <input type="text" v-model="you" />
