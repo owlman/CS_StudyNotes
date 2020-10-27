@@ -1,13 +1,12 @@
 {
   "name": "component_4",
   "version": "1.0.0",
-  "description": "学习构建 webpack+vue 项目",
+  "description": "学习构建更复杂的组件",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/webpack",
-    "clear": "rm -rf ./public/*",
-    "dev": "npm run build && nodemon ./index.js"
+    "clear": "rm -rf ./public/*"
   },
   "keywords": [],
   "author": "owlman",
