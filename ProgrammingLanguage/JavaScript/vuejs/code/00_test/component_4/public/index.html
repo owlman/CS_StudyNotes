@@ -6,7 +6,15 @@
 </head>
 <body>
     <div id="app">
-        <my-counter v-model="num"></my-counter>
+        <my-box>
+            <template v-slot:title>
+                <h1>我的计数器</h1>
+            </template>      
+            <template v-slot:default>
+                <p>这是一个“计数器”组件：</p>
+                <my-counter v-model="num"></my-counter>
+            </template>
+        </my-box>
     </div>
 <script type="text/javascript" src="js/main-bundle.js"></script></body>
 </html>
