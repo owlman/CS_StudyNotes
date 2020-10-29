@@ -7,7 +7,7 @@
     - Ubuntu 使用总结
 - **ProgrammingLanguage**：与编程语言及其相关框架相关的学习笔记。
   - *C&Cpp*：目前只有示例。
-`  - *JavaScript*
+  - *JavaScript*
     - Node.js 学习笔记
     - Vue.js 学习笔记
     - Electron.js 学习笔记
