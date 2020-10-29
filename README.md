@@ -6,11 +6,11 @@
   - **Linux**
     - Ubuntu 使用总结
 - **ProgrammingLanguage**：与编程语言及其相关框架相关的学习笔记。
-  - *c&cpp*：目前只有示例。
-  - *JavaScript*
+  - *C&Cpp*：目前只有示例。
+`  - *JavaScript*
     - Node.js 学习笔记
     - Vue.js 学习笔记
     - Electron.js 学习笔记
-  - *python*
+  - *Python*：目前只有示例。
 - **WritingTools**：与写作工具相关的学习笔记。
-  - *markdown*：目前只有示例。
+  - *Markdown*：目前只有示例。
