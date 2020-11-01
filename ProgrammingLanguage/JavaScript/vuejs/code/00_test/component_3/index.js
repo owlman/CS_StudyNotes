@@ -7,8 +7,6 @@ const app = express();
 
 // 配置 public 目录，将其开放给浏览器端
 app.use('/', express.static(path.join(__dirname, 'public')));
-// 配置 node_modules 目录，将其开放给浏览器端
-// app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // 监听 8080 端口
 app.listen(port, function(){
