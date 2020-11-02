@@ -1,97 +1,111 @@
-Html Webpack Plugin:
-<pre>
-  Error: Child compilation failed:
-  Entry module not found: Error: Can't resolve '/mnt/pan_2/document/code/study/ProgrammingLanguage/JavaScript/vuejs/code/  04_notepad/frontend/index.htm' in '/mnt/pan_2/document/code/study/ProgrammingLanguage/JavaScript/vuejs/code/04_notepad'  :
-  Error: Can't resolve '/mnt/pan_2/document/code/study/ProgrammingLanguage/JavaScript/vuejs/code/04_notepad/frontend/inde  x.htm' in '/mnt/pan_2/document/code/study/ProgrammingLanguage/JavaScript/vuejs/code/04_notepad'
-  
-  - compiler.js:79 childCompiler.runAsChild
-    [04_notepad]/[html-webpack-plugin]/lib/compiler.js:79:16
-  
-  - Compiler.js:300 compile
-    [04_notepad]/[webpack]/lib/Compiler.js:300:11
-  
-  - Compiler.js:510 applyPluginsAsync.err
-    [04_notepad]/[webpack]/lib/Compiler.js:510:14
-  
-  - Tapable.js:202 next
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:202:11
-  
-  - CachePlugin.js:78 Compiler.<anonymous>
-    [04_notepad]/[webpack]/lib/CachePlugin.js:78:5
-  
-  - Tapable.js:206 Compiler.applyPluginsAsyncSeries
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:206:13
-  
-  - Compiler.js:507 compilation.seal.err
-    [04_notepad]/[webpack]/lib/Compiler.js:507:11
-  
-  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:195:46
-  
-  - Compilation.js:683 applyPluginsAsync.err
-    [04_notepad]/[webpack]/lib/Compilation.js:683:19
-  
-  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:195:46
-  
-  - Compilation.js:674 applyPluginsAsync.err
-    [04_notepad]/[webpack]/lib/Compilation.js:674:11
-  
-  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:195:46
-  
-  - Compilation.js:669 applyPluginsAsync.err
-    [04_notepad]/[webpack]/lib/Compilation.js:669:10
-  
-  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:195:46
-  
-  - Compilation.js:665 applyPluginsAsyncSeries
-    [04_notepad]/[webpack]/lib/Compilation.js:665:9
-  
-  - Tapable.js:195 Compilation.applyPluginsAsyncSeries
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:195:46
-  
-  - Compilation.js:608 Compilation.seal
-    [04_notepad]/[webpack]/lib/Compilation.js:608:8
-  
-  - Compiler.js:504 applyPluginsParallel.err
-    [04_notepad]/[webpack]/lib/Compiler.js:504:17
-  
-  - Tapable.js:289 
-    [04_notepad]/[webpack]/[tapable]/lib/Tapable.js:289:11
-  
-  - Compilation.js:511 _addModuleChain
-    [04_notepad]/[webpack]/lib/Compilation.js:511:11
-  
-  - Compilation.js:394 errorAndCallback.bail
-    [04_notepad]/[webpack]/lib/Compilation.js:394:4
-  
-  - Compilation.js:417 moduleFactory.create
-    [04_notepad]/[webpack]/lib/Compilation.js:417:13
-  
-  - NormalModuleFactory.js:237 factory
-    [04_notepad]/[webpack]/lib/NormalModuleFactory.js:237:20
-  
-  - NormalModuleFactory.js:60 resolver
-    [04_notepad]/[webpack]/lib/NormalModuleFactory.js:60:20
-  
-  - NormalModuleFactory.js:127 asyncLib.parallel
-    [04_notepad]/[webpack]/lib/NormalModuleFactory.js:127:20
-  
-  - async.js:3888 
-    [04_notepad]/[async]/dist/async.js:3888:9
-  
-  - async.js:473 
-    [04_notepad]/[async]/dist/async.js:473:16
-  
-  - async.js:1062 iteratorCallback
-    [04_notepad]/[async]/dist/async.js:1062:13
-  
-  - async.js:969 
-    [04_notepad]/[async]/dist/async.js:969:16
-  
-  - async.js:3885 
-    [04_notepad]/[async]/dist/async.js:3885:13
-  
-</pre>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>云端记事本</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 10px;
+            text-align: left;
+            font-family: Lato;
+            color: #fff;
+            background: #9b59b6;
+        }
+
+        .tabs {
+            width: 650px;
+            float: none;
+            list-style: none;
+            position: relative;
+            margin: 80px 0 0 10px;
+            text-align: left;
+        }
+        .tabs li {
+            float: left;
+            display: block;
+        }
+        .tabs input[type="radio"] {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        .tabs label {
+            display: block;
+            padding: 14px 21px;
+            border-radius: 2px 2px 0 0;
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+            background: #8e44ad;
+            cursor: pointer;
+            position: relative;
+            top: 4px;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        .tabs label:hover {
+            background: #703688;
+        }
+        .tabs .tab-content {
+            z-index: 2;
+            display: none;
+            overflow: hidden;
+            width: 100%;
+            font-size: 17px;
+            line-height: 25px;
+            padding: 25px;
+            position: absolute;
+            top: 53px;
+            left: 0;
+            background: #612e76;
+        }
+            .tabs [id^="tab"]:checked + label {
+            top: 0;
+            padding-top: 17px;
+            background: #612e76;
+        }
+        .tabs [id^="tab"]:checked ~ [id^="tab-"] {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>云端记事本</h1>
+        <div id="user" v-if="!isLogin">
+            <ul class="tabs">
+                <li>
+                    <input type="radio"
+                           name="tabs"
+                           id="tab1"
+                           value="login" 
+                           v-model="checked" />
+                    <label for="tab1">用户登录</label>
+                    <user-login v-if="checked === 'login'" />
+                </li>
+
+                <li>
+                    <input type="radio"
+                           name="tabs"
+                           id="tab2"                           
+                           value="sign" 
+                           v-model="checked" />
+                    <label for="tab2">用户注册</label>
+                    <user-sign-up v-if="checked === 'sign'" /> 
+                </li>
+            </ul>
+        </div>
+    </div>
+<script type="text/javascript" src="js/main-bundle.js"></script></body>
+</html>
+ 
