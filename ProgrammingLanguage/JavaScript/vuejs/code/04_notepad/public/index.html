@@ -3,109 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>云端记事本</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        body {
-            padding: 10px;
-            text-align: left;
-            font-family: Lato;
-            color: #fff;
-            background: #9b59b6;
-        }
-
-        .tabs {
-            width: 650px;
-            float: none;
-            list-style: none;
-            position: relative;
-            margin: 80px 0 0 10px;
-            text-align: left;
-        }
-        .tabs li {
-            float: left;
-            display: block;
-        }
-        .tabs input[type="radio"] {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-        .tabs label {
-            display: block;
-            padding: 14px 21px;
-            border-radius: 2px 2px 0 0;
-            font-size: 20px;
-            font-weight: normal;
-            text-transform: uppercase;
-            background: #8e44ad;
-            cursor: pointer;
-            position: relative;
-            top: 4px;
-            -webkit-transition: all 0.2s ease-in-out;
-            -moz-transition: all 0.2s ease-in-out;
-            -o-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-        }
-        .tabs label:hover {
-            background: #703688;
-        }
-        .tabs .tab-content {
-            z-index: 2;
-            display: none;
-            overflow: hidden;
-            width: 100%;
-            font-size: 17px;
-            line-height: 25px;
-            padding: 25px;
-            position: absolute;
-            top: 53px;
-            left: 0;
-            background: #612e76;
-        }
-            .tabs [id^="tab"]:checked + label {
-            top: 0;
-            padding-top: 17px;
-            background: #612e76;
-        }
-        .tabs [id^="tab"]:checked ~ [id^="tab-"] {
-            display: block;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
         <h1>云端记事本</h1>
-        <div id="user" v-if="!isLogin">
+        <div id="user" v-if="!user.isLogin">
             <ul class="tabs">
                 <li>
                     <input type="radio"
-                           name="tabs"
-                           id="tab1"
+                           name="tab-user"
+                           id="tabLogin"
                            value="login" 
                            v-model="checked" />
-                    <label for="tab1">用户登录</label>
-                    <user-login v-if="checked === 'login'" />
+                    <label for="tabLogin">用户登录</label>
+                    <user-login v-model="user" v-if="checked === 'login'" />
                 </li>
 
                 <li>
                     <input type="radio"
-                           name="tabs"
-                           id="tab2"                           
+                           name="tab-user"
+                           id="tabSign"                           
                            value="sign" 
                            v-model="checked" />
-                    <label for="tab2">用户注册</label>
+                    <label for="tabSign">用户注册</label>
                     <user-sign-up v-if="checked === 'sign'" /> 
                 </li>
             </ul>
         </div>
+        <div id="notes" v-if="user.isLogin">
+            <note-list></note-list>
+        </div>
     </div>
 <script type="text/javascript" src="js/main-bundle.js"></script></body>
 </html>
- 
