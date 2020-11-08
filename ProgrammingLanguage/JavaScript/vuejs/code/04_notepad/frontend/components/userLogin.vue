@@ -41,15 +41,15 @@
                         if(res.data.length = 1) {
                             const user = {
                                 isLogin: true,
-                                data: res.data
+                                data: res.data[0]
                             };
                             that.$emit('input', user);
                         }
                     })
                     .catch(function(err) {
-                        // 错误处理
+                        // 请求错误处理
                     });
-                }
+                  }
             },
             reset: function() {
                 this.userName = '';

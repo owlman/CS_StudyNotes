@@ -1,7 +1,7 @@
 <template>
     <div id="noteList">
         <ul class="tabs">
-            <li v-for="note in noteList" :key="note.id">
+            <li v-for="note in noteList" :key="note.nid">
                 <input type="radio"
                     name="tab-note"
                     id="tabNote"
@@ -10,6 +10,9 @@
                 <label for="tabNote">{{ note.title }}</label>
                 <div id="tab-note" class="tab-content" v-if="checked == note.title">
                     {{ note.text }}
+                    <div id="set">
+                        <input type="button" value="删除" @click="deleteNote(note.nid)" />
+                    </div>
                 </div>
             </li>
             <li>
@@ -23,11 +26,21 @@
                     <table>
                         <tr>
                             <td>笔记标题：</td>
-                            <td><input type="text" /></td>                    
+                            <td>
+                                <input type="text" class="inputText"
+                                    v-model="newNoteTitle"/>
+                            </td>                    
                         </tr>
                         <tr>
                             <td>笔记内容：</td>
-                            <td><textarea></textarea></td>
+                            <td>
+                                <textarea rows="10" class="inputText"
+                                    v-model="newNoteText" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="button" value="保存" @click="addNote"></td>
+                            <td><input type="button" value="重置" @click="reset"></td>
                         </tr>
                     </table>
                 </div>
@@ -37,11 +50,16 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: "noteList",
+        props:['uid'],
         data: function() {
             return {
                 noteList: [],
+                newNoteTitle:'',
+                newNoteText:'',
                 checked: ''
             };
         },
@@ -50,23 +68,67 @@
         },
         methods: {
             initData: function() {
-                this.noteList.push(
-                {
-                    id: 1,
-                    title: '标题1',
-                    text: '内容1'
-                },
-                {
-                    id: 2,
-                    title: '标题2',
-                    text: '内容2'
+                this.getNotes();
+                if(this.noteList.length > 0){
+                    this.checked = this.noteList[0].title;
+                } else {
+                    this.checked = 'newNote';
+                }
+            },
+            getNotes: function() {
+                const that = this;
+                axios.get('/notes/get', {
+                    params: { uid : that.uid }
+                })
+                .then(function(res) {
+                    if(res.statusText === 'OK') {
+                        that.noteList = res.data;
+                    }
+                })
+                .catch(function(err){
+                    // 请求错误处理
                 });
-                this.checked = this.noteList[0].title;
-                console.log(this.checked)
+            },
+            addNote: function() {
+                const that = this
+                axios.post('/notes/add', {
+                    title: that.newNoteTitle,
+                    text: that.newNoteText,
+                    uid: that.uid
+                })
+                .then(function(res) {
+                    if(res.statusText === 'OK') {
+                        that.getNotes();
+                    }
+                })
+                .catch(function(err) {
+                    // 请求错误处理
+                });
+            },
+            deleteNote: function(id) {
+                const that = this
+                axios.delete('/notes/delete', {
+                    params: { nid : id }
+                })
+                .then(function(res) {
+                    if(res.statusText === 'OK') {
+                        that.getNotes();
+                    }
+                })
+                .catch(function(err) {
+                    // 请求错误处理
+                });
+            },
+            reset: function() {
+                this.newNoteTitle = '';
+                this.newNoteText = '';
             }
         }
     };
 </script>
 
 <style scoped>
+    .inputText {
+        width: 250px;
+    }
 </style>
