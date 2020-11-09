@@ -23,15 +23,6 @@ function users(app) {
                 table.increments('uid').primary();// 将 uid 设置为自动增长的字段，并将其设为主键。
                 table.string('userName');         // 将 userName 设置为字符串类型的字段。
                 table.string('password');         // 将 password 设置为字符串类型的字段。
-                appDB('users').insert(
-                    {
-                        userName : 'owlman',
-                        password: '0000'
-                    }
-                )
-                .catch(function(err) {
-                   console.log('添加初始数据失败，错误信息为：', err);
-                });
             })
             .catch(function(err) {
                 console.log('users表创建失败，错误信息为：', err);
@@ -39,19 +30,62 @@ function users(app) {
         }
     })
     .then(function() {
-        app.post('/user/login', function(req, res) {
+        appDB('users').select('*')
+        .then(function(data) {
+            if(data.length === 0) {
+                console.log('正在初始化数据...');
+                appDB('users').insert(
+                    {
+                        userName: 'admin',
+                        password: '123456'
+                    }
+                )
+                .catch(function(err) {
+                   console.log('添加初始数据失败，错误信息为：', err);
+                });
+            }
+        })
+    })
+    .then(function() {
+        app.get('/user/login', function(req, res) {
             appDB('users').select('*')
-            .where('userName','=', req.body['userName'])
-            .andWhere('password', '=', req.body['password'])
+            .where('userName','=', req.query.userName)
+            .andWhere('password', '=', req.query.password)
             .then(function(data) {
                 res.status(200).send(data);                
+            })
+            .catch(function(err) {
+                res.status(404).send('用户登录失败！ 错误信息为：' + err);
+            })
+        });
+
+        app.post('/user/sign', function(req, res) {
+            appDB('users').select('*')
+            .where('userName','=', req.body['userName'])
+            .then(function(data) {
+                if(data.length > 0) {
+                    res.status(200).send('用户已存在！');
+                } else {
+                    appDB('users').insert(
+                        {
+                            userName: req.body['userName'],
+                            password: req.body['password']
+                        }
+                    )
+                    .then(function() {
+                        res.status(200).send('注册成功，请登录！');
+                    })
+                    .catch(function(err) {
+                        res.status(404).send('注册用户失败，错误信息为：' + err);
+                     });
+                }
             })
         });
     })
     .catch(function() {
         // 断开数据库连接，并销毁 appDB 对象
         appDB.destroy();
-    });    
+    });
 };
 
 module.exports = users;

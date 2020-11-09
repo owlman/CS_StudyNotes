@@ -40,7 +40,15 @@ function notes(app) {
                 }
             )
             .then(function() {
-                res.status(200);
+                appDB('notes').select('*')
+                .where('uid', '=', req.body['uid'])
+                .then(function(data) {
+                    res.status(200).send(data);
+                })
+                .catch(function(err) {
+                    res.status(404);
+                    console.error('获取笔记列表错误：', err);
+                });
             })
             .catch(function() {
                 res.status(404);
@@ -48,16 +56,33 @@ function notes(app) {
         });
         
         app.get('/notes/get', function(req, res) {
-            console.log(req.query)
             appDB('notes').select('*')
             .where('uid', '=', req.query.uid)
             .then(function(data) {
-                console.log(data)
                 res.status(200).send(data);
             })
             .catch(function(err) {
                 res.status(404);
                 console.error('获取笔记列表错误：', err);
+             });
+        });
+
+        app.delete('/notes/delete', function(req, res) {
+            appDB('notes').delete()
+            .where('nid', '=', req.query.nid)
+            .then(function() {
+                appDB('notes').select('*')
+                .where('uid', '=', req.query.uid)
+                .then(function(data) {
+                    res.status(200).send(data);
+                })
+                .catch(function(err) {
+                    res.status(404);
+                    console.error('获取笔记列表错误：', err);
+                });
+            })
+            .catch(function() {
+                res.status(404);
              });
         });
     })

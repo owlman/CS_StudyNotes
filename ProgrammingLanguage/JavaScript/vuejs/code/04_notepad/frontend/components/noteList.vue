@@ -1,20 +1,6 @@
 <template>
     <div id="noteList">
-        <ul class="tabs">
-            <li v-for="note in noteList" :key="note.nid">
-                <input type="radio"
-                    name="tab-note"
-                    id="tabNote"
-                    :value="note.title" 
-                    v-model="checked" />
-                <label for="tabNote">{{ note.title }}</label>
-                <div id="tab-note" class="tab-content" v-if="checked == note.title">
-                    {{ note.text }}
-                    <div id="set">
-                        <input type="button" value="删除" @click="deleteNote(note.nid)" />
-                    </div>
-                </div>
-            </li>
+        <ul class="tabs notes">
             <li>
                 <input type="radio"
                     name="tab-note"
@@ -45,6 +31,20 @@
                     </table>
                 </div>
             </li>
+            <li v-for="note in noteList" :key="note.nid">
+                <input type="radio"
+                    name="tab-note"
+                    id="tabNote"
+                    :value="note.title" 
+                    v-model="checked" />
+                <label for="tabNote">{{ note.title }}</label>
+                <div id="tab-note" class="tab-content" v-if="checked == note.title">
+                    {{ note.text }}
+                    <div id="set">
+                        <input type="button" value="删除" @click="deleteNote(note.nid)" />
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
 </template>
@@ -60,21 +60,13 @@
                 noteList: [],
                 newNoteTitle:'',
                 newNoteText:'',
-                checked: ''
+                checked: 'newNote'
             };
         },
         created: function() {
-            this.initData();
+            this.getNotes();
         },
         methods: {
-            initData: function() {
-                this.getNotes();
-                if(this.noteList.length > 0){
-                    this.checked = this.noteList[0].title;
-                } else {
-                    this.checked = 'newNote';
-                }
-            },
             getNotes: function() {
                 const that = this;
                 axios.get('/notes/get', {
@@ -86,10 +78,14 @@
                     }
                 })
                 .catch(function(err){
-                    // 请求错误处理
+                    window.alert('笔记载入失败！');
                 });
             },
             addNote: function() {
+                if(this.newNoteTitle === '' || this.newNoteText === '') {
+                    window.alert('笔记标题和内容都不能为空！');
+                    return false;
+                }
                 const that = this
                 axios.post('/notes/add', {
                     title: that.newNoteTitle,
@@ -98,25 +94,30 @@
                 })
                 .then(function(res) {
                     if(res.statusText === 'OK') {
-                        that.getNotes();
+                        that.noteList = res.data;
                     }
                 })
                 .catch(function(err) {
-                    // 请求错误处理
+                    window.alert('添加笔记失败！');
                 });
+                that.reset();
             },
             deleteNote: function(id) {
                 const that = this
                 axios.delete('/notes/delete', {
-                    params: { nid : id }
+                    params: {
+                        nid : id,
+                        uid: that.uid
+                    }
                 })
                 .then(function(res) {
                     if(res.statusText === 'OK') {
-                        that.getNotes();
+                        that.noteList = res.data;
+                        that.checked = 'newNote';
                     }
                 })
                 .catch(function(err) {
-                    // 请求错误处理
+                    window.alert('删除笔记失败！');
                 });
             },
             reset: function() {
@@ -129,6 +130,10 @@
 
 <style scoped>
     .inputText {
-        width: 250px;
+        width: 650px;
+    }
+
+    .notes {
+        width: 65%;
     }
 </style>

@@ -631,6 +631,12 @@ module.exports = g;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(28);
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -736,20 +742,20 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_userLogin_vue_vue_type_script_lang_js___ = __webpack_require__(5);
-/* unused harmony namespace reexport */
- /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_userLogin_vue_vue_type_script_lang_js___["a" /* default */]); 
-
-/***/ }),
 /* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_userLogin_vue_vue_type_script_lang_js___ = __webpack_require__(6);
+/* unused harmony namespace reexport */
+ /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_userLogin_vue_vue_type_script_lang_js___["a" /* default */]); 
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -786,20 +792,26 @@ function normalizeComponent (
         login: function () {
             if (this.userName !== '' && this.password !== '') {
                 const that = this;
-                __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/user/login', {
-                    'userName': that.userName,
-                    'password': that.password
+                __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/user/login', {
+                    params: {
+                        'userName': that.userName,
+                        'password': that.password
+                    }
                 }).then(function (res) {
-                    if (res.data.length = 1) {
+                    if (res.statusText === 'OK' && res.data.length == 1) {
                         const user = {
                             isLogin: true,
                             data: res.data[0]
                         };
                         that.$emit('input', user);
+                    } else {
+                        window.alert('用户名或密码错误！');
                     }
-                }).catch(function (err) {
-                    // 请求错误处理
+                }).catch(function () {
+                    window.alert('登录请求失败！');
                 });
+            } else {
+                window.alert('用户名与密码都不能为空！');
             }
         },
         reset: function () {
@@ -808,12 +820,6 @@ function normalizeComponent (
         }
     }
 });
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(28);
 
 /***/ }),
 /* 7 */
@@ -1339,6 +1345,25 @@ module.exports = Cancel;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1346,12 +1371,47 @@ module.exports = Cancel;
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     name: "tab-sign",
     data() {
-        return {};
+        return {
+            userName: '',
+            password: '',
+            rePassword: ''
+        };
     },
-    methods: {}
+    methods: {
+        signUp: function () {
+            if (this.userName !== '' && this.password !== '' && this.rePassword !== '') {
+                if (this.password === this.rePassword) {
+                    const that = this;
+                    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/user/sign', {
+                        userName: that.userName,
+                        password: that.password
+                    }).then(function (res) {
+                        console.log(res.statusText);
+                        if (res.statusText === 'OK') {
+                            window.alert(res.data);
+                            that.reset();
+                        }
+                    }).catch(function () {
+                        window.alert('注册请求失败！');
+                    });
+                } else {
+                    window.alert('你两次输入的密码不一致！');
+                }
+            } else {
+                window.alert('请正确填写注册信息！');
+            }
+        },
+        reset: function () {
+            this.userName = '';
+            this.password = '';
+            this.rePassword = '';
+        }
+    }
 });
 
 /***/ }),
@@ -1368,7 +1428,7 @@ module.exports = Cancel;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -1432,21 +1492,13 @@ module.exports = Cancel;
             noteList: [],
             newNoteTitle: '',
             newNoteText: '',
-            checked: ''
+            checked: 'newNote'
         };
     },
     created: function () {
-        this.initData();
+        this.getNotes();
     },
     methods: {
-        initData: function () {
-            this.getNotes();
-            if (this.noteList.length > 0) {
-                this.checked = this.noteList[0].title;
-            } else {
-                this.checked = 'newNote';
-            }
-        },
         getNotes: function () {
             const that = this;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/notes/get', {
@@ -1456,10 +1508,14 @@ module.exports = Cancel;
                     that.noteList = res.data;
                 }
             }).catch(function (err) {
-                // 请求错误处理
+                window.alert('笔记载入失败！');
             });
         },
         addNote: function () {
+            if (this.newNoteTitle === '' || this.newNoteText === '') {
+                window.alert('笔记标题和内容都不能为空！');
+                return false;
+            }
             const that = this;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/notes/add', {
                 title: that.newNoteTitle,
@@ -1467,22 +1523,27 @@ module.exports = Cancel;
                 uid: that.uid
             }).then(function (res) {
                 if (res.statusText === 'OK') {
-                    that.getNotes();
+                    that.noteList = res.data;
                 }
             }).catch(function (err) {
-                // 请求错误处理
+                window.alert('添加笔记失败！');
             });
+            that.reset();
         },
         deleteNote: function (id) {
             const that = this;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete('/notes/delete', {
-                params: { nid: id }
+                params: {
+                    nid: id,
+                    uid: that.uid
+                }
             }).then(function (res) {
                 if (res.statusText === 'OK') {
-                    that.getNotes();
+                    that.noteList = res.data;
+                    that.checked = 'newNote';
                 }
             }).catch(function (err) {
-                // 请求错误处理
+                window.alert('删除笔记失败！');
             });
         },
         reset: function () {
@@ -12887,9 +12948,9 @@ exports.clearImmediate = typeof self !== "undefined" && self.clearImmediate || t
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue_vue_type_template_id_58842238_scoped_true___ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userLogin_vue_vue_type_script_lang_js___ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userLogin_vue_vue_type_script_lang_js___ = __webpack_require__(5);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(4);
 
 
 
@@ -13788,7 +13849,7 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userSignUp_vue_vue_type_template_id_8c827266_scoped_true___ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userSignUp_vue_vue_type_script_lang_js___ = __webpack_require__(15);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(4);
 
 
 
@@ -13851,7 +13912,104 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "tab-content", attrs: { id: "tab-sign" } }, [
-    _vm._v("\n    用户注册页面\n")
+    _c("table", [
+      _c("tr", [
+        _c("td", [_vm._v("请输入用户名：")]),
+        _vm._v(" "),
+        _c("td", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.userName,
+                expression: "userName"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.userName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.userName = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [_vm._v("请设置密码：")]),
+        _vm._v(" "),
+        _c("td", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password,
+                expression: "password"
+              }
+            ],
+            attrs: { type: "password" },
+            domProps: { value: _vm.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.password = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [_vm._v("请重复密码：")]),
+        _vm._v(" "),
+        _c("td", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.rePassword,
+                expression: "rePassword"
+              }
+            ],
+            attrs: { type: "password" },
+            domProps: { value: _vm.rePassword },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.rePassword = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [
+          _c("input", {
+            attrs: { type: "button", value: "注册" },
+            on: { click: _vm.signUp }
+          })
+        ]),
+        _vm._v(" "),
+        _c("td", [
+          _c("input", {
+            attrs: { type: "button", value: "重置" },
+            on: { click: _vm.reset }
+          })
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -13868,7 +14026,7 @@ render._withStripped = true
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__noteList_vue_vue_type_script_lang_js___ = __webpack_require__(17);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__noteList_vue_vue_type_style_index_0_id_36942f9a_scoped_true_lang_css___ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(4);
 
 
 
@@ -13934,61 +14092,8 @@ var render = function() {
   return _c("div", { attrs: { id: "noteList" } }, [
     _c(
       "ul",
-      { staticClass: "tabs" },
+      { staticClass: "tabs notes" },
       [
-        _vm._l(_vm.noteList, function(note) {
-          return _c("li", { key: note.nid }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.checked,
-                  expression: "checked"
-                }
-              ],
-              attrs: { type: "radio", name: "tab-note", id: "tabNote" },
-              domProps: {
-                value: note.title,
-                checked: _vm._q(_vm.checked, note.title)
-              },
-              on: {
-                change: function($event) {
-                  _vm.checked = note.title
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "tabNote" } }, [
-              _vm._v(_vm._s(note.title))
-            ]),
-            _vm._v(" "),
-            _vm.checked == note.title
-              ? _c(
-                  "div",
-                  { staticClass: "tab-content", attrs: { id: "tab-note" } },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(note.text) +
-                        "\n                "
-                    ),
-                    _c("div", { attrs: { id: "set" } }, [
-                      _c("input", {
-                        attrs: { type: "button", value: "删除" },
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteNote(note.nid)
-                          }
-                        }
-                      })
-                    ])
-                  ]
-                )
-              : _vm._e()
-          ])
-        }),
-        _vm._v(" "),
         _c("li", [
           _c("input", {
             directives: [
@@ -14096,7 +14201,60 @@ var render = function() {
                 ]
               )
             : _vm._e()
-        ])
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.noteList, function(note) {
+          return _c("li", { key: note.nid }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.checked,
+                  expression: "checked"
+                }
+              ],
+              attrs: { type: "radio", name: "tab-note", id: "tabNote" },
+              domProps: {
+                value: note.title,
+                checked: _vm._q(_vm.checked, note.title)
+              },
+              on: {
+                change: function($event) {
+                  _vm.checked = note.title
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "tabNote" } }, [
+              _vm._v(_vm._s(note.title))
+            ]),
+            _vm._v(" "),
+            _vm.checked == note.title
+              ? _c(
+                  "div",
+                  { staticClass: "tab-content", attrs: { id: "tab-note" } },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(note.text) +
+                        "\n                "
+                    ),
+                    _c("div", { attrs: { id: "set" } }, [
+                      _c("input", {
+                        attrs: { type: "button", value: "删除" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteNote(note.nid)
+                          }
+                        }
+                      })
+                    ])
+                  ]
+                )
+              : _vm._e()
+          ])
+        })
       ],
       2
     )
@@ -14151,7 +14309,7 @@ if(false) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(19);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.inputText[data-v-36942f9a] {\n    width: 250px;\n}\n", ""]);
+exports.push([module.i, "\n.inputText[data-v-36942f9a] {\n    width: 650px;\n}\n.notes[data-v-36942f9a] {\n    width: 65%;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

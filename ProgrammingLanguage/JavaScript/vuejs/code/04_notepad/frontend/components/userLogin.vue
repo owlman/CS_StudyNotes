@@ -33,23 +33,31 @@
             login: function() {
                 if(this.userName !== '' && this.password !== '') {
                     const that = this;
-                    axios.post('/user/login', {
-                        'userName': that.userName,
-                        'password': that.password
+                    axios.get('/user/login', {
+                        params: {
+                            'userName': that.userName,
+                            'password': that.password
+                        }
                     })
-                    .then(function(res){
-                        if(res.data.length = 1) {
+                    .then(function(res) {
+                        if(res.statusText === 'OK' && 
+                           res.data.length == 1) {
                             const user = {
                                 isLogin: true,
                                 data: res.data[0]
                             };
                             that.$emit('input', user);
+                        } else {
+                            window.alert('用户名或密码错误！');
                         }
                     })
-                    .catch(function(err) {
-                        // 请求错误处理
+                    .catch(function() {
+                        window.alert('登录请求失败！');
                     });
-                  }
+                } else {
+                    window.alert('用户名与密码都不能为空！');
+
+                }
             },
             reset: function() {
                 this.userName = '';
