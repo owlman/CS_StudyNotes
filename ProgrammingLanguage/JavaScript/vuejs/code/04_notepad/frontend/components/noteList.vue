@@ -7,7 +7,7 @@
                     id="tabNote"
                     value="newNote" 
                     v-model="checked" />
-                <label for="tabNote"> 添加笔记 </label>
+                <label for="tabNote">添加笔记</label>
                 <div id="tab-note" class="tab-content" v-if="checked == 'newNote'">
                     <table>
                         <tr>
@@ -134,6 +134,6 @@
     }
 
     .notes {
-        width: 65%;
+        width: auto;
     }
 </style>

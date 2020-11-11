@@ -14118,7 +14118,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("label", { attrs: { for: "tabNote" } }, [_vm._v(" 添加笔记 ")]),
+          _c("label", { attrs: { for: "tabNote" } }, [_vm._v("添加笔记")]),
           _vm._v(" "),
           _vm.checked == "newNote"
             ? _c(
@@ -14309,7 +14309,7 @@ if(false) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(19);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.inputText[data-v-36942f9a] {\n    width: 650px;\n}\n.notes[data-v-36942f9a] {\n    width: 65%;\n}\n", ""]);
+exports.push([module.i, "\n.inputText[data-v-36942f9a] {\n    width: 650px;\n}\n.notes[data-v-36942f9a] {\n    width: auto;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
