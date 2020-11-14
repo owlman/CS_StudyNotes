@@ -58,9 +58,9 @@
         data: function() {
             return {
                 noteList: [],
+                checked: 'newNote',
                 newNoteTitle:'',
-                newNoteText:'',
-                checked: 'newNote'
+                newNoteText:''
             };
         },
         created: function() {
