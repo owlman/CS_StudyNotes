@@ -1,5 +1,5 @@
 <template>
-    <div id="tab-login" class="tab-content">
+    <div id="tab-login">
         <table>
             <tr>
                 <td>用户名：</td>
@@ -18,8 +18,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
     export default {
         name: "tab-login",
         props : ['value'],
@@ -50,6 +48,3 @@
         }
 };
 </script>
-
-<style scoped>
-</style>

@@ -1,5 +1,5 @@
 <template>
-    <div id="tab-sign" class="tab-content">
+    <div id="tab-sign">
         <table>
             <tr>
                 <td>请输入用户名：</td>
@@ -20,10 +20,7 @@
         </table>
     </div>
 </template>
-
 <script>
-    import axios from 'axios';
-
     export default {
         name: "tab-sign",
         data() {
@@ -56,6 +53,3 @@
         }
     };
 </script>
-
-<style scoped>
-</style>
