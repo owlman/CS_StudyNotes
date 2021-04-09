@@ -67,7 +67,7 @@ module.exports = config;
 
 ### `entry`成员：配置入口模块
 
-在`config`对象中，`entry`成员通常是我们第一个要定义的配置选项，该选项主要用于指定对当前项目进行打包时的入口模块。换句话说，`entty`成员所配置的就是 Webpack 的输入选项，后者就是以该选项指定的模块为起点开始构建依赖关系图的。在该关系图的构建过程中，Webpack 会搜寻到项目中存在的所有模块，并确认这些模块内外存在的、直接或间接的依赖关系。另外，由于在许多情况下，项目的入口模块未必只有一个，所以`entty`成员可以有四种定义形式。首先是字符串形式，当我们确定项目自始至终只会存在单一入口模块时，`entry`成员就可以被直接被定义成一个字符串类型的值，其具体示例代码如下：
+在`config`对象中，`entry`成员通常是我们第一个要定义的配置选项，该选项主要用于指定对当前项目进行打包时的入口模块。换句话说，`entry`成员所配置的就是 Webpack 的输入选项，后者就是以该选项指定的模块为起点开始构建依赖关系图的。在该关系图的构建过程中，Webpack 会搜寻到项目中存在的所有模块，并确认这些模块内外存在的、直接或间接的依赖关系。另外，由于在许多情况下，项目的入口模块未必只有一个，所以`entry`成员可以有四种定义形式。首先是字符串形式，当我们确定项目自始至终只会存在单一入口模块时，`entry`成员就可以被直接被定义成一个字符串类型的值，其具体示例代码如下：
 
 ```JavaScript
 const path = require('path');
@@ -137,7 +137,7 @@ const config = {
 module.export = config;
 ```
 
-需要特别说明的是，Webpack 在 4.0 之后的版本中新增了默认配置的机制，所以在使用最新版本的 Webpack 进行项目打包时，如果读者忘记了定义`config`对象的`entrty`成员，Webpack 的输入选项会被配置为`./src`这个默认值。
+需要特别说明的是，Webpack 在 4.0 之后的版本中新增了默认配置的机制，所以在使用最新版本的 Webpack 进行项目打包时，如果读者忘记了定义`config`对象的`entry`成员，Webpack 的输入选项会被配置为`./src`这个默认值。
 
 ### `output`成员：配置输出选项
 
@@ -299,7 +299,7 @@ plugins: [
 ]
 ```
 
-在上述插件配置中，我们创建了三个`HtmlWebpackPlugin`插件实例，它们会在`punlic`目录中分别输出`index.html`、`list.html`和`message.html`这三个 HTML 页面。正如读者所看到的，我们这一次在创建`HtmlWebpackPlugin`插件实例时，除了使用`temmplate`参数指定输出页面的模板文件之外，还用`filename`参数指定了输出页面的文件名。当然，如果还想对输出页面进行更多的设置。我们还可能会需要用到下面这些常用参数。
+在上述插件配置中，我们创建了三个`HtmlWebpackPlugin`插件实例，它们会在`public`目录中分别输出`index.html`、`list.html`和`message.html`这三个 HTML 页面。正如读者所看到的，我们这一次在创建`HtmlWebpackPlugin`插件实例时，除了使用`template`参数指定输出页面的模板文件之外，还用`filename`参数指定了输出页面的文件名。当然，如果还想对输出页面进行更多的设置。我们还可能会需要用到下面这些常用参数。
 
 - `title`: 该参数用于生成输出页面的标题。其作用就相当于在输出页面在插入这样一个带模板语法的`<title>`标签：
 
@@ -574,7 +574,7 @@ module.exports = config;
    └───public
    ```
 
-2. 使用`npm init -y`初始化想，并在项目该目录下执行`npm install vue-loader --save-dev`等命令，将要用到的预处理器和插件安装到项目中。
+2. 使用`npm init -y`初始化项目，并在项目根目录下执行`npm install vue-loader --save-dev`等命令，将要用到的预处理器和插件安装到项目中。
 
 3. 在项目该目录下执行`npm install webpack webpack-cli --save-dev`命令，将 Webpack 工具安装到项目中：
 
@@ -666,7 +666,7 @@ module.exports = config;
 - 在项目根目录下执行`npm install webpack-dev-server --save-dev`命令将服务器组件安装到项目中。
 
 - 在`webpack.config.js`配置文件中为`config`对象添加一个名为`devServer`成员，并将成员的`contentBase`值配置如下：
- 
+
     ```JavaScript
     const path = require('path');
     // 引入其他模块
@@ -680,6 +680,7 @@ module.exports = config;
 
     module.exports = config;
    ```
+
 - 在项目根目录下将`package.json`文件中的`scripts`选项修改如下：
 
    ```JSON
