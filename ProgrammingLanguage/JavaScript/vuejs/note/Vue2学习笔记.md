@@ -1,6 +1,6 @@
-# Vue.js 学习笔记
+# Vue.js 2.0 学习笔记
 
-这篇学习笔记将记录一些我个人在学习 Vue.js 框架时所编写的程序代码与学习心得。为此，我会在`ProgrammingLanguage/JavaScript`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
+这篇学习笔记将记录一些我个人在学习 Vue.js 2.0 框架时所编写的程序代码与学习心得。为此，我会在`ProgrammingLanguage/JavaScript`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
 
 - `note`目录用于存放`markdown`格式的笔记。
 - `code`目录则用于存放笔记中所记录的程序代码。
@@ -20,8 +20,6 @@
   - 线上文档：
     - [Vue.js 官方教程](https://cn.vuejs.org/v2/guide/)
     - [webpack 官方文档](https://www.webpackjs.com/concepts/)
-  - 参考书籍：
-    - [《深入浅出 Vue.js》](https://book.douban.com/subject/32581281/)
 
 ## 第 1 部分：了解 Vue.js 框架
 

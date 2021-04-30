@@ -1,15 +1,15 @@
 # 计算机技术学习笔记
 
-这里存放的是本人在学习计算机技术过程中所写的各种笔记或代码示例。整个项目按笔记分类形成以下目录结构：
+这里存放的是本人在研究计算机技术过程中所写的各种学习笔记与代码示例。整个项目按笔记分类形成以下目录结构：
 
-- **OperatingSystem**：与操作系统相关的学习笔记。
+- **OperatingSystem**：
   - *Linux*；
     - Ubuntu 使用笔记
-- **ProgrammingLanguage**：与编程语言及其相关框架相关的学习笔记。
-  - *C&Cpp*：
+- **ProgrammingLanguage**：
+  - *C/Cpp*：
     - 算法实现示例
     - 数据结构示例
-  - *JavaScript*
+  - *JavaScript*：
     - Node.js 学习笔记
     - Vue.js 学习笔记
     - Electron.js 学习笔记
