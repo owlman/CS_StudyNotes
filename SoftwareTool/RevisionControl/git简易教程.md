@@ -1,0 +1,463 @@
+# git简易教程
+
+## 概述
+
+在说明什么是git之前，我们需要对版本控制（Version Control）做一个基本的概述，一般情况下，我们的源代码都是在时间和空间两个维度上进行管理并维护的，代码本身以及组织代码的项目文件（如 makefile或者vs的项目文件）都是以文件和目录的形式存储在磁盘空间上的，这种文件管理的形式已经被大家所熟悉了，然而，我们在不同时间段里做出 的各种修改怎么管理呢？版本控制系统 （Version Control System，以下简称VCS）就是一种记录代码修改演化的系统，他的功能就是方便你今后找回某个特定时期(或版本)的文件、查看版本之间发生了哪些变 化、对变化进行比较或者是修正致命错误。
+版本控制系统主要经历了本地版本控制，集中式版本控制到分布式版本控制的发展：
+
+* 本地版本控制(Local Version Control System)顾名思义就是本地化的版本控制系统，没有网络协作等较为先进的版本控制的概念。
+* 集中式版本控制(Centralized Version Control System)为有一台版本控制服务器运行在那边存放并提供一个项目中所有版本文件的服务，在很长一段时间内占据主流，其中CVS与SVN为其代表。
+* 分布式版本控制(Distributed Version Control System)克服了集中式版本控制可能因为单点失败造成的巨大损失的缺点，让每一台客户端在每一次checkout操作后都完全镜像整个版本控制中的项 目。在分布式版本控制系统中，任何一台机器都可以视为版本控制服务器。即使有一台服务器失去服务能力，其它机器与系统可以继续协作维持版本控制系统的正常 运转。git就是分布式版本控制系统。
+
+git与其它主流的VCS最大的区别就是，在项目版本更新的过程中，git记录的并非是基于初始文件的变化数据，而是通过一系列快照 (Snapshot，就像是个小型的文件系统)来保存记录每个文件。如果有些文件在版本更新后没有发生任何变化，那么在新的版本中它会是一个指向最近一次 更新的文件版本的链接。 此外，几乎所有git的操作都是在本地进行的，所以，没有了”延迟”，几乎所有的操作都是瞬间完成的。例如，当你想要查看项目历史时，不需要特地去服务器 上抓取历史记录，直接在本地浏览即可。这意味着，你可以在本地对比两个不同版本的文件的差别，可以在本地查看过去有哪些人对指定文件作出了修改与更新，可 以……几乎完全本地化的操作也让这样一种场景成为了可能： 当有人由于没有网络连接条件但是又必须抓紧时间对自己的项目进行修改与开发，同时又需要有版本管理系统来记录每次他commit的历史，这时，git提供 了他所有需要的便利。
+
+git使用SHA-1 Hash算法加密生成的40位字符串(而不是文件名)来记录代表git中的每样东西。格式就像这样：
+
+```text
+    ??6bafcdc09f3d6d416f6572f82082987a486d3098
+```
+
+git中的文件主要会处于三种状态，它们分别是：
+
+* Committed： 文件或数据已经安全的存放在了git本地数据库中
+* Modified： 文件或数据已经修改但是尚未commit到数据库
+* Staged：文件或数据已被标记要放入到下一次commit中
+
+这样的机制致使git的镜像会由三个部分组成（假设有一个git目录叫git-repo）：
+
+* Git directory： 存放项目中所有元数据以及对象的地方（git-repo/.git/）
+* Working directory： 在这里是从git项目数据库中checkout出的一个单独的(默认情况下是最新的)项目版本，用于对指定项目版本中的文件进行修改和编辑（git-repo/）
+* Staging area： 一般是存放在Git directory中的一个简单的文件，里面存放着下一次需要commit的文件的信息（在git-repo/.git/中）
+
+## 安装与配置
+
+Git可以安装在各种操作系统下，下面以windows为例，linux系统和mac os系统的用户可以查找github.com上的help内容。
+在windows下安装git非常简单，只要依次完成下面操作即可：
+
+* 第一步：下载 msysgit（http://code.google.com/p/msysgit/），安装时一般只需要保留默认选项， 只是要注意，不要使用putty作为客户端，GitHub只支持openssh. 安装完成后需要生成SSH Key。
+
+* 第二步：配置ssh的key，在用户目录下（windows下通常是C:\Documents and Settings\，其他系统通常都是/home/）如果已经存在ssh的配置会存有一个.ssh目录（是隐藏目录），目录下会存有两个文件 （id_rsa, id_rsa.pub），将其备份一下，然后生成新的，这里cygwin的命令序列如下:
+    ```bash
+    $ ssh-keygen -t rsa -C “<your_mail_addr@yourmail.com>”
+    Enter file in which to save the key (~/.ssh/id_rsa):
+    Enter passphrase (empty for no passphrase):<此处需要你为其设定一个密码>
+    Enter same passphrase again:<重复一遍密码>
+    Your identification has been saved in ~/.ssh/id_rsa.
+    Your public key has been saved in ~/.ssh/id_rsa.pub.
+    The key fingerprint is:
+        e8:ae:60:8f:38:c2:98:1d:6d:84:60:8c:9e:dd:47:81 <your_mail_addr@yourmail.com>
+    ```
+
+* 第三步：将Public Key 添加到你所需要提交的服务器上（这里以GitHub为例，其他服务器的方式联系相关的管理员），打开你的GitHub->SSH Public Key->点击”Add another public key”, 将你的public key（id_rsa.pub）的内容拷贝到GitHub中。
+
+* 第四步：测试配置是否成功，同样的，在cygwin里如此输入：
+    ```bash
+    $ ssh git@github.com
+    ERROR: Hi <your_username> You’ve successfully authenticated, but GitHub does not provide shell access Connection to github.com closed.
+    ```
+
+看到以上信息表示操作成功，接下来，我们可以学习一些基本使用。
+
+## 本地基本操作
+
+首先我们要初始化一个Repository，如果完全是新建一个项目，我们可以：
+
+```bash
+mkdir test
+cd test
+git init
+```
+
+这个时候，test目录下就会多出一个叫做.git的目录，该目录下会有个config文件，他的内容如下：
+
+```text
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+```
+
+我们需要加入自己的用户信息（注意，该信息必须与你配置ssh的时候的信息保持一致）：
+
+```text
+[user]
+    name = <your_username>
+    email = <your_mail_addr@yourmail.com>
+```
+
+当然，用户信息我们完全可以用命令行来配置，在git init命令之前输入如下命令：
+
+```bash
+git config –global user.name “your_username”
+git config –global user.email “your_mail_addr@yourmail.com”
+```
+
+如果项目目录已经存在，我们可以直接：
+
+```bash
+cd existing_git_repo
+git init
+```
+
+接下来就是一些基本的操作了……
+
+首先要用的是：git status，该命令用于查看目前git镜像的状态，在使用git的过程中，我们将会反复的使用到这个工具：
+
+```bash
+$ git status
+# On branch master
+#
+# Initial commit
+#
+
+nothing to commit (create/copy files and use “git add” to track)
+```
+
+可以看出，git status给出了相当详细的信息，第一行中首先给出的是git的分支(branch)状态信息，接着，git会告诉你现在还没有东西提交到镜像中，建议 先使用命令git add来对文件进行追踪。所以，接下来我们介绍git add命令， 假设在的工作目录中使用python语言写一个helloworld的小程序，将代码保存完成后，我们得到一个hello.py文件，然后，我们希望将这个文件被git镜像追踪(track)到，那么只需要：
+
+```bash
+$ git add hello.py
+```
+
+这样，我们就将hello.py加入到了git镜像中去进行版本控制，再次使用git status来查看目前的镜像状态:
+
+```bash
+$ git status
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+# (use “git rm –cached …” to unstage)
+#
+# new file: hello.py
+#
+```
+
+注意，这里它提到了changes to be committed，意思是该文件已经处于staged状态，接下去你可以根据自己的需要将其提交(commit)，或者如果你觉得这是一个误操作，该文 件不应当被提交，你可以通过git rm –cached命令来取消它的staged状态(你会 发现status信息中给出了精确的提示)。
+现在，我们通过命令git commit将hello.py提交:
+
+```bash
+$ git commit
+```
+
+这时，会出现一个带有status信息的文本给你编辑(使用什么编辑器取决于你对git的配置)，在以”#”开头的注释行下输入一些文本，用于注释此次提交，方便于其他代码协作者的维护与理解！
+你也可以通过命令参数-m来直接输入注释内容，加快提交速度:
+
+```bash
+$ git commit -m “comment here”
+```
+
+至此，你的文件hello.py已经处于tracked状态！。
+现在，我们有一个hello.py在镜像中了，接下来，假设发现了一个小错误，额，比如一个循环的条件写错了，于是我们需要针对文件完成修改，之后，当我们再次git status的时候：
+
+```bash
+# On branch master
+# Changed but not updated:
+# (use “git add …” to update what will be committed)# (use “git che
+#  ckout — …” to discard changes in working directory)
+#
+# modified: hello.py
+# no changes added to commit (use “git add” and/or “git commit -a”)
+```
+
+git status显示，hello.py被修改过了，如果你想要提交，需要再次git add该文件，或者，可以直接使用git commit -a跳过add的步骤，直接提交(尚未track的文件必须先git add才能进行提交)。
+在提示中，还有提到说，如果你想撤销对hello.py的修改，就可以使用git checkout命令来实现，这里的情况会是:
+
+```bash
+$ git checkout – hello.py
+```
+
+如果你这么做了，你就会发现，你的hello.py又回到了之前没有被修改过的时候的状态。在Unix/Unix-like系统中，几乎都会有一个 小巧的对比文件不同的工具叫做diff，在git中也有这么一个工具，来详细比较你修改后准备提交的文件与修改前的状态的不同之处，恩，也许你猜到了，这 个命令就是git diff。
+现在我们尝试着再次修改一下hello.py，然后运行git diff:
+
+```bash
+$ git diff
+diff –git a/ hello.py b/ hello.py
+index befc634..a86316b 100644
+— a/hello.py
++++ b/hello.py
+@@ -1,3 +1,4 @@
++/* new comment line */
+if __name__ == “__main__”:
+    print “hello, world!”
+```
+
+通过git的diff工具，很容易了解到我们更改了哪些地方。这个时候，如果我们想撤销之前的更改，可以使用git reset命令：
+
+```bash
+$ git reset HEAD hello.py
+$ git status
+# On branch master
+# Untracked files:
+# (use “git add …” to include in what will be committed)
+#
+# hello.py
+
+nothing added to commit but untracked files present (use “git add” to track)
+```
+
+再次git status，hello.py又回到了untracked状态！
+
+接下来，如果需要修改README.txt（通常是项目的自述文件）的文件名（千万要记得我们的文件在git的镜像中进行版本控制管理，不要鲁莽的直接使用unix命令mv或者rm来对git镜像中的文件进行普通的文件操作），我们该使用git mv命令：
+
+```bash
+$ git mv README.txt tutorial.txt
+$ git status
+# On branch master
+# Changes to be committed:
+# (use “git reset HEAD …” to unstage)
+#
+# renamed: README.txt -> tutorial.txt
+#
+$ git commit -a -m “renamed a file”
+[master 55ce30d] renamed a file
+1 files changed, 0 insertions(+), 0 deletions(-)
+rename README.txt => tutorial.txt (100%)
+```
+
+可以看到，在提交变更后，README.txt在文件系统以及git镜像中都被成功地重命名为了tutorial.txt。同样的，你可以unstage来撤销对该文件的重命名，the choice is yours！ 如果我们不再需要tutorial.txt这个文件，我们可以将其从git镜像中删除，git中删除文件的命令是git rm:
+
+```bash
+$ git rm tutorial.txt
+rm ‘tutorial.txt’
+$ git status
+# On branch master
+# Changes to be committed:
+# (use “git reset HEAD …” to unstage)
+#
+# deleted: tutorial.txt
+#
+$ git commit -a -m ” deleted a file”
+[master 7d81981] deleted a file
+1 files changed, 0 insertions(+), 1 deletions(-)
+delete mode 100644 tutorial.txt
+```
+
+正如之前所提到的，这些操作都是可以恢复的，因为git是版本控制系统，所以自然而然的就会有一套版本历史管理机制。
+我们可以用工具git log提供了查看git镜像的commit历史:
+
+```bash
+$ git log
+commit 7d819818530ce89322019ba5000723c973eb0420
+Author: ghosTM55
+Date: Sun Mar 14 15:26:22 2010 +0800
+
+deleted a file
+
+commit 55ce30d88fb5c81d20bdf86e2034053613fed632
+Author: ghosTM55
+Date: Sun Mar 14 15:11:39 2010 +0800
+renamed a file
+commit 2ed9f1f9bd1a7561cd7e57dcdbd7f2cda54668fb
+Author: ghosTM55
+Date: Sun Mar 14 14:58:11 2010 +0800
+a little change
+```
+
+基本上可以清楚地看到，git详细记录了每次commit的信息(checksum值、提交者信息、提交时间)。 下面简单的说一下分支管理的操作，git的分支管理是异常的简单和方便，可以用git branch命令进行非常直观的操作：
+首先可以在工作目录下查看当前的项目存在多少分支：
+
+```bash
+$ git branch
+* master
+test
+```
+
+可以清楚地看到，目前该项目存在两个分支master和test，带*的是当前分支（我们可以用命令git checkout test切换到test反之）。接下来我们为项目添加一个分支：
+
+```bash
+$ git branch new
+$ git branch
+* master
+new
+test
+```
+
+我们看到新分支new已经添加进git的镜像里了，如果要删除该分支，我们可以如此：
+
+```bash
+$ git branch -d new
+Deleted branch new (was 63c0da1).
+$ git branch
+* master
+test
+```
+
+这时候我们就看到new已不在镜像中。
+
+## 远程基本操作
+
+（这部分引用一个网络blog：http://archive.cnblogs.com/a/2050324/）
+
+要参与任何一个 Git 项目的协作，必须要了解该如何管理远程仓库。远程仓库是指托管在网络上的项目仓库，可能会有好多个，其中有些你只能读，另外有些可以写。同他人协作开发某 个项目时，需要管理这些远程仓库，以便推送或拉取数据，分享各自的工作进展。管理远程仓库的工作，包括添加远程库，移除废弃的远程库，管理各式远程库分 支，定义是否跟踪这些分支，等等。本节我们将详细讨论远程库的管理和使用。
+
+### 查看当前的远程库
+
+要查看当前配置有哪些远程仓库，可以用 git remote 命令，它会列出每个远程库的简短名字。在克隆完某个项目后，至少可以看到一个名为 origin 的远程库，Git 默认使用这个名字来标识你所克隆的原始仓库：
+
+```bash
+$ git clone git://github.com/schacon/ticgit.git
+Initialized empty Git repository in /private/tmp/ticgit/.git/
+remote: Counting objects: 595, done.
+remote: Compressing objects: 100% (269/269), done.
+remote: Total 595 (delta 255), reused 589 (delta 253)
+Receiving objects: 100% (595/595), 73.31 KiB | 1 KiB/s, done.
+Resolving deltas: 100% (255/255), done.
+$ cd ticgit
+$ git remote
+origin
+```
+
+也可以加上 -v 选项（译注：此为 –verbose 的简写，取首字母），显示对应的克隆地址：
+    
+```bash
+$ git remote –v
+origin    git://github.com/schacon/ticgit.git
+```
+
+如果有多个远程仓库，此命令将全部列出。比如在我的 Grit 项目中，可以看到：
+
+```bash
+$ cd grit
+$ git remote –v
+bakkdoor git://github.com/bakkdoor/grit.git
+cho45 git://github.com/cho45/grit.git
+defunkt git://github.com/defunkt/grit.git
+koke git://github.com/koke/grit.git
+origin git@github.com:mojombo/grit.git
+```
+
+这样一来，我就可以非常轻松地从这些用户的仓库中，拉取他们的提交到本地。请注意，上面列出的地址只有 origin 用的是 SSH URL 链接，所以也只有这个仓库我能推送数据上去。
+
+### 添加远程仓库
+
+要添加一个新的远程仓库，可以指定一个简单的名字，以便将来引用，运行 git remote add <shortname> <url>：
+
+```bash
+$ git remote
+origin
+$ git remote add pb git://github.com/paulboone/ticgit.git
+$ git remote –v
+origin    git://github.com/schacon/ticgit.git
+pb    git://github.com/paulboone/ticgit.git
+```
+
+现在可以用字串 pb 指代对应的仓库地址了。比如说，要抓取所有 Paul 有的，但本地仓库没有的信息，可以运行 git fetch pb：
+
+```bash
+$ git fetch pb
+remote: Counting objects: 58, done.
+remote: Compressing objects: 100% (41/41), done.
+remote: Total 44 (delta 24), reused 1 (delta 0)
+Unpacking objects: 100% (44/44), done.
+From git://github.com/paulboone/ticgit
+* [new branch] master -> pb/master
+* [new branch] ticgit -> pb/ticgit
+```
+
+现在，Paul 的主干分支（master）已经完全可以在本地访问了，对应的名字是 pb/master，你可以将它合并到自己的某个分支，或者切换到这个分支，看看有些什么有趣的更新。
+
+### 从远程仓库抓取数据
+
+正如之前所看到的，可以用下面的命令从远程仓库抓取数据到本地：
+
+```bash
+$ git fetch [remote-name]
+```
+
+此命令会到远程仓库中拉取所有你本地仓库中还没有的数据。运行完成后，你就可以在本地访问该远程仓库中的所有分支，将其中某个分支合并到本地，或者只是取出某个分支，一探究竟。（我们会在第三章详细讨论关于分支的概念和操作。）
+
+如果是克隆了一个仓库，此命令会自动将远程仓库归于 origin 名下。所以，git fetch origin 会抓取从你上次克隆以来别人上传到此远程仓库中的所有更新（或是上次fetch 以来别人提交的更新）。有一点很重要，需要记住，fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能手工合并。(说明：事先需要创建好远程的仓库，然后执 行：git remote add <仓库名> <仓库url]> ;git fetch <远程仓库名>，即可抓取到远程仓库数据到本地，再用git merge remotes/<仓库名>/master就可以将远程仓库merge到本地当前branch。这种分支方式比较适合独立-整合开发，即各自开发测试好后 再整合在一起。比如，Android的Framework和AP开发。
+
+可以使用–bare 选项运行git init 来设定一个空仓库，这会初始化一个不包含工作目录的仓库。
+
+```bash
+$ cd /opt/git
+$ mkdir project.git
+$ cd project.git
+$ git –bare init
+```
+
+这时，Join，Josie 或者Jessica 就可以把它加为远程仓库，推送一个分支，从而把第一个版本的工程上传到仓库里了。)
+如果设置了某个分支用于跟踪某个远端仓库的分支（参见下节及第三章的内容），可以使用 git pull 命令自动抓取数据下来，然后将远端分支自动合并到本地仓库中当前分支。在日常工作中我们经常这么用，既快且好。实际上，默认情况下 git clone 命令本质上就是自动创建了本地的 master 分支用于跟踪远程仓库中的 master 分支（假设远程仓库确实有 master 分支）。所以一般我们运行 git pull，目的都是要从原始克隆的远端仓库中抓取数据后，合并到工作目录中当前分支。
+
+### 推送数据到远程仓库
+
+项目进行到一个阶段，要同别人分享目前的成果，可以将本地仓库中的数据推送到远程仓库。实现这个任务的命令很简单： git push <remote-name> <branch-name>。如果要把本地的 master 分支推送到 origin 服务器上（再次说明下，克隆操作会自动使用默认的 master 和 origin 名字），可以运行下面的命令：
+
+```bash
+$ git push origin master
+```
+
+只有在所克隆的服务器上有写权限，或者同一时刻没有其他人在推数据，这条命令才会如期完成任务。如果在你推数据前，已经有其他人推送了若干更新，那 你的推送操作就会被驳回。你必须先把他们的更新抓取到本地，并到自己的项目中，然后才可以再次推送。有关推送数据到远程仓库的详细内容见第三章。
+
+### 查看远程仓库信息
+
+我们可以通过命令 git remote show <remote-name> 查看某个远程仓库的详细信息，比如要看所克隆的origin 仓库，可以运行：
+
+```bash
+$ git remote show origin
+* remote origin
+URL: git://github.com/schacon/ticgit.git
+Remote branch merged with ‘git pull’ while on branch master
+master
+Tracked remote branches
+master
+ticgit
+```
+
+除了对应的克隆地址外，它还给出了许多额外的信息。它友善地告诉你如果是在 master 分支，就可以用git pull命令抓取数据合并到本地。另外还列出了所有处于跟踪状态中的远端分支。
+在实际使用过程中，git remote show 给出的信息可能会像这样：
+
+```bash
+$ git remote show origin
+* remote origin
+URL: git@github.com:defunkt/github.git
+Remote branch merged with ‘git pull’ while on branch issues
+issues
+Remote branch merged with ‘git pull’ while on branch master
+master
+New remote branches (next fetch will store in remotes/origin)
+caching
+Stale tracking branches (use ‘git remote prune’)
+libwalker
+walker2
+Tracked remote branches
+acl
+apiv2
+dashboard2
+issues
+master
+postgres
+Local branch pushed with ‘git push’
+master:master
+```
+
+它告诉我们，运行 git push 时缺省推送的分支是什么（译注：最后两行）。它还显示了有哪些远端分支还没有同步 到本地（译注：第六行的 caching 分支），哪些已同步到本地的远端分支在远端服务器上已被删除（译注：Stale tracking branches 下面的两个分支），以及运行 git pull 时将自动合并哪些分支（译注：前四行中列出的 issues 和 master 分支）。(此命令也可以查看到本地分支和远程仓库分支的对应关系。)
+
+### 远程仓库的删除和重命名
+
+在新版 Git 中可以用 git remote rename 命令修改某个远程仓库的简短名称，比如想把 pb改成 paul，可以这么运行：
+
+```bash
+$ git remote rename pb paul
+$ git remote
+origin
+paul
+```
+
+注意，对远程仓库的重命名，也会使对应的分支名称发生变化，原来的 pb/master分支现在成了paul/master。 碰到远端仓库服务器迁移，或者原来的克隆镜像不再使用，又或者某个参与者不再贡献代码，那么需要移除对应的远端仓库，可以运行 git remote rm 命令：
+
+```bash
+$ git remote rm paul
+$ git remote
+Origin
+```
+
+## 推荐书籍
+
+* 《版本控制之道——使用Git》： 作者: Travis Swicegood ; 译者: 董越 / 付昭伟 / 等译; 出版社: 电子工业出版社; 出版年: 2010年5月;
+
+* 《Git权威指南》： 作者: 蒋鑫; 出版社: 机械工业出版社华章公司; 出版年: 2011年6月;
