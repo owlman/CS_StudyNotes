@@ -1,11 +1,16 @@
 # Cygwin 研究笔记
 
+## Cygwin 简介
+
+## Cygwin 的安装与配置
+
 ## Win7 重装后，如何删除 Cygwin 目录？
 
-> 参考：
-> http://blog.csdn.net/zjjyliuweijie/article/details/6577037
-> http://blog.csdn.net/huangzhtao/article/details/6038504
-> http://blog.csdn.net/hu_shengyang/article/details/7828998
+> **参考资料**：
+>
+> - http://blog.csdn.net/zjjyliuweijie/article/details/6577037
+> - http://blog.csdn.net/huangzhtao/article/details/6038504
+> - http://blog.csdn.net/hu_shengyang/article/details/7828998
 
 ### 为什么 Cygwin 的安装目录（在win7重装后）会如此难以删除？
 
@@ -17,15 +22,14 @@
 
 #### 手动删除
 
-1. 右键点要删除 Cygwin 文件夹，依次选属性->安全->高级->所有者->编辑，将所有者改为你的登录帐户，勾选下方"替换子容器和对象的所有者"。
-2. 在属性->安全->高级对话框中选"审核选项卡"，点"继续"，点"添加"，输入：Everyone，点"确定"添加 Everyone 帐户，在弹出的对话框中将"完全控制"后面的允许勾上，勾选"使用可从此对象继承的权限替换所有子对象权限",点击"确定"。
+1. 右键点要删除 Cygwin 文件夹，依次选择属性->安全->高级->所有者->编辑，将所有者改为你的登录帐户，勾选下方"替换子容器和对象的所有者"。
+2. 继续在文件夹的属性对话框中依次点击安全->高级对话框中选"审核选项卡"->"继续"->"添加"，并在其中输入 Everyone，以便添加 Everyone 帐户，在弹出的对话框中将"完全控制"后面的允许勾上，勾选"使用可从此对象继承的权限替换所有子对象权限"，点击"确定"。
 
 现在，我们可以顺利删除 Cygwin 文件夹了。显而易见，手动删除是件非常痛苦的工作。
 
-#### 程序删除
+#### 自动删除
 
 1. 使用 takeown.exe 修改 Cygwin 文件夹及其子文件的权限。takeown.exe 可从网上下载，下载完成之后，将 takeown.exe 放在 Cygwin 的安装目录下，然后在cmd中输入：`takeown.exe /F * /R`。该命令会负责把 takedown 所处目录下的所有文件和文件夹的所有者修改成当前用户，并且可对这些目录进行递归操作，令其对所有子目录和子文件生效。
-2. 用win7系统提供的命令修改用户对目标文件夹下所有子目录的访问权限。该命令为`Icacls`，其用法亦可在网上搜到：`Icacls \cygwin /T /grant <user>:F`。
-该命令会赋予`<user>`用户在 Cygwin 文件夹及其所有子目录的完全控制（F）权限。
+2. 用 win7 系统提供的命令修改用户对目标文件夹下所有子目录的访问权限。该命令为`Icacls`，其用法亦可在网上搜到：`Icacls \cygwin /T /grant <user>:F`。该命令会赋予`<user>`用户在 Cygwin 文件夹及其所有子目录的完全控制（F）权限。
 
 以上两个步骤都需要 2、3 分钟左右的处理时间，请务必要耐心等其执行完毕。
