@@ -440,3 +440,55 @@ set t_Co=256
   - 将文件内容复制到剪贴板：`cat <filename> | xsel -i`
   - 将剪贴板中的内容复制到文件：`xsel > <filename>`
   - 将剪贴板中的内容追加到文件：`xsel >> <filename>`
+
+## 实现远程登录
+
+
+我的记录本
+
+    安装了新系统之后，直接就进行了远程桌面的测试
+        1.系统设置
+        2.安装xrdp
+        3.安装dconf-editor并设置
+        4.切换windows系统打开远程桌面
+
+安装了新系统之后，直接就进行了远程桌面的测试
+
+更新源都没有动，直接进行远程桌面的测试。
+参考文献：远程桌面
+1.系统设置
+
+在这里插入图片描述按照上图进行设置，密码要记住，一会在windows远程登陆的时候，第二步要输入密码。
+
+2.安装xrdp
+
+sudo apt-get install xrdp
+
+
+3.安装dconf-editor并设置
+
+Ctr+Art+T
+
+sudo apt-get install dconf-editor
+
+启动软件“dconf-editor"，打开之后，依次展开org->gnome->desktop->remote-access，然后取消 “requlre-encryption”的勾选即可。如图所示：
+
+在这里插入图片描述
+在这里插入图片描述记录当前IP ：
+在这里插入图片描述
+4.切换windows系统打开远程桌面
+
+进入windows，开启远程桌面，填入IP登陆，选择vnc-any，填入IP和共享设置的密码。
+
+在这里插入图片描述
+
+在这里插入图片描述
+好了，就到这里。
+
+2020年7月4日
+那么还有一种是从ubuntu访问windows的远程桌面：
+这个在ubuntu20.04当中很简单，直接在软件当中搜索remmina就可以了。
+填写信息自己试一试就好了，这里给个例子：
+在这里插入图片描述
+
+好了，登陆成功之后，自己试一试怎么全屏吧，个人觉得系统自带的应该稳定一些。
