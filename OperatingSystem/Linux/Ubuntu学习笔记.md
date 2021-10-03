@@ -1,15 +1,15 @@
+#!https://zhuanlan.zhihu.com/p/359806073
+
 # Ubuntu 学习笔记
 
 ## 使用 Linux 的动机和理由
 
-我一直以来都想离开 Windows 这个封闭的系统环境，将工作机换成 Linux 系统已经成为了多年来的一个执念。但直到 2018 年，我才真正看到了可以将其付诸实现的主客观条件，这些条件主要有以下几条：
-
 - 第一，非 IE 浏览器市场成熟了，比如网上购物、网上银行这类生活必需的应用不再非 IE 不可了；
-- 第二，我喜欢用命令行操作电脑，而 Windows 下的 Cygwin 或 Powershell 始终让我感觉差强人意；
-- 第三，我现在使用的笔记本已经算是非常老旧了，还是 i7 3520M 的 CPU，8GB 的内存，Windows 不止本身很耗资源，还不得不装一些很耗资源的安全软件，不然撑不过一个月（实际上也不见得有多安全）；
+- 第二，喜欢用命令行操作电脑，而 Windows 下的 Cygwin 或 Powershell 始终让我感觉差强人意；
+- 第三，Windows 不止本身很耗资源，还不得不装一些很耗资源的安全软件，不然撑不过一个月（实际上也不见得有多安全）；
 - 第四，Linux 的桌面环境已经比以前成熟多了，易用性也已经得到了很大的改善，不再需要像我在大学时代那样配置系统了（虽然这样对学习计算机专业知识是有好处的）；
 - 第五，虚拟机软件很成熟了，无论是 VMware 还是 VirtualBox 都已经很好用了，我们可以在需要时随时建构一个 Windows 机来解决问题。
-- 第六，我对玩游戏这件事越来越没了兴趣，这可能也是一个重要原因。
+- 第六，对玩游戏这件事越来越没了兴趣，这可能也是一个重要原因。
 
 ## Linux 发行版的选择
 
@@ -30,17 +30,30 @@
 
 ## Ubuntu 的安装
 
-正如之前所说，我用的是一台差不多十年前的老机器，所以只能选择老一些的 16.04 版（在本文发表之后，18.04 版也提供了对 i386/i686 架构的支持）。具体安装过程非常简单，网上教程也很多，内容也都大同小异，基本上照着做即可。这里推荐几个，供各位自行参考：
+Ubuntu 系统的具体安装过程非常简单，网上教程也很多，内容也都大同小异，基本上照着以下步骤做即可：
 
-- [百度经验：《Ubuntu 16.04 安装基础入门教程》](https://jingyan.baidu.com/article/3c48dd348bc005e10be358eb.html)
-- [CSDN 博客《新手安装 Ubuntu 16.04 操作系统》](https://blog.csdn.net/jjkkaa326/article/details/78638814)
-- [优酷视频《如何安装 Ubuntu 16.04》](https://v.youku.com/v_show/id_XMzAyOTIyMzM4MA==.html?spm=a2h0k.11417342.soresults.dtitle)
+1. 去 Ubuntu 官方网站下载适合自己的安装镜像文件。在这里，我要安装系统的设备是一台 CPU 为 i7 3520M 的 ThinkPad X230，所以选择的是`ubuntu-20.04.3-desktop-amd64.iso`这个镜像文件，即 20.04 版本的桌面系统。
 
-## 安装之后必须要做的几件事
+2. 准备一个存储容量大于 4G 的 U 盘，并使用 U 盘刻录软件将其制作成 Ubuntu 的系统安装盘。
+
+3. 将 U 盘插入要安装系统的目标设备，并让该设备从 U 盘启动。待其加载完安装程序之后，在欢迎界面选择系统要使用的语言（这里选择中文），并单击【安装 Ubuntu】按钮开始正式安装。
+
+4. 根据系统安装向导执行以下操作：
+   - 在设置【键盘布局】时选择美式键盘。
+   - 在设置【更新和其他软件】时，取消【安装 Ubuntu 时下载更新】选项。
+   - 在设置【安装类型】时，如果没有双系统方面的需求，建议选择【现在安装】，让系统自动分配分区。
+   - 在设置【你在什么地方】时，选择自己所在的时区，这里选择上海。
+   - 在设置【你是谁】时，输入自己的名字、目标设备的名称、登录系统时所要使用的用户名和密码等信息。
+
+5. 待系统安装向导执行完所有操作最后，会提示重启设备。这时候需先取出 U 盘，让设备从硬盘重启。这样一来，就能在设备重启之后进入 Ubuntu 系统的 GNOME 桌面环境了，具体如下图所示：
+
+   ![GNOME](./img/GNOME.jpg)
+
+## 初始环境配置
 
 ### 将 apt 的源换成国内源
 
-由于某些不可抗力的存在和客观物理网络的问题，国外的网络资源通常被认为是朝不保夕的，所以个人强烈建议，在安装完 Ubuntu 之后，第一件事就是将 apt 的软件源改成国内的，我这里选择的是阿里云的源，替换的具体操作如下：
+由于某些不可抗力的存在和客观物理网络的问题，国外的网络资源通常被认为是朝不保夕的，所以在安装完 Ubuntu 之后，要做的第一件事应该就是将 apt 的软件源改成国内的镜像，这里选择的是阿里云的源，替换的具体操作如下：
 
 首先备份一下原有的国外源，以备日后在需要时将其恢复：
 
@@ -52,65 +65,23 @@ sudo cp sources.list sources.list.bak
 然后用编辑器打开源配置文件`sources.list`，将其内容改成：
 
 ```bash
-# deb cdrom:[Ubuntu 16.04.4 LTS _Xenial Xerus_ - Release i386 (20180228)]/ xenial main restricted
-
-# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
-# newer versions of the distribution.
-deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted
-# deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial main restricted
-
-## Major bug fix updates produced after the final release of the
-## distribution.
-deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted
-# deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-updates main restricted
-
-## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
-## team. Also, please note that software in universe WILL NOT receive any
-## review or updates from the Ubuntu security team.
-deb http://mirrors.aliyun.com/ubuntu/ xenial universe
-# deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial universe
-deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe
-# deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-updates universe
-
-## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
-## team, and may not be under a free licence. Please satisfy yourself as to
-## your rights to use the software. Also, please note that software in
-## multiverse WILL NOT receive any review or updates from the Ubuntu
-## security team.
-deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse
-# deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial multiverse
-deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse
-# deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-updates multiverse
-
-## N.B. software from this repository may not have been tested as
-## extensively as that contained in the main release, although it includes
-## newer versions of some applications which may provide useful features.
-## Also, please note that software in backports WILL NOT receive any review
-## or updates from the Ubuntu security team.
-deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
-# deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse
-
-## Uncomment the following two lines to add software from Canonical's
-## 'partner' repository.
-## This software is not part of Ubuntu, but is offered by Canonical and the
-## respective vendors as a service to Ubuntu users.
-# deb http://archive.canonical.com/ubuntu xenial partner
-# deb-src http://archive.canonical.com/ubuntu xenial partner
-
-deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted
-# deb-src http://security.ubuntu.com/ubuntu xenial-security main restricted
-deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe
-# deb-src http://security.ubuntu.com/ubuntu xenial-security universe
-deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse
-# deb-src http://security.ubuntu.com/ubuntu xenial-security multiverse
-deb https://dl.winehq.org/wine-builds/ubuntu/ xenial main
-# deb-src https://dl.winehq.org/wine-builds/ubuntu/ xenial main
+# 使用阿里云的源
+deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
 ```
 
-最后更新一下索引缓存：
+最后更新一下系统：
 
 ```bash
-sudo apt update
+sudo apt update  && sudo apt upgrade
 ```
 
 ### 安装输入输入法
@@ -156,7 +127,7 @@ sudo apt install pavucontrol
 
 ![PulseAudio](./img/PulseAudio.png)
 
-数字键盘启动问题：
+如果外接键盘的数字键存在启动问题，可执行以下命令安装 numlockx：
 
 ```bash
 sudo apt install numlockx
@@ -409,7 +380,7 @@ set t_Co=256
   - 对文件执行命令：`sed [options] <command> <filename(s)>`
   - 对文件执行脚本：`sed [options] -f <scriptfile> <filename(s)>`
 
-- wget命令：
+- wget 命令：
   - 下载文件： `wget <URL>`
    下载并另存为：`wget -o <filename> <URL>`
   - 断点续传下载：`wget -c <URL>`
@@ -434,7 +405,7 @@ set t_Co=256
       tar.bz2tar –xZvf <packagename>.tar.Z
       ```
 
-- xsel命令：
+- xsel 命令：
   - 将文件内容复制到剪贴板：`cat <filename> | xsel -i`
   - 将剪贴板中的内容复制到文件：`xsel > <filename>`
   - 将剪贴板中的内容追加到文件：`xsel >> <filename>`
