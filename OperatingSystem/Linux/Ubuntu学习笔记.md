@@ -430,7 +430,7 @@ set t_Co=256
    sudo apt install dconf-editor
    ```
 
-   待其成功安装之后，启动`dconf-editor`配置编辑器，然后依次展开org->gnome->desktop->remote-access 选项卡，并将其中的`requlre-encryption`选项关闭（即设置为`false`），如下图所示：
+   待其成功安装之后，启动`dconf-editor`配置编辑器，然后依次展开org -> gnome -> desktop -> remote-access 选项卡，并将其中的`requlre-encryption`选项关闭（即设置为`false`），如下图所示：
 
    ![dconf-editor](./img/dconf-editor.png)
 
