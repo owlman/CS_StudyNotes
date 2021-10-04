@@ -45,9 +45,7 @@ Ubuntu 系统的具体安装过程非常简单，网上教程也很多，内容�
    - 在设置【你在什么地方】时，选择自己所在的时区，这里选择上海。
    - 在设置【你是谁】时，输入自己的名字、目标设备的名称、登录系统时所要使用的用户名和密码等信息。
 
-5. 待系统安装向导执行完所有操作最后，会提示重启设备。这时候需先取出 U 盘，让设备从硬盘重启。这样一来，就能在设备重启之后进入 Ubuntu 系统的 GNOME 桌面环境了，具体如下图所示：
-
-   ![GNOME](./img/GNOME.jpg)
+5. 待系统安装向导执行完所有操作最后，会提示重启设备。这时候需先取出 U 盘，让设备从硬盘重启。这样一来，就能在设备重启之后进入 Ubuntu 系统的 GNOME 桌面环境了
 
 ## 初始环境配置
 
@@ -91,27 +89,26 @@ sudo apt update  && sudo apt upgrade
 首先，确认当前系统中是否已经安装了 fcitx，由于 Linux 版的搜狗输入法是基于这个输入法框架来设计的，所以必须先确保它已经被安装。在一般情况下，Ubuntu 中文版是安装了这个框架的，如果意外发现没有安装，请执行以下命令来安装它：
 
 ```bash
-# 1）先添加以下源
-sudo add-apt-repository ppa:fcitx-team/nightly
-# 2）添加源后我们更新一下系统
-sudo apt update
-# 3）开始安装fcitx
 sudo apt install fcitx
 # 如果发现有错误提示，请试一下"sudo apt -f install"命令，然后再试一下sudo apt install fcitx。
-# 4）安装fcitx的配置工具
-sudo apt install fcitx-config-gtk
-# 5）安装fcitx的table-all包
-sudo apt install fcitx-table-all
-# 6）安装im-switch工具
-sudo apt install im-switch
 ```
 
-然后去[搜狗输入法的官网](http://pinyin.sogou.com/linux/)下载 linux 系统下的安装包，记住下载对应自己版本的文件，我这里下载的是 32 位的版本，文件是`sogoupinyin_2.2.0.0108_i386.deb`，然后进入到该文件所在的目录中使用 dpkg 命令安装它：
+待安装完成之后，执行以下配置操作：
 
-```bash
-sudo dpkg -i sogoupinyin_2.2.0.0108_i386.deb
-# 如果发现有错误提示，请试一下"sudo apt -f install"命令，然后重新执行一下这条安装命令
-```
+1. 在系统设置中依次打开【区域和语言】 -> 【管理已安装的语言】， 并在【语言】选项卡中点击【添加或删除语言】。
+
+2. 在弹出【已安装语言】窗口中勾选【中文（简体）】，并点击【应用】按钮。
+
+3. 回到【语言支持】窗口，在键盘输入法系统中，选择“fcitx”并点击“应用到整个系统。
+
+4. 去[搜狗输入法的官网](http://pinyin.sogou.com/linux/)下载 ubuntu 系统下的安装包，记住下载对应自己版本的文件，这里下载的是`sogoupinyin_2.4.0.3469_amd64.deb`，然后进入到该文件所在的目录中使用 dpkg 命令安装它：
+
+   ```bash
+   sudo dpkg -i sogoupinyin_2.4.0.3469_amd64.deb
+   # 如果发现有错误提示，请试一下"sudo apt -f install"命令，然后重新执行一下这条安装命令
+   ```
+
+5. 关闭窗口，重启电脑。
 
 请注意，输入法安装之后通常是不能立即启用的。所以，我们需要先注销当前系统用户并重新登录一次，然后就可以搜索出 fcitx 配置，删除不需要的输入法，将搜狗输入法设为默认即可。
 
@@ -146,7 +143,7 @@ sudo apt install numlockx
 - JavaScript 环境：`sudo apt install nodejs`
 - vim 和 Eclipse：`sudo apt install vim eclipse`
 - pandoc 和 LaTeX : `sudo apt install pandoc texlive-full texmaker latex-cjk-all`
-- git、wget 和 pip：`sudo apt git wget python-pip`
+- git、wget 和 pip：`sudo apt install git wget python-pip`
 
 ### 配置 pip 的国内源
 
