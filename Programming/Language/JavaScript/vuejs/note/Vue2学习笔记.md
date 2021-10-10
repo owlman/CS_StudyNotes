@@ -1,11 +1,13 @@
+#! https://zhuanlan.zhihu.com/p/419836603
+
 # Vue.js 2.0 学习笔记
 
-这篇学习笔记将记录一些我个人在学习 Vue.js 2.0 框架时所编写的程序代码与学习心得。为此，我会在`ProgrammingLanguage/JavaScript`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
+这篇笔记将用于记录个人在学习 Vue.js 2.0 框架过程中所编写的程序代码与学习心得。为此，我会在`https://github.com/owlman/study_note`项目的`ProgrammingLanguage/JavaScript`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
 
 - `note`目录用于存放`markdown`格式的笔记。
 - `code`目录则用于存放笔记中所记录的程序代码。
 
-## 第 0 部分： 学习规划
+## 学习规划
 
 - 学习基础：
   - 掌握 HTML、CSS、JavaScript 相关的基础知识。
@@ -16,10 +18,8 @@
 - 学习资料：
   - 视频教程：
     - [黑马程序员之 Vue.js 教学视频](https://www.bilibili.com/video/BV12J411m7MG?p=1)
-    - [webpack 前端配置](https://www.bilibili.com/video/BV1Ks411j714)
   - 线上文档：
     - [Vue.js 官方教程](https://cn.vuejs.org/v2/guide/)
-    - [webpack 官方文档](https://www.webpackjs.com/concepts/)
 
 ## 第 1 部分：了解 Vue.js 框架
 
@@ -312,8 +312,7 @@ const app = new Vue({
                 this.taskList.splice(index,1);
             }
         }
-    }
-});
+    });
 ```
 
 下面来具体分析一下这个程序。在通常情况下，Web 应用程序在前端接受用户输入信息的方式主要有两种：第一种方式是用文本框元素来获取用户从键盘输入的信息。在 Vue.js 框架中，我们可以用`v-model`指令将`<input type="text">`标签绑定到`newTask`数据中，该指令与`v-bind`指令不同的在于，它是一种双向绑定。也就是说，`v-model`指令不止可以让 JavaScript 代码中对绑定数据的修改反映到页面元素中，也可以让页面元素获取到的用户输入数据同步到 JavaScript 代码中。在 JavaScript 代码获取到文本框中的用户输入内容之后，我们就可以通过事件处理函数`addNew`将其加入到一个名为`taskList`的数据列表中，然后将该事件处理函数注册给输入回车和鼠标单击事件。

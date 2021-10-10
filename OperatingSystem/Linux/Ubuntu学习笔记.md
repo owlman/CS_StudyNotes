@@ -399,7 +399,7 @@ set t_Co=256
       tar –xvf <packagename>.tar
       tar -xzvf <packagename>.tar.gz
       tar -xjvf <packagename>.tar.bz2
-      tar.bz2tar –xZvf <packagename>.tar.Z
+       tar.bz2tar –xZvf <packagename>.tar.Z
       ```
 
 - xsel 命令：
