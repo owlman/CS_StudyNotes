@@ -72,3 +72,5 @@ target/
 # vscode project
 .vscode/
 node_modules
+
+SoftwareTool/Git/code/demo_repo/
