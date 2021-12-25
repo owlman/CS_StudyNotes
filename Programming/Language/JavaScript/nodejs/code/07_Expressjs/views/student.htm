@@ -1,0 +1,39 @@
+{{ extend './baseTpl.art' }}
+
+{{ block 'navbar' }}
+<div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+        <li><a href="/">你好，Express！</a></li>
+        <li class="active"><a href="/student">学生管理</a></li>
+        <li><a href="/board">留言板</a></li>
+    </ul>
+</div>
+{{ /block }}
+
+{{ block 'main' }}
+<div class="jumbotron">
+    <h2>学生信息表</h2>
+    <a class="btn btn-success" href="/student/add">添加学生</a>
+    <table class="table table-striped">
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>爱好</th>
+            <th>操作</th>
+        </tr>
+        {{ each db }}
+        <tr>
+            <td>{{ $value.name }} </td>
+            <td>{{ $value.age }} </td>
+            <td>{{ $value.sex }} </td>
+            <td>{{ $value.items }}</td>
+            <td>
+                <a href="/student/edit?name={{ $value.name}}">编辑</a>
+                <a href="/student/delete?name={{ $value.name}}">删除</a>
+            </td>
+        </tr>
+        {{ /each }}
+    </table>
+</div>
+{{ /block }}

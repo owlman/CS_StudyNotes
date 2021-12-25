@@ -1,0 +1,28 @@
+{
+  "name": "component_3",
+  "version": "1.0.0",
+  "description": "学习构建 webpack+vue 项目",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "npm run build && nodemon ./index.js"
+  },
+  "keywords": [],
+  "author": "owlman",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "style-loader": "^2.0.0",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  }
+}

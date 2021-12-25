@@ -1,0 +1,26 @@
+<!doctype html><html lang="zh-cn"><head><meta charset="UTF-8"><style>body {
+                background: black;
+                color: floralwhite;
+            }
+            .box {
+            width: 400px;
+            height: 300px;
+            border-radius: 14px;
+            padding: 14px;
+            color: black;
+            background: floralwhite;
+        }
+        @keyframes usersAni {
+           0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .usersModule-leave-active {
+            animation: usersAni .5s;
+        }</style><title>Vue 组件实验（6）：使用动态组件</title><script defer="defer" src="js/main-bundle.js"></script></head><body><div id="app" class="box"><h1>用户登录</h1><div v-show="!isLogin"><input type="button" value="注册新用户" @click="componentId='signup'"> <input type="button" value="用户登录" @click="componentId='login'"><transition name="usersModule" mode="out-in"><keep-alive><component :is="componentId" v-model="isLogin"></component></keep-alive></transition></div><div v-show="isLogin">登录成功</div></div></body></html>
