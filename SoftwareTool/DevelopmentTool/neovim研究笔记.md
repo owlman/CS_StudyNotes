@@ -31,6 +31,8 @@ pip install pynvim
 sudo apt install curl git
 ```
 
+<!-- 以下内容尚未整理 -->
+
 安装配置neovim
 安装neovim
 
