@@ -9,18 +9,18 @@
 
 ### NeoVim 起源
 
-2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）曾经向 Vim 开源编辑器项目递交了两大补丁，其中包含了对 Vim 的架构进行大幅调整的建议，但遭到了 Vim 作者 Bram Moolenaar 的拒绝。因为后者认为对于 Vim 这样一个成熟的项目进行如此大的改变风险太高。而在 tarruda 看来，Vim 项目还是上个世纪 90 年代初的产物，至今已经 20 多年了，项目中不仅遗留了大量的历史痕迹，而且该项目的管理层如今在程序的维护、Bug 的修复、以及新特性的添加等问题上的态度都在变得越来越僵化，且难以与时俱进。要想解决这些问题，就需要致力于打造一款面向 21 世纪的代码编辑器。
+2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）曾经向 Vim 开源编辑器项目递交了两大补丁，其中包含了对 Vim 的架构进行大幅调整的建议，结果遭到了 Vim 作者 Bram Moolenaar 的拒绝。因为后者认为对于 Vim 这样一个成熟的项目进行如此大的改变风险太高。但或许在 tarruda 看来，Vim 这个上个世纪 90 年代初的产物，至今已经 20 多年了，该项目中不仅遗留了大量的历史痕迹，而且该项目的管理层如今在程序的维护、Bug 的修复、以及新特性的添加等问题上的态度都在变得越来越僵化，且难以与时俱进。
 
-总而言之，基于对 Vim 项目的不满，tarruda 以众筹资金的方式发起了这个 Vim fork 项目：NeoVim。在这里，Neo 即“新”之意，它是 Vim 在这个新时代的重生。
+总而言之，基于对 Vim 项目的不满，并致力于打造一款面向 21 世纪的代码编辑器，tarruda 先生以众筹资金的方式发起了 Vim 的这个 fork 项目：NeoVim。在这里，Neo 这个单词取“新”之意，表达的是其作者对 Vim 编辑器在这个新时代的重生期待。
 
 ### NeoVim 现状
 
-根据 NeoVim 的自述说明，在总体上，它将达到下列目的 :
+根据 NeoVim 项目的自述说明，它在总体上想实现以下目标 :
 
 - 通过简化维护以改进 Bug 修复及特性添加的速度；
 - 分派各个开发人员的工作；
 - 实现新的、现代化的用户界面，而不必修改核心源代码；
-- 利用新的、基于协同进程的新插件架构改善扩展性，并支持使用任何语言 编写插件
+- 利用新的、基于协同进程的新插件架构改善扩展性，并支持使用任何语言编写插件；
 
 NeoVim 目前在 Mac 和 Linux 上运作的很好，而且从项目的 Commit 上来看，项目发起人（PM）是个非常有经验的人，管理有条不紊， 不过项目迭代也是相当快，几天一个版本。Ubuntu 有现成的 PPA 源方便及时更新。目前来说， NeoVim 已经实现 Vim 大部分功能，兼容Vim 90%+以上的配置。 小部分没有实现和兼容.
 
@@ -62,15 +62,6 @@ sudo apt install curl git
 
 <!-- 以下内容尚未整理 -->
 
-2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）因为多次对 vim 提交 feature patch 遭到拒绝。出于对 vim 低效的开发社区的不满，决定众筹一个新项目 —— neovim，尝试解决 vim 当时的问题：
-
-    由于 vim 写于 90 年代，20 多年过去，产生了大量的遗留代码，导致程序维护困难
-    社区新功能开发进度缓慢，vim 开发社区仍然使用邮件 patch 的方式协作，并且对新人极度不友好
-    作者 Bram Moolenaar 被形容为 vim 社区的独裁者，大量开发者提交的 patch 被拒绝
-
-Neovim 项目发起之初，并不被人们看好，并且被认为是在重复造轮子。vim 作者 Bram 这样评价刚发起的 neovim 项目：
-
-    It’s going to be an awful lot of work, with the result that not all systems will be supported, new bugs introduced and what’s the gain for the end user exactly?
 
 但是随着时间的推移，neovim 项目逐渐发展成为一个成熟的项目，并率先提供了多个当时 vim 不支持的新特性：
 
