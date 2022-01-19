@@ -1,6 +1,35 @@
-# neovim 研究笔记
+# NeoVim 研究笔记
 
-本文将以 Ubuntu Linux 发行版为例来介绍 neovim 的安装与环境配置方法，并研究它的具体功能使用。
+本文将以 Ubuntu Linux 发行版为系统环境来研究 NeoVim 的安装与环境配置方法，并学习使用它的具体功能。
+
+- NeoVim 项目地址：[GitHub - neovim/neovim](https://github.com/neovim/neovim)
+- Vim 原项目地址：[GitHub - vim/vim](https://github.com/vim/vim)
+
+## 背景知识介绍
+
+### NeoVim 起源
+
+2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）曾经向 Vim 开源编辑器项目递交了两大补丁，其中对 Vim 的架构进行了大幅调整，结果遭到了 Vim 作者 Bram Moolenaar 的拒绝，因为后者认为对于 Vim 这样一个成熟的项目进行如此大的改变风险太高。于是 tarruda 发起了 Vim fork 项目 NeoVim，集资 1 万美元打造出 21 世纪的编辑器，提供更好的脚本、插件支持，整合现代的图形界面。
+
+Bram Moolenaar 在写 Vim 时还是 90 年代初，至今已经 20 多年 过去了。其中，不仅包含了大量的遗留代码，而且程序的维护、Bug 的修复、以及新特性的添加都变得越来越困难。为了解决这些问题，NeoVim 项目应运而生。Neo 即“新”之意，它是 Vim 在这个新时代的重生。
+
+### NeoVim 现状
+
+根据 NeoVim 的自述说明，在总体上，它将达到下列目的 :
+
+- 通过简化维护以改进 Bug 修复及特性添加的速度；
+- 分派各个开发人员的工作；
+- 实现新的、现代化的用户界面，而不必修改核心源代码；
+- 利用新的、基于协同进程的新插件架构改善扩展性，并支持使用任何语言 编写插件
+
+NeoVim 目前在 Mac 和 Linux 上运作的很好，而且从项目的 Commit 上来看，项目发起人（PM）是个非常有经验的人，管理有条不紊， 不过项目迭代也是相当快，几天一个版本。Ubuntu 有现成的 PPA 源方便及时更新。目前来说， NeoVim 已经实现 Vim 大部分功能，兼容Vim 90%+以上的配置。 小部分没有实现和兼容.
+
+### 和 Vim 的差异
+
+- NeoVim 只有终端版本. 没有 GUI 版本，但是Vim 有 GUI 版本；
+- NeoVim 目前的剪贴板功能（寄存器） 和原生 Vim 实现不一 ；
+- NeoVim 配置文件入口和 Vim 不同，可以通过 `:version`命令来查看；
+- NeoVim 目前对外部语言的支持并不友好，目前只对 Python 支持比较完善，而 Vim 则支持比较全面；
 
 ## 基础环境配置
 
@@ -33,10 +62,10 @@ sudo apt install curl git
 
 <!-- 以下内容尚未整理 -->
 
-安装配置neovim
-安装neovim
+安装配置NeoVim
+安装NeoVim
 
-和安装nodejs一样，neovim下载地址：neovim
+和安装nodejs一样，NeoVim下载地址：NeoVim
 
 sudo ln -s /home/ykh/软件/nvim-linux64/bin/nvim nvim
 
@@ -62,7 +91,7 @@ source /etc/profile
 
     1
 
-这时候就可以直接用nvim来打开neovim了
+这时候就可以直接用nvim来打开NeoVim了
 安装插件管理器
 
 参看一下raw.githubusercontent.com的IP，有时候会连不上：IP查询
@@ -118,12 +147,12 @@ tab补全
     6
     7
 
-保存退出，进入neovim命令模式下输入PlugInstall自动安装，重启进入neovim,按下tab键就会有提示了，其他插件安装类似
+保存退出，进入NeoVim命令模式下输入PlugInstall自动安装，重启进入NeoVim,按下tab键就会有提示了，其他插件安装类似
 安装coc.nvim
 
 coc.nvim 是集代码补全、静态检测、函数跳转等功能的一个引擎
 
-npm install -g neovim
+npm install -g NeoVim
 
     1
 
