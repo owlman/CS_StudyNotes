@@ -85,7 +85,6 @@ sudo apt install -y neovim
 
 <!-- 以下内容尚未整理 -->
 
-
 环境变量加入：
 
 export PATH="/home/ykh/软件/nVim-linux64/bin:$PATH"
@@ -96,6 +95,7 @@ export TMPDIR="/tmp"
 source /etc/profile
 
 这时候就可以直接用nVim来打开NeoVim了
+
 安装插件管理器
 
 参看一下raw.githubusercontent.com的IP，有时候会连不上：IP查询
