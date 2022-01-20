@@ -95,9 +95,6 @@ sudo Vim /etc/profile
 export PATH="/home/ykh/软件/nVim-linux64/bin:$PATH"
 export TMPDIR="/tmp"
 
-    1
-    2
-
 让环境变量生效：
 
 source /etc/profile
