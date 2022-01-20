@@ -73,19 +73,17 @@ pip install pynVim
 sudo apt install -y curl git
 ```
 
-### 安装 NeoVim
+### NeoVim 的安装
+
+在 Ubuntu Linux 中，我们可以直接通过 APT 包管理器来安装 NeoVim，其安装命令如下：
+
+```bash
+sudo apt install -y neovim
+```
+
+如果我们使用的其他 Linux 发行版或者 Windows/macOS 等其他操作系统，也可以通过参考官方提供的[帮助文档](https://github.com/neovim/neovim/wiki/Installing-Neovim)来进行相关的安装操作。
 
 <!-- 以下内容尚未整理 -->
-
-安装NeoVim
-
-和安装nodejs一样，NeoVim下载地址：NeoVim
-
-sudo ln -s /home/ykh/软件/nVim-linux64/bin/nVim nVim
-
-创建环境变量（第二个deepin没有，需要自己创建，不然安装coc.nVim会出错）：
-
-sudo Vim /etc/profile
 
 
 环境变量加入：
@@ -96,8 +94,6 @@ export TMPDIR="/tmp"
 让环境变量生效：
 
 source /etc/profile
-
-    1
 
 这时候就可以直接用nVim来打开NeoVim了
 安装插件管理器
