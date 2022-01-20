@@ -43,7 +43,7 @@ curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
-如果一切顺利，通过`node -v`和`npm -v`命令就会看到相应的版本，例如像这样：
+如果一切顺利，我们通过`node -v`和`npm -v`命令就可以查看到相应的版本，例如像这样：
 
 ```bash
 $ node -v
@@ -60,24 +60,22 @@ $ npm config get registry
 https://registry.npm.taobao.org
 ```
 
-接着，我们需要安装 Python3 环境，为此可以继续在 bash shell 环境中输入以下命令序列：
+接着，我们需要安装 Python3 环境，它可以通过以下 Bash 命令序列来安装：
 
 ```bash
-sudo apt install python3
-sudo apt install python3-pip
+sudo apt install  -y  python3 python3-pip
 pip install pynVim
 ```
 
-最后，我们需要安装 curl 和 git，为此可以继续在 bash shell 环境中输入以下命令：
+最后，我们需要安装 curl 和 git，它们可以通过以下 Bash 命令序列来安装：
 
 ```bash
-sudo apt install curl git
+sudo apt install -y curl git
 ```
 
-<!-- 以下内容尚未整理 -->
-
-
 ### 安装 NeoVim
+
+<!-- 以下内容尚未整理 -->
 
 安装NeoVim
 
