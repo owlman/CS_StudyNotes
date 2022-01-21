@@ -1,6 +1,6 @@
 # NeoVim 学习笔记
 
-## 研究资源
+## 学习资源
 
 - NeoVim 官方网站：[NeoVim.io](https://NeoVim.io/)
 - NeoVim 项目仓库：[GitHub - NeoVim/NeoVim](https://github.com/NeoVim/NeoVim)
@@ -25,7 +25,7 @@
 随着时间的推移，NeoVim 项目逐渐发展成为一个成熟的项目，并率先提供了多个 8.0 版本之前的 Vim 所没有的新特性：
 
 - 支持在 Vim 中打开命令行终端窗口，使用户不必退出编辑器就能执行 bash 命令；
-- 为 vimscript 提供了异步任务的支持，之前的 vimscirpt 只能以同步的方式执行任务；
+- 为 vimscript 提供了异步任务的支持，之前的 vimscript 只能以同步的方式执行任务；
 - 重构了 Vim 的部分代码，实现了多平台兼容，并可使用更加现代化的代码编译工具链；
 
 但与此同时，NeoVim 项目的成功也反过来唤起了 Vim 项目组的危机意识，重新激发了他们的开发热情，促使 Vim 在 7.0 之后加快了新功能开发进度，很快发布了 Vim 8.0/8.1，把 NeoVim 实现的大部分新特性在 Vim 中也实现了一遍。Vim 现在也支持异步任务，内置终端等特性了。所以目前来看 NeoVim 与 Vim 的差异已经很小，大部分第三方插件都能兼容 NeoVim/Vim。
@@ -36,7 +36,7 @@
 
 ### 基础环境配置
 
-因为在为 NeoVim 安装 coc.nVim 等插件时会需要用到 Node.js，所以在正式安装 NeoVim 之前，我们首先要在操作系统中安装一个 12.0.0 以上版本的 Node.js 运行时环境，它可以通过以下 Bash 命令序列来安装：
+因为在为 NeoVim 安装 coc.nvim 等插件时会需要用到 Node.js，所以在正式安装 NeoVim 之前，我们首先要在操作系统中安装一个 12.0.0 以上版本的 Node.js 运行时环境，它可以通过以下 Bash 命令序列来安装：
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
@@ -64,7 +64,7 @@ https://registry.npm.taobao.org
 
 ```bash
 sudo apt install  -y  python3 python3-pip
-pip install pynVim
+pip install pynvim
 ```
 
 最后，我们需要安装 curl 和 git，它们可以通过以下 Bash 命令序列来安装：
@@ -73,7 +73,7 @@ pip install pynVim
 sudo apt install -y curl git
 ```
 
-### NeoVim 的安装
+### 安装 NeoVim
 
 在 Ubuntu Linux 中，我们可以直接通过 APT 包管理器来安装 NeoVim，其安装命令如下：
 
@@ -81,94 +81,114 @@ sudo apt install -y curl git
 sudo apt install -y neovim
 ```
 
-如果我们使用的其他 Linux 发行版或者 Windows/macOS 等其他操作系统，也可以通过参考官方提供的[帮助文档](https://github.com/neovim/neovim/wiki/Installing-Neovim)来进行相关的安装操作。
+如果我们使用的是其他 Linux 发行版或者 Windows/macOS 等其他操作系统，也可以通过参考官方提供的[帮助文档](https://github.com/neovim/neovim/wiki/Installing-Neovim)来进行相关的安装操作。总而言之，如果一切顺利，我们接下来就可以使用`nvim -v`命令来查看 NeoVim 的版本信息了，像这样：
+
+```bash
+$ nvim -v
+NVIM v0.4.3
+Build type: Release
+LuaJIT 2.1.0-beta3
+Compilation: /usr/bin/cc -g -O2 -fdebug-prefix-map=/build/neovim-gOb7vg/neovim-0.4.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=1 -DDISABLE_LOG -Wdate-time -D_FORTIFY_SOURCE=1 -O2 -DNDEBUG -DMIN_LOG_LEVEL=3 -Wall -Wextra -pedantic -Wno-unused-parameter -Wstrict-prototypes -std=gnu99 -Wshadow -Wconversion -Wmissing-prototypes -Wimplicit-fallthrough -Wvla -fstack-protector-strong -fdiagnostics-color=always -DINCLUDE_GENERATED_DECLARATIONS -D_GNU_SOURCE -DNVIM_MSGPACK_HAS_FLOAT32 -DNVIM_UNIBI_HAS_VAR_FROM -I/build/neovim-gOb7vg/neovim-0.4.3/build/config -I/build/neovim-gOb7vg/neovim-0.4.3/src -I/usr/include -I/usr/include/lua5.1 -I/build/neovim-gOb7vg/neovim-0.4.3/build/src/nvim/auto -I/build/neovim-gOb7vg/neovim-0.4.3/build/include
+Compiled by team+vim@tracker.debian.org
+
+Features: +acl +iconv +tui
+See ":help feature-compile"
+
+  system vimrc file: "$VIM/sysinit.vim"
+  fall-back for $VIM: "/usr/share/nvim"
+
+Run :checkhealth for more info
+```
+
+如果看到了类似的版本信息，就说明 NeoVim 编辑器已经成功地安装到了我们的计算机中。接下来，我们要来创建的一个专属于用户个人的配置文件，以方便后面的个性化配置。为此，我们需要执行以下 bash 命令：
+
+```bash
+mkdir ~/.config/nvim/
+nvim ~/.config/nvim/init.vim
+```
+
+并在打开的``文件中输入如下代码：
+
+```vim
+" 令编辑器显示行号
+set nu
+```
+
+然后在 NeoVim 中执行`:wq`命令保存配置并退出，如果当我们再次进入 NeoVim 时能看到其显示了行号，就证明我们的用户配置文件完成了创建并成功生效了。
+
+### 插件安装方法
+
+对于国内用户来说，在正式安装 NeoVim 编辑器的插件之前，最好先设置一下对`raw.githubusercontent.com`这个域名的本地 DNS 解析表，否则有时候会因不可控的网络因素而造成安装失败。具体做法是，先使用 IP 查询工具找到该域名对应的 IP 地址，然后将其写入到`/etc/hosts`文件中，像这样：
+
+```bash
+$ cat /etc/hosts
+# [network]
+# generateHosts = false
+127.0.0.1   localhost
+127.0.1.1   owlman.localdomain    owlman
+199.232.96.133  raw.githubusercontent.com
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
+
+接下来，我们就可以开始为 NeoVim 编辑器安装插件了。首先需要安装的是 Vim-plug 插件管理器，它可以通过以下 Bash 命令来安装：
+
+```bash
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/Vim-plug/master/plug.vim'
+```
+
+如果一切顺利，我们现在就可以在 NeoVim 编辑器中执行`:PlugInstall`命令来安装插件了。下面，我们就试着来安装一下可以按 tab 键进行补全的功能插件，其操作步骤如下：
+
+1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
+
+   ```vim
+   " 令编辑器显示行号
+   set nu
+
+   " 要安装的插件列表
+   call plug#begin('~/.vim/plugged')
+   " tab键补全功能插件
+   Plug 'ervandew/supertab'
+   call plug#end()
+   ```
+
+2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其中`:PlugInstall`命令即可自动安装上述配置文件中列出的插件，待安装完成之后，我们再次重启进入 NeoVim 编辑器，并在编辑模式中按下 tab 键就会看到该插件提供的补全提示了。
+
+### 常用插件安装
 
 <!-- 以下内容尚未整理 -->
 
-环境变量加入：
+安装coc.nvim
 
-export PATH="/home/ykh/软件/nVim-linux64/bin:$PATH"
-export TMPDIR="/tmp"
-
-让环境变量生效：
-
-source /etc/profile
-
-这时候就可以直接用nVim来打开NeoVim了
-
-安装插件管理器
-
-参看一下raw.githubusercontent.com的IP，有时候会连不上：IP查询
-在这里插入图片描述
-修改下host：
-
-sudo nVim /etc/hosts
-
-    1
-
-加入：
-
-199.232.96.133 raw.githubusercontent.com
-
-    1
-
-安装Vim-plug
-
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nVim/site/autoload/plug.Vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/Vim-plug/master/plug.Vim'
-
-
-创建配置文件：
-
-mkdir ~/.config/nVim/
-nVim ~/.config/nVim/init.Vim
-
-输入（设置行号）
-
-set nu
-
-    1
-
-保存退出，再次进入，显示行号了就成功了
-安装插件
-tab补全
-
-编辑配置文件init.Vim
-
-  set nu
-
-  call plug#begin('~/.Vim/plugged')
-                 
-  Plug 'ervandew/supertab'
-                 
-  call plug#end()
-
-保存退出，进入NeoVim命令模式下输入PlugInstall自动安装，重启进入NeoVim,按下tab键就会有提示了，其他插件安装类似
-安装coc.nVim
-
-coc.nVim 是集代码补全、静态检测、函数跳转等功能的一个引擎
+coc.nvim 是集代码补全、静态检测、函数跳转等功能的一个引擎
 
 npm install -g NeoVim
 
-init.Vim加入：
+init.vim加入：
 
-Plug 'neoclide/coc.nVim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 然后进行自动安装，安装完成后可以输入命令 checkhealth 检查是否有错误
 配置C++环境：
 
-nVim命令模式输入：
+nvim命令模式输入：
 
 :CocInstall coc-clangd # C++环境插件
 :CocInstall coc-cmake  # Cmake 支持
 
 打开一个.cpp文件
 
-nVim test.cpp
+nvim test.cpp
 
 会出现提示：
 
-[coc.nVim] clangd was not found on your PATH. :CocCommand clangd.install will install 11.0.0.
+[coc.nvim] clangd was not found on your PATH. :CocCommand clangd.install will install 11.0.0.
 
 C++ 需要安装clangd，输入:CocCommand clangd.install安装clangd，但我的失败了，另一个方法：
 
@@ -190,10 +210,10 @@ C++ 需要安装clangd，输入:CocCommand clangd.install安装clangd，但我�
 
 配色
 
-这里配色使用monokai，把monokai.Vim下载下来，放到/root/.config/nVim/colors/目录下，没有就自己创建
+这里配色使用monokai，把monokai.vim下载下来，放到/root/.config/nvim/colors/目录下，没有就自己创建
 monokai
 
-修改init.Vim，加入colorscheme monokai再次打开：
+修改init.vim，加入colorscheme monokai再次打开：
 在这里插入图片描述
 其他配置和插件
 插件：
@@ -201,34 +221,33 @@ monokai
 首先要安装ranger：sudo apt install ranger
 
 Plug 'junegunn/Vim-easy-align'
-"ranger文件浏览器                                                                              
-Plug 'kevinhwang91/rnVimr'
-"更好看的标签栏                                                                                  
-Plug 'Vim-airline/Vim-airline'                                                                              
+"ranger文件浏览器
+Plug 'kevinhwang91/rnvimr'
+"更好看的标签栏
+Plug 'Vim-airline/Vim-airline'
 Plug 'Vim-airline/Vim-airline-themes' "airline 的主题 
 
 
 配置：
 
 ```Vim
-let g:airline#extensions#tabline#enabled = 1                                                                
-let g:rnVimr_ex_enable = 1   
-" Alt+o打开ranger                                                                                                                                                                                  
-nnoremap <silent> <M-o> :RnVimrToggle<CR>                                                                   
+let g:airline#extensions#tabline#enabled = 1                                   
+let g:rnvimr_ex_enable = 1   
+" Alt+o打开ranger                                       
+nnoremap <silent> <M-o> :RnvimrToggle<CR>                                                                   
 "Alt+加号切换下一个标签，-号上一个                                                       
-nnoremap <M-+> :bp<CR>                                                                                      
+nnoremap <M-+> :bp<CR> 
 nnoremap <M--> :bn<CR>
 ```
 
-
-随着 nVim/Vim 对异步任务的支持，很多原先 Vim 中被大量使用的插件已经逐渐变得过时，这里列举一些更加「先进」的插件，可以作为古老 Vim 插件的替代品。
+随着 nvim/Vim 对异步任务的支持，很多原先 Vim 中被大量使用的插件已经逐渐变得过时，这里列举一些更加「先进」的插件，可以作为古老 Vim 插件的替代品。
 文件管理
 
-使用 Shougo/defx.nVim 替代 scrooloose/nerdtree，defx.nVim 使用 NeoVim 的 Remote plugin，通过 python3 开发，支持异步，在文件多的情况下打开文件浏览器的速度更加快速。作者 Shougo 是一个高产的 Vim 插件作者，同时开发了 denite 等著名插件。但是他写的插件特点就是并不开箱即用，需要大量的配置。这里我列出了我的 defx 配置，同时使用了 kristijanhusak/defx-git 和 kristijanhusak/defx-icons（需要安装 nerd font）来显示 git 修改和图标。
+使用 Shougo/defx.nvim 替代 scrooloose/nerdtree，defx.nvim 使用 NeoVim 的 Remote plugin，通过 python3 开发，支持异步，在文件多的情况下打开文件浏览器的速度更加快速。作者 Shougo 是一个高产的 Vim 插件作者，同时开发了 denite 等著名插件。但是他写的插件特点就是并不开箱即用，需要大量的配置。这里我列出了我的 defx 配置，同时使用了 kristijanhusak/defx-git 和 kristijanhusak/defx-icons（需要安装 nerd font）来显示 git 修改和图标。
 
 配置：
 
-Plug 'Shougo/defx.nVim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 map <silent> - :Defx<CR>
 " Avoid the white space highting issue
 autocmd FileType defx match ExtraWhitespace /^^/
@@ -297,7 +316,7 @@ let g:defx_icons_enable_syntax_highlight = 1
 defx
 fzf
 
-https://github.com/junegunn/fzf.Vim
+https://github.com/junegunn/fzf.vim
 
 fzf 是一个 fuzzy search 工具，相比与 ctrlp，它能提供更好的性能，并且扩展性更好，可以集成到其他插件中。类似与 ctrlp 它能提供文件搜索功能，同时还能提供 ctags 代码 symbol 搜索，代码内容搜索等功能。 fzf 的配置相对简单，这里只贴一些的效果图：
 
@@ -309,16 +328,16 @@ fzf 使用了 terminal + command 的实现方式，可以对其功能进行扩�
 
 fzf-btags
 
-除了fzf， Shougo 开发的 denite.nVim 也是一个非常流行的 fuzzy search 插件，但是 denite 的配置就更加复杂，这里就进行赘述了。
+除了fzf， Shougo 开发的 denite.nvim 也是一个非常流行的 fuzzy search 插件，但是 denite 的配置就更加复杂，这里就进行赘述了。
 代码补全
 
-在过去，比较流行的补全插件有 ycm-core/YouCompleteMe 和 Shougo/deoplete.nVim，但是这些插件对不同语言的支持程度都不尽相同，每个语言的补全可能都需要单独配置。其中 YCM 采用 C++ 开发了额外程序，每次更新还需要进行编译。配置，使用，调试都是非常费力且折腾的事情。
+在过去，比较流行的补全插件有 ycm-core/YouCompleteMe 和 Shougo/deoplete.nvim，但是这些插件对不同语言的支持程度都不尽相同，每个语言的补全可能都需要单独配置。其中 YCM 采用 C++ 开发了额外程序，每次更新还需要进行编译。配置，使用，调试都是非常费力且折腾的事情。
 
 随着微软发力开发开源代码编辑器 vscode，同时发布了 Language Server Protocol，这种混乱的局面正在逐渐变得标准化和统一。现在每个语言基本都有对应的 LSP Server 实现。使用 LSP 协议的好处在于，编辑器是需要实现 LSP Client 就可以和 LSP Server 交互，而不需要 care 具体是什么语言。
 
-coc.nVim 就是这样一个采用 LSP 实现的 Vim 插件。同时他还利用了 NeoVim 的 Remote plugin 功能，使用 typescript 开发，能够最小成本的将已有的 vscode 插件进行少量修改适配，即可移植到 Vim 中来。
+coc.nvim 就是这样一个采用 LSP 实现的 Vim 插件。同时他还利用了 NeoVim 的 Remote plugin 功能，使用 typescript 开发，能够最小成本的将已有的 vscode 插件进行少量修改适配，即可移植到 Vim 中来。
 
-coc.nVim 同时是一个插件化的系统，通过很多众多的插件，还能提供代码补全之外的额外功能。而且 coc.nVim 的开发速度非常快，已经支持了 NeoVim 刚刚 master 分支上实现的 floating window 功能（这个功能未来也会在 Vim 中进行对应实现）。
+coc.nvim 同时是一个插件化的系统，通过很多众多的插件，还能提供代码补全之外的额外功能。而且 coc.nvim 的开发速度非常快，已经支持了 NeoVim 刚刚 master 分支上实现的 floating window 功能（这个功能未来也会在 Vim 中进行对应实现）。
 
 这里列举一些常用功能：
 
@@ -346,8 +365,7 @@ coc-func-param
 
 coc-diag
 
-coc.nVim 还能够安装扩展支持很多额外功能，例如 git 信息显示，括号自动补全，调用第三方 sinppets 等功能。具体的安装配置文档可以参考：coc wiki
+coc.nvim 还能够安装扩展支持很多额外功能，例如 git 信息显示，括号自动补全，调用第三方 sinppets 等功能。具体的安装配置文档可以参考：coc wiki
 配置参考
 
 由于篇幅限制，这里只列出一些我常用的一些插件，我所有的 Vim 配置文件都在 github 上可以查看，完整的插件和配置可以参考：https://github.com/paco0x/dotfiles/tree/master/Vim
-
