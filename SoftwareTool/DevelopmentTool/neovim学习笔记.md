@@ -269,7 +269,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
    " vim-airline 标签栏插件的主题插件
    Plug 'Vim-airline/vim-airline-themes'  
    " ranger 文件浏览器
-·   Plug 'kevinhwang91/rnvimr'
+   Plug 'kevinhwang91/rnvimr'
    call plug#end()
 
    " 配置 vim-airline 标签栏插件
