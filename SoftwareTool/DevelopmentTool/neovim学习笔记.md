@@ -1,9 +1,19 @@
+#! https://zhuanlan.zhihu.com/p/460725286
 # NeoVim 学习笔记
 
-## 学习资源
+这篇学习笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`SoftwareTool/DevelopmentTool`目录下，并予以长期维护。
 
-- NeoVim 官方网站：[NeoVim.io](https://NeoVim.io/)
-- NeoVim 项目仓库：[GitHub - NeoVim/NeoVim](https://github.com/NeoVim/NeoVim)
+## 学习规划
+
+- 学习基础：
+  - 掌握 Linux shell 命令的基本使用。
+  - 掌握 Vim 编辑器的基本操作方法。
+  - 有一两门编程语言的使用经验。
+- 学习环境：
+  - Ubuntu Linux 操作系统。
+- 学习资料：
+  - NeoVim 官方网站：[NeoVim.io](https://NeoVim.io/)
+  - NeoVim 项目仓库：[GitHub - NeoVim/NeoVim](https://github.com/NeoVim/NeoVim)
 
 ## 背景知识
 
