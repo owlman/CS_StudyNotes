@@ -28,7 +28,7 @@
 - 为 vimscript 提供了异步任务的支持，之前的 vimscript 只能以同步的方式执行任务；
 - 重构了 Vim 的部分代码，实现了多平台兼容，并可使用更加现代化的代码编译工具链；
 
-但与此同时，NeoVim 项目的成功也反过来唤起了 Vim 项目组的危机意识，重新激发了他们的开发热情，促使 Vim 在 7.0 之后加快了新功能开发进度，很快发布了 Vim 8.0/8.1，把 NeoVim 实现的大部分新特性在 Vim 中也实现了一遍。Vim 现在也支持异步任务，内置终端等特性了。所以目前来看 NeoVim 与 Vim 的差异已经很小，大部分第三方插件都能兼容 NeoVim/Vim。
+但与此同时，NeoVim 项目的成功也反过来唤起了 Vim 项目组的危机意识，重新激发了他们的开发热情，促使 Vim 在 7.0 之后加快了新功能开发进度，很快发布了 Vim 8.0/8.1，把 NeoVim 实现的大部分新特性在 Vim 中也实现了一遍。Vim 现在也支持异步任务，内置终端等特性了。所以目前来看 NeoVim 与 Vim 的差异已经很小，大部分第三方插件都能兼容 NeoVim/vim。
 
 ## 安装与配置
 
@@ -140,7 +140,7 @@ ff02::2 ip6-allrouters
 
 ```bash
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/Vim-plug/master/plug.vim'
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 
 如果一切顺利，我们现在就可以在 NeoVim 编辑器中执行`:PlugInstall`命令来安装插件了。下面，我们就试着来安装一下可以按 tab 键进行补全的功能插件，其操作步骤如下：
@@ -158,214 +158,131 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
    call plug#end()
    ```
 
-2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其中`:PlugInstall`命令即可自动安装上述配置文件中列出的插件，待安装完成之后，我们再次重启进入 NeoVim 编辑器，并在编辑模式中按下 tab 键就会看到该插件提供的补全提示了。
+2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述配置文件中列出的插件，待安装完成之后，我们再次重启进入 NeoVim 编辑器，并在编辑模式中按下 tab 键就会看到该插件提供的补全提示了。
 
-### 常用插件安装
+## 常用插件安装
 
-<!-- 以下内容尚未整理 -->
+### Coc 插件
 
-安装coc.nvim
+这是一个集成了代码补全、静态检测、函数跳转等功能的插件引擎，它允许用户根据自己使用的编程语言来安装相应的智能补全插件，其安装步骤如下：
 
-coc.nvim 是集代码补全、静态检测、函数跳转等功能的一个引擎
+1. 由于 Coc.nvim 是基于 Node.js 的，所以我们首先要确定当前系统环境中已经安装了 Node.js 运行环境，并且其版本应该在 12.0.0 以上。
 
-npm install -g NeoVim
+2. 重新打开并编辑`init.vim`文件，将其内容修改如下：
 
-init.vim加入：
+   ```vim
+   " 令编辑器显示行号
+   set nu
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   " 要安装的插件列表
+   call plug#begin('~/.vim/plugged')
+   " tab键补全功能插件
+   Plug 'ervandew/supertab'
+   " Coc 智能补全插件引擎
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   call plug#end()
+   ```
 
-然后进行自动安装，安装完成后可以输入命令 checkhealth 检查是否有错误
-配置C++环境：
+3. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，我们再次重启 NeoVim 编辑器，就可以根据自己使用的编程语言来安装智能补全插件了。
 
-nvim命令模式输入：
+4. 由于 Coc 本身并不提供具体语言的补全功能，所以在安装完成后，我们需要安装具体的语言服务以支持对应的补全功能。例如想要配置 C++环境，我们就需要在 NeoVim 的命令模式下执行以下命令来安装相关的插件：
 
-:CocInstall coc-clangd # C++环境插件
-:CocInstall coc-cmake  # Cmake 支持
+  ```vim
+  :CocInstall coc-clangd # C++环境插件
+  :CocInstall coc-cmake  # Cmake 支持
+  ```
+  
+  在上述命令执行完成之后，我们可以试着用 NeoVim 打开一个`.cpp`文件，然后就会在编辑器的底部看到这样一段提示：
 
-打开一个.cpp文件
+  ```bash
+  [coc.nvim] clangd was not found on your PATH. :CocCommand clangd.install will install 11.0.0.
+  ```
 
-nvim test.cpp
+  这时候，我们可以继续在命令模式中输入`:CocCommand clangd.instal`命令来安装 clangd。然后，当我们再次重启 NeoVim 之后，编写 C++ 代码就会看到相关的智能补全提示了。当然了，我们可以执行以下命令来配置其他编程语言和工具的智能补全插件：
 
-会出现提示：
+  ```vim
+  :CocInstall coc-git            # git 支持
+  :CocInstall coc-highlight  # 高亮支持
+  :CocInstall coc-jedi           # jedi
+  :CocInstall coc-json          # json 文件支持
+  :CocInstall coc-python     # python 环境支持
+  :CocInstall coc-sh             # bash 环境支持
+  :CocInstall coc-snippets   # python提供 snippets
+  :CocInstall coc-vimlsp      # lsp
+  :CocInstall coc-yaml         # yaml
+  ```
 
-[coc.nvim] clangd was not found on your PATH. :CocCommand clangd.install will install 11.0.0.
+### vim-airline 插件
 
-C++ 需要安装clangd，输入:CocCommand clangd.install安装clangd，但我的失败了，另一个方法：
+我们可以利用 vim-airline 插件及其主题插件来让 NeoVim 编辑器具有更赏心悦目的用户界面，其安装步骤如下：
 
- sudo apt-get install clang-tools
+1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
 
-然后编写c++就有提示了
-在这里插入图片描述
-其他语言配置
+   ```vim
+   " 令编辑器显示行号
+   set nu
 
-:CocInstall coc-git    # git 支持
-:CocInstall coc-highlight  # 高亮支持
-:CocInstall coc-jedi   # jedi
-:CocInstall coc-json   # json 文件支持
-:CocInstall coc-python # python 环境支持
-:CocInstall coc-sh     # bash 环境支持
-:CocInstall coc-snippets # python提供 snippets
-:CocInstall coc-Vimlsp # lsp
-:CocInstall coc-yaml   # yaml
+   " 要安装的插件列表
+   call plug#begin('~/.vim/plugged')
+   " tab键补全功能插件
+   Plug 'ervandew/supertab'
+   " Coc 智能补全插件引擎
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   " vim-airline 标签栏插件
+   Plug 'Vim-airline/vim-airline'
+   " vim-airline 标签栏插件的主题插件
+   Plug 'Vim-airline/vim-airline-themes'  
+   call plug#end()
 
-配色
+   " 配置 vim-airline 标签栏插件
+   let g:airline#extensions#tabline#enabled = 1
+   ```
 
-这里配色使用monokai，把monokai.vim下载下来，放到/root/.config/nvim/colors/目录下，没有就自己创建
-monokai
+2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到如下用户界面了。
 
-修改init.vim，加入colorscheme monokai再次打开：
-在这里插入图片描述
-其他配置和插件
-插件：
+   ![vim-airline](img/vim-airline.png)
 
-首先要安装ranger：sudo apt install ranger
+### ranger 插件
 
-Plug 'junegunn/Vim-easy-align'
-"ranger文件浏览器
-Plug 'kevinhwang91/rnvimr'
-"更好看的标签栏
-Plug 'Vim-airline/Vim-airline'
-Plug 'Vim-airline/Vim-airline-themes' "airline 的主题 
+这一款非常好用的文件浏览器插件，其安装步骤如下：
 
+1. 先在 Ubuntu 系统环境中执行以下 bash 命令安装 ranger 组件：
 
-配置：
+   ```bash
+   sudo apt install -y ranger
+   ```
 
-```Vim
-let g:airline#extensions#tabline#enabled = 1                                   
-let g:rnvimr_ex_enable = 1   
-" Alt+o打开ranger                                       
-nnoremap <silent> <M-o> :RnvimrToggle<CR>                                                                   
-"Alt+加号切换下一个标签，-号上一个                                                       
-nnoremap <M-+> :bp<CR> 
-nnoremap <M--> :bn<CR>
-```
+2. 重新打开并编辑`init.vim`文件，将其内容修改如下：
 
-随着 nvim/Vim 对异步任务的支持，很多原先 Vim 中被大量使用的插件已经逐渐变得过时，这里列举一些更加「先进」的插件，可以作为古老 Vim 插件的替代品。
-文件管理
+   ```vim
+   " 令编辑器显示行号
+   set nu
 
-使用 Shougo/defx.nvim 替代 scrooloose/nerdtree，defx.nvim 使用 NeoVim 的 Remote plugin，通过 python3 开发，支持异步，在文件多的情况下打开文件浏览器的速度更加快速。作者 Shougo 是一个高产的 Vim 插件作者，同时开发了 denite 等著名插件。但是他写的插件特点就是并不开箱即用，需要大量的配置。这里我列出了我的 defx 配置，同时使用了 kristijanhusak/defx-git 和 kristijanhusak/defx-icons（需要安装 nerd font）来显示 git 修改和图标。
+   " 要安装的插件列表
+   call plug#begin('~/.vim/plugged')
+   " tab键补全功能插件
+   Plug 'ervandew/supertab'
+   " Coc 智能补全插件引擎
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   " vim-airline 标签栏插件
+   Plug 'Vim-airline/vim-airline'
+   " vim-airline 标签栏插件的主题插件
+   Plug 'Vim-airline/vim-airline-themes'  
+   " ranger 文件浏览器
+·   Plug 'kevinhwang91/rnvimr'
+   call plug#end()
 
-配置：
+   " 配置 vim-airline 标签栏插件
+   let g:airline#extensions#tabline#enabled = 1
+   " 配置 ranger 文件浏览器插件
+   let g:rnvimr_ex_enable = 1   
+   " Alt+o 打开 ranger                                       
+   nnoremap <silent> <M-o> :RnvimrToggle<CR>
+   "Alt+加号 切换至下一个标签，减号则是切换回上一个
+   nnoremap <M-+> :bp<CR> 
+   nnoremap <M--> :bn<CR>
+   ```
 
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-map <silent> - :Defx<CR>
-" Avoid the white space highting issue
-autocmd FileType defx match ExtraWhitespace /^^/
-" Keymap in defx
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-  IndentLinesDisable
-  setl nospell
-  setl signcolumn=no
-  setl nonumber
-  nnoremap <silent><buffer><expr> <CR>
-  \ defx#is_directory() ?
-  \ defx#do_action('open_or_close_tree') :
-  \ defx#do_action('drop',)
-  nmap <silent><buffer><expr> <2-LeftMouse>
-  \ defx#is_directory() ?
-  \ defx#do_action('open_or_close_tree') :
-  \ defx#do_action('drop',)
-  nnoremap <silent><buffer><expr> s defx#do_action('drop', 'split')
-  nnoremap <silent><buffer><expr> v defx#do_action('drop', 'vsplit')
-  nnoremap <silent><buffer><expr> t defx#do_action('drop', 'tabe')
-  nnoremap <silent><buffer><expr> o defx#do_action('open_tree')
-  nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
-  nnoremap <silent><buffer><expr> C defx#do_action('copy')
-  nnoremap <silent><buffer><expr> P defx#do_action('paste')
-  nnoremap <silent><buffer><expr> M defx#do_action('rename')
-  nnoremap <silent><buffer><expr> D defx#do_action('remove_trash')
-  nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> U defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select')
-  nnoremap <silent><buffer><expr> R defx#do_action('redraw')
-endfunction
+3. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器并按下快捷键 Alt+o，就可以看到如下用户界面了。
 
-" Defx git
-Plug 'kristijanhusak/defx-git'
-let g:defx_git#indicators = {
-  \ 'Modified'  : '✹',
-  \ 'Staged'    : '✚',
-  \ 'Untracked' : '✭',
-  \ 'Renamed'   : '➜',
-  \ 'Unmerged'  : '═',
-  \ 'Ignored'   : '☒',
-  \ 'Deleted'   : '✖',
-  \ 'Unknown'   : '?'
-  \ }
-let g:defx_git#column_length = 0
-hi def link Defx_filename_directory NERDTreeDirSlash
-hi def link Defx_git_Modified Special
-hi def link Defx_git_Staged Function
-hi def link Defx_git_Renamed Title
-hi def link Defx_git_Unmerged Label
-hi def link Defx_git_Untracked Tag
-hi def link Defx_git_Ignored Comment
-
-" Defx icons
-" Requires nerd-font, install at https://github.com/ryanoasis/nerd-fonts or
-" brew cask install font-hack-nerd-font
-" Then set non-ascii font to Driod sans mono for powerline in iTerm2
-Plug 'kristijanhusak/defx-icons'
-" disbale syntax highlighting to prevent performence issue
-let g:defx_icons_enable_syntax_highlight = 1
-
-显示效果如下：
-
-defx
-fzf
-
-https://github.com/junegunn/fzf.vim
-
-fzf 是一个 fuzzy search 工具，相比与 ctrlp，它能提供更好的性能，并且扩展性更好，可以集成到其他插件中。类似与 ctrlp 它能提供文件搜索功能，同时还能提供 ctags 代码 symbol 搜索，代码内容搜索等功能。 fzf 的配置相对简单，这里只贴一些的效果图：
-
-文件模糊搜索：
-
-fzf-file
-
-fzf 使用了 terminal + command 的实现方式，可以对其功能进行扩展，例如结合 Vim-go 插件搜索代码中的 code symbol：
-
-fzf-btags
-
-除了fzf， Shougo 开发的 denite.nvim 也是一个非常流行的 fuzzy search 插件，但是 denite 的配置就更加复杂，这里就进行赘述了。
-代码补全
-
-在过去，比较流行的补全插件有 ycm-core/YouCompleteMe 和 Shougo/deoplete.nvim，但是这些插件对不同语言的支持程度都不尽相同，每个语言的补全可能都需要单独配置。其中 YCM 采用 C++ 开发了额外程序，每次更新还需要进行编译。配置，使用，调试都是非常费力且折腾的事情。
-
-随着微软发力开发开源代码编辑器 vscode，同时发布了 Language Server Protocol，这种混乱的局面正在逐渐变得标准化和统一。现在每个语言基本都有对应的 LSP Server 实现。使用 LSP 协议的好处在于，编辑器是需要实现 LSP Client 就可以和 LSP Server 交互，而不需要 care 具体是什么语言。
-
-coc.nvim 就是这样一个采用 LSP 实现的 Vim 插件。同时他还利用了 NeoVim 的 Remote plugin 功能，使用 typescript 开发，能够最小成本的将已有的 vscode 插件进行少量修改适配，即可移植到 Vim 中来。
-
-coc.nvim 同时是一个插件化的系统，通过很多众多的插件，还能提供代码补全之外的额外功能。而且 coc.nvim 的开发速度非常快，已经支持了 NeoVim 刚刚 master 分支上实现的 floating window 功能（这个功能未来也会在 Vim 中进行对应实现）。
-
-这里列举一些常用功能：
-
-快速查看函数签名，支持 floating window 展示：
-
-coc-k
-
-这个功能直接映射一个快捷键即可，这里映射为 K：
-
-" Use K to show documentation in preview window
-function! s:show_documentation()
-  if (index(['Vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-在补全中提示函数的参数列表：
-
-coc-func-param
-
-执行代码检查，并将结果通过 flaoting window 展示：
-
-coc-diag
-
-coc.nvim 还能够安装扩展支持很多额外功能，例如 git 信息显示，括号自动补全，调用第三方 sinppets 等功能。具体的安装配置文档可以参考：coc wiki
-配置参考
-
-由于篇幅限制，这里只列出一些我常用的一些插件，我所有的 Vim 配置文件都在 github 上可以查看，完整的插件和配置可以参考：https://github.com/paco0x/dotfiles/tree/master/Vim
+   ![ranger](img/ranger.png)
