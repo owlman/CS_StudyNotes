@@ -170,9 +170,11 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
    call plug#end()
    ```
 
-2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述配置文件中列出的插件，待安装完成之后，我们再次重启进入 NeoVim 编辑器，并在编辑模式中按下 tab 键就会看到该插件提供的补全提示了。
+2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述配置文件中列出的插件，待安装完成之后，我们再次重启 NeoVim 编辑器，并在编辑模式中按下 tab 键就会看到该插件提供的补全提示了。
 
-### Coc 插件
+### 常用插件推荐
+
+#### Coc 插件
 
 这是一个集成了代码补全、静态检测、函数跳转等功能的插件引擎，它允许用户根据自己使用的编程语言来安装相应的智能补全插件，其安装步骤如下：
 
@@ -222,7 +224,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
   :CocInstall coc-yaml         # yaml
   ```
 
-### vim-airline 插件
+#### vim-airline 插件
 
 我们可以利用 vim-airline 插件及其主题插件来让 NeoVim 编辑器具有更赏心悦目的用户界面，其安装步骤如下：
 
@@ -252,9 +254,9 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
    ![vim-airline](img/vim-airline.png)
 
-### ranger 插件
+#### ranger 插件
 
-这一款非常好用的文件浏览器插件，其安装步骤如下：
+该插件是一款非常好用的文件浏览器，其安装步骤如下：
 
 1. 先在 Ubuntu 系统环境中执行以下 bash 命令安装 ranger 组件：
 
