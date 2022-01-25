@@ -1,4 +1,5 @@
 #! https://zhuanlan.zhihu.com/p/460725286
+
 # NeoVim 学习笔记
 
 这篇学习笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`SoftwareTool/DevelopmentTool`目录下，并予以长期维护。
@@ -40,7 +41,7 @@
 
 但与此同时，NeoVim 项目的成功也反过来唤起了 Vim 项目组的危机意识，重新激发了他们的开发热情，促使 Vim 在 7.0 之后加快了新功能开发进度，很快发布了 Vim 8.0/8.1，把 NeoVim 实现的大部分新特性在 Vim 中也实现了一遍。Vim 现在也支持异步任务，内置终端等特性了。所以目前来看 NeoVim 与 Vim 的差异已经很小，大部分第三方插件都能兼容 NeoVim/vim。
 
-## 安装方法
+## 安装与配置
 
 本文将以 Ubuntu Linux 发行版为系统环境来研究 NeoVim 的安装与环境配置方法，并学习使用它的具体功能。
 
@@ -110,7 +111,11 @@ See ":help feature-compile"
 Run :checkhealth for more info
 ```
 
-如果看到了类似的版本信息，就说明 NeoVim 编辑器已经成功地安装到了我们的计算机中。接下来，我们要来创建的一个专属于用户个人的配置文件，以方便后面的个性化配置。为此，我们需要执行以下 bash 命令：
+如果看到了与上述输出类似的版本信息，就说明 NeoVim 编辑器已经成功地安装到了我们的计算机中。
+
+### 用户配置文件
+
+接下来，我们要来创建的一个专属于用户个人的配置文件，以方便后面的个性化配置。为此，我们需要执行以下 bash 命令：
 
 ```bash
 mkdir ~/.config/nvim/
