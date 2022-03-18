@@ -5,6 +5,14 @@
 - **OperatingSystem**：
   - *Linux*；
     - Ubuntu 使用笔记
+- **SoftwareTool**：
+  - *DevelopmentTool*：
+    - clang 编译器简介
+    - makefile 简易教程
+    - neovim 学习笔记
+  - *OperationsTool*：
+    - Docker 学习笔记
+    - Git 学习笔记
 - **ProgrammingLanguage**：
   - *C/Cpp*：
     - 算法实现示例
