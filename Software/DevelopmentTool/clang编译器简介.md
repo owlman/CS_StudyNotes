@@ -5,6 +5,7 @@
 > + [结构化编译器前端--clang介绍](http://blog.163.com/bjtornado@yeah/blog/static/6951048420126201578983/)。
 
 ## 什么是clang编译器？
+
 clang是LLVM编译器工具集的一个用于编译C、C++、Objective-C的前端。LLVM项目的目标是提供一个GNU编译器套装（gcc）的替代品，由苹果公司的赞助开发，其源代码授权采用的是类BSD的伊利诺伊大学厄巴纳-香槟分校开源码许可。
 
 ## clang编译器的优势与劣势
