@@ -6,9 +6,7 @@
     @name  :   sorting_algorithm
 '''
 
-import sys
 import random
-import cProfile
 
 def gnomesort(seq): 
     i = 0
