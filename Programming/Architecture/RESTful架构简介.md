@@ -78,3 +78,4 @@ http://localhost:3000/v1/users/10
 
 [^1]: 罗伊·托马斯·菲尔丁（Roy Thomas Fielding）是HTTP协议（1.0版和1.1版）的主要设计者，同时也是Apache服务器软件的作者之一，并曾经担任Apache基金会的第一任主席。他于2000年发表了一篇题为*Architectural Styles and the Design of Network-based Software Architectures*的博士论文，一直以来都被称为是Web服务设计领域的”圣经”，并进而对当今互联网时代的软件设计产生了深远的影响。
 [^2]: 当然，更为规范的做法是在 HTTP 请求头信息的`Accect`字段中指定版本信息。因为API的不同版本，也可以被理解成同一种资源的不同表现形式，所以理论上似乎应该采用同一个URI，但通常在实际生产环境中，这些规范未必能得到如此严格的遵守。
+ 
