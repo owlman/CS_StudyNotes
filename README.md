@@ -7,15 +7,16 @@
     - Ubuntu 使用笔记
 - **Programming**：
   - Language
-    - *C/Cpp*：
+    - *C/Cpp 研究*：
       - 算法实现示例
       - 数据结构示例
-    - *JavaScript*：
+    - *JavaScript 研究*：
       - Node.js 学习笔记
       - Vue.js 学习笔记
       - Electron.js 学习笔记
       - Webpackjs 学习笔记
-    - *Python*：
+    - *Python 研究*：
+      - 路线图
       - 基础语法示例
       - 数据处理示例
       - 网路开发示例
@@ -23,7 +24,7 @@
       - 游戏开发示例
       - 人工智能示例
 - **Software**：
-  - *Contaner*：
+  - *Contaner 研究*：
     - Docker 学习笔记
     - K8s 研究笔记
   - *DevelopmentTool*：
@@ -31,6 +32,6 @@
     - makefile 简易教程
     - neovim 学习笔记
   - *Git 学习笔记*
-  - *VirtualMachine*：
+  - *VirtualMachine 研究*：
     - Vagramt 学习笔记
     - VirualBox 学习笔记
