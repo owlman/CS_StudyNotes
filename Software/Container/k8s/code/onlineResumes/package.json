@@ -1,0 +1,18 @@
+{
+  "name": "02-onlineresumes",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "pm2 start ./bin/www --name resumes"
+  },
+  "dependencies": {
+    "connect-history-api-fallback": "^1.6.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "knex": "^1.0.7",
+    "mongodb": "^4.5.0",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1"
+  }
+}

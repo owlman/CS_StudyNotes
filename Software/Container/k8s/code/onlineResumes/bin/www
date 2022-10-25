@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+
+// 引入 [项目根目录]/app.js 文件中定义的模块
+const app = require('../app');
+// 引入 Node.js 运行平台的 debug 模块，用于输出调试信息
+const debug = require('debug')('02-onlineresumes:server');
+// 引入 Node.js 运行平台的 HTTP 模块
+const http = require('http');
+
+// 设置服务器使用的端口号，默认为3000
+const port = normalizePort(process.env.PORT || '3001');
+app.set('port', port);
+
+// 引入 app 模块中的定义创建 HTTP 服务器
+const server = http.createServer(app);
+
+// 设置服务器的监听端口
+server.listen(port);
+// 注册服务器的 error 事件处理函数
+server.on('error', onError);
+// 注册服务器的 listening 事件处理函数
+server.on('listening', onListening);
+
+// 确保端口号设置有效的函数
+//     有效的端口号会被序列化为正整数值
+//     无效的端口号则返回 false
+function normalizePort(val) {
+    const port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+    // named pipe
+    return val;
+    }
+
+    if (port >= 0) {
+    // port number
+    return port;
+    }
+
+    return false;
+}
+
+// 定义服务器的 error 事件处理函数
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    const bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+    // 针对特定的错误在终端中输出友好提示信息
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+// 定义服务器的 listening 事件处理函数
+function onListening() {
+    const addr = server.address();
+    const bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+}
