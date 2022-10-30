@@ -5,6 +5,7 @@
 - **OperatingSystem**：
   - *Linux 研究*：
     - Ubuntu 使用笔记
+  - *UNIX 研究*：
   - *Windows 研究*：
     - Cygwin 研究笔记
 - **Programming**：
@@ -37,3 +38,15 @@
   - *VirtualMachine 研究*：
     - Vagramt 学习笔记
     - VirualBox 学习笔记
+- **Reading**：
+  - 书籍推荐：
+    - 《大教堂与集市》
+    - 《K&R》
+    - 《黑客与画家》
+    - 《只是因为好玩》
+- **Writing**：
+  - 出版感言：
+    - 《元素模式》译后记
+    - 《JavaScript全栈开发》出版感言
+  - 写作心得：
+    - 关于国内技术书籍的质量问题
