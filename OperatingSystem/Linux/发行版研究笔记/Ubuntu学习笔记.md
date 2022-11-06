@@ -15,7 +15,7 @@
 
 需要普及的一个常识是，Linux 本身只是一个操作系统的内核，严格来说它并不是一个完整可用的操作系统。所以我们在说自己使用的是 Linux 系统时，实际上指的是某一种以 Linux 为内核的操作系统，它们通常被称之为 Linux 发行版。关于 Linux 的发行版，各位可以参考来自 Wikipedia 的这张表：
 
-![Linux发行版](./img/Linux_rel.jpg)
+![Linux发行版](../img/Linux_rel.jpg)
 
 在我个人看来，Linux 目前主流的发行版主要可分为三大分支：
 
@@ -122,7 +122,7 @@ sudo apt install pavucontrol
 
 它的配置方式非常简单，一看就会：
 
-![PulseAudio](./img/PulseAudio.png)
+![PulseAudio](../img/PulseAudio.png)
 
 如果外接键盘的数字键存在启动问题，可执行以下命令安装 numlockx：
 
@@ -191,7 +191,7 @@ ls ~/.oh-my-zsh/themes
 
 然后，选择一款主题，譬如我们选择`cloud`，就编辑`~/.zshrc`文件中的`ZSH_THEME`变量：`ZSH_THEME="cloud"`。效果如下所示：
 
-![zsh主题](./img/ohmyzsh_themes.png)
+![zsh主题](../img/ohmyzsh_themes.png)
 
 ### powerline 插件
 
@@ -234,7 +234,7 @@ sudo apt install fonts-powerline
 
 效果如下：
 
-![zsh+powerline](./img/zsh-powerline.png)
+![zsh+powerline](../img/zsh-powerline.png)
 
 配置 tmux：
 
@@ -246,7 +246,7 @@ source '.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.con
 
 效果如下：
 
-![tmux+powerline](./img/tmux-powerline.png)
+![tmux+powerline](../img/tmux-powerline.png)
 
 配置 vim：
 
@@ -260,7 +260,7 @@ set t_Co=256
 
 效果如下：
 
-![vim+powerline](./img/vim-powerline.png)
+![vim+powerline](../img/vim-powerline.png)
 
 ## 日常所用软件
 
@@ -413,7 +413,7 @@ set t_Co=256
 
 1. 在系统设置的【共享】选项卡中打开【远程登录】选项，如下图所示：
 
-   ![远程桌面选项](./img/system_setting.png)
+   ![远程桌面选项](../img/system_setting.png)
 
 2. 安装`xrdp`服务，这是一个微软远程桌面协议(RDP)的开源实现，它允许 Windows 用户可以使用 RDP 客户端远程访问 Linux 桌面，其安装命令如下：
   
@@ -429,12 +429,12 @@ set t_Co=256
 
    待其成功安装之后，启动`dconf-editor`配置编辑器，然后依次展开org -> gnome -> desktop -> remote-access 选项卡，并将其中的`requlre-encryption`选项关闭（即设置为`false`），如下图所示：
 
-   ![dconf-editor](./img/dconf-editor.png)
+   ![dconf-editor](../img/dconf-editor.png)
 
 4. 在另一台 Windows 系统的计算机上启动 RDP 客户端。在这里，我使用的是一款名为 MobaXterm 的远程登录软件，具体做法就是创建一个 RDP  类型的会话，并在其中笔记本在家中局域网中的 IP 地址和用于登录 Ubuntu 系统的用户名：
 
-   ![MobaXterm](./img/MobaXterm.png)
+   ![MobaXterm](../img/MobaXterm.png)
 
 5. 保存会话之后，就可以启动 RDP 远程登录连接了。如果看到如下界面，就证明 Ubuntu 系统中的远程桌面服务已经配置妥当了。
 
-   ![RDP](./img/RDP.png)
+   ![RDP](../img/RDP.png)

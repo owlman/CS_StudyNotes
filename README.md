@@ -4,7 +4,10 @@
 
 - **OperatingSystem**：
   - *Linux 研究*：
-    - Ubuntu 使用笔记
+    - 发行版研究笔记
+      - Ubuntu 使用笔记
+    - 内核研究笔记
+      - 规划路线图
   - *UNIX 研究*：
   - *Windows 研究*：
     - Cygwin 研究笔记
