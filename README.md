@@ -11,7 +11,7 @@
     - 内核研究笔记
       - 规划路线图
   - *UNIX 研究*：
-    - 类UNIX系统学习书单
+    - 类 UNIX 系统学习书单
   - *Windows 研究*：
     - Cygwin 研究笔记
 - **Programming**：
