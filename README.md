@@ -5,13 +5,13 @@
 - **OpenSource**：
   - 许可协议简介
 - **OperatingSystem**：
-  - *Linux 研究*：
-    - 发行版研究笔记
-      - Ubuntu 使用笔记
-    - 内核研究笔记
-      - 规划路线图
-  - *UNIX 研究*：
+  - *UNIX-like 研究*：
     - 类 UNIX 系统学习书单
+    - Linux 研究：
+      - 发行版研究笔记
+        - Ubuntu 使用笔记
+      - 内核研究笔记
+        - 规划路线图
   - *Windows 研究*：
     - Cygwin 研究笔记
 - **Programming**：
