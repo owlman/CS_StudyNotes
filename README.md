@@ -6,7 +6,7 @@
   - 许可协议简介
 - **OperatingSystem**：
   - *UNIX-like 研究*：
-    - 类 UNIX 系统学习书单
+    - 关于类 UNIX 系统的学习及其推荐书目
     - Linux 研究：
       - 发行版研究笔记
         - Ubuntu 使用笔记
