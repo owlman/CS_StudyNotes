@@ -13,7 +13,9 @@
       - 内核研究笔记
         - 规划路线图
   - *Windows 研究*：
-    - Cygwin 研究笔记
+    - 关于 Windows 系统的学习及其推荐书目
+    - 命令行工具研究
+      - Cygwin 研究笔记
 - **Programming**：
   - Language 研究*：
     - C/C++：
