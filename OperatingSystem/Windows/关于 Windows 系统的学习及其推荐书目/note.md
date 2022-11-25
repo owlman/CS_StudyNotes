@@ -4,32 +4,13 @@
 
 ## Windows 内部机制研究
 
-如果按照操作系统内核类来进行分类，Windows 系统发展到目前为止，主要可被分为 Windows 9x 和 Windows NT 两个系列。其中，采用 Windows 9x 内核的主要包括 Windows 95、Windows 98、Windows Me 这一组操作系统。该系列操作系统的主要特点是它们仍然需要基于 16 位的 DOS 基层程序来运行，不算是真正意义上的32位操作系统，由于使用DOS代码，架构也与16位DOS一样，核心属于单核心，但也引入了部分32位操作系统的特性，具有一定的32位的处理能力。Windows 9x可视为微软将MS-DOS操作系统与早期Windows图形用户界面集成出售。
+如果按照操作系统内核类来进行分类，Windows 系统发展到目前为止，主要可被分为 MS-DOS 和 Windows NT 两个系列。其中，采用 MS-DOS 内核的主要包括 Windows 95/98/Me 这一系列操作系统，它们的共同特点是需要基于 16 位的 MS-DOS 基层程序来运行，并不能被视为真正意义上的 32 位操作系统。这主要是因为 Windows 最初是作为 MS-DOS 系统的图形界面被开发出来的，其地位相当于类 UNIX 系统中的 GNOME 和 KDE，本质上属于操作系统的 Shell。当然了，由于采用该内核的 Windows 系统已经年代久远，如今已经鲜少有人研究了，读者只需粗略了解一下即可。
 
-Windows 95在1995年8月24日正式发布，作为继Windows 3.x后的下一代消费级Windows。尽管仍然以MS-DOS为基础，Windows 95引入了对32位程序、即插即用硬件、抢占式多任务处理、长文件名等功能的支持，并提供更高的稳定性。与此同时，Windows 95引入了全新的、对象化的用户界面设计，用“开始”菜单、任务栏、Windows资源管理器等全新组件取代了之前的程序管理器。Windows 95是微软历史上的一次巨大商业成功。CNET的Ina Fried评价道：“当Windows 95终于在2001年走下市场时，它已然牢牢地钉在了全世界的电脑上。”[24]此外，微软的网页浏览器Internet Explorer首度与Windows捆绑发行。[25]
+自 Windows 2000 之后，所有版本的 Windows 系统都转而采用了原本只专用于服务器领域的 Windows NT 内核。由于该内核的实现彻底摆脱了对 DOS 基础程序的依赖，因而提供了比 MS-DOS 内核更好的执行性能、稳定性以及用户体验。虽然 Windows 是一个不开放源代码的操作系统，我们在面向该系统进行设备驱动与应用程序开发时未必需要了解它的内部实现，但在笔者看来，适当了解一下 Windows 的内核实现与内部运行机制，将有助于理解为什么 Windows 系统的图形界面相较于类 UNIX 系统更有优势，并提高在工作中查找其浩如烟海的 API 时的效率和方向感。关于这方面的知识，读者可以去阅读一下潘爱民老师的《Windows 内核原理与实现》，这本书将以以 Windows 的源代码（WRK, Windows Research Kernel）为参照，详细解析 Windows 如何实现现代操作系统的各个关键部件及其运行机制，其中包括了进程、线程、物理内存和虚拟内存的管理，Windows 中的同步和并发性支持，以及Windows 的 I/O 模型等重要的议题。
 
-Windows 98随后于1998年6月25日发布，引入了Windows Driver Model、USB通用设备、ACPI、休眠、多显示器等功能和硬件的支持。Internet Explorer 4还通过活动桌面和Windows桌面更新集成到了Windows 98。1999年5月，Windows 98的更新版本Windows 98 SE（Second Edition，第二版）发布。Windows 98 SE包括Internet Explorer 5.0和Windows Media Player 6.2以及其他升级。
+![《Windows 内核原理与实现》](./img/1-1.jpg)
 
-Windows Me（Millennium Edition）发布于2000年9月14日，它是最后一代基于DOS的Windows。Windows Me借鉴了Windows 2000的外观，启动速度较前几代都更快（代价是失去了访问实模式DOS环境的能力，及一些旧程序的兼容性）[26]，增强了多媒体功能（包括 Windows Media Player 7、Windows Movie Maker和用于从扫描仪和数字相机检索图像的Windows Image Acquisition框架）并新增了诸如系统文件保护、系统恢复以及家庭网络工具等功能[27]。不过，Windows Me的运行速度和不稳定性，硬件兼容性问题以及取消对实模式DOS的支持而广受诟病，《个人电脑世界》杂志认为Windows Me是微软历史上最糟糕的一代系统，也是有史以来第四差的科技产品。[28]Windows Me 也经常被戏称为 Windows Mistake Edition。
-Windows NT系列
-主条目：Windows NT
-
-不同于依然需要DOS基层程序的混合16/32位的Windows 9x，Windows NT系列采用的是重新设计的Windows NT核心，属于混合式核心。最早仅支持纯32位，后期加入了对64位的支持。
-
-32位Windows NT系统包括：[注 7]
-
-    Windows NT 3.1
-    Windows NT 3.5
-    Windows NT 3.51
-    Windows NT 4.0
-    Windows 2000
-    32位 Windows XP
-    32位 Windows Vista
-    32位 Windows 7
-    32位 Windows 8
-    32位 Windows 8.1
-    32位 Windows 10
-    32位 Windows Server 2003/2003R2/2008
+<!-- 以下为参考资料 -->
 
 64位Windows NT系统，分为支持于IA-64架构和x64架构的两种不同版本。在历史上微软曾对两种不同的64位架构提供支持，其一是英特尔公司和惠普公司联合开发具有革新化的Itanium家族架构，或称之为IA-64；和AMD公司开发的演进化的x86-64架构。由于两种架构的核心设计思想不同，因此两种架构的操作系统和应用软件不具有互通性，但都对传统的IA-32架构的软件一定程度上提供支持。微软在发布Windows Server 2012 R2前放弃了对Itanium架构的支持。因此现在微软的64位产品指的单单是x86-64架构，而在微软的词汇中称为x64。
 
