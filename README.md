@@ -17,10 +17,10 @@
       - Cygwin 研究笔记
 - **Programming**：
   - *Methodolgy 研究笔记*
+  - *Algorithms 研究笔记*  -- 进行中
   - Language 研究笔记*：
     - C/C++：
-      - 算法实现示例
-      - 数据结构示例
+      - 数据结构学习  -- 待完成
     - JavaScript：
       - Node.js 学习
       - Vue.js 学习
