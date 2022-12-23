@@ -3,7 +3,7 @@
 这里存放的是本人在研究计算机技术过程中所写的各种学习笔记与代码示例。整个项目按笔记分类形成以下目录结构：
 
 - **OpenSource**：
-  - 许可协议简介
+  - 许可协议简介  -- 待整理
 - **OperatingSystem**：
   - *UNIX-like 研究笔记*：
     - 关于类 UNIX 系统的学习及其推荐书目
@@ -17,7 +17,9 @@
       - Cygwin 研究笔记
 - **Programming**：
   - *Methodolgy 研究笔记*
-  - *Algorithms 研究笔记*  -- 进行中
+    - 学习路线图规划
+  - *Algorithms 研究笔记*
+    - 学习路线图规划 -- 进行中
   - *Language 研究笔记*：
     - C/C++：
       - 数据结构示例
