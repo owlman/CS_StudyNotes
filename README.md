@@ -20,7 +20,7 @@
   - *Algorithms 研究笔记*  -- 进行中
   - *Language 研究笔记*：
     - C/C++：
-      - 数据结构学习  -- 待完成
+      - 数据结构示例
     - JavaScript：
       - Node.js 学习
       - Vue.js 学习
@@ -38,11 +38,11 @@
   - *Contaner 研究笔记*：
     - Docker 学习
     - K8s 研究
-  - *DevelopmentTool*：
+  - *DevelopmentTool 研究笔记*：
     - clang 编译器简介
     - makefile 简易教程
     - neovim 学习
-  - *Git 学习*
+  - *Git 学习笔记*
   - *VirtualMachine 研究*：
     - Vagramt 学习
     - VirualBox 学习
