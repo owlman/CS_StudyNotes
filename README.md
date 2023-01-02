@@ -19,9 +19,13 @@
   - *Methodolgy 研究笔记*
     - 学习路线图规划
   - *Algorithms 研究笔记*
-    - 学习路线图规划 -- 进行中
+    - 学习路线图规划
+    - Code
+      - C\C++示例
+      - Python示例
   - *Language 研究笔记*：
     - C/C++：
+      - 图形界面示例
       - 数据结构示例
     - JavaScript：
       - Node.js 学习
