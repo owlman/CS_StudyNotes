@@ -14,7 +14,7 @@
   - *Windows 研究笔记*：
     - 关于 Windows 系统的学习及其推荐书目
     - 命令行工具研究
-      - Cygwin 研究笔记
+      - Cygwin 研究笔记 — 待完成
 - **Programming**：
   - *Methodolgy 研究笔记*
     - 学习路线图规划
@@ -39,6 +39,7 @@
       - QT 学习 — 待完成
       - GTK 学习 — 待完成
   - *Client-Server 研究笔记*
+    - 学习路线图规划 — 待完成
     - 开发框架研究
       - Vue.js 学习
       - Webpackjs 学习
@@ -51,9 +52,10 @@
     - Docker 学习
     - K8s 研究
   - *DevelopmentTool 研究笔记*：
-    - clang 编译器简介
-    - makefile 简易教程
-    - neovim 学习
+    - Clang 编译器简介
+    - Makefile 简易教程
+    - NeoVim 学习笔记
+    - Vim 学习笔记  — 待完成
   - *Git 学习笔记*
   - *VirtualMachine 研究*：
     - Vagramt 学习
