@@ -8,7 +8,7 @@
   - *UNIX-like 研究笔记*：
     - 关于类 UNIX 系统的学习及其推荐书目
     - Linux 研究：
-      - 发行版研究笔记
+      - 发行版使用笔记
         - Ubuntu 使用笔记
       - 内核研究笔记  — 待完成
   - *Windows 研究笔记*：
@@ -16,6 +16,14 @@
     - 命令行工具研究
       - Cygwin 研究笔记
 - **Programming**：
+  - *客户端与服务端编程研究*
+    - 开发框架研究
+      - Vue.js 学习
+      - Webpackjs 学习
+    - 运行平台研究
+      - Node.js 学习
+    - 基础架构研究
+      - RESTful API 简介
   - *Methodolgy 研究笔记*
     - 学习路线图规划
   - *Algorithms 研究笔记*
@@ -24,14 +32,6 @@
       - C\C++示例
       - Python示例
   - *Language 研究笔记*：
-    - C/C++：
-      - 图形界面示例
-      - 数据结构示例
-    - JavaScript：
-      - Node.js 学习
-      - Vue.js 学习
-      - Electron.js 学习
-      - Webpackjs 学习
     - Python
       - 学习路线与基础
       - 测试自动化研究  — 待完成
