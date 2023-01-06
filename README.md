@@ -16,14 +16,6 @@
     - 命令行工具研究
       - Cygwin 研究笔记
 - **Programming**：
-  - *Client-Server 研究笔记*
-    - 开发框架研究
-      - Vue.js 学习
-      - Webpackjs 学习
-    - 运行平台研究
-      - Node.js 学习
-    - 基础架构研究
-      - RESTful API 简介
   - *Methodolgy 研究笔记*
     - 学习路线图规划
   - *Algorithms 研究笔记*
@@ -40,6 +32,20 @@
       - 网络开发研究     — 待完成
       - 游戏开发研究     — 待完成
       - 人工智能研究     — 待完成
+  - *GUI 研究笔记*
+    - 学习路线图规划
+    - 开发框架研究
+      - Electron.js 学习
+      - QT 学习
+      - GTK 学习
+  - *Client-Server 研究笔记*
+    - 开发框架研究
+      - Vue.js 学习
+      - Webpackjs 学习
+    - 运行平台研究
+      - Node.js 学习
+    - 基础架构研究
+      - RESTful API 简介
 - **Software**：
   - *Contaner 研究笔记*：
     - Docker 学习
