@@ -20,7 +20,7 @@
     - 学习路线图规划
   - *Algorithms 研究笔记*
     - 学习路线图规划
-    - Code
+    - 示例代码
       - C\C++示例
       - Python示例
   - *Language 研究笔记*：
@@ -42,10 +42,10 @@
     - 学习路线图规划 — 待完成
     - 开发框架研究
       - Vue.js 学习
-      - Webpackjs 学习
+      - Webpack.js 学习
     - 运行平台研究
       - Node.js 学习
-    - 基础架构研究
+    - 基础理论学习
       - RESTful API 简介
 - **Software**：
   - *Contaner 研究笔记*：
