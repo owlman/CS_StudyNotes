@@ -2,8 +2,6 @@
 
 这里存放的是本人在研究计算机技术过程中所写的各种学习笔记与代码示例。整个项目按笔记分类形成以下目录结构：
 
-- **OpenSource**：
-  - 许可协议简介  -- 待整理
 - **OperatingSystem**：
   - *UNIX-like 研究笔记*：
     - 关于类 UNIX 系统的学习及其推荐书目
@@ -40,15 +38,20 @@
       - QT 学习 — 待完成
       - GTK 学习 — 待完成
   - *Client-Server 研究笔记*
-    - 学习路线图规划 — 待完成
+    - 学习路线图规划
     - 开发框架研究
       - Vue.js 学习
       - Webpack.js 学习
     - 运行平台研究
       - Node.js 学习
     - 基础理论学习
-      - RESTful API 简介
-- **Software**：
+      - RESTful API 研究
+- **SoftwareEngineering**：
+  - 学习路线图规划 — 待完成
+  - *OpenSource 研究笔记*：
+    - 《大教堂与集市》：软件工程的另一种选择
+    - 开源许可协议研究  -- 待整理
+- **SoftwareTool**：
   - *Contaner 研究笔记*：
     - Docker 学习
     - K8s 研究
@@ -61,13 +64,11 @@
   - *VirtualMachine 研究*：
     - Vagramt 学习
     - VirualBox 学习
-- **Reading**：
-  - 阅读笔记：
-    - 《大教堂与集市》
+- **Writing & Reading**：
+  - 读书笔记：
     - 《K&R》
     - 《黑客与画家》
     - 《只是因为好玩》
-- **Writing**：
   - 出版感言：
     - 《元素模式》译后记
     - 《JavaScript全栈开发》出版感言
