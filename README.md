@@ -61,7 +61,7 @@
     - NeoVim 学习笔记
     - Vim 学习笔记  — 待完成
   - *Database 研究笔记*
-    - 学习路线图规划 -- 进行中
+    - 学习路线图规划
     - MySQL 学习  — 待完成
     - MongoDB 学习 — 待完成
     - SQLite3 学习 — 待完成
