@@ -62,7 +62,7 @@
     - Vim 学习笔记  — 待完成
   - *Database 研究笔记*
     - 学习路线图规划
-    - MySQL 学习  — 待完成
+    - **MySQL** 学习  — 待完成
     - MongoDB 学习 — 待完成
     - SQLite3 学习 — 待完成
   - *Git 学习笔记*
