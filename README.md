@@ -64,7 +64,8 @@
     - MySQL 学习  — 待完成
     - MongoDB 学习 — 待完成
     - SQLite 学习 — 待完成
-  - *Git 学习笔记*
+  - *VCS 研究笔记*
+    - Git 学习
   - *VirtualMachine 研究*：
     - Vagramt 学习
     - VirualBox 学习
