@@ -1,7 +1,7 @@
 #! https://zhuanlan.zhihu.com/p/453613712
 # Git 学习笔记
 
-这篇学习笔记将用于记录本人在学习 Git 版本控制系统过程中的学习心得，它会被存储在在`https://github.com/owlman/study_note`项目的`SoftwareTool/VCS`目录下一个名为的`Git`目录中。
+这篇学习笔记将用于记录本人在学习 Git 版本控制系统过程中的心得体会，它会被存储在在`https://github.com/owlman/study_note`项目的`SoftwareTool/VCS`目录下一个名为的`Git`目录中。
 
 ## 学习规划
 
