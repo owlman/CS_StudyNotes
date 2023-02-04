@@ -1,3 +1,4 @@
+#! https://zhuanlan.zhihu.com/p/603489824
 # Cygwin 研究笔记
 
 这篇笔记将用于记录个人在研究 Cygwin Shell 环境过程中所获取的学习心得，我会将笔记的原始文本存储在`https://github.com/owlman/study_note`项目的`OperatingSystem/Windows/ShellTool`目录下，并予以长期维护。
@@ -40,15 +41,9 @@ Cygwin 的安装文件很容易通过搜索引擎找到。国内的网站上有"
 
 - `LD_LIBRARY_PATH`变量：该变量被 Cygwin 函数 dlopen() 用作为搜索.dll文件的路径列表。同样的，该变量的值也会在 Cygwin 进程启动时从 Windows 路径格式转换成UNIX-like 路径格式。当然了，多数 Cygwin 应用程序不使用dlopen，因而通常不需要特别设置该变量。
 
-## 特定问题 1：Windows 重装后，如何删除 Cygwin 目录？
+## 特定问题的解决方案
 
-> **参考资料**：
->
-> - http://blog.csdn.net/zjjyliuweijie/article/details/6577037
-> - http://blog.csdn.net/huangzhtao/article/details/6038504
-> - http://blog.csdn.net/hu_shengyang/article/details/7828998
-
-### 为什么 Cygwin 的安装目录（在系统重装后）会如此难以删除？
+### 1. 为什么 Cygwin 的安装目录在系统重装后会难以被删除？
 
 在正常情况下，Cygwin 的反安装程序自然是删除该目录的最好选择。但 Windows 的重装会反安装程序，这之后再要删除该目录就有点麻烦了。因为 Cygwin 所模拟的是 Linux 的权限管理体系，这跟 Windows 的默认权限管理存在着一些冲突。不信的话，您可以用右键查看一下该目录属性中的安全选项，就会在"组或用户名"一栏中看到一些无法识别的用户（带问号），它们其实是系统重装之前的用户，它会有一串用于唯一识别的数字。所以哪怕我们重装系统之后再使用原来的用户名，这个唯一识别号也是完全不同的。因此，我们当前登录的帐号对文件没有修改和删除的权限。
 
