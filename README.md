@@ -2,28 +2,31 @@
 
 这里存放的是本人在研究计算机技术过程中所写的各种学习笔记与代码示例。整个项目按笔记分类形成以下目录结构：
 
+- **ToDoList**
 - **OperatingSystem**：
   - *UNIX-like 研究笔记*：
     - RouteMap：学习路线图规划
     - Linux 研究：
       - 发行版使用笔记
         - Ubuntu 使用笔记
+    - ShellTool：终端环境研究
   - *Windows 研究笔记*：
     - RouteMap：学习路线图规划
-    - 命令行工具研究
+    - ShellTool：终端环境研究
+      - Cygwin 研究
 - **Programming**：
   - *Methodolgy 研究笔记*
     - RouteMap：学习路线图规划
   - *Algorithms 研究笔记*
     - RouteMap：学习路线图规划
-    - 示例代码
+    - Examples：示例代码
       - C\C++示例
       - Python示例
   - *Language 研究笔记*：
     - Python
       - RouteMap：学习路线图规划
       - 测试自动化研究
-      - 示例代码
+      - Examples：示例代码
         - 数据库处理
         - 图形化界面
         - 网络开发
@@ -49,7 +52,7 @@
     - Docker 学习
     - K8s 研究
   - *DevelopmentTool 研究笔记*：
-    - Clang 编译器简介
+    - Clang 学习笔记
     - Makefile 简易教程
     - NeoVim 学习笔记
   - *Database 研究笔记*

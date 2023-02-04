@@ -1,36 +1,41 @@
 # Cygwin 研究笔记
 
+这篇笔记将用于记录个人在研究 Cygwin Shell 环境过程中所获取的学习心得，我会将笔记的原始文本存储在`https://github.com/owlman/study_note`项目的`OperatingSystem/Windows/ShellTool`目录下，并予以长期维护。
+
 ## Cygwin 简介
 
-Cygwin 是一个在 Windows 平台上运行的类 UNIX 模拟环境，是Cygnus Solutions公司开发的自由软件（该公司开发的著名工具还有eCos，不过现已被Redhat收购）。它对于学习UNIX/Linux操作环境，或者从UNIX到Windows的应用程序移植，或者进行某些特殊的开发工作，尤其是使用GNU工具集在Windows上进行嵌入式系统开发，非常有用。随着嵌入式系统开发在国内日渐流行，越来越多的开发者对Cygwin产生了兴趣。
+Cygwin 是一个在 Windows 平台上运行的 UNIX-like 模拟环境，系由 Cygnus Solutions公司开发并以 GPL 许可协议发布的的自由软件。在 WSL 出现之前，该软件对于在 Windows 环境中学习 UNIX-like Shell 操作环境，或者实现应用程序从 UNIX-like 到 Windows 的跨系统移植与开发工作都是非常有使用价值的。
 
-Cygwin 提供一个UNIX 模拟 DLL 以及在其上层构建的多种可以在 Linux 系统中找到的软件包，在 Windows XP SP3 以上的版本提供良好的支持。Cygwin主要由Red Hat及其下属社区负责维护。
+从技术上来说，Cygwin 项目所做的主要是提供一个可在 Windows 系统中模拟 UNIX-like 系统环境的 DLL 文件，并在其上移植了多种在 UNIX-like 系统中常用的软件包，它在 Windows XP SP3 以上的版本中得到了良好的支持。目前，Cygwin 项目主要由 Red Hat 及其下属社区负责维护。
 
-## Cygwin 的安装与配置
+## 安装与配置
 
-Cygwin 的安装文件很容易通过百度找到。国内的网站上有"网络安装版"和"本地安装版"两种。标准的发行版应该是网络安装版。两者并无大不同，下面介绍一下安装的过程。
+Cygwin 的安装文件很容易通过搜索引擎找到。国内的网站上有"网络安装版"和"本地安装版"两种。标准的发行版应该是网络安装版。两者并无大不同。具体做法就是，在下载到 Cygwin 的安装文件（通常名为`setup.exe`）后，启动它的图形化安装向导即可开始进行安装，大多数情况下，我们只需 一路直接点"下一步(N)—>"即可，只有在下面步骤中需要做一些特别操作。
 
-step1. 下载后，点击安装文件（setup.exe）进行安装，第一个画面是GNU版权说明，点"下一步(N)—>"，
+1. 在选择 Cygwin 的安装模式时，我们有"Install from Internet"、"Download from Internet"、"Install from Local Directory" 三个选项。通常情况下，我们会选择"Install from Internet"这一选项，即直接通过网络镜像来安装。
 
-环境变量
+    ![安装模式](./img/cygwin-1.png)
 
-开始运行bash之前，应该设置一些环境变量。Cygwin提供了一个.bat文件，里面已经设置好了最重要的环境变量。通过它来启动bash是最安全的办法。这个.bat文件安装在Cygwin所在的根目录下。可以随意编辑该文件。
+2. 考虑到网络环境的问题，我们往往还需在安装镜像列表中选择一个位于中国境内的镜像源，以便提高安装速度。
 
-CYGWIN变量用来针对Cygwin运行时系统进行多种全局设置。开始时，可以不设置CYGWIN或者在执行bash前用类似下面的格式在dos框下把它设为tty
+    ![安装镜像列表](./img/cygwin-2.png)
 
-C:\> set CYGWIN=tty notitle glob
+3. 选择需安装的 Cygwin 组件包。通常情况下，我们需要安装 Devel 这个部分的模块，其中包含了各种开发所用到的工具或模块。
 
-PATH变量被Cygwin应用程序作为搜索可知性文件的路径列表。当一个Cygwin进程启动时，该变量被从windows格式（e.g. C:\WinNT\system32;C:\WinNT）转换成unix格式（e.g., /WinNT/system32:/WinNT）。如果想在不运行bash的时候也能够使用Cygwin工具集，PATH起码应该包含x:\Cygwin\bin，其中x:\Cygwin 是你的系统中的Cygwin目录。
+    ![安装组件包](./img/cygwin-3.png)
 
-HOME变量用来指定主目录，推荐在执行bash前定义该变量。当Cygwin进程启动时，该变量也被从windows格式转换成unix格式，例如，作者的机器上HOME的值为C:\（dos命令set HOME就可以看到它的值，set HOME=XXX可以进行设置），在bash中用echo $HOME看，其值为/cygdrive/c.
+接下来要做的是环境变量设置。在开始运行 Cygwin 中的 bash 终端环境之前，我们应该设置一些环境变量。为此，Cygwin 提供了一个`.bat`文件，里面已经设置好了最重要的环境变量。通过它来启动 bash 终端是最安全的办法。这个`.bat`文件安装在Cygwin所在的根目录下，其可编辑的主要内容如下：
 
-TERM变量指定终端型态。如果没对它进行设置，它将自动设为Cygwin。
+- `CYGWIN`变量：该变量用于针对 Cygwin 运行时系统进行多种全局设置。通常情况下，我们会把它的值设为`tty`。
 
-LD_LIBRARY_PATH被Cygwin函数dlopen()作为搜索.dll文件的路径列表，该变量也被从windows格式转换成unix格式。多数Cygwin应用程序不使用dlopen,因而不需要该变量。
+- `PATH`变量：该变量用于设置系统可搜索文件的路径列表。当 Cygwin 进程启动时，该变量的值会从 Windows 路径格式（例如`C:\WinNT\system32;C:\WinNT`）转换成UNIX-like`路径格式（例如`/WinNT/system32:/WinNT`）。当然了，如果想在不运行 bash 的时候也能够使用 Cygwin 工具集，可在 Windows 的`PATH`系统环境变量中加入`x:\Cygwin\bin`路径，在这里`x:\Cygwin`是 Cygwin 在 Windows 系统中的安装目录。
+
+- `HOME`变量：该变量用于设置用户个人的主工作目录，当 Cygwin 进程启动时，该变量的值也会从 Windows 路径格式转换成UNIX-like`路径格式。例如，如果我将当前 Windows 系统中`HOME`变量的值为`C:\`，那么它在 Cygwin 的 bash 中用`echo $HOME`命令看到的值就会变成`/cygdrive/c`。
+
+- `TERM`变量：该变量用于指定 bash 终端型态。如果没对它进行设置，它将自动设为Cygwin。
+
+- `LD_LIBRARY_PATH`变量：该变量被 Cygwin 函数 dlopen() 用作为搜索.dll文件的路径列表，该变量也被从windows格式转换成unix格式。多数Cygwin应用程序不使用dlopen,因而不需要该变量。
 进入安装模式选择画面。
-
-step2. 安装模式有"Install from Internet"、"Download from Internet"、
-"Install from Local Directory" 三种。"Install from Internet"就是直接从internet上装，适用于网速较快的情况。在选择镜像页面，可以使用一些中国的镜像源以便提高网速。
 
 ## Windows 重装后，如何删除 Cygwin 目录？
 
@@ -178,3 +183,53 @@ Eclipse是一款比较出名的IDE，功能强大，可以用来做C\C++开发�
 但是随着Cygwin更新到1.7，CDT插件工作开始不正常，最明显的两个症状是：1.console无输出，2.按住ctrl点击，很多标准对象找不到对应的头文件。
 解决方法：打开eclipse，windows->preferences->C\C++->Debug->Source Lookup Path，点击Add，添加一个Path Mapping，名字可以随意取，比如Cygwin Path Mapping；假设Cygwin安装在C盘，将/cygdriver/c映射到C:\，确定保存以后，重启Eclipse，以前的ctrl点击，控制台输出就正常了。
 此方法出处来自于CDT插件的FAQ，具体网址是参见扩展阅读。原理非常简单，因为Eclipse是一个跨平台的编译器，所以CDT插件在磁盘上找文件的时候也是采用的unix风格的路径，所以在windows上无法正常工作，做一个路径映射，将Cygwin所在磁盘的路径映射为windows风格的路径，CDT就可以正常的发现头文件了。
+
+在这里插入图片描述
+4、在下载的同时，Cygwin组件也保存到了本地，以便以后能够再次安装，这一步选择安装过程中从网上下载的Cygwin组件包的保存位置
+在这里插入图片描述
+5、这一步选择连接的方式，选择你的连接方式，然后点击下一步，会出现选择下载站点的对话框，如下图所示
+在这里插入图片描述
+①Use System Proxy Settings 使用系统的代理设置
+②Direct Connection 一般多数用户都是这种直接连接的网络，所以都是直接使用默认设置即可
+③Use HTTP/FTP Proxy 使用HTTP或FTP类型的代理。如果有需要，自己选择此项后，设置对应的代理地址和端口，即可
+
+6、选择下载站点
+不同的镜像存放了不同的包，为了获得最快的下载速度，我们可以添加网易开源镜像http://mirrors.163.com/cygwin/ 或者 阿里云镜像http://mirrors.aliyun.com/cygwin/
+在这里插入图片描述
+在这里插入图片描述
+7、开始加载
+在这里插入图片描述
+
+展开devel
+
+在这里插入图片描述
+从中选择binutils、 gcc 、mingw 、gdb进行安装，找到以下选项，点击后边的skip，使其变为版本号即可
+在这里插入图片描述
+在这里插入图片描述
+在这里插入图片描述
+在这里插入图片描述
+9、确认改变，进行安装
+在这里插入图片描述
+在这里插入图片描述
+10、安装完成，创建桌面快捷方式
+在这里插入图片描述
+验证Cygwin是否安装成功
+
+运行cygwin
+在这里插入图片描述
+在弹出的命令窗口输入
+
+会打印出当前cygwin的版本和运行状态，如果status是ok的话，则cygwin运行正常
+在这里插入图片描述
+
+在这里插入图片描述
+
+在这里插入图片描述
+Errol_King
+关注
+
+    273
+    593
+    打赏
+    63
+
