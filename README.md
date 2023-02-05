@@ -2,8 +2,8 @@
 
 这里存放的是本人在研究计算机技术过程中所写的各种学习笔记与代码示例。整个项目按笔记分类形成以下目录结构：
 
-- **ToDoList**
-- **OperatingSystem**：
+- **ToDoList.md**：项目的任务列表
+- **OperatingSystem**：操作系统研究
   - *UNIX-like 研究笔记*：
     - RouteMap：学习路线图规划
     - Linux 研究：
@@ -13,8 +13,8 @@
   - *Windows 研究笔记*：
     - RouteMap：学习路线图规划
     - ShellTool：终端环境研究
-      - Cygwin 研究
-- **Programming**：
+      - Cygwin 研究笔记
+- **Programming**：编程技术研究
   - *Methodolgy 研究笔记*
     - RouteMap：学习路线图规划
   - *Algorithms 研究笔记*
@@ -44,10 +44,10 @@
       - Node.js 学习
     - 基础理论学习
       - RESTful API 研究
-- **SoftwareEngineering**：
+- **SoftwareEngineering**：软件工程研究
   - RouteMap：学习路线图规划
   - *OpenSource 研究笔记*：
-- **SoftwareTool**：
+- **SoftwareTool**：软件工具研究
   - *Contaner 研究笔记*：
     - Docker 学习
     - K8s 研究
@@ -62,7 +62,7 @@
   - *VirtualMachine 研究*：
     - Vagramt 学习
     - VirualBox 学习
-- **Writing & Reading**：
+- **Writing & Reading**：读书与写作
   - 读后评论：
     - 《大教堂与集市》：软件工程的另一种选择
     - 《C 程序设计语言》：计算机教材的典范
