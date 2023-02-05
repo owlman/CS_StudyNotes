@@ -1,21 +1,23 @@
 #! https://zhuanlan.zhihu.com/p/603489824
 # Cygwin 研究笔记
 
-这篇笔记将用于记录个人在研究 Cygwin Shell 环境过程中所获取的学习心得，我会将笔记的原始文本存储在`https://github.com/owlman/study_note`项目的`OperatingSystem/Windows/ShellTool`目录下，并予以长期维护。
+这篇笔记将用于记录个人在研究 Cygwin 这一 UNIX-like 模拟环境过程中所获取的学习心得与使用经验，我会将笔记的原始文本存储在`https://github.com/owlman/study_note`项目的`OperatingSystem/Windows/ShellTool`目录下，并予以长期维护。
 
 ## Cygwin 简介
 
-Cygwin 的开发始于 1995 年，它最初是 Cygnus 工程师 Steve Chamberlain 的一个项目，当时 Windows NT 和 Windows 95 将 COFF 作为目标代码，而 GNU 已经支持 x86 和 COFF，以及 C 语言库 newlib。因而至少在理论上，我们确实可以尝试将 GCC 重定向，以实现交叉编译（cross-compile），从而产生能在 Windows 上运行的可执行程序。在后来的实践中，这很快实现了。1996 年后，由于看到 Cygwin 可以提供 Windows 系统上的 Cygnus 嵌入式工具（以往的方案是使用 DJGPP），其他工程师也加入了进来。特别吸引人的是，Cygwin 可以实现 three-way cross-compile，例如可以在Sun工作站上 build，如此就形成 Windows-x-MIPS cross-compiler，这样比单纯在 PC 上编译要快不少。1998年起，Cygnus 开始将 Cygwin 包作为产品来提供。目前，Cygwin 项目已经交由 Red Hat 及其下属社区负责维护。按照 Red Hat 的规定，Cygwin 库本身虽然声明遵守 GPL 许可协议，但也可以跟符合开源定义的自由软件链接。Red Hat 另有价格不菲的许可协议，这样使用 Cygwin 库的专属软件，就可以进行再发布。
+Cygwin 的开发始于 1995 年，它最初是 Cygnus 工程师 Steve Chamberlain 的一个私人项目。当时，Windows NT 和 Windows 95 中的可执行文件、共享库文件使用的都是 COFF（即 Common File format，中文可译为“通用目标文件格式”）的文件格式，而 GNU 工具集已经支持了面向 x86 和 COFF 的编译，以及 C 语言库 newlib。因而 Steve Chamberlain 认为至少在理论上，人们已经可以考虑通过将 gcc 编译器重定向来实现交叉编译（cross-compile），从而产生能在 Windows 系统上运行之前只能在 UNIX-like 系统中运行的程序。正是基于这一设想，他才在后来的不断实践中成就了 Cygwin 项目。
+
+到了1996 年后，由于看到 Cygwin 可以在 Windows 系统上很好地为用户提供 Cygnus 嵌入式工具（以往的方案是使用 DJGPP），该公司的其他工程师也陆续加入到了这个项目中。该项目最吸引人的地方是：人们可以使用 Cygwin 提供的模拟环境来实现三方交叉编译（即 three-way cross-compile），例如，我们可以选择在 Sun 工作站上编译并建构应用程序，如此就形成 Windows-x-MIPS cross-compile，这样比单纯在 PC 上编译要快上不少。于是自 1998 年起，Cygnus 开始将 Cygwin 包作为公司的主打产品来提供。目前，Cygwin 项目已经被 Red Hat 公司收购，并交由其下属社区来负责维护，但 Cygwin 本身依然 声明遵守 GPL 许可协议，并可以跟符合开源定义的自由软件进行链接。
 
 总而言之，Cygwin 就是一个在 Windows 平台上运行的 UNIX-like 模拟环境，在 WSL 出现之前，该软件对于在 Windows 环境中学习 UNIX-like Shell 操作环境，或者实现应用程序从 UNIX-like 到 Windows 的跨系统移植与开发工作都是非常有使用价值的。
 
-从技术上来说，Cygwin 项目所做的主要是提供一个可在 Windows 系统中模拟 UNIX-like 系统环境的 DLL 文件，并在其上移植了多种在 UNIX-like 系统中常用的软件包。具体来说，就是 Cygwin 提供了一套动态链接库，该库在 Win32 系统下实现了 POSIX 系统调用的API；还有一套 GNU 开发工具集（比如GCC、GDB），这样可以进行简单的软件开发；还有一些 UNIX 系统下的常见程序。2001 年，新增了 X Window System。另外还有一个名为 MinGW 的库，可以跟Windows本地的MSVCRT库（Windows API）一起工作。MinGW占用内存、硬盘空间都比较少，能够链接到任意软件，但它对POSIX规范的实现没有Cygwin库完备。
+从技术上来说，Cygwin 项目所做的主要就是提供了一个可在 Windows 系统中模拟 UNIX-like 系统环境的 DLL 文件，并在其上移植了多种在 UNIX-like 系统中常用的软件包。其中最重要的是，Cygwin 项目在 Windows 系统下实现了符合 POSIX 标准的系统 API，并成功移植了一套 GNU 工具集（比如 gcc、gdb 和 make）。除此之外，还有一个名为 MinGW 的库，该库可以跟 Windows 本地的 MSVCRT 库（即 Windows API）一起工作。MinGW 占用内存、硬盘空间都比较少，能够链接到任意软件，但它对 POSIX 标准的实现没有 Cygwin 库完备。
 
 美中不足的是，Cygwin 不支持 Unicode。除了当前 Windows 系统以及 OEM codepages（例如，俄语用户的代码页应该是 CP1251 和 CP866，而不能是 KOI8-R、ISO/IEC 8859-5、UTF-8 等），Cygwin 对其他字符集都不支持。Cygwin 的较新版本可以通过自带终端模拟器的设置来满足显示 UTF-8 和更多代码页的功能。
 
 ## 安装与配置
 
-Cygwin 的安装文件很容易通过搜索引擎找到。国内的网站上有"网络安装版"和"本地安装版"两种。标准的发行版应该是网络安装版。两者并无大不同。具体做法就是，在下载到 Cygwin 的安装文件（通常名为`setup.exe`）后，启动它的图形化安装向导即可开始进行安装，大多数情况下，我们只需 一路直接点"下一步(N)—>"即可，只有在下面步骤中需要做一些特别操作。
+Cygwin 的安装文件很容易通过搜索引擎找到。国内的网站上有"网络安装版"和"本地安装版"两种。标准的发行版应该是网络安装版。两者并无大不同。具体安装方法就是，在下载到 Cygwin 的安装文件（通常名为`setup.exe`）后，启动它的图形化安装向导即可开始进行安装，大多数情况下，我们只需 一路直接点"下一步(N)—>"即可，只有在下面步骤中需要做一些特别操作。
 
 1. 在选择 Cygwin 的安装模式时，我们有"Install from Internet"、"Download from Internet"、"Install from Local Directory" 三个选项。通常情况下，我们会选择"Install from Internet"这一选项，即直接通过网络镜像来安装。
 
