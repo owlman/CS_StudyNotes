@@ -6,47 +6,47 @@
 - **OperatingSystem**：操作系统研究
   - *UNIX-like*：类 UNIX 系统研究
     - RouteMap：学习路线图规划
-    - Linux：Linux 系统研究
+    - Linux：Linux 项目研究
+    - ShellTool：终端环境研究
       - Distribution： 发行版使用笔记
         - Ubuntu 使用笔记
-    - ShellTool：终端环境研究
-  - *Windows 研究笔记*：
+  - *Windows*：Windows 系统研究
     - RouteMap：学习路线图规划
     - ShellTool：终端环境研究
       - Cygwin 研究笔记
 - **Programming**：编程技术研究
-  - *Methodolgy 研究笔记*
+  - *Methodolgy*：编程方法研究
     - RouteMap：学习路线图规划
-  - *Algorithms 研究笔记*
+  - *Algorithms*：计算机算法研究
     - RouteMap：学习路线图规划
     - Examples：示例代码
       - C\C++ 示例
       - Python 示例
-  - *Language 研究笔记*：
+  - *LanguageStudy*：编程语言学习
     - Python
       - RouteMap：学习路线图规划
-      - 测试自动化研究
       - Examples：示例代码
-        - 数据库处理
-        - 图形化界面
+        - 数据处理
         - 网络开发
         - 游戏开发
         - 人工智能
-  - *GUI 研究笔记*
+  - *GUI*：图形化界面开发
     - RouteMap：学习路线图规划
     - Frameworks：开发框架研究
-  - *Client-Server 研究笔记*
+  - *Client-Server*：C/S 开发架构研究
     - RouteMap：学习路线图规划
     - Frameworks：开发框架研究
-      - Vue.js 学习
-      - Webpack.js 学习
+      - Vue.js 学习笔记
+      - Webpack.js 学习笔记
     - Runtime：运行平台研究
-      - Node.js 学习
+      - Node.js 学习笔记
     - TheBasics：基础理论学习
-      - RESTful API 研究
+      - RESTful API 研究笔记
+  - *AutomatedTest*：自动化测试研究
+    - Python 实践
 - **SoftwareEngineering**：软件工程研究
-  - RouteMap：学习路线图规划
-  - *OpenSource 研究笔记*：
+  - *RouteMap*：学习路线图规划
+  - *OpenSource*：开源文化研究
 - **SoftwareTool**：软件工具研究
   - *Contaner*：容器技术研究
     - Docker 学习笔记
