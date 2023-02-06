@@ -4,10 +4,10 @@
 
 - **ToDoList.md**：项目的任务列表
 - **OperatingSystem**：操作系统研究
-  - *UNIX-like 研究笔记*：
+  - *UNIX-like*：类 UNIX 系统研究
     - RouteMap：学习路线图规划
-    - Linux 研究：
-      - 发行版使用笔记
+    - Linux：Linux 系统研究
+      - Distribution： 发行版使用笔记
         - Ubuntu 使用笔记
     - ShellTool：终端环境研究
   - *Windows 研究笔记*：
@@ -20,8 +20,8 @@
   - *Algorithms 研究笔记*
     - RouteMap：学习路线图规划
     - Examples：示例代码
-      - C\C++示例
-      - Python示例
+      - C\C++ 示例
+      - Python 示例
   - *Language 研究笔记*：
     - Python
       - RouteMap：学习路线图规划
@@ -34,34 +34,34 @@
         - 人工智能
   - *GUI 研究笔记*
     - RouteMap：学习路线图规划
-    - 开发框架研究
+    - Frameworks：开发框架研究
   - *Client-Server 研究笔记*
     - RouteMap：学习路线图规划
-    - 开发框架研究
+    - Frameworks：开发框架研究
       - Vue.js 学习
       - Webpack.js 学习
-    - 运行平台研究
+    - Runtime：运行平台研究
       - Node.js 学习
-    - 基础理论学习
+    - TheBasics：基础理论学习
       - RESTful API 研究
 - **SoftwareEngineering**：软件工程研究
   - RouteMap：学习路线图规划
   - *OpenSource 研究笔记*：
 - **SoftwareTool**：软件工具研究
-  - *Contaner 研究笔记*：
-    - Docker 学习
-    - K8s 研究
-  - *DevelopmentTool 研究笔记*：
+  - *Contaner*：容器技术研究
+    - Docker 学习笔记
+    - K8s 研究笔记
+  - *DevelopmentTool*：开发工具研究
     - Clang 学习笔记
     - Makefile 简易教程
     - NeoVim 学习笔记
-  - *Database 研究笔记*
+  - *Database*：数据库系统研究
     - RouteMap：学习路线图规划
-  - *VCS 研究笔记*
-    - Git 学习
-  - *VirtualMachine 研究*：
-    - Vagramt 学习
-    - VirualBox 学习
+  - *VCS*：版本控制系统研究
+    - Git 学习笔记
+  - *VirtualMachine*：虚拟机技术研究
+    - Vagramt 学习笔记
+    - VirualBox 学习笔记
 - **Writing & Reading**：读书与写作
   - 读后评论：
     - 《大教堂与集市》：软件工程的另一种选择
