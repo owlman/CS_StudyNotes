@@ -2,7 +2,7 @@
 
 # NeoVim 学习笔记
 
-这篇学习笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`SoftwareTool/DevelopmentTool`目录下，并予以长期维护。
+这篇学习笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`Software/DevelopmentTool`目录下，并予以长期维护。
 
 ## 学习规划
 
@@ -396,44 +396,44 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
 
    ```vim
-   " 令编辑器显示行号
-   set nu
+    " 令编辑器显示行号
+    set nu
 
-   " 要安装的插件列表
-   call plug#begin('~/.vim/plugged')
-   " tab键补全功能插件
-   Plug 'ervandew/supertab'
-   " Coc 智能补全插件引擎
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   " vim-airline 标签栏插件
-   Plug 'Vim-airline/vim-airline'
-   " vim-airline 标签栏插件的主题插件
-   Plug 'Vim-airline/vim-airline-themes'  
-   " vim-startify 插件
-   Plug 'mhinz/vim-startify'
-   " vim-snazzy 主题插件
-   Plug 'connorholyday/vim-snazzy'
-   " markdown 预览插件
-   Plug 'iamcco/markdown-preview.nvim'
-   call plug#end()
+    " 要安装的插件列表
+    call plug#begin('~/.vim/plugged')
+    " tab键补全功能插件
+    Plug 'ervandew/supertab'
+    " Coc 智能补全插件引擎
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " vim-airline 标签栏插件
+    Plug 'Vim-airline/vim-airline'
+    " vim-airline 标签栏插件的主题插件
+    Plug 'Vim-airline/vim-airline-themes'  
+    " vim-startify 插件
+    Plug 'mhinz/vim-startify'
+    " vim-snazzy 主题插件
+    Plug 'connorholyday/vim-snazzy'
+    " markdown 预览插件
+    Plug 'iamcco/markdown-preview.nvim'
+    call plug#end()
 
-   " 配置 vim-airline 标签栏插件
-   let g:airline#extensions#tabline#enabled = 1
-   let g:airline#extensions#tabline#enabled = 1
-   " 配置 ranger 文件浏览器插件
-   let g:rnvimr_ex_enable = 1   
-   " Alt+o 打开 ranger                                       
-   nnoremap <silent> <M-o> :RnvimrToggle<CR>
-   "Alt+加号 切换至下一个标签，减号则是切换回上一个
-   nnoremap <M-+> :bp<CR> 
-   nnoremap <M--> :bn<CR>
-   " 配置 vim-snazzy 主题插件
-   colorscheme snazzy
-   let g:SnazzyTransparent = 1
-   " 指定浏览器路径
-   let g:mkdp_path_to_chrome = "<此处填写chrome的安装路径>"
-   " 指定预览主题，默认Github
-   let g:mkdp_markdown_css=''
-   ```
+    " 配置 vim-airline 标签栏插件
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#enabled = 1
+    " 配置 ranger 文件浏览器插件
+    let g:rnvimr_ex_enable = 1   
+    " Alt+o 打开 ranger                                       
+    nnoremap <silent> <M-o> :RnvimrToggle<CR>
+    "Alt+加号 切换至下一个标签，减号则是切换回上一个
+    nnoremap <M-+> :bp<CR> 
+    nnoremap <M--> :bn<CR>
+    " 配置 vim-snazzy 主题插件
+    colorscheme snazzy
+    let g:SnazzyTransparent = 1
+    " 指定浏览器路径
+    let g:mkdp_path_to_chrome = "<此处填写chrome的安装路径>"
+    " 指定预览主题，默认Github
+    let g:mkdp_markdown_css=''
+```
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，并在其命令模式下执行`:call mkdp#util#install()`命令，然后就可以通过`:MarkdownPreview`命令来启动预览，然后用`:MarkdownPreviewStop`命令来关闭预览了。

@@ -1,0 +1,26 @@
+{
+    "version": "3.5",
+    "services": {
+        "resumes_db": {
+            "image": "mongo:3.6.8",
+            "volumes": [
+                "./db:/data/db"
+            ],
+            "networks": [
+                "resumes_net"
+            ]
+        },
+        "resumes_web": {
+            "build": ".",
+            "ports": [
+                "3000:3001"
+            ],
+            "networks": [
+                "resumes_net"
+            ]
+        }
+    },
+    "networks": {
+        "resumes_net": null
+    }
+}

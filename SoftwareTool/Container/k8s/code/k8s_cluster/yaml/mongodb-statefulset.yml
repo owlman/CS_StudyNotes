@@ -1,0 +1,92 @@
+# 用StorageClass对象定义一个数据持久化方案
+apiVersion: storage.k8s.io/v1 # 指定StorageClass API的版本
+kind: StorageClass  # 定义资源对象的类型为StorageClass
+metadata:               # 定义StorageClass对象的元数据信息
+  name: cluster-mongo # 定义StorageClass对象的名称
+provisioner: fuseim.pri/ifs # 定义StorageClass对象采用nfs文件系统
+
+---
+# 用StatefulSet对象来组织用于部署MongoDB数据库的Pod对象
+apiVersion: apps/v1  # 指定StatefulSet API的版本
+kind: StatefulSet   # 定义资源对象的类型为StatefulSet
+metadata:              # 定义StatefulSet对象的元数据信息
+  name: mongodb-statefulset # 定义StatefulSet对象的名称
+  namespace: online-resumes # 定义StatefulSet对象所属的命名空间
+spec:                     # 定义StatefulSet对象的具体属性
+  selector  :            # 定义StatefulSet对象的选择器，以便其他对象引用
+    matchLabels: # 定义该选择器用于匹配的标签
+      role: mongo # 定义该选择器的role标签，用于匹配相应的认证规则
+      environment: test # 定义该选择器的环境标签为test
+  serviceName: mongo-service
+  replicas: 2  # 定义StatefulSet对象要部署的数量
+  template:  # 定义StatefulSet对象中的Pod对象模板
+    metadata: # 定义该Pod对象模板的元数据
+      labels: # 定义该Pod对象模板的标签信息
+        role: mongo
+        environment: test
+    spec: # 定义Pod对象模板的具体属性
+      containers: # 定义Pod对象模板中要部署的容器列表
+      - name: mongo  # 定义第一个容器的名称
+        image: mongo:latest # 定义第一个容器使用的镜像
+        command: # 设置启动该容器的命令参数
+          - mongod
+          - "--replSet"
+          - rs0
+          - "--bind_ip"
+          - 0.0.0.0
+          - "--smallfiles"
+          - "--noprealloc"
+        ports:   # 定义该容器对外开放的端口
+          - containerPort: 27017
+        volumeMounts: # 定义该容器所要挂载的数据卷
+          - name: mongo-storage
+            mountPath: /data/db
+      - name: mongo-sidecar  # 定义第二个容器的名称及相关参数
+        image: cvallance/mongo-k8s-sidecar:latest # 定义第二个容器使用的镜像
+        env:
+          - name: MONGO_SIDECAR_POD_LABELS
+            value: "role=mongo,environment=test"
+  volumeClaimTemplates: # 定义StatefulSet对象所要使用的数据卷模板
+    - metadata:
+        name: mongo-storage
+      spec:
+        storageClassName: cluster-mongo # 采用之前已定义的StorageClass
+        accessModes: ["ReadWriteOnce"] # 定义数据卷的读写模式
+        resources: # 定义该模板要申请的存储资源
+          requests:
+            storage: 10Gi # 数据卷的容量
+
+---
+# 将上述StatefulSet控制器对象组织的Pod导出为本地服务
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+  namespace: online-resumes
+  labels:
+    name: mongo-service
+spec:
+  clusterIP: None # 定义该Service对象的网络类型为本地访问
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    role: mongo
+
+---
+# 将上述StatefulSet控制器对象组织的Pod导出为外部服务
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-cs
+  namespace: online-resumes
+  labels:
+    name: mongo
+spec:
+  type: NodePort # 定义该Service对象的网络类型为NodePort
+  ports:
+    - port: 27017
+      targetPort: 27017
+      nodePort: 30717
+  selector:
+    role: mongo

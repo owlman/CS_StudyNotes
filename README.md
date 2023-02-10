@@ -1,31 +1,75 @@
-# 计算机技术学习笔记
+# 计算机技术学习
 
 这里存放的是本人在研究计算机技术过程中所写的各种学习笔记与代码示例。整个项目按笔记分类形成以下目录结构：
 
-- **OperatingSystem**：
-  - *Linux*；
-    - Ubuntu 使用笔记
-- **SoftwareTool**：
-  - *DevelopmentTool*：
-    - clang 编译器简介
-    - makefile 简易教程
-    - neovim 学习笔记
-  - *OperationsTool*：
+- **ToDoList.md**：项目的任务列表
+- **OperatingSystem**：操作系统研究
+  - *UNIX-like*：类 UNIX 系统研究
+    - RouteMap：学习路线图规划
+    - Linux：Linux 项目研究
+    - ShellTool：终端环境研究
+      - Distribution： 发行版使用笔记
+        - Ubuntu 使用笔记
+  - *Windows*：Windows 系统研究
+    - RouteMap：学习路线图规划
+    - ShellTool：终端环境研究
+      - Cygwin 研究笔记
+- **Programming**：编程技术研究
+  - *Methodolgy*：编程方法研究
+    - RouteMap：学习路线图规划
+  - *Algorithms*：计算机算法研究
+    - RouteMap：学习路线图规划
+    - Examples：示例代码
+      - C\C++ 示例
+      - Python 示例
+  - *LanguageStudy*：编程语言学习
+    - Python
+      - RouteMap：学习路线图规划
+      - Examples：示例代码
+        - 数据处理
+        - 网络开发
+        - 游戏开发
+        - 人工智能
+  - *GUI*：图形化界面开发
+    - RouteMap：学习路线图规划
+    - Frameworks：开发框架研究
+  - *Client-Server*：C/S 开发架构研究
+    - RouteMap：学习路线图规划
+    - Frameworks：开发框架研究
+      - Vue.js 学习笔记
+      - Webpack.js 学习笔记
+    - Runtime：运行平台研究
+      - Node.js 学习笔记
+    - TheBasics：基础理论学习
+      - RESTful API 研究笔记
+  - *AutomatedTest*：自动化测试研究
+    - Python 实践
+- **SoftwareEngineering**：软件工程研究
+  - *RouteMap*：学习路线图规划
+  - *OpenSource*：开源文化研究
+- **SoftwareTool**：软件工具研究
+  - *Contaner*：容器技术研究
     - Docker 学习笔记
+    - K8s 研究笔记
+  - *DevelopmentTool*：开发工具研究
+    - Clang 学习笔记
+    - Makefile 简易教程
+    - NeoVim 学习笔记
+  - *Database*：数据库系统研究
+    - RouteMap：学习路线图规划
+  - *VCS*：版本控制系统研究
     - Git 学习笔记
-- **ProgrammingLanguage**：
-  - *C/Cpp*：
-    - 算法实现示例
-    - 数据结构示例
-  - *JavaScript*：
-    - Node.js 学习笔记
-    - Vue.js 学习笔记
-    - Electron.js 学习笔记
-    - Webpackjs 学习笔记
-  - *Python*：
-    - 基础语法示例
-    - 数据处理示例
-    - 网路开发示例
-    - 图形界面示例
-    - 游戏开发示例
-    - 人工智能示例
+  - *VirtualMachine*：虚拟机技术研究
+    - Vagramt 学习笔记
+    - VirualBox 学习笔记
+- **Writing & Reading**：读书与写作
+  - 读后评论：
+    - 《大教堂与集市》：软件工程的另一种选择
+    - 《C 程序设计语言》：计算机教材的典范
+    - 《黑客与画家》：：书呆子的正名
+    - 《只是因为好玩》：学习即游戏
+  - 出版感言：
+    - 《元素模式》译后记
+    - 《JavaScript全栈开发》出版感言
+  - 写作心得：
+    - 关于国内技术书籍的质量问题

@@ -1,0 +1,43 @@
+apiVersion: apps/v1 # 指定Deployment API的版本，
+                                # 可用kubectl api-versions命令查看
+kind: Deployment   # 定义资源对象的类型为Deployment
+metadata:              # 定义Deploynent对象的元数据信息
+  name: express-deployment # 定义Deploynent对象的名称
+  namespace: online-resumes # 定义Deploynent对象所属的命名空间
+spec:    # 定义Deploynent对象的具体特征
+  replicas: 3 # 定义Deploynent对象要部署的数量
+  selector: # 定义Deploynent对象的选择器，以便其他对象引用
+    matchLabels: # 定义该选择器用于匹配的标签
+      app: resumes-web # 定义该选择器的app标签
+  template:  # 定义Deploynent对象中的Pod对象模板
+    metadata: # 定义该Pod对象模板的元数据
+      labels: # 定义Pod对象模板的标签信息
+        app: resumes-web # 定义Pod对象模板的app标签
+    spec:      # 定义Pod对象模板的具体特征
+      containers: # 定义Pod对象模板中要部署的容器列表
+      - name: resumes-web # 定义容器的名称
+        image: online_resumes:latest # 定义容器使用的镜像
+        imagePullPolicy: Never # 定义拉取容器的方式，主要有：
+                                              # Always：始终从远程仓库中拉取
+                                              # Never：始终使用本地镜像
+                                              # IfNotPresent：优先使用本地镜像，
+                                              #      镜像不存在时从远程仓库拉取
+        ports:               # 定义容器的端口映射
+        - containerPort: 3000 # 定义容器对外开放的端口
+
+---
+apiVersion: v1 # 指定Service API的版本，
+                        # 可用kubectl api-versions命令查看
+kind: Service    # 定义资源对象的类型为Service
+metadata:        # 定义Service对象的元数据信息
+  name: express-service # 定义Service对象的名称
+  namespace: online-resumes # 定义Service对象所属的命名空间
+  labels:             # 定义Service对象的标签信息
+    app: resumes-web # 定义Service对象的app标签
+spec:                  # 定义Service对象的具体属性
+  type: ClusterIP # 定义Service对象的类型为 ClusterIP，这也是其默认类型
+  ports:              # 定义Service对象的端口映射
+    - port: 80    # 定义Service对象对外开放的端口
+      targetPort: 3000 # 定义Service对象要转发的内部端口
+  selector:         # 使用选择器定义Service对象要部署的资源对象
+    app: resumes-web # 该app标匹配的是稍后定义的Deployment对象

@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  resumes_db:
+    image: "mongo:3.6.8"
+    volumes:
+      - "mongodb:/data/db"
+    networks:
+      - resumes_net
+  resumes_web:
+    build: .
+    ports:
+      - "3000:3001"
+    environment:
+      DB_USER: "owlman"
+      DB_PWD: "41x0d40d7xfc5d2cxx"
+    networks:
+      - resumes_net
+networks:
+  resumes_net:
+volumes:
+  mongodb:
