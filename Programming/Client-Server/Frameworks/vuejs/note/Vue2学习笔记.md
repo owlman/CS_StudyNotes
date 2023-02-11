@@ -2,10 +2,10 @@
 
 # Vue.js 2.0 学习笔记
 
-这篇笔记将用于记录个人在学习 Vue.js 2.0 框架过程中所编写的程序代码与学习心得。为此，我会在`https://github.com/owlman/study_note`项目的`ProgrammingLanguage/JavaScript`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
+这篇笔记将用于记录个人在学习 Vue.js 2.0 框架过程中所编写的示例代码与心得体会。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Frameworks`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
 
 - `note`目录用于存放`markdown`格式的笔记。
-- `code`目录则用于存放笔记中所记录的程序代码。
+- `code`目录则用于存放笔记中所记录的代码示例。
 
 ## 学习规划
 

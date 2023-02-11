@@ -58,18 +58,20 @@
 
 而 Robot Framwork 则是一款更为通用的、可扩展的、支持关键字驱动的自动化测试框架，通常被专业的测试工程师们用于端到端地进行验收测试，例如用于验收测试驱动开发的成果，或者用于测试分布式异构应用程序中的各种接口。该框架的优势主要在于：关键字驱动测试可以重复利用、易扩展、支持生成 HTML 格式的测试报告、有庞大的测试库提供支撑等，但也存在着一些界面操作的共性问题，它会在测试用例过于庞大时产生界面卡顿，并触发一些 BUG，例如在导入测试库时会遇到界面卡死的现象。令人遗憾的是，笔者没能找到一本值得推荐的，致力于介绍 Robot framework 使用方法的中文教程，因此在这里就只能推荐一些网络资源了，具体如下：
 
-> 学习 Robot framework 框架的参考资料：
+> **学习 Robot framework 框架的参考资料**
 >
 > - 框架教程：https://docs.robotframework.org/docs
 > - 用户手册：https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html
 > - API 文档：https://robot-framework.readthedocs.io/en/stable/
+>  
 
 基本上，只要很好地掌握了 Selenium 和 Robot framekwork 这两个框架，那么无论是主流的、基于 Web 界面的自动化测试，还是面向其他 UI 的自动化测试，我们都能够获得一定的心得体会与实践经验，并且在日后的自我学习中举一反三，例如学习用于在 Android 和 iOS 平台上进行自动化测试的 [Appium 框架](http://appium.io/)，它的使用方法是大同小异的（其参考资料如下）。这样一来，我们就能让自己在就业市场中占有一席地位。
 
-> 学习 Appium 框架的参考资料：
+> **学习 Appium 框架的参考资料**
 >
 > - 中文官方文档：https://appium.io/docs/cn/about-appium/intro/
-> - 英文官方文档：https://appium.io/docs/en/about-appium/intro/ 
+> - 英文官方文档：https://appium.io/docs/en/about-appium/intro/
+>  
 
 除了测试框架之外，我们在某些自动化测试场景中可能还会用到一些持续集成的工具。例如，在测试工程师基于上述框架将自动化测试脚本都编写好之后，他大概率还是需要每天上班点击“开始“运行脚本，而且当开发提交新的版本时，也需要重新运行自动化脚本。如果他想让这些脚本的运行更自动化一些，就会需要学习持续集成。在这方面，我们会推荐读者去了解一下一款叫做 [Jenkins](https://www.jenkins.io/zh/) 的持续集成工具。该工具是基于 Java 语言实现的开源工具，它无论是在扩展性方面，还是实用性方面都有非常优异的表现，颇受业界欢迎。如果想系统地学习该工具的使用方法，我个人会推荐读者参考一下《Jenkins2 权威指南》这本书。
 
