@@ -4,6 +4,7 @@
 
 - [ ] 人工智能的研究笔记之路线规划：所在目录是`Programming/ArtificialIntelligence/RouteMap`。
 - [ ] 开源研究笔记之许可协议：所在目录是`SoftwareEngineering/OpenSource`。
+- [ ] PowerShell 研究笔记：所在目录是`OperatingSystem/Windows/ShellTool`。
 - [ ] Bash shell 研究笔记：所在目录是`OperatingSystem/UNIX-like/ShellTool`。
 - [ ] Zsh shell 研究笔记：所在目录是`OperatingSystem/UNIX-like/ShellTool`。
 - [ ] Fish shell 研究笔记：所在目录是`OperatingSystem/UNIX-like/ShellTool`。
