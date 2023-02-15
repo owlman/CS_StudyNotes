@@ -18,3 +18,4 @@
 - [ ] GitHub 学习笔记：所在目录是`SoftwareTool/VCS/GitHub`。
 - [ ] Linux 内核研究笔记：所在目录是`OperatingSystem/UNIX-like/Linux/kernel`。
 - [ ] LaTeX 研究笔记：所在目录是`Writing&Reading/WritingTool/LaTeX`。
+- [ ] Pandoc 研究笔记：所在目录是`Writing&Reading/WritingTool/Pandoc`。
