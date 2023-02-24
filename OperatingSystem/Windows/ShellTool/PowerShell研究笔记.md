@@ -102,7 +102,7 @@ scoop bucket list #列出已订阅的仓库
 | everything   | 搜索软件       | 官网绿色版       |
 | yu-writer    | markdown编辑器 | 官网绿色版       |
 | WinPython    | python集成软件 | 官网绿色版       |
-
+ 
     1、安装要求
 
     用户名文件夹不含中文（我的不是中文，不清楚如果是中文会发生什么，修改用户名文件夹为英文请看我的另一篇文章 传送门）

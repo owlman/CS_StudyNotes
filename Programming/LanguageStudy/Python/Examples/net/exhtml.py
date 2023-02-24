@@ -6,7 +6,7 @@
     @author: lingjie
     @name : example_html_proc
 '''
-import urllib2, sys
+import urllib, sys
 from htmlentitydefs import entitydefs
 from HTMLParser import HTMLParser
 
@@ -43,14 +43,14 @@ class exhtml(HTMLParser):
 if __name__ == "__main__":
     url = "http://www.gnu.org/"
     try:
-        req = urllib2.Request(url)
-        fd = urllib2.urlopen(req)
-    except urllib2.HTTPError, e:
-        print "error: ", e
+        req = urllib.Request(url)
+        fd = urllib.urlopen(req)
+    except(urllib.HTTPError, e):
+        print("error: ", e)
         sys.exit(1)
 
     tp = exhtml()
     tp.feed(fd.read())    
     for i in range(5):
-        print "h%d : %s"%(i+1,tp.getHn(i))
+        print("h%d : %s"%(i+1,tp.getHn(i)))
     tp.close()
