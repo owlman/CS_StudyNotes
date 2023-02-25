@@ -32,7 +32,6 @@ if __name__ == '__main__':
 
 	print("在example目录下创建hello.py脚本。。。")
 	if(not os.path.exists(r"example/hello.py")):
-		os.mknod(r"example/hello.py")
 		file = open(r"example/hello.py",'w')
 		file.writelines(r"print('hello,world...')")
 		file.close()
@@ -52,4 +51,3 @@ if __name__ == '__main__':
 	shutil.rmtree("temp")
 	print("当前目录下的文件。。。")
 	print(os.listdir(os.getcwd()))
-
