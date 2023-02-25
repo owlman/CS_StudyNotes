@@ -15,4 +15,4 @@ print ("--------System Environment Variables-----------------")
     
 env_vars = os.environ
 for item in env_vars.items():
-	print( "[%s]: %s" % item)
+	print("[%s]: %s" % item)
