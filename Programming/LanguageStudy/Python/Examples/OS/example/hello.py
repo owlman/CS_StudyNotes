@@ -1,1 +1,1 @@
-wprint('hello,world...')
+print('hello,world...')

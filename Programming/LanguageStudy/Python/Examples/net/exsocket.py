@@ -18,17 +18,17 @@ def serverside(host="", port=160214, bufsize=1024):
     servsocket.listen(5)
     
     while True:
-        print "waiting for connection..."
+        print("waiting for connection...")
         clisock, addr = servsocket.accept()
-        print "...connected from:", addr
+        print("...connected from:", addr)
         
         while True:
             try:
                 data = servsocket.recv(bufsize)
-                print "<", data
+                print("<", data)
                 clisock.send('[%s] %s' % (ctime(), data)) 
             except:
-                print "disconnect from:", addr
+                print("disconnect from:", addr)
                 clisock.close() 
                 break
     
@@ -48,7 +48,7 @@ def cliectside(host="localhost", port=160214, bufsize=1024):
                 continue
             clisocket.send(data)
             data = clisocket.recv(bufsize)
-            print data
+            print(data)
     except:
         clisocket.close()
     
