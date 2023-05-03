@@ -2,6 +2,7 @@
 
 以下是接下来要启动的研究与学习计划，会根据这个任务列表不定期更新这个笔记项目。
 
+- [ ] 自动化测试学习笔记（Python 篇）：所在目录是`Programming/AutomatedTest/In_Python`。
 - [ ] 人工智能的研究笔记之路线规划：所在目录是`Programming/ArtificialIntelligence/RouteMap`。
 - [ ] 开源研究笔记之许可协议：所在目录是`SoftwareEngineering/OpenSource`。
 - [ ] PowerShell 研究笔记：所在目录是`OperatingSystem/Windows/ShellTool`。
