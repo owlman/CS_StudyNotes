@@ -117,7 +117,7 @@ VSCode 编辑器的最强大之处在于它有一个非常完善的插件生态�
     ```python
     #! /usr/bin/env python
     '''
-        Created on 2023-3-1
+        Created on 2020-3-1
 
         @author: lingjie
         @name : HelloPython
@@ -193,7 +193,7 @@ def [函数名称]:
 ```python
 #! /usr/bin/env python
 '''
-    Created on 2023-3-1
+    Created on 2020-3-1
 
     @author: lingjie
     @name : HelloPython
