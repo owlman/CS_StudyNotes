@@ -4,7 +4,7 @@
 
     @author: lingjie
     @name : HelloPython
-'''
+'''  
 
 def showStringOperator() :
     name = "lingjie"   # 存储一般的字符串数据

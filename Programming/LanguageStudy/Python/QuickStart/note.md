@@ -593,7 +593,7 @@ while (line = readLine(text)) :
 - `profile`、`pstats`模块：这两个模块主要用于执行与性能分析相关的操作。其中，`profile`模块提供了`profile`和`cProfile`两种不同实现的性能分析工具，可用来描述程序各个部分的执行时间和频率，统计后的信息可以通过`pstats`模块保存并使用。
 - `unitest`模块：该模块主要用于执行与单元测试相关的操作，它在设计上受到 JUnit 和其他主流测试库的启发，因此在使用方式方面与它们有着相似的风格。
 
-在 Python 语言中，使用标准库的方式是非常简单且直观的，大体上只需要执行两个步骤即可。下面，让我们借助一个使用`threading`模块的示例来为读者演示一下这两个步骤。具体做法是在之前创建的`01_HelloPython`目录创建一个名为的`exThreading.py`文件，并在其中输入如下代码。
+在 Python 语言中，使用标准库的方式是非常简单且直观的，大体上只需要执行两个步骤即可。下面，让我们借助一个使用`threading`模块的示例来为读者演示一下这两个步骤。具体做法是在之前创建的`HelloPython`目录创建一个名为的`exThreading.py`文件，并在其中输入如下代码。
 
 ```python
 # 第一步：使用 import 语句在当前作用域中导入要使用的模块：
@@ -655,7 +655,7 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 ```
 
-另外，在部分 Linux 发行版中，我们也可以直接使用操作系统的包管理器来安装 pip，例如在 Ubuntu 系统中，我们只需直接执行`sudo apt install python-pip`命令即可。在确认了 pip 已经被正确安装之后，我们就可以使用这个包管理器来安装并管理 Python 的第三方扩展了，以下是它的一些常用的命令（关于这些命令的具体使用，读者可参考本书的配套视频 2-4 中的演示）。
+另外，在部分 Linux 发行版中，我们也可以直接使用操作系统的包管理器来安装 pip，例如在 Ubuntu 系统中，我们只需直接执行`sudo apt install python-pip`命令即可。在确认了 pip 已经被正确安装之后，我们就可以使用这个包管理器来安装并管理 Python 的第三方扩展了，以下是它的一些常用的命令。
 
 - `pip --version`命令：用于查看当前所用 pip 的版本及其安装路径；
 - `pip --help`命令：用于获取 pip 的官方帮助信息，这些信息对于初学者是非常有用的；
@@ -671,7 +671,7 @@ python get-pip.py
 
 1. 在终端环境中执行`pip install numpy`命令将这个名为`numpy`的第三方扩展安装到当前计算机设备中。
 
-2. 待安装过程结束之后，继续在之前创建的`01_HelloPython`目录下创建一个名为的`exNumpy.py`文件，并在其中输入如下代码。
+2. 待安装过程结束之后，继续在之前创建的`HelloPython`目录下创建一个名为的`exNumpy.py`文件，并在其中输入如下代码。
 
     ```python
     import numpy;
