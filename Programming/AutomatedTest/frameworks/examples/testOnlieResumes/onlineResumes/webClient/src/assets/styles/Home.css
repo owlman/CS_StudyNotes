@@ -1,0 +1,34 @@
+.users {
+    float: left;
+    text-align: left;
+    width: 340px;
+}
+
+.tab-button {
+    padding: 6px 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 14px;
+    border: 1px solid #42b983;
+    cursor: pointer;
+    background: #f0f0f0;
+    margin-bottom: -1px;
+    margin-right: -1px;
+}
+
+.tab-button:hover {
+    background: #e0e0e0;
+}
+
+.tab-button.active {
+    background: #e0e0e0;
+}
+
+.tab {
+    border: 1px solid #42b983;
+    padding: 10px;
+}
+
+.main {
+    float: left;
+    width: 700px;
+}

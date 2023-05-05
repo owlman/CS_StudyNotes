@@ -1,0 +1,39 @@
+{
+  "id": "190ab661-c7b0-4425-9a5b-54aedb81c837",
+  "version": "2.0",
+  "name": "testSeleniumIDE",
+  "url": "",
+  "tests": [{
+    "id": "a885fc0a-79fd-49f0-83ca-9d071cffcfca",
+    "name": "Untitled",
+    "commands": []
+  }, {
+    "id": "8dff8e78-55a3-4871-b15c-69d166f0c4c4",
+    "name": "openBaidu",
+    "commands": [{
+      "id": "a84a365e-ce11-4f9e-831d-d4d518dacf2f",
+      "comment": "",
+      "command": "open",
+      "target": "https://www.baidu.com",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "936b1284-d819-4456-80d6-9f1e6034d563",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "b3d65568-cf79-486f-9e20-af7fffdee37a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["a885fc0a-79fd-49f0-83ca-9d071cffcfca"]
+  }],
+  "urls": [],
+  "plugins": []
+}
