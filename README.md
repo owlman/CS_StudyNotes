@@ -25,6 +25,7 @@
   - *LanguageStudy*：编程语言学习
     - Python
       - RouteMap：学习路线图规划
+      - QuickStart：快速学习笔记
       - Examples：示例代码
         - 数据处理
         - 网络开发
@@ -43,7 +44,12 @@
     - TheBasics：基础理论学习
       - RESTful API 研究笔记
   - *AutomatedTest*：自动化测试研究
-    - Python 实践
+    - RouteMap：学习路线图规划
+    - TestCases：测试用例研究笔记
+    - Frameworks：测试框架研究
+      - Selenium 学习笔记
+      - Robot Frameworks 研究笔记
+      - PyTest+Jenkins 研究笔记
 - **SoftwareEngineering**：软件工程研究
   - *RouteMap*：学习路线图规划
   - *OpenSource*：开源文化研究
