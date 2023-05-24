@@ -45,7 +45,7 @@
       - RESTful API 研究笔记
   - *AutomatedTest*：自动化测试研究
     - RouteMap：学习路线图规划
-    - TestCases：测试用例研究笔记
+    - TestCases：基于自动化技术的测试用例设计
     - Frameworks：测试框架研究
       - Selenium 学习笔记
       - Robot Frameworks 研究笔记
