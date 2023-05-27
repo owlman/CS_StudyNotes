@@ -297,10 +297,10 @@ def afunc(x, y, z) :
                 json= None, 
                 headers= None):
             result = self.session.request(method,url,
-                                        params=params,
-                                        data=data,
-                                        json=json,
-                                        headers=headers)
+                            params=params,
+                            data=data,
+                            json=json,
+                            headers=headers)
             try:
                 # 返回 JSON 结果
                 return result.json()
