@@ -1,19 +1,19 @@
 # Rust 学习笔记（未完成）
 
-这篇学习笔记将用于记录本人在学习 Rust 编程语言过程中所编写的学习心得与代码。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Language/`目录下创建一个名为的`Rust`目录，并在该目录下设置以下两个子目录：
+这篇学习笔记将用于记录本人在学习 Rust 编程语言过程中所编写的学习心得与代码。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/LanguageStudy/`目录下创建一个名为的`Rust`目录，并在该目录下设置以下两个子目录：
 
-- `note`目录用于存放`markdown`格式的笔记。
-- `code`目录则用于存放笔记中所记录的代码示例。
+- `QuickStart`目录用于存放 Markdown 格式的笔记。
+- `Examples`目录则用于存放笔记中所记录的代码示例。
 
 ## 学习规划
 
-- 学习基础：有 C/C++/JavaScript/Python 等编程语言的使用经验。
+- 学习基础：有 C/C++/Java 等系统级编程语言的使用经验。
 - 学习资料：
   - 使用书籍：
-    - [《Rust 权威指南》](https://book.douban.com/subject/35081743/)
+    - [《Rust 实战》](https://book.douban.com/subject/35081743/)
     - [《精通 Rust》](https://book.douban.com/subject/35290878/)
   - 视频资料：
-    - [Rust 编程语言教程视频](https://www.bilibili.com/video/BV1hp4y1k7SV?spm_id_from=333.999.0.0)
+    - [Rust 编程语言入门教程](https://www.bilibili.com/video/BV1hp4y1k7SV?spm_id_from=333.999.0.0)
 - 学习目标：
   - 开发一个基于 RESTful 架构的服务端应用。
 
@@ -141,8 +141,8 @@ cargo install racer
 
 #### 集成开发环境
 
-推荐使用vscode：`https://code.visualstudio.com/`
-安装好vscode后，Ctrl + Shift + X 打开应用商店
+推荐使用 VSCode：`https://code.visualstudio.com/`
+安装好 VSCode后，Ctrl + Shift + X 打开应用商店
 搜索chinese安装中文语言包，搜索Rust (rls)官方的插件，基本上就OK可以撸代码了。
 
 ## 第 1 部分：Rust 编程语言基础
