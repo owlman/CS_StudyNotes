@@ -118,13 +118,10 @@ registry = "https://code.aliyun.com/rustcc/crates.io-index.git"
 
 在配置完上述内容之后，可以通过执行`rustup update`命令来验证代理仓库是否可用。如果一切正常，该命令会将当前语言环境中的所有组件更新到最新版本。
 
-
-安装 RLS 组件
+安装 rust-analyzer 组件
 
 ```bash
-rustup component add rls --toolchain nightly
-rustup component add rust-analysis --toolchain nightly
-rustup component add rust-src --toolchain nightly
+rustup component add rust-analyzer --toolchain stable
 ```
 
 #### 构建开发环境
