@@ -1,7 +1,6 @@
-#! https://zhuanlan.zhihu.com/p/624744452
 # 《Node.js 后端全程实战》自序
 
-> ![全栈系列作品](./img/FullStack.png)
+> ![全栈系列作品](https://img2023.cnblogs.com/blog/691082/202305/691082-20230529101933260-926062938.png)
 >
 > - 《JavaScript全栈开发》：https://book.douban.com/subject/35493728/
 > - 《Vue.js全平台前端实战》：https://book.douban.com/subject/35886403/
