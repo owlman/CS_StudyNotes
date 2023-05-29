@@ -77,3 +77,6 @@ SoftwareTool/Git/code/demo_repo/
 
 #vagrant files
 */*/.vagrant/*
+
+# IDE files
+*/*/.idea/*
