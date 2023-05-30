@@ -1,5 +1,3 @@
-#! https://zhuanlan.zhihu.com/p/419829864
-
 # Webpack 学习笔记
 
 这篇学习笔记将用于记录本人在学习 Webpack 打包工具过程中所编写的心得体会与代码示例。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Frameworks`目录下创建一个名为的`webpackjs`目录，并在该目录下设置以下两个子目录：
@@ -28,7 +26,7 @@
 
 在如今的 Vue.js 项目实践中，上面所讨论的模块打包和代码转译工作大多数时候是通过 Webpack 这个工具来完成的。Webpack 是一个基于 JavaScript 语言的现代化**前端打包工具**，它会尝试着在前端项目中各类型文件之间构建起一个依赖关系图，这个关系图很大程度上就体现了应用程序中各模块之间、以及模块内部文件之间存在的依赖关系。然后，Webpack 会负责将这些模块按页面加载的具体需求压缩并打包成一个或多个经过压缩过的文件，整个过程如下图所示[^1]。
 
-![前端打包原理](./img/6-1.png)
+![前端打包原理](https://img2023.cnblogs.com/blog/691082/202305/691082-20230530100626806-1544887002.png)
 
 ## 基本打包选项
 
@@ -661,7 +659,7 @@ module.exports = config;
 
 到这一步，我们就已经可以在项目的根目录下执行`npm run build`命令来使用 webpack-cli 了，该命令在终端中的执行效果如下：
 
-![webpack-cli执行效果](./img/6-2.png)
+![webpack-cli执行效果](https://img2023.cnblogs.com/blog/691082/202305/691082-20230530100856094-60372982.png)
 
 ### 开发环境配置
 
