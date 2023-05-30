@@ -31,4 +31,4 @@
   - *Database*：数据库系统研究
   - *VCS*：版本控制系统研究
   - *VirtualMachine*：虚拟机软件研究
-- **Writing & Reading**：读书笔记与写作心得
+- **Writing & Reading**：读书与写作心得
