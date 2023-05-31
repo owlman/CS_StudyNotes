@@ -1,8 +1,6 @@
-#! https://zhuanlan.zhihu.com/p/460725286
-
 # NeoVim 学习笔记
 
-这篇学习笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`Software/DevelopmentTool`目录下，并予以长期维护。
+这篇学习笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`SoftwareTool/DevelopmentTool`目录下，并予以长期维护。
 
 ## 学习规划
 
@@ -257,7 +255,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到如下用户界面了。
 
-   ![vim-airline](img/vim-airline.png)
+   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093239943-1706380553.png)
 
 #### ranger 插件
 
@@ -302,7 +300,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 3. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器并按下快捷键 Alt+o，就可以看到如下用户界面了。
 
-   ![ranger](img/ranger.png)
+   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093309706-1651556637.png)
 
 #### vim-startify 插件
 
@@ -342,7 +340,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到最近编辑过的文件了，如下图所示。
 
-   ![vim-startify](img/vim-startify.png)
+   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093338530-1260250621.png)
 
 #### vim-snazzy 主题插件
 
@@ -387,7 +385,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到如下用户界面。
 
-   ![vim-startify](img/vim-snazzy.png)
+   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093410417-1672216531.png)
 
 #### markdown-preview 插件
 
@@ -434,6 +432,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
     let g:mkdp_path_to_chrome = "<此处填写chrome的安装路径>"
     " 指定预览主题，默认Github
     let g:mkdp_markdown_css=''
-```
+    ```
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，并在其命令模式下执行`:call mkdp#util#install()`命令，然后就可以通过`:MarkdownPreview`命令来启动预览，然后用`:MarkdownPreviewStop`命令来关闭预览了。
