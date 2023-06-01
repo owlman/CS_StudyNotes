@@ -1,7 +1,6 @@
-#!https://zhuanlan.zhihu.com/p/359806073
 # Ubuntu 使用笔记
 
-这篇学习笔记将用于记录本人在使用 Ubuntu 系统过程中的学习心得，它会被存储在在`https://github.com/owlman/study_note`项目的`OperatingSystem/UNIX-like/Linux/`目录下一个名为的`发行版研究笔记`目录中。
+这篇学习笔记将用于记录本人在使用 Ubuntu 系统过程中的学习心得，它会被存储在在`https://github.com/owlman/study_note`项目的`OperatingSystem/UNIX-like/Linux/`目录下一个名为的`Distribution`目录中。
 
 ## 使用 Linux 的动机和理由
 
