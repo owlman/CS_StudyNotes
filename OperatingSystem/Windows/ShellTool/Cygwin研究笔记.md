@@ -1,4 +1,3 @@
-#! https://zhuanlan.zhihu.com/p/603489824
 # Cygwin 研究笔记
 
 这篇笔记将用于记录个人在研究 Cygwin 这一 UNIX-like 模拟环境过程中所获取的学习心得与使用经验，我会将笔记的原始文本存储在`https://github.com/owlman/study_note`项目的`OperatingSystem/Windows/ShellTool`目录下，并予以长期维护。
