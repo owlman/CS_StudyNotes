@@ -171,7 +171,6 @@ VSCode 是一款微软公司于 2015 年推出的现代化代码编辑器，由�
 - **crates**：该插件可以帮助开发者分析当前项目的依赖是否是最新的版本。
 - **rust test lens**：该插件可以用于快速运行某个 Rust 测试。
 - **rust-analyzer**：该插件会实时编译和分析我们编写的 Rust 代码，提示代码中的错误，并对类型进行标注。
-- **Rust Language Server**：Rust 语言服务器（RLS）基于 LSP（Language Server Protocol），即语言服务器协议实现的远程服务器，LSP 由 Redhat、Microsoft和 Codenvy 联合推出，设计目标是让不同的程序编辑器与集成开发环境（IDE）方便地嵌入各种编程语言，允许开发人员在最喜爱的工具中使用各种语言来编写程序。
 - **better toml**：由于 Rust 开发使用 toml 格式的文件来充当项目配置文件，所以我们通常会需要一个能方便用于编辑该格式文件的插件。
 - **Tabnine AI Autocomplete**：这是一款基于 AI 的自动代码补全插件，可以帮助开发者们更快地撰写代码。
 - **GitLens**：该插件用于查看开发者们在Git版本控制系统中的提交记录。
