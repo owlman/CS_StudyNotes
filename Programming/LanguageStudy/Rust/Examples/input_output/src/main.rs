@@ -1,6 +1,6 @@
 use std::io::{self, Write};
 
-fn main() {
+fn say_hello () {
     let mut input = String::new();
     print!("Please give me a name: ");
     io::stdout().flush().expect("output error!");
@@ -14,4 +14,8 @@ fn main() {
             println!("Error Message: {}", e);
         }
     }
-} 
+}
+
+fn main() {
+    say_hello();   
+}
