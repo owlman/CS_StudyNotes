@@ -240,9 +240,37 @@ VSCode 是一款微软公司于 2015 年推出的现代化代码编辑器，由�
 
 和学习其他用于系统编程语言的过程一样，我们对 Rust 语言的学习也将从实现程序在命令行终端中的输入/输出操作开始。接下来，读者可以尝试着将上面的 Hello World 程序改造得更复杂一些，使它能根据用户输入的名字来输出相应的信息，其具体步骤如下。
 
-1. 使用 Bash 或 Powershell 之类的命令行终端进入到之前准备好的、用于存放代码示例的`Examples`目录中，并执行`cargo new input_`命令来创建新项目。
+1. 使用 Bash 或 Powershell 之类的命令行终端进入到之前准备好的、用于存放代码示例的`Examples`目录中，并执行`cargo new input_output`命令来创建新项目。
 
-2. 
+2. 使用 VSCode 编辑器打开刚刚新建的项目，并在该项目的`src`目录下找到名为`main.rs`的源码文件，然后将其中的代码修改如下。
+
+    ```rust
+    use std::io::{self, Write};
+
+    fn say_hello () {
+        let mut input = String::new();
+        print!("Please give me a name: ");
+        io::stdout().flush().expect("output error!");
+        match io::stdin().read_line(&mut input) {
+            Ok(n) => {
+                println!("{} bytes read", n);
+                let name = input.trim();
+                println!("Hello, world! \nMy name is {}.", name);
+            }
+            Err(e) => {
+                println!("Error Message: {}", e);
+            }
+        }
+    }
+
+    fn main() {
+        say_hello();   
+    }
+    ```
+
+3. 使用命令行终端进入到项目的根目录下并执行`cargo run`命令，然后在程序完成编译并运行之后，根据其输出的提示输入一个名字并按回车键即可，该操作过程在 Powershell 中的演示效果如下图所示。
+
+    ![input_name](./img/input_output.png)
 
 ### 条件与循环
 
