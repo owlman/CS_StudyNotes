@@ -1,8 +1,8 @@
-# Makefile简易教程
+# Makefile 简易教程
 
 > 本文部分内容引用：
-+ [中文维基百科](https://zh.wikipedia.org/wiki/Make)。
-+ [一个简单的Makefile教程](http://blog.163.com/weidao_xue/blog/static/2045410462012102222755897/)。
+	+ [中文维基百科](https://zh.wikipedia.org/wiki/Make)。
+	+ [一个简单的 Makefile 教程](http://blog.163.com/weidao_xue/blog/static/2045410462012102222755897/)。
 
 ## Makefile简介
 

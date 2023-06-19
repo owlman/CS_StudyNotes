@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/notes.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "https://www.youtube.com/watch?v=KGv0M367Mrg",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/notes.md"
+                "file": "README.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/notes.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/notes.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,6 +137,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "workspaces:管理工作区布局": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
@@ -145,6 +146,33 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "b29c2d732007cebf",
-  "lastOpenFiles": []
+  "active": "c356de0fef53ebdb",
+  "lastOpenFiles": [
+    "SoftwareTool/DevelopmentTool/Vim 学习笔记.md",
+    "README.md",
+    "SoftwareTool/DevelopmentTool/NeoVim 学习笔记.md",
+    "SoftwareTool/DevelopmentTool/Makefile 简易教程.md",
+    "SoftwareTool/DevelopmentTool/Clang 学习笔记.md",
+    "SoftwareTool/VirtualMachine/VirtualBox/note.md",
+    "SoftwareTool/VirtualMachine/vagrant/Vagrant 学习笔记.md",
+    "SoftwareTool/VCS/Git/Git 学习笔记.md",
+    "SoftwareTool/VCS/GitHub/notes.md",
+    "SoftwareTool/Database/MongoDB 研究笔记.md",
+    "SoftwareTool/Database/RouteMap/关于数据库的使用及其书籍推荐.md",
+    "SoftwareTool/Container/k8s/Kubernetes 研究笔记.md",
+    "SoftwareTool/Container/Docker/Docker 学习笔记.md",
+    "Writing&Reading/Publication/《Node.js 后端全程实战》自序.md",
+    "Writing&Reading/Publication/《JavaScript 全栈开发》出版感言.md",
+    "Writing&Reading/ReadingComments/读《C 程序设计语言》：技术书籍的写作典范.md",
+    "Writing&Reading/ReadingComments/读《Just For Fun》：学习即游戏.md",
+    "Writing&Reading/ReadingComments/读《黑客与画家》：书呆子的正名.md",
+    "SoftwareEngineering/OpenSource/《大教堂与集市》：软件工程的另一种选择.md",
+    "SoftwareEngineering/OpenSource/开源许可协议研究.md",
+    "SoftwareEngineering/RouteMap/关于软件工程及其书籍推荐.md",
+    "Programming/Client-Server/Frameworks/electronjs/notes/Electron 学习笔记.md",
+    "Programming/Client-Server/Theories/响应式设计.md",
+    "Programming/Client-Server/Frameworks/vuejs/notes/Vue 2.x 学习笔记.md",
+    "Programming/Client-Server/Frameworks/vuejs/notes/vue-cli 与 Vite 学习笔记.md",
+    "Programming/Client-Server/Runtime/nodejs/notes/Node.js 学习笔记.md"
+  ]
 }

@@ -1,4 +1,3 @@
-#!https://zhuanlan.zhihu.com/p/360306502
 # Node.js 学习笔记
 
 这篇笔记将用于记录个人在研究 Node.js 运行环境过程中所编写的代码示例与学习心得。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Runtime`目录下创建一个名为的`nodejs`目录，并在该目录下设置以下两个子目录：

@@ -1,4 +1,4 @@
-# Electron 学习笔记
+# Electron 学习笔记（持续更新中）·
 
 在这篇学习笔记中，笔者将记录一些在学习 Electron 框架时所编写的代码示例与学习心得。为此，我会在`Programming/Language/JavaScript`目录下创建一个名为的`electronjs`目录，并在该目录下设置以下两个子目录：
 

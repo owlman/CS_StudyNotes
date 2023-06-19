@@ -1,6 +1,4 @@
-#! https://zhuanlan.zhihu.com/p/419836603
-
-# Vue.js 2.0 学习笔记
+# Vue.js 2.x 学习笔记
 
 这篇笔记将用于记录个人在学习 Vue.js 2.0 框架过程中所编写的示例代码与心得体会。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Frameworks`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
 

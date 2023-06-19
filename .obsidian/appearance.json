@@ -4,5 +4,6 @@
   "baseFontSize": 18,
   "showViewHeader": false,
   "nativeMenus": false,
-  "translucency": false
+  "translucency": false,
+  "cssTheme": "GitHub Theme"
 }
