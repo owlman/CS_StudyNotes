@@ -15,6 +15,7 @@
 	- [[怎样进行有意义的技术讨论]]
 	- [[什么人适合从事计算机科学研究]]
 	- [[关于国内技术类书籍的质量问题]]
+	- [[人工智能的可怕与不可怕]]
 - **ArtificialIntelligence**：人工智能研究
 	- [[关于人工智能的研究及其书籍推荐]]
 - **OperatingSystem**：操作系统研究
@@ -26,6 +27,8 @@
   - *Windows*：Windows 系统研究
 	- [[关于 Windows 系统的学习及其推荐书目]]
 	- ShellTool：终端环境研究
+		- [[Cygwin 研究笔记]]
+		- [[PowerShell 研究笔记]]
 - **Programming**：编程技术研究
 	- *Methodolgy*：编程方法研究
 		- [[关于编程方法论及其推荐书目]]

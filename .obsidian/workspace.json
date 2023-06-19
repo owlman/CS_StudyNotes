@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,8 +148,15 @@
   },
   "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
-    "SoftwareTool/DevelopmentTool/Vim 学习笔记.md",
     "README.md",
+    "OperatingSystem/Windows/ShellTool/PowerShell 研究笔记.md",
+    "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
+    "Programming/Methodology/RouteMap/关于编程方法论及其推荐书目.md",
+    "SoftwareEngineering/RouteMap/关于软件工程及其书籍推荐.md",
+    "Programming/Algorithms/RouteMap/关于计算机算法及其书籍推荐.md",
+    "Questions&Answers/人工智能的可怕与不可怕.md",
+    "ArtificialIntelligence/RouteMap/关于人工智能的研究及其书籍推荐.md",
+    "SoftwareTool/DevelopmentTool/Vim 学习笔记.md",
     "SoftwareTool/DevelopmentTool/NeoVim 学习笔记.md",
     "SoftwareTool/DevelopmentTool/Makefile 简易教程.md",
     "SoftwareTool/DevelopmentTool/Clang 学习笔记.md",
@@ -166,13 +173,6 @@
     "Writing&Reading/ReadingComments/读《C 程序设计语言》：技术书籍的写作典范.md",
     "Writing&Reading/ReadingComments/读《Just For Fun》：学习即游戏.md",
     "Writing&Reading/ReadingComments/读《黑客与画家》：书呆子的正名.md",
-    "SoftwareEngineering/OpenSource/《大教堂与集市》：软件工程的另一种选择.md",
-    "SoftwareEngineering/OpenSource/开源许可协议研究.md",
-    "SoftwareEngineering/RouteMap/关于软件工程及其书籍推荐.md",
-    "Programming/Client-Server/Frameworks/electronjs/notes/Electron 学习笔记.md",
-    "Programming/Client-Server/Theories/响应式设计.md",
-    "Programming/Client-Server/Frameworks/vuejs/notes/Vue 2.x 学习笔记.md",
-    "Programming/Client-Server/Frameworks/vuejs/notes/vue-cli 与 Vite 学习笔记.md",
-    "Programming/Client-Server/Runtime/nodejs/notes/Node.js 学习笔记.md"
+    "SoftwareEngineering/OpenSource/《大教堂与集市》：软件工程的另一种选择.md"
   ]
 }
