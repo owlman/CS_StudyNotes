@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md"
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,8 +148,8 @@
   },
   "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
-    "Programming/GUI_Dev/RouteMap/关于图形界面编程及其书籍推荐.md",
     "00_ToBeOrganized/01_ToDoList.md",
+    "Programming/GUI_Dev/RouteMap/关于图形界面编程及其书籍推荐.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
     "README.md",
     "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
