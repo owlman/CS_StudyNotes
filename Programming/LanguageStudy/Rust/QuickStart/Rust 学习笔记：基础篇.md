@@ -1,9 +1,9 @@
-# Rust 学习笔记（持续更新中）
+# Rust 学习笔记：基础篇
 
-这篇学习笔记将用于记录本人在学习 Rust 编程语言过程中所编写的学习心得与代码。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/LanguageStudy/`目录下创建一个名为的`Rust`目录，并在该目录下设置以下两个子目录：
+这篇学习笔记将用于记录本人在学习 Rust 编程语言的基础部分时所编写的学习心得与代码实例。为此，我会在[本笔记库](https://github.com/owlman/study_note)项目的`Programming/LanguageStudy/`目录下创建一个名为`Rust`的目录，并在该目录下设置以下两个子目录：
 
 - `QuickStart`目录用于存放 Markdown 格式的笔记。
-- `Examples`目录则用于存放笔记中所记录的代码示例。
+- `Examples`目录则用于存放笔记中所编写的代码实例。
 
 ## 参考资料说明
 
@@ -278,4 +278,3 @@ VSCode 是一款微软公司于 2015 年推出的现代化代码编辑器，由�
 
 ### 程序流程控制
 
-## 具体项目实践

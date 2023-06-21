@@ -37,9 +37,9 @@
 	- *LanguageStudy*：编程语言学习
 		- Python
 			- [[Python 学习路线图]]
-			- [[Python 学习笔记]]
+			- [[Python 学习笔记：基础篇]]
 		- Rust
-		    - [[Rust 学习笔记]]
+		    - [[Rust 学习笔记：基础篇]]
 	  - *GUI_Dev*：图形化界面开发
 	  - *Client-Server*：C/S 开发架构研究
 		  - [[关于客户机-服务器编程及其书籍推荐]]
@@ -54,6 +54,8 @@
 			  - [[Webpack 学习笔记]]
 	  - *AutomatedTest*：自动化测试研究
 		  - [[关于自动化测试及其书籍推荐]]
+		  - 基础理论研究
+			  - [[基于自动化技术的测试用例设计]]
 		  - 开发框架研究
 			  - [[Pytest+Jenkins 学习笔记]]
 			  - [[Robot 框架学习笔记]]

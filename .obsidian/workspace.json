@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md"
+                "file": "00_ToBeOrganized/01_ToDoList.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,9 +148,19 @@
   },
   "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
+    "Programming/GUI_Dev/RouteMap/关于图形界面编程及其书籍推荐.md",
+    "00_ToBeOrganized/01_ToDoList.md",
+    "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
     "README.md",
-    "OperatingSystem/Windows/ShellTool/PowerShell 研究笔记.md",
+    "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
     "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
+    "SoftwareTool/VirtualMachine/VirtualBox/VirtualBox 研究笔记.md",
+    "SoftwareEngineering/OpenSource/开源许可协议研究.md",
+    "Programming/AutomatedTest/TestCases/基于自动化技术的测试用例设计.md",
+    "OperatingSystem/Windows/ShellTool/PowerShell 研究笔记.md",
+    "OperatingSystem/UNIX-like/ShellTool/zsh/Zsh 研究笔记.md",
+    "OperatingSystem/UNIX-like/ShellTool/fish/Fish 研究笔记.md",
+    "OperatingSystem/UNIX-like/ShellTool/bash/Bash 研究笔记.md",
     "Programming/Methodology/RouteMap/关于编程方法论及其推荐书目.md",
     "SoftwareEngineering/RouteMap/关于软件工程及其书籍推荐.md",
     "Programming/Algorithms/RouteMap/关于计算机算法及其书籍推荐.md",
@@ -160,19 +170,9 @@
     "SoftwareTool/DevelopmentTool/NeoVim 学习笔记.md",
     "SoftwareTool/DevelopmentTool/Makefile 简易教程.md",
     "SoftwareTool/DevelopmentTool/Clang 学习笔记.md",
-    "SoftwareTool/VirtualMachine/VirtualBox/note.md",
     "SoftwareTool/VirtualMachine/vagrant/Vagrant 学习笔记.md",
     "SoftwareTool/VCS/Git/Git 学习笔记.md",
     "SoftwareTool/VCS/GitHub/notes.md",
-    "SoftwareTool/Database/MongoDB 研究笔记.md",
-    "SoftwareTool/Database/RouteMap/关于数据库的使用及其书籍推荐.md",
-    "SoftwareTool/Container/k8s/Kubernetes 研究笔记.md",
-    "SoftwareTool/Container/Docker/Docker 学习笔记.md",
-    "Writing&Reading/Publication/《Node.js 后端全程实战》自序.md",
-    "Writing&Reading/Publication/《JavaScript 全栈开发》出版感言.md",
-    "Writing&Reading/ReadingComments/读《C 程序设计语言》：技术书籍的写作典范.md",
-    "Writing&Reading/ReadingComments/读《Just For Fun》：学习即游戏.md",
-    "Writing&Reading/ReadingComments/读《黑客与画家》：书呆子的正名.md",
-    "SoftwareEngineering/OpenSource/《大教堂与集市》：软件工程的另一种选择.md"
+    "SoftwareTool/Database/MongoDB 研究笔记.md"
   ]
 }
