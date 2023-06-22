@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md"
+                "file": "00_ToBeOrganized/01_ToDoList.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,10 +148,12 @@
   },
   "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
+    "README.md",
+    "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
+    "Programming/LanguageStudy/Rust/QuickStart/未命名.md",
+    "Programming/LanguageStudy/Rust/QuickStart/img/cargo_build.png",
     "00_ToBeOrganized/01_ToDoList.md",
     "Programming/GUI_Dev/RouteMap/关于图形界面编程及其书籍推荐.md",
-    "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
-    "README.md",
     "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
     "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
     "SoftwareTool/VirtualMachine/VirtualBox/VirtualBox 研究笔记.md",
@@ -172,7 +174,6 @@
     "SoftwareTool/DevelopmentTool/Clang 学习笔记.md",
     "SoftwareTool/VirtualMachine/vagrant/Vagrant 学习笔记.md",
     "SoftwareTool/VCS/Git/Git 学习笔记.md",
-    "SoftwareTool/VCS/GitHub/notes.md",
-    "SoftwareTool/Database/MongoDB 研究笔记.md"
+    "SoftwareTool/VCS/GitHub/notes.md"
   ]
 }
