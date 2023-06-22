@@ -1,4 +1,4 @@
-# Obsidian 研究笔记
+# Obsidian 使用心得
 
 ## 参考资料说明
 
