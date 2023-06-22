@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md"
+                "file": "00_ToBeOrganized/01_ToDoList.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
+                "file": "00_ToBeOrganized/01_ToDoList.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,10 +147,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "cceac6dc3fd2184e",
+  "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
-    "00_ToBeOrganized/01_ToDoList.md",
     "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
+    "00_ToBeOrganized/01_ToDoList.md",
     "README.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
     "Programming/LanguageStudy/Rust/QuickStart/未命名.md",
