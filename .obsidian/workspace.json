@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md"
+                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,6 +137,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "workspaces:管理工作区布局": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
@@ -146,13 +147,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "c356de0fef53ebdb",
+  "active": "cceac6dc3fd2184e",
   "lastOpenFiles": [
+    "00_ToBeOrganized/01_ToDoList.md",
+    "Writing&Reading/WritingExperience/Obsidian 研究笔记.md",
     "README.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
     "Programming/LanguageStudy/Rust/QuickStart/未命名.md",
     "Programming/LanguageStudy/Rust/QuickStart/img/cargo_build.png",
-    "00_ToBeOrganized/01_ToDoList.md",
     "Programming/GUI_Dev/RouteMap/关于图形界面编程及其书籍推荐.md",
     "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
     "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
@@ -173,7 +175,6 @@
     "SoftwareTool/DevelopmentTool/Makefile 简易教程.md",
     "SoftwareTool/DevelopmentTool/Clang 学习笔记.md",
     "SoftwareTool/VirtualMachine/vagrant/Vagrant 学习笔记.md",
-    "SoftwareTool/VCS/Git/Git 学习笔记.md",
-    "SoftwareTool/VCS/GitHub/notes.md"
+    "SoftwareTool/VCS/Git/Git 学习笔记.md"
   ]
 }
