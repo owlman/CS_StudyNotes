@@ -2,8 +2,8 @@
 
 这篇笔记将用于记录个人在研究 Node.js 运行环境过程中所编写的代码示例与学习心得。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Runtime`目录下创建一个名为的`nodejs`目录，并在该目录下设置以下两个子目录：
 
-- `notes`目录用于存放`markdown`格式的笔记。
-- `code`目录则用于存放笔记中所记录的代码示例。
+- `notes`目录用于存放 Markdown 格式的笔记。
+- `examples`目录则用于存放笔记中所记录的代码示例。
 
 ## 学习规划
 
@@ -105,13 +105,13 @@ sudo n                    # 使用上下键切换已有版本
 
 ### 示例1. 跟大家说 Hello
 
-由于 Node.js 只是 JavaScript 程序的运行时环境，所以它并不会限制 JavaScript 代码的具体运行形式。为了说明这一点，我接下来将使用四种形式来跟大家说"Hello"。首先，我会在`code`目录下执行`mkdir 01_sayHello`命令，以创建用于存放这一组示例的目录。
+由于 Node.js 只是 JavaScript 程序的运行时环境，所以它并不会限制 JavaScript 代码的具体运行形式。为了说明这一点，我接下来将使用四种形式来跟大家说"Hello"。首先，我会在`examples`目录下执行`mkdir 01_sayHello`命令，以创建用于存放这一组示例的目录。
 
 #### 1. 终端输出
 
 在终端输出信息需要调用`console.log()`方法，下面来创建第一个 Node.js 脚本，步骤如下：
 
-1. 在`code/01_sayHello`目录下执行`touch 01-sayHello.js`命令。
+1. 在`examples/01_sayHello`目录下执行`touch 01-sayHello.js`命令。
 2. 执行`vim 01-sayHello.js`命令打开该脚本文件。
 3. 在`01-sayHello.js`脚本文件中输入如下代码：
 
@@ -120,7 +120,7 @@ sudo n                    # 使用上下键切换已有版本
     console.log('你好！', name)  // 输出：你好！owlman
     ```
 
-4. 保存文件后，在`code/01_sayHello`目录下执行`node 01-sayHello.js`命令，就可以看到输出结果：
+4. 保存文件后，在`examples/01_sayHello`目录下执行`node 01-sayHello.js`命令，就可以看到输出结果：
 
     ![第一个 Node.js 脚本](img/AB-6.png)
 
@@ -128,11 +128,11 @@ sudo n                    # 使用上下键切换已有版本
 
 用 Node.js 脚本读文本文件需要调用`fs.readFile()`方法，具体步骤如下：
 
-1. 在`code/01_sayHello`目录下执行`touch 01-readFile.js`命令。
+1. 在`examples/01_sayHello`目录下执行`touch 01-readFile.js`命令。
 
-2. 在`code/01_sayHello`目录下执行`mkdir data`命令，创建用于存放文件的目录。
+2. 在`examples/01_sayHello`目录下执行`mkdir data`命令，创建用于存放文件的目录。
 
-3. 在`code/01_sayHello/data`目录下执行`touch text-data.txt`命令，并在其中输入以下内容：
+3. 在`examples/01_sayHello/data`目录下执行`touch text-data.txt`命令，并在其中输入以下内容：
 
     ```bash
     Hello，owlman，欢迎学习 Nodejs。
@@ -145,7 +145,7 @@ sudo n                    # 使用上下键切换已有版本
     轻舟已过万重山。
     ```
 
-4. 在`code/01_sayHello`目录下执行`vim 01-readFile.js`命令打开脚本文件，输入如下代码：
+4. 在`examples/01_sayHello`目录下执行`vim 01-readFile.js`命令打开脚本文件，输入如下代码：
 
     ```JavaScript
     const fs = require('fs')
@@ -157,15 +157,15 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-5. 保存文件后，在`code/01_sayHello`目录下执行`node 01-readFile.js`命令，就可以看到相关内容已被输出到终端中：
+5. 保存文件后，在`examples/01_sayHello`目录下执行`node 01-readFile.js`命令，就可以看到相关内容已被输出到终端中：
 
     ![Node.js 脚本读取文本文件](img/AB-7.png)
 
 用 Node.js 脚本写文本文件需要调用`fs.writeFile()`方法，具体步骤如下：
 
-1. 在`code/01_sayHello`目录下执行`touch 01-writeFile.js`命令。
+1. 在`examples/01_sayHello`目录下执行`touch 01-writeFile.js`命令。
 
-2. 在`code/01_sayHello`目录下执行`vim 01-writeFile.js`命令打开脚本文件，并输入如下代码：
+2. 在`examples/01_sayHello`目录下执行`vim 01-writeFile.js`命令打开脚本文件，并输入如下代码：
 
     ```JavaScript
     const fs = require('fs')
@@ -179,7 +179,7 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-3. 保存文件后，在`code/01_sayHello`目录下执行`node 01-writeFile.js`命令，就可以看到相关内容已经被写入`output.txt`文件：
+3. 保存文件后，在`examples/01_sayHello`目录下执行`node 01-writeFile.js`命令，就可以看到相关内容已经被写入`output.txt`文件：
 
     ![Node.js 脚本写文本文件](img/AB-8.png)
 
@@ -187,7 +187,7 @@ sudo n                    # 使用上下键切换已有版本
 
 用 Node.js 脚本创建 Web 服务需要用到`http`模块，具体步骤如下：
 
-1. 在`code/01_sayHello`目录下执行`touch 01-webServer.js`命令。
+1. 在`examples/01_sayHello`目录下执行`touch 01-webServer.js`命令。
 
 2. 执行`vim 01-webServer.js`命令打开脚本文件，输入如下代码：
 
@@ -204,7 +204,7 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-3. 保存文件后，在`code/01_sayHello`目录下执行`node 01-webServer.js`命令，并用浏览器访问`http://localhost:8080/`，就可以看到一个显示`<h1>`标签的页面：
+3. 保存文件后，在`examples/01_sayHello`目录下执行`node 01-webServer.js`命令，并用浏览器访问`http://localhost:8080/`，就可以看到一个显示`<h1>`标签的页面：
 
     ![Node.js 脚本创建 Web 服务](img/AB-9.png)
 
@@ -212,7 +212,7 @@ sudo n                    # 使用上下键切换已有版本
 
 用 Node.js 构建 TCP 服务需要用到`net`模块，具体步骤如下：
 
-1. 在`code/01_sayHello`目录下执行`touch 01-tcpServer.js`命令。
+1. 在`examples/01_sayHello`目录下执行`touch 01-tcpServer.js`命令。
 
 2. 执行`vim 01-tcpServer.js`命令打开脚本文件，输入如下代码：
 
@@ -228,17 +228,17 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-3. 保存文件后，在`code/01_sayHello`目录下执行`node 01-tcpServer.js`命令，并用`telnet localhost 7000`命令测试该服务器，结果如下：
+3. 保存文件后，在`examples/01_sayHello`目录下执行`node 01-tcpServer.js`命令，并用`telnet localhost 7000`命令测试该服务器，结果如下：
 
     ![Node.js 脚本创建 TCP 服务](img/AB-10.png)
 
 ### 示例2. 自定义模块及其使用方式
 
-这一部分示例将致力于演示 Node.js 的自定义模块语法以及部分 ES6 新增的语法。首先，我们要在`code`目录下执行`mkdir 02_useModule`命令来创建用于存放这一组示例的目录。
+这一部分示例将致力于演示 Node.js 的自定义模块语法以及部分 ES6 新增的语法。首先，我们要在`examples`目录下执行`mkdir 02_useModule`命令来创建用于存放这一组示例的目录。
 
 #### 1. 单文件模块
 
-1. 在`code/02_useModule`目录下执行`touch 02-singleFile.js`命令,创建脚本文件，并输入如下代码：
+1. 在`examples/02_useModule`目录下执行`touch 02-singleFile.js`命令,创建脚本文件，并输入如下代码：
 
     ```JavaScript
     class singleFile_module {
@@ -254,7 +254,7 @@ sudo n                    # 使用上下键切换已有版本
     module.exports = singleFile_module
     ```
 
-2. 在`code/02_useModule`目录下执行`touch 02-test.js`命令,创建脚本文件，并输入如下代码：
+2. 在`examples/02_useModule`目录下执行`touch 02-test.js`命令,创建脚本文件，并输入如下代码：
 
     ```JavaScript
     const es5_syntax = require('./02-singleFile')
@@ -262,15 +262,15 @@ sudo n                    # 使用上下键切换已有版本
     testobj.sayhello()
     ```
 
-3. 保存文件后，在`code/02_useModule`目录下执行`node 02-test.js`命令，结果如下：
+3. 保存文件后，在`examples/02_useModule`目录下执行`node 02-test.js`命令，结果如下：
 
     ![Node.js的单文件模块](img/AB-11.png)
 
 #### 2. 多文件模块
 
-1. 在`code/02_useModule`目录下执行`mkdir 02-multiFile`命令，并进入到该目录中执行`npm init -y`命令，创建模块目录。
+1. 在`examples/02_useModule`目录下执行`mkdir 02-multiFile`命令，并进入到该目录中执行`npm init -y`命令，创建模块目录。
 
-2. 在`code/02_useModule/02-multiFile`目录下执行`touch functions.js`命令，创建脚本文件，并输入如下代码：
+2. 在`examples/02_useModule/02-multiFile`目录下执行`touch functions.js`命令，创建脚本文件，并输入如下代码：
 
     ```JavaScript
     function add(x,y){
@@ -280,7 +280,7 @@ sudo n                    # 使用上下键切换已有版本
     exports.add = add
     ```
 
-3. 在`code/02_useModule/02-multiFile`目录下执行`touch dataObj.js`命令，创建脚本文件，并输入如下代码：
+3. 在`examples/02_useModule/02-multiFile`目录下执行`touch dataObj.js`命令，创建脚本文件，并输入如下代码：
 
     ```JavaScript
     const name = 'multFile_module'
@@ -288,7 +288,7 @@ sudo n                    # 使用上下键切换已有版本
     exports.name = name
     ```
 
-4. 在`code/02_useModule/02-multiFile`目录下执行`touch index.js`命令，创建脚本文件，并输入如下代码：
+4. 在`examples/02_useModule/02-multiFile`目录下执行`touch index.js`命令，创建脚本文件，并输入如下代码：
 
     ```JavaScript
     const func = require('./functions')
@@ -309,7 +309,7 @@ sudo n                    # 使用上下键切换已有版本
     module.exports = multiFile_module
     ```
 
-5. 在`code/02_useModule`目录下将`02-test.js`脚本修改如下：
+5. 在`examples/02_useModule`目录下将`02-test.js`脚本修改如下：
 
     ```JavaScript
     const singleFile_module = require(`./02-singleFile`)
@@ -321,7 +321,7 @@ sudo n                    # 使用上下键切换已有版本
     testobj2.sayhello()
     ```
 
-6. 保存所有文件后，在`code/02_useModule`目录下执行`node 02-test.js`命令，结果如下：
+6. 保存所有文件后，在`examples/02_useModule`目录下执行`node 02-test.js`命令，结果如下：
 
     ![Node.js 的多文件模块](img/AB-12.png)
 
@@ -331,9 +331,9 @@ sudo n                    # 使用上下键切换已有版本
 
 ### 示例3. 构建 Web 服务器
 
-这部分示例将致力于用 Node.js 模拟一个类似于 Apache 的 Web 服务器，处理浏览器端的请求，将相关的页面响应给浏览器。首先，我会要在`code`目录下执行`mkdir 03_webSever`命令，以创建用于存放这一组示例的目录。然后执行以下步骤：
+这部分示例将致力于用 Node.js 模拟一个类似于 Apache 的 Web 服务器，处理浏览器端的请求，将相关的页面响应给浏览器。首先，我会要在`examples`目录下执行`mkdir 03_webSever`命令，以创建用于存放这一组示例的目录。然后执行以下步骤：
 
-1. 在`code/03_webSever`目录下执行`mkdir www`命令，创建网站目录，然后在其中创建`index.htm`和`login.htm`两个 HTML 文件以及一个名为`style.css`的 CSS 文件：
+1. 在`examples/03_webSever`目录下执行`mkdir www`命令，创建网站目录，然后在其中创建`index.htm`和`login.htm`两个 HTML 文件以及一个名为`style.css`的 CSS 文件：
    - index.htm:
 
         ```HTML
@@ -376,7 +376,7 @@ sudo n                    # 使用上下键切换已有版本
         }
         ```
 
-2. 在`code/03_webSever`目录下执行`touch 03-webServer.js`命令，创建脚本文件，并输入如下代码：
+2. 在`examples/03_webSever`目录下执行`touch 03-webServer.js`命令，创建脚本文件，并输入如下代码：
 
     ```JavaScript
     const http = require('http')
@@ -404,21 +404,21 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-3. 保存所有文件后，在`code/03_webSever`目录下执行`node 03-webServer.js`命令，然后打开浏览器并访问`http://localhost:8080/`，就会看到如下页面：
+3. 保存所有文件后，在`examples/03_webSever`目录下执行`node 03-webServer.js`命令，然后打开浏览器并访问`http://localhost:8080/`，就会看到如下页面：
 
     ![用 Node.js 构建 Web 服务器](img/AB-13.png)
 
 ### 示例4. 使用`art-template`模版引擎生成网页
 
-这一部分示例将以生成个人信息页面为例，演示在服务器端基于 Node.js 使用`art-template`模板引擎来生成网页。为此，我需要在`code`目录下执行`mkdir 04_templatingEngine`命令来创建用于存放这一组示例的目录。
+这一部分示例将以生成个人信息页面为例，演示在服务器端基于 Node.js 使用`art-template`模板引擎来生成网页。为此，我需要在`examples`目录下执行`mkdir 04_templatingEngine`命令来创建用于存放这一组示例的目录。
 
 #### 1. 单模版渲染
 
 首先来示范一下如何使用`art-template`模版引擎的渲染单一模版文件，请跟着以下步骤来构建示例：
 
-1. 在`code/04_templatingEngine`目录下执行`npm install art-template --save`命令，安装将`art-template`包安装到当前示例项目中。
+1. 在`examples/04_templatingEngine`目录下执行`npm install art-template --save`命令，安装将`art-template`包安装到当前示例项目中。
 
-2. 在`code/04_templatingEngine`目录下执行`touch singleTpl.htm`命令，创建一个模版文件，并在其中输入以下代码：
+2. 在`examples/04_templatingEngine`目录下执行`touch singleTpl.htm`命令，创建一个模版文件，并在其中输入以下代码：
 
     ```HTML
     <!DOCTYPE html>
@@ -443,7 +443,7 @@ sudo n                    # 使用上下键切换已有版本
     </html>
     ```
 
-3. 在`code/04_templatingEngine`目录下执行`touch 04-useTemplating_engine.js`命令，创建一个脚本文件，具体如下：
+3. 在`examples/04_templatingEngine`目录下执行`touch 04-useTemplating_engine.js`命令，创建一个脚本文件，具体如下：
 
     ```JavaScript
     const http = require('http')
@@ -496,7 +496,7 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-4. 保存所有文件后，在`code/04_templatingEngine`目录下执行`node 04-useTemplating_engine.js`命令，然后打开浏览器并访问`http://localhost:8080/wang`，就会看到如下页面：
+4. 保存所有文件后，在`examples/04_templatingEngine`目录下执行`node 04-useTemplating_engine.js`命令，然后打开浏览器并访问`http://localhost:8080/wang`，就会看到如下页面：
 
     ![用 Node.js 生成页面](img/AB-14.png)
 
@@ -504,7 +504,7 @@ sudo n                    # 使用上下键切换已有版本
 
 在同一 Web 应用中，所有的页面通常都由相同的头部和底部元素，所以为了减少代码的冗余，提高重用率，开发者们通常会考虑将重复的部分独立成一个单独的模版文件，然后用相互包含的方式组合成页面。下面就继续以`art-template`模板引擎为例来演示一下如何将多个模版组合渲染成单一的 HTML 页面，其具体步骤如下：
 
-1. 在`code/04_templatingEngine`目录下执行`touch tpl1.art tpl2.art`命令，创建两个模版文件，然后在这两个文件中分别输入以下代码：
+1. 在`examples/04_templatingEngine`目录下执行`touch tpl1.art tpl2.art`命令，创建两个模版文件，然后在这两个文件中分别输入以下代码：
 
    - tpl1.art :
 
@@ -525,7 +525,7 @@ sudo n                    # 使用上下键切换已有版本
      </footer>
      ```
 
-2. 在`code/04_templatingEngine`目录下执行`touch multiTpl.htm`命令创建用于组合的 HTML 页面文件，并在其中输入以下代码：
+2. 在`examples/04_templatingEngine`目录下执行`touch multiTpl.htm`命令创建用于组合的 HTML 页面文件，并在其中输入以下代码：
 
    ```HTML
    <!DOCTYPE html>
@@ -552,7 +552,7 @@ sudo n                    # 使用上下键切换已有版本
     </html>
     ```
 
-3. 在`code/04_templatingEngine`目录下执行`cp 04-useTemplating_engine.js 04-useTemplating_engine2.js`命令，将之前的代码复制一份，并修改如下：
+3. 在`examples/04_templatingEngine`目录下执行`cp 04-useTemplating_engine.js 04-useTemplating_engine2.js`命令，将之前的代码复制一份，并修改如下：
   
     ```JavaScript
     const http = require('http')
@@ -607,7 +607,7 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-4. 保存所有文件后，在`code/04_templatingEngine`目录下执行`node 04-useTemplating_engine2.js`命令，然后打开浏览器并访问`http://localhost:8080/wang`，就会看到如下页面：
+4. 保存所有文件后，在`examples/04_templatingEngine`目录下执行`node 04-useTemplating_engine2.js`命令，然后打开浏览器并访问`http://localhost:8080/wang`，就会看到如下页面：
 
     ![用 Node.js 生成页面](img/AB-23.png)
 
@@ -615,7 +615,7 @@ sudo n                    # 使用上下键切换已有版本
 
 当然，如果重复的元素只有头部和尾部的话，有时候使用模版继承语法来渲染页面会是一个更好的选择，下面就来继续演示一下`art-template`模板引擎的继承语法来渲染 HTML 页面，其具体步骤如下：
 
-1. 在`code/04_templatingEngine`目录下执行`touch baseTpl.art`命令，创建父模版文件，然后在该文件中输入以下代码：
+1. 在`examples/04_templatingEngine`目录下执行`touch baseTpl.art`命令，创建父模版文件，然后在该文件中输入以下代码：
 
    ```HTML
    <!DOCTYPE html>
@@ -643,7 +643,7 @@ sudo n                    # 使用上下键切换已有版本
    </html>
    ```
 
-2. 在`code/04_templatingEngine`目录下执行`touch extendTpl.htm`命令，创建子模版文件，然后在该文件中输入以下代码：
+2. 在`examples/04_templatingEngine`目录下执行`touch extendTpl.htm`命令，创建子模版文件，然后在该文件中输入以下代码：
 
    ```HTML
    {{ extend 'baseTpl.art' }}
@@ -662,7 +662,7 @@ sudo n                    # 使用上下键切换已有版本
    {{ /block }}
    ```
 
-3. 在`code/04_templatingEngine`目录下执行`cp 04-useTemplating_engine.js 04-useTemplating_engine3.js`命令，将之前的代码复制一份，并修改如下：
+3. 在`examples/04_templatingEngine`目录下执行`cp 04-useTemplating_engine.js 04-useTemplating_engine3.js`命令，将之前的代码复制一份，并修改如下：
 
    ```JavaScript
    // 用Node.js生成动态页面
@@ -721,19 +721,19 @@ sudo n                    # 使用上下键切换已有版本
    })
    ```
 
-4. 保存所有文件后，在`code/04_templatingEngine`目录下执行`node 04-useTemplating_engine3.js`命令，然后打开浏览器并访问`http://localhost:8080/wang`，就会看到与之前相同的页面。
+4. 保存所有文件后，在`examples/04_templatingEngine`目录下执行`node 04-useTemplating_engine3.js`命令，然后打开浏览器并访问`http://localhost:8080/wang`，就会看到与之前相同的页面。
 
 ### 示例5. Web 表单处理
 
-这一部分示例将致力于演示用 Node.js 处理 Web 表单，我们将会分别示范如何用`get`和`post`两种方法来处理表单的请求。首先，我们要在`code`目录下执行`mkdir 05_webForm`命令来创建用于存放这一组示例的目录。
+这一部分示例将致力于演示用 Node.js 处理 Web 表单，我们将会分别示范如何用`get`和`post`两种方法来处理表单的请求。首先，我们要在`examples`目录下执行`mkdir 05_webForm`命令来创建用于存放这一组示例的目录。
 
 #### 1. get 方法
 
-先用一个信息查询程序来演示一下如何处理使用`get`方法来发送请求的表单。首先，在`code/05_webForm`目录下执行`mkdir get_form`命令，并执行以下步骤：
+先用一个信息查询程序来演示一下如何处理使用`get`方法来发送请求的表单。首先，在`examples/05_webForm`目录下执行`mkdir get_form`命令，并执行以下步骤：
 
-1. 在`code/05_webForm/get_form`目录下执行`npm install art-template`命令，将`art-template`安装到当前示例项目中。
+1. 在`examples/05_webForm/get_form`目录下执行`npm install art-template`命令，将`art-template`安装到当前示例项目中。
 
-2. 在`code/05_webForm/get_form`目录下执行`touch index.htm`，创建一个模版文件，具体如下：
+2. 在`examples/05_webForm/get_form`目录下执行`touch index.htm`，创建一个模版文件，具体如下：
 
     ```HTML
     <!DOCTYPE html>
@@ -768,7 +768,7 @@ sudo n                    # 使用上下键切换已有版本
     </html>
     ```
 
-3. 在`code/05_webForm/get_form`目录下执行`touch app.js`，创建一个脚本文件，具体如下：
+3. 在`examples/05_webForm/get_form`目录下执行`touch app.js`，创建一个脚本文件，具体如下：
 
     ```JavaScript
     const http = require('http')
@@ -841,17 +841,17 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-4. 保存所有文件后，在`code/05_webForm/get_form`目录下执行`node app.js`命令，结果如下：
+4. 保存所有文件后，在`examples/05_webForm/get_form`目录下执行`node app.js`命令，结果如下：
 
     ![用Node.js处理get表单](img/AB-15.png)
 
 #### 2. post 方法
 
-先来演示如何处理使用`post`方法来发送请求的表单。首先，在`code/05_webForm`目录下执行`mkdir post_form`命令，并执行以下步骤：
+先来演示如何处理使用`post`方法来发送请求的表单。首先，在`examples/05_webForm`目录下执行`mkdir post_form`命令，并执行以下步骤：
 
-1. 在`code/05_webForm/get_form`目录下执行`npm install art-template`命令，将`art-template`安装到当前示例项目中。
+1. 在`examples/05_webForm/get_form`目录下执行`npm install art-template`命令，将`art-template`安装到当前示例项目中。
 
-2. 在`code/05_webForm/post_form`目录下执行`touch index.htm`，创建一个模版文件，具体如下：
+2. 在`examples/05_webForm/post_form`目录下执行`touch index.htm`，创建一个模版文件，具体如下：
 
     ```HTML
     <!DOCTYPE html>
@@ -889,7 +889,7 @@ sudo n                    # 使用上下键切换已有版本
     </html>
     ```
 
-3. 在`code/05_webForm/post_form`目录下执行`touch app.js`，创建一个脚本文件，具体如下：
+3. 在`examples/05_webForm/post_form`目录下执行`touch app.js`，创建一个脚本文件，具体如下：
 
     ```JavaScript
     const http = require('http')
@@ -955,7 +955,7 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-4. 保存所有文件后，在`code/05_webForm/post_form`目录下执行`node app.js`命令，结果如下：
+4. 保存所有文件后，在`examples/05_webForm/post_form`目录下执行`node app.js`命令，结果如下：
 
     ![用Node.js处理post表单](img/AB-16.png)
 
@@ -965,17 +965,17 @@ sudo n                    # 使用上下键切换已有版本
 
 ### 示例6. 数据库读写
 
-这部分示例将示范`SQLite3`、`MongoDB`这两种不同类型的数据库在 Node.js 中的使用方法。首先，我需要在`code`目录下执行`mkdir 06_database`命令来创建用于存放这一组示例的目录。
+这部分示例将示范`SQLite3`、`MongoDB`这两种不同类型的数据库在 Node.js 中的使用方法。首先，我需要在`examples`目录下执行`mkdir 06_database`命令来创建用于存放这一组示例的目录。
 
 #### 1. SQLite
 
-`SQLite3`是一个轻量级的关系型数据库，我们在这里用它来示范 Node.js 对关系型数据库的处理。首先，在`code/06_database`目录下执行`mkdir sqlite`命令，并执行以下步骤：
+`SQLite3`是一个轻量级的关系型数据库，我们在这里用它来示范 Node.js 对关系型数据库的处理。首先，在`examples/06_database`目录下执行`mkdir sqlite`命令，并执行以下步骤：
 
-1. 在`code/06_database/sqlite`目录下执行`npm install sqlite3`命令，将`sqlite3`安装到当前示例项目中。
+1. 在`examples/06_database/sqlite`目录下执行`npm install sqlite3`命令，将`sqlite3`安装到当前示例项目中。
 
-2. 为控制程序按串行方式执行，需在`code/06_database/sqlite`目录下执行`npm install async`命令，将`async`包安装到当前示例项目中。
+2. 为控制程序按串行方式执行，需在`examples/06_database/sqlite`目录下执行`npm install async`命令，将`async`包安装到当前示例项目中。
 
-3. 在`code/06_database/sqlite`目录下执行`touch Sqlite.js`，创建一个脚本文件，具体如下：
+3. 在`examples/06_database/sqlite`目录下执行`touch Sqlite.js`，创建一个脚本文件，具体如下：
 
     ```JavaScript
     const fs = require('fs')
@@ -1041,7 +1041,7 @@ sudo n                    # 使用上下键切换已有版本
     module.exports = SqliteDB
     ```
 
-4. 在`code/06_database/sqlite`目录下执行`touch useSqlite.js`，创建一个脚本文件，具体如下：
+4. 在`examples/06_database/sqlite`目录下执行`touch useSqlite.js`，创建一个脚本文件，具体如下：
 
     ```JavaScript
     const async = require('async')
@@ -1113,21 +1113,21 @@ sudo n                    # 使用上下键切换已有版本
     ])
     ```
 
-5. 保存所有文件后，在`code/06_database/sqlite`目录下执行`node useSqlite.js`命令，结果如下：
+5. 保存所有文件后，在`examples/06_database/sqlite`目录下执行`node useSqlite.js`命令，结果如下：
 
     ![用Node.js处理sqlite数据库](img/AB-17.png)
 
 #### 2. MongoDB
 
-`MongoDB`是非关系型数据库的一个典型代表，我们在这里用它来示范 Node.js 对非关系型数据库的处理。在 Node.js 中操作`MongoDB`数据库有两个扩展包可以选择，下面我们一一来演示。首先，在`code/06_database`目录下执行`mkdir mongodb`命令，并执行以下步骤：
+`MongoDB`是非关系型数据库的一个典型代表，我们在这里用它来示范 Node.js 对非关系型数据库的处理。在 Node.js 中操作`MongoDB`数据库有两个扩展包可以选择，下面我们一一来演示。首先，在`examples/06_database`目录下执行`mkdir mongodb`命令，并执行以下步骤：
 
 ##### 使用`mongodb`包
 
-1. 在`code/06_database/mongodb`目录下执行`npm install mongodb`命令，将`mongodb`包安装到当前示例项目中。
+1. 在`examples/06_database/mongodb`目录下执行`npm install mongodb`命令，将`mongodb`包安装到当前示例项目中。
 
-2. 为控制程序按串行方式执行，需在`code/06_database/mongodb`目录下执行`npm install async`命令，将`async`包安装到当前示例项目中。
+2. 为控制程序按串行方式执行，需在`examples/06_database/mongodb`目录下执行`npm install async`命令，将`async`包安装到当前示例项目中。
 
-3. 在`code/06_database/mongodb`目录下执行`touch useMongodb.js`，创建一个脚本文件，具体如下：
+3. 在`examples/06_database/mongodb`目录下执行`touch useMongodb.js`，创建一个脚本文件，具体如下：
 
     ```JavaScript
     const MongoClient = require('mongodb').MongoClient
@@ -1316,15 +1316,15 @@ sudo n                    # 使用上下键切换已有版本
 
     ```
 
-4. 保存所有文件后，在`code/06_database/mongodb`目录下执行`node useMongodb.js`命令，结果如下：
+4. 保存所有文件后，在`examples/06_database/mongodb`目录下执行`node useMongodb.js`命令，结果如下：
 
     ![用Node.js处理MongoDB数据库](img/AB-18.png)
 
 ##### 使用`mongoose`包
 
-1. 在`code/06_database/mongodb`目录下执行`npm install mongoose`命令，将`mongoose`包安装到当前示例项目中。
+1. 在`examples/06_database/mongodb`目录下执行`npm install mongoose`命令，将`mongoose`包安装到当前示例项目中。
 
-2. 在`code/06_database/mongodb`目录下执行`touch useMongoose.js`，创建一个脚本文件，具体如下：
+2. 在`examples/06_database/mongodb`目录下执行`touch useMongoose.js`，创建一个脚本文件，具体如下：
 
     ```JavaScript
     const server = 'mongodb://localhost:27017'
@@ -1488,23 +1488,23 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-3. 保存所有文件后，在`code/06_database/mongodb`目录下执行`node useMongoose.js`命令，结果如下：
+3. 保存所有文件后，在`examples/06_database/mongodb`目录下执行`node useMongoose.js`命令，结果如下：
 
     ![用Node.js处理MongoDB数据库](img/AB-22.png)
 
 ### 示例7. 使用 Express 框架
 
-这部分示例将通过`你好，Express`、`留言板`和`学生管理`三个应用的实现来演示`Express`框架的基本使用。首先来搭建该示例项目的基本脚手架，为此我需要在`code`目录下执行`mkdir 07_Expressjs`命令来创建用于存放这一组示例的目录，并执行一下步骤：
+这部分示例将通过`你好，Express`、`留言板`和`学生管理`三个应用的实现来演示`Express`框架的基本使用。首先来搭建该示例项目的基本脚手架，为此我需要在`examples`目录下执行`mkdir 07_Expressjs`命令来创建用于存放这一组示例的目录，并执行一下步骤：
 
-1. 在`code/07_Expressjs`目录下执行`npm init --yes`命令来初始化本示例项目。
+1. 在`examples/07_Expressjs`目录下执行`npm init --yes`命令来初始化本示例项目。
 
-2. 在`code/07_Expressjs`目录下执行`npm install express body-parser sqlite3 mongodb async art-template express-art-template --save`命令来安装本示例所要用到的扩展包。
+2. 在`examples/07_Expressjs`目录下执行`npm install express body-parser sqlite3 mongodb async art-template express-art-template --save`命令来安装本示例所要用到的扩展包。
 
-3. 在`code/07_Expressjs`目录下执行`mkdir views`命令来创建用于存放模板文件的目录。
+3. 在`examples/07_Expressjs`目录下执行`mkdir views`命令来创建用于存放模板文件的目录。
 
-4. 在`code/07_Expressjs`目录下执行`mkdir public`命令创建`public`目录，并进入到该目录中，执行`mkdir DB css js img`命令来创建用于存放相应类型资源的目录。
+4. 在`examples/07_Expressjs`目录下执行`mkdir public`命令创建`public`目录，并进入到该目录中，执行`mkdir DB css js img`命令来创建用于存放相应类型资源的目录。
 
-5. 在`code/07_Expressjs`目录下执行`touch index.js`命令，创建本示例的程序入口文件，具体代码如下：
+5. 在`examples/07_Expressjs`目录下执行`touch index.js`命令，创建本示例的程序入口文件，具体代码如下：
 
     ```JavaScript
     const path = require('path')
@@ -1534,7 +1534,7 @@ sudo n                    # 使用上下键切换已有版本
     })
     ```
 
-6. 在`code/07_Expressjs`目录下执行`touch router.js`命令，创建本示例的程序路由文件，具体代码如下：
+6. 在`examples/07_Expressjs`目录下执行`touch router.js`命令，创建本示例的程序路由文件，具体代码如下：
 
     ```JavaScript
     const path = require('path')
@@ -1555,7 +1555,7 @@ sudo n                    # 使用上下键切换已有版本
     module.exports = router
     ```
 
-7. 在`code/07_Expressjs`目录下执行`touch baseTpl.js`命令，创建该项目的基础模版文件，并在其中输入以下代码：
+7. 在`examples/07_Expressjs`目录下执行`touch baseTpl.js`命令，创建该项目的基础模版文件，并在其中输入以下代码：
 
    ```HTML
     <!DOCTYPE html>
@@ -1609,7 +1609,7 @@ sudo n                    # 使用上下键切换已有版本
     </html>
    ```
 
-8. 在`code/07_Expressjs/public/css/`目录创建一个名为`main.css`的样式文件，内容如下：
+8. 在`examples/07_Expressjs/public/css/`目录创建一个名为`main.css`的样式文件，内容如下：
 
     ```css
     body {
@@ -1623,9 +1623,9 @@ sudo n                    # 使用上下键切换已有版本
 
 接下来的应用示例主要用于示范如何用`Express`框架来创建一个 Web 应用程序。在这过程中，我将使用`art-template`作为构建页面的模板引擎。其主要步骤如下：
 
-1. 在`code/07_Expressjs/public/img/`目录下放置一张`Express`官网首页的截图，将其命名为`express.jpeg`。
+1. 在`examples/07_Expressjs/public/img/`目录下放置一张`Express`官网首页的截图，将其命名为`express.jpeg`。
 
-2. 在`code/07_Expressjs/views/`目录创建一个名为`hello.htm`的模版文件，内容如下：
+2. 在`examples/07_Expressjs/views/`目录创建一个名为`hello.htm`的模版文件，内容如下：
 
     ```HTML
     {{ extend './baseTpl.art' }}
@@ -1648,7 +1648,7 @@ sudo n                    # 使用上下键切换已有版本
     {{ /block }}
     ```
 
-3. 在`code/07_Expressjs`目录下执行`mkdir sayHello`命令来创建该应用的目录，并在其中创建一个名为`index.js`的脚本文件，内容如下：
+3. 在`examples/07_Expressjs`目录下执行`mkdir sayHello`命令来创建该应用的目录，并在其中创建一个名为`index.js`的脚本文件，内容如下：
 
     ```JavaScript
     module.exports = function(app) {
@@ -1658,7 +1658,7 @@ sudo n                    # 使用上下键切换已有版本
     }
     ```
 
-4. 保存所有文件后，在`code/07_Expressjs`目录下执行`node index.js`命令，结果如下：
+4. 保存所有文件后，在`examples/07_Expressjs`目录下执行`node index.js`命令，结果如下：
 
     ![在Express框架中说Hello](img/AB-19.png)
 
@@ -1666,7 +1666,7 @@ sudo n                    # 使用上下键切换已有版本
 
 这个应用示例主要用于演示如何用`Express`框架实现学生管理系统，并使用`SQLite3`作为数据库，其具体步骤如下：
 
-1. 在`code/07_Expressjs/views/`目录创建一个名为`student.htm`的模版文件，内容如下：
+1. 在`examples/07_Expressjs/views/`目录创建一个名为`student.htm`的模版文件，内容如下：
 
     ```HTML
     {{ extend './baseTpl.art' }}
@@ -1710,7 +1710,7 @@ sudo n                    # 使用上下键切换已有版本
     {{ /block }}
     ```
 
-2. 在`code/07_Expressjs/views/`目录创建一个名为`add.htm`的模版文件，内容如下：
+2. 在`examples/07_Expressjs/views/`目录创建一个名为`add.htm`的模版文件，内容如下：
 
     ```HTML
     {{ extend './baseTpl.art' }}
@@ -1763,7 +1763,7 @@ sudo n                    # 使用上下键切换已有版本
     {{ /block }}
     ```
 
-3. 在`code/07_Expressjs/views/`目录创建一个名为`edit.htm`的模版文件，内容如下：
+3. 在`examples/07_Expressjs/views/`目录创建一个名为`edit.htm`的模版文件，内容如下：
 
     ```HTML
     {{ extend './baseTpl.art' }}
@@ -1816,7 +1816,7 @@ sudo n                    # 使用上下键切换已有版本
     {{ /block }}
     ```
 
-4. 在`code/07_Expressjs`目录下执行`mkdir student`命令来创建该应用的目录，并在其中创建一个名为`index.js`和`Sqlite.js`的两个脚本文件，内容如下：
+4. 在`examples/07_Expressjs`目录下执行`mkdir student`命令来创建该应用的目录，并在其中创建一个名为`index.js`和`Sqlite.js`的两个脚本文件，内容如下：
 
    - index.js
 
@@ -2025,7 +2025,7 @@ sudo n                    # 使用上下键切换已有版本
     module.exports = SqliteDB
     ```
 
-5. 保存所有文件后，在`code/07_Expressjs`目录下执行`node index.js`命令，结果如下：
+5. 保存所有文件后，在`examples/07_Expressjs`目录下执行`node index.js`命令，结果如下：
 
     ![在Express框架中实现学生管理](img/AB-20.png)
 
@@ -2033,7 +2033,7 @@ sudo n                    # 使用上下键切换已有版本
 
 这个应用示例主要用于演示如何用`Express`框架实现留言板应用，并使用`MongoDB`作为数据库，其具体步骤如下：
 
-1. 在`code/07_Expressjs/views/`目录创建一个名为`board.htm`的模版文件，内容如下：
+1. 在`examples/07_Expressjs/views/`目录创建一个名为`board.htm`的模版文件，内容如下：
 
     ```HTML
     {{ extend './baseTpl.art' }}
@@ -2086,7 +2086,7 @@ sudo n                    # 使用上下键切换已有版本
     {{ /block }}
     ```
 
-2. 在`code/07_Expressjs`目录下执行`mkdir board`命令来创建该应用的目录，并在其中创建一个名为`index.js`的脚本文件，内容如下：
+2. 在`examples/07_Expressjs`目录下执行`mkdir board`命令来创建该应用的目录，并在其中创建一个名为`index.js`的脚本文件，内容如下：
 
     ```JavaScript
     const MongoClient = require('mongodb').MongoClient
@@ -2142,7 +2142,7 @@ sudo n                    # 使用上下键切换已有版本
     }
     ```
 
-3. 保存所有文件后，在`code/07_Expressjs`目录下执行`node index.js`命令，结果如下：
+3. 保存所有文件后，在`examples/07_Expressjs`目录下执行`node index.js`命令，结果如下：
 
     ![在Express框架中实现留言板](img/AB-21.png)
  
