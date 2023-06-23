@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "522bafdbb6c6106b",
+        "id": "00a88163c350fcfa",
         "type": "tabs",
         "children": [
           {
-            "id": "c356de0fef53ebdb",
+            "id": "510fbbba8e4b212c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md",
+                "file": "00_ToBeOrganized/videos/台大讲座：人工智能及其科学家.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md"
+                "file": "00_ToBeOrganized/videos/台大讲座：人工智能及其科学家.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md",
+                "file": "00_ToBeOrganized/videos/台大讲座：人工智能及其科学家.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md",
+                "file": "00_ToBeOrganized/videos/台大讲座：人工智能及其科学家.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,11 +147,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "c356de0fef53ebdb",
+  "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "01_ToDoList.md",
+    "00_ToBeOrganized/Posts/Zettelkasten方法简介.md",
+    "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md",
     "README.md",
     "Programming/GUI_Dev/Frameworks/electronjs/notes/Electron 学习笔记.md",
-    "01_ToDoList.md",
     "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
     "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md",
     "Programming/GUI_Dev/Frameworks/QT/notes.md",
@@ -173,8 +175,6 @@
     "Programming/Algorithms/RouteMap/关于计算机算法及其书籍推荐.md",
     "Questions&Answers/人工智能的可怕与不可怕.md",
     "ArtificialIntelligence/RouteMap/关于人工智能的研究及其书籍推荐.md",
-    "SoftwareTool/DevelopmentTool/Vim 学习笔记.md",
-    "SoftwareTool/DevelopmentTool/NeoVim 学习笔记.md",
-    "SoftwareTool/DevelopmentTool/Makefile 简易教程.md"
+    "SoftwareTool/DevelopmentTool/Vim 学习笔记.md"
   ]
 }
