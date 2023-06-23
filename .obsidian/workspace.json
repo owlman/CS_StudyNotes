@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md"
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,7 +149,7 @@
   },
   "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
-    "00_ToBeOrganized/01_ToDoList.md",
+    "01_ToDoList.md",
     "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
     "README.md",
