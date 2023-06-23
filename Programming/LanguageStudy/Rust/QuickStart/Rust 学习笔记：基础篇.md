@@ -245,7 +245,7 @@ VSCode 是一款微软公司于 2015 年推出的现代化代码编辑器，由�
 1. 使用 Bash 或 Powershell 之类的命令行终端进入到之前准备好的、用于存放代码示例的`examples`目录中，并执行`cargo new input_output`命令来创建新项目。
 
 2. 使用 VSCode 编辑器打开刚刚新建的项目，并在该项目的`src`目录下找到名为`main.rs`的源码文件，然后将其中的代码修改如下。
-
+    
     ```rust
     use std::io::{self, Write};
 
