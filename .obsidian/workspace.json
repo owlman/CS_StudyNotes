@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md"
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "00_ToBeOrganized/01_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,9 +149,9 @@
   },
   "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
+    "00_ToBeOrganized/01_ToDoList.md",
     "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
-    "00_ToBeOrganized/01_ToDoList.md",
     "README.md",
     "Programming/LanguageStudy/Rust/QuickStart/未命名.md",
     "Programming/LanguageStudy/Rust/QuickStart/img/cargo_build.png",
