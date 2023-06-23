@@ -1,4 +1,4 @@
-# Zettelkasten方法简介
+# Zettelkasten 方法简介
 
 > 编译自：Introduction to the Zettelkasten Method
 
@@ -146,10 +146,9 @@ Zettel的长度与你想要创建的超文本类型直接相关。你想创建�
 
 参考文献（Reference）
 
-最后是MultiMarkdown语法中citekeys的定义。在这里，它在正文的最后一行被引用了一次。
-Zettel底部的引用部分说明了信息的来源。页脚是外部资源(如书籍或网络文章)的合适位置。
+最后是MultiMarkdown语法中citekeys的定义。在这里，它在正文的最后一行被引用了一次。Zettel底部的引用部分说明了信息的来源。页脚是外部资源(如书籍或网络文章)的合适位置。
 
-要管理参考文献，请使用像BibDesk这样的参考资料管理软件。它将包含书目数据，并为您提供citekeys。Citekeys类似于IDs。它们是标识符，你可以通过它们指向你正在使用的参考文献(一个常见的citekey格式是[#lastnameYEAR])。
+要管理参考文献，请使用像BibDesk这样的参考资料管理软件。它将包含书目数据，并为您提供citekeys。Citekeys类似于IDs。它们是标识符，你可以通过它们指向你正在使用的参考文献(一个常见的citekey格式是[`#lastnameYEAR`])。
 
 然而，有时你会把其他Zettel作为你的灵感来源。在这种情况下，你的思想是基于你过去已经处理过的事情。你可以通过ID链接到Zettel来引用它，将新旧连接起来。
 

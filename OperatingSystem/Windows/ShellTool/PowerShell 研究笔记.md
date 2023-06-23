@@ -78,10 +78,12 @@ scoop install <仓库名>/<软件名> -s
 
 另外附上常用命令
 
-scoop update #更新仓库
-scoop update * #更新所有软件
-scoop list #列出已安装的软件
-scoop bucket list #列出已订阅的仓库
+```bash
+scoop update # 更新仓库
+scoop update * # 更新所有软件
+scoop list # 列出已安装的软件
+scoop bucket list # 列出已订阅的仓库
+```
 
 后记
 
@@ -137,7 +139,7 @@ $env:SCOOP_GLOBAL='F:\GlobalScoopApps'
 2）以管理员身份打开PowerShell，输入以下命令
 
 Set-ExecutionPolicy RemoteSigned -scope CurrentUser
-#然后输入 Y 或 A 回车
+# 然后输入 Y 或 A 回车
 
 3）执行安装命令
 
@@ -234,22 +236,6 @@ games
 jetbrains	 # jetbrains公司的所有软件
 
  自行探索要添加的bucket，当然，你可以全部添加。
-
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-    12
-    13
-    14
-    15
 
 3）添加bucket
 
