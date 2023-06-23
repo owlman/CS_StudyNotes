@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md"
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,9 +149,10 @@
   },
   "active": "c356de0fef53ebdb",
   "lastOpenFiles": [
+    "01_ToDoList.md",
+    "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md",
     "Programming/GUI_Dev/Frameworks/QT/notes.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
-    "01_ToDoList.md",
     "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
     "README.md",
     "Programming/LanguageStudy/Rust/QuickStart/未命名.md",
@@ -174,7 +175,6 @@
     "SoftwareTool/DevelopmentTool/Vim 学习笔记.md",
     "SoftwareTool/DevelopmentTool/NeoVim 学习笔记.md",
     "SoftwareTool/DevelopmentTool/Makefile 简易教程.md",
-    "SoftwareTool/DevelopmentTool/Clang 学习笔记.md",
-    "SoftwareTool/VirtualMachine/vagrant/Vagrant 学习笔记.md"
+    "SoftwareTool/DevelopmentTool/Clang 学习笔记.md"
   ]
 }
