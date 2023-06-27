@@ -10,8 +10,8 @@ fn say_hello () {
             let name = input.trim();
             println!("Hello, world! \nMy name is {}.", name);
         }
-        Err(e) => {
-            println!("Error Message: {}", e);
+        Err(_) => {
+            println!("Input Error!");
         }
     }
 }
