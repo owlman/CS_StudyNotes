@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
+                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md"
+                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
+                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
+                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,13 +149,13 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
     "00_ToBeOrganized/videos/台大讲座：人工智能及其科学家.md",
     "01_ToDoList.md",
     "00_ToBeOrganized/Posts/Zettelkasten方法简介.md",
     "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md",
     "README.md",
     "Programming/GUI_Dev/Frameworks/electronjs/notes/Electron 学习笔记.md",
-    "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
     "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md",
     "Programming/GUI_Dev/Frameworks/QT/notes.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
