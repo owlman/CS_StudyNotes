@@ -4,7 +4,7 @@
 >
 > - 文献出处：[Introduction to the Zettelkasten Method](https://zettelkasten.de/introduction/)；
 > - 参考翻译：[知乎用户 ConanXin 翻译的文章](https://zhuanlan.zhihu.com/p/299377905)；
-> - 笔记任务：调整文章结构、改善翻译质量；
+> - 二次整理：调整文章结构、标注文章要点、改善翻译质量、添加自己的理解；
 >
 
 ## 为什么要读这篇文献？
