@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md",
                 "mode": "source",
                 "source": false
               }
@@ -65,8 +65,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -86,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md"
+                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md"
               }
             }
           },
@@ -96,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,8 +147,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "5d4a2a0b419c6481",
+  "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "01_LiteratureNote/posts/卡片笔记写作法简介.md",
+    "01_LiteratureNote/posts/卡片盒笔记法简介.md",
     "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md",
     "01_LiteratureNote/posts/学习如何阅读.md",
     "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
@@ -174,8 +175,6 @@
     "OperatingSystem/UNIX-like/ShellTool/zsh/Zsh 研究笔记.md",
     "OperatingSystem/UNIX-like/ShellTool/fish/Fish 研究笔记.md",
     "OperatingSystem/UNIX-like/ShellTool/bash/Bash 研究笔记.md",
-    "Programming/Methodology/RouteMap/关于编程方法论及其推荐书目.md",
-    "SoftwareEngineering/RouteMap/关于软件工程及其书籍推荐.md",
-    "Programming/Algorithms/RouteMap/关于计算机算法及其书籍推荐.md"
+    "Programming/Methodology/RouteMap/关于编程方法论及其推荐书目.md"
   ]
 }
