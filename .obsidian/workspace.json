@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md",
+                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md"
+                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md",
+                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01_LiteratureNote/posts/Zettelkasten方法简介.md",
+                "file": "01_LiteratureNote/posts/卡片笔记写作法简介.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
