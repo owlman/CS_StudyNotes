@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "https://www.youtube.com/watch?v=KGv0M367Mrg",
+                "query": "卡片笔记写作法",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -147,7 +148,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "510fbbba8e4b212c",
+  "active": "5d4a2a0b419c6481",
   "lastOpenFiles": [
     "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md",
     "01_LiteratureNote/posts/学习如何阅读.md",
