@@ -11,8 +11,12 @@
             "id": "510fbbba8e4b212c",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -80,7 +84,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md"
+              }
             }
           },
           {
@@ -89,6 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
