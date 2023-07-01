@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md"
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法简介.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,10 +147,11 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "cceac6dc3fd2184e",
+  "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
     "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "01_LiteratureNote/posts/卡片盒笔记法简介.md",
+    "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "01_LiteratureNote/posts/卡片笔记写作法简介.md",
     "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md",
     "01_LiteratureNote/posts/学习如何阅读.md",
@@ -174,7 +175,6 @@
     "Programming/AutomatedTest/TestCases/基于自动化技术的测试用例设计.md",
     "OperatingSystem/Windows/ShellTool/PowerShell 研究笔记.md",
     "OperatingSystem/UNIX-like/ShellTool/zsh/Zsh 研究笔记.md",
-    "OperatingSystem/UNIX-like/ShellTool/fish/Fish 研究笔记.md",
-    "OperatingSystem/UNIX-like/ShellTool/bash/Bash 研究笔记.md"
+    "OperatingSystem/UNIX-like/ShellTool/fish/Fish 研究笔记.md"
   ]
 }
