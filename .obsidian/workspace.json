@@ -11,12 +11,8 @@
             "id": "510fbbba8e4b212c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -84,9 +80,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md"
-              }
+              "state": {}
             }
           },
           {
@@ -95,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +105,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,11 +141,12 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+    "01_LiteratureNote/posts/img/Pasted image 20230701141915.png",
     "01_LiteratureNote/posts/img/2020-08-13_folgezettel-sequence.png",
     "01_LiteratureNote/posts/img/2020-08-13_folgezettel-sequence.png.crdownload",
     "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "01_LiteratureNote/posts/卡片盒笔记法简介.md",
-    "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "01_LiteratureNote/posts/卡片笔记写作法简介.md",
     "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md",
     "01_LiteratureNote/posts/学习如何阅读.md",
