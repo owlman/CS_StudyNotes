@@ -6,9 +6,10 @@
 - **00_ToDoOrganized**：待整理的资料
 - **01_LiteratureNote**：整理过的参考文献
   - *posts*：文章资料
-  - *Books*：书籍文献
+    - [[卡片盒笔记法介绍|关于卡片盒笔记系统的官方介绍（中文版）]]
+  - *books*：书籍文献
   - *videos*：视频资料
-  - *Person*：人物档案
+  - *person*：人物档案
     - [[尼克拉斯·卢曼]]
 - **Writing & Reading**：读与写的心得
   - *Publication*：出版相关
