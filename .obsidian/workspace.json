@@ -149,6 +149,9 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "00_ToBeOrganized/VS Code 中的双链笔记：Foam 使用体验分享.md",
+    "00_ToBeOrganized/学习如何阅读.md",
+    "00_ToBeOrganized/img",
     "01_LiteratureNote/posts/img/Pasted image 20230701145334.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701145250.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701145216.png",
@@ -159,7 +162,6 @@
     "01_LiteratureNote/posts/img/Pasted image 20230701144805.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701144705.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701144606.png",
-    "01_LiteratureNote/posts/img/Pasted image 20230701144330.png",
     "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "01_LiteratureNote/posts/img/2020-08-13_folgezettel-sequence.png.crdownload",
     "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
@@ -184,7 +186,6 @@
     "SoftwareTool/VirtualMachine/VirtualBox/VirtualBox 研究笔记.md",
     "SoftwareEngineering/OpenSource/开源许可协议研究.md",
     "Programming/AutomatedTest/TestCases/基于自动化技术的测试用例设计.md",
-    "OperatingSystem/Windows/ShellTool/PowerShell 研究笔记.md",
-    "OperatingSystem/UNIX-like/ShellTool/zsh/Zsh 研究笔记.md"
+    "OperatingSystem/Windows/ShellTool/PowerShell 研究笔记.md"
   ]
 }

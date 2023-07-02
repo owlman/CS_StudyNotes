@@ -4,11 +4,10 @@
 
 - **[[00_ToDoList]]**：本笔记库的任务列表
 - **00_ToDoOrganized**：待整理的资料
-  - *books*：书籍资料
+- **01_LiteratureNote**：整理过的参考文献
   - *posts*：文章资料
-  - *videos*：视频资料
-- **01_LiteratureNote**：文献笔记目录
   - *Books*：书籍文献
+  - *videos*：视频资料
   - *Person*：人物档案
     - [[尼克拉斯·卢曼]]
 - **Writing & Reading**：读与写的心得
