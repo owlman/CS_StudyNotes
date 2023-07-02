@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_ToBeOrganized/学习如何阅读.md",
+                "file": "01_LiteratureNote/posts/学习如何阅读.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00_ToBeOrganized/学习如何阅读.md"
+                "file": "01_LiteratureNote/posts/学习如何阅读.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "00_ToBeOrganized/学习如何阅读.md",
+                "file": "01_LiteratureNote/posts/学习如何阅读.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "00_ToBeOrganized/学习如何阅读.md",
+                "file": "01_LiteratureNote/posts/学习如何阅读.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,12 +149,12 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "00_ToBeOrganized/VS Code 中的双链笔记：Foam 使用体验分享.md",
+    "01_LiteratureNote/posts/学习如何阅读.md",
     "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "01_LiteratureNote/person/尼克拉斯·卢曼.md",
     "01_LiteratureNote/person",
     "01_LiteratureNote/books",
-    "00_ToBeOrganized/VS Code 中的双链笔记：Foam 使用体验分享.md",
-    "00_ToBeOrganized/学习如何阅读.md",
     "00_ToBeOrganized/img",
     "01_LiteratureNote/posts/img/Pasted image 20230701145334.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701145250.png",
@@ -171,7 +171,6 @@
     "01_LiteratureNote/posts/卡片盒笔记法简介.md",
     "01_LiteratureNote/posts/卡片笔记写作法简介.md",
     "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md",
-    "01_LiteratureNote/posts/学习如何阅读.md",
     "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
     "00_ToBeOrganized/videos/台大讲座：人工智能及其科学家.md",
     "01_ToDoList.md",
