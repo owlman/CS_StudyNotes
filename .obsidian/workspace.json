@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+                "file": "00_ToBeOrganized/学习如何阅读.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md"
+                "file": "00_ToBeOrganized/学习如何阅读.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+                "file": "00_ToBeOrganized/学习如何阅读.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+                "file": "00_ToBeOrganized/学习如何阅读.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,6 +149,7 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "01_LiteratureNote/person/尼克拉斯·卢曼.md",
     "01_LiteratureNote/person",
     "01_LiteratureNote/books",
@@ -165,7 +166,6 @@
     "01_LiteratureNote/posts/img/Pasted image 20230701144805.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701144705.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701144606.png",
-    "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "01_LiteratureNote/posts/img/2020-08-13_folgezettel-sequence.png.crdownload",
     "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "01_LiteratureNote/posts/卡片盒笔记法简介.md",
