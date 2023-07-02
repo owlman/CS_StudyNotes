@@ -149,6 +149,7 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "01_LiteratureNote/books",
     "00_ToBeOrganized/VS Code 中的双链笔记：Foam 使用体验分享.md",
     "00_ToBeOrganized/学习如何阅读.md",
     "00_ToBeOrganized/img",
@@ -185,7 +186,6 @@
     "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
     "SoftwareTool/VirtualMachine/VirtualBox/VirtualBox 研究笔记.md",
     "SoftwareEngineering/OpenSource/开源许可协议研究.md",
-    "Programming/AutomatedTest/TestCases/基于自动化技术的测试用例设计.md",
-    "OperatingSystem/Windows/ShellTool/PowerShell 研究笔记.md"
+    "Programming/AutomatedTest/TestCases/基于自动化技术的测试用例设计.md"
   ]
 }
