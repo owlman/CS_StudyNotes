@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_ToBeOrganized/00_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00_ToBeOrganized/00_ToDoList.md"
+                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "00_ToBeOrganized/00_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "00_ToBeOrganized/00_ToDoList.md",
+                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,6 +149,7 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "00_ToBeOrganized/00_ToDoList.md",
     "wikilink.md",
     "01_LiteratureNote/person/尼克拉斯·卢曼.md",
     "01_LiteratureNote/posts/学习如何阅读.md",
@@ -187,7 +188,6 @@
     "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
     "OperatingSystem/Windows/ShellTool/Cygwin 研究笔记.md",
     "SoftwareTool/VirtualMachine/VirtualBox/VirtualBox 研究笔记.md",
-    "SoftwareEngineering/OpenSource/开源许可协议研究.md",
-    "Programming/AutomatedTest/TestCases/基于自动化技术的测试用例设计.md"
+    "SoftwareEngineering/OpenSource/开源许可协议研究.md"
   ]
 }
