@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md"
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
+                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,8 +147,9 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "510fbbba8e4b212c",
+  "active": "cceac6dc3fd2184e",
   "lastOpenFiles": [
+    "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "00_ToBeOrganized/00_ToDoList.md",
     "wikilink.md",
     "01_LiteratureNote/person/尼克拉斯·卢曼.md",
@@ -169,7 +170,6 @@
     "01_LiteratureNote/posts/img/Pasted image 20230701144705.png",
     "01_LiteratureNote/posts/img/Pasted image 20230701144606.png",
     "01_LiteratureNote/posts/img/2020-08-13_folgezettel-sequence.png.crdownload",
-    "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "01_LiteratureNote/posts/卡片盒笔记法简介.md",
     "01_LiteratureNote/posts/卡片笔记写作法简介.md",
     "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md",
