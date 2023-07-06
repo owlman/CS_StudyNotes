@@ -94,7 +94,7 @@
     - [[Git 学习笔记]]
   - *VirtualMachine*：虚拟机软件研究
     - [[Vagrant 学习笔记]]
-  - *CodeEditor*：代码编辑器研究
+  - *TextEditor*：编辑器软件研究
     - 类 Vim 编辑器的研究编辑
       - [[Vim 学习笔记]]
       - [[NeoVim 学习笔记]]
