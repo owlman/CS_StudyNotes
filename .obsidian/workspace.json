@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md",
+                "file": "SoftwareTool/TextEditor/VSCode/VSCode 中的双链笔记实践.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md"
+                "file": "SoftwareTool/TextEditor/VSCode/VSCode 中的双链笔记实践.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md",
+                "file": "SoftwareTool/TextEditor/VSCode/VSCode 中的双链笔记实践.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md",
+                "file": "SoftwareTool/TextEditor/VSCode/VSCode 中的双链笔记实践.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
