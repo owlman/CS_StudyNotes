@@ -10,7 +10,7 @@
 
 Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行。笔者的 VSCode 主要用于编写代码，配置繁重，另一方面也为了实现不同工作区的隔离，因此选择安装 VSCode 的开源分支 [VSCodium](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2FVSCodium%2Fvscodium)（下文统一称 VSCode）。
 
-VSCode 安装成功并启动后，首先要要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)更改为 VSCode 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（《[2021 年最受欢迎的 15 个 VSCode 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》。另外，VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
+VSCode 安装成功并启动后，首先要要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)更改为 VSCode 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（此处可参考《[2021 年最受欢迎的 15 个 VSCode 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》这篇文章）。另外，VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
 
 一个标准的 VSCode 项目（对于我们就是 Foam 笔记库），其配置文件位于项目文件夹（笔记库的根目录）下的 `.vscode` 文件夹下。在这篇文章中我们主要需要使用两个文件：`settings.json`（项目的配置文件）和 `foam-snippets.code-snippets` 文件（用户代码片段）。
 
