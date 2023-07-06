@@ -10,9 +10,7 @@
 
 Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行。笔者的 VSCode 主要用于编写代码，配置繁重，另一方面也为了实现不同工作区的隔离，因此选择安装 VSCode 的开源分支 [VSCodium](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2FVSCodium%2Fvscodium)（下文统一称 VSCode）。
 
-VSCode 安装成功并启动后，首先要要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)更改为 VSCode 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（《[2021 年最受欢迎的 15 个 VSCode 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》——
-
-VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
+VSCode 安装成功并启动后，首先要要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)更改为 VSCode 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（《[2021 年最受欢迎的 15 个 VSCode 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》。另外，VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
 
 一个标准的 VSCode 项目（对于我们就是 Foam 笔记库），其配置文件位于项目文件夹（笔记库的根目录）下的 `.vscode` 文件夹下。在这篇文章中我们主要需要使用两个文件：`settings.json`（项目的配置文件）和 `foam-snippets.code-snippets` 文件（用户代码片段）。
 
@@ -45,7 +43,7 @@ VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体�
 
 基础配置完成后，让我们开始了解 Foam 的基本功能和操作。
 
-Foam 具备一般 Zettelkasten 笔记软件的常用功能，如 Markdown 支持、「双向链接」「知识图谱」「标签」「Daily Note」等，且使用体验比较良好。
+Foam 具备一般卡片盒笔记软件的常用功能，如 Markdown 支持、双向链接、知识图谱、标签、Daily Note 等，且使用体验比较良好。
 
 #### 创建新的笔记
 
@@ -207,7 +205,7 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 除此之外，Daily Note 的一些属性也可以在项目的配置文件中修改，如 Daily Note 的存放位置和文件名格式：
 
-```
+```yaml
 "foam.openDailyNote.directory": "journal", // 默认存放在 journal 文件夹
 "foam.openDailyNote.fileNameFormat": "'DailyNote'-yyyy-mm-dd" // Eg.: DailyNote-2022-01-13.md
 "foam.openDailyNote.onStartup": true // 启动项目时自动打开 Daily Note
@@ -254,4 +252,3 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 与 Roam Research 和 Obsidian 等专业笔记软件相比，Foam 或许没有独特优势，甚至在某些方面支持并不完善。但好在作为一个开源项目，它能够深植良好的社区环境，吸收用户的建议与反馈，让每个人都成为项目的贡献者。
 
 目前国内介绍和分享 Foam 使用经验的内容比较少，本文仅作为抛砖引玉，让更多人能认识到这款工具。毕竟对用户来说，多一种选择本身就是一件好事，而对于开源项目的开发者而言，更多人参与其中本身就是开源理念的价值所在。如果你也想推动 Foam 项目的进展，可以关注他们的 [开发路线图](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2Fdev%2Froadmap)，或者加入他们的 [Discord Server](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Fjoin-discord%2Fw)。
-
