@@ -87,7 +87,6 @@
   - *DevelopmentTool*：开发工具研究
     - [[Clang 学习笔记]]
     - [[Makefile 简易教程]]
-    - [[NeoVim 学习笔记]]
   - *Database*：数据库系统研究
     - [[关于数据库的使用及其书籍推荐]]
     - [[MongoDB 研究笔记]]
@@ -95,3 +94,10 @@
     - [[Git 学习笔记]]
   - *VirtualMachine*：虚拟机软件研究
     - [[Vagrant 学习笔记]]
+  - *CodeEditor*：代码编辑器研究
+    - 类 Vim 编辑器的研究编辑
+      - [[Vim 学习笔记]]
+      - [[NeoVim 学习笔记]]
+    - VSCode 编辑器的研究笔记
+      - [[VSCode 的基本使用]]
+      - [[在 VSCode 中实现双链笔记的插件]]
