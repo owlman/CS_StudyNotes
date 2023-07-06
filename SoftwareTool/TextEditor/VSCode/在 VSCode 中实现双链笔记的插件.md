@@ -1,20 +1,16 @@
-VS Code 中的双链笔记：Foam 使用体验分享
+# VSCode 中的双链笔记实践
 
-近年来，随着「双向链接」和「Zettelkasten」概念的兴起，和人们对更有效地记录笔记的需求的高涨，笔记软件的市场呈现出推陈出新和自我革新的局面。不仅有 Roam Research 和 Obsidian 等后起之秀凭借对这两种笔记法的率先支持获得广泛欢迎，一些传统笔记软件，例如 Notion，也在逐步加入相应的功能支持。
+近年来，随着「双向链接」和「卡片盒笔记系统」等概念的兴起（[[卡片盒笔记法介绍|相关介绍]]），和人们对更有效地记录笔记的需求的高涨，笔记软件的市场呈现出推陈出新和自我革新的局面。不仅有 Roam Research 和 Obsidian 等后起之秀凭借对这两种笔记法的率先支持获得广泛欢迎，一些传统笔记软件，例如 Notion，也在逐步加入相应的功能支持。在这些丰富的笔记软件选择之外，还有另一个值得关注的软件，也通过特殊的方式实现了这些功能需求，那就是微软出品的文本编辑器 VSCode。VSCode 最为强大之处，在于可以通过丰富的扩展，将其定制成为自己专属且特化的应用（少数派中介绍将 VS Code 用作笔记软件的[文章](https://sspai.com/post/66883)）。这篇文章要介绍的，便是在 VS Code 上实现「双向链接」和「Zettelkasten」功能的扩展：Foam。
 
-在这些丰富的笔记软件选择之外，还有另一个值得关注的软件，也通过特殊的方式实现了这些功能需求，那就是微软出品的文本编辑器 VS Code。VS Code 最为强大之处，在于可以通过丰富的扩展，将其定制成为自己专属且特化的应用（少数派中介绍将 VS Code 用作笔记软件的[文章](https://sspai.com/post/66883)）。这篇文章要介绍的，便是在 VS Code 上实现「双向链接」和「Zettelkasten」功能的扩展：Foam。
-
-少数派上目前有相当数量介绍「双向链接」和「Zettelkasten」概念的文章，且内容详尽、质量优秀。因此本文将聚焦于对 Foam 这一工具的介绍和自己的使用经验（也因为笔者实践 Zettelkasten 的时间较短，无法妄谈理解）。
-
-在 [官方主页](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2F) 上，Foam 被定义为「**受 Roam Research 启发**的、依托于 VS Code 和 GitHub 的、**管理和分享**个人知识的系统」。你可以用它来组织研究、记录笔记或者在网络上发布内容。这篇文章中我们将主要把 Foam 作为构建笔记系统的工具。
+在 [Foam 插件的官方主页](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2F) 上，Foam 被定义为「**受 Roam Research 启发**的、依托于 VSCode 和 GitHub 的、**管理和分享**个人知识的系统」。你可以用它来组织研究、记录笔记或者在网络上发布内容。这篇文章中我们将主要把 Foam 作为构建卡片盒笔记系统的工具。
 
 ## 基础配置与上手
 
-### **使用 VS Code**
+### **使用 VSCode**
 
-Foam 作为 [VS Code](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行。笔者的 VS Code 主要用于编写代码，配置繁重，另一方面也为了实现不同工作区的隔离，因此选择安装 VS Code 的开源分支 [VSCodium](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2FVSCodium%2Fvscodium)（下文统一称 VS Code）。
+Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行。笔者的 VSCode 主要用于编写代码，配置繁重，另一方面也为了实现不同工作区的隔离，因此选择安装 VSCode 的开源分支 [VSCodium](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2FVSCodium%2Fvscodium)（下文统一称 VS Code）。
 
-VS Code 安装成功并启动后，首先要要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VS Code 并不一致，可以参考 [这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923) 更改为 VS Code 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（《[2021 年最受欢迎的 15 个 VS Code 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》——
+VSCode 安装成功并启动后，首先要要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考 [这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923) 更改为 VSCode 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（《[2021 年最受欢迎的 15 个 VS Code 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》——
 
 VS Code 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VS Code 上使用 Foam 需要注意的点。
 
