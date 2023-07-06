@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md"
+                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+                "file": "SoftwareTool/TextEditor/VSCode/在 VSCode 中实现双链笔记的插件.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,15 +147,15 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "cceac6dc3fd2184e",
+  "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
-    "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "00_ToBeOrganized/00_ToDoList.md",
+    "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
+    "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "wikilink.md",
     "01_LiteratureNote/person/尼克拉斯·卢曼.md",
     "01_LiteratureNote/posts/学习如何阅读.md",
     "00_ToBeOrganized/VS Code 中的双链笔记：Foam 使用体验分享.md",
-    "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "01_LiteratureNote/person",
     "01_LiteratureNote/books",
     "00_ToBeOrganized/img",
