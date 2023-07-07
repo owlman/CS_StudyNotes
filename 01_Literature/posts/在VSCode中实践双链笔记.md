@@ -17,13 +17,11 @@
 
 ### 使用 VSCode
 
-Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行。而 VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
+Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行，而 VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
 
-一个标准的 VSCode 项目（对于我们就是 Foam 笔记库），其配置文件位于项目文件夹（笔记库的根目录）下的 `.vscode` 文件夹下。在这篇文章中我们主要需要使用两个文件：`settings.json`（项目的配置文件）和 `foam-snippets.code-snippets` 文件（用户代码片段）。
+首先，一个标准的 VSCode 项目（对于我们就是 Foam 笔记库），其配置文件位于项目文件夹（笔记库的根目录）下的 `.vscode` 文件夹下。在这篇文章中我们主要需要使用两个文件：`settings.json`（项目的配置文件）和 `foam-snippets.code-snippets` 文件（用户代码片段）。==需要注意的是，如果将笔记库保存为 VSCode 工作区，即后缀为 `.code-space` 的文件，那该文件本身就是工作区的配置文件。对该文件的更改会覆盖 `.vscode` 目录下 `settings.json` 文件中的配置==。
 
-需要注意的是，如果将笔记库保存为 VSCode 工作区，即后缀为 `.code-space` 的文件，那该文件本身就是工作区的配置文件。对该文件的更改会覆盖 `.vscode` 目录下 `settings.json` 文件中的配置。
-
-在 VSCode 中执行一个命令（内建的或者来自扩展的），需要通过命令面板（command palette，快捷键 `Ctrl + Shift + P`）。这篇文章中主要使用的一些命令如下：
+其次，==在 VSCode 中执行一个命令（内建的或者来自扩展的），需要通过命令面板（command palette，快捷键 `Ctrl + Shift + P`）==。在这篇文章中，我们常用的一些命令如下：
 
 - `Foam: Create New Note`：在当前目录下创建新的笔记条目。
 - `Foam: Show Graph`：打开知识图谱页面。
@@ -34,15 +32,10 @@ Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.vi
 
 ### 配置笔记库
 
-下面开始建立 Foam 笔记库。根据是否使用 GitHub 进行版本控制，分为两种方案。
+下面，我们开始来具体演示如何建立 Foam 笔记库。根据是否使用 GitHub 进行版本控制，分为两种方案。
 
-#### 在 GitHub 上建立笔记库
-
-使用官方提供的 [foam-template](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template) 在自己的 GitHub 上建立仓库，可以选择是否将仓库设为私有库。仓库建立后，将其 clone 到本地并在 VSCode 中打开。这样以后就可以通过 GitHub 对你的笔记库进行版本控制，也可以通过 Github Pages 或其他静态网页服务发布笔记。
-
-#### 在本地使用 Foam
-
-鉴于国内的网络环境和学习 git 操作的学习成本，也可以选择在本地建立 Foam 笔记库。下载[官方模板](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template%2Farchive%2Fmaster.zip)到本地解压后便可以作为笔记库的根目录。
+- 在 GitHub 上建立笔记库：使用官方提供的 [foam-template](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template) 在自己的 GitHub 上建立仓库，可以选择是否将仓库设为私有库。仓库建立后，将其 clone 到本地并在 VSCode 中打开。这样以后就可以通过 GitHub 对你的笔记库进行版本控制，也可以通过 Github Pages 或其他静态网页服务发布笔记。
+- 在本地使用 Foam：鉴于国内的网络环境和学习 git 操作的学习成本，也可以选择在本地建立 Foam 笔记库。下载[官方模板](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template%2Farchive%2Fmaster.zip)到本地解压后便可以作为笔记库的根目录。
 
 通过以上两种方式建立 Foam 笔记库，并在 VSCode 中打开笔记库根目录后，软件会自动提示安装 Foam 和其他推荐的扩展（包括：Markdown All in One、Markdown Emoji、Paste Image、Todo Tree 和 Spell Right 等），可以选择全部或按需安装。
 
