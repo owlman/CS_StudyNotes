@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在VSCode中实践双链笔记.md",
+                "file": "01_Literature/posts/在VSCode中实践双链笔记.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在VSCode中实践双链笔记.md"
+                "file": "01_Literature/posts/在VSCode中实践双链笔记.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在VSCode中实践双链笔记.md",
+                "file": "01_Literature/posts/在VSCode中实践双链笔记.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/在VSCode中实践双链笔记.md",
+                "file": "01_Literature/posts/在VSCode中实践双链笔记.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
