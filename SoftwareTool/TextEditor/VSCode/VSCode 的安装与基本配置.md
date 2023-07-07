@@ -18,19 +18,13 @@ VSCode 是一款微软公司于 2015 年推出的、现代化的代码编辑器�
 
 ![VSCode 的插件安装界面](./img/vscode_plugin.png)
 
-根据本人的具体工作需要，笔者在这里会选择安装以下 VSCode 插件。
+根据具体的工作需要，笔者在这里会选择安装以下 VSCode 插件。
 
-- **Chinese (Simplified) Language Pack**：简体中文语言包，用于将VSCode编辑器的界面变成中文。
+- **Chinese (Simplified) Language Pack**：简体中文语言包，用于将 VSCode 编辑器的界面变成中文。
 - **GitLens**：该插件用于查看开发者们在Git版本控制系统中的提交记录。
 - **vscode-icons**：该插件用于为不同类型的文件加上不同的图标，以方便文件管理。
 - **Tabnine AI Autocomplete**：这是一款基于 AI 的自动代码补全插件，可以帮助开发者们更快地撰写代码。
 - **Path Intellisense**：该插件用于在代码中指定文件路径时执行自动补全功能。
-
-- **rust syntax**：该插件可以为 Rust 代码文件提供语法高亮功能。
-- **crates**：该插件可以帮助开发者分析当前项目的依赖是否是最新的版本。
-- **rust test lens**：该插件可以用于快速运行某个 Rust 测试。
-- **rust-analyzer**：该插件会实时编译和分析我们编写的 Rust 代码，提示代码中的错误，并对类型进行标注。
-- **better toml**：由于 Rust 开发使用 toml 格式的文件来充当项目配置文件，所以我们通常会需要一个能方便用于编辑该格式文件的插件。
 
 - **HTML Boilerplate**：该插件用于在编写HTML代码时执行一些常见代码片段的自动生成。
 - **HTML CSS Support**：该插件用于在编写CSS代码时执行自动补全功能。
@@ -39,5 +33,22 @@ VSCode 是一款微软公司于 2015 年推出的、现代化的代码编辑器�
 - **ESlint**：该插件用于自动检测JavaScript代码中存在的语法问题与格式问题。
 - **View In Browser**：该插件可用于快速启动系统默认的网页浏览器，以便即时查看当前正在编写的HTML文档。
 - **Live Server**：该插件可用于在当前计算机上快速构建一个简单的网页服务器，并自动将当前项目部署到该服务器上。
+- **vetur**：该插件可实现针对`.vue`文件中的代码进行语法错误检查、代码高亮与码自动补全（配合 ESLint 插件使用效果更佳）。
+- **npm**：该插件可用`package.json`来校验安装的 npm 包，确保安装包的版本正确。
+- **Node.js Modules IntelliSense**：该插件可用于在 JavaScript 和 TypeScript 导入声明时执行自动补全功能。
+- **Node.js Exec**：该插件可用 Node 命令执行当前文件或被我们选中的代码。
+- **Node Debug**：该插件可实现直接在 VSCode 编辑器中调试后端的 JavaScript 代码。
+
+- **Python extension for Visual Studio Code**：该插件由 Microsoft 官方发布并维护，它提供了代码分析，高亮，规范化等一系列方便程序员们编写 Python 代码的基本功能。
+- **LiveCode for Python**：该插件支持在不运行 Python 代码的情况下实时展示代码中所使用的每一个变量值，且能够识别`print()`并自动打印。这种交互式的编程体验对于初学者们可能会更友好一些。
+- **Python Snippets**：该插件可以让我们的 Python 编程更加高效。它包含了大量的内置方法，以及`string`、`list`、`sets`、`tuple`、`dictionary`、`class`代码片段，并且还为每个代码段提供至少一个示例。
+- **Python Indent**：如果对 VSCode 编辑器对 Python 代码所做的自动缩进格式不太满意，就可以利用这个插件来获得更好的编码体验。
+- **Pip Manager**：该插件能够很好地帮助我们在 VSCode 编辑器中管理在编写 Python 代码时会用到的第三方扩展。
+
+- **rust syntax**：该插件可以为 Rust 代码文件提供语法高亮功能。
+- **crates**：该插件可以帮助开发者分析当前项目的依赖是否是最新的版本。
+- **rust test lens**：该插件可以用于快速运行某个 Rust 测试。
+- **rust-analyzer**：该插件会实时编译和分析我们编写的 Rust 代码，提示代码中的错误，并对类型进行标注。
+- **better toml**：由于 Rust 开发使用 toml 格式的文件来充当项目配置文件，所以我们通常会需要一个能方便用于编辑该格式文件的插件。
 
 当然，VSCode 编辑器的插件浩若繁星，读者也可以根据自己的喜好来安装其他功能类似的插件，只要这些插件后面的项目实践需求即可。除此之外，Atom 与 Submit Text 这两款编辑器也与 VSCode 编辑器有着类似的插件生态系统和使用方式，如果读者喜欢的话，也可以使用它们来打造属于自己的项目开发工具，方法是大同小异的。
