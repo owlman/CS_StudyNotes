@@ -26,9 +26,14 @@ VSCode 是一款微软公司于 2015 年推出的、现代化的代码编辑器�
 - **Tabnine AI Autocomplete**：这是一款基于 AI 的自动代码补全插件，可以帮助开发者们更快地撰写代码。
 - **Path Intellisense**：该插件用于在代码中指定文件路径时执行自动补全功能。
 
-- **Markdown All in One**：
+- **Markdown All in One**：该插件·是个大一统型的扩展，集成了撰写 Markdown 时所需要的大部分功能，是 Markdown 类插件中下载榜榜首。可认为是 VSCode 中的 Markdown 必备扩展。
+- **markdownlint**：这是个功能强大的 Markdown 语法检查器，可以帮助你书写出规范的文档，同时避免书写错误导致文档无法渲染。个人观点，认为这个也是必装扩展。
 - **Markdown PDF**：
 - **Markdown+Math**：
+- **Paste Image**：
+- **Zhihu On VSCode**：可用于 Markdown 在知乎上一键发布，尤其适合存在大量图片和代码块的帖子，当然也在 VSCode 里看帖摸鱼。
+比之曾经的初代扩展，其最有特色的功能之一是，支持元数据，可以在本地修改已经发布的帖子。
+
 
 - **HTML Boilerplate**：该插件用于在编写HTML代码时执行一些常见代码片段的自动生成。
 - **HTML CSS Support**：该插件用于在编写CSS代码时执行自动补全功能。
