@@ -27,6 +27,8 @@ VSCode 是一款微软公司于 2015 年推出的、现代化的代码编辑器�
 - **Path Intellisense**：该插件用于在代码中指定文件路径时执行自动补全功能。
 
 - **Markdown All in One**：
+- **Markdown PDF**：
+- **Markdown+Math**：
 
 - **HTML Boilerplate**：该插件用于在编写HTML代码时执行一些常见代码片段的自动生成。
 - **HTML CSS Support**：该插件用于在编写CSS代码时执行自动补全功能。
