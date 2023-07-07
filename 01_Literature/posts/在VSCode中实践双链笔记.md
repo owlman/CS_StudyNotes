@@ -1,6 +1,15 @@
-# VSCode 中的双链笔记实践
+# 在 VSCode 中实现双链笔记
 
-近年来，随着「卡片盒笔记系统」及其相关方法论的兴起（[[卡片盒笔记法介绍|相关介绍]]），和人们对更有效地记录笔记的需求的高涨，笔记软件的市场呈现出推陈出新和自我革新的局面。不仅有 Roam Research 和 Obsidian 等后起之秀凭借对这两种笔记法的率先支持获得广泛欢迎，一些传统笔记软件，例如 Notion，也在逐步加入相应的功能支持。在这些丰富的笔记软件选择之外，还有另一个值得关注的软件，也通过特殊的方式实现了这些功能需求，那就是微软出品的文本编辑器 VSCode。VSCode 最为强大之处，就在于它可以通过丰富的扩展，将其定制成为自己专属且特化的应用。这篇文章要介绍的，便是在 VSCode 上实现「卡片盒笔记系统」功能的扩展：Foam。
+---
+ **文献说明：**
+
+- 原文出处：`https://client.sspai.com/post/70956#!`；
+- 二次加工：改善文章结构、标注文章要点；
+- 关联文献：[[卡片盒笔记法介绍]]；
+
+---
+
+近年来，随着「卡片盒笔记系统」及其相关方法论的兴起，人们对更有效地记录笔记的需求的高涨，笔记软件的市场呈现出推陈出新和自我革新的局面。不仅有 Roam Research 和 Obsidian 等后起之秀凭借对这两种笔记法的率先支持获得广泛欢迎，一些传统笔记软件，例如 Notion，也在逐步加入相应的功能支持。在这些丰富的笔记软件选择之外，还有另一个值得关注的软件，也通过特殊的方式实现了这些功能需求，那就是微软出品的文本编辑器 VSCode。==VSCode 最为强大之处，就在于它可以通过丰富的扩展，将其定制成为自己专属且特化的应用==。这篇文章要介绍的，便是在 VSCode 上实现「卡片盒笔记系统」功能的扩展：Foam。
 
 在 [Foam 插件的官方主页](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2F) 上，Foam 被定义为「**受 Roam Research 启发**的、依托于 VSCode 和 GitHub 的、**管理和分享**个人知识的系统」。你可以用它来组织研究、记录笔记或者在网络上发布内容。这篇文章中我们将主要把 Foam 作为构建卡片盒笔记系统的工具。
 
@@ -8,9 +17,7 @@
 
 ### 使用 VSCode
 
-Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行。笔者的 VSCode 主要用于编写代码，配置繁重，另一方面也为了实现不同工作区的隔离，因此选择安装 VSCode 的开源分支 [VSCodium](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2FVSCodium%2Fvscodium)（下文统一称 VSCode）。
-
-VSCode 安装成功并启动后，首先要要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)更改为 VSCode 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（此处可参考《[2021 年最受欢迎的 15 个 VSCode 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》这篇文章）。另外，VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
+Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行。笔者的 VSCode 主要用于编写代码，配置繁重，另一方面也为了实现不同工作区的隔离，因此选择安装 VSCode 的开源分支 [VSCodium](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2FVSCodium%2Fvscodium)（下文统一称 VSCode）。在VSCode 安装成功并启动后，首先要做的是点击侧边栏扩展图标（需要注意 VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?target=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)更改为 VSCode 的扩展源），搜索并安装安装简体中文语言包和自己喜欢的颜色主题（此处可参考《[2021 年最受欢迎的 15 个 VSCode 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》这篇文章）。另外，VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
 
 一个标准的 VSCode 项目（对于我们就是 Foam 笔记库），其配置文件位于项目文件夹（笔记库的根目录）下的 `.vscode` 文件夹下。在这篇文章中我们主要需要使用两个文件：`settings.json`（项目的配置文件）和 `foam-snippets.code-snippets` 文件（用户代码片段）。
 
@@ -41,9 +48,7 @@ VSCode 安装成功并启动后，首先要要做的是点击侧边栏扩展图�
 
 ### 初步上手
 
-基础配置完成后，让我们开始了解 Foam 的基本功能和操作。
-
-Foam 具备一般卡片盒笔记软件的常用功能，如 Markdown 支持、双向链接、知识图谱、标签、Daily Note 等，且使用体验比较良好。
+基础配置完成后，让我们开始了解 Foam 的基本功能和操作。Foam 具备一般卡片盒笔记软件的常用功能，如 Markdown 支持、双向链接、知识图谱、标签、Daily Note 等，且使用体验比较良好。
 
 #### 创建新的笔记
 
@@ -140,13 +145,10 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 一条代码片段通常包含这些字段：
 
-`"scope"`，编辑这些格式的文件时，该代码片段生效；
-
-`"prefix"`，键入该字段时会显示该代码片段的建议；
-
-`"body"`，该代码片段的内容；
-
-`"description"`，对该代码片段的描述。
+- `"scope"`，编辑这些格式的文件时，该代码片段生效；
+- `"prefix"`，键入该字段时会显示该代码片段的建议；
+- `"body"`，该代码片段的内容；
+- `"description"`，对该代码片段的描述。
 
 个人的两个用例是为笔记创建元数据和在笔记中插入时间戳，仅供参考。
 
