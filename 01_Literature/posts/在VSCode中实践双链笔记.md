@@ -190,9 +190,7 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 ### 创建和使用模板
 
-和 Roam Research 与 Obsidian 一样，在 Foam 中也可以创建和使用模板。在命令面板执行 `Foam: Create New Note From template` 命令即可从现有的模板创建笔记。Foam 的模板文件位于笔记库根目录的 `.foam/templates` 路径下。Foam 的模板同样支持 VSCode 代码片段中预定义的变量。
-
-以 Daily Note 为例，在模板文件夹路径下创建 `daily-note.md` 文件，便可以开始自定义这一模板。我的 Daily Note 模板定义如下：
+和 Roam Research 与 Obsidian 一样，==在 Foam 中也可以创建和使用模板。在命令面板执行 `Foam: Create New Note From template` 命令即可从现有的模板创建笔记==。Foam 的模板文件位于笔记库根目录的 `.foam/templates` 路径下。Foam 的模板同样支持 VSCode 代码片段中预定义的变量。以 Daily Note 为例，在模板文件夹路径下创建 `daily-note.md` 文件，便可以开始自定义这一模板。我的 Daily Note 模板定义如下：
 
 ![](https://cdn.sspai.com/2022/01/14/0a829d4a7c2c4bbdb53b8b8e5c4a1c1b.png?imageView2/2/w/1120/q/40/interlace/1/ignore-error/1)
 
@@ -207,28 +205,6 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 ```
 
 也可以在 Foam 中定义其他模板，如 Todo List、Weekly Note 等，都会极大地便利个人的日常学习和各项工作。
-
-### 使用 note-macros 扩展（不推荐）
-
-除了使用 Foam 模板，官方也提供了从 note-macros 扩展快速创建新笔记的选择。note-macros 并不是配置 Foam 时就安装的扩展，因此需要自行安装。要创建由 note-macros 宏定义的笔记，只需在命令面板执行 `Note Macros: Run A Macro` 命令，然后选择自定义的宏即可。也可以为特定的宏绑定快捷键，像使用 `Alt + D` 创建 Daily Note 一样快速创建新笔记。
-
-要创建自定义的宏，需要在配置文件中添加相应的字段。官方提供了从 note-macros 创建 Weekly Note 的用例：
-
-```json
-"note-macros": {
-    "Weekly": [
-        {
-            "type": "note",
-            "directory": "Weekly",
-            "extension": ".md",
-            "name": "weekly-note",
-            "date": "yyyy-W"
-        }
-    ]
-}
-```
-
-不过需要注意的是，这种方式无法在创建笔记的同时创建笔记的元数据（note-macro 扩展的开发者虽然规划了这一功能，但实际上该扩展项目已经 17 个月没有更新了），需要自己定义相应的代码片段来实现快捷输入，而且无法自定义文件名的格式。总而言之，目前并不推荐使用这种方法来创建笔记模板。
 
 ## 从其它源获取内容
 
