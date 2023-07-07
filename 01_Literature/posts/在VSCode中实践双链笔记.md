@@ -32,7 +32,7 @@ Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.vi
 
 ### 配置笔记库
 
-下面，我们开始来具体演示如何建立 Foam 笔记库。根据是否使用 GitHub 进行版本控制，分为两种方案。
+下面，我们开始来具体演示如何建立 Foam 笔记库。==根据是否使用 GitHub 进行版本控制，读者可以自行从以下两种方案中选择一种来执行。
 
 - 在 GitHub 上建立笔记库：使用官方提供的 [foam-template](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template) 在自己的 GitHub 上建立仓库，可以选择是否将仓库设为私有库。仓库建立后，将其 clone 到本地并在 VSCode 中打开。这样以后就可以通过 GitHub 对你的笔记库进行版本控制，也可以通过 Github Pages 或其他静态网页服务发布笔记。
 - 在本地使用 Foam：鉴于国内的网络环境和学习 git 操作的学习成本，也可以选择在本地建立 Foam 笔记库。下载[官方模板](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template%2Farchive%2Fmaster.zip)到本地解压后便可以作为笔记库的根目录。
@@ -41,15 +41,15 @@ Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.vi
 
 ### 初步上手
 
-基础配置完成后，让我们开始了解 Foam 的基本功能和操作。Foam 具备一般卡片盒笔记软件的常用功能，如 Markdown 支持、双向链接、知识图谱、标签、Daily Note 等，且使用体验比较良好。
+在基础配置完成后，让我们开始来了解 Foam 的基本功能和操作。==Foam 具备一般卡片盒笔记软件的常用功能，如 Markdown 支持、双向链接、知识图谱、标签、Daily Note 等，且使用体验比较良好==。
 
 #### 创建新的笔记
 
-要在 Foam 中创建新的笔记，可以使用快捷键 `Ctrl + Shift + P` 打开命令面板，输入并执行 `Foam: Create New Note` 命令，即可在当前文件夹下创建新的笔记文件（`.md` 格式）。当然也可以在侧边栏「资源管理器」面板或者通过快捷键 `Ctrl + N` 实现相应的功能。需要注意的是，因为 Foam 本地化程度有限，个人不推荐使用中文的文件名。官方用例中使用的文件名有两种：`title-case-name` 或 `Title Case Name`。
+==要在 Foam 中创建新的笔记，可以使用快捷键 `Ctrl + Shift + P` 打开命令面板，输入并执行 `Foam: Create New Note` 命令，即可在当前文件夹下创建新的笔记文件（`.md` 格式）==。当然也可以在侧边栏「资源管理器」面板或者通过快捷键 `Ctrl + N` 实现相应的功能。需要注意的是，因为 Foam 本地化程度有限，个人不推荐使用中文的文件名。官方用例中使用的文件名有两种：`title-case-name` 或 `Title Case Name`。
 
 #### 创建双向链接
 
-在 Foam 中创建一个双向链接与在其他软件中无异，即使用 `[[]]` 符号。如果被 `[[]]` 包括的文本有对应的笔记，就会成为一个双向链接。当将鼠标移动并悬浮在文本上时，会显示这一条目的预览，可以按下 `Ctrl + 单击` 或鼠标右键选择「转到定义」来打开这条笔记；如果没有对应的笔记，则会创建一个占位符，按下`Ctrl + Click` 创建可以对应的条目。
+==在 Foam 中创建一个双向链接与在其他软件中无异，即使用 `[[]]` 符号==。如果被 `[[]]` 包括的文本有对应的笔记，就会成为一个双向链接。当将鼠标移动并悬浮在文本上时，会显示这一条目的预览，可以按下 `Ctrl + 单击` 或鼠标右键选择「转到定义」来打开这条笔记；如果没有对应的笔记，则会创建一个占位符，按下`Ctrl + Click` 创建可以对应的条目。
 
 ![](https://cdn.sspai.com/2022/01/14/3cf4c34d2df8a7a22dab9bb4f37e02a9.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
 
