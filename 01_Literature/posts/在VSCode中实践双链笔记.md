@@ -41,7 +41,7 @@ Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.vi
 
 ### 初步上手
 
-在基础配置完成后，让我们开始来了解 Foam 的基本功能和操作。==Foam 具备一般卡片盒笔记软件的常用功能，如 Markdown 支持、双向链接、知识图谱、标签、Daily Note 等，且使用体验比较良好==。
+在基础配置完成后，让我们开始来了解 Foam 的基本功能和操作。==Foam 具备一般卡片盒笔记软件的常用功能，如 Markdown 支持、双向链接、知识图谱、标签系统、Daily Note 等，且使用体验比较良好==。
 
 #### 创建新的笔记
 
@@ -63,7 +63,7 @@ Foam 并不支持 Roam Research 式的块引用，但支持标题引用，使用
 
 #### 笔记元数据
 
-使用 Markdown 文档时，在笔记头部使用 YAML 语言格式的字段来定义这个文档的元数据是一个良好的习惯，Foam 也支持这一功能（note property）。其格式如下：
+==使用 Markdown 文档时，在笔记头部使用 YAML 语言格式的字段来定义这个文档的元数据是一个良好的习惯==，Foam 也支持这一功能（note property）。其格式如下：
 
 ```yaml
 ---
@@ -84,25 +84,25 @@ tags: tag1, tag2, tag3
 
 ![](https://cdn.sspai.com/2022/01/14/a032170d973e9793d88c3601b5bea487.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
 
-使用颜色区分不同 type 的笔记
+图 3：使用颜色区分不同 type 的笔记
 
 #### 知识图谱
 
-在命令面板执行 `Foam: Show Graph` 命令来打开 Foam 的知识图谱，还可以通过页面右上角的过滤控件进行图谱中显示的节点进行控制。同样支持缩放和拖拽等操作。
+==在命令面板执行 `Foam: Show Graph` 命令来打开 Foam 的知识图谱==，还可以通过页面右上角的过滤控件进行图谱中显示的节点进行控制。同样支持缩放和拖拽等操作。
 
 ![](https://cdn.sspai.com/2022/01/14/da0d81a9b81f2fb5825b3a5a360d5ab3.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
 
-Foam 中的知识图谱
+图 4：Foam 中的知识图谱
 
 #### Daily Note
 
-与 Roam Research 类似，Foam 也支持快速记录 Daily Note。在命令面板执行 `Foam: Open Daily Note` 命令或按下快捷键 `Alt + D`，即可创建或打开今日的 Daily Note。在此处可以记录今天的任务、灵感或其他想要记录的内容。Daily Note 格式可以通过模板功能自定义（下文会介绍如何在 Foam 中自定义模板）。
+与 Roam Research 类似，==Foam 也支持快速记录 Daily Note。在命令面板执行 `Foam: Open Daily Note` 命令或按下快捷键 `Alt + D`，即可创建或打开今日的 Daily Note==。在此处可以记录今天的任务、灵感或其他想要记录的内容。Daily Note 格式可以通过模板功能自定义（下文会介绍如何在 Foam 中自定义模板）。
 
 在 Daily Note 笔记中，键入 `/` 会显示一些日期建议，通过这种方法可以快速插入指向指定日期的双向链接。
 
 ![](https://cdn.sspai.com/2022/01/14/cc2c50280e30638f25e679b85a5e9345.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
 
-键入 / 来快速插入指向对应日期的链接
+图 5：键入 / 来快速插入指向对应日期的链接
 
 #### 侧边栏面板
 
@@ -114,7 +114,7 @@ Foam 的侧边栏面板包含这几项功能：文件管理、大纲、时间线
 
 ![](https://cdn.sspai.com/2022/01/14/657a8fc52a3454515aa2bda1cc2c487a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
 
-Foam 的侧边栏面板
+图 6：Foam 的侧边栏面板
 
 ## 生产力从美化开始
 
@@ -128,7 +128,7 @@ Foam 的项目配置文件是位于笔记库根目录下的 `.vscode/settings.j
 
 ![](https://cdn.sspai.com/2022/01/14/1dd648d69a06e81950919c851cb87be0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1)
 
-Cascadia Code 字体支持连写字符
+图 7：Cascadia Code 字体支持连写字符
 
 ## 使用代码片段和模板来提高效率
 
@@ -196,7 +196,7 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 ![](https://cdn.sspai.com/2022/01/14/0a829d4a7c2c4bbdb53b8b8e5c4a1c1b.png?imageView2/2/w/1120/q/40/interlace/1/ignore-error/1)
 
-我的 Daily Note 模板
+图 8：我的 Daily Note 模板
 
 除此之外，Daily Note 的一些属性也可以在项目的配置文件中修改，如 Daily Note 的存放位置和文件名格式：
 
@@ -234,13 +234,8 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 虽然我并不建议将来自外界的信息不经消化吸收直接保存在笔记库中，但 Foam 毕竟提供了这个选择并且确实存在这种需求，因此还是稍作提及。
 
-### 从网页捕获内容
-
-像其他笔记软件大多提供了剪辑网页内容的功能一样，Foam 也可以保存来自网页的内容：通过 [MarkDownload](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Fdeathau%2Fmarkdownload) 这一浏览器扩展。MarkDownload 可以获取整个网页的主体文本、或只截取想要保存的文本为 Markdown 文件，并为其添加元数据。在扩展选项中可以调整元数据的格式为与 Foam 一致，从而无缝衔接 Foam 笔记库。
-
-### 从 iOS 端输入内容
-
-如果将 Foam 笔记库托管在 GitHub 上，我们就可以从 iOS 端输入内容并将其推送到库中。Foam 官方给出了 [通过 Shortcuts](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2Frecipes%2Fcapture-notes-with-shortcuts-and-github-actions) 和 [通过 Drafts Pro](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2Frecipes%2Fcapture-notes-with-drafts-pro) 输入内容两种解决方案。我目前手边并没有可用的 iOS 设备，因此就不再展开。
+- 从网页捕获内容：像其他笔记软件大多提供了剪辑网页内容的功能一样，==Foam 也可以保存来自网页的内容：通过 [MarkDownload](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Fdeathau%2Fmarkdownload) 这一浏览器扩展。MarkDownload 可以获取整个网页的主体文本、或只截取想要保存的文本为 Markdown 文件，并为其添加元数据==。在扩展选项中可以调整元数据的格式为与 Foam 一致，从而无缝衔接 Foam 笔记库。
+- 从 iOS 端输入内容：如果将 Foam 笔记库托管在 GitHub 上，我们就可以从 iOS 端输入内容并将其推送到库中。==Foam 官方给出了 [通过 Shortcuts](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2Frecipes%2Fcapture-notes-with-shortcuts-and-github-actions) 和 [通过 Drafts Pro](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2Frecipes%2Fcapture-notes-with-drafts-pro) 输入内容两种解决方案==。
 
 ## 并不完美但未来可期
 
