@@ -206,7 +206,7 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 "foam.openDailyNote.onStartup": true // 启动项目时自动打开 Daily Note
 ```
 
-也可以在 Foam 中定义其他模板，如 Todo List、Weekly Note 等1，都会极大地便利个人的日常学习和各项工作。
+也可以在 Foam 中定义其他模板，如 Todo List、Weekly Note 等，都会极大地便利个人的日常学习和各项工作。
 
 ### 使用 note-macros 扩展（不推荐）
 
@@ -214,7 +214,7 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 要创建自定义的宏，需要在配置文件中添加相应的字段。官方提供了从 note-macros 创建 Weekly Note 的用例：
 
-```
+```json
 "note-macros": {
     "Weekly": [
         {
@@ -241,4 +241,4 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 与 Roam Research 和 Obsidian 等专业笔记软件相比，Foam 或许没有独特优势，甚至在某些方面支持并不完善。但好在作为一个开源项目，它能够深植良好的社区环境，吸收用户的建议与反馈，让每个人都成为项目的贡献者。
 
-目前国内介绍和分享 Foam 使用经验的内容比较少，本文仅作为抛砖引玉，让更多人能认识到这款工具。毕竟对用户来说，多一种选择本身就是一件好事，而对于开源项目的开发者而言，更多人参与其中本身就是开源理念的价值所在。如果你也想推动 Foam 项目的进展，可以关注他们的 [开发路线图](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2Fdev%2Froadmap)，或者加入他们的 [Discord Server](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Fjoin-discord%2Fw)。
+目前国内介绍和分享 Foam 使用经验的内容比较少，本文仅作为抛砖引玉，让更多人能认识到这款工具。毕竟对用户来说，多一种选择本身就是一件好事，而对于开源项目的开发者而言，更多人参与其中本身就是开源理念的价值所在。==如果你也想推动 Foam 项目的进展，可以关注他们的 [开发路线图](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Ffoam%2Fdev%2Froadmap)，或者加入他们的 [Discord Server](https://client.sspai.com/link?target=https%3A%2F%2Ffoambubble.github.io%2Fjoin-discord%2Fw)==。
