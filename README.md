@@ -5,24 +5,19 @@
 - **[[00_ToDoList]]**：本笔记库的任务列表
 - **00_ToDoOrganized**：待整理的资料
 - **01_Literature**：整理过的参考文献
-  - *posts*：文章资料
-    - [[卡片盒笔记法介绍|关于卡片盒笔记系统的官方介绍（中文版）]]
-    - [[学习如何阅读]]
-  - *books*：书籍文献
-  - *videos*：视频资料
-  - *person*：人物档案
-    - [[尼克拉斯·卢曼]]
-- **Writing & Reading**：读与写的心得
-  - *Publication*：出版相关
+  **Writing & Reading**：读与写的心得
+  - *Publication*：出版感言
     - [[《元素模式》译后记：回答一些问题]]
     - [[《JavaScript 全栈开发》出版感言]]
     - [[《Node.js 后端全程实战》自序]]
-  - *ReadingComments*：读书评论
+  - *ReadingComments*：阅读笔记
     - [[读《黑客与画家》：书呆子的正名]]
     - [[读《Just For Fun》：学习即游戏]]
     - [[读《C 程序设计语言》：技术书籍的写作典范]]
+    - [[学习如何阅读|（翻译）卢曼：学习如何阅读]]
   - *WritingExperience*：写作实践
     - [[关于卡片盒笔记法的研究]]
+    - [[卡片盒笔记法介绍|（翻译）关于卡片盒笔记系统的官方介绍]]
 - **Questions & Answers**：问与答的记录
   - [[怎样进行有意义的技术讨论]]
   - [[什么人适合从事计算机科学研究]]
@@ -71,7 +66,7 @@
     - [[关于自动化测试及其书籍推荐]]
     - 基础理论研究
       - [[基于自动化技术的测试用例设计]]
-    - 开发框架研究
+    - 测试框架研究
       - [[Pytest+Jenkins 学习笔记]]
       - [[Robot 框架学习笔记]]
       - [[Selenium 学习笔记]]·
@@ -83,7 +78,7 @@
 - **SoftwareTool**：软件工具研究
   - *Contaner*：容器使用研究
     - [[Docker 学习笔记]]
-    - [[Kubernetes 研究笔记]] 
+    - [[Kubernetes 研究笔记]]
   - *DevelopmentTool*：开发工具研究
     - [[Clang 学习笔记]]
     - [[Makefile 简易教程]]
