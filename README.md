@@ -1,6 +1,6 @@
 # 计算机技术研究笔记
 
-这是一个基于 Obsidian 系统建立的笔记库，存放的是本人在研究计算机技术过程中所写的各种学习笔记与代码示例。整个项目按笔记分类形成以下目录结构：
+由于这是一个基于双链功能建立的笔记库，因此建议各位看官使用 [Obsidian 笔记软件](https://obsidian.md/)或者安装了 [Foam 插件](https://foambubble.github.io/foam/)的 VSCode 编辑器来使用这个笔记项目，该项目中存放的是本人在研究计算机技术过程中所写的各种笔记与代码示例。整个项目按笔记分类形成以下目录结构：
 
 - **[[00_ToDoList]]**：本笔记库的任务列表
 - **00_ToDoOrganized**：待整理的资料
@@ -23,9 +23,9 @@
   - [[什么人适合从事计算机科学研究]]
   - [[关于国内技术类书籍的质量问题]]
   - [[人工智能的可怕与不可怕]]
-- **ArtificialIntelligence**：人工智能研究
+- **ArtificialIntelligence**：关于人工智能的研究
   - [[关于人工智能的研究及其书籍推荐]]
-- **OperatingSystem**：操作系统研究
+- **OperatingSystem**：关于操作系统的研究
   - *UNIX-like*：类 UNIX 系统研究
     - [[关于类 UNIX 系统的学习及其推荐书目]]
     - Linux：Linux 项目研究
@@ -36,7 +36,7 @@
     - ShellTool：终端环境研究
       - [[Cygwin 研究笔记]]
       - [[PowerShell 研究笔记]]
-- **Programming**：编程技术研究
+- **Programming**：关于编程技术的研究
   - *Methodolgy*：编程方法研究
     - [[关于编程方法论及其推荐书目]]
   - *Algorithms*：计算机算法研究
@@ -50,7 +50,7 @@
   - *GUI_Dev*：图形化界面开发
     - 开发框架研究
       - [[Electron 学习笔记]]
-  - *Client-Server*：C/S 开发架构研究
+  - *Client-Server*：基于C/S 架构的开发
     - [[关于客户机-服务器编程及其书籍推荐]]
     - 基础理论研究
       - [[RESTful API 设计]]
@@ -62,7 +62,7 @@
       - [[Vue 2.x 学习笔记]]
       - [[vue-cli 与 Vite 学习笔记]]
       - [[Webpack 学习笔记]]
-  - *AutomatedTest*：自动化测试研究
+  - *AutomatedTest*：自动化测试
     - [[关于自动化测试及其书籍推荐]]
     - 基础理论研究
       - [[基于自动化技术的测试用例设计]]
@@ -70,12 +70,12 @@
       - [[Pytest+Jenkins 学习笔记]]
       - [[Robot 框架学习笔记]]
       - [[Selenium 学习笔记]]·
-- **SoftwareEngineering**：软件工程研究
+- **SoftwareEngineering**：关于软件工程的研究
   - [[关于软件工程及其书籍推荐]]
   - *OpenSource*：开源文化研究
     - [[关于开源许可协议的研究]]
     - [[《大教堂与集市》：软件工程的另一种选择]]
-- **SoftwareTool**：软件工具研究
+- **SoftwareTool**：关于软件工具的研究
   - *Contaner*：容器使用研究
     - [[Docker 学习笔记]]
     - [[Kubernetes 研究笔记]]
