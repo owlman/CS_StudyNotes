@@ -15,7 +15,7 @@ VSCode 是一款微软公司于 2015 年推出的、现代化的代码编辑器�
 
 然后，读者需要根据自己所在的操作系统平台来下载相应的安装包。待下载完成之后，我们就可以通过鼠标双击安装包的方式来启动它的图形化安装向导了。在安装的开始阶段，安装向导会要求用户设置一些选项，例如选择程序的安装目录、是否在系统中添加环境变量（如果读者想从命令行终端中启动 VSCode 编辑器，就需要激活这个选项）等，大多数时候只需采用默认选项，直接一路点击「Next」就可以完成安装了。
 
-当然，如果读者希望实现不同工作区的隔离，也可以选择安装 VSCode 的开源分支 [VSCodium](https://github.com/VSCodium/vscodium)。这里需要注意的是，VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?arget=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)中的步骤将其更改为 VSCode 的扩展源。然后就可以搜索并安装自己喜欢的插件和主题了（关于主题的选择，读者可参考《[2021 年最受欢迎的 15 个 VSCode 主题排行榜](https://client.sspai.com/link?target=https%3A%2F%2Fwww.oschina.net%2Fnews%2F175861%2Fmost-popular-vscode-themes)》这篇文章中的推荐）。
+当然，如果读者希望实现不同工作区的隔离，也可以选择安装 VSCode 的开源分支 [VSCodium](https://github.com/VSCodium/vscodium)。这里需要注意的是，VSCodium 开箱配置的扩展源与 VSCode 并不一致，可以参考[这篇文章](https://client.sspai.com/link?arget=https%3A%2F%2Fblog.csdn.net%2Fpythonyzh2019%2Farticle%2Fdetails%2F117395923)中的步骤将其更改为 VSCode 的扩展源。然后就可以搜索并安装自己喜欢的插件和主题了（关于主题的选择，读者可参考《[2022 年的 VSCode 主题排行榜](https://zhuanlan.zhihu.com/p/553669477)》这篇文章中的推荐）。
 
 ## 插件配置
 
@@ -31,7 +31,7 @@ VSCode 是一款微软公司于 2015 年推出的、现代化的代码编辑器�
   - **vscode-icons**：该插件用于为不同类型的文件加上不同的图标，以方便文件管理。
   - **Tabnine AI Autocomplete**：这是一款基于 AI 的自动代码补全插件，可以帮助开发者们更快地撰写代码。
   - **Path Intellisense**：该插件用于在代码中指定文件路径时执行自动补全功能。
-  - **Ayu**：一款美观、简洁的 VSCode 主题插件。
+  - **Bracket Light Pro**：一款美观、简洁的 VSCode 主题插件。
 
 - **与写作相关的插件**：
   - **Markdown All in One**：该插件是个大一统型的扩展，它集成了撰写 Markdown 时所需要的大部分功能，可被认为是在 VSCode 中使用 Markdown 来开展写作类工作时的必备插件。
