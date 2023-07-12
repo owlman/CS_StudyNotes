@@ -1,6 +1,6 @@
 # Python 学习笔记：基础篇
 
-在这里，我将会提供一份针对 Python 语言的快速学习笔记，目的是帮助读者学习以下技能：
+承接之前在[《[[Python 学习路线图]]》](https://www.cnblogs.com/owlman/p/17546847.html)一文中的规划，接下来，我将会提供一份针对 Python 语言的快速学习笔记（该笔记将会被保存在[我个人笔记库项目](https://github.com/owlman/study_note)的`Programming/LanguageStudy/Python/QuickStart`目录下），目的是帮助读者学习以下技能：
 
 - 安装并配置好 Python 语言的运行时环境与相关的编程工具；
 - 熟练掌握 Python 语言的基本语法及其标准库的使用方法；
@@ -727,3 +727,6 @@ python get-pip.py
     ```
 
 现在，笔者已经对 Python 语言的基本用法做了一次基础性的介绍，只要读者能掌握上述内容所涉及的知识点，就足以应付日常大部分的脚本编程任务了。当然了，如果读者想更全面地掌握 Python 语言的全部特性，使其成为自己手中无往不利的工具，那就需要去阅读一下更为全面的书籍，例如挪威科技大学副教授 Magnus Lie Hetland 编写的《Python 基础教程》、《Python 算法教程》这两本书，我们在这里就不继续深入了。
+
+---
+#已完成
