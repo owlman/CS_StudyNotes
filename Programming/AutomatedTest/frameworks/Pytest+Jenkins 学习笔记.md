@@ -484,3 +484,6 @@ FAILED testScripts/test_dome.py::TestCases::testCase2 - assert 101 == 100
     图 33 设置`testOnlineResumes`任务的触发器
 
 现在，只要`buildOnlineResumes`任务完成构建动作，`testOnlineResumes`就会自动启动构建任   务。这样一来，前者负责待测软件的自动化持续集成，后者负责自动化的集成测试，至此，我们就完成了一次基于持续集成方式的自动化测试演示。当然了，在实际生产环境中，这两个任务的设置过程都要比这里演示的复杂得多，读者如有需要，还需再仔细查阅 Jenkins 的官方文档，这里基于篇幅的考虑，就不再继续展开演示了。
+
+----
+#已完成
