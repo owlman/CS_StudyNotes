@@ -260,5 +260,7 @@ scoop install main/git
 如果还不够，到官方给出的列表中查看https://github.com/rasa/scoop-directory/blob/master/by-score.md
 这是一个md文件，由于较大，无法在线查看，可以下载后自行查看（英语不好的可要头疼了）
 
-
 好了，scoop的基本使用就是这些了，希望对大家有用。使用时可以输入scoop help ，查看帮助文档自行研究。
+
+----
+#研究中

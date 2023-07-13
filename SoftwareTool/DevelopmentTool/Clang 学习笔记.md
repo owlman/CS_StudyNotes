@@ -118,3 +118,6 @@ if(os.path.exists("example")):
 然后，我们只需要在命令行终端中输入`python hello_c.py Clang`即可，如果看到输出一行“hello world”说明编译器已经可以正常工作。
 
 ![hello_c_test](./img/hello_c_test.png)
+
+----
+#已完成

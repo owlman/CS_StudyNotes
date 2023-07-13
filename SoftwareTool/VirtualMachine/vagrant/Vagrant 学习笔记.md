@@ -549,3 +549,6 @@ vagrant-vbguest (0.30.0, global)
     ```
 
 如果读者想获得上述示例的源码，也可以前往`https://github.com/owlman/vagrant-ubuntu-k8s-cluster`处获得。
+
+----
+#已完成

@@ -435,3 +435,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
     ```
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，并在其命令模式下执行`:call mkdp#util#install()`命令，然后就可以通过`:MarkdownPreview`命令来启动预览，然后用`:MarkdownPreviewStop`命令来关闭预览了。
+
+----
+#已完成
