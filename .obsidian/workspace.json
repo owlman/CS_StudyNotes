@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/VSCode 编辑器的基本配置.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/VSCode 编辑器的基本配置.md"
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/VSCode 编辑器的基本配置.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SoftwareTool/TextEditor/VSCode/VSCode 编辑器的基本配置.md",
+                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,6 +149,8 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
+    "SoftwareTool/TextEditor/VSCode/VSCode 编辑器的基本配置.md",
     "Programming/LanguageStudy/Rust/QuickStart/img/vscode_plugin.png",
     "SoftwareTool/TextEditor/VSCode/img/vscode_plugin.png",
     "SoftwareTool/TextEditor/VSCode/img/vscode_web.png",
@@ -159,7 +161,6 @@
     "SoftwareTool/TextEditor/VSCode/img/QuickStart/img/2-5.png",
     "SoftwareTool/TextEditor/VSCode/img/QuickStart/img/2-4.png",
     "SoftwareTool/TextEditor/VSCode/img/QuickStart/img/2-3.png",
-    "SoftwareTool/TextEditor/VSCode/img/QuickStart/img/2-2.png",
     "SoftwareTool/TextEditor/VSCode/img/QuickStart/img",
     "SoftwareTool/TextEditor/VSCode/img/QuickStart/Python 学习笔记：基础篇.md",
     "SoftwareTool/TextEditor/VSCode/img/QuickStart",
@@ -169,7 +170,6 @@
     "00_ToBeOrganized/00_ToDoList.md",
     "01_Literature/posts/在VSCode中实践双链笔记.md",
     "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
-    "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "wikilink.md",
     "01_LiteratureNote/person/尼克拉斯·卢曼.md",
     "01_LiteratureNote/posts/学习如何阅读.md",
