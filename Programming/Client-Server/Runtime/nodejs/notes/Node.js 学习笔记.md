@@ -12,18 +12,14 @@
   - 了解与浏览器、服务器、数据库相关的基本知识。
   - 了解 B/S 分布式应用程序架构的基本原理。
 - 学习资料：
-  - 视频教程：
-    [黑马程序员-Nodejs 教学课程](https://www.bilibili.com/video/av27670326?p=1)
-  - 书籍教材：
-    [《深入浅出 Node.js》](https://book.douban.com/subject/25768396/)
-  - 线上文档：
-    [Node.js 官方文档](http://nodejs.cn/api/)
-  - 线上论坛：
-    [cnode论坛](https://cnodejs.org/)
+  - 视频教程：[黑马程序员-Nodejs 教学课程](https://www.bilibili.com/video/av27670326?p=1)
+  - 书籍教材：[《深入浅出 Node.js》](https://book.douban.com/subject/25768396/)
+  - 线上文档：[Node.js 官方文档](http://nodejs.cn/api/)
+  - 线上论坛：[cnode论坛](https://cnodejs.org/)
 - 学习目标：
   - 开发一个 CMS 类型的后端应用。
 
-## 第 1 部分：认识 Node.js
+## 认识 Node.js
 
 这一部分笔记将致力于对 Node.js 做一个概要认知，并搭建好学习 Node.js 的开发/调试环境。
 
@@ -99,7 +95,7 @@ sudo n                    # 使用上下键切换已有版本
 
 如果一切顺利，我们打开 bash 这一类命令行终端，并在其中输入`node -v`命令并回车之后，应该就会看到相关的版本信息。
 
-## 第 2 部分：基本使用
+## 基本使用
 
 这一部分笔记将致力于记录为学习并掌握 JavaScript 在 Node.js 运行平台下的基本使用而编写的代码。
 
@@ -325,7 +321,7 @@ sudo n                    # 使用上下键切换已有版本
 
     ![Node.js 的多文件模块](img/AB-12.png)
 
-## 第 3 部分：构建 Web 服务
+## 构建 Web 服务
 
 这一部分笔记将致力于记录为学习并掌握如何在 Node.js 运行平台下构建 Web 服务而编写的代码。
 
@@ -959,7 +955,7 @@ sudo n                    # 使用上下键切换已有版本
 
     ![用Node.js处理post表单](img/AB-16.png)
 
-## 第 4 部分： 高级应用示例
+## 高级应用示例
 
 这一部分笔记将致力于记录为学习并掌握如何在 Node.js 运行平台下使用数据库和 Express 框架而编写的代码。
 
