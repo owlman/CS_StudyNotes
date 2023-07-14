@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
+                "file": "Questions&Answers/人工智能的可怕与不可怕.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md"
+                "file": "Questions&Answers/人工智能的可怕与不可怕.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
+                "file": "Questions&Answers/人工智能的可怕与不可怕.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
+                "file": "Questions&Answers/人工智能的可怕与不可怕.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,6 +149,9 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "Questions&Answers/关于ChatGPT与机器伦理学.md",
+    "Programming/Client-Server/Theories/基于HTML&CSS的响应式设计.md",
+    "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
     "Writing&Reading/WritingExperience/关于卡片盒笔记法的研究.md",
     "SoftwareTool/TextEditor/VSCode/VSCode 编辑器的基本配置.md",
     "Programming/LanguageStudy/Rust/QuickStart/img/vscode_plugin.png",
@@ -166,7 +169,6 @@
     "SoftwareTool/TextEditor/VSCode/img/QuickStart",
     "Questions&Answers/什么人适合从事计算机科学研究.md",
     "SoftwareTool/TextEditor/VSCode/VSCode 的安装与基本配置.md",
-    "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
     "00_ToBeOrganized/00_ToDoList.md",
     "01_Literature/posts/在VSCode中实践双链笔记.md",
     "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
@@ -188,8 +190,6 @@
     "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md",
     "README.md",
     "Programming/GUI_Dev/Frameworks/electronjs/notes/Electron 学习笔记.md",
-    "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md",
-    "Programming/GUI_Dev/Frameworks/QT/notes.md",
-    "Programming/LanguageStudy/Rust/QuickStart/未命名.md"
+    "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md"
   ]
 }
