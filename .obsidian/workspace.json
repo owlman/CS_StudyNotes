@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Questions&Answers/人工智能的可怕与不可怕.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Questions&Answers/人工智能的可怕与不可怕.md"
+                "file": "README.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Questions&Answers/人工智能的可怕与不可怕.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Questions&Answers/人工智能的可怕与不可怕.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,6 +149,14 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "ArtificialIntelligence/RouteMap/人工智能的研究路线图.md",
+    "OperatingSystem/Windows/ShellTool/Cygwin 使用笔记.md",
+    "OperatingSystem/Windows/ShellTool/PowerShell 使用笔记.md",
+    "OperatingSystem/Windows/ShellTool/PowerShell 笔记.md",
+    "OperatingSystem/UNIX-like/ShellTool/zsh/Zsh 使用笔记.md",
+    "OperatingSystem/UNIX-like/ShellTool/fish/Fish 使用笔记.md",
+    "OperatingSystem/UNIX-like/ShellTool/bash/Bash 使用笔记.md",
+    "Questions&Answers/人工智能的可怕与不可怕.md",
     "Questions&Answers/关于ChatGPT与机器伦理学.md",
     "Programming/Client-Server/Theories/基于HTML&CSS的响应式设计.md",
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：基础篇.md",
@@ -182,14 +190,6 @@
     "01_LiteratureNote/posts/img/2020-08-13_folgezettel-sequence.png.crdownload",
     "01_LiteratureNote/posts/卡片盒笔记法简介.md",
     "01_LiteratureNote/posts/卡片笔记写作法简介.md",
-    "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md",
-    "Writing&Reading/WritingExperience/关于卡片笔记写作法的研究.md",
-    "00_ToBeOrganized/videos/台大讲座：人工智能及其科学家.md",
-    "01_ToDoList.md",
-    "00_ToBeOrganized/Posts/Zettelkasten方法简介.md",
-    "Programming/AutomatedTest/Frameworks/Pytest+Jenkins 学习笔记.md",
-    "README.md",
-    "Programming/GUI_Dev/Frameworks/electronjs/notes/Electron 学习笔记.md",
-    "Programming/Client-Server/Frameworks/vuejs/code/00_test/vuecli2demo/README.md"
+    "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md"
   ]
 }
