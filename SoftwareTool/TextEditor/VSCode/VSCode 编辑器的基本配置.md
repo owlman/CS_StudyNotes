@@ -43,7 +43,7 @@ VSCode 是一款微软公司于 2015 年推出的、现代化的代码编辑器�
   - **博客园Cnblogs客户端**：该插件可用于 Markdown 文件在博客园上的一键发布。
   - **Foam**：这是一款*受 Roam Research 启发*的、依托于 VSCode 和 GitHub 来*管理和分享*个人知识的插件，读者可以通过参考[这篇文章](https://client.sspai.com/post/70956)来学习如何使用 Foam 插件将 VSCode 扩展为构建卡片盒笔记系统的工具。
 
-    > 关联笔记：[[在 VSCode 中实践双链笔记]]
+    > 关联笔记：[[【收藏】在 VSCode 中实践双链笔记]]
 
 
 - **与 Web 开发相关的插件**：
