@@ -1,4 +1,4 @@
-# Rust 学习笔记：基础篇（持续更新中）
+# Rust 学习笔记：快速上手篇
 
 这篇学习笔记将用于记录本人在学习 Rust 编程语言的基础部分时所编写的学习心得与代码实例。为此，我会在[本笔记库](https://github.com/owlman/study_note)项目的`Programming/LanguageStudy/`目录下创建一个名为`Rust`的目录，并在该目录下设置以下两个子目录：
 
@@ -279,8 +279,6 @@ VSCode 是一款微软公司于 2015 年推出的现代化代码编辑器，由�
     ![input_name](./img/input_output.png)
 
 下面，让我们来逐条讲解一下`main.rs`文件中的源码，看看能从其中学到哪些 Rust 语言的基本语法。
-
-### 程序流程控制
 
 ----
 #研究中

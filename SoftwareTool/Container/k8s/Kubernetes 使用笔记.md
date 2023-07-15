@@ -1,6 +1,6 @@
-# Kubernetes 研究笔记
+# Kubernetes 使用笔记
 
-在接下来的这篇笔记中，我将会介绍 Kubernetes 这一强大的容器编排工具，并学习其基本使用方法。该笔记将会被存储在`https://github.com/owlman/study_note`项目的`Software/Container`目录下一个名为的`K8s`子目录中。其具体内容将包含：
+在接下来的这篇笔记中，我将会介绍 Kubernetes 这一强大的容器编排工具，并学习其基本使用方法。该笔记将会被存储在`https://github.com/owlman/study_note`项目的`Software/Container`目录下一个名为`K8s`的子目录中。其具体内容将包含：
 
 - 了解 Kubernetes 的核心设计理念和它的基本组成结构；
 - 掌握使用 Kubernetes 构建服务器集群的基本工作流程；

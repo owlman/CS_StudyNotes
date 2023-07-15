@@ -1,6 +1,7 @@
-# Clang 学习笔记
+# Clang 使用笔记
 
 > 本文部分内容引用：
+>
 > - [中文维基百科](https://zh.wikipedia.org/wiki/Clang)。
 > - [结构化编译器前端--Clang介绍](http://blog.163.com/bjtornado@yeah/blog/static/6951048420126201578983/)。
 

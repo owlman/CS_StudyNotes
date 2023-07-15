@@ -1,4 +1,4 @@
-# Python 学习笔记：基础篇
+# Python 学习笔记：快速上手篇
 
 承接之前在[《[[Python 学习路线图]]》](https://www.cnblogs.com/owlman/p/17546847.html)一文中的规划，接下来，我将会提供一份针对 Python 语言的快速学习笔记（该笔记将会被保存在[我个人笔记库项目](https://github.com/owlman/study_note)的`Programming/LanguageStudy/Python/QuickStart`目录下），目的是帮助读者学习以下技能：
 

@@ -1,6 +1,6 @@
-# NeoVim 学习笔记
+# NeoVim 使用笔记
 
-这篇学习笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`SoftwareTool/DevelopmentTool`目录下，并予以长期维护。
+这篇笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/study_note`项目的`SoftwareTool/DevelopmentTool`目录下，并予以长期维护。
 
 ## 学习规划
 
