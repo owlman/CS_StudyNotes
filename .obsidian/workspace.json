@@ -11,12 +11,8 @@
             "id": "510fbbba8e4b212c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -84,9 +80,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "README.md"
-              }
+              "state": {}
             }
           },
           {
@@ -95,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +105,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,6 +141,9 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：快速上手篇.md",
+    "00_ToBeOrganized/00_ToDoList.md",
+    "README.md",
     "ArtificialIntelligence/RouteMap/人工智能的研究路线图.md",
     "OperatingSystem/Windows/ShellTool/Cygwin 使用笔记.md",
     "OperatingSystem/Windows/ShellTool/PowerShell 使用笔记.md",
@@ -177,7 +172,6 @@
     "SoftwareTool/TextEditor/VSCode/img/QuickStart",
     "Questions&Answers/什么人适合从事计算机科学研究.md",
     "SoftwareTool/TextEditor/VSCode/VSCode 的安装与基本配置.md",
-    "00_ToBeOrganized/00_ToDoList.md",
     "01_Literature/posts/在VSCode中实践双链笔记.md",
     "01_LiteratureNote/posts/卡片盒笔记法介绍.md",
     "wikilink.md",
@@ -188,8 +182,6 @@
     "01_LiteratureNote/books",
     "00_ToBeOrganized/img",
     "01_LiteratureNote/posts/img/2020-08-13_folgezettel-sequence.png.crdownload",
-    "01_LiteratureNote/posts/卡片盒笔记法简介.md",
-    "01_LiteratureNote/posts/卡片笔记写作法简介.md",
-    "01_LiteratureNote/posts/VS Code 中的双链笔记：Foam 使用体验分享.md"
+    "01_LiteratureNote/posts/卡片盒笔记法简介.md"
   ]
 }
