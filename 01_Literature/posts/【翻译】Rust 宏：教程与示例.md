@@ -1,11 +1,13 @@
-# 【翻译】Rust 语言中的宏
+# 【翻译】Rust 语言中的宏：示例教程
 
-> 原文标题：Macros in Rust: A tutorial with examples  
-> 原文链接：[https://blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/](https://link.zhihu.com/?target=https%3A//blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/)  
-> 公众号： Rust 碎碎念  
-> 翻译 by： Praying  
+> **文献说明：**  
+> 英文文献：[Macros in Rust: A tutorial with examples](https://link.zhihu.com/?target=https%3A//blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/) ；  
+> 参考翻译：[Rust宏：教程与示例](https://zhuanlan.zhihu.com/p/353421021#Rust%20%E5%AE%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F)；  
+> 二次加工：调整文章结构、改善翻译质量、标注文章要点；  
 
-在本文中，我们将会涵盖你需要了解的关于 Rust 宏（macro）的一切，包括对 Rust 宏的介绍和如何使用 Rust 宏的示例。  
+----
+
+在这篇文献中，我们将会涵盖你需要了解的关于 Rust 宏（macro）的一切，包括对 Rust 宏的介绍和如何使用 Rust 宏的示例。  
 
 我们会涵盖以下内容：
 
