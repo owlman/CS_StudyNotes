@@ -1,0 +1,177 @@
+/* Map colors to semantic Obsidian names */
+
+.theme-light {
+	--mono100: black;
+	--mono0: white;
+}
+.theme-dark {
+	--mono100: white;
+	--mono0: black;
+}
+
+.theme-light.minimal-light-contrast .titlebar,
+.theme-light.minimal-light-contrast.minimal-status-off .status-bar,
+.theme-light.minimal-light-contrast.is-mobile .workspace-drawer.mod-left,
+.theme-dark,
+.theme-light {
+	--background-modifier-accent:        var(--ax3);  
+	--background-modifier-border-focus:  var(--ui3);
+	--background-modifier-border-hover:  var(--ui2);
+	--background-modifier-border:        var(--ui1);
+
+	--background-modifier-form-field-highlighted: var(--bg1);
+	--background-modifier-form-field:    var(--bg1);
+	--background-modifier-success:       var(--color-green);
+
+	--background-modifier-hover:         var(--bg3);
+	--background-modifier-active-hover:  var(--bg3);
+
+	--background-primary:                var(--bg1);
+	--background-primary-alt:            var(--bg2);
+
+	--background-secondary:              var(--bg2);
+	--background-secondary-alt:          var(--bg1);
+
+	--background-table-rows:             var(--bg2);
+
+	--checkbox-color:                    var(--ax3);
+	--code-normal:                       var(--tx1);
+
+	--divider-color:                     var(--ui1);
+	--frame-divider-color:               var(--ui1);
+
+	--icon-color-active:                 var(--tx1);
+	--icon-color-focused:                var(--tx1);
+	--icon-color-hover:                  var(--tx2);
+	--icon-color:                        var(--tx2);
+	--icon-hex:                          var(--mono0);
+
+	--interactive-accent-hover:          var(--ax1);
+	--interactive-accent:                var(--ax3);
+	--interactive-hover:                 var(--ui1);
+
+	--list-marker-color:                 var(--tx3);
+
+	--modal-border-color:                var(--ui2);
+
+	--nav-item-background-active:        var(--bg3);
+	--nav-item-background-hover:         var(--bg3);
+	--nav-item-color:                    var(--tx2);
+	--nav-item-color-active:             var(--tx1);
+	--nav-item-color-hover:              var(--tx1);
+
+	--nav-collapse-icon-color:           var(--tx2);
+	--nav-collapse-icon-color-collapsed: var(--tx2);
+	--nav-indentation-guide-color:       var(--ui1);
+
+	--prompt-border-color:               var(--ui3);
+	--quote-opening-modifier:            var(--ui2);
+
+	--ribbon-background:                 var(--bg2);
+
+	--scrollbar-active-thumb-bg:         var(--ui3);
+	--scrollbar-bg:                      transparent;
+	--scrollbar-thumb-bg:                var(--ui1);
+
+	--search-result-background:           var(--bg1);
+
+	--tab-text-color-focused-active:     var(--tx1);
+	--tab-outline-color:                 var(--ui1);
+
+	--text-accent-hover:                 var(--ax2);
+	--text-accent:                       var(--ax1);
+	--text-blockquote:                   var(--tx2);
+	--text-bold:                         var(--tx1);
+	--text-code:                         var(--tx4);
+	--text-error:                        var(--color-red);
+	--text-faint:                        var(--tx3);
+	--text-highlight-bg:                 var(--hl2);
+	--text-italic:                       var(--tx1);
+	--text-muted:                        var(--tx2);
+	--text-normal:                       var(--tx1);
+	--text-on-accent:                    var(--sp1);
+	--text-selection:                    var(--hl1);
+
+	--title-color-inactive:              var(--tx2);
+	--title-color:                       var(--tx1);
+
+	--titlebar-background:               var(--bg2);
+	--titlebar-background-focused:       var(--bg2);
+	--titlebar-text-color-focused:       var(--tx1);
+
+	--workspace-background-translucent:  hsla(var(--base-h),var(--base-s), var(--base-l), 0.7);
+}
+
+.theme-light.minimal-light-contrast {
+	--workspace-background-translucent:  rgba(0,0,0,0.6);
+}
+
+.theme-light.minimal-light-contrast .theme-dark {
+	--tab-container-background:          var(--bg2);
+	--ribbon-background-collapsed:       var(--bg2);
+}
+
+.theme-light {
+	--interactive-normal:         var(--bg1);
+	--interactive-accent-rgb:220, 220, 220;
+
+	--active-line-bg:rgba(0,0,0,0.035);
+	--background-modifier-cover:hsla(var(--base-h),calc(var(--base-s) - 70%),calc(var(--base-l) - 20%),0.5);
+
+	--text-highlight-bg-active:rgba(0, 0, 0, 0.1);
+
+	/* Errors */
+	--background-modifier-error:rgba(255,0,0,0.14);
+	--background-modifier-error-hover:rgba(255,0,0,0.08);
+
+	/* Shadows */
+	--shadow-color:rgba(0, 0, 0, 0.1);
+	--btn-shadow-color:rgba(0, 0, 0, 0.05);
+}
+
+.theme-dark {
+	--interactive-normal:         var(--bg3);
+	--interactive-accent-rgb: 66, 66, 66;
+
+	--active-line-bg: rgba(255,255,255,0.04);
+	--background-modifier-cover: hsla(var(--base-h),var(--base-s), calc(var(--base-l) - 12%), 0.5);
+
+	--text-highlight-bg-active:rgba(255, 255, 255, 0.1);
+
+	/* Errors */
+	--background-modifier-error:rgba(255,20,20,0.12);
+	--background-modifier-error-hover:rgba(255,20,20,0.18);
+
+	/* Shadows */
+	--background-modifier-box-shadow:rgba(0, 0, 0, 0.3);
+	--shadow-color:rgba(0, 0, 0, 0.3);
+	--btn-shadow-color:rgba(0, 0, 0, 0.2);
+}
+
+.theme-light.minimal-light-white {
+	--background-table-rows:     var(--bg2);
+}
+
+.theme-light.minimal-light-tonal {
+	--background-primary:        var(--bg2);
+	--background-primary-alt:    var(--bg3);
+	--background-table-rows:     var(--bg3);
+}
+
+.theme-dark.minimal-dark-tonal {
+	--ribbon-background: var(--bg1);
+	--background-secondary:      var(--bg1);
+	--background-table-rows:     var(--bg3);
+}
+
+.theme-dark.minimal-dark-black {
+	--background-primary-alt:    var(--bg3);
+	--background-table-rows:     var(--bg3);
+	--modal-border:              var(--ui2);
+
+	--active-line-bg:rgba(255,255,255,0.085);
+
+	--background-modifier-form-field: var(--bg3);
+	--background-modifier-cover:hsla(var(--base-h),var(--base-s),calc(var(--base-d) + 8%),0.9);
+	--background-modifier-box-shadow:rgba(0, 0, 0, 1);
+}

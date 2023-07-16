@@ -1,0 +1,14 @@
+/* Tooltips */
+
+.tooltip {
+	transition: none;
+	animation: none;
+}
+.tooltip.mod-left,
+.tooltip.mod-right {
+	transform:none;
+	animation:none; 
+}
+.tooltip.mod-error {
+	color: var(--text-error);
+}

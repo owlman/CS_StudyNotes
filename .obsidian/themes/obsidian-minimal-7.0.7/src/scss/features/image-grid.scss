@@ -1,0 +1,67 @@
+/* MIT License | Copyright (c) Stephan Ango (@kepano) 
+
+Image Grid snippet for Obsidian
+
+author: @kepano
+version: 4.0.0
+
+Support my work:
+https://github.com/sponsors/kepano
+
+*/
+/* Revamped for Obsidian 1.1.9+ using :has() */
+
+body {
+	--image-grid-fit: cover;
+	--image-grid-background: transparent;
+	--img-grid-gap: 0.5rem;
+}
+@media (max-width:400pt) {
+	body {
+		--img-grid-gap: 0.25rem;
+	}
+}
+
+.img-grid-ratio {
+	--image-grid-fit: contain;
+}
+
+.img-grid {
+
+	.image-embed.is-loaded {
+		line-height:0;
+		img {
+			background-color: var(--image-grid-background);
+			&:active {
+				background-color: transparent;
+			}
+		}
+	}
+
+	.markdown-preview-section {
+		/*img:not(.emoji):not([width]),
+		video {
+			width:100%;
+		}*/
+		> div:has(.image-embed) > p {
+			display: grid;
+			margin-block-start: var(--img-grid-gap);
+			margin-block-end: var(--img-grid-gap);
+			grid-column-gap: var(--img-grid-gap);
+			grid-row-gap: 0;
+			grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+			> br {
+				display:none;
+			}
+			> img {
+				object-fit: var(--image-grid-fit);
+				align-self: stretch;
+			}
+			> .internal-embed img {
+				object-fit: var(--image-grid-fit);
+				height:100%;
+				align-self: center;
+			}
+		}
+	}
+}

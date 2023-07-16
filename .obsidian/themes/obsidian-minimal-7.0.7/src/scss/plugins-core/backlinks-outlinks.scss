@@ -1,0 +1,12 @@
+/* Backlink pane */
+
+.outgoing-link-pane > .tree-item-self:hover,
+.outgoing-link-pane > .tree-item-self,
+.backlink-pane > .tree-item-self:hover,
+.backlink-pane > .tree-item-self {
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  font-size:var(--font-adaptive-smallest);
+  font-weight:500;
+}

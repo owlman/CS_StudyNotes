@@ -1,0 +1,95 @@
+/* Dark mode images  */
+/* MIT License | Copyright (c) Stephan Ango (@kepano) */
+
+:root {
+	--image-mix: normal
+}
+.image-blend-light {
+	--image-mix: multiply;
+}
+
+.theme-dark .markdown-source-view img,
+.theme-dark .markdown-preview-view img {
+	opacity:var(--image-muted);
+	transition:opacity 0.25s linear;
+}
+
+@media print{
+  body {
+    --image-muted: 1;
+  }
+}
+
+.theme-dark .print-preview img,
+.theme-dark .markdown-source-view img:hover,
+.theme-dark .markdown-preview-view img:hover {
+	opacity:1;
+	transition:opacity 0.25s linear;
+}
+
+.theme-light img {
+	mix-blend-mode: var(--image-mix);
+}
+
+/* Invert  */
+
+// Necessary to set background for screen/multiply to work
+div[src$="#multiply"],
+div[src$="#invert"] {
+	background-color: var(--background-primary);
+}
+
+.theme-dark {
+	img[src$="#invert"],
+	div[src$="#invert"] img,
+	span[src$="#invert"] img {
+		filter: invert(1) hue-rotate(180deg);
+		mix-blend-mode: screen;
+	}
+	img[src$="#multiply"],
+	div[src$="#multiply"] img,
+	span[src$="#multiply"] img {
+		mix-blend-mode: screen;
+	}
+}
+
+.theme-light {
+	img[src$="#multiply"],
+	div[src$="#multiply"] img,
+	span[src$="#multiply"] img {
+		mix-blend-mode: multiply;
+	}
+	img[src$="#invertW"],
+	div[src$="#invertW"] img,
+	span[src$="invertW"] img {
+		filter: invert(1) hue-rotate(180deg);
+	}
+}
+
+/* Circle */
+img[src$="#circle"],
+span[src$="#circle"] img,
+span[src$="#round"] img {
+	border-radius:50%;
+	aspect-ratio:1/1;
+}
+
+/* Outline */
+img[src$="#outline"],
+span[src$="#outline"] img {
+	border:1px solid var(--ui1);
+}
+
+/* Interface */
+img[src$="#interface"],
+span[src$="#interface"] img {
+	border:1px solid var(--ui1);
+	box-shadow:
+	0px 0.5px 0.9px rgba(0, 0, 0, 0.021),
+	0px 1.3px 2.5px rgba(0, 0, 0, 0.03),
+	0px 3px 6px rgba(0, 0, 0, 0.039),
+	0px 10px 20px rgba(0, 0, 0, 0.06);
+	margin-top:10px;
+	margin-bottom:15px;
+	border-radius:var(--radius-m);
+}

@@ -1,0 +1,48 @@
+/* Checklists, task lists, checkboxes */
+body {
+	--checkbox-radius: 50%;
+	--checkbox-top: 2px;
+	--checkbox-left: 0px;
+	--checkbox-margin: 0px 6px 0px -2em;
+}
+.checkbox-square {
+	--checkbox-size: calc(var(--font-text-size) * 0.85);
+	--checkbox-radius: 4px;
+	--checkbox-top: 1px;
+	--checkbox-left: 0px;
+	--checkbox-margin: 0px 8px 0px -2em;
+}
+
+body.minimal-strike-lists {
+	--checklist-done-decoration: line-through;
+}
+body:not(.minimal-strike-lists) {
+	--checklist-done-decoration: none;
+	--checklist-done-color: var(--text-normal);
+}
+
+.markdown-preview-section > .contains-task-list {
+	padding-bottom: 0.5em;
+}
+
+.mod-cm6 .HyperMD-task-line[data-task] .cm-formatting-list-ol ~ .task-list-label .task-list-item-checkbox {
+	margin: 1px;
+}
+.markdown-preview-view .task-list-item-checkbox {
+	position: relative;
+	top: var(--checkbox-top);
+	left: var(--checkbox-left);
+	line-height: 0;
+}
+.markdown-preview-view ul > li.task-list-item {
+	text-indent: 0;
+	line-height: var(--line-height);
+}
+
+.is-mobile .mod-cm6 .HyperMD-task-line[data-task] .task-list-item-checkbox {
+	margin-inline-start: -0.4em;
+}
+.is-mobile .markdown-preview-view input[type=checkbox].task-list-item-checkbox {
+	top: 0.2em;
+}
+

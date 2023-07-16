@@ -1,0 +1,35 @@
+/* Headings and fonts */
+
+h1,h2,h3,h4 {letter-spacing:-0.02em;} 
+
+body, input, button  {
+	font-family:var(--font-interface);
+}
+.cm-s-obsidian span.cm-error {
+	color:var(--color-red);
+}
+.markdown-preview-view,
+.popover,
+.workspace-leaf-content[data-type=markdown] {
+	font-family:var(--font-text)
+}
+
+body,
+.markdown-preview-view,
+.markdown-source-view.mod-cm6.is-live-preview .cm-scroller,
+.cm-s-obsidian {
+	font-size: var(--font-adaptive-normal);
+	font-weight: var(--normal-weight);
+	line-height: var(--line-height);
+}
+
+.markdown-source-view.mod-cm6 .cm-scroller,
+.markdown-source-view,
+.cm-s-obsidian {
+	line-height: var(--line-height);
+	font-family: var(--font-editor);
+}
+
+.cm-s-obsidian span.cm-formatting-task {
+	line-height:var(--line-height);
+}

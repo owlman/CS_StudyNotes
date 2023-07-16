@@ -1,0 +1,15 @@
+/* Preview mode  */
+figure {
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+}
+
+.markdown-preview-view .mod-highlighted {
+  transition:background-color 0.3s ease;
+  background-color:var(--text-selection);
+  color:inherit;
+}
+
+.inline-title {
+	padding-top: 16px;
+}

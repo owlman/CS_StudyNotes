@@ -1,0 +1,30 @@
+/* File browser */
+
+.is-mobile .nav-folder.mod-root > .nav-folder-title .nav-folder-title-content {
+	display:none;
+}
+
+body:not(.is-mobile) .nav-folder.mod-root>.nav-folder-title .nav-folder-title-content {
+	font-weight:500;
+	text-transform:uppercase;
+	letter-spacing: 0.05em;
+	color: var(--text-muted);
+	font-size: var(--font-adaptive-smallest);
+}
+
+.nav-buttons-container {
+	justify-content:flex-start;
+}
+
+.nav-file-tag {
+	padding-top: 0.2em;
+	background-color: transparent;
+	color: var(--text-faint);
+}
+
+.nav-file:hover,
+.nav-file .is-active {
+	.nav-file-tag {
+		color: var(--text-muted);
+	}
+}

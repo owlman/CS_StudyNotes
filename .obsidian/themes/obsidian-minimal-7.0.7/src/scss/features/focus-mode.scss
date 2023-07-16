@@ -1,0 +1,153 @@
+/* Focus mode */
+/* MIT License | Copyright (c) Stephan Ango (@kepano) */
+
+/* Hide app ribbon */
+.workspace-ribbon.mod-left {
+	border-left:0;
+	transition:none;
+}
+.minimal-focus-mode {
+
+	&.is-translucent .workspace-ribbon.mod-left.is-collapsed,
+	&.is-translucent .workspace-ribbon.mod-left.is-collapsed:before {
+		background-color: var(--background-primary) !important;
+	}
+
+	/* Hide ribbon */
+	.workspace-ribbon.mod-left {
+		transition: background-color 0s linear 0s;
+	}
+	.workspace-ribbon.mod-left.is-collapsed {
+		border-color: transparent;
+		background-color: var(--background-primary);
+		&:before {
+			background-color: var(--background-primary);
+			border-color:transparent;
+		}
+		.side-dock-actions,
+		.side-dock-settings {
+			opacity: 0;
+			transition: opacity 0.1s ease-in-out 0.1s;
+		}
+		&:hover {
+			.side-dock-actions,
+			.side-dock-settings {
+				opacity: 1;
+				transition: opacity 0.1s ease-in-out 0.1s;
+			}
+		}
+	}
+	&.borders-title .workspace-ribbon.mod-left.is-collapsed {
+		border-right:none;
+	}
+
+	/* Hide right sidebar button */
+	.mod-top-right-space .sidebar-toggle-button.mod-right {
+		opacity: 0;
+	}
+
+	/* Hide status bar */
+	&:not(.minimal-status-off) .status-bar {
+		opacity: 0;
+		transition:opacity 0.2s ease-in-out;
+	}
+	.status-bar:hover {
+		opacity: 1;
+		transition:opacity 0.2s ease-in-out;
+	}
+
+
+	.mod-root .workspace-tabs {
+		position: relative;
+		
+		&:before:hover {
+			background-color: blue;
+		}
+	}
+
+	.mod-root .workspace-tab-header-container {
+		height: 0px;
+		transition: all 0.1s linear 0.6s;
+		--tab-outline-width: 0px;
+
+		.workspace-tab-header-container-inner,
+		.workspace-tab-header-new-tab,
+		.workspace-tab-header-tab-list {
+			opacity: 0;
+			transition: opacity 0.1s linear 0.6s;
+		}
+
+		.workspace-tab-header-spacer:before {
+			width: 100%;
+			content: " ";
+			background-color: transparent;
+			height: 15px;
+			position: absolute;
+			z-index: 100;
+			top: 0;
+			left: 0;
+		}
+
+		&:hover {
+			height: var(--header-height);
+			--tab-outline-width: 1px;
+			transition: all 0.1s linear 0.05s;
+			.workspace-tab-header-container-inner,
+			.workspace-tab-header-new-tab,
+			.workspace-tab-header-tab-list {
+				opacity: 1;
+				transition: opacity 0.1s linear 0.05s;
+			}
+		}
+	}
+
+	&.mod-macos:not(.is-fullscreen) .workspace:not(.is-left-sidedock-open) .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header-inner {
+		padding-top: 30px;
+	}
+
+}
+
+/* Collapse pane header */
+body.show-view-header  .app-container .workspace-split.mod-root > .workspace-leaf .view-header {
+	transition: height 0.1s linear 0.1s;
+}
+body.minimal-focus-mode.show-view-header {
+	.mod-root .workspace-leaf .view-header {
+		height: 0em;
+		transition: all 0.1s linear 0.5s;
+	}
+	.view-header::after {
+		width: 100%;
+		content: " ";
+		background-color: transparent;
+		height: 40px;
+		position: absolute;
+		z-index: -9;
+		top: 0;
+	}
+	.view-header-nav-buttons,
+	.view-header-title-container,
+	.view-actions {
+		opacity: 0;
+		transition: all 0.1s linear 0.5s;
+	}
+	.mod-root .workspace-tab-header-container:hover ~ .workspace-tab-container .view-header,
+	.mod-root .workspace-leaf .view-header:hover,
+	.mod-root .workspace-leaf .view-header:focus-within {
+		height: calc(var(--header-height) + 2px);
+		transition: all 0.1s linear 0.1s;
+	}
+	.mod-root .workspace-tab-header-container:hover ~ .workspace-tab-container .view-header,
+	.view-header:hover,
+	.view-header:focus-within {
+		.view-header-nav-buttons,,
+		.view-actions,
+		.view-header-title-container {
+			opacity: 1;
+			transition: all 0.1s linear 0.1s;
+		}
+	}
+	.view-content {
+		height:100%;
+	}
+}

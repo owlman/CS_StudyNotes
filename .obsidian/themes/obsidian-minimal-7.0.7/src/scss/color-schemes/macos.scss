@@ -1,0 +1,85 @@
+/* macOS */
+
+.theme-dark.minimal-macos-dark,
+.theme-light.minimal-macos-light {
+	--color-red-rgb: 255,59,49;
+	--color-orange-rgb: 255,149,2;
+	--color-yellow-rgb: 255,204,0;
+	--color-green-rgb: 42,205,65;
+	--color-cyan-rgb: 2,199,190;
+	--color-blue-rgb: 2,122,255;
+	--color-purple-rgb: 176,81,222;
+	--color-pink-rgb: 255,46,85;
+
+	--color-red:#ff3b31;
+	--color-orange:#ff9502;
+	--color-yellow:#ffcc00;
+	--color-green:#2acd41;
+	--color-cyan:#02c7be;
+	--color-blue:#027aff;
+	--color-purple:#b051de;
+	--color-pink:#ff2e55;
+}
+
+.theme-light.minimal-macos-light {
+	--base-h:106;
+	--base-s:0%;
+	--base-l:94%;
+
+	--accent-h:212;
+	--accent-s:100%;
+	--accent-l:50%;
+
+	--bg1:#fff;
+	--bg2:#f0f0f0;
+	--bg3:rgba(0,0,0,.1);
+
+	--ui1:#e7e7e7;
+
+	--tx1:#454545;
+	--tx2:#808080;
+	--tx3:#b0b0b0;
+
+	--hl1:#b3d7ff;
+}
+.theme-light.minimal-macos-light.minimal-light-tonal {
+	--bg1:#f0f0f0;
+	--bg2:#f0f0f0;
+}
+.theme-light.minimal-macos-light.minimal-light-contrast .titlebar,
+.theme-light.minimal-macos-light.minimal-light-contrast.minimal-status-off .status-bar,
+.theme-light.minimal-macos-light.minimal-light-contrast .workspace-drawer.mod-left,
+.theme-light.minimal-macos-light.minimal-light-contrast .mod-left-split,
+.theme-light.minimal-macos-light.minimal-light-contrast .workspace-ribbon.mod-left:not(.is-collapsed),
+.theme-dark.minimal-macos-dark {
+	--base-h:106;
+	--base-s:0%;
+	--base-l:12%;
+
+	--accent-h:212;
+	--accent-s:100%;
+	--accent-l:50%;
+
+	--bg1:#1e1e1e;
+	--bg2:#282828;
+	--bg3:rgba(255,255,255,0.11);
+
+	--divider-color:#000;
+	--tab-outline-color:#000;
+
+	--ui1:#373737;
+	--ui2:#515151;
+	--ui3:#595959;
+
+	--tx1:#dcdcdc;
+	--tx2:#8c8c8c;
+	--tx3:#686868;
+
+	--hl1:rgba(98,169,252,0.5);
+
+	--sp1:#fff;
+}
+.theme-dark.minimal-macos-dark.minimal-dark-black {
+	--divider-color:#1e1e1e;
+	--tab-outline-color:#1e1e1e;
+}
