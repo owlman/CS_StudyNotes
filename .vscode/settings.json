@@ -23,8 +23,11 @@
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "sync",
   "markdown.preview.breaks": true,
-  "pasteImage.path": "${projectRoot}/attachments",
+  "pasteImage.path": "${projectRoot}/.tmp",
   "pasteImage.showFilePathConfirmInputBox": true,
   "prettier.singleQuote": false,
-  "markdown.styles": ["assets\\css\\style.css"],
+"markdown.styles": [
+    ".foam\\themes\\enhanced\\notion-light-enhanced.css"
+],
+"editor.fontFamily": "'微软雅黑',‘Meslo LGM NF’, Consolas,'Courier New', monospace",
 }

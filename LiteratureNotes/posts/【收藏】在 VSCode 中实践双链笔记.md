@@ -120,7 +120,7 @@ Foam 的侧边栏面板包含这几项功能：文件管理、大纲、时间线
 
 Foam 使用 Markdown 作为笔记的文件格式，一方面其通用性便利了跨平台使用，另一方面也可以利用 `CSS` 文件对其进行美化（如果你想定制自己的 Markdown 的预览样式，可以参考 [Typora 的指南](https://client.sspai.com/link?target=https%3A%2F%2Ftheme.typora.io%2Fdoc%2FWrite-Custom-Theme%2F)）。
 
-Foam 的项目配置文件是位于笔记库根目录下的 `.vscode/settings.json` 文件，Markdown 预览样式则由笔记库根目录下 `assets/css/style.scss` 文件控制。然而经过测试，直接修改该样式表文件并没有生效。这里我选择复制该文件并将后缀改为 `.css`，然后在配置文件中新增一行代码 `"markdown.styles": ["assets\\css\\style.css"],`，配置生效。
+Foam 的项目配置文件是位于笔记库根目录下的 `.vscode/settings.json` 文件，Markdown 预览样式则由笔记库根目录下 `assets/css/style.scss` 文件控制。然而经过测试，直接修改该样式表文件并没有生效。这里我选择复制该文件并将后缀改为 `.css`，然后在配置文件中新增一行代码 `"markdown.styles": ["assets\\css\\style.css"],`，配置生效。  
 
 个人并没有进行太多的样式调整，主要是将英文字体改为 `Cascadia Code` 来实现对连写符号的支持：
 
