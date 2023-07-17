@@ -11,7 +11,7 @@
             "id": "510fbbba8e4b212c",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {}
             }
           }
@@ -139,7 +139,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "510fbbba8e4b212c",
+  "active": "cceac6dc3fd2184e",
   "lastOpenFiles": [
     "Programming/LanguageStudy/Rust/QuickStart/Rust 学习笔记：快速上手篇.md",
     "00_ToBeOrganized/00_ToDoList.md",
