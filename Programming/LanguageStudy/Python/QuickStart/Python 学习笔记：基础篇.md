@@ -1,7 +1,6 @@
-#! https://zhuanlan.zhihu.com/p/644232952
 # Python 学习笔记：基础篇
 
-承接之前在[《[[Python 学习路线图]]》](https://www.cnblogs.com/owlman/p/17546847.html)一文中的规划，接下来，我将会提供一份针对学习 Python 语言基础的笔记（该笔记将会被保存在[我个人笔记库项目](https://github.com/owlman/study_note)的`Programming/LanguageStudy/Python/QuickStart`目录下），目的是帮助读者学习以下技能：
+承接之前在[《[[Python 语言的学习路线图]]》](https://www.cnblogs.com/owlman/p/17546847.html)一文中的规划，接下来，我将会提供一份针对学习 Python 语言基础的笔记（该笔记将会被保存在[我个人笔记库项目](https://github.com/owlman/study_note)的`Programming/LanguageStudy/Python/QuickStart`目录下），目的是帮助读者学习以下技能：
 
 - 安装并配置好 Python 语言的运行时环境与相关的编程工具；
 - 熟练掌握 Python 语言的基本语法及其标准库的使用方法；
@@ -646,7 +645,7 @@ print('thread %s ended.' % threading.current_thread().name)
 
 上述设计准则会确保程序员们在使用这门语言时自觉地拒绝花俏的语法，并尽可能地使用明确且没有歧义的表达方式来编写代码。当然了，凡事都有两面性，对于这些准则的坚守也让 Python 社区对于牺牲了优雅特性的优化策略始终持有较为谨慎的态度，这导致许多开发者对 Python 语言的一些非重要部分所做的性能优化，和非核心功能的扩展往往很难被其官方直接纳入到其标准库中，某种程度上也限制这门语言在某些特定领域中的运用。而如果想要在这些特定领域中使用 Python 语言进行开发，我们就必须自己手动引入第三方开发的扩展。
 
-> 关于这些扩展及其应用领域，读者可参考我在之前在《[[Python 学习路线图]]》一文中的介绍。
+> 关于这些扩展及其应用领域，读者可参考我在之前在《[[Python 语言的学习路线图]]》一文中的介绍。
 
 在基于 Python 编程工作中，引入第三方扩展最简单的方法就是使用一款叫做 pip 的包管理工具。这是一款 Python 官方提供的扩展包下载与管理工具，可用于查找、下载、安装、卸载所有可引入到 Python 应用中的第三方扩展。在本章的最后，我们就来具体介绍一下 pip 的使用方法。
 

@@ -11,8 +11,12 @@
             "id": "510fbbba8e4b212c",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -80,7 +84,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md"
+              }
             }
           },
           {
@@ -89,6 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,6 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
