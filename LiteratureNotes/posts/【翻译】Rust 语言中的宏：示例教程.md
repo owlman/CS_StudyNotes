@@ -7,7 +7,7 @@
 
 ----
 
-在这篇文献中，我们将会借助一系列示例来为你介绍 Rust 语言中的宏（macro）以及它的使用方法。为此，我们将讨论如下议题：
+在这篇文献中，我们将会借助一系列示例来为读者介绍 Rust 语言中的宏（macro）以及它的使用方法。为此，我们需要具体讨论如下议题：
 
 - Rust 宏是什么？
 - Rust 宏的类型
@@ -23,18 +23,16 @@
 
 ## Rust 宏是什么？
 
-Rust 语言对宏（macro）有着非常好的支持。==宏能够使得你能够通过写代码的方式来生成代码，这通常被称为元编程（metaprogramming）==。它提供了类似函数的功能，但是没有运行时开销。但是，因为宏会在编译期进行展开（expand），所以它会有一些编译期的开销。  
-
-Rust 宏非常不同于 C 里面的宏。Rust 宏会被应用于词法树（token tree），而 C 语言里的宏则是文本替换。
+Rust 语言对宏（macro）有着非常好的支持。宏这种记住使得我们可以通过写代码的方式来生成代码，这通常也被称为元编程（metaprogramming）。宏的功能与函数非常类似，区别在于前者没有运行时开销，因为它会在编译期展开（expand）。但也正是因为这一点，所以宏相对地会有一些编译期的开销。  另外需要说明的是，Rust 语言中的宏与 C 语言里面的宏是非常不同的，前者会被应用于词法树（token tree），而后者则只是单纯的文本替换。
 
 ## Rust 宏的类型
 
-Rust 有两种类型的宏：
+在 Rust 语言中，宏主要有以下两种类型：
 
-- 声明式宏（Declarative macros）使得你能够写出类似 match 表达式的东西，来操作你所提供的 Rust 代码。它使用你提供的代码来生成用于替换宏调用的代码。  
-- 过程宏（Procedural macros）允许你操作给定 Rust 代码的抽象语法树（abstract syntax tree, AST）。过程宏是从一个（或者两个）`TokenStream`到另一个`TokenStream`的函数，用输出的结果来替换宏调用。  
+- 声明式宏（Declarative macros）：这种类型的宏可以帮助我们写出类似 match 表达式的东西，来操作你所提供的 Rust 代码。它使用你提供的代码来生成用于替换宏调用的代码。  
+- 过程式宏（Procedural macros）：这种类型的宏允许我们操作给定 Rust 代码的抽象语法树（abstract syntax tree, AST）。过程宏是从一个（或者两个）`TokenStream`到另一个`TokenStream`的函数，用输出的结果来替换宏调用。  
 
-让我们来看一下声明式宏和过程宏的更多细节，并讨论一些关于如何在 Rust 中使用宏的例子。
+下面，让我们来通过一些具体示例来了解下声明式宏和过程宏的更多细节，以及它们的具体使用方法。
 
 ## Rust 中的声明式宏
 
@@ -44,18 +42,18 @@ Rust 有两种类型的宏：
 
 ```rust
 macro_rules! add{
- // macth like arm for macro
+    // macth like arm for macro
     ($a:expr,$b:expr)=>{
- // macro expand to this code
+        // macro expand to this code
         {
-// $a and $b will be templated using the value/variable provided to macro
+            // $a and $b will be templated using the value/variable provided to macro
             $a+$b
         }
     }
 }
 
 fn main(){
- // call to macro, $a=1 and $b=2
+    // call to macro, $a=1 and $b=2
     add!(1,2);
 }
 ```
