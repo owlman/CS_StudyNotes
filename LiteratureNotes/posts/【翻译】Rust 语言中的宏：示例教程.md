@@ -1,36 +1,29 @@
 # 【翻译】Rust 语言中的宏：示例教程
 
 > **文献说明：**  
-> 英文文献：[Macros in Rust: A tutorial with examples](https://link.zhihu.com/?target=https%3A//blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/) ；  
+> 英文文献：[Macros in Rust: A tutorial with examples](https://blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/) ；  
 > 参考翻译：[Rust宏：教程与示例](https://zhuanlan.zhihu.com/p/353421021#Rust%20%E5%AE%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F)；  
 > 二次加工：调整文章结构、改善翻译质量、标注文章要点；  
 
 ----
-    
-在这篇文献中，我们将会涵盖你需要了解的关于 Rust 宏（macro）的一切，包括对 Rust 宏的介绍和如何使用 Rust 宏的示例。  
 
-我们会涵盖以下内容：
+在这篇文献中，我们将会借助一系列示例来为你介绍 Rust 语言中的宏（macro）以及它的使用方法。为此，我们将讨论如下议题：
 
 - Rust 宏是什么？
 - Rust 宏的类型
-- Rust 宏的声明  
-    
--   创建声明式宏  
-    
--   Rust 中声明式宏的高级解析
--   从结构体中解析元数据
--   声明式宏的限制  
-    
--   Rust 中的过程宏  
-    
--   属性式风格宏  
-    
--   自定义继承宏
--   函数式风格宏
+- Rust 宏的声明
+  - 创建声明式宏  
+  - Rust 中声明式宏的高级解析
+  - 从结构体中解析元数据
+  - 声明式宏的限制  
+- Rust 中的过程宏
+  - 属性式风格宏
+  - 自定义继承宏
+  - 函数式风格宏
 
-Rust 对宏（macro）有着非常好的支持。宏能够使得你能够通过写代码的方式来生成代码，这通常被称为元编程（metaprogramming）。  
+## Rust 宏是什么？
 
-宏提供了类似函数的功能，但是没有运行时开销。但是，因为宏会在编译期进行展开（expand），所以它会有一些编译期的开销。  
+Rust 语言对宏（macro）有着非常好的支持。==宏能够使得你能够通过写代码的方式来生成代码，这通常被称为元编程（metaprogramming）==。它提供了类似函数的功能，但是没有运行时开销。但是，因为宏会在编译期进行展开（expand），所以它会有一些编译期的开销。  
 
 Rust 宏非常不同于 C 里面的宏。Rust 宏会被应用于词法树（token tree），而 C 语言里的宏则是文本替换。
 
@@ -38,10 +31,8 @@ Rust 宏非常不同于 C 里面的宏。Rust 宏会被应用于词法树（toke
 
 Rust 有两种类型的宏：
 
--  声明式宏（Declarative macros）使得你能够写出类似 match 表达式的东西，来操作你所提供的 Rust 代码。它使用你提供的代码来生成用于替换宏调用的代码。  
-    
--   过程宏（Procedural macros）允许你操作给定 Rust 代码的抽象语法树（abstract syntax tree, AST）。过程宏是从一个（或者两个）`TokenStream`到另一个`TokenStream`的函数，用输出的结果来替换宏调用。  
-    
+- 声明式宏（Declarative macros）使得你能够写出类似 match 表达式的东西，来操作你所提供的 Rust 代码。它使用你提供的代码来生成用于替换宏调用的代码。  
+- 过程宏（Procedural macros）允许你操作给定 Rust 代码的抽象语法树（abstract syntax tree, AST）。过程宏是从一个（或者两个）`TokenStream`到另一个`TokenStream`的函数，用输出的结果来替换宏调用。  
 
 让我们来看一下声明式宏和过程宏的更多细节，并讨论一些关于如何在 Rust 中使用宏的例子。
 
