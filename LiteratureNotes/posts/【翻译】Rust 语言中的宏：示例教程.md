@@ -40,9 +40,9 @@ Rust 有两种类型的宏：
 
 宏通过使用`macro_rules!`来声明。声明式宏虽然功能上相对较弱，但提供了易于使用的接口来创建宏来移除重复性代码。最为常见的一个声明式宏就是`println！`。声明式宏提供了一个类似`match`的接口，在匹配时，宏会被匹配分支的代码替换。
 
-## 创建声明式宏
+### 创建声明式宏
 
-```
+```rust
 macro_rules! add{
  // macth like arm for macro
     ($a:expr,$b:expr)=>{
@@ -64,7 +64,7 @@ fn main(){
 
 这个宏没有对两个数执行相加操作，它只是把自己替换为把两个数相加的代码。宏的每个分支接收一个函数的参数，并且参数可以被指定多个类型。如果想要`add`函数也能仅接收一个参数，我们可以添加另一个分支：
 
-```
+```rust
 macro_rules! add{
  // first arm match add!(1,2), add!(2,3) etc
     ($a:expr,$b:expr)=>{
@@ -90,23 +90,21 @@ fn main(){
 
 在一个宏中，可以有多个分支，宏根据不同的参数展开到不同的代码。每个分支可以接收多个参数，这些参数使用`$`符号开头，然后跟着一个 token 类型：
 
--   `item` ——一个项（item），像一个函数，结构体，模块等。
--   `block` ——一个块 （block）（即一个语句块或一个表达式，由花括号所包围）
--   `stmt` —— 一个语句（statement）
--   `pat` ——一个模式（pattern）
--   `expr` —— 一个表达式（expression）
--   `ty` ——一个类型（type）
--   `ident`—— 一个标识符（indentfier）
--   `path` —— 一个路径（path）（例如，`foo`，`::std::mem::replace`，`transmute::<_, int>`，...）
--   `meta` —— 一个元数据项；位于`#[...]`和`#![...]`属性  
-    
--   `tt`——一个词法树  
-    
--   `vis`——一个可能为空的`Visibility`限定词
+- `item` ——一个项（item），像一个函数，结构体，模块等。
+- `block` ——一个块 （block）（即一个语句块或一个表达式，由花括号所包围）
+- `stmt` —— 一个语句（statement）
+- `pat` ——一个模式（pattern）
+- `expr` —— 一个表达式（expression）
+- `ty` ——一个类型（type）
+- `ident`—— 一个标识符（indentfier）
+- `path` —— 一个路径（path）（例如，`foo`，`::std::mem::replace`，`transmute::<_, int>`，...）
+- `meta` —— 一个元数据项；位于`#[...]`和`#![...]`属性  
+- `tt`——一个词法树
+- `vis`——一个可能为空的`Visibility`限定词
 
 在上面的例子中，我们使用`$typ`参数，它的 token 类型为`ty`，类似于`u8`，`u16`。这个宏在对数字进行相加之前转换为一个特定的类型。
 
-```
+```rust
 macro_rules! add_as{
 // using a ty token type for macthing datatypes passed to maccro
     ($a:expr,$b:expr,$typ:ty)=>{
@@ -121,7 +119,7 @@ fn main(){
 
 Rust 宏还支持接收可变数量的参数。这个操作非常类似于正则表达式。`*`被用于零个或更多的 token 类型，`+`被用于零个或者一个参数。
 
-```
+```rust
 macro_rules! add_as{
     (
   // repeated block
@@ -149,7 +147,7 @@ fn main(){
 
 如果你更仔细地观察，你会发现这段代码有一个额外的 0 使得语法有效。为了移除这个 0，让`add`表达式像参数一样，我们需要创建一个新的宏，被称为[TT muncher](https://link.zhihu.com/?target=https%3A//danielkeep.github.io/tlborm/book/pat-incremental-tt-munchers.html)。
 
-```
+```rust
 macro_rules! add{
  // first arm in case of single argument and last remaining variable/number
     ($a:expr)=>{
@@ -176,16 +174,13 @@ fn main(){
 
 TT muncher 以递归方式分别处理每个 token，每次处理单个 token 也更为简单。这个宏有三个分支：
 
--   第一个分支处理是否单个参数通过的情况  
-    
--   第二个分支处理是否两个参数通过的情况  
-    
--   第三个分支使用剩下的参数再次调用`add`宏  
-    
+- 第一个分支处理是否单个参数通过的情况  
+- 第二个分支处理是否两个参数通过的情况  
+- 第三个分支使用剩下的参数再次调用`add`宏  
 
 宏参数不需要用逗号分隔。多个 token 可以被用于不同的 token 类型。例如，圆括号可以结合`ident`token 类型使用。Rust 编译器能够匹配对应的分支并且从参数字符串中导出变量。
 
-```
+```rust
 macro_rules! ok_or_return{
 // match something(q,r,t,6,7,8) etc
 // compiler extracts function name and arguments. It injects the values in respective varibles.
@@ -222,7 +217,7 @@ fn main()->Result<(),String>{
 
 要创建一个内部规则，需要添加以`@`开头的规则名作为参数。这个宏将不会匹配到一个内部的规则除非显式地被指定作为一个参数。
 
-```
+```rust
 macro_rules! ok_or_return{
  // internal rule.
     (@error $a:ident,$($b:tt)* )=>{
@@ -258,7 +253,7 @@ fn main()->Result<(),String>{
 }
 ```
 
-## 在 Rust 中使用声明式宏进行高级解析
+### 在 Rust 中使用声明式宏进行高级解析
 
 宏有时候会执行需要解析 Rust 语言本身的任务。  
 
@@ -291,7 +286,7 @@ macro_rules! make_public{
 
 一个`struct`可能包含多个字段，这些字段具有相同或不同的数据类型和可见性。`ty` token 类型用于数据类型，`vis`用于可见性，`ident`用于字段名。我们将会使用`*`用于零个或更多字段。
 
-```
+```rust
 macro_rules! make_public{
     (
      $vis:vis struct $struct_name:ident {
@@ -316,7 +311,7 @@ macro_rules! make_public{
 
 通常，`struct`有一些附加的元数据或者过程宏，比如`#[derive(Debug)]`。这个元数据需要保持完整。解析这类元数据是通过使用`meta`类型来完成的。
 
-```
+```rust
 macro_rules! make_public{
     (
      // meta data about struct
@@ -344,7 +339,7 @@ macro_rules! make_public{
 
 我们的`make_public` 宏现在准备就绪了。为了看一下`make_public`是如何工作的，让我们使用[Rust Playground](https://link.zhihu.com/?target=https%3A//play.rust-lang.org/)来把宏展开为真实编译的代码。
 
-```
+```rust
 macro_rules! make_public{
     (
      $(#[$meta:meta])*
@@ -380,7 +375,7 @@ fn main(){
 
 展开后的代码看起来像下面这样：
 
-```
+```rust
 // some imports
 
 
@@ -411,7 +406,7 @@ fn main() {
 }
 ```
 
-## 声明式宏的限制
+### 声明式宏的限制
 
 声明式宏有一些限制。有些是与 Rust 宏本身有关，有些则是声明式宏所特有的：
 
@@ -424,14 +419,6 @@ fn main() {
 -   更大的二进制  
     
 -   更长的编译时间（这一条对于声明式宏和过程宏都存在）  
-    
-
-![动图封面](https://pic1.zhimg.com/v2-d09750201555784c9d28f5aef49c0d80_b.jpg)
-
-> 原文标题：Macros in Rust: A tutorial with examples  
-> 原文链接：[https://blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/](https://link.zhihu.com/?target=https%3A//blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/)  
-> 公众号： Rust 碎碎念  
-> 翻译 by： Praying  
 
 [过程宏（Procedural macros）](https://link.zhihu.com/?target=https%3A//blog.logrocket.com/procedural-macros-in-rust/)是一种更为高级的宏。过程宏能够扩展 Rust 的现有语法。它接收任意输入并产生有效的 Rust 代码。  
 
@@ -443,7 +430,7 @@ fn main() {
 
 接下来我们将会对它们进行详细讨论。
 
-### 属性式宏
+## Rust 中的属性式宏
 
 属性式宏能够让你创建一个自定义的属性，该属性将其自身关联一个项（item），并允许对该项进行操作。它也可以接收参数。
 
@@ -472,8 +459,9 @@ proc-macro = true
 
 把`syn`和[quote](https://link.zhihu.com/?target=https%3A//crates.io/crates/quote)添加到`Cargo.toml`。
 
-```
+```toml
 # Cargo.toml
+
 [dependencies]
 syn = {version="1.0.57",features=["full","fold"]}
 quote = "1.0.8"
@@ -481,7 +469,7 @@ quote = "1.0.8"
 
 现在我们可以使用`proc_macro`在`lib.rs`中写一个属性式宏，`proc_macro`是编译器提供的用于写过程宏的一个 crate。对于一个过程宏 crate，除了过程宏外，不能导出其他任何东西，crate 中定义的过程宏不能在 crate 自身中使用。
 
-```
+```rust
 // lib.rs
 extern crate proc_macro;
 use proc_macro::{TokenStream};
@@ -498,7 +486,7 @@ pub fn my_custom_attribute(_metadata: TokenStream, _input: TokenStream) -> Token
 
 为了测试我们添加的宏，我们需要创建一个测试。创建一个名为`tests`的文件夹然后在该文件夹添加文件`attribute_macro.rs`。在这个文件中，我们可以测试我们的属性式宏。
 
-```
+```rust
 // tests/attribute_macro.rs
 
 use macro_demo::*;
@@ -522,7 +510,7 @@ fn test_macro(){
 
 首先，我们需要去验证，我们的宏是如何操作与其所关联的代码的
 
-```
+```rust
 #[trace_vars(a)]
 fn do_something(){
   let a=9;
@@ -535,7 +523,7 @@ fn do_something(){
 
 首先，解析属性式宏所关联的代码。`syn`提供了一个适用于 Rust 函数语法的内置解析器。`ItemFn`将会解析函数，并且如果语法无效，它会抛出一个错误。
 
-```
+```rust
 #[proc_macro_attribute]
 pub fn trace_vars(_metadata: TokenStream, input: TokenStream) -> TokenStream {
 // parsing rust function to easy to use struct
@@ -546,14 +534,14 @@ pub fn trace_vars(_metadata: TokenStream, input: TokenStream) -> TokenStream {
 
 现在我们已经解析了`input`，让我们开始转移到`metadata`。对于`metadata`，没有适用的内置解析器，所以我们必须自己使用`syn`的`parse`模块写一个解析器。
 
-```
+```rust
 #[trace_vars(a,c,b)] // we need to parse a "," seperated list of tokens
 // code
 ```
 
 要想`syn`能够工作，我们需要实现`syn`提供的`Parse` trait。`Punctuated`用于创建一个由`,`分割`Indent`的`vector`。
 
-```
+```rust
 struct Args{
     vars:HashSet<Ident>
 }
@@ -571,7 +559,7 @@ impl Parse for Args{
 
 一旦我们实现`Parse` trait，我们就可以使用`parse_macro_input`宏来解析`metadata`。
 
-```
+```rust
 #[proc_macro_attribute]
 pub fn trace_vars(metadata: TokenStream, input: TokenStream) -> TokenStream {
     let input_fn = parse_macro_input!(input as ItemFn);
@@ -583,7 +571,7 @@ pub fn trace_vars(metadata: TokenStream, input: TokenStream) -> TokenStream {
 
 现在，我们准备修改`input_fn`以便于在当变量值变化时添加`println!`。为了完成这项修改，我们需要过滤出有复制语句的代码，并在那行代码之后插入一个 print 语句。
 
-```
+```rust
 impl Args {
     fn should_print_expr(&self, e: &Expr) -> bool {
         match *e {
@@ -651,7 +639,7 @@ impl Args {
 
 现在，我们将会在`input_fn`上进行 DFS，并插入 print 语句。`syn`提供了一个`Fold`trait 可以用来对任意`Item`实现 DFS。我们只需要修改与我们想要操作的 token 类型所对应的 trait 方法。
 
-```
+```rust
 impl Fold for Args {
     fn fold_expr(&mut self, e: Expr) -> Expr {
         match e {
@@ -700,7 +688,7 @@ impl Fold for Args {
 
 现在我们可以使用`fold_item_fn`在我们解析的代码中注入 print 语句。
 
-```
+```rust
 #[proc_macro_attribute]
 pub fn trace_var(args: TokenStream, input: TokenStream) -> TokenStream {
 // parse the input
@@ -722,14 +710,14 @@ Rust 中的自定义派生宏能够对 trait 进行自动实现。这些宏通�
 
 `syn`对`derive`宏有很好的支持。
 
-```
+```rust
 #[derive(Trait)]
 struct MyStruct{}
 ```
 
 要想在 Rust 中写一个自定义派生宏，我们可以使用`DeriveInput`来解析派生宏的输入。我们还将使用`proc_macro_derive`宏来定义一个自定义派生宏。
 
-```
+```rust
 #[proc_macro_derive(Trait)]
 pub fn derive_trait(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -756,7 +744,7 @@ pub fn derive_trait(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 
 下面是如何在 Rust 中写一个函数式宏：
 
-```
+```rust
 #[proc_macro]
 pub fn a_proc_macro(_input: TokenStream) -> TokenStream {
     TokenStream::from(quote!(
@@ -771,19 +759,11 @@ pub fn a_proc_macro(_input: TokenStream) -> TokenStream {
 
 使用过程宏的优势包括：
 
--   使用`span`获得更好的错误处理
--   更好的控制输出
--   社区已有`syn`和`quote`两个 crate
--   比声明式宏更为强大
+- 使用`span`获得更好的错误处理
+- 更好的控制输出
+- 社区已有`syn`和`quote`两个 crate
+- 比声明式宏更为强大
 
 ## 总结
 
 在这篇 Rust 教程中，我们涵盖了 Rust 中关于宏的基本内容，声明式宏和过程宏的定义，以及如果使用各种语法和社区的 crate 来编写这两种类型的宏。我们还总结了每种类型的 Rust 宏所具有优势。
-
-Update 2021-3-12：
-
-感谢
-
-老师纠正，将Derive macros译为派生宏更为合适。
-
-![动图封面](https://pic1.zhimg.com/v2-d09750201555784c9d28f5aef49c0d80_b.jpg)
