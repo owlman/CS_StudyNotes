@@ -263,7 +263,7 @@ fn main()->Result<(),String>{
 
 一个`struct`（即结构体）声明在其开头有一个可见性关键字（比如`pub` ） ，后面跟着`struct`关键字，然后是`struct`的名字和`struct`的主体。
 
-![text](https://pic2.zhimg.com/v2-2df8d58a6366dfdbcf53f08f91346305_b.jpg)
+![text](https://img2023.cnblogs.com/blog/691082/202307/691082-20230719153358572-491077099.jpg)
 
 ```rust
 macro_rules! make_public{
@@ -280,7 +280,7 @@ macro_rules! make_public{
 
 `$vis`将会拥有可见性，`$struct_name`将会拥有一个结构体名。为了让一个结构体是公开的，我们只需要添加`pub`关键字并忽略`$vis`变量。
 
-![text](https://pic2.zhimg.com/v2-60bfd6426d4c7ec107670534bf8f4021_b.jpg)
+![text](https://img2023.cnblogs.com/blog/691082/202307/691082-20230719153359147-1452398427.jpg)
 
 一个`struct`可能包含多个字段，这些字段具有相同或不同的数据类型和可见性。`ty` token 类型用于数据类型，`vis`用于可见性，`ident`用于字段名。我们将会使用`*`用于零个或更多字段。
 
