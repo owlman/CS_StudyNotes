@@ -29,14 +29,14 @@ Rust 语言对宏（macro）有着非常好的支持。宏这种记住使得我�
 
 在 Rust 语言中，宏主要有以下两种类型：
 
-- 声明式宏（Declarative macros）：这种类型的宏可以帮助我们写出类似 match 表达式的东西，来操作你所提供的 Rust 代码。它使用你提供的代码来生成用于替换宏调用的代码。  
-- 过程式宏（Procedural macros）：这种类型的宏允许我们操作给定 Rust 代码的抽象语法树（abstract syntax tree, AST）。过程宏是从一个（或者两个）`TokenStream`到另一个`TokenStream`的函数，用输出的结果来替换宏调用。  
+- 声明式宏（Declarative macros）：这种类型的宏在功能上类似于匹配表达式，它会根据我们提供的代码来生成用于替换宏调用的代码。  
+- 过程式宏（Procedural macros）：这种类型的宏允许我们操作给定 Rust 代码的抽象语法树（abstract syntax tree, AST）。过程式宏是从一个（或者两个）`TokenStream`到另一个`TokenStream`的函数，用输出的结果来替换宏调用。  
 
-下面，让我们来通过一些具体示例来了解下声明式宏和过程宏的更多细节，以及它们的具体使用方法。
+下面，让我们将通过一些具体示例来分别了解下这两种类型的宏，以及它们的具体使用方法。
 
-## Rust 中的声明式宏
+## 声明式宏
 
-宏通过使用`macro_rules!`来声明。声明式宏虽然功能上相对较弱，但提供了易于使用的接口来创建宏来移除重复性代码。最为常见的一个声明式宏就是`println！`。声明式宏提供了一个类似`match`的接口，在匹配时，宏会被匹配分支的代码替换。
+宏通过使用`macro_rules!`来声明。声明式宏虽然功能上相对较弱，但提供了易于使用的接口来创建宏来移除重复性代码。最为常见的一个声明式宏就是`println!`。声明式宏提供了一个类似`match`的接口，在匹配时，宏会被匹配分支的代码替换。
 
 ### 创建声明式宏
 
@@ -147,17 +147,17 @@ fn main(){
 
 ```rust
 macro_rules! add{
- // first arm in case of single argument and last remaining variable/number
+    // first arm in case of single argument and last remaining variable/number
     ($a:expr)=>{
         $a
     };
-// second arm in case of two arument are passed and stop recursion in case of odd number ofarguments
+    // second arm in case of two arument are passed and stop recursion in case of odd number ofarguments
     ($a:expr,$b:expr)=>{
         {
             $a+$b
         }
     };
-// add the number and the result of remaining arguments
+    // add the number and the result of remaining arguments
     ($a:expr,$($b:tt)*)=>{
        {
            $a+add!($($b)*)
@@ -263,9 +263,9 @@ fn main()->Result<(),String>{
 
 一个`struct`（即结构体）声明在其开头有一个可见性关键字（比如`pub` ） ，后面跟着`struct`关键字，然后是`struct`的名字和`struct`的主体。
 
-![](https://pic2.zhimg.com/v2-2df8d58a6366dfdbcf53f08f91346305_b.jpg)
+![text](https://pic2.zhimg.com/v2-2df8d58a6366dfdbcf53f08f91346305_b.jpg)
 
-```
+```rust
 macro_rules! make_public{
     (
   // use vis type for visibility keyword and ident for struct name
@@ -280,7 +280,7 @@ macro_rules! make_public{
 
 `$vis`将会拥有可见性，`$struct_name`将会拥有一个结构体名。为了让一个结构体是公开的，我们只需要添加`pub`关键字并忽略`$vis`变量。
 
-![](https://pic2.zhimg.com/v2-60bfd6426d4c7ec107670534bf8f4021_b.jpg)
+![text](https://pic2.zhimg.com/v2-60bfd6426d4c7ec107670534bf8f4021_b.jpg)
 
 一个`struct`可能包含多个字段，这些字段具有相同或不同的数据类型和可见性。`ty` token 类型用于数据类型，`vis`用于可见性，`ident`用于字段名。我们将会使用`*`用于零个或更多字段。
 
@@ -289,8 +289,8 @@ macro_rules! make_public{
     (
      $vis:vis struct $struct_name:ident {
         $(
- // vis for field visibility, ident for field name and ty for field data type
-        $field_vis:vis $field_name:ident : $field_type:ty
+            // vis for field visibility, ident for field name and ty for field data type
+            $field_vis:vis $field_name:ident : $field_type:ty
         ),*
     }
     ) => {
@@ -408,34 +408,32 @@ fn main() {
 
 声明式宏有一些限制。有些是与 Rust 宏本身有关，有些则是声明式宏所特有的：
 
--   缺少对宏的自动完成和展开的支持  
-    
--   声明式宏调式困难  
-    
--   修改能力有限  
-    
--   更大的二进制  
-    
--   更长的编译时间（这一条对于声明式宏和过程宏都存在）  
+- 缺少对宏的自动完成和展开的支持  
+- 声明式宏调式困难  
+- 修改能力有限  
+- 更大的二进制  
+- 更长的编译时间（这一条对于声明式宏和过程宏都存在）  
 
-[过程宏（Procedural macros）](https://link.zhihu.com/?target=https%3A//blog.logrocket.com/procedural-macros-in-rust/)是一种更为高级的宏。过程宏能够扩展 Rust 的现有语法。它接收任意输入并产生有效的 Rust 代码。  
+## 过程式宏
+
+[过程式宏（Procedural macros）](https://link.zhihu.com/?target=https%3A//blog.logrocket.com/procedural-macros-in-rust/)是一种更为高级的宏。过程宏能够扩展 Rust 的现有语法。它接收任意输入并产生有效的 Rust 代码。  
 
 过程宏接收一个`TokenStream`作为参数并返回另一个`TokenStream`。过程宏对输入的`TokenStream`进行操作并产生一个输出。有三种类型的过程宏：
 
-1.  属性式宏（Attribute-like macros）
-2.  派生宏（Derive macros）
-3.  函数式宏（Function-like macros）
+1. 属性式宏（Attribute-like macros）
+2. 派生式宏（Derive macros）
+3. 函数式宏（Function-like macros）
 
 接下来我们将会对它们进行详细讨论。
 
-## Rust 中的属性式宏
+### 属性式宏
 
 属性式宏能够让你创建一个自定义的属性，该属性将其自身关联一个项（item），并允许对该项进行操作。它也可以接收参数。
 
-```
+```rust
 #[some_attribute_macro(some_argument)]
 fn perform_task(){
-// some code
+    // some code
 }
 ```
 
@@ -443,7 +441,7 @@ fn perform_task(){
 
 为了编写一个属性式宏，我们先用`cargo new macro-demo --lib`来创建一个项目。创建完成后，修改`Cargo.toml`来通知 cargo，该项目将会创建过程宏。
 
-```
+```toml
 # Cargo.toml
 [lib]
 proc-macro = true
@@ -574,16 +572,16 @@ impl Args {
     fn should_print_expr(&self, e: &Expr) -> bool {
         match *e {
             Expr::Path(ref e) => {
- // variable shouldn't start wiht ::
+                 // variable shouldn't start wiht ::
                 if e.path.leading_colon.is_some() {
                     false
-// should be a single variable like `x=8` not n::x=0
+                // should be a single variable like `x=8` not n::x=0
                 } else if e.path.segments.len() != 1 {
                     false
                 } else {
-// get the first part
+                    // get the first part
                     let first = e.path.segments.first().unwrap();
-// check if the variable name is in the Args.vars hashset
+                    // check if the variable name is in the Args.vars hashset
                     self.vars.contains(&first.ident) && first.arguments.is_empty()
                 }
             }
@@ -591,36 +589,36 @@ impl Args {
         }
     }
 
-// used for checking if to print let i=0 etc or not
+    // used for checking if to print let i=0 etc or not
     fn should_print_pat(&self, p: &Pat) -> bool {
         match p {
-// check if variable name is present in set
+            // check if variable name is present in set
             Pat::Ident(ref p) => self.vars.contains(&p.ident),
             _ => false,
         }
     }
 
-// manipulate tree to insert print statement
+    // manipulate tree to insert print statement
     fn assign_and_print(&mut self, left: Expr, op: &dyn ToTokens, right: Expr) -> Expr {
- // recurive call on right of the assigment statement
+        // recurive call on right of the assigment statement
         let right = fold::fold_expr(self, right);
-// returning manipulated sub-tree
+        // returning manipulated sub-tree
         parse_quote!({
             #left #op #right;
             println!(concat!(stringify!(#left), " = {:?}"), #left);
         })
     }
 
-// manipulating let statement
+    // manipulating let statement
     fn let_and_print(&mut self, local: Local) -> Stmt {
         let Local { pat, init, .. } = local;
         let init = self.fold_expr(*init.unwrap().1);
-// get the variable name of assigned variable
+        // get the variable name of assigned variable
         let ident = match pat {
             Pat::Ident(ref p) => &p.ident,
             _ => unreachable!(),
         };
-// new sub tree
+        // new sub tree
         parse_quote! {
             let #pat = {
                 #[allow(unused_mut)]
