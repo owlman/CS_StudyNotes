@@ -1,6 +1,6 @@
 # Rust 学习笔记：快速上手篇
 
-根据之前在《[[Rust 语言的学习路线图]]》一文中的规划，这篇学习笔记将用于记录本人在快速上手 Rust 编程语言时所记录的学习心得与代码实例。为此，我会在[本笔记库](https://github.com/owlman/study_note)项目的`Programming/LanguageStudy/Rust/`目录下创建以下两个子目录：
+根据之前在《[[Rust 语言的学习路线图]]》一文中的规划，这篇学习笔记将用于记录本人在快速上手 Rust 编程语言时所记录的学习心得与代码实例。为此，我会在[本人的笔记库项目](https://github.com/owlman/study_note)的`Programming/LanguageStudy/Rust/`目录下创建以下两个子目录：
 
 - `StudyNotes`目录：用于存放 Markdown 格式的笔记。
 - `examples`目录：则用于存放笔记中所编写的代码实例。
