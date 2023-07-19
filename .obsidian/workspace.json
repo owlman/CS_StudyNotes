@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
+                "file": "Programming/LanguageStudy/Rust/RouteMap/Rust 语言的学习路线图.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md"
+                "file": "Programming/LanguageStudy/Rust/RouteMap/Rust 语言的学习路线图.md"
               }
             }
           },
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
+                "file": "Programming/LanguageStudy/Rust/RouteMap/Rust 语言的学习路线图.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
+                "file": "Programming/LanguageStudy/Rust/RouteMap/Rust 语言的学习路线图.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,6 +149,7 @@
   },
   "active": "510fbbba8e4b212c",
   "lastOpenFiles": [
+    "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
     "Programming/LanguageStudy/Rust/StudyNotes/Rust 学习笔记：项目实践篇.md",
     "Programming/LanguageStudy/Rust/StudyNotes/Rust 学习笔记：扩展应用篇.md",
     "Programming/LanguageStudy/Rust/StudyNotes/Rust 学习笔记：篇.md",
@@ -188,7 +189,6 @@
     "SoftwareTool/TextEditor/VSCode/img/QuickStart",
     "Questions&Answers/什么人适合从事计算机科学研究.md",
     "SoftwareTool/TextEditor/VSCode/VSCode 的安装与基本配置.md",
-    "01_Literature/posts/在VSCode中实践双链笔记.md",
     "01_LiteratureNote/person",
     "01_LiteratureNote/books",
     "00_ToBeOrganized/img",

@@ -2,7 +2,7 @@
 
 在这个系列笔记中，我将陆续整理自己在学习 Rust 编程语言及其框架的过程中留下的笔记和代码，目的是掌握如何在生产环境中利用各种领域的第三方框架来快速开发应用程序。和大多数学习过程一样，我需要在第一部分笔记中花费一点篇幅来鸟瞰一下 Rust 语言及其所涉及的领域，以便从全局视野来规划接下来的学习路线图，为此，我会在[我个人笔记库项目](https://github.com/owlman/study_note)的`Programming/LanguageStudy/Rust`目录下创建一个名为的`RouteMap`目录，用于存放并维护接下来的这一部分笔记。
 
-## 参考资料说明
+## 学习资料列表
 
 - 网络资源：[《Rust 程序设计语言》线上版](https://www.rustwiki.org.cn/zh-CN/book/)
 - 视频教程：[Rust 编程语言入门教程](https://www.bilibili.com/video/BV1hp4y1k7SV/)；
