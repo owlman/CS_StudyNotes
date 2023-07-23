@@ -29,5 +29,5 @@
 "markdown.styles": [
     ".foam\\themes\\enhanced\\notion-light-enhanced.css"
 ],
-"editor.fontFamily": "'微软雅黑',‘Meslo LGM NF’, Consolas,'Courier New', monospace",
+"editor.fontFamily": "'微软雅黑', ‘FiraCode Nerd Font', Meslo LGM NF’, Consolas,'Courier New', monospace",
 }
