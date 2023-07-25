@@ -148,7 +148,7 @@ import Vue from './node_modules/vue/dist/vue.esm.browser.min.js';
     });
    ```
 
-接下来只需将相关的 Web 服务运行起来（该服务器可以是 Apache 或者 Nginx，也可以是 VSCode 的 Live Sever 插件），然后如果在 Web 浏览器中看到如下页面，就说明 Vue.js 框架已经被引入到了程序中，并被成功执行起来了。
+接下来只需将相关的 Web 服务运行起来（该服务器可以是 Apache 或者 Nginx，也可以是 VS Code 的 Live Sever 插件），然后如果在 Web 浏览器中看到如下页面，就说明 Vue.js 框架已经被引入到了程序中，并被成功执行起来了。
 
    ![Hello_World](img/hello_vue.png)
 

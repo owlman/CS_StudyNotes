@@ -1,4 +1,4 @@
-# 在 VSCode 中实现双链笔记
+# 在 VS Code 中实现双链笔记
 
 > **文献说明：**  
 > 原文出处：`https://client.sspai.com/post/70956`；  
@@ -7,35 +7,35 @@
 
 ---
 
-近年来，随着「卡片盒笔记系统」及其相关方法论的兴起，人们对更有效地记录笔记的需求的高涨，笔记软件的市场呈现出推陈出新和自我革新的局面。不仅有 Roam Research 和 Obsidian 等后起之秀凭借对这两种笔记法的率先支持获得广泛欢迎，一些传统笔记软件，例如 Notion，也在逐步加入相应的功能支持。在这些丰富的笔记软件选择之外，还有另一个值得关注的软件，也通过特殊的方式实现了这些功能需求，那就是微软出品的文本编辑器 VSCode。==VSCode 最为强大之处，就在于它可以通过丰富的扩展，将其定制成为自己专属且特化的应用==。这篇文章要介绍的，便是在 VSCode 上实现「卡片盒笔记系统」功能的扩展：Foam。
+近年来，随着「卡片盒笔记系统」及其相关方法论的兴起，人们对更有效地记录笔记的需求的高涨，笔记软件的市场呈现出推陈出新和自我革新的局面。不仅有 Roam Research 和 Obsidian 等后起之秀凭借对这两种笔记法的率先支持获得广泛欢迎，一些传统笔记软件，例如 Notion，也在逐步加入相应的功能支持。在这些丰富的笔记软件选择之外，还有另一个值得关注的软件，也通过特殊的方式实现了这些功能需求，那就是微软出品的文本编辑器 VS Code。==VS Code 最为强大之处，就在于它可以通过丰富的扩展，将其定制成为自己专属且特化的应用==。这篇文章要介绍的，便是在 VS Code 上实现「卡片盒笔记系统」功能的扩展：Foam。
 
-在 [Foam 插件的官方主页](https://foambubble.github.io/foam/ ) 上，==Foam 被定义为「**受 Roam Research 启发**的、依托于 VSCode 和 GitHub 的、**管理和分享**个人知识的系统」==。你可以用它来组织研究、记录笔记或者在网络上发布内容。这篇文章中我们将主要把 Foam 作为构建卡片盒笔记系统的工具。
+在 [Foam 插件的官方主页](https://foambubble.github.io/foam/ ) 上，==Foam 被定义为「**受 Roam Research 启发**的、依托于 VS Code 和 GitHub 的、**管理和分享**个人知识的系统」==。你可以用它来组织研究、记录笔记或者在网络上发布内容。这篇文章中我们将主要把 Foam 作为构建卡片盒笔记系统的工具。
 
 ## 基础配置与上手
 
-### 使用 VSCode
+### 使用 VS Code
 
-Foam 作为 [VSCode](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行，而 VSCode 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VSCode 上使用 Foam 需要注意的点。
+Foam 作为 [VS Code](https://client.sspai.com/link?target=https%3A%2F%2Fcode.visualstudio.com%2F) 的扩展，必须依托其上才能运行，而 VS Code 作为一个代码编辑器，主要还是面向前端工程师等群体，对于一些文字工作者可能有使用门槛，这里简单介绍一些在 VS Code 上使用 Foam 需要注意的点。
 
-首先，一个标准的 VSCode 项目（对于我们就是 Foam 笔记库），其配置文件位于项目文件夹（笔记库的根目录）下的 `.vscode` 文件夹下。在这篇文章中我们主要需要使用两个文件：`settings.json`（项目的配置文件）和 `foam-snippets.code-snippets` 文件（用户代码片段）。==需要注意的是，如果将笔记库保存为 VSCode 工作区，即后缀为 `.code-space` 的文件，那该文件本身就是工作区的配置文件。对该文件的更改会覆盖 `.vscode` 目录下 `settings.json` 文件中的配置==。
+首先，一个标准的 VS Code 项目（对于我们就是 Foam 笔记库），其配置文件位于项目文件夹（笔记库的根目录）下的 `.vs code` 文件夹下。在这篇文章中我们主要需要使用两个文件：`settings.json`（项目的配置文件）和 `foam-snippets.code-snippets` 文件（用户代码片段）。==需要注意的是，如果将笔记库保存为 VS Code 工作区，即后缀为 `.code-space` 的文件，那该文件本身就是工作区的配置文件。对该文件的更改会覆盖 `.vs code` 目录下 `settings.json` 文件中的配置==。
 
-其次，==在 VSCode 中执行一个命令（内建的或者来自扩展的），需要通过命令面板（command palette，快捷键 `Ctrl + Shift + P`）==。在这篇文章中，我们常用的一些命令如下：
+其次，==在 VS Code 中执行一个命令（内建的或者来自扩展的），需要通过命令面板（command palette，快捷键 `Ctrl + Shift + P`）==。在这篇文章中，我们常用的一些命令如下：
 
 - `Foam: Create New Note`：在当前目录下创建新的笔记条目。
 - `Foam: Show Graph`：打开知识图谱页面。
 - `Foam: Open Daily Note`：创建 Daily Note。
 - `Foam: Create New Note From Template`：从模板创建新笔记。
 
-在 VSCode 中搜索文件可以使用快捷键 `Ctrl + P` 弹出对应面板，通过文件名进行搜索。打开侧边栏的搜索面板（快捷键 `Ctrl + Shift + F`），可以对整个笔记库的内容进行检索。
+在 VS Code 中搜索文件可以使用快捷键 `Ctrl + P` 弹出对应面板，通过文件名进行搜索。打开侧边栏的搜索面板（快捷键 `Ctrl + Shift + F`），可以对整个笔记库的内容进行检索。
 
 ### 配置笔记库
 
 下面，我们开始来具体演示如何建立 Foam 笔记库。==根据是否使用 GitHub 进行版本控制，读者可以自行从以下两种方案中选择一种来执行。
 
-- 在 GitHub 上建立笔记库：使用官方提供的 [foam-template](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template) 在自己的 GitHub 上建立仓库，可以选择是否将仓库设为私有库。仓库建立后，将其 clone 到本地并在 VSCode 中打开。这样以后就可以通过 GitHub 对你的笔记库进行版本控制，也可以通过 Github Pages 或其他静态网页服务发布笔记。
+- 在 GitHub 上建立笔记库：使用官方提供的 [foam-template](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template) 在自己的 GitHub 上建立仓库，可以选择是否将仓库设为私有库。仓库建立后，将其 clone 到本地并在 VS Code 中打开。这样以后就可以通过 GitHub 对你的笔记库进行版本控制，也可以通过 Github Pages 或其他静态网页服务发布笔记。
 - 在本地使用 Foam：鉴于国内的网络环境和学习 git 操作的学习成本，也可以选择在本地建立 Foam 笔记库。下载[官方模板](https://client.sspai.com/link?target=https%3A%2F%2Fgithub.com%2Ffoambubble%2Ffoam-template%2Farchive%2Fmaster.zip)到本地解压后便可以作为笔记库的根目录。
 
-通过以上两种方式建立 Foam 笔记库，并在 VSCode 中打开笔记库根目录后，软件会自动提示安装 Foam 和其他推荐的扩展（包括：Markdown All in One、Markdown Emoji、Paste Image、Todo Tree 和 Spell Right 等），可以选择全部或按需安装。
+通过以上两种方式建立 Foam 笔记库，并在 VS Code 中打开笔记库根目录后，软件会自动提示安装 Foam 和其他推荐的扩展（包括：Markdown All in One、Markdown Emoji、Paste Image、Todo Tree 和 Spell Right 等），可以选择全部或按需安装。
 
 ### 初步上手
 
@@ -120,7 +120,7 @@ Foam 的侧边栏面板包含这几项功能：文件管理、大纲、时间线
 
 Foam 使用 Markdown 作为笔记的文件格式，一方面其通用性便利了跨平台使用，另一方面也可以利用 `CSS` 文件对其进行美化（如果你想定制自己的 Markdown 的预览样式，可以参考 [Typora 的指南](https://client.sspai.com/link?target=https%3A%2F%2Ftheme.typora.io%2Fdoc%2FWrite-Custom-Theme%2F)）。
 
-Foam 的项目配置文件是位于笔记库根目录下的 `.vscode/settings.json` 文件，Markdown 预览样式则由笔记库根目录下 `assets/css/style.scss` 文件控制。然而经过测试，直接修改该样式表文件并没有生效。这里我选择复制该文件并将后缀改为 `.css`，然后在配置文件中新增一行代码 `"markdown.styles": ["assets\\css\\style.css"],`，配置生效。  
+Foam 的项目配置文件是位于笔记库根目录下的 `.vs code/settings.json` 文件，Markdown 预览样式则由笔记库根目录下 `assets/css/style.scss` 文件控制。然而经过测试，直接修改该样式表文件并没有生效。这里我选择复制该文件并将后缀改为 `.css`，然后在配置文件中新增一行代码 `"markdown.styles": ["assets\\css\\style.css"],`，配置生效。  
 
 个人并没有进行太多的样式调整，主要是将英文字体改为 `Cascadia Code` 来实现对连写符号的支持：
 
@@ -132,7 +132,7 @@ Foam 的项目配置文件是位于笔记库根目录下的 `.vscode/settings.j
 
 ### 代码片段的配置介绍
 
-VSCode 内建对代码片段（snippets）的支持，并且支持用户自定义代码片段，因此这一功能也可以在 Foam 中使用。在 Foam 笔记库根目录下 `.vscode` 路径创建 `foam-snippets.code-snippets` 文件以创建用户片段（该文件本质上是一个 json 文件）。
+VS Code 内建对代码片段（snippets）的支持，并且支持用户自定义代码片段，因此这一功能也可以在 Foam 中使用。在 Foam 笔记库根目录下 `.vs code` 路径创建 `foam-snippets.code-snippets` 文件以创建用户片段（该文件本质上是一个 json 文件）。
 
 一条代码片段通常包含这些字段：
 
@@ -163,9 +163,9 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 }
 ```
 
-在 VSCode 的代码片段中，类似 `$1` 这样的格式化文本称为 tabstop。在键入 `/meta` 并在建议中选择上述代码片段后，光标会首先停留在 `$1` 处，我们可以在此处输入文本，键入完成后按 `tab` 会跳转到下一个 tabstop `${2|type1,type2,type3|}`，这是一个需要选择而非键入的格式，完成选择后再次按 `tab`跳转到 `$3` 处，在此可以输入这条笔记的标签，全部完成后按 `tab` 跳出代码片段。
+在 VS Code 的代码片段中，类似 `$1` 这样的格式化文本称为 tabstop。在键入 `/meta` 并在建议中选择上述代码片段后，光标会首先停留在 `$1` 处，我们可以在此处输入文本，键入完成后按 `tab` 会跳转到下一个 tabstop `${2|type1,type2,type3|}`，这是一个需要选择而非键入的格式，完成选择后再次按 `tab`跳转到 `$3` 处，在此可以输入这条笔记的标签，全部完成后按 `tab` 跳出代码片段。
 
-像 `date` 属性中的 `$CURRENT_YEAR` 和类似的格式化文本则是由 VSCode 预定义的变量，它的值和格式取决于系统的日期时间，因此在输入这条代码片段后，就会自动完成 `date` 属性，而不需要自行添加。
+像 `date` 属性中的 `$CURRENT_YEAR` 和类似的格式化文本则是由 VS Code 预定义的变量，它的值和格式取决于系统的日期时间，因此在输入这条代码片段后，就会自动完成 `date` 属性，而不需要自行添加。
 
 ### 插入时间戳
 
@@ -188,7 +188,7 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 ### 创建和使用模板
 
-和 Roam Research 与 Obsidian 一样，==在 Foam 中也可以创建和使用模板。在命令面板执行 `Foam: Create New Note From template` 命令即可从现有的模板创建笔记==。Foam 的模板文件位于笔记库根目录的 `.foam/templates` 路径下。Foam 的模板同样支持 VSCode 代码片段中预定义的变量。以 Daily Note 为例，在模板文件夹路径下创建 `daily-note.md` 文件，便可以开始自定义这一模板。我的 Daily Note 模板定义如下：
+和 Roam Research 与 Obsidian 一样，==在 Foam 中也可以创建和使用模板。在命令面板执行 `Foam: Create New Note From template` 命令即可从现有的模板创建笔记==。Foam 的模板文件位于笔记库根目录的 `.foam/templates` 路径下。Foam 的模板同样支持 VS Code 代码片段中预定义的变量。以 Daily Note 为例，在模板文件夹路径下创建 `daily-note.md` 文件，便可以开始自定义这一模板。我的 Daily Note 模板定义如下：
 
 ![我的 Daily Note 模板](https://cdn.sspai.com/2022/01/14/0a829d4a7c2c4bbdb53b8b8e5c4a1c1b.png?imageView2/2/w/1120/q/40/interlace/1/ignore-error/1)
 
@@ -219,4 +219,3 @@ VSCode 内建对代码片段（snippets）的支持，并且支持用户自定�
 
 ----
 #文献
- 

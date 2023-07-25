@@ -27,7 +27,7 @@
     "pasteImage.showFilePathConfirmInputBox": true,
     "prettier.singleQuote": false,
     "markdown.styles": [
-        ".foam\\themes\\enhanced\\notion-light-enhanced.css"
+        ".foam/themes/classic/notion-light-classic.css"
     ],
     "editor.fontFamily": "'微软雅黑', 'FiraCode Nerd Font',  'Courier New'"
 }
