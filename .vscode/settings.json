@@ -1,33 +1,33 @@
 {
-  "editor.minimap.enabled": false,
-  "editor.wrappingIndent": "none",
-  "editor.overviewRulerBorder": false,
-  "editor.lineHeight": 24,
-  "[markdown]": {
-    "editor.quickSuggestions": {
-        "comments": "on",
-        "strings": "on",
-        "other": "on"
-    }
-  },
-  "files.defaultLanguage": "markdown",
-  "files.exclude": {
-    "**/node_modules": true
-  },
-  "files.watcherExclude": {
-    "**/node_modules": true
-  },
-  "foam.edit.linkReferenceDefinitions": "off",
-  "foam.openDailyNote.directory": "journal",
-  "foam.openDailyNote.titleFormat": "fullDate",
-  "git.enableSmartCommit": true,
-  "git.postCommitCommand": "sync",
-  "markdown.preview.breaks": true,
-  "pasteImage.path": "${projectRoot}/.tmp",
-  "pasteImage.showFilePathConfirmInputBox": true,
-  "prettier.singleQuote": false,
-"markdown.styles": [
-    ".foam/themes/enhanced/notion-light-enhanced.css"
-],
-"editor.fontFamily": "'微软雅黑',‘Meslo LGM NF’, Consolas,'Courier New', monospace",
+    "editor.minimap.enabled": false,
+    "editor.wrappingIndent": "none",
+    "editor.overviewRulerBorder": false,
+    "editor.lineHeight": 24,
+    "[markdown]": {
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    },
+    "files.defaultLanguage": "markdown",
+    "files.exclude": {
+        "**/node_modules": true
+    },
+    "files.watcherExclude": {
+        "**/node_modules": true
+    },
+    "foam.edit.linkReferenceDefinitions": "off",
+    "foam.openDailyNote.directory": "journal",
+    "foam.openDailyNote.titleFormat": "fullDate",
+    "git.enableSmartCommit": true,
+    "git.postCommitCommand": "sync",
+    "markdown.preview.breaks": true,
+    "pasteImage.path": "${projectRoot}/.tmp",
+    "pasteImage.showFilePathConfirmInputBox": true,
+    "prettier.singleQuote": false,
+    "markdown.styles": [
+        ".foam/themes/classic/notion-light-classic.css"
+    ],
+    "editor.fontFamily": "'微软雅黑', 'FiraCode Nerd Font',  'Courier New'"
 }

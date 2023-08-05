@@ -57,7 +57,6 @@ def selectionSort(coll):
         for j in range(i):
             if coll[j] > coll[max_j]: max_j = j
         coll[i], coll[max_j] = coll[max_j], coll[i]
-
     return coll
 
 def countingSort(coll):
@@ -78,18 +77,18 @@ def countingSort(coll):
 
 def radixSort(coll, length):
     if(coll == []): return []
-    
+
     for d in xrange(length):
         LSD = [[] for _ in xrange(10)]
         for n in coll:
             LSD[n / (10 ** d) % 10].append(n)
         coll = [tmp_a for tmp_b in LSD for tmp_a in tmp_b]
-    
+
     return coll
 
 def bucketSort(coll):
     if(coll == []): return []
-    
+
     length = len(coll)
     buckets = [[] for _ in xrange(length)] 
     for tmp_a in coll:
@@ -105,9 +104,9 @@ def insertSort(coll):
     for i in range(1,len(coll)):
         j = i
         while j > 0 and coll[j-1] > coll[j]:
-             coll[j-1], coll[j] = coll[j], coll[j-1]  
-             j -= 1
-              
+                coll[j-1], coll[j] = coll[j], coll[j-1]  
+                j -= 1
+                
     return coll 
 
 def shellSort(coll):
@@ -123,7 +122,7 @@ def shellSort(coll):
                 ins -= step
             coll[ins] = tmp
         step = step / 2
-    
+
     return coll
 
 def bubbleSort(coll):
@@ -137,8 +136,8 @@ def bubbleSort(coll):
 def quickSort(coll):
     if(coll == []): return []
     return quickSort([x for x in coll[1:] if x < coll[0]]) + \
-                         coll[0:1] + \
-                         quickSort([x for x in coll[1:] if x >= coll[0]])
+                            coll[0:1] + \
+                            quickSort([x for x in coll[1:] if x >= coll[0]])
 ```
 
 最后，在最理想的情况下，读者还应该具备一些针对某一特定任务来编写自动化脚本的能力，例如能理解并复述下面这段实现 Git 提交操作的自动化脚本。
@@ -195,5 +194,5 @@ print(n*'=')
 
 总而言之，对于如今的项软件工程师来说，在一个月内快速掌握某个新框架的能力远比之前已经掌握了多少个框架重要得多，例如当开发团队的管理员在面试新成员时，如果这位面试者有五年 A 框架的使用经验，那固然是很好，但团队中很多人都有，未必需要再多一个同类型的人才、但如果该面试者能在一个礼拜快速上手基于 Python 的任意一种框架，那么这位人才的重要性就会被凸显出来。毕竟如果我是一个开发团队的管理者，肯定不会喜欢团队的成员告诉我这个不会，那个不会。
 
----
+----
 #待深入
