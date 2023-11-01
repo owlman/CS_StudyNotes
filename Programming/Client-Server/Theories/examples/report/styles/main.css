@@ -1,0 +1,94 @@
+/* main.css */
+
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+header, main, footer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+/* 标题样式 */
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+/* 段落样式 */
+p {
+    margin-bottom: 10px;
+}
+
+/* 引用样式 */
+blockquote {
+    background-color: #f8f8f8;
+    border-left: 4px solid #ccc;
+    margin: 0;
+    padding: 10px;
+}
+
+cite {
+    display: block;
+    margin-top: 10px;
+    font-style: italic;
+    color: #777;
+}
+
+/* 列表样式 */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* 表格样式 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+/* 链接样式 */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 图片样式 */
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
