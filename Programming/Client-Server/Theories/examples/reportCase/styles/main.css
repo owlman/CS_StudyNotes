@@ -14,6 +14,10 @@ header, main, footer {
     padding: 20px;
 }
 
+article {
+    padding: 0.5vh 1vw;
+}
+
 h1, h2 {
     color: #333;
 }
@@ -31,6 +35,15 @@ h2 {
 /* 段落样式 */
 p {
     margin-bottom: 10px;
+}
+
+/* 图片样式 */
+img {
+    float: left;
+    max-width: 100%;
+    width: 50%;
+    margin: 1.5vh 1.5vw;
+    border: 1px solid #ccc;
 }
 
 /* 引用样式 */
@@ -77,14 +90,6 @@ a {
 
 a:hover {
     text-decoration: underline;
-}
-
-/* 图片样式 */
-img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border: 1px solid #ccc;
 }
 
 /* 页脚样式 */
