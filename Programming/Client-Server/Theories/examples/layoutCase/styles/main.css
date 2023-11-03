@@ -47,13 +47,24 @@ nav {
     text-align: center;
 }
 
-/* 匹配section标签，用于定义网页主体区域的样式 */
-section {
+/* 匹配main标签，用于定义网页主要内容区域的样式 */
+main {
     height: 80%;
     background-color: white;
     margin: 0.5vh 0;
     padding: 1vh 0.5vw;
-    font-size: 1.5em;
+    font-size: 1.5rem;
+    border: 1px solid;
+    text-align: center;
+}
+
+/* 匹配section标签，用于定义网页主体区域的样式 */
+section {
+    height: 85%;
+    background-color: white;
+    margin: 0.5vh 0vw;
+    padding: 1vh 1vw;
+    font-size: 1.3rem;
     border: 1px solid;
     text-align: center;
 }
@@ -61,41 +72,40 @@ section {
 /* 匹配aside标签，用于定义网页侧边栏区域的样式 */
 aside {
     float: left;
-    height: 80%;
-    width: 15%;
+    height: 90%;
+    width: 20%;
     background-color: var(--primary-bg-color);
-    margin-left: 1.5vh;
-    padding: 1.5vh;
+    margin: 1.5vh 1.5vw;
+    padding: 0.5vh 0.5vw;
     border: 1px solid;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-align: center;
 }
 
 /* 匹配article标签，用于网页中某一特定内容区域的样式 */
 article {
     float: left;
-    height: 80%;
-    width: 75%;
+    height: 70%;
+    width: 70%;
     background-color: var(--primary-bg-color);
-    margin-left: 1.5vh;
-    padding: 1.5vh;
+    margin: 1.5vh 0.5vw;
+    padding: 1.4vh 0.5vw;
     border: 1px solid;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-align: center;
 }
 /* 匹配article标签下的h1标签 */
 article h1 {
-    height: 15%;
     background-color: white;
-    margin: 1.5vh;
-    padding: 0.5vh;
+    margin: 1.5vh 0.5vw;
+    padding: 0.5vh 0.5vw;
 }
 /* 匹配article标签下的p标签 */
 article p {
-    height: 65%;
+    height: 75%;
     background-color: white;
-    margin: 1.5vh;
-    padding: 0.5vh;
+    margin: 1.5vh 0.5vw;
+    padding: 0.5vh 0.5vw;
 }
 
 /* 匹配footer标签，用于定义网页底部区域的样式 */
