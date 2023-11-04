@@ -263,39 +263,40 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 ### 嵌入类标记
 
-在网页设计工作中，除了最基本的图文类元素之外，我们通常还会在当前网页中嵌入一些其他类型的内容，例如矢量图、CSS样式、脚本代码、视频、音频、小程序等。下面，我们就分别来介绍一下这些用于在网页中嵌入其他类型内容的HTML标记。
+在网页设计工作中，除了最基本的图文类元素之外，我们通常还会在当前网页中嵌入矢量图、CSS样式、脚本代码、视频、音频、小程序等特定数据类型的元素。这些元素也都有对应的HTML标记。下面，我们就分别来介绍一下这些HTML标记，以便读者可以根据项目需求自行选择适当的标记来丰富网页的功能。
 
 #### 嵌入矢量图
 
-在HTML 5中，设计师们可以使用 `<svg>` 标记来在网页中嵌入矢量图元素。在这里，SVG是一套基于XML来实现的、用于描述矢量图形的标记语言，设计师们可以利用这套标记语言在网页中创建复杂的图形、图表和图像，而不会损失图像的质量。例如，下面就是一段嵌入矢量图的代码。
+在HTML 5中，设计师们可以使用 `<svg>` 标记来在网页中嵌入矢量图元素。SVG是一套基于XML来实现的、用于描述矢量图形的标记语言，我们们可以利用这套标记语言在网页中创建复杂的图形元素。例如，如果读者想在网页中绘制一个绘制有红色圆形+黄色矩形的图案，就可以这样做：
 
-```html
+```xml
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <meta charset="UTF-8">
         <title>嵌入矢量图</title>
     </head>
     <body>
-        <svg width="100" height="100">
+        <svg width="400" height="300">
+            <!-- 在这里放置用于绘制SVG图形的标记 -->
             <circle cx="50" cy="50" r="40" 
-               stroke="black" stroke-width="3" fill="red" />
+                stroke="black" stroke-width="3" fill="red" />
+            <rect x="100" y="100" width="200" height="100"
+                stroke="black" stroke-width="3" fill="yellow" />
         </svg>
     </body>
 </html>
 ```
 
-以下是关于 `<svg>` 标记及其用法的详细介绍：
+上述代码示例被保存在本笔记所在目录下的`examples/embedCase`目录中，读者可以使用网页浏览器打开该文件，就可以看到如图3所示的效果。
 
-- `<svg>` 标记具有开始标记 `<svg>` 和结束标记 `</svg>`，它们用于定义 SVG 图形的范围。在这两个标记之间的内容将被渲染为SVG图形。设计师们可以使用该标记的 `width` 和 `height` 属性来指定图形的宽度和高度。这决定了 SVG 画布的尺寸，所有的图形元素将在这个画布上绘制。
+![图3](./img/html&css/3.png)
 
-  ```html
-  <svg width="200" height="100">
-      <!-- 关于SVG图形元素的具体描述 -->
-  </svg>
-  ```
+下面，我们来详细介绍一下`<svg>` 标记的使用方法：
 
-- SVG使用一个坐标系统，其中 `(0,0)` 通常位于左上角。设计师们可以在SVG中使用坐标来放置和定位图形元素。`<svg>` 标记内的坐标系统是相对的，它们与 `width` 和 `height` 属性的值相关联。在 `<svg>` 标记内，设计师们可以使用一系列子标记来定义不同的SVG图形元素，例如 `<circle>`、`<rect>`、`<line>`、`<path>` 等，这些子标记有各自的属性，可用于控制图形的外观和行为。
+- `<svg>` 标记具有开始标记 `<svg>` 和结束标记 `</svg>`，在这两个标记之间的内容将被渲染为SVG图形。设计师们可以使用该标记的 `width` 和 `height` 属性来指定图形的宽度和高度。这决定了SVG画布的尺寸，所有的图形元素将在这个画布上绘制。
+
+- SVG拥有一个独立的坐标系，其中 `(0,0)` 通常位于左上角。设计师们可以在SVG中使用坐标来放置和定位图形元素。`<svg>` 标记内的坐标系统是相对的，它们与 `width` 和 `height` 属性的值相关联。在 `<svg>` 标记内，设计师们可以使用一系列子标记来绘制不同的SVG图形元素，例如 `<circle>`、`<rect>`、`<line>`、`<path>` 等，这些子标记有各自的属性，可用于控制图形的外观和行为。
 
 - 设计师们可以使用CSS样式来控制SVG图形元素的颜色、填充、描边等外观属性。这些样式可以通过在网页中嵌入内联样式或者引用外部CSS文件来进行定义。
 
@@ -303,17 +304,17 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 - 设计师们可以将SVG图形嵌入到网页中，也可以通过外部文件引入 SVG 图形。这使得图形的重用和维护变得更加容易。
 
-总之，`<svg>` 标记是一个强大的工具，用于在网页中创建矢量图形和图表，它提供了丰富的功能，包括绘制、样式、交互性和动画等。SVG 图形可以在不失真的情况下缩放，适合多种不同的屏幕尺寸和分辨率。
+总而言之，`<svg>` 标记是一个可用于在网页中创建矢量图形和图表的强大工具，它提供了丰富的功能，包括绘制、样式、交互性和动画等。而且，SVG图形还可以在不失真的情况下缩放，适合多种不同的屏幕尺寸和分辨率。
 
-#### 嵌入内联样式
+#### 嵌入CSS样式
 
-在HTML 5中，设计师们可以使用 `<style>` 标记来在网页中嵌入内联的CSS样式，也就是说，我们可以选择将只适用于当前网页的样式代码直接写在`<style>`和`</style>`这对标记之间。例如：
+在HTML 5中，设计师们可以使用 `<style>` 标记来在网页中嵌入内联的CSS样式，也就是说，我们可以选择将只适用于当前网页的样式代码直接写在`<style>`和`</style>`这对标记之间，例如像下面这样：
 
 ```html
 <!DOCTYPE html>
 <html>
     <head>
-        <title>HTML5内联样式</title>
+        <title>嵌入CSS样式</title>
         <style>
             h1 {
                 color: red;
@@ -321,20 +322,20 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
         </style>
     </head>
     <body>
-        <h1>This is an example of an inline style.</h1>
+        <h1>这是一个 h1 标题</h1>
     </body>
 </html>
 ```
 
 #### 嵌入脚本代码
 
-在HTML 5中，设计师们可以使用 `<script>` 标记来在网页中嵌入脚本代码，例如我们可以选择将只适用于当前网页的JavaScript脚本代码直接写在`<script>`和`</script>`这对标记之间，或者使用该标签的`src`属性来引用外部JavaScript文件。例如：
+在HTML 5中，设计师们可以使用 `<script>` 标记来在网页中嵌入脚本代码，例如我们可以选择将只适用于当前网页的JavaScript脚本代码直接写在`<script>`和`</script>`这对标记之间，或者使用该标签的`src`属性来引用外部JavaScript文件，例如像下面这样：
 
 ```html
 <!DOCTYPE html>
 <html>
     <head>
-        <title>HTML5内联脚本</title>
+        <title>嵌入脚本代码</title>
         <script>
             function changeText() {
                 document.getElementById("demo").innerHTML = "Hello World!";
@@ -350,47 +351,45 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 </html>
 ```
 
-#### 嵌入视频播放器
+#### 嵌入媒体元素
 
-在HTML 5中，设计师们可以使用 `<video>` 标记来在网页中嵌入视频播放器，我们可以使用该标签的`src`属性来指定要在当前网页中播放的视频文件。例如：
+在HTML 5中，设计师们可以使用 `<video>`、`<audio>`这两个标记来实现在网页中嵌入视频/音频元素，如今我们所熟悉的哔哩哔哩、喜马拉雅等视频/音频网站，就是基于这两个标记来实现的。下面，我们来分别介绍一下它们的使用方法：
 
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>HTML5内联视频</title>
-    </head>
-    <body>
-        <video width="320" height="240" controls>
-            <source src="movie.mp4" type="video/mp4">
-            <source src="movie.ogg" type="video/ogg">
-            Your browser does not support the video tag.
-        </video>
-    </body>
-</html>
-```
+- **`<video>`** 标记：该标记用于在网页文档中嵌入一个视频播放器，我们可以先使用该标签的`height`和`width`属性来指定视频播放器在网页中所要显示的高度和宽度，然后利用其`<source>`子标记的`src`属性来指定要播放的视频文件，例如像这样：
 
-#### 嵌入音频播放器
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>嵌入视频播放器</title>
+        </head>
+        <body>
+            <video width="320" height="240" controls>
+                <source src="movie.mp4" type="video/mp4">
+                <p>你的浏览器不支持HTML 5的视频标签！</p>
+            </video>
+        </body>
+    </html>
+    ```
 
-在HTML 5中，设计师们可以使用 `<audio>` 标记来在网页中嵌入音频播放器，我们可以使用该标签的`src`属性来指定要在当前网页中播放的音频文件。例如：
+- **`<audio>`** 标记：该标记用于在网页文档中嵌入一个音频播放器，我们可以先使用该标签的`height`和`width`属性来指定音频播放器在网页中所要显示的高度和宽度，然后利用其`<source>`子标记的`src`属性来指定要播放的音频文件，例如像这样：
 
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>HTML5内联音频</title>
-    </head>
-    <body>
-        <audio controls>
-            <source src="horse.ogg" type="audio/ogg">
-            <source src="horse.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </body>
-</html>
-```
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>嵌入音频播放器</title>
+        </head>
+        <body>
+            <audio controls>
+                <source src="horse.mp3" type="audio/mpeg">
+                <p>你的浏览器不支持HTML 5的音频标签！</p>
+            </audio>
+        </body>
+    </html>
+    ```
 
-#### 嵌入其他类型的元素
+#### 嵌入其他元素
 
 - `<object>`标记：该标记用于在网页文档中嵌入一个对象元素，我们可以使用该标签的`data`属性来指定要嵌入的对象。例如：
 
@@ -398,7 +397,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     <!DOCTYPE html>
     <html>
         <head>
-            <title>HTML5内嵌对象</title>
+            <title>嵌入对象元素</title>
         </head>
         <body>
             <object data="demo.swf"></object>
@@ -412,7 +411,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     <!DOCTYPE html>
     <html>
         <head>
-            <title>HTML5内嵌插件</title>
+            <title>嵌入插件</title>
         </head>
         <body>
             <embed src="plugin.swf" width="320" height="240">
@@ -426,7 +425,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     <!DOCTYPE html>
     <html>
         <head>
-            <title>HTML5内嵌网页</title>
+            <title>嵌入另一个网页</title>
         </head>
         <body>
             <iframe src="demo_iframe.htm" width="320" height="240"></iframe>
@@ -440,21 +439,19 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     <!DOCTYPE html>
     <html>
         <head>
-            <title>HTML5内嵌画布</title>
+            <title>嵌入画布元素</title>
         </head>
         <body>
             <canvas id="canvas" width="320" height="240"></canvas>
             <script>
-                var canvas = document.getElementById('canvas');
-                var context = canvas.getContext('2d');
+                const canvas = document.getElementById('canvas');
+                const context = canvas.getContext('2d');
                 context.fillStyle = '#FF0000';
                 context.fillRect(0, 0, 150, 100);
             </script>
         </body>
     </html>
     ```
-
-这些HTML标记允许你在网页中嵌入各种类型的内容，从图形和样式到交互性和多媒体。根据项目需求，你可以选择适当的标记来丰富网页的功能。
 
 ### 交互类标记
 
