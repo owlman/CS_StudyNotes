@@ -134,6 +134,32 @@
                     <img src="./res/img/jscode.png">
                 </div>
             </section>
+            <section>
+                <h2>嵌入另一个网页：</h2>
+                <div class="example">
+                    <iframe src="res/html/example.htm" 
+                                width="320" height="240">
+                    </iframe>
+                </div>                
+                <div class="code">
+                    <img src="./res/img/iframe.png">
+                </div>
+            </section>
+            <section>
+                <h2>嵌入画布元素：</h2>
+                <div class="example">
+                    <canvas id="canvas" width="320" height="240"></canvas>
+                    <script>
+                        const canvas = document.getElementById('canvas');
+                        const context = canvas.getContext('2d');
+                        context.fillStyle = '#FF0000';
+                        context.fillRect(0, 0, 150, 100);
+                    </script>
+                </div>                
+                <div class="code">
+                    <img src="./res/img/canvas.png">
+                </div>
+            </section>
             <footer>
                 <p>© 2021 内嵌HTML元素示例</p>
             </footer>

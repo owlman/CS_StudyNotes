@@ -407,34 +407,6 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 #### 嵌入其他元素
 
-- `<object>`标记：该标记用于在网页文档中嵌入一个对象元素，我们可以使用该标签的`data`属性来指定要嵌入的对象。例如：
-
-    ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>嵌入对象元素</title>
-        </head>
-        <body>
-            <object data="demo.swf"></object>
-        </body>
-    </html>
-    ```
-
-- `<embed>`标记：该标记用于在网页文档中嵌入一个插件，我们可以使用该标签的`src`属性来指定要嵌入的插件。例如：
-
-    ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>嵌入插件</title>
-        </head>
-        <body>
-            <embed src="plugin.swf" width="320" height="240">
-        </body>
-    </html>
-    ```
-
 - `<iframe>`标记：该标记用于在网页文档中嵌入另一个网页，我们可以使用该标签的`src`属性来指定要嵌入网页的URL。例如：
 
     ```html
@@ -444,12 +416,20 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
             <title>嵌入另一个网页</title>
         </head>
         <body>
-            <iframe src="demo_iframe.htm" width="320" height="240"></iframe>
+            <iframe src="res/html/example.htm" 
+                        width="320" height="240">
+            </iframe>
         </body>
     </html>
     ```
 
-- `<canvas>`标记：该标记用于在网页文档中嵌入一个画布，我们可以使用该标签的`width`和`height`属性来设置画布的宽度和高度。例如：
+    在上述代码中，我们使用`<iframe>`标记在当前网页中嵌入了一个名为`example.htm`的网页，该网页的URL为`res/html/example.htm`，其效果如下所示：
+
+    ![图8](./img/html&css/8.png)
+
+    需要提醒读者的是，使用`<iframe>`标记时要注意安全性问题，我们原则上并不鼓励在网页设计中过多地使用该标记。即使在不得已使用时，我们也必须要确保嵌入的网页是可信的，以防止恶意代码或跨站脚本攻击。
+
+- `<canvas>`标记：该标记用于在网页文档中嵌入可用于绘画的画布元素。在使用该元素时，我们通常会先使用该标签的`width`和`height`属性来设置画布的宽度和高度，然后使用JavaScript脚本进行绘画，例如像下面这样：
 
     ```html
     <!DOCTYPE html>
@@ -468,6 +448,13 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
         </body>
     </html>
     ```
+
+    上述代码在网页中的显示效果如下所示：
+
+    ![图9](./img/html&css/9.png)
+
+    请注意，`<canvas>`标记需要使用JavaScript来进行绘制，因此对于不熟悉JavaScript的开发者来说，可能需要学习一些基本的Canvas API知识。同时，不同的浏览器可能对Canvas API的支持程度有所不同，因此在使用时需要进行兼容性测试。
+
 
 ### 交互类标记
 
