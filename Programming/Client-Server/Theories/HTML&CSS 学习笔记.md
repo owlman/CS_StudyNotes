@@ -401,7 +401,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 </html>
 ```
 
-在上述代码中，我们首先使用 `<script>` 标记定义了一个JavaScript函数，然后在该标记内部使用JavaScript函数来指定当`<button>`按钮被点击时，将会在下面显示“Hello World!”，最后使用 `<p>` 标记来指定当前网页中所有的段落文字。其效果如下所示：
+在上述代码中，我们首先使用 `<script>` 标记定义了一个JavaScript函数，然后在`<button>`标记内部将该函数注册为鼠标点击事件的处理函数，这样一来，当页面中的按钮被鼠标点击时，该函数就将会在`id="demo"`的段落区域中显示出“Hello World!”字样的文本。其效果如下所示：
 
 ![图7](./img/html&css/7.png)
 
