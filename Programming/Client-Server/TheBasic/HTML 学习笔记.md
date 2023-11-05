@@ -1,10 +1,6 @@
-# HTML&CSS学习笔记
+# HTML学习笔记
 
-HTML和CSS是开发者们在网页设计工作中必然会用到的计算机标记语言，前者用于定义网页的内容结构，后者则用于定义网页的外观样式。所以，如果是网页设计领域的初学者，我们在正式开展工作之前必须要先了解一下这两门语言的基本使用方法、以及它们现阶段各自所采用的标准规范。当然了，如果读者认为自己已经掌握了这部份知识，可自行忽略这篇笔记。
-
-## HTML学习笔记
-
-HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言”）是一门用于描述网页的文档结构及其内容的标记语言，因此网页也通常被称作HTML文档。该标记语言的主要作用是网页描述成一个树状的数据结构，以便于网页可以将其解析成可被JavaScript、VBScript等网页脚本语言识别的对象模型，这样人们就可以用编写代码的方式来对网页进行操作了。在这里，笔记所涉及的所有知识都将基于HTML 5的标准来开展学习，该标准赋予了HTML在面对富媒体、富应用以及富内容时强大的描述能力，这将有助于我们设计出信息量更为丰富的网页。
+HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言”）是一门用于描述网页的文档结构及其内容的标记语言，因此网页也通常被称作HTML文档。该标记语言的主要作用是网页描述成一个树状的数据结构，以便于网页可以将其解析成可被JavaScript、VBScript等网页脚本语言识别的对象模型，这样人们就可以用编写代码的方式来对网页进行操作了。在这篇笔记中，我们将基于HTML 5的标准来介绍相关的基础知识。后者赋予了HTML在面对富媒体、富应用以及富内容时强大的描述能力，这将有助于人们设计出信息量更为丰富的网页。
 
 在使用HTML的过程中，网页设计者们将会需要用到一系列相互包裹的、用尖括号表示的HTML标记来描述网页的文档结构及其要显示的内容，且在大多数时候，HTML标记都是成对出现的，该标记要定义的内容会被放在这一对标记中间。换而言之，如果读者要使用一个名为tag的HTML标记，那么该标记的使用语法在大多数情况下是这样的：
 
@@ -14,11 +10,11 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 </tag>
 ```
 
-当然，少数情况下也会用到一些单一形式的HTML标记，我将会在后面的实例演示部分中结合具体情况来介绍这些标记的使用方法，下面先来介绍一些在网页设计中最常用的HTML标记及其作用，先从用于定义文档结构的标记开始。
+当然，少数情况下也会用到一些单一形式的HTML标记，我将会在后面的实例演示部分中结合具体情况来介绍这些标记的使用方法。下面，我们先来介绍一些在网页设计中最常用的HTML标记及其作用。本着从简单到复杂，逐步深入的学习原则，我们先从用于定义文档结构的标记开始介绍。
 
-### 文档类标记
+## 文档定义类标记
 
-在HTML的标准规范中，文档类标记的作用是定义网页的文档结构，因此这些标记通常会被放在HTML文档的最前面，下面是一些常用的文档类标记及其作用：
+在HTML的标准规范中，文档定义类标记通常会位于HTML树状结构的根部，用于定义整个网页的文档结构。下面，我们来具体介绍一下这些标记及其使用方法：
 
 - **`<!DOCTYPE>`**标记：该标记会被放置在被定义文档的第一行，以便用于指定该文档的类型。例如，如果我们要定义的是一个基于HTML 5标准的网页文档，那么该标记就应该是`<!DOCTYPE html>`。
 - `<html>`标记：该标记是用于定义网页文档的总标记。这意味着，所有网页的定义代码都必须从一个`<html>`开始，并以一个`</html>`标记结束，其他所有的HTML标记都必须被放在这两个标记之间。
@@ -43,9 +39,9 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 </html>
 ```
 
-### 布局类标记
+## 页面布局类标记
 
-和画家在拿到画布之后需要先进行整体的构图工作一样，网页设计师们在定义好一个网页文档之后，接下来要完成的工作是网页的整体布局设计。在HTML 5标准发布之前，网页的布局工作基本上是依靠`<div>`标记来完成的。该标记的作用是在网页中定义一个块状显示元素，这是网页设计中会用到的、最基本的布局工具，例如在下面的代码中，读者将会看到一个`id="card"`的块状元素，它的功能在相关的CSS样式作用下在网页中显示一个类似名片的卡片形态。
+和画家在拿到画布之后需要先进行针对整体的构图作业一样，网页设计师们在定义好一个网页文档的结构之后，接下来要完成的就是网页的整体布局设计了。在HTML 5标准发布之前，网页的布局工作基本上是依靠`<div>`标记来完成的。该标记的作用是在网页中定义一个块状显示元素，这是网页设计中会用到的、最基本的布局工具，例如在下面的代码中，读者将会看到一个`id="card"`的块状元素，它的功能在相关的CSS样式作用下在网页中显示一个类似名片的卡片形态。
 
 ```html
 <!DOCTYPE html>
@@ -71,7 +67,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 </html>
 ```
 
-然而，上面这种方式在网页布局相对复杂的情况下通常会出现某种程度上混乱，这将给项目代码的可读性带来一些不良的影响，进而给维护工作带来一些意想不到的麻烦。为了应对这类问题，HTML 5标准中新增了许多专用于网页布局的标记，下面来看一下这些标记的基本介绍与使用示范。
+然而，上面这种方式在应对相对复杂的布局需求时通常会出现某种程度上混乱，这将给HTML代码的可读性带来一些不良的影响，并进而会给网页的维护工作带来一些意想不到的麻烦。对此，读者只需想象一下，当同一个HTML文档中存在数十个甚至上百个时而并列、时而嵌套的`<div>`标签时会是什么情况，就不能理解自己会遇到什么麻烦了。为了更好地避免这一类的麻烦，HTML 5标准中新增了许多专用于网页布局的标记，下面来看一下这些标记的基本介绍与使用示范。
 
 - `<header>`标记：该标记不仅可用于定义一个网页的头部区域，也可用于定义网页中某个局部区域的头部；
 - `<main>`标记：该标记不仅可用于定义一个网页的主体区域，也可用于定义网页中某个局部区域的正文内容；
@@ -88,7 +84,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 <html lang="zh-CN">
     <head>
         <link rel="stylesheet" href="./styles/main.css">
-        <title>布局类标记示例图</title>
+        <title>网页布局类标记的使用示例</title>
     </head>
     <body>
         <header>
@@ -128,9 +124,9 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 图1：HTML5中的布局类标记
 
-### 图文类标记
+## 图文编排类标记
 
-在完成了网页布局部分的工作之后，设计师们接下来的工作就是安排要显示在网页浏览器中的具体内容了。而在网页可显示的诸多元素中，最基本的就是图文信息类元素了，主要包括标题、段落。引用、列表、表格、链接、图片等。下面，我们就先来介绍一些常用于在网页中显示这类元素的HTML标记。
+在完成了网页布局部分的工作之后，设计师们接下来的工作就是安排要显示在网页浏览器中的具体内容了。而在网页可显示的诸多元素中，最基本的就是图文类元素了，这类元素主要包括标题、段落。引用、列表、表格、链接、图片等。下面，我们就先来介绍一些常用于在网页中显示这类元素的HTML标记。
 
 - `<h1>……<h6>`标记：该标记的作用是在网页中显示文本标题。根据HTML的语法规则，标题元素可以有六个级别，其中，`<h1>`标记定义的标题是最高级别的标题，而`<h6>`标记定义的标题是最低级别的标题。
 - `<p>`标记：该标记的作用是在网页中定义一个文本段落元素。
@@ -147,7 +143,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 - `<a>`标记：该标记的作用是在网页中定义一个超链接元素，换而言之，该标记的作用是让浏览器在网页中显示一个指向其他网页的超链接文本。
 - `<img>`标记：该标记的作用是在网页中定义一个图像元素，换而言之，该标记的作用是让浏览器在网页中显示一个图像。
 
-下面，我们将通过模拟设计一个网页版的图文报告模板来示范一下上述HTML标记的使用方法，该示例被保存在本笔记所在目录下的`examples/report`目录中，我在该目录中创建了一个名为`index.html`的HTML文件，并在其中输入了如下代码。
+下面，我们将通过模拟设计一个网页版的图文报告模板来示范一下上述HTML标记的使用方法，该示例会被保存在本笔记所在目录下的`examples/report`目录中，我在该目录中创建了一个名为`index.html`的HTML文件，并在其中输入了如下代码。
 
 ```html
 <!DOCTYPE html>
@@ -261,11 +257,11 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 图2：HTML5中的图文类标记
 
-### 嵌入类标记
+## 元素嵌入类标记
 
 在网页设计工作中，除了最基本的图文类元素之外，我们通常还会在当前网页中嵌入矢量图、CSS样式、脚本代码、视频、音频、小程序等特定数据类型的元素。这些元素也都有对应的HTML标记。下面，我们就分别来介绍一下这些HTML标记，以便读者可以根据项目需求自行选择适当的标记来丰富网页的功能。
 
-#### 嵌入矢量图
+### 嵌入矢量图
 
 在HTML 5中，设计师们可以使用 `<svg>` 标记来在网页中嵌入矢量图元素。SVG是一套基于XML来实现的、用于描述矢量图形的标记语言，我们们可以利用这套标记语言在网页中创建复杂的图形元素。例如，如果读者想在网页中绘制一个绘制有红色圆形+黄色矩形的图案，就可以这样做：
 
@@ -306,7 +302,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 总而言之，`<svg>` 标记是一个可用于在网页中创建矢量图形和图表的强大工具，它提供了丰富的功能，包括绘制、样式、交互性和动画等。而且，SVG图形还可以在不失真的情况下缩放，适合多种不同的屏幕尺寸和分辨率。
 
-#### 嵌入媒体元素
+### 嵌入媒体元素
 
 在HTML 5中，设计师们可以使用 `<video>`、`<audio>`这两个标记来实现在网页中嵌入视频/音频元素，如今我们所熟悉的哔哩哔哩、喜马拉雅等视频/音频网站，就是基于这两个标记来实现的。下面，我们来分别介绍一下它们的使用方法：
 
@@ -352,7 +348,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
     ![图5](./img/html&css/5.png)
 
-#### 嵌入CSS样式
+### 嵌入CSS样式
 
 在HTML 5中，除了使用`<link>`标记引入外部的CSS样式文件之外，设计师们也可以选择将只适用于当前网页的样式代码直接写在`<style>`和`</style>`这对标记之间，例如像下面这样：
 
@@ -377,7 +373,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 ![图6](./img/html&css/6.png)
 
-#### 嵌入脚本代码
+### 嵌入脚本代码
 
 在HTML 5中，设计师们可以使用 `<script>` 标记来在网页中嵌入脚本代码，例如我们可以选择将只适用于当前网页的JavaScript脚本代码直接写在`<script>`和`</script>`这对标记之间，或者使用该标签的`src`属性来引用外部JavaScript文件，例如像下面这样：
 
@@ -405,7 +401,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 ![图7](./img/html&css/7.png)
 
-#### 嵌入其他元素
+### 嵌入其他元素
 
 - `<iframe>`标记：该标记用于在网页文档中嵌入另一个网页，我们可以使用该标签的`src`属性来指定要嵌入网页的URL。例如：
 
@@ -455,117 +451,24 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
     请注意，`<canvas>`标记需要使用JavaScript来进行绘制，因此对于不熟悉JavaScript的开发者来说，可能需要学习一些基本的Canvas API知识。同时，不同的浏览器可能对Canvas API的支持程度有所不同，因此在使用时需要保持谨慎的态度，事前必须进行充分的兼容性测试。
 
-### 交互类标记
+## 人机交互类标记
 
-自以AJAX技术为代表的Web2.0时代开始，网页日益成为了分布式应用程序的用户界面（因此有时候也被称为应用程序的前端），因此学习如何构建Web应用程序的用户界面，并赋予它良好的用户体验也就越来越成为了网页设计工作的重要部分。为了便于设计师更好地完成这一部分的工作，HTML 5中提供了一系列交互类的标记，用于构建应用程序的交互界面元素，下面，我们就来详细介绍一些常用的交互类标记及其使用方法。
+自以AJAX技术为代表的Web2.0时代开始，网页日益成为了分布式应用程序的用户界面（因此有时候也被称为应用程序的前端），因此学习如何构建Web应用程序的用户界面，并赋予它良好的用户体验也就越来越成为了网页设计工作的重要部分。为了便于设计师更好地完成这一部分的工作，HTML 5中提供了一系列交互类的标记，用于构建应用程序的交互界面元素。下面，我们就来详细介绍一些常用的交互类标记及其使用方法。
 
-- `<form>`标记：该标记用于在网页中创建一个表单，其基本语法格式如下所示：
+### 独立交互元素
 
-    ```html
-    <form action="url" method="get/post">
-        表单元素
-    </form>
-    ```
- 
-    其中，`action`属性用于指定表单提交的地址，`method`属性用于指定表单提交的方式，其值可以是`get`或`post`。
+同样本着从简单到复杂，逐步深入的学习原则，我们在这里也从一些可独立创建交互元素的标记开始。
+
+- `<button>`标记：该标记用于在网页中显示一个独立的按钮元素，其基本语法格式如下所示：
 
     ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>表单标记</title>
-        </head>
-        <body>
-            <h1>登录界面表单示例</h1>
-            <form method="post" action="http://www.baidu.com">
-                <p>用户名：<input type="text" name="username" /></p>
-                <p>密码：<input type="password" name="password" /></p>
-                <p><input type="submit" value="登录" /></p>
-            </form> 
-        </body>
-    </html>
+    <button type="button" onclick="alert('Hello World!')">
+        <!-- 这里可以设置按钮上要显示的文字或图形 -->
+        <p>按钮</p>
+    </button>
     ```
 
-
-- `<input>`标记：该标记用于创建各种表单输入控件，如文本框、复选框、单选按钮、下拉列表等。可以使用不同的`type`属性来指定不同的输入类型。例如：
-
-   ```html
-   <input type="text" name="username" placeholder="Enter your username">
-   <input type="checkbox" name="agree" id="agree">
-   <label for="agree">I agree to the terms and conditions</label>
-   <input type="radio" name="gender" value="male"> Male
-   <input type="radio" name="gender" value="female"> Female
-   <select name="country">
-     <option value="us">United States</option>
-     <option value="uk">United Kingdom</option>
-     <option value="ca">Canada</option>
-   </select>
-   ```
-
-- `<textarea>`标记：该标记用于创建多行文本输入框。可以使用`rows`和`cols`属性指定文本框的行数和列数。例如：
-
-   ```html
-   <textarea name="message" rows="4" cols="50"></textarea>
-   ```
-
-- `<button>`标记：该标记用于创建按钮。可以在其中放置文本或其他HTML元素作为按钮的内容。例如：
-
-   ```html
-   <button type="button">Click me</button>
-   ```
-
-- `<datalist>`和`<option>`标记：这两个标记用于创建自动完成的下拉列表。`<datalist>`定义可选项列表，`<option>`定义每个选项。例如：
-
-   ```html
-   <input list="fruits">
-   <datalist id="fruits">
-     <option value="Apple">
-     <option value="Banana">
-     <option value="Orange">
-   </datalist>
-   ```
-
-- `<details>`和`<summary>`：
-   `<details>`和`<summary>`标记用于创建可折叠的内容块。`<summary>`定义折叠块的摘要，`<details>`定义折叠块的内容。例如：
-
-   ```html
-   <details>
-     <summary>Click to expand</summary>
-     <p>Hidden content</p>
-   </details>
-   ```
-
-- `<progress>`：
-   `<progress>`标记用于显示任务的进度。可以使用`value`和`max`属性来指定当前进度和最大值。例如：
-
-   ```html
-   <progress value="50" max="100"></progress>
-   ```
-
-- `<meter>`：
-   `<meter>`标记用于显示度量值或比例。可以使用`value`、`min`、`max`、`low`、`high`等属性来指定度量值的范围和当前值。例如：
-
-   ```html
-   <meter value="75" min="0" max="100">75%</meter>
-   ```
-
-- `<output>`：
-   `<output>`标记用于显示计算结果或脚本输出。可以使用`for`属性将其与其他元素关联起来。例如：
-
-   ```html
-   <output for="range">0</output>
-   <input type="range" id="range" min="0" max="100" oninput="output.value = range.value">
-   ```
-
-这些标记和属性可以帮助开发者创建更丰富、交互性更强的用户界面，提供更好的用户体验。它们可以与CSS和JavaScript一起使用，以实现更多的交互效果和功能。
-
-- `<button>`标记：该标记用于在网页中创建一个按钮，其基本语法格式如下所示：
-
-    ```html
-    <button type="button">按钮</button>
-    ```
-
-    其中，`type`属性用于指定按钮的类型，其值可以是`submit`、`reset`或`button`，分别用于提交表单、重置表单和普通按钮。
+    在上述语法中，`type`属性用于指定按钮的类型，其取值可以是`button`、`submit`或`reset`，分别表示普通按钮、提交按钮和重置按钮，默认值为`button`。`onclick`属性用于指定按钮被点击时所要执行的JavaScript脚本，其值可以是JavaScript代码，也可以是JavaScript代码所在的URL。在这里，我们让它弹出一个带有“Hello World!”字样的对话框。下面来示范一下如何使用`<button>`标记构建三个独立的按钮元素：
 
     ```html
     <!DOCTYPE html>
@@ -581,6 +484,62 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     </html>
     ```
 
+- `<progress>`标记：该标记用于显示任务的进度。可以使用`value`和`max`属性来指定当前进度和最大值。例如：
+
+   ```html
+   <progress value="50" max="100"></progress>
+   ```
+
+- `<meter>`标记：该标记用于显示度量值或比例。可以使用`value`、`min`、`max`、`low`、`high`等属性来指定度量值的范围和当前值。例如：
+
+   ```html
+   <meter value="75" min="0" max="100">75%</meter>
+   ```
+
+- `<output>`标记：该标记用于显示计算结果或脚本输出。可以使用`for`属性将其与其他元素关联起来。例如：
+
+   ```html
+   <output for="range">0</output>
+   <input type="range" id="range" min="0" max="100" oninput="output.value = range.value">
+   ```
+
+- `<textarea>`标记：该标记用于创建多行文本输入框。可以使用`rows`和`cols`属性指定文本框的行数和列数。例如：
+
+   ```html
+   <textarea name="message" rows="4" cols="50"></textarea>
+   ```
+
+- `<datalist>`和`<option>`标记：这两个标记用于创建自动完成的下拉列表。其中，`<datalist>`标记用于定义要创建的下拉列表，而`<option>`子标记则用于创建该下拉列表中的可选项，同一`<datalist>`标记中可包含多个`<option>`子标记。例如，如果我们想在网页中创建一个`id="fruits"`的下拉列表，其中包含三个可选项，分别为`Apple`、`Banana`和`Orange`，就可以这样做：
+  
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>自动完成下拉列表</title>
+        </head>
+        <body>
+            <input type="text" list="fruits">
+            <datalist id="fruits">
+                <option value="Apple">
+                <option value="Banana">
+                <option value="Orange">
+            </datalist>
+        </body>
+    </html>
+    ```
+
+- `<details>`和`<summary>`标记：这两个标记用于创建可折叠的内容块。`<summary>`定义折叠块的摘要，`<details>`定义折叠块的内容。例如：
+
+   ```html
+   <details>
+     <summary>Click to expand</summary>
+     <p>Hidden content</p>
+   </details>
+   ```
+
+这些标记和属性可以帮助开发者创建更丰富、交互性更强的用户界面，提供更好的用户体验。它们可以与CSS和JavaScript一起使用，以实现更多的交互效果和功能。
+
+<!-- 以下为待整理 -->
 - `<input>`标记：该标记用于在网页中创建一个输入框，其基本语法格式如下所示：
 
     ```html
@@ -625,6 +584,50 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
         </body>
     </html>
     ```
+
+### 表单交互元素
+
+- `<form>`标记：该标记用于在网页中创建一个表单，其基本语法格式如下所示：
+
+    ```html
+    <form action="url" method="get/post">
+        表单元素
+    </form>
+    ```
+ 
+    其中，`action`属性用于指定表单提交的地址，`method`属性用于指定表单提交的方式，其值可以是`get`或`post`。
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>表单标记</title>
+        </head>
+        <body>
+            <h1>登录界面表单示例</h1>
+            <form method="post" action="http://www.baidu.com">
+                <p>用户名：<input type="text" name="username" /></p>
+                <p>密码：<input type="password" name="password" /></p>
+                <p><input type="submit" value="登录" /></p>
+            </form> 
+        </body>
+    </html>
+    ```
+
+- `<input>`子标记：该标记用于创建各种表单输入控件，如文本框、复选框、单选按钮、下拉列表等。可以使用不同的`type`属性来指定不同的输入类型。例如：
+
+   ```html
+   <input type="text" name="username" placeholder="Enter your username">
+   <input type="checkbox" name="agree" id="agree">
+   <label for="agree">I agree to the terms and conditions</label>
+   <input type="radio" name="gender" value="male"> Male
+   <input type="radio" name="gender" value="female"> Female
+   <select name="country">
+     <option value="us">United States</option>
+     <option value="uk">United Kingdom</option>
+     <option value="ca">Canada</option>
+   </select>
+   ```
 
 ----
 #待整理
