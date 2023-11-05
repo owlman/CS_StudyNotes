@@ -457,6 +457,175 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 ### 交互类标记
 
+自以AJAX技术为代表的Web2.0时代开始，网页日益成为了分布式应用程序的用户界面（因此有时候也被称为应用程序的前端），因此学习如何构建Web应用程序的用户界面，并赋予它良好的用户体验也就越来越成为了网页设计工作的重要部分。为了便于设计师更好地完成这一部分的工作，HTML 5中提供了一系列交互类的标记，用于构建应用程序的交互界面元素，下面，我们就来详细介绍一些常用的交互类标记及其使用方法。
+
+- `<form>`标记：该标记用于在网页中创建一个表单，其基本语法格式如下所示：
+
+    ```html
+    <form action="url" method="get/post">
+        表单元素
+    </form>
+    ```
+ 
+    其中，`action`属性用于指定表单提交的地址，`method`属性用于指定表单提交的方式，其值可以是`get`或`post`。
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>表单标记</title>
+        </head>
+        <body>
+            <h1>登录界面表单示例</h1>
+            <form method="post" action="http://www.baidu.com">
+                <p>用户名：<input type="text" name="username" /></p>
+                <p>密码：<input type="password" name="password" /></p>
+                <p><input type="submit" value="登录" /></p>
+            </form> 
+        </body>
+    </html>
+    ```
+
+
+- `<input>`标记：该标记用于创建各种表单输入控件，如文本框、复选框、单选按钮、下拉列表等。可以使用不同的`type`属性来指定不同的输入类型。例如：
+
+   ```html
+   <input type="text" name="username" placeholder="Enter your username">
+   <input type="checkbox" name="agree" id="agree">
+   <label for="agree">I agree to the terms and conditions</label>
+   <input type="radio" name="gender" value="male"> Male
+   <input type="radio" name="gender" value="female"> Female
+   <select name="country">
+     <option value="us">United States</option>
+     <option value="uk">United Kingdom</option>
+     <option value="ca">Canada</option>
+   </select>
+   ```
+
+- `<textarea>`标记：该标记用于创建多行文本输入框。可以使用`rows`和`cols`属性指定文本框的行数和列数。例如：
+
+   ```html
+   <textarea name="message" rows="4" cols="50"></textarea>
+   ```
+
+- `<button>`标记：该标记用于创建按钮。可以在其中放置文本或其他HTML元素作为按钮的内容。例如：
+
+   ```html
+   <button type="button">Click me</button>
+   ```
+
+- `<datalist>`和`<option>`标记：这两个标记用于创建自动完成的下拉列表。`<datalist>`定义可选项列表，`<option>`定义每个选项。例如：
+
+   ```html
+   <input list="fruits">
+   <datalist id="fruits">
+     <option value="Apple">
+     <option value="Banana">
+     <option value="Orange">
+   </datalist>
+   ```
+
+- `<details>`和`<summary>`：
+   `<details>`和`<summary>`标记用于创建可折叠的内容块。`<summary>`定义折叠块的摘要，`<details>`定义折叠块的内容。例如：
+
+   ```html
+   <details>
+     <summary>Click to expand</summary>
+     <p>Hidden content</p>
+   </details>
+   ```
+
+- `<progress>`：
+   `<progress>`标记用于显示任务的进度。可以使用`value`和`max`属性来指定当前进度和最大值。例如：
+
+   ```html
+   <progress value="50" max="100"></progress>
+   ```
+
+- `<meter>`：
+   `<meter>`标记用于显示度量值或比例。可以使用`value`、`min`、`max`、`low`、`high`等属性来指定度量值的范围和当前值。例如：
+
+   ```html
+   <meter value="75" min="0" max="100">75%</meter>
+   ```
+
+- `<output>`：
+   `<output>`标记用于显示计算结果或脚本输出。可以使用`for`属性将其与其他元素关联起来。例如：
+
+   ```html
+   <output for="range">0</output>
+   <input type="range" id="range" min="0" max="100" oninput="output.value = range.value">
+   ```
+
+这些标记和属性可以帮助开发者创建更丰富、交互性更强的用户界面，提供更好的用户体验。它们可以与CSS和JavaScript一起使用，以实现更多的交互效果和功能。
+
+- `<button>`标记：该标记用于在网页中创建一个按钮，其基本语法格式如下所示：
+
+    ```html
+    <button type="button">按钮</button>
+    ```
+
+    其中，`type`属性用于指定按钮的类型，其值可以是`submit`、`reset`或`button`，分别用于提交表单、重置表单和普通按钮。
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>按钮标记</title>
+        </head>
+        <body>
+            <button type="button">普通按钮</button>
+            <button type="submit">提交按钮</button>
+            <button type="reset">重置按钮</button>
+        </body>
+    </html>
+    ```
+
+- `<input>`标记：该标记用于在网页中创建一个输入框，其基本语法格式如下所示：
+
+    ```html
+    <input type="text" value="输入框" />
+    ```
+
+    其中，`type`属性用于指定输入框的类型，其值可以是`text`、`password`、`radio`、`checkbox`、`submit`、`reset`或`button`，分别用于创建文本输入框、密码输入框、单选框、复选框、提交按钮和重置按钮。
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>输入框标记</title>
+        </head>
+        <body>
+            <input type="text" value="文本输入框" />
+            <input type="password" value="密码输入框" />
+            <input type="radio" value="单选框" />
+            <input type="checkbox" value="复选框" />
+            <input type="submit" value="提交按钮" />
+            <input type="reset" value="重置按钮" />
+        </body>
+    </html>
+    ```
+
+- `<textarea>`标记：该标记用于在网页中创建一个文本区域，其基本语法格式如下所示：
+
+    ```html
+    <textarea rows="3" cols="20">文本区域</textarea>
+    ```
+
+    其中，`rows`属性用于指定文本区域中可以显示的行数，`cols`属性用于指定文本区域中可以显示的列数。
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>文本区域标记</title>
+        </head>
+        <body>
+            <textarea rows="3" cols="20">文本区域</textarea>
+        </body>
+    </html>
+    ```
+
 ## CSS学习笔记
 
 CSS（即Cascading Style Sheets，通常被译为“层叠样式表”）是一门用于定义网页外观样式的计算机语言。人们可以使用这门语言对网页中出现的图片、文本、按钮等元素进行像素级别的精确控制。在这本书中，所有项目都将按照CSS3这一最新标准来定义网页的外观样式。该标准新增了圆角效果、渐变效果、图形化边界、文字阴影、透明度设置、多背景图设置、可定制字体、媒体查询、多列布局以及弹性盒模型布局等诸多更为丰富的新样式特性，这将有助于我们设计出更为丰富多彩的网页。
