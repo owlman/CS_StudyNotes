@@ -306,9 +306,55 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 总而言之，`<svg>` 标记是一个可用于在网页中创建矢量图形和图表的强大工具，它提供了丰富的功能，包括绘制、样式、交互性和动画等。而且，SVG图形还可以在不失真的情况下缩放，适合多种不同的屏幕尺寸和分辨率。
 
+#### 嵌入媒体元素
+
+在HTML 5中，设计师们可以使用 `<video>`、`<audio>`这两个标记来实现在网页中嵌入视频/音频元素，如今我们所熟悉的哔哩哔哩、喜马拉雅等视频/音频网站，就是基于这两个标记来实现的。下面，我们来分别介绍一下它们的使用方法：
+
+- **`<video>`** 标记：该标记用于在网页文档中嵌入一个视频播放器，我们可以利用其`<source>`子标记的`src`属性来指定要播放的视频文件，例如像这样：
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>嵌入视频播放器</title>
+        </head>
+        <body>
+            <video width="320" height="240" controls>
+                <source src="movie.mp4" type="video/mp4">
+                <p>你的浏览器不支持HTML 5的视频标签！</p>
+            </video>
+        </body>
+    </html>
+    ```
+
+    在上述代码中，我们首先使用 `<video>` 标记定义了一个视频播放器，然后使用其 `width` 和 `height` 属性来指定视频播放器在网页中所要显示的高度和宽度，接着使用其 `<source>` 子标记的 `src` 属性来指定要播放的视频文件，最后使用其 `<p>` 子标记来指定当浏览器不支持HTML 5的视频标签时显示的文本信息。其效果如下所示：
+
+    ![图4](./img/html&css/4.png)
+
+- **`<audio>`** 标记：该标记用于在网页文档中嵌入一个音频播放器，我们可以利用其`<source>`子标记的`src`属性来指定要播放的音频文件，例如像这样：
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>嵌入音频播放器</title>
+        </head>
+        <body>
+            <audio width="400" height="300" controls>
+                <source src="horse.mp3" type="audio/mpeg">
+                <p>你的浏览器不支持HTML 5的音频标签！</p>
+            </audio>
+        </body>
+    </html>
+    ```
+
+    在上述代码中，我们首先使用 `<audio>` 标记定义了一个音频播放器，然后使用其 `width` 和 `height` 属性来指定音频播放器在网页中所要显示的高度和宽度，接着使用其 `<source>` 子标记的 `src` 属性来指定要播放的音频文件，最后使用其 `<p>` 子标记来指定当浏览器不支持HTML 5的音频标签时显示的文本信息。其效果如下所示：
+
+    ![图5](./img/html&css/5.png)
+
 #### 嵌入CSS样式
 
-在HTML 5中，设计师们可以使用 `<style>` 标记来在网页中嵌入内联的CSS样式，也就是说，我们可以选择将只适用于当前网页的样式代码直接写在`<style>`和`</style>`这对标记之间，例如像下面这样：
+在HTML 5中，除了使用`<link>`标记引入外部的CSS样式文件之外，设计师们也可以选择将只适用于当前网页的样式代码直接写在`<style>`和`</style>`这对标记之间，例如像下面这样：
 
 ```html
 <!DOCTYPE html>
@@ -327,6 +373,10 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 </html>
 ```
 
+在上述代码中，我们首先使用 `<style>` 标记定义了一个CSS样式，然后在该标记内部使用CSS样式来指定当前网页中所有`<h1>`标记的字体颜色为红色，最后使用 `<h1>` 标记来指定当前网页中所有的标题文字。其效果如下所示：
+
+![图6](./img/html&css/6.png)
+
 #### 嵌入脚本代码
 
 在HTML 5中，设计师们可以使用 `<script>` 标记来在网页中嵌入脚本代码，例如我们可以选择将只适用于当前网页的JavaScript脚本代码直接写在`<script>`和`</script>`这对标记之间，或者使用该标签的`src`属性来引用外部JavaScript文件，例如像下面这样：
@@ -343,51 +393,17 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
         </script>
     </head>
     <body>
-        <h1>This is an example of an inline script.</h1>
-        <button type="button" onclick="changeText()">Click Me!</button>
-        <p>The button above will change the text in this paragraph.</p>
+        <h1>嵌入 JavaScript 脚本代码.</h1>
+        <button type="button" onclick="changeText()">打个招呼！</button>
+        <p>点击上面的按钮将会在下面显示“Hello World!”。</p>
         <p id="demo"></p>
     </body>
 </html>
 ```
 
-#### 嵌入媒体元素
+在上述代码中，我们首先使用 `<script>` 标记定义了一个JavaScript函数，然后在该标记内部使用JavaScript函数来指定当`<button>`按钮被点击时，将会在下面显示“Hello World!”，最后使用 `<p>` 标记来指定当前网页中所有的段落文字。其效果如下所示：
 
-在HTML 5中，设计师们可以使用 `<video>`、`<audio>`这两个标记来实现在网页中嵌入视频/音频元素，如今我们所熟悉的哔哩哔哩、喜马拉雅等视频/音频网站，就是基于这两个标记来实现的。下面，我们来分别介绍一下它们的使用方法：
-
-- **`<video>`** 标记：该标记用于在网页文档中嵌入一个视频播放器，我们可以先使用该标签的`height`和`width`属性来指定视频播放器在网页中所要显示的高度和宽度，然后利用其`<source>`子标记的`src`属性来指定要播放的视频文件，例如像这样：
-
-    ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>嵌入视频播放器</title>
-        </head>
-        <body>
-            <video width="320" height="240" controls>
-                <source src="movie.mp4" type="video/mp4">
-                <p>你的浏览器不支持HTML 5的视频标签！</p>
-            </video>
-        </body>
-    </html>
-    ```
-
-- **`<audio>`** 标记：该标记用于在网页文档中嵌入一个音频播放器，我们可以先使用该标签的`height`和`width`属性来指定音频播放器在网页中所要显示的高度和宽度，然后利用其`<source>`子标记的`src`属性来指定要播放的音频文件，例如像这样：
-
-    ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>嵌入音频播放器</title>
-        </head>
-        <body>
-            <audio controls>
-                <source src="horse.mp3" type="audio/mpeg">
-                <p>你的浏览器不支持HTML 5的音频标签！</p>
-            </audio>
-        </body>
-    </html>
-    ```
+![图7](./img/html&css/7.png)
 
 #### 嵌入其他元素
 
@@ -549,7 +565,7 @@ CSS（即Cascading Style Sheets，通常被译为“层叠样式表”）是一�
 
 在之前提到的CSS基本语法中，`[选择器]`以外的部分可被称为“样式规则”，而样式规则主要由一系列的`[属性名称]`和`[属性值]`构成，下面继续来介绍一下这两个语法单元：
 
-- **属性名称**：`[属性名称]`的作用是指定被设置样式的具体项。在CSS代码中，一段样式定义可以指定的具体项取决于`[选择器]`单元所匹配的页面元素，例如，对于`<header>`、`<nav>`这一类页面元素来说，设计师们可以设置的常见具体样式项主要包括：
+- **属性名称**：`[属性名称]`的作用是指定被设置样式的具体项。在CSS代码中，一段样式定义可以指定的具体项取决于`[选择器]`单元所匹配的页面元素，例如，对于`<header>`、`<nav>`这样的布局类元素来说，设计师们可以为它们设置以下常见的样式项：
   - `height`：设置页面元素的垂直高度；
   - `width`：设置页面元素的水平宽度；
   - `margin`：设置页面元素的外边距；

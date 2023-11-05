@@ -62,7 +62,7 @@
             }
             .code img {
                 width: 100%;
-                height: 300px;
+                height: 100%;
             }
             footer {
                 width: 100%;
@@ -84,7 +84,6 @@
                 <h2>嵌入矢量图：</h2>
                 <div class="example">
                     <svg width="400" height="300">
-                        <!-- 在这里放置用于绘制SVG图形的标记 -->
                         <circle cx="50" cy="50" r="40" 
                             stroke="black" stroke-width="3" fill="red" />
                         <rect x="100" y="100" width="200" height="100"
@@ -98,7 +97,7 @@
             <section>
                 <h2>嵌入视频播放器：</h2>
                 <div  class="example">
-                    <video width="430" height="300" controls>
+                    <video width="450" height="290" controls>
                         <source src="movie.mp4" type="video/mp4">
                         <p>你的浏览器不支持HTML 5的视频标签！</p>
                     </video>    
@@ -117,6 +116,22 @@
                 </div>                
                 <div class="code">
                     <img src="./res/img/audio.png">
+                </div>
+            </section>
+            <section>
+                <h2>嵌入 JavaScript 脚本代码：</h2>
+                <div class="example">
+                    <script>
+                        function changeText() {
+                          document.getElementById("demo").innerHTML = "Hello World!";
+                        }
+                    </script>
+                    <button type="button" onclick="changeText()">打个招呼！</button>
+                    <p>点击上面的按钮将会在下面显示“Hello World!”.</p>
+                    <p id="demo"></p>
+                </div>                
+                <div class="code">
+                    <img src="./res/img/jscode.png">
                 </div>
             </section>
             <footer>
