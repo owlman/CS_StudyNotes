@@ -130,7 +130,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 - `<h1>……<h6>`标记：该标记的作用是在网页中显示文本标题。根据HTML的语法规则，标题元素可以有六个级别，其中，`<h1>`标记定义的标题是最高级别的标题，而`<h6>`标记定义的标题是最低级别的标题。
 - `<p>`标记：该标记的作用是在网页中定义一个文本段落元素。
-- `<br>`标记：该标记的作用是在网页中定义一个换行元素，换而言之，该标记的作用是让浏览器在网页中显示一个换行符。 
+- `<br>`标记：该标记的作用是在网页中定义一个换行元素，换而言之，该标记的作用是让浏览器在网页中显示一个换行符。
 - `<hr>`标记：该标记的作用是在网页中定义一条水平分割线，通常用于分隔网页中的多个章节区域。
 - `<pre>`标记：该标记的作用是在网页中定义一个预格式文本元素，换而言之，该标记的作用是让浏览器将预格式文本中的所有空格、换行符、制表符等原样显示出来，而不会将它们转换为HTML代码中的空格、换行符等。
 - `<blockquote>`标记：该标记的作用是在网页中定义一个引用文本元素，换而言之，该标记的作用是让浏览器将引用文本中的所有空格、换行符、制表符等原样显示出来，而不会将它们转换为HTML代码中的空格、换行符等。
@@ -453,13 +453,13 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 
 ## 人机交互类标记
 
-自以AJAX技术为代表的Web2.0时代开始，随着网页日益成为了分布式应用程序的用户界面（因此它们有时也被称为应用程序的前端），学习*如何构建Web应用程序的用户界面，并赋予它良好的用户体验*也就日益成为了网页设计工作的重要组成部分。为了帮助设计师们更好地完成这一部分的工作，HTML 5中提供了一系列人机交互类的标记，以便用于构建应用程序的交互界面元素。下面，我们就来详细介绍一下这些标记以及它们的使用方法。
+自AJAX为代表的Web2.0技术崛起以来，网页的功能日益被扩展成了一种应用程序的用户界面（因此它们有时也被称为应用程序的前端）。因此，学习*如何构建Web应用程序的用户界面，并赋予它良好的用户体验*也就成为了网页设计工作中的重要任务。为了帮助设计师们更好地完成这一部分的工作，HTML 5中提供了一系列人机交互类的标记，以便用于构建应用程序的人机交互界面。下面，我们就来详细介绍一下这些标记以及它们的使用方法。
 
-### 独立交互元素
+### 可独立设置的元素
 
-同样本着从简单到复杂，逐步深入的学习原则，我们在这里也将会从一些可独立创建的交互元素开始，下面是用于创建这些元素的HTML标记。
+同样本着从简单到复杂，逐步深入的学习原则，我们在这里也将会从一些可独立设置的元素开始，下面是用于创建这类元素的HTML标记。
 
-- `<button>`标记：该标记可用于在网页中创建一个独立的按钮元素，其基本语法格式如下所示：
+- `<button>`标记：该标记可用于在网页中创建一个独立的按钮元素，该元素可独立响应用户的鼠标点击操作，其基本使用方法如下所示：
 
     ```html
     <button type="button" onclick="alert('Hello World!')">
@@ -468,9 +468,57 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     </button>
     ```
 
-    在上述语法中，`type`属性用于指定按钮的类型，其取值可以是`button`、`submit`或`reset`，分别表示普通按钮、提交按钮和重置按钮，默认值为`button`。而`onclick`属性则用于指定按钮在被点击时所要执行的JavaScript脚本，其值既可以是JavaScript代码，也可以是JavaScript代码所在的URL。在这里，我们让它弹出一个带有“Hello World!”字样的信息提示框。最后，在`<button>`和`</button>`标记之间，我们可以设置用于显示在按钮上的提示信息，该信息可以是一段文本，也可以是一个图形，但必须要能说明该按钮元素的功能。
+    在上述示例中，`type`属性用于指定按钮的类型，其取值可以是`button`、`submit`或`reset`，分别表示普通按钮、提交按钮和重置按钮，默认值为`button`。而`onclick`属性则用于指定按钮在被点击时所要执行的JavaScript脚本，其值既可以是JavaScript代码，也可以是JavaScript代码所在的URL。在这里，我们让它弹出一个带有“Hello World!”字样的信息提示框。最后，在`<button>`和`</button>`标记之间，我们可以设置用于显示在按钮上的提示信息，该信息可以是一段文本，也可以是一个图形，但必须要能说明该按钮元素的功能。
 
-- `<progress>`标记：该标记可用于在网页中创建一个独立的进度条元素，其基本语法格式如下所示：
+- `<input>`标记：该标记可用于在网页中创建一个输入性质的元素，主要包括分别可用于创建文本输入框、密码输入框、单选框、复选框、滑块、按钮等元素，其基本使用方法如下所示：
+
+    ```html
+    <!-- 以下定义一个文本输入框 -->
+    <input type="text" value="文本输入框" />
+
+    <!-- 以下定义一个密码输入框 -->
+    <input type="password" value="密码输入框" />
+
+    <!-- 以下定义一组单选框，其中只有一个选项被选中 -->
+    <input type="radio" name="gender" value="male" checked="checked" />男
+    <input type="radio" name="gender" value="female" />女
+
+    <!-- 以下定义一组复选框，其中有两个选项被选中 -->
+    <input type="checkbox" name="hobby" value="basketball" checked="checked" />篮球
+    <input type="checkbox" name="hobby" value="football" />足球
+    <input type="checkbox" name="hobby" value="swimming" />游泳
+    
+    <!-- 以下定义一个滑块，其中滑块的当前值是50 -->
+    <input type="range" min="0" max="100" value="50" />
+    ```
+
+    在上述示例中，`type`属性用于指定输入框的类型，其值可以是`text`、`password`、`radio`、`checkbox`、`range`、`submit`、`reset`或`button`等。需要特别提醒的是，虽然`<input>`标记也可用于创建按钮元素，但与`<button>`标记相比，`<input>`标记的语义更偏向于用户输入的具体信息，笔者原则上并不鼓励用它来设置按钮元素。
+
+- `<textarea>`标记：该标记用于在网页中创建一个支持多行输入的文本输入框，其基本使用方法如下所示：
+
+    ```html
+    <textarea rows="3" cols="20">文本区域</textarea>
+    ```
+
+    在上述示例中，`rows`属性用于指定该多行文本输入框元素中可以显示的行数，`cols`属性则用于指定该元素中可以显示的列数。
+
+- `<output>`标记：该标记用于在网页中创建一个输出区域，通常需要配合输入性质的元素一起使用，其基本使用方法如下所示：
+
+    ```html
+    <!--
+        for属性用于指定该输出区域与哪个输入性质的元素相关联，
+        在本例中，该输出区域与range元素相关联
+    -->
+    <output for="range">0</output>    
+    <input type="range" id="range"
+        min="0" max="100"
+        oninput="output.value = range.value"
+    />
+    ```
+
+    在上述示例中，我们首先用`<output>`标记创建了一个输出区域，然后用`<input>`标记创建了一个滑块，并为其设置了`oninput`事件，当滑块的值发生变化时，会自动更新输出区域中的值。
+
+- `<progress>`标记：该标记可用于在网页中创建一个独立的进度条元素，该元素的主要功能是根据用户的操作或某个预定义的JavaScript脚本来显示某一指定任务的执行进度，其基本使用方法如下所示：
 
    ```html
    <progress id="task" value="0" max="100"></progress>
@@ -479,34 +527,51 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
    </script>
    ```
 
-    在上述语法中，`value`属性用于指定进度条当前的进度值，而`max`属性则用于指定进度条的最大值。通常情况下，该标记要搭配某一个JavaScript函数使用，以便于根据指定的任务执行情况来动态地改变进度条的进度值。
+    在上述示例中，`value`属性用于指定进度条当前的进度值，而`max`属性则用于指定进度条的最大值。在这里，该标记会根据`<script>`标记中预定义的JavaScript脚本来显示进度条的进度值。
 
-- `<meter>`标记：该标记用于显示度量值或比例。可以使用`value`、`min`、`max`、`low`、`high`等属性来指定度量值的范围和当前值。例如：
+- `<meter>`标记：该标记可用于在网页中创建一个独立的度量值元素，其基本使用方法如下所示：
 
    ```html
    <meter value="75" min="0" max="100">75%</meter>
    ```
 
-- `<output>`标记：该标记用于显示计算结果或脚本输出。可以使用`for`属性将其与其他元素关联起来。例如：
+    在上述示例中，`value`属性用于指定度量值元素的当前值，而`min`和`max`属性则用于指定度量值元素的最大值和最小值。
 
-   ```html
-   <output for="range">0</output>
-   <input type="range" id="range" min="0" max="100" oninput="output.value = range.value">
-   ```
+### 需组合使用的元素
 
-- `<textarea>`标记：该标记用于创建多行文本输入框。可以使用`rows`和`cols`属性指定文本框的行数和列数。例如：
+为了帮助设计师们设计出功能更为复杂的用户界面，HTML 5中还提供了一系列需要使用多个标记来创建的人机交互元素，下面，我们继续来介绍这部分HTML标记及其使用方法。
 
-   ```html
-   <textarea name="message" rows="4" cols="50"></textarea>
-   ```
+- `<select>`和`<option>`标记：这两个标记可用于在网页中创建一个独立的下拉列表元素，其基本使用方法如下所示：
 
-- `<datalist>`和`<option>`标记：这两个标记用于创建自动完成的下拉列表。其中，`<datalist>`标记用于定义要创建的下拉列表，而`<option>`子标记则用于创建该下拉列表中的可选项，同一`<datalist>`标记中可包含多个`<option>`子标记。例如，如果我们想在网页中创建一个`id="fruits"`的下拉列表，其中包含三个可选项，分别为`Apple`、`Banana`和`Orange`，就可以这样做：
+    ```html
+    <select>
+        <option value="1">选项1</option>
+        <option value="2">选项2</option>
+        <option value="3">选项3</option>
+    </select>
+    ```
+
+    在上述语法中，`<select>`标记用于创建下拉列表本身，而其`<option>`子标记则用于设置下拉列表中的选项，其`value`属性用于指定选项的值。
+
+- `<details>`和`<summary>`标记：这两个标记可用于在网页中创建一个可折叠的内容块元素，该元素允许用户通过单击其标题部分来隐藏或显示它要显示的具体内容，其基本使用方法如下所示：
+
+    ```html
+    <details>
+        <summary>内容块的标题</summary>
+        <!-- 在这里放置要在内容块中显示的内容 -->
+        <p>内容块中的一个段落。</p>
+    </details>
+    ```
+
+    在上述语法中，`<details>`标记则于创建可折叠的内容块元素本身，其`<summary>`子标记则用于设置该块元素的标题部分，而内容块元素要显示或隐藏的具体内容则需要被放置在`<summary>`标记之后到`</details>`标记之前的那个区域中，例如我们在这里放置的是一个`<p>`标记。
+
+- `<datalist>`和`<option>`标记：这两个标记可用于在网页中创建面向`<input>`标记的自动完成列表，其基本使用方法如下所示：
   
     ```html
     <!DOCTYPE html>
     <html>
         <head>
-            <title>自动完成下拉列表</title>
+            <title>自动完成列表</title>
         </head>
         <body>
             <input type="text" list="fruits">
@@ -519,106 +584,93 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     </html>
     ```
 
-- `<details>`和`<summary>`标记：这两个标记用于创建可折叠的内容块。`<summary>`定义折叠块的摘要，`<details>`定义折叠块的内容。例如：
+    在上述语法示例中，我们先用`<input>`标记创建了一个文本输入框，然后再用`<datalist>`标记为该文本输入框创建一个自动完成列表元素，并利用其`<option>`子标记为该元素设置了`Apple`、`Banana`和`Orange`三个可选项。  
 
-   ```html
-   <details>
-     <summary>Click to expand</summary>
-     <p>Hidden content</p>
-   </details>
-   ```
+- `<form>`标记及其子标记：该标记用于在网页中创建一个表单元素，在基于HTML的用户界面设计中，表单元素的作用是收集用户输入的数据。在该元素下，设计师们可以使用一系列子标签来让用户输入数据，这些标记主要包括：
+- `<label>`子标记：该子标记用于在表单中创建一个标签，其`for`属性则用于指定该标签所对应的输入框的ID；
+  - `<input>`子标记：该子标记用于在表单中创建一个输入性质的元素，其使用方法与该标签独立使用时相同
+- `<textarea>`子标记：该子标记用于在表单中创建一个多行的文本输入框，其使用方法与该标签独立使用时相同；
+- `<button>`子标记：该子标记用于在表单中创建一个按钮元素，其使用方法与该标签独立使用时相同；
+- `<select>`子标记：该子标记用于在表单中创建一个下拉列表元素，其使用方法与该标签独立使用时相同；
+- `<optgroup>`子标记：该子标记用于在表单的下拉列表中创建一个选项组元素；
+- `<datalist>`子标记：该子标记用于在表单中创建一个自动完成列表元素，其使用方法与该标签独立使用时相同；
+- `<keygen>`子标记：该子标记用于在表单中创建一个密钥对生成器元素。
+- `<output>`子标记：该子标记用于在表单中创建一个输出元素，其使用方法与该标签独立使用时相同。
+- `<fieldset>`子标记：该子标记用于在表单中创建一个表单元素的分组，该分组会设置有一个专属边框；
+- `<legend>`子标记：该子标记用于在表单的分组中创建一个标题，其`for`属性则用于指定该标题所对应的输入框的ID；
 
-这些标记和属性可以帮助开发者创建更丰富、交互性更强的用户界面，提供更好的用户体验。它们可以与CSS和JavaScript一起使用，以实现更多的交互效果和功能。
+  下面来模拟设计一个简单的、用于用户注册的表单：
 
-<!-- 以下为待整理 -->
-- `<input>`标记：该标记用于在网页中创建一个输入框，其基本语法格式如下所示：
+  ```html
+  <form method="post" action="http://example.com/register">
+      <label for="username">用户名：</label>
+      <input type="text" name="username" id="username" />
+      <label for="password">密码：</label>
+      <input type="password" name="password" id="password" />
+      <label for="email">邮箱：</label>
+      <input type="email" name="email" id="email" />
+      <label for="sex">先别：</label>
+      <input type="radio" name="sex" id="sex" value="male" />男
+      <input type="radio" name="sex" id="sex" value="female" />女
+      <label for="birthday">生日：</label>
+      <input type="date" name="birthday" id="birthday" />
+      <label for="hobby">爱好：</label>
+      <input type="checkbox" name="hobby" id="hobby" value="basketball" />篮球
+      <input type="checkbox" name="hobby" id="hobby" value="football" />足球
+      <input type="checkbox" name="hobby" id="hobby" value="swimming" />游泳
+      <label for="comment">评论：</label>
+      <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
+      <button type="submit">注册</button>
+      <button type="reset">重置</button>
+      <button type="button">取消</button>
+  </form>
+  ```
 
-    ```html
-    <input type="text" value="输入框" />
-    ```
+上述示例是一个典型的HTML表单元素，用于用户注册。以下是对代码的详细解释：
 
-    其中，`type`属性用于指定输入框的类型，其值可以是`text`、`password`、`radio`、`checkbox`、`submit`、`reset`或`button`，分别用于创建文本输入框、密码输入框、单选框、复选框、提交按钮和重置按钮。
+1. `<form method="post" action="http://example.com/register">`：这是一个表单元素，使用POST方法将数据提交到`http://example.com/register`的URL。当用户点击注册按钮时，表单数据将被发送到该URL。
 
-    ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>输入框标记</title>
-        </head>
-        <body>
-            <input type="text" value="文本输入框" />
-            <input type="password" value="密码输入框" />
-            <input type="radio" value="单选框" />
-            <input type="checkbox" value="复选框" />
-            <input type="submit" value="提交按钮" />
-            <input type="reset" value="重置按钮" />
-        </body>
-    </html>
-    ```
+2. `<label for="username">用户名：</label>`：这是一个标签元素，用于显示文本内容"用户名："。`for`属性与后面的`<input>`元素的`id`属性相对应，用于关联标签和输入字段。
 
-- `<textarea>`标记：该标记用于在网页中创建一个文本区域，其基本语法格式如下所示：
+3. `<input type="text" name="username" id="username" />`：这是一个输入字段元素，`type`属性设置为"text"表示文本输入字段。`name`属性设置为"username"，在提交表单时，该字段的值将被命名为"username"。`id`属性用于与前面的`<label>`元素关联。
 
-    ```html
-    <textarea rows="3" cols="20">文本区域</textarea>
-    ```
+4. `<label for="password">密码：</label>`：类似于用户名的标签和输入字段，用于输入密码。
 
-    其中，`rows`属性用于指定文本区域中可以显示的行数，`cols`属性用于指定文本区域中可以显示的列数。
+5. `<input type="password" name="password" id="password" />`：类似于用户名的输入字段，用于输入密码。`type`属性设置为"password"，以隐藏输入的字符。
 
-    ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>文本区域标记</title>
-        </head>
-        <body>
-            <textarea rows="3" cols="20">文本区域</textarea>
-        </body>
-    </html>
-    ```
+6. `<label for="email">邮箱：</label>`：类似于用户名的标签和输入字段，用于输入电子邮件地址。
 
-### 表单交互元素
+7. `<input type="email" name="email" id="email" />`：类似于用户名的输入字段，用于输入电子邮件地址。`type`属性设置为"email"，以验证输入是否符合电子邮件格式。
 
-- `<form>`标记：该标记用于在网页中创建一个表单，其基本语法格式如下所示：
+8. `<label for="sex">先别：</label>`：类似于用户名的标签和输入字段，用于选择性别。
 
-    ```html
-    <form action="url" method="get/post">
-        表单元素
-    </form>
-    ```
- 
-    其中，`action`属性用于指定表单提交的地址，`method`属性用于指定表单提交的方式，其值可以是`get`或`post`。
+9. `<input type="radio" name="sex" id="sex" value="male" />男`：这是一个单选按钮，`name`属性设置为"sex"，表示这是一个性别选择的字段。`id`属性用于与前面的`<label>`元素关联。`value`属性设置为"male"，表示选中该按钮时，该字段的值将被命名为"male"。
 
-    ```html
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>表单标记</title>
-        </head>
-        <body>
-            <h1>登录界面表单示例</h1>
-            <form method="post" action="http://www.baidu.com">
-                <p>用户名：<input type="text" name="username" /></p>
-                <p>密码：<input type="password" name="password" /></p>
-                <p><input type="submit" value="登录" /></p>
-            </form> 
-        </body>
-    </html>
-    ```
+10. `<input type="radio" name="sex" id="sex" value="female" />女`：类似于男性的单选按钮，但`value`属性设置为"female"。
 
-- `<input>`子标记：该标记用于创建各种表单输入控件，如文本框、复选框、单选按钮、下拉列表等。可以使用不同的`type`属性来指定不同的输入类型。例如：
+11. `<label for="birthday">生日：</label>`：类似于用户名的标签和输入字段，用于输入生日。
 
-   ```html
-   <input type="text" name="username" placeholder="Enter your username">
-   <input type="checkbox" name="agree" id="agree">
-   <label for="agree">I agree to the terms and conditions</label>
-   <input type="radio" name="gender" value="male"> Male
-   <input type="radio" name="gender" value="female"> Female
-   <select name="country">
-     <option value="us">United States</option>
-     <option value="uk">United Kingdom</option>
-     <option value="ca">Canada</option>
-   </select>
-   ```
+12. `<input type="date" name="birthday" id="birthday" />`：类似于用户名的输入字段，用于输入日期。`type`属性设置为"date"，以提供日期选择器。
+
+13. `<label for="hobby">爱好：</label>`：类似于用户名的标签和输入字段，用于选择爱好。
+
+14. `<input type="checkbox" name="hobby" id="hobby" value="basketball" />篮球`：这是一个复选框，`name`属性设置为"hobby"，表示这是一个爱好选择的字段。`id`属性用于与前面的`<label>`元素关联。`value`属性设置为"basketball"，表示选中该复选框时，该字段的值将被命名为"basketball"。
+
+15. 类似于篮球的复选框，但`value`属性分别设置为"football"和"swimming"，表示足球和游泳。
+
+16. `<label for="comment">评论：</label>`：类似于用户名的标签和输入字段，用于输入评论。
+
+17. `<textarea name="comment" id="comment" rows="3" cols="20"></textarea>`：这是一个文本区域，用于多行文本输入。`name`属性设置为"comment"，在提交表单时，该字段的值将被命名为"comment"。`id`属性用于与前面的`<label>`元素关联。`rows`和`cols`属性分别设置为3和20，以控制文本区域的大小。
+
+18. `<button type="submit">注册</button>`：这是一个提交按钮，用于提交表单数据。
+
+19. `<button type="reset">重置</button>`：这是一个重置按钮，用于将表单字段重置为默认值。
+
+20. `<button type="button">取消</button>`：这是一个普通按钮，没有特定的行为。
+
+这段代码创建了一个用户注册表单，包含用户名、密码、邮箱、性别、生日、爱好、评论等字段，用户填写完表单后，可以点击注册按钮将数据提交到指定的URL。
 
 ----
 #待整理
+
+<!-- 以下为待整理 -->

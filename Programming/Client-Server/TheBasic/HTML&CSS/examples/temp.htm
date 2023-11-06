@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   <meter value="75" min="0" max="100">75%</meter>
+   <br>
+
+   <progress id="task" value="0" max="100"></progress>
+   <script>
+       document.getElementById('task').value = 50;
+   </script>
+    <br>
+
+    <button type="button" onclick="alert('Hello World!')">
+        <!-- 这里可以设置按钮上要显示的文字或图形 -->
+        <p>按钮</p>
+    </button>
+    <br>
+
+    <details>
+        <summary>详细信息</summary>
+        <p>详细信息内容</p>
+    </details>
+    <br>
+
+    <select>
+        <option value="1">选项1</option>
+        <option value="2">选项2</option>
+        <option value="3">选项3</option>
+    </select>
+    <br>
+
+    <input type="text" list="fruits">
+    <datalist id="fruits">
+        <option value="Apple">
+        <option value="Banana">
+        <option value="Orange">
+    </datalist>
+    <br>
+
+    <output for="range">0</output>
+    <input type="range" id="range"
+        min="0" max="100"
+        oninput="output.value = range.value"
+    />
+    <br>
+
+    <form method="post" action="http://www.example.com/register.php">
+        <label for="username">用户名：</label>
+        <input type="text" name="username" id="username" />
+        <label for="password">密码：</label>
+        <input type="password" name="password" id="password" />
+        <label for="email">邮箱：</label>
+        <input type="email" name="email" id="email" />
+        <label for="sex">先别：</label>
+        <input type="radio" name="sex" id="sex" value="male" />男
+        <input type="radio" name="sex" id="sex" value="female" />女
+        <label for="birthday">生日：</label>
+        <input type="date" name="birthday" id="birthday" />
+        <label for="hobby">爱好：</label>
+        <input type="checkbox" name="hobby" id="hobby" value="basketball" />篮球
+        <input type="checkbox" name="hobby" id="hobby" value="football" />足球
+        <input type="checkbox" name="hobby" id="hobby" value="swimming" />游泳
+        <label for="comment">评论：</label>
+        <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
+        <button type="submit">注册</button>
+        <button type="reset">重置</button>
+        <button type="button">取消</button>
+    </form>
+</body>
+</html>
