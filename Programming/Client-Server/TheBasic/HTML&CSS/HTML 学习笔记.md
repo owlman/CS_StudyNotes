@@ -587,8 +587,8 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     在上述语法示例中，我们先用`<input>`标记创建了一个文本输入框，然后再用`<datalist>`标记为该文本输入框创建一个自动完成列表元素，并利用其`<option>`子标记为该元素设置了`Apple`、`Banana`和`Orange`三个可选项。  
 
 - `<form>`标记及其子标记：该标记用于在网页中创建一个表单元素，在基于HTML的用户界面设计中，表单元素的作用是收集用户输入的数据。在该元素下，设计师们可以使用一系列子标签来让用户输入数据，这些标记主要包括：
-- `<label>`子标记：该子标记用于在表单中创建一个标签，其`for`属性则用于指定该标签所对应的输入框的ID；
-  - `<input>`子标记：该子标记用于在表单中创建一个输入性质的元素，其使用方法与该标签独立使用时相同
+- `<label>`子标记：该子标记用于在表单中创建一个标签元素，其`for`属性则用于指定该标签所对应的输入框的ID；
+  - `<input>`子标记：该子标记用于在表单中创建一个输入性质的元素，其使用方法与该标签独立使用时相同；
 - `<textarea>`子标记：该子标记用于在表单中创建一个多行的文本输入框，其使用方法与该标签独立使用时相同；
 - `<button>`子标记：该子标记用于在表单中创建一个按钮元素，其使用方法与该标签独立使用时相同；
 - `<select>`子标记：该子标记用于在表单中创建一个下拉列表元素，其使用方法与该标签独立使用时相同；
@@ -625,50 +625,6 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
       <button type="button">取消</button>
   </form>
   ```
-
-上述示例是一个典型的HTML表单元素，用于用户注册。以下是对代码的详细解释：
-
-1. `<form method="post" action="http://example.com/register">`：这是一个表单元素，使用POST方法将数据提交到`http://example.com/register`的URL。当用户点击注册按钮时，表单数据将被发送到该URL。
-
-2. `<label for="username">用户名：</label>`：这是一个标签元素，用于显示文本内容"用户名："。`for`属性与后面的`<input>`元素的`id`属性相对应，用于关联标签和输入字段。
-
-3. `<input type="text" name="username" id="username" />`：这是一个输入字段元素，`type`属性设置为"text"表示文本输入字段。`name`属性设置为"username"，在提交表单时，该字段的值将被命名为"username"。`id`属性用于与前面的`<label>`元素关联。
-
-4. `<label for="password">密码：</label>`：类似于用户名的标签和输入字段，用于输入密码。
-
-5. `<input type="password" name="password" id="password" />`：类似于用户名的输入字段，用于输入密码。`type`属性设置为"password"，以隐藏输入的字符。
-
-6. `<label for="email">邮箱：</label>`：类似于用户名的标签和输入字段，用于输入电子邮件地址。
-
-7. `<input type="email" name="email" id="email" />`：类似于用户名的输入字段，用于输入电子邮件地址。`type`属性设置为"email"，以验证输入是否符合电子邮件格式。
-
-8. `<label for="sex">先别：</label>`：类似于用户名的标签和输入字段，用于选择性别。
-
-9. `<input type="radio" name="sex" id="sex" value="male" />男`：这是一个单选按钮，`name`属性设置为"sex"，表示这是一个性别选择的字段。`id`属性用于与前面的`<label>`元素关联。`value`属性设置为"male"，表示选中该按钮时，该字段的值将被命名为"male"。
-
-10. `<input type="radio" name="sex" id="sex" value="female" />女`：类似于男性的单选按钮，但`value`属性设置为"female"。
-
-11. `<label for="birthday">生日：</label>`：类似于用户名的标签和输入字段，用于输入生日。
-
-12. `<input type="date" name="birthday" id="birthday" />`：类似于用户名的输入字段，用于输入日期。`type`属性设置为"date"，以提供日期选择器。
-
-13. `<label for="hobby">爱好：</label>`：类似于用户名的标签和输入字段，用于选择爱好。
-
-14. `<input type="checkbox" name="hobby" id="hobby" value="basketball" />篮球`：这是一个复选框，`name`属性设置为"hobby"，表示这是一个爱好选择的字段。`id`属性用于与前面的`<label>`元素关联。`value`属性设置为"basketball"，表示选中该复选框时，该字段的值将被命名为"basketball"。
-
-15. 类似于篮球的复选框，但`value`属性分别设置为"football"和"swimming"，表示足球和游泳。
-
-16. `<label for="comment">评论：</label>`：类似于用户名的标签和输入字段，用于输入评论。
-
-17. `<textarea name="comment" id="comment" rows="3" cols="20"></textarea>`：这是一个文本区域，用于多行文本输入。`name`属性设置为"comment"，在提交表单时，该字段的值将被命名为"comment"。`id`属性用于与前面的`<label>`元素关联。`rows`和`cols`属性分别设置为3和20，以控制文本区域的大小。
-
-18. `<button type="submit">注册</button>`：这是一个提交按钮，用于提交表单数据。
-
-19. `<button type="reset">重置</button>`：这是一个重置按钮，用于将表单字段重置为默认值。
-
-20. `<button type="button">取消</button>`：这是一个普通按钮，没有特定的行为。
-
-这段代码创建了一个用户注册表单，包含用户名、密码、邮箱、性别、生日、爱好、评论等字段，用户填写完表单后，可以点击注册按钮将数据提交到指定的URL。
 
 ----
 #待整理
