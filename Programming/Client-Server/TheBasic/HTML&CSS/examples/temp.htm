@@ -48,27 +48,50 @@
     />
     <br>
 
-    <form method="post" action="http://www.example.com/register.php">
+    <form method="post" action="https://www.example.com/register">
         <label for="username">用户名：</label>
-        <input type="text" name="username" id="username" />
+        <input type="text" name="username" id="username" placeholder="请输入用户名">
+        <br>
         <label for="password">密码：</label>
-        <input type="password" name="password" id="password" />
+        <input type="password" name="password" id="password" placeholder="请输入密码">
+        <br>
         <label for="email">邮箱：</label>
-        <input type="email" name="email" id="email" />
-        <label for="sex">先别：</label>
-        <input type="radio" name="sex" id="sex" value="male" />男
-        <input type="radio" name="sex" id="sex" value="female" />女
+        <input type="email" name="email" id="email" placeholder="请输入邮箱">
+        <br>
         <label for="birthday">生日：</label>
-        <input type="date" name="birthday" id="birthday" />
+        <input type="date" name="birthday" id="birthday">
+        <br>
+        <label for="gender">性别：</label>
+        <input type="radio" name="gender" id="male" value="male">
+        <label for="male">男</label>
+        <input type="radio" name="gender" id="female" value="female">
+        <label for="female">女</label>
+        <br>
         <label for="hobby">爱好：</label>
-        <input type="checkbox" name="hobby" id="hobby" value="basketball" />篮球
-        <input type="checkbox" name="hobby" id="hobby" value="football" />足球
-        <input type="checkbox" name="hobby" id="hobby" value="swimming" />游泳
-        <label for="comment">评论：</label>
-        <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
-        <button type="submit">注册</button>
+        <input type="checkbox" name="hobby" id="football" value="football">
+        <label for="football">足球</label>
+        <input type="checkbox" name="hobby" id="basketball" value="basketball">
+        <label for="basketball">篮球</label>
+        <input type="checkbox" name="hobby" id="swimming" value="swimming">
+        <label for="swimming">游泳</label>
+        <br>
+        <label for="address">地址：</label>
+        <select name="address" id="address">
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+            <option value="guangzhou">广州</option>
+            <option value="shenzhen">深圳</option>
+        </select>
+        <br>
+        <label for="file">照片：</label>
+        <input type="file" name="file" id="file">
+        <br>
+        <label for="textarea">个人描述：</label>
+        <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+        <br>
+        <button type="submit"
+                onclick="alert('提交成功')">提交</button>
         <button type="reset">重置</button>
-        <button type="button">取消</button>
     </form>
 </body>
 </html>

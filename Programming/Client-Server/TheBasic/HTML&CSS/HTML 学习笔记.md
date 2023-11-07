@@ -464,13 +464,21 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     ```html
     <button type="button" onclick="alert('Hello World!')">
         <!-- 这里可以设置按钮上要显示的文字或图形 -->
-        <p>按钮</p>
+        <p>普通按钮</p>
+    </button>
+    <button type="submit" onclick="alert('Hello World!')">
+        <!-- 这里可以设置按钮上要显示的文字或图形 -->
+        <p>提交按钮</p>
+    </button>
+    <button type="reset" onclick="alert('Hello World!')">
+        <!-- 这里可以设置按钮上要显示的文字或图形 -->
+        <p>重置按钮</p>
     </button>
     ```
 
     在上述示例中，`type`属性用于指定按钮的类型，其取值可以是`button`、`submit`或`reset`，分别表示普通按钮、提交按钮和重置按钮，默认值为`button`。而`onclick`属性则用于指定按钮在被点击时所要执行的JavaScript脚本，其值既可以是JavaScript代码，也可以是JavaScript代码所在的URL。在这里，我们让它弹出一个带有“Hello World!”字样的信息提示框。最后，在`<button>`和`</button>`标记之间，我们可以设置用于显示在按钮上的提示信息，该信息可以是一段文本，也可以是一个图形，但必须要能说明该按钮元素的功能。
 
-- `<input>`标记：该标记可用于在网页中创建一个输入性质的元素，主要包括分别可用于创建文本输入框、密码输入框、单选框、复选框、滑块、按钮等元素，其基本使用方法如下所示：
+- `<input>`标记：该标记可用于在网页中创建一个输入性质的元素，主要包括分别可用于创建文本输入框、密码输入框、单选框、复选框、文件上传控件等元素，其基本使用方法如下所示：
 
     ```html
     <!-- 以下定义一个文本输入框 -->
@@ -488,11 +496,17 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     <input type="checkbox" name="hobby" value="football" />足球
     <input type="checkbox" name="hobby" value="swimming" />游泳
     
+    <!-- 以下创建一个文件上传控件，用于上传图片 -->
+    <input type="file" name="file" />
+
+    <!-- 以下创建一个日期选择控件，用于选择生日 -->
+    <input type="date" name="birthday" />
+
     <!-- 以下定义一个滑块，其中滑块的当前值是50 -->
     <input type="range" min="0" max="100" value="50" />
     ```
 
-    在上述示例中，`type`属性用于指定输入框的类型，其值可以是`text`、`password`、`radio`、`checkbox`、`range`、`submit`、`reset`或`button`等。需要特别提醒的是，虽然`<input>`标记也可用于创建按钮元素，但与`<button>`标记相比，`<input>`标记的语义更偏向于用户输入的具体信息，笔者原则上并不鼓励用它来设置按钮元素。
+    在上述示例中，`type`属性用于指定输入框的类型，其值可以是`text`、`password`、`radio`、`checkbox`、`range`、`file`、`date`、`button`等。需要特别提醒的是，虽然`<input>`标记也可用于创建按钮元素，但与`<button>`标记相比，`<input>`标记的语义更偏向于用户输入的具体信息，笔者原则上并不鼓励用它来设置按钮元素。
 
 - `<textarea>`标记：该标记用于在网页中创建一个支持多行输入的文本输入框，其基本使用方法如下所示：
 
@@ -551,7 +565,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     </select>
     ```
 
-    在上述语法中，`<select>`标记用于创建下拉列表本身，而其`<option>`子标记则用于设置下拉列表中的选项，其`value`属性用于指定选项的值。
+    在上述示例中，`<select>`标记用于创建下拉列表本身，而其`<option>`子标记则用于设置下拉列表中的选项，其`value`属性用于指定选项的值。
 
 - `<details>`和`<summary>`标记：这两个标记可用于在网页中创建一个可折叠的内容块元素，该元素允许用户通过单击其标题部分来隐藏或显示它要显示的具体内容，其基本使用方法如下所示：
 
@@ -563,7 +577,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     </details>
     ```
 
-    在上述语法中，`<details>`标记则于创建可折叠的内容块元素本身，其`<summary>`子标记则用于设置该块元素的标题部分，而内容块元素要显示或隐藏的具体内容则需要被放置在`<summary>`标记之后到`</details>`标记之前的那个区域中，例如我们在这里放置的是一个`<p>`标记。
+    在上述示例中，`<details>`标记则于创建可折叠的内容块元素本身，其`<summary>`子标记则用于设置该块元素的标题部分，而内容块元素要显示或隐藏的具体内容则需要被放置在`<summary>`标记之后到`</details>`标记之前的那个区域中，例如我们在这里放置的是一个`<p>`标记。
 
 - `<datalist>`和`<option>`标记：这两个标记可用于在网页中创建面向`<input>`标记的自动完成列表，其基本使用方法如下所示：
   
@@ -584,7 +598,7 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
     </html>
     ```
 
-    在上述语法示例中，我们先用`<input>`标记创建了一个文本输入框，然后再用`<datalist>`标记为该文本输入框创建一个自动完成列表元素，并利用其`<option>`子标记为该元素设置了`Apple`、`Banana`和`Orange`三个可选项。  
+    在上述示例中，我们先用`<input>`标记创建了一个文本输入框，然后再用`<datalist>`标记为该文本输入框创建一个自动完成列表元素，并利用其`<option>`子标记为该元素设置了`Apple`、`Banana`和`Orange`三个可选项。  
 
 - `<form>`标记及其子标记：该标记用于在网页中创建一个表单元素，在基于HTML的用户界面设计中，表单元素的作用是收集用户输入的数据。在该元素下，设计师们可以使用一系列子标签来让用户输入数据，这些标记主要包括：
 - `<label>`子标记：该子标记用于在表单中创建一个标签元素，其`for`属性则用于指定该标签所对应的输入框的ID；
@@ -599,34 +613,61 @@ HTML（即Hyper Text Markup Language，通常被译为“超文本标记语言�
 - `<fieldset>`子标记：该子标记用于在表单中创建一个表单元素的分组，该分组会设置有一个专属边框；
 - `<legend>`子标记：该子标记用于在表单的分组中创建一个标题，其`for`属性则用于指定该标题所对应的输入框的ID；
 
-  下面来模拟设计一个简单的、用于用户注册的表单：
+  下面，我们来通过一个简单的、用于用户注册的表单实例来具体演示一下这些标记的使用方法：
 
   ```html
-  <form method="post" action="http://example.com/register">
-      <label for="username">用户名：</label>
-      <input type="text" name="username" id="username" />
-      <label for="password">密码：</label>
-      <input type="password" name="password" id="password" />
-      <label for="email">邮箱：</label>
-      <input type="email" name="email" id="email" />
-      <label for="sex">先别：</label>
-      <input type="radio" name="sex" id="sex" value="male" />男
-      <input type="radio" name="sex" id="sex" value="female" />女
-      <label for="birthday">生日：</label>
-      <input type="date" name="birthday" id="birthday" />
-      <label for="hobby">爱好：</label>
-      <input type="checkbox" name="hobby" id="hobby" value="basketball" />篮球
-      <input type="checkbox" name="hobby" id="hobby" value="football" />足球
-      <input type="checkbox" name="hobby" id="hobby" value="swimming" />游泳
-      <label for="comment">评论：</label>
-      <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
-      <button type="submit">注册</button>
-      <button type="reset">重置</button>
-      <button type="button">取消</button>
-  </form>
-  ```
+    <form method="post" action="https://www.example.com/register">
+        <label for="username">用户名：</label>
+        <input type="text" name="username" id="username" placeholder="请输入用户名">
+        <br>
+        <label for="password">密码：</label>
+        <input type="password" name="password" id="password" placeholder="请输入密码">
+        <br>
+        <label for="email">邮箱：</label>
+        <input type="email" name="email" id="email" placeholder="请输入邮箱">
+        <br>
+        <label for="birthday">生日：</label>
+        <input type="date" name="birthday" id="birthday">
+        <br>
+        <label for="gender">性别：</label>
+        <input type="radio" name="gender" id="male" value="male">
+        <label for="male">男</label>
+        <input type="radio" name="gender" id="female" value="female">
+        <label for="female">女</label>
+        <br>
+        <label for="hobby">爱好：</label>
+        <input type="checkbox" name="hobby" id="football" value="football">
+        <label for="football">足球</label>
+        <input type="checkbox" name="hobby" id="basketball" value="basketball">
+        <label for="basketball">篮球</label>
+        <input type="checkbox" name="hobby" id="swimming" value="swimming">
+        <label for="swimming">游泳</label>
+        <br>
+        <label for="address">地址：</label>
+        <select name="address" id="address">
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+            <option value="guangzhou">广州</option>
+            <option value="shenzhen">深圳</option>
+        </select>
+        <br>
+        <label for="file">照片：</label>
+        <input type="file" name="file" id="file">
+        <br>
+        <label for="textarea">个人描述：</label>
+        <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+        <br>
+        <button type="submit"
+                onclick="alert('提交成功')">提交</button>
+        <button type="reset">重置</button>
+    </form>
+    ```
+
+    在上述示例中，我们主要做了以下动作：
+
+    1. 先使用`<form>`标记创建了表单元素。在此过程中，我们用`method`属性指定了表单提交的方式为`post`，用`action`属性指定了表单提交的目的地（即应用程序后端的某个URL）。
+    2. 然后用`<form>`标记的各种子标记创建了该表单元素的各个输入字段，并为其设置了对应的`id` 属性，这样在提交表单时，这些输入字段的值会以键值对的形式被提交到服务端。
+    3. 最后使用`<button>`创建了该表单元素的提交按钮和重置按钮，并为其添加了点击事件。
 
 ----
 #待整理
-
-<!-- 以下为待整理 -->
