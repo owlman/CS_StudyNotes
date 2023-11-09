@@ -430,6 +430,91 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
 
 ![图7](./img/html&css/7.png)
 
+当然了，上面这种内联形式的脚本通常只适合编写少量的代码。如果大量的脚本代码与HTML标签混在一起，会严重影响代码的可维护性。因此在更多时候，我们往往会选择使用`<script>`标签的`src`属性来嵌入外部的脚本文件，例如像这样：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>嵌入外部脚本文件</title>
+    </head>
+    <body>
+        <h1>嵌入外部脚本文件</h1>
+        <div id="targetID">
+            <!--元素内容-->
+        </div>
+        <script src="test.js"></script>
+    </body>
+</html>
+```
+
+然而这带来了另一个问题：由于浏览器在默认执行模式下会先载入完外链的脚本文件再继续读取后面的HTML标签，所以，为了避免因文件载入而造成的延时影响了整个网页的读取效率，我们通常还会激活`<script>`标签的`async`属性，令浏览器改用异步执行模式，例如像这样：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>异步嵌入外部脚本文件</title>
+    </head>
+    <body>
+    <h1>异步嵌入外部脚本文件</h1>
+    <div id="targetID">
+        <!--元素内容-->
+    </div>
+    <script src="test.js" async="async"></script>
+    </body>
+</html>
+```
+
+这样一来，脚本文件的载入就不会影响到后面“其他页面元素”的载入了。然后，我们就只需要在03-test.js文件中编写相应的脚本代码即可。
+
+但是，`<script>`标签的上述使用方式依然存在着一个问题：由于在异步执行模式下，浏览器一旦外链的脚本文件载入完成就会立即执行，开发者无法确保脚本被执行的具体时间，所以它依然得被放在targetID元素的后面。很显然，更理想的选择是将该标签与引用CSS文件的`<link>`标签一样放在`<head>`标签中，这时候，我们就得要求浏览器采用延后执行模式，即让浏览器在在载入所有HTML标签之后再执行脚本，这就需要激活`<script>`标签的`defer`属性，例如像这样：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8">
+        <title>嵌入延后执行的外部脚本文件</title>
+        <script src="test.js" defer="defer"></script>
+    </head>
+    <body>
+        <h1>嵌入延后执行的外部脚本文件</h1>
+        <div id="targetID">
+            <!--元素内容-->
+        </div>
+    </body>
+</html>
+```
+
+除此之外，我们通常还会用`<script>`标签的`type`属性来指定其载入脚本的文本类型，以明确其引用的是哪一种脚本。在HTML 5的标准规范中，`<script>`标签的默认`type`属性值是`type="text/javascript"`，我们之前使用的都是这种文本类型，它不用特别声明。在默认情况下，浏览器会将该标签载入的代码当做普通的JavaScript脚本来执行，但当我们想使用模块，即`type="module"`时，浏览器就会将该标签载入的代码当做JavaScript模块来执行。
+
+最后，我们还必须得考虑一下`<script>`标签不起作用时的情况。出于安全等原因，如今依然存在着一些特定的浏览器或用户会选择禁用脚本功能，这会让许多应用程序的用户界面就会无法正常工作。在脚本功能被禁用的情况下，浏览器会忽略`<script>`标签的存在，这时我们就需要用`<noscript>`标签来建议用户打开浏览器的脚本功能或者改用支持脚本的浏览器，该标签的具体用法如下：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>浏览器端脚本支持测试</title>
+        <script type="module" src="test.js"></script>
+    </head>
+    <body>
+        <noscript>
+            <p>本页面需要浏览器支持或启用脚本功能。</p>
+        </noscript>
+        <h1>浏览器端脚本支持测试</h1>
+        <div id="targetID">
+            <!--元素内容-->
+        </div>
+    </body>
+</html>
+```
+
+这样一来，我们的网页就会在脚本功能被禁用时显示一条提示信息，虽然在如今的主流的浏览器中，它已经很少有机会发挥作用了。
+
 #### 嵌入其他元素
 
 - `<iframe>`标记：该标记用于在网页文档中嵌入另一个网页，我们可以使用该标签的`src`属性来指定要嵌入网页的URL。例如：
