@@ -404,7 +404,7 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
 
 #### 嵌入脚本代码
 
-在HTML 5中，设计师们可以使用 `<script>` 标记来在网页中嵌入脚本代码，例如我们可以选择将只适用于当前网页的JavaScript脚本代码直接写在`<script>`和`</script>`这对标记之间，或者使用该标签的`src`属性来引用外部JavaScript文件，例如像下面这样：
+在HTML 5中，设计师们可以使用 `<script>` 标记来在网页中嵌入脚本代码，例如我们可以选择将只适用于当前网页的JavaScript脚本代码直接写在`<script>`和`</script>`这对标记之间，让它们以网页内联脚本的形式来执行，例如像下面这样：
 
 ```html
 <!DOCTYPE html>
@@ -413,7 +413,7 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
         <title>嵌入脚本代码</title>
         <script>
             function changeText() {
-                document.getElementById("demo").innerHTML = "Hello World!";
+                document.getElementById("targetID").innerHTML = "Hello World!";
             }
         </script>
     </head>
@@ -421,16 +421,16 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
         <h1>嵌入 JavaScript 脚本代码.</h1>
         <button type="button" onclick="changeText()">打个招呼！</button>
         <p>点击上面的按钮将会在下面显示“Hello World!”。</p>
-        <p id="demo"></p>
+        <div id="targetID"></div>
     </body>
 </html>
 ```
 
-在上述代码中，我们首先使用 `<script>` 标记定义了一个JavaScript函数，然后在`<button>`标记内部将该函数注册为鼠标点击事件的处理函数，这样一来，当页面中的按钮被鼠标点击时，该函数就将会在`id="demo"`的段落区域中显示出“Hello World!”字样的文本。其效果如下所示：
+在上述代码中，我们首先使用 `<script>` 标记定义了一个JavaScript函数，然后在`<button>`标记内部将该函数注册为鼠标点击事件的处理函数，这样一来，当页面中的按钮被鼠标点击时，该函数就将会在`id="targetID"`的`<div>`元素中显示出“Hello World!”字样的文本。其效果如下所示：
 
 ![图7](./img/html&css/7.png)
 
-当然了，上面这种内联形式的脚本通常只适合编写少量的代码。如果大量的脚本代码与HTML标签混在一起，会严重影响代码的可维护性。因此在更多时候，我们往往会选择使用`<script>`标签的`src`属性来嵌入外部的脚本文件，例如像这样：
+当然了，上面这种内联形式的脚本通常只适合编写少量的代码，如果我们将大量的脚本代码与HTML标签混在一起，可能会严重影响代码的的可读性与可维护性。因此在更多时候，我们会选择使用`<script>`标签的`src`属性来嵌入外部的脚本文件，例如像这样：
 
 ```html
 <!DOCTYPE html>
@@ -441,15 +441,15 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
     </head>
     <body>
         <h1>嵌入外部脚本文件</h1>
-        <div id="targetID">
-            <!--元素内容-->
-        </div>
+        <button type="button" onclick="changeText()">打个招呼！</button>
+        <p>点击上面的按钮将会在下面显示“Hello World!”.</p>
+        <div id="targetID"></div>
         <script src="test.js"></script>
     </body>
 </html>
 ```
 
-然而这带来了另一个问题：由于浏览器在默认执行模式下会先载入完外链的脚本文件再继续读取后面的HTML标签，所以，为了避免因文件载入而造成的延时影响了整个网页的读取效率，我们通常还会激活`<script>`标签的`async`属性，令浏览器改用异步执行模式，例如像这样：
+然而，这样做会带来一个问题：由于浏览器在默认情况下采用的是同步嵌入模式，即它在读取到`<script>`标记时会先下载完外链的脚本文件，再继续读取后面的HTML标记，这其中造成的延时会影响整个网页的读取效率。为了解决这个问题，我们通常会在使用嵌入外部脚本时选择激活`<script>`标记的`async`属性，令浏览器改用异步载入模式，例如像这样：
 
 ```html
 <!DOCTYPE html>
@@ -459,18 +459,18 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
         <title>异步嵌入外部脚本文件</title>
     </head>
     <body>
-    <h1>异步嵌入外部脚本文件</h1>
-    <div id="targetID">
-        <!--元素内容-->
-    </div>
-    <script src="test.js" async="async"></script>
+        <h1>异步嵌入外部脚本文件</h1>
+        <button type="button" onclick="changeText()">打个招呼！</button>
+        <p>点击上面的按钮将会在下面显示“Hello World!”.</p>
+        <div id="targetID"></div>
+        <script src="test.js" async="async"></script>
     </body>
 </html>
 ```
 
-这样一来，脚本文件的载入就不会影响到后面“其他页面元素”的载入了。然后，我们就只需要在03-test.js文件中编写相应的脚本代码即可。
+这样一来，脚本文件的下载过程就不会影响到后面“其他页面元素”的载入了。然后，我们就只需要`test.js`文件中编写相应的脚本代码即可。
 
-但是，`<script>`标签的上述使用方式依然存在着一个问题：由于在异步执行模式下，浏览器一旦外链的脚本文件载入完成就会立即执行，开发者无法确保脚本被执行的具体时间，所以它依然得被放在targetID元素的后面。很显然，更理想的选择是将该标签与引用CSS文件的`<link>`标签一样放在`<head>`标签中，这时候，我们就得要求浏览器采用延后执行模式，即让浏览器在在载入所有HTML标签之后再执行脚本，这就需要激活`<script>`标签的`defer`属性，例如像这样：
+当然了，`<script>`标签的上述使用方式还存在着另一个问题：由于在异步嵌入模式下，浏览器一旦下载完脚本文件就会立即执行，开发者无法确保脚本被执行的具体时间，所以它在上述代码中依然得被放在`id="targetID"`的`<div>`元素的后面。很显然，更理想的选择是将该标签与引用CSS文件的`<link>`标签一样放在`<head>`标签中。如果想做到这一点，我们就得要求浏览器采用延后执行模式，即让浏览器在在载入所有HTML标签之后再执行脚本，这就需要激活`<script>`标签的`defer`属性，例如像这样：
 
 ```html
 <!DOCTYPE html>
@@ -482,9 +482,9 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
     </head>
     <body>
         <h1>嵌入延后执行的外部脚本文件</h1>
-        <div id="targetID">
-            <!--元素内容-->
-        </div>
+        <button type="button" onclick="changeText()">打个招呼！</button>
+        <p>点击上面的按钮将会在下面显示“Hello World!”.</p>
+        <div id="targetID"></div>
     </body>
 </html>
 ```
@@ -506,14 +506,14 @@ HTML的标准化过程最早可以追溯到1980年，物理学家蒂姆·伯纳�
             <p>本页面需要浏览器支持或启用脚本功能。</p>
         </noscript>
         <h1>浏览器端脚本支持测试</h1>
-        <div id="targetID">
-            <!--元素内容-->
-        </div>
+        <button type="button" onclick="changeText()">打个招呼！</button>
+        <p>点击上面的按钮将会在下面显示“Hello World!”.</p>
+        <div id="targetID"></div>
     </body>
 </html>
 ```
 
-这样一来，我们的网页就会在脚本功能被禁用时显示一条提示信息，虽然在如今的主流的浏览器中，它已经很少有机会发挥作用了。
+这样一来，我们的网页就会在脚本功能被禁用时显示一条提示信息，虽然在如今的主流网页浏览器中，它已经很少有机会发挥作用了。
 
 #### 嵌入其他元素
 

@@ -123,12 +123,13 @@
                 <div class="example">
                     <script>
                         function changeText() {
-                          document.getElementById("demo").innerHTML = "Hello World!";
+                            document.getElementById("targetID").innerHTML
+                                = "Hello World!";
                         }
                     </script>
                     <button type="button" onclick="changeText()">打个招呼！</button>
                     <p>点击上面的按钮将会在下面显示“Hello World!”.</p>
-                    <p id="demo"></p>
+                    <div id="targetID"></div>
                 </div>                
                 <div class="code">
                     <img src="./res/img/jscode.png">
