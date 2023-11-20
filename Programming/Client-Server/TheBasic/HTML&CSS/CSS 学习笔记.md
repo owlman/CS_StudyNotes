@@ -455,17 +455,13 @@ footer {
 
 总而言之，在掌握了CSS的层叠特性之后，网页设计师们就可以轻松地解决样式规则冲突的问题，从而避免了样式设置过程中可能出现的混乱。这意味着他们可以使用不同的、可相互叠加的CSS样式规则来控制元素的外观，从而设计出更为复杂、精致且具有交互性的网页。
 
-## CSS要解决的问题
+## 样式设计基础
 
-在使用CSS定义网页样式的过程中，设计师们很大一部分的工作都与尺寸和配色问题有关，因为这两个问题涉及到如何在网页中呈现整体布局、图文信息以及用户交互界面等元素。下面先来介绍在网页设计工作中首先要解决的布局问题。
+在设计网页样式的过程中，设计师们很大一部分的工作都与尺寸、定位和色彩这三个基础概念有关，因为这三个概念涉及到他们将如何在计算机中描述网页的样式，后者将直接影响到诸如网页整体布局、图文信息排版以及用户交互界面等网页设计问题的解决方案。所以，在正式讨论这些解决方案之前，我们很有必要先详细地了解一下在样式设计工作中会用到的基础知识。
 
-### 网页布局问题
+### 尺寸设置
 
-在网页设计工作中，页面中各元素的布局安排是设计师们首先要解决的一个关键问题，因为这直接关系到布局类元素、图文类元素、用户交互类元素在网页上的具体位置与呈现范围，以及这些元素彼此之间的距离。为了解决好这个关键问题，设计师们需要先了解一下相关的基本概念。
-
-#### 网页中的尺寸概念
-
-在网页设计过程中，设计师们需要先了解一些与尺寸相关的概念，因为这些概念在网页布局过程中会起到关键作用，其重要性就相当于画家在开始作画时的构图作业。下面，我们就来具体介绍一下这些概念：
+在这一小节中，让我们先来了解与尺寸相关的概念和计量单位，这些知识在网页布局、图文排版等问题中将会起到关键作用，其重要性就相当于画家在开始作画时使用的各种标尺。下面就先来具体介绍一些基本概念：
 
 1. **像素**：这一概念是计算机显示设备中的基本度量单位，这一单位最初来自于计算机显示设备上可显示的物理光源。换而言之，在与计算机显示设备相关的领域中，一个像素就代表一个显示单元，像素的大小很大程度上代表了设备的分辨率。
 2. **分辨率**：这一概念主要用于量化显示设备（如计算机显示屏、手机屏幕等）所显示图像的精细程度，它的具体表达形式是`[水平分辨率]x[垂直分辨率]`。其中，`[水平分辨率]`是显示设备在水平方向上可显示的像素单位，而`[垂直分辨率]`则是它在垂直方向上可显示的像素单位。例如，如果某个显示设备在水平方向上可显示1920个像素单位，在垂直方向上可显示1080个像素单位，那么该设备的分辨率就可以被表示为`1920x1080`。
@@ -483,6 +479,79 @@ footer {
 - `%`：这是CSS代码中当前元素相对于其外层元素的尺度单位，通常用于设置网页中布局尺寸的设计，当然了，在对当前元素使用这个尺度单位之前，设计师们必须先确保其外层元素的相关尺寸已经得到了明确的设置；
 - `vm`：这是CSS代码中相对于浏览器视窗宽度的尺度单位，换而言之，`1vw`等于浏览器视窗宽度的`1%`;
 - `vh`：这是CSS代码中相对于浏览器视窗高度的尺度单位，换而言之，`1vw`等于浏览器视窗高度的`1%`;
+
+### 元素定位
+
+### 颜色编码
+
+在描述网页的配色方案时，设计师们的主要任务是将方案编写成CSS样式代码。在这个任务中，设计师们需要将配色方案中的每个颜色进行编码，以便能被计算机及其软件识别并渲染在显示设备中。所以在接下来的这一小节中，我们将会为读者介绍几种在CSS样式代码中常见的颜色编码方式：
+
+1. **RGB**：RGB是一种将红色、绿色和蓝色组合在一起来表示颜色的方法。每个颜色通道的取值范围是0到255，其中0表示没有颜色，255表示最大强度的颜色。通过调整三个通道的数值，可以创建各种不同的颜色。例如，纯红色可以表示为RGB(255, 0, 0)。
+2. **Hex**：即十六进制颜色代码，这是一种使用六个字符（0-9和A-F）来表示颜色的方法。每个字符对应于RGB通道的强度值。前两个字符表示红色通道，中间两个字符表示绿色通道，最后两个字符表示蓝色通道。例如，纯红色可以表示为#FF0000。
+3. **HSL**：HSL是一种使用色相、饱和度和亮度三个参数来表示颜色的方法。色相表示颜色在色轮上的位置，取值范围是0到360度。饱和度表示颜色的纯度或灰度程度，取值范围是0%到100%。亮度表示颜色的明亮程度，取值范围是0%到100%。通过调整这三个参数的值，可以创建各种不同的颜色。
+4. **RGBA**：RGBA是一种与RGB类似的表示颜色的方法，但多了一个透明度通道。透明度通道的取值范围是0到1，其中0表示完全透明，1表示完全不透明。RGBA可以用于创建具有不同透明度的颜色，使得网页元素可以显示出层次感和透明效果。
+
+值得特别注意的是，由于CSS本身为用户提供了一系列预定义了名称的颜色，我们在这里会更倾向于建议读者在使用自定义的颜色编码之前，最好先查看一下该颜色编码是否已经存在于下面的预定义颜色表中，以避免重复发明轮子，浪费了自己宝贵的时间。
+
+| 颜色名称   | 颜色值       | 颜色名称   | 颜色值       | 颜色名称   | 颜色值       |
+| ----------- | ------------ | ----------- | ------------ | ----------- |---------- |
+| AliceBlue   | #F0F8FF      | AntiqueWhite| #FAEBD7      | Aqua        | #00FFFF      |
+| Aquamarine  | #7FFFD4      | Azure       | #F0FFFF      | Beige       | #F5F5DC      |
+| Bisque      | #FFE4C4      | Black       | #000000      | BlanchedAlmond | #FFEBCD   |
+| Blue        | #0000FF      | BlueViolet  | #8A2BE2      | Brown       | #A52A2A      |
+| BurlyWood   | #DEB887      | CadetBlue   | #5F9EA0      | Chartreuse  | #7FFF00      |
+| Chocolate   | #D2691E      | Coral       | #FF7F50      | CornflowerBlue | #6495ED   |
+| Cornsilk    | #FFF8DC      | Crimson     | #DC143C      | Cyan        | #00FFFF      |
+| DarkBlue    | #00008B      | DarkCyan    | #008B8B      | DarkGoldenRod | #B8860B   |
+| DarkGray    | #A9A9A9      | DarkGreen   | #006400      | DarkKhaki   | #BDB76B      |
+| DarkMagenta | #8B008B      | DarkOliveGreen | #556B2F   | DarkOrange  | #FF8C00      |
+| DarkOrchid  | #9932CC      | DarkRed     | #8B0000      | DarkSalmon  | #E9967A      |
+| DarkSeaGreen | #8FBC8F    | DarkSlateBlue | #483D8B    | DarkSlateGray | #2F4F4F    |
+| DarkTurquoise | #00CED1    | DarkViolet  | #9400D3      | DeepPink    | #FF1493      |
+| DeepSkyBlue | #00BFFF      | DimGray     | #696969      | DodgerBlue  | #1E90FF      |
+| FireBrick   | #B22222      | FloralWhite | #FFFAF0      | ForestGreen | #228B22      |
+| Fuchsia     | #FF00FF      | Gainsboro   | #DCDCDC      | GhostWhite  | #F8F8FF      |
+| Gold        | #FFD700      | GoldenRod   | #DAA520      | Gray        | #808080      |
+| Green       | #008000      | GreenYellow | #ADFF2F      | HoneyDew    | #F0FFF0      |
+| HotPink     | #FF69B4      | IndianRed   | #CD5C5C      | Indigo      | #4B0082      |
+| Ivory       | #FFFFF0      | Khaki       | #F0E68C      | Lavender    | #E6E6FA      |
+| LavenderBlush | #FFF0F5    | LawnGreen   | #7CFC00      | LemonChiffon | #FFFACD    |
+| LightBlue   | #ADD8E6      | LightCoral  | #F08080      | LightCyan   | #E0FFFF      |
+| LightGoldenRodYellow | #FAFAD2 | LightGray   | #D3D3D3      | LightGreen  | #90EE90      |
+| LightPink   | #FFB6C1      | LightSalmon | #FFA07A      | LightSeaGreen | #20B2AA    |
+| LightSkyBlue | #87CEFA     | LightSlateGray | #778899   | LightSteelBlue | #B0C4DE   |
+| LightYellow | #FFFFE0      | Lime        | #00FF00      | LimeGreen   | #32CD32      |
+| Linen       | #FAF0E6      | Magenta     | #FF00FF      | Maroon      | #800000      |
+| MediumAquaMarine | #66CDAA | MediumBlue  | #0000CD      | MediumOrchid | #BA55D3    |
+| MediumPurple | #9370DB     | MediumSeaGreen | #3CB371   | MediumSlateBlue | #7B68EE   |
+| MediumSpringGreen | #00FA9A | MediumTurquoise | #48D1CC  | MediumVioletRed | #C71585  |
+| MidnightBlue | #191970    | MintCream   | #F5FFFA      | MistyRose   | #FFE4E1      |
+| Moccasin    | #FFE4B5      | NavajoWhite | #FFDEAD      | Navy        | #000080      |
+| OldLace     | #FDF5E6      | Olive       | #808000      | OliveDrab   | #6B8E23      |
+| Orange      | #FFA500      | OrangeRed   | #FF4500      | Orchid      | #DA70D6      |
+| PaleGoldenRod | #EEE8AA   | PaleGreen   | #98FB98      | PaleTurquoise | #AFEEEE    |
+| PaleVioletRed | #DB7093   | PapayaWhip  | #FFEFD5      | PeachPuff   | #FFDAB9      |
+| Peru        | #CD853F      | Pink        | #FFC0CB      | Plum        | #DDA0DD      |
+| PowderBlue  | #B0E0E6      | Purple      | #800080      | RebeccaPurple | #663399    |
+| Red         | #FF0000      | RosyBrown   | #BC8F8F      | RoyalBlue   | #4169E1      |
+| SaddleBrown | #8B4513      | Salmon      | #FA8072      | SandyBrown  | #F4A460      |
+| SeaGreen    | #2E8B57      | SeaShell    | #FFF5EE      | Sienna      | #A0522D      |
+| Silver      | #C0C0C0      | SkyBlue     | #87CEEB      | SlateBlue   | #6A5ACD      |
+| SlateGray   | #708090      | Snow        | #FFFAFA      | SpringGreen | #00FF7F      |
+| SteelBlue   | #4682B4      | Tan         |
+
+在实际项目实践中，设计师常常会根据自己的偏好和项目的具体需求来搭配使用上面这些颜色表述方法，以便设计出可文档化的网页配色方案，比如使用RGB或Hex代码来表示颜色，同时使用HSL来调整颜色的亮度和饱和度。
+
+## 要解决的问题
+
+下面先来介绍在网页设计工作中首先要解决的布局问题。
+
+### 网页布局问题
+
+在网页设计工作中，页面中各元素的布局安排是设计师们首先要解决的一个关键问题，因为这直接关系到布局类元素、图文类元素、用户交互类元素在网页上的具体位置与呈现范围，以及这些元素彼此之间的距离。
+
+#### 
+
 
 #### PC端的网页布局
 
@@ -594,14 +663,9 @@ nav ul li a {
 3. **对比度和可读性**：在网页中，文本和背景之间的对比度对于文字的可读性至关重要。因此，设计师们在设计配色方案时需要让文本在颜色上与其背景之间形成足够的对比，以使提高文本的可读性。
 4. **无障碍性**：为了确保网站对所有用户都友好，设计师们在设计配色方案时需要充分考虑颜色对于视力受损人士的可访问性。例如，选择对比度较大的颜色，以便视力受损用户也能轻松阅读和浏览内容。
 
-在选择好配色方案之后，设计师们的下一个任务是将该配色方案编写成CSS样式代码。在这个任务中，设计师们首先需要将配色方案中的每个颜色进行编码，以便能被计算机及其软件识别并渲染在显示设备中。下面是几种在CSS样式代码中常用的颜色编码方式：
+在选择好配色方案之后，设计师们的下一个任务是将该配色方案编写成CSS样式代码。在这个任务中，设计师们首先需要将配色方案中的每个颜色进行编码，以便能被计算机及其软件识别并渲染在显示设备中。由于我们之前在“样式设计基础”一节中已经介绍过了在CSS中常用的颜色编码方式，所以在这里就不再赘述了。
 
-1. **RGB**：RGB是一种将红色、绿色和蓝色组合在一起来表示颜色的方法。每个颜色通道的取值范围是0到255，其中0表示没有颜色，255表示最大强度的颜色。通过调整三个通道的数值，可以创建各种不同的颜色。例如，纯红色可以表示为RGB(255, 0, 0)。
-2. **Hex**：即十六进制颜色代码，这是一种使用六个字符（0-9和A-F）来表示颜色的方法。每个字符对应于RGB通道的强度值。前两个字符表示红色通道，中间两个字符表示绿色通道，最后两个字符表示蓝色通道。例如，纯红色可以表示为#FF0000。
-3. **HSL**：HSL是一种使用色相、饱和度和亮度三个参数来表示颜色的方法。色相表示颜色在色轮上的位置，取值范围是0到360度。饱和度表示颜色的纯度或灰度程度，取值范围是0%到100%。亮度表示颜色的明亮程度，取值范围是0%到100%。通过调整这三个参数的值，可以创建各种不同的颜色。
-4. **RGBA**：RGBA是一种与RGB类似的表示颜色的方法，但多了一个透明度通道。透明度通道的取值范围是0到1，其中0表示完全透明，1表示完全不透明。RGBA可以用于创建具有不同透明度的颜色，使得网页元素可以显示出层次感和透明效果。
-
-在颜色在计算机中的编码方式之后，读者接下来要做的是将颜色编码定义成可在CSS样式代码中重复使用的变量（这在维护和修改样式时非常有用）。这个任务可以利用CSS提供的自定义属性来实现。在这里，本书会建议读者按照以下步骤来完成这个任务。
+在完成了颜色的编码之后，接下来要做的就是将颜色编码定义成可在CSS样式代码中重复使用的变量（这在维护和修改样式时非常有用）。这个任务可以利用CSS提供的自定义属性来实现。在这里，本书会建议读者按照以下步骤来完成这个任务。
 
 1. 首先定义一个名为`:root`的伪根类选择器，并将要使用的颜色编码设置成该选择器的自定义属性（只有`:root`伪类选择器的自定义属性可被全局使用，一般选择器的自定义属性只能在与之匹配的页面元素中被使用）。按照约定俗成，设计师们通常会使用`--`前缀来表示这些自定义颜色的名称。例如，读者可以先像下面这样在`:root`伪类选择器中定义了一个名为`--primary-bg-color`的自定义属性，并用RGB的编码方式将它的值设置成`rgb(164, 205, 223)`。
 
@@ -630,56 +694,7 @@ nav ul li a {
     }
     ```
 
-当然了，考虑到CSS本身也为用户提供了一系列预定义的颜色名称，本书在这里会建议读者在对自己使用的颜色编码进行命名之前，最好先查看一下该颜色编码是否已经存在于下面的预定义颜色表中，以避免重复发明轮子，浪费了自己宝贵的时间。
-
-| 颜色名称   | 颜色值       | 颜色名称   | 颜色值       | 颜色名称   | 颜色值       |
-| ----------- | ------------ | ----------- | ------------ | ----------- |---------- |
-| AliceBlue   | #F0F8FF      | AntiqueWhite| #FAEBD7      | Aqua        | #00FFFF      |
-| Aquamarine  | #7FFFD4      | Azure       | #F0FFFF      | Beige       | #F5F5DC      |
-| Bisque      | #FFE4C4      | Black       | #000000      | BlanchedAlmond | #FFEBCD   |
-| Blue        | #0000FF      | BlueViolet  | #8A2BE2      | Brown       | #A52A2A      |
-| BurlyWood   | #DEB887      | CadetBlue   | #5F9EA0      | Chartreuse  | #7FFF00      |
-| Chocolate   | #D2691E      | Coral       | #FF7F50      | CornflowerBlue | #6495ED   |
-| Cornsilk    | #FFF8DC      | Crimson     | #DC143C      | Cyan        | #00FFFF      |
-| DarkBlue    | #00008B      | DarkCyan    | #008B8B      | DarkGoldenRod | #B8860B   |
-| DarkGray    | #A9A9A9      | DarkGreen   | #006400      | DarkKhaki   | #BDB76B      |
-| DarkMagenta | #8B008B      | DarkOliveGreen | #556B2F   | DarkOrange  | #FF8C00      |
-| DarkOrchid  | #9932CC      | DarkRed     | #8B0000      | DarkSalmon  | #E9967A      |
-| DarkSeaGreen | #8FBC8F    | DarkSlateBlue | #483D8B    | DarkSlateGray | #2F4F4F    |
-| DarkTurquoise | #00CED1    | DarkViolet  | #9400D3      | DeepPink    | #FF1493      |
-| DeepSkyBlue | #00BFFF      | DimGray     | #696969      | DodgerBlue  | #1E90FF      |
-| FireBrick   | #B22222      | FloralWhite | #FFFAF0      | ForestGreen | #228B22      |
-| Fuchsia     | #FF00FF      | Gainsboro   | #DCDCDC      | GhostWhite  | #F8F8FF      |
-| Gold        | #FFD700      | GoldenRod   | #DAA520      | Gray        | #808080      |
-| Green       | #008000      | GreenYellow | #ADFF2F      | HoneyDew    | #F0FFF0      |
-| HotPink     | #FF69B4      | IndianRed   | #CD5C5C      | Indigo      | #4B0082      |
-| Ivory       | #FFFFF0      | Khaki       | #F0E68C      | Lavender    | #E6E6FA      |
-| LavenderBlush | #FFF0F5    | LawnGreen   | #7CFC00      | LemonChiffon | #FFFACD    |
-| LightBlue   | #ADD8E6      | LightCoral  | #F08080      | LightCyan   | #E0FFFF      |
-| LightGoldenRodYellow | #FAFAD2 | LightGray   | #D3D3D3      | LightGreen  | #90EE90      |
-| LightPink   | #FFB6C1      | LightSalmon | #FFA07A      | LightSeaGreen | #20B2AA    |
-| LightSkyBlue | #87CEFA     | LightSlateGray | #778899   | LightSteelBlue | #B0C4DE   |
-| LightYellow | #FFFFE0      | Lime        | #00FF00      | LimeGreen   | #32CD32      |
-| Linen       | #FAF0E6      | Magenta     | #FF00FF      | Maroon      | #800000      |
-| MediumAquaMarine | #66CDAA | MediumBlue  | #0000CD      | MediumOrchid | #BA55D3    |
-| MediumPurple | #9370DB     | MediumSeaGreen | #3CB371   | MediumSlateBlue | #7B68EE   |
-| MediumSpringGreen | #00FA9A | MediumTurquoise | #48D1CC  | MediumVioletRed | #C71585  |
-| MidnightBlue | #191970    | MintCream   | #F5FFFA      | MistyRose   | #FFE4E1      |
-| Moccasin    | #FFE4B5      | NavajoWhite | #FFDEAD      | Navy        | #000080      |
-| OldLace     | #FDF5E6      | Olive       | #808000      | OliveDrab   | #6B8E23      |
-| Orange      | #FFA500      | OrangeRed   | #FF4500      | Orchid      | #DA70D6      |
-| PaleGoldenRod | #EEE8AA   | PaleGreen   | #98FB98      | PaleTurquoise | #AFEEEE    |
-| PaleVioletRed | #DB7093   | PapayaWhip  | #FFEFD5      | PeachPuff   | #FFDAB9      |
-| Peru        | #CD853F      | Pink        | #FFC0CB      | Plum        | #DDA0DD      |
-| PowderBlue  | #B0E0E6      | Purple      | #800080      | RebeccaPurple | #663399    |
-| Red         | #FF0000      | RosyBrown   | #BC8F8F      | RoyalBlue   | #4169E1      |
-| SaddleBrown | #8B4513      | Salmon      | #FA8072      | SandyBrown  | #F4A460      |
-| SeaGreen    | #2E8B57      | SeaShell    | #FFF5EE      | Sienna      | #A0522D      |
-| Silver      | #C0C0C0      | SkyBlue     | #87CEEB      | SlateBlue   | #6A5ACD      |
-| SlateGray   | #708090      | Snow        | #FFFAFA      | SpringGreen | #00FF7F      |
-| SteelBlue   | #4682B4      | Tan         |
-
-在实际项目实践中，设计师常常会根据自己的偏好和项目的具体需求来搭配使用上面这些颜色表述方法，以便设计出可文档化的网页配色方案，比如使用RGB或Hex代码来表示颜色，同时使用HSL来调整颜色的亮度和饱和度。
+当然了，考虑到CSS本身也为用户提供了一系列预定义的颜色名称，我们也更倾向于建议读者在为某个颜色编码建立自定义属性之前，不妨先查看一下我们之前在“样式设计基础”一节中列出的CSS预定义的颜色名称表，这也可以避免干出重复发明轮子的“傻事”。
 
 <!-- 以下资料来自维基百科 -->
 
