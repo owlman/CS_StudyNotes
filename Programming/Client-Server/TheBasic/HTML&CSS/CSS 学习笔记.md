@@ -808,9 +808,9 @@ z-index: 2;
 
 ## 要解决的问题
 
-下面先来介绍在网页设计工作中首先要解决的布局问题。
+在网页设计过程中，网页的整体布局安排、配色方案的设计、图文信息的排版、用户交互类元素在网页上的具体位置以及这些元素彼此之间的距离都是设计师们几乎一定会遇到的问题。在这一节中，我们将逐一为读者介绍这些问题的解决方案，以及这些方案所体现出来的CSS设计思维。下面，让我们从网页设计工作中首先要解决的整体布局问题开始。
 
-### 网页布局问题
+### 网页整体布局
 
 在网页设计工作中，页面的整体布局安排是设计师们首先要解决的一个关键问题，因为这直接关系到布局类元素、图文类元素、用户交互类元素在网页上的具体位置与呈现范围，以及这些元素彼此之间的距离。
 
@@ -818,7 +818,7 @@ z-index: 2;
 
 在PC端，显示设备的大小相对来说是较为固定的，因此设计师们可以较为放心的对网页进行整体布局，比如将网页分为头部、主体、底部三个部分，再对每个部分进行进一步的划分，比如头部可以分为导航栏、logo、搜索栏等，主体部分可以分为内容区、侧边栏等。底部则可以分为版权声明、页脚等。在这一节中，我们将通过模拟一个简单的页面设计过程来为读者介绍如何在面向PC端的网页设计工作中使用CSS语言。在通常情况下，我们在PC端创建一个网页时大致会执行以下步骤：
 
-1. 先创建一个HTML文档，并用HTML 5提供的布局类标记定义好网页的文档结构和内容元素，例如像这样：
+1. 先创建一个HTML文档，并用HTML 5提供的布局类标记定义好网页的文档结构和内容元素，我们在《[[HTML 学习笔记]]》一文中曾经示范过这些标记的使用方法，该示例的具体代码如下：
 
    ```html
    <!DOCTYPE html>
@@ -859,12 +859,28 @@ z-index: 2;
     </html>
    ```
 
-2. 然后基于上述HTML文档中定义的页面元素，我们来依次定义它们的样式，首先是`<header>`标记所定义的头部区域的样式，我们在这里可以为它编写如下样式：
+2. 现在，我们要做的就是基于上述HTML文档中定义的页面元素来依次定义它们的样式，首先是`<body>`标记所定义的网页主体区域的样式，我们在这里可以定义一些适用于整个页面的通用样式，例如像这样:
+
+   ```css
+    /* 匹配body标签，用于定义整个网页所在区域的样式 */
+    body {
+        /* 设置网页使用的默认字体 */
+        font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        /* 设置网页使用的主背景色并将其保存为变量 */
+        --primary-bg-color: rgb(164, 205, 223);
+        background-color: var(--primary-bg-color);
+        /* 设置被匹配标签所在元素的内边距 */
+        padding: 1vh 0.5vw;
+    }
+   ```
+
+3. 在设置完全局样式之后，接下来就可以开始设置`<header>`标记所定义的头部区域的样式了，我们在这里可以为它编写如下样式：
 
    ```css
     /* 匹配header标签，用于定义网页头部区域的样式 */
     header {
-        height: 10vh;
+        height: 5vh;
         background-color: white;
         padding: 1.5vh;
         font-size: 1.5rem;
@@ -873,26 +889,26 @@ z-index: 2;
     }
    ```
 
-3. 接下来要做的是定义`<nav>`标记所定义的导航栏的样式，在这里我们可以为它编写如下样式：
+4. 再接下来要做的是定义`<nav>`标记所定义的导航栏的样式，在这里我们可以为它编写如下样式：
 
    ```css
     /* 匹配nav标签，用于定义网页导航栏区域的样式 */
-   nav {
+    nav {
         height: 5vh;
         background-color: white;
         padding: 1.5vh;
         border: 1px solid;
         font-size: 1.5rem;
         text-align: center;
-   }
+    }
    ```
 
-4. 接着是`<main>`标记所定义的网页主体区域及其内部元素的样式，在这里我们可以为它编写如下样式：
+5. 接着，就轮到由`<main>`标记所定义的网页主体区域及其内部元素的样式了，这里包括网页中的各个分区域、侧边栏区域、文章区域（包括标题与段落）等元素，我们在这里可以为它编写如下样式：
 
    ```css
     /* 匹配main标签，用于定义网页主要内容区域的样式 */
     main {
-        height: 70vh;
+        height: 72vh;
         background-color: white;
         margin: 0.5vh 0;
         padding: 1vh 0.5vw;
@@ -901,9 +917,9 @@ z-index: 2;
         text-align: center;
     }
 
-    /* 匹配section标签，用于定义网页主体区域的样式 */
+    /* 匹配section标签，用于定义网页中各个分区域的样式 */
     section {
-        height: 58vh;
+        height: 60vh;
         background-color: white;
         margin: 0.5vh 0vw;
         padding: 1vh 1vw;
@@ -915,7 +931,7 @@ z-index: 2;
     /* 匹配aside标签，用于定义网页侧边栏区域的样式 */
     aside {
         float: left;
-        height: 52vh;
+        height: 55vh;
         width: 20vw;
         background-color: var(--primary-bg-color);
         margin: 1.5vh 1.5vw;
@@ -928,10 +944,10 @@ z-index: 2;
     /* 匹配article标签，用于网页中某一特定内容区域的样式 */
     article {
         float: left;
-        height: 42vh;
-        width: 66vw;
+        height: 45vh;
+        width: 65vw;
         background-color: var(--primary-bg-color);
-        margin: 1.5vh 1.3vw;
+        margin: 2vh 1.5vw;
         padding: 1.4vh 0.5vw;
         border: 1px solid;
         font-size: 1.3rem;
@@ -945,30 +961,35 @@ z-index: 2;
     }
     /* 匹配article标签下的p标签 */
     article p {
-        height: 30vh;
+        height: 35vh;
         background-color: white;
         margin: 1.5vh 0.5vw;
         padding: 0.5vh 0.5vw;
     }
     ```
 
-5. 最后，我们来定义`<footer>`标记所定义的网页页脚区域样式，在这里我们可以为它编写如下样式：
+6. 最后，让我们来定义一下`<footer>`标记所定义的网页页脚区域样式，在这里我们可以为它编写如下样式：
 
    ```css
     /* 匹配footer标签，用于定义网页底部区域的样式 */
     footer {
-        height: 6vh;
+        height: 3vh;
         background-color: white;
         padding: 1vh 0.5vw;
         border: 1px solid;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         text-align: center;
     }
    ```
 
-6. 在将上述HTML+CSS代码保存为相应类型的文件之后（这些代码被保存在本笔记文件所在目录下的`examples/layoutCase/styles`目录中），就可以在用网页浏览器中打开这个网页时看到如图1所示的布局效果。
+7. 在将上述HTML+CSS代码保存为相应类型的文件之后（这些代码被保存在本笔记文件所在目录下的`examples/layoutCase/styles`目录中），就可以在用网页浏览器中打开这个网页时看到如下图所示的布局效果。
 
-    ![图1](./img/html&css/1.png)
+    ![PC端网页整体布局示例](./img/html&css/1.png)
+
+从上述示例的效果图中可以看出，在CSS的视角下，网页的外观样式模型主要由一系列元素盒子组成，这些盒子之间有些是相互包裹的上下层关系，有些则是属于同一层级的横向或纵向排列关系。设计师们在设计网页的整体布局时要思考的问题主要是：
+
+1. 如何基于元素的盒模型概念设置好它们的内外边距（并在必要时设置边框）。
+2. 如何基于网页要显示的内容让这些元素盒子以合适的大小显示在合适的位置上。
 
 #### 移动端的网页布局
 

@@ -1,27 +1,10 @@
-/* 只有`:root`伪类选择器的自定义属性可被全局使用，
- * 一般选择器的自定义属性只能在被其匹配的元素中使用
- */
-:root {
-    --primary-bg-color: rgb(164, 205, 223);
-}
-
-/* 为了在后续代码中顺利使用相对尺寸单位，
- *  在这里必须要先利用html根标记的选择器建立一个基准
- */
-html {
-    /* 将网页的基准高度设置为浏览器的视口高度*/
-    height: 100%; 
-    /* 将网页的基准宽度设置为浏览器的视口宽度 */
-    width: 100%;
-    /* 设置网页使用的默认字体大小为16个像素单位*/
-    font-size: 16px;
-}
-
 /* 匹配body标签，用于定义整个网页所在区域的样式 */
 body {
-    /* 设置被匹配标签所在元素的高度：为网页基准高度的90% */
-    height: 90%;
-    /* 设置被匹配标签所在元素的背景色 */
+    /* 设置网页使用的默认字体 */
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    /* 设置网页使用的主背景色并将其保存为变量 */
+    --primary-bg-color: rgb(164, 205, 223);
     background-color: var(--primary-bg-color);
     /* 设置被匹配标签所在元素的内边距 */
     padding: 1vh 0.5vw;
@@ -49,7 +32,7 @@ nav {
 
 /* 匹配main标签，用于定义网页主要内容区域的样式 */
 main {
-    height: 70vh;
+    height: 72vh;
     background-color: white;
     margin: 0.5vh 0;
     padding: 1vh 0.5vw;
@@ -58,9 +41,9 @@ main {
     text-align: center;
 }
 
-/* 匹配section标签，用于定义网页主体区域的样式 */
+/* 匹配section标签，用于定义网页中各个分区域的样式 */
 section {
-    height: 58vh;
+    height: 60vh;
     background-color: white;
     margin: 0.5vh 0vw;
     padding: 1vh 1vw;
@@ -72,7 +55,7 @@ section {
 /* 匹配aside标签，用于定义网页侧边栏区域的样式 */
 aside {
     float: left;
-    height: 52vh;
+    height: 55vh;
     width: 20vw;
     background-color: var(--primary-bg-color);
     margin: 1.5vh 1.5vw;
@@ -85,10 +68,10 @@ aside {
 /* 匹配article标签，用于网页中某一特定内容区域的样式 */
 article {
     float: left;
-    height: 42vh;
-    width: 66vw;
+    height: 45vh;
+    width: 65vw;
     background-color: var(--primary-bg-color);
-    margin: 1.5vh 1.3vw;
+    margin: 2vh 1.5vw;
     padding: 1.4vh 0.5vw;
     border: 1px solid;
     font-size: 1.3rem;
@@ -102,7 +85,7 @@ article h1 {
 }
 /* 匹配article标签下的p标签 */
 article p {
-    height: 30vh;
+    height: 35vh;
     background-color: white;
     margin: 1.5vh 0.5vw;
     padding: 0.5vh 0.5vw;
@@ -110,10 +93,10 @@ article p {
 
 /* 匹配footer标签，用于定义网页底部区域的样式 */
 footer {
-    height: 6vh;
+    height: 3vh;
     background-color: white;
     padding: 1vh 0.5vw;
     border: 1px solid;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: center;
 }
