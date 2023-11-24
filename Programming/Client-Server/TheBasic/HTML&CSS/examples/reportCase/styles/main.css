@@ -1,82 +1,83 @@
-/* main.css */
-
-/* 全局样式 */
+/* 设置全局样式 */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: "Microsoft Yahei",  Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6vh;
     margin: 0;
-    padding: 20px;
+    padding: 1.5vh 1.5vw;
 }
 
+/* 设置布局类元素的样式 */
 header, main, footer {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 1.5vh 1.5vw;
 }
-
+section {
+    border-top: 1px solid #eee;
+    padding-top: 2.5vh;
+    margin-bottom: 3.5vh;
+}
+/* 设置文章区域的图文样式 */
 article {
     padding: 0.5vh 1vw;
+    width: 60vw;
 }
-
-h1, h2 {
-    color: #333;
-}
-
 /* 标题样式 */
 h1 {
-    font-size: 2em;
+    color: #333;
+    font-size: 2rem;
 }
-
 h2 {
-    font-size: 1.5em;
-    margin-top: 20px;
+    color: #333;
+    font-size: 1.5rem;
+    margin-top: 1.5vh;
 }
-
 /* 段落样式 */
 p {
-    margin-bottom: 10px;
+    margin-bottom: 1.5vh;
 }
-
 /* 图片样式 */
 img {
     float: left;
-    max-width: 100%;
-    width: 50%;
+    width: 30vw;
     margin: 1.5vh 1.5vw;
     border: 1px solid #ccc;
 }
-
 /* 引用样式 */
 blockquote {
     background-color: #f8f8f8;
+    width: 100%;
     border-left: 4px solid #ccc;
-    margin: 0;
-    padding: 10px;
+    padding: 1.5vh 0vw;
+    padding-left: 1.5vw;
+    margin: 1.5vh 0vw;
 }
-
 cite {
-    display: block;
-    margin-top: 10px;
+    margin: 0;
+    margin-top: 1.5vh;
+    margin-left: 35vw;
     font-style: italic;
     color: #777;
 }
-
 /* 列表样式 */
+ul, ol {
+    padding: 0;
+    margin: 2vh 1.5vw;
+}
 ul {
     list-style: none;
-    padding: 0;
 }
-
 li {
-    margin-bottom: 5px;
+    margin-bottom: 1.5vh;
 }
 
 /* 表格样式 */
 table {
+    margin: 1.5vh 1.5vw;
     border-collapse: collapse;
     width: 100%;
 }
-
 th, td {
     border: 1px solid #ccc;
     padding: 8px;
@@ -87,13 +88,21 @@ a {
     color: #007bff;
     text-decoration: none;
 }
-
 a:hover {
     text-decoration: underline;
 }
 
-/* 页脚样式 */
+/* 设置页脚区域内的图文样式 */
 footer {
+    border-top: 1px solid #ccc;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 1.5vh;
+}
+
+/* 设置强调文本的样式 */
+strong {
+    color:deeppink;
+}
+em {
+    background-color: lemonchiffon
 }

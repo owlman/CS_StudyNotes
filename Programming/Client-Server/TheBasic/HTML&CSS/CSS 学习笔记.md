@@ -1126,12 +1126,12 @@ nav ul li a {
         }
 
         #box {
-            /* 设置网页中id=“box”的元素所使用的背景色 */
+            /* 设置网页中 id="box" 的元素所使用的背景色 */
             background-color: var( --primary-bg-color));
         }
 
         .button {
-            /* 设置网页中class="button"的元素所使用的背景色 */
+            /* 设置网页中 class="button" 的元素所使用的背景色 */
             background-color: var( --primary-bg-color);
         }
         ```
@@ -1139,5 +1139,116 @@ nav ul li a {
     当然了，考虑到CSS本身也为用户提供了一系列预定义的颜色名称，我们也更倾向于建议读者在为某个颜色编码建立自定义属性之前，不妨先查看一下我们之前在“样式设计基础”一节中列出的、CSS预定义的颜色名称表，避免干出“重复发明轮子”的傻事。
 
 ### 图文信息的排版
+
+在完成了网页整体布局与配色方案部分的工作之后，设计师们接下来的工作就是安排要如何显示网页中的具体内容了。而在网页可显示的诸多元素中，最基本的就是图文类元素了，这类元素主要包括标题、段落。引用、列表、表格、链接、图片等。下面，我们会通过创建一个网页版的图文报告模版来示范如何使用CSS完成针对图文类信息的排版，演示的具体步骤如下。
+
+1. 首先需要创建一个用于定义这个图文报告页面的HTML文档。我曾经在《[[HTML 学习笔记]]》一文中创建过这个HTML文档，它被保存在本笔记所在目录下的`examples/report.index.htm`文件中，其代码如下。
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+        <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="./styles/main.css">
+            <title>图文报告模板</title>
+        </head>
+        <body>
+            <header>
+                <h1>图文报告标题</h1>
+                <p>发布日期：2023年11月1日</p>
+            </header>
+            <main>
+                <section>
+                    <h2>第一部分：概述</h2>
+                    <p>在这里写一些简要的介绍和背景信息，
+                        并用<em>无序列表</em>元素设置一个目录。
+                    </p>
+                    <ul>
+                        <li>第一部分：概述</li>
+                        <li>第二部分：论述</li>
+                        <li>第三部分：结论</li>
+                        <li>第四部分：文献</li>
+                    </ul>    
+                </section>
+                <section>
+                    <h2>第二部分：论述</h2>
+                    <p>
+                        在这里可以放置一些与报告内容相关的<em>图片、表格以及引用文字</em>。
+                    </p>
+                    <article>
+                        <img src="./img/pic.png" alt="示例图片">
+                        <div>
+                            <h3>图文分析</h3>
+                            <p>在这里可以用<em>无序列表</em>元素来做一些分析说明。</p>
+                            <ul>
+                                <li>第一项说明</li>
+                                <li>第二项说明</li>
+                                <li>第三项说明</li>
+                            </ul>            
+                        </div>
+                    </article>
+                    <article>
+                        <h3>表格分析</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>项目名称</th>
+                                    <th>报价数据</th>
+                                    <th>相关说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>项目1</td>
+                                    <td>￥30000</td>
+                                    <td>在这里写一段说明文字。</td>
+                                </tr>
+                                <tr>
+                                    <td>项目2</td>
+                                    <td>￥25000</td>
+                                    <td>在这里写一段说明文字。</td>
+                                </tr>
+                                <tr>
+                                    <td>项目3</td>
+                                    <td>￥50000</td>
+                                    <td>在这里写一段说明文字。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </article>
+                    <article>
+                        <blockquote>
+                            <h3>引用现有文献</h3>
+                            <p>在这里可以使用<em>引用元素</em>援引一段现有文献中的重要文本或话语。</p>
+                            <cite>— 引用来源</cite>
+                        </blockquote>
+                    </article>                
+                </section>
+                <section>
+                    <h2>第三部分：结论</h2>
+                    <p>在这里可以用<em>无序列表</em>元素来做一个总结。</p>
+                    <ul>
+                        <li><strong>结论一</strong>：在这里写一段总结文字。</li>
+                        <li><strong>结论二</strong>：在这里写一段总结文字。</li>
+                        <li><strong>结论三</strong>：在这里写一段总结文字。</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>第四部分：文献</h2>
+                    <p>在这里可以用<em>有序列表+超链接元素</em>来列举报告的参考文献。</p>
+                    <ol>
+                        <li><a href="https://www.example.com">参考文献1</a></li>
+                        <li><a href="https://www.example.com">参考文献2</a></li>
+                        <li><a href="https://www.example.com">参考文献3</a></li>
+                    </ol> 
+                </section>
+            </main>
+            <footer>
+                <p>&copy; 2023 图文报告公司</p>
+            </footer>
+        </body>
+    </html>
+    ```
+
 
 ### 用户界面的设计
