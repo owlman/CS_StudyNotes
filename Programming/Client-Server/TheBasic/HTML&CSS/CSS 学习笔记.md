@@ -1142,7 +1142,7 @@ nav ul li a {
 
 在完成了网页整体布局与配色方案部分的工作之后，设计师们接下来的工作就是安排要如何显示网页中的具体内容了。而在网页可显示的诸多元素中，最基本的就是图文类元素了，这类元素主要包括标题、段落。引用、列表、表格、链接、图片等。下面，我们会通过创建一个网页版的图文报告模版来示范如何使用CSS完成针对图文类信息的排版，演示的具体步骤如下。
 
-1. 首先需要创建一个用于定义这个图文报告页面的HTML文档。我曾经在《[[HTML 学习笔记]]》一文中创建过这个HTML文档，它被保存在本笔记所在目录下的`examples/report.index.htm`文件中，其代码如下。
+1. 首先需要创建一个用于定义这个图文报告页面的HTML文档。我曾经在《[[HTML 学习笔记]]》一文中创建过这个HTML文档，它被保存在本笔记所在目录下的`examples/reportCase/index.htm`文件中，其代码如下。
 
     ```html
     <!DOCTYPE html>
@@ -1219,8 +1219,8 @@ nav ul li a {
                     <article>
                         <blockquote>
                             <h3>引用现有文献</h3>
-                            <p>在这里可以使用<em>引用元素</em>援引一段现有文献中的重要文本或话语。</p>
-                            <cite>— 引用来源</cite>
+                            <p>在这里可以使用<em>引用元素</em>援引一段现有文献中的文本段落。</p>
+                            <cite>— 引用自《参考资料名称》</cite>
                         </blockquote>
                     </article>                
                 </section>
@@ -1249,6 +1249,145 @@ nav ul li a {
         </body>
     </html>
     ```
+
+2. 现在要做的就是基于上述HTML文档中定义的页面元素来依次定义它们的样式。为此，我们需要先按照该HTML文档中`<link>`标记指定的相对路径创建一个名为`main.css`的CSS文件，然后用代码编辑器打开该文件就开始编写样式代码了。在通常情况下，我们会从整个页面的布局与适用于全局的样式开始着手，先来设置一下整个页面中各布局元素的内外边距及其大小，以及需要全局使用的字体及其大小、行高等，例如像这样:
+
+    ```css
+    /* 设置全局样式 */
+    body {
+        font-family: "Microsoft Yahei",  Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5vh;
+        margin: 0;
+        padding: 1.5vh 1.5vw;
+    }
+
+    /* 设置布局类元素的样式 */
+    header, main, footer {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1.5vh 1.5vw;
+    }
+    section {
+        border-top: 1px solid #eee;
+        padding-top: 2.5vh;
+        margin-bottom: 3.5vh;
+    }
+    article {
+        padding: 0.5vh 1vw;
+        width: 60vw;
+    }
+    footer {
+        border-top: 1px solid #ccc;
+        text-align: center;
+        margin-top: 1.5vh;
+    }
+    ```
+
+3. 接下来就可以开始正式设置图文类信息的样式了。让我们从最简单的文本标题和段落开始，这部分的元素通常只需要设置一些字体大小与颜色，外边距，例如像这样：
+  
+   ```css
+    /* 文本标题样式 */
+    h1 {
+        color: #333;
+        font-size: 2rem;
+    }
+    h2 {
+        color: #333;
+        font-size: 1.5rem;
+        margin-top: 1.5vh;
+    }
+    h3 {
+        color: #333;
+        font-size: 1.2rem;
+        margin: 2vh 0;
+    }
+    /* 文本段落样式 */
+    p {
+        margin-bottom: 2vh;
+    }
+   ```
+
+4. 接着来定义一下网页中带有特殊语义的文本元素，这些特殊语义主要分为强调、引用和链接三种，我们主要可以通过特殊的字体颜色、背景色或者特定的外边距来凸显这类元素要表达的语义，例如像这样：
+
+    ```css
+    /* 设置强调文本的样式 */
+    strong {
+        color:deeppink;
+    }
+    em {
+        background-color: lemonchiffon
+    }
+
+    /* 设置引用文本的样式 */
+    blockquote {
+        background-color: #f8f8f8;
+        width: 100%;
+        border-left: 4px solid #ccc;
+        padding: 1.5vh 0vw;
+        padding-left: 1.5vw;
+        margin: 1.5vh 0vw;
+    }
+    cite {
+        margin: 0;
+        margin-top: 1.5vh;
+        margin-left: 35vw;
+        font-style: italic;
+        color: #777;
+    }
+    
+    /* 设置链接文本的样式 */
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    ```
+
+5. 下面继续来定义一下列表与表格这两种元素的样式，这两种元素的样式设置内容与布局类元素很接近，主要是一些内外边距、边框以及长宽度的设置，有时候还会设置一下列表项的符号，例如像这样：
+
+    ```css
+    /* 设置列表元素的样式 */
+    ul, ol {
+        padding: 0;
+        margin: 2vh 1.5vw;
+    }
+    ul {
+        list-style: none;
+    }
+    li {
+        margin-bottom: 1.5vh;
+    }
+
+    /* 设置表格元素的样式 */
+    table {
+        margin: 1.5vh 1.5vw;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+    }
+    ```
+
+6. 再接下来就轮到图片元素的样式设置了，这类元素的样式设置内容主要与图片的边框、内外边距、长宽度以及元素定位的设置有关，例如像这样：
+
+   ```css
+   /* 设置图片元素的样式 */
+    img {
+        float: left;
+        width: 30vw;
+        margin: 1.5vh 1.5vw;
+        border: 1px solid #ccc;
+    }
+    ```
+
+7. 最后在将上述HTML+CSS代码保存为相应类型的文件之后（这些代码被保存在本笔记文件所在目录下的`examples/reportCase`目录中），就可以在用网页浏览器中打开这个网页时看到如下图所示的布局效果。
+
+    ![网页图文类信息排版示例](./img/html&css/2.png)
 
 
 ### 用户界面的设计
