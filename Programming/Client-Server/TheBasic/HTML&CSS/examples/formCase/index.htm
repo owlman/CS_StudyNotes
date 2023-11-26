@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>交互类元素示例：用户注册</title>
+        <lInk rel="stylesheet" href="./styles/main.css">
+    </head>
+    <body>
+        <form method="post" action="https://www.example.com/register">
+            <label for="username">用户名：</label>
+            <input type="text" name="username" id="username" placeholder="请输入用户名">
+            <br>
+            <label for="password">密码：</label>
+            <input type="password" name="password" id="password" placeholder="请输入密码">
+            <br>
+            <label for="email">邮箱：</label>
+            <input type="email" name="email" id="email" placeholder="请输入邮箱">
+            <br>
+            <label for="birthday">生日：</label>
+            <input type="date" name="birthday" id="birthday">
+            <br>
+            <label for="gender">性别：</label>
+            <input type="radio" name="gender" id="male" value="male">
+            <label for="male" class="radio-label">男性</label>
+            <input type="radio" name="gender" id="female" value="female">
+            <label for="female" class="radio-label">女性</label>
+            <input type="radio" name="gender" id="secret" value="secret">
+            <label for="secret" class="radio-label">保密</label>
+            <br>
+            <label for="hobby">爱好：</label>
+            <input type="checkbox" name="hobby" id="football" value="football">
+            <label for="football" class="checkbox-label">足球</label>
+            <input type="checkbox" name="hobby" id="basketball" value="basketball">
+            <label for="basketball" class="checkbox-label">篮球</label>
+            <input type="checkbox" name="hobby" id="swimming" value="swimming">
+            <label for="swimming" class="checkbox-label">游泳</label>
+            <br>
+            <label for="address">居住城市：</label>
+            <select name="address" id="address">
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="guangzhou">广州</option>
+                <option value="shenzhen">深圳</option>
+            </select>
+            <br>
+            <label for="file">个人照片：</label>
+            <input type="file" name="file" id="file">
+            <br>
+            <label for="textarea">个人描述：</label>
+            <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+            <br>
+            <button type="submit"
+                    onclick="alert('提交成功')">提交</button>
+            <button type="reset">重置</button>
+        </form>    
+    </body>
+</html>
