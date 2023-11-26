@@ -1390,3 +1390,75 @@ nav ul li a {
     ![网页图文类信息排版示例](./img/html&css/2.png)
 
 ### 用户界面的设计
+
+自从Ajax等Web2.0技术问世以来，网页设计领域发生了巨大的变革。这些新技术为以网页为客户端的分布式应用程序的开发带来了前所未有的可能性。也正因为如此，基于HTML+CSS技术的用户界面设计日益成为了网页设计工作中至关重要的一环，它会直接影响应用程序的用户体验及其背后的品牌形象。一个精心设计的用户界面可以提供直观、易用和愉悦的交互体验。通过合理的布局、清晰的导航和直观的操作方式，用户可以轻松地浏览网站内容、完成任务，并与网站进行互动。良好的用户界面设计可以帮助用户快速找到所需信息，提高用户满意度和忠诚度。在这一节内容中，我们就来介绍CSS语言在用户界面设计方面的应用。同样的，我们在这里也将通过创建一个用于注册账户的用户界面来做示例教学，演示的具体步骤如下。
+
+1. 首先需要创建一个HTML文档来定义这个用于账户注册的用户界面。我曾经在《[[HTML 学习笔记]]》一文中创建过这个HTML文档，它被保存在本笔记所在目录下的`examples/formCase/index.htm`文件中，其代码如下。
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+        <head>
+            <meta charset="UTF-8">
+            <title>交互类元素示例：用户注册</title>
+            <lInk rel="stylesheet" href="./styles/main.css">
+        </head>
+        <body>
+            <form method="post" action="https://www.example.com/register">
+                <label for="username">用户名：</label>
+                <input type="text" name="username" id="username"
+                        placeholder="请输入用户名">
+                <br>
+                <label for="password">密码：</label>
+                <input type="password" name="password" id="password"
+                        placeholder="请输入密码">
+                <br>
+                <label for="email">邮箱：</label>
+                <input type="email" name="email" id="email"
+                        placeholder="请输入邮箱">
+                <br>
+                <label for="birthday">生日：</label>
+                <input type="date" name="birthday" id="birthday">
+                <br>
+                <label for="gender">性别：</label>
+                <input type="radio" name="gender" id="male" value="male">
+                <label for="male" class="radio-label">男性</label>
+                <input type="radio" name="gender" id="female" value="female">
+                <label for="female" class="radio-label">女性</label>
+                <input type="radio" name="gender" id="secret" value="secret">
+                <label for="secret" class="radio-label">保密</label>
+                <br>
+                <label for="hobby">爱好：</label>
+                <input type="checkbox" name="hobby" id="football" value="football">
+                <label for="football" class="checkbox-label">足球</label>
+                <input type="checkbox" name="hobby" id="basketball" value="basketball">
+                <label for="basketball" class="checkbox-label">篮球</label>
+                <input type="checkbox" name="hobby" id="swimming" value="swimming">
+                <label for="swimming" class="checkbox-label">游泳</label>
+                <br>
+                <label for="address">居住城市：</label>
+                <select name="address" id="address">
+                    <option value="beijing">北京</option>
+                    <option value="shanghai">上海</option>
+                    <option value="guangzhou">广州</option>
+                    <option value="shenzhen">深圳</option>
+                </select>
+                <br>
+                <label for="file">个人照片：</label>
+                <input type="file" name="file" id="file">
+                <br>
+                <label for="textarea">个人描述：</label>
+                <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+                <br>
+                <button type="submit"
+                        onclick="alert('提交成功')">提交</button>
+                <button type="reset">重置</button>
+            </form>    
+        </body>
+    </html>
+    ```
+
+2. 现在要做的就是基于上述HTML文档中定义的页面元素来依次定义它们的样式。为此，我们需要先按照该HTML文档中`<link>`标记指定的相对路径创建一个名为`main.css`的CSS文件，然后用代码编辑器打开该文件就开始编写样式代码了。同样的，我们会先从整个页面全局样式开始着手，先来设置一下需要全局使用的字体及其大小、行高等，例如像这样:
+
+    ```css
+    /* 设置全局样式 */

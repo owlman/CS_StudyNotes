@@ -8,25 +8,26 @@ body {
 /* 设置表单的样式 */
 form {
     width: 45vw;
-    margin: 0 auto;
+    margin: 0 auto;    
     padding: 0.5vh 1.5vw;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 设置标签的样式 */
+/* 设置一般性标签元素的样式 */
 label {
     display: block;
-    margin-bottom: 1vh;
+    margin: 0.5vh 0;
     font-weight: bold;
 }
 
-/* 设置输入框的样式 */
+/* 设置一般性输入元素的样式 */
 input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="date"],
+input[type="file"],
 textarea {
     width: 100%;
     padding: 1.5vh 1.5vw;
@@ -35,11 +36,8 @@ textarea {
     box-sizing: border-box;
     margin-bottom: 0.5vh;
 }
-label {
-    margin-top: 0.5vh;
-}
 
-/* 设置单选框和复选框的样式 */
+/* 设置单选框和复选框元素的特定样式 */
 input[type="radio"],
 input[type="checkbox"] {
     margin-right: 0.1vw;
@@ -50,27 +48,26 @@ label.checkbox-label {
     margin-right: 1vw;
 }
 
-/* 设置下拉列表的样式 */
+/* 设置下拉列表元素的特定样式 */
 select {
     width: 100%;
-    padding: 8px;
+    padding: 0.5vh 0.5vw;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    margin-bottom: 0.5vh;
 }
 
-/* 设置按钮的样式 */
+/* 设置按钮元素的特定样式 */
 button {
-    padding: 8px 16px;
+    padding: 1vh 2vw;
     background-color: #4CAF50;
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    margin-right: 10px;
+    margin: 0.5vh 1vw;
 }
-
 button[type="reset"] {
     background-color: #f44336;
 }
@@ -78,23 +75,9 @@ button[type="reset"] {
 /* 设置文本区域的样式 */
 textarea {
     width: 100%;
-    padding: 8px;
+    padding: 1vh 1.5vw;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
-    margin-bottom: 10px;
-}
-
-/* 设置提交成功时的提示框样式 */
-.alert {
-    padding: 8px;
-    background-color: #4CAF50;
-    color: #fff;
-    border-radius: 3px;
-    margin-bottom: 10px;
-}
-
-/* 设置重置按钮的样式 */
-button[type="reset"] {
-    background-color: #f44336;
+    margin-bottom: 0.5vh;
 }

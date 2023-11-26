@@ -733,9 +733,9 @@ HTML的出现最早可以追溯到1980年，那时，物理学家蒂姆·伯纳�
   - `<fieldset>`子标记：该子标记用于在表单中创建一个表单元素的分组，该分组会设置有一个专属边框；
   - `<legend>`子标记：该子标记用于在表单的分组中创建一个标题，其`for`属性则用于指定该标题所对应的输入框的ID；
 
-  下面，我们来通过一个简单的、用于用户注册的表单示例来具体演示一下这些标记的使用方法：
+    下面，我们来通过一个简单的、用于用户注册的表单示例来具体演示一下这些标记的使用方法：
 
-  ```html
+    ```html
     <form method="post" action="https://www.example.com/register">
         <label for="username">用户名：</label>
         <input type="text" name="username" id="username" placeholder="请输入用户名">
@@ -751,19 +751,21 @@ HTML的出现最早可以追溯到1980年，那时，物理学家蒂姆·伯纳�
         <br>
         <label for="gender">性别：</label>
         <input type="radio" name="gender" id="male" value="male">
-        <label for="male">男</label>
+        <label for="male" class="radio-label">男性</label>
         <input type="radio" name="gender" id="female" value="female">
-        <label for="female">女</label>
+        <label for="female" class="radio-label">女性</label>
+        <input type="radio" name="gender" id="secret" value="secret">
+        <label for="secret" class="radio-label">保密</label>
         <br>
         <label for="hobby">爱好：</label>
         <input type="checkbox" name="hobby" id="football" value="football">
-        <label for="football">足球</label>
+        <label for="football" class="checkbox-label">足球</label>
         <input type="checkbox" name="hobby" id="basketball" value="basketball">
-        <label for="basketball">篮球</label>
+        <label for="basketball" class="checkbox-label">篮球</label>
         <input type="checkbox" name="hobby" id="swimming" value="swimming">
-        <label for="swimming">游泳</label>
+        <label for="swimming" class="checkbox-label">游泳</label>
         <br>
-        <label for="address">地址：</label>
+        <label for="address">居住城市：</label>
         <select name="address" id="address">
             <option value="beijing">北京</option>
             <option value="shanghai">上海</option>
@@ -771,7 +773,7 @@ HTML的出现最早可以追溯到1980年，那时，物理学家蒂姆·伯纳�
             <option value="shenzhen">深圳</option>
         </select>
         <br>
-        <label for="file">照片：</label>
+        <label for="file">个人照片：</label>
         <input type="file" name="file" id="file">
         <br>
         <label for="textarea">个人描述：</label>
