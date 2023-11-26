@@ -1458,7 +1458,102 @@ nav ul li a {
     </html>
     ```
 
-2. 现在要做的就是基于上述HTML文档中定义的页面元素来依次定义它们的样式。为此，我们需要先按照该HTML文档中`<link>`标记指定的相对路径创建一个名为`main.css`的CSS文件，然后用代码编辑器打开该文件就开始编写样式代码了。同样的，我们会先从整个页面全局样式开始着手，先来设置一下需要全局使用的字体及其大小、行高等，例如像这样:
+2. 现在要做的就是基于上述HTML文档中定义的页面元素来依次定义它们的样式。为此，我们需要先按照该HTML文档中`<link>`标记指定的相对路径创建一个名为`main.css`的CSS文件，然后用代码编辑器打开该文件就开始编写样式代码了。同样的，我们会先从整个页面全局样式开始着手，主要设置一下需要全局使用的字体及其大小、背景色等，例如像这样:
 
     ```css
     /* 设置全局样式 */
+    body {
+        font-family: "Microsoft Yahei" Arial, sans-serif;
+        font-size: 16px;
+        background-color: #f2f2f2;
+    }
+    ```
+
+3. 接下来就可以开始正式设置用户界面的样式了。让我们从表单元素及其一般性的标签与输入性元素开始，这部分的外观样式通常只是一些贵内外边距和边框的设置，例如像这样：
+  
+   ```css
+    /* 设置表单元素的样式 */
+    form {
+        width: 45vw;
+        margin: 0 auto;    
+        padding: 0.5vh 1.5vw;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 设置一般性标签元素的样式 */
+    label {
+        display: block;
+        margin: 0.5vh 0;
+        font-weight: bold;
+    }
+
+    /* 设置一般性输入元素的样式 */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="date"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+        padding: 1.5vh 1.5vw;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+        margin-bottom: 0.5vh;
+    }
+    ```
+
+4. 接着来设置一下用户中带有特殊样式的输入性元素，这些特殊样式包括我们希望单选框与复选框元素应该横向排、多行输入框需要指定行数和列数、按钮需要有指定的背景色等，例如像这样：
+
+    ```css
+    /* 设置单选框和复选框元素的特定样式 */
+    input[type="radio"],
+    input[type="checkbox"] {
+        margin-right: 0.1vw;
+    }
+    label.radio-label,
+    label.checkbox-label {
+        display: inline-block;
+        margin-right: 1vw;
+    }
+
+    /* 设置下拉列表元素的特定样式 */
+    select {
+        width: 100%;
+        padding: 0.5vh 0.5vw;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+        margin-bottom: 0.5vh;
+    }
+
+    /* 设置文本区域元素的特定样式 */
+    textarea {
+        width: 100%;
+        padding: 1vh 1.5vw;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+        margin-bottom: 0.5vh;
+    }
+
+    /* 设置按钮元素的特定样式 */
+    button {
+        padding: 1vh 2vw;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin: 0.5vh 1vw;
+    }
+    button[type="reset"] {
+        background-color: #f44336;
+    }
+    ```
+
+5. 最后在将上述HTML+CSS代码保存为相应类型的文件之后（这些代码被保存在本笔记文件所在目录下的`examples/formCase`目录中），就可以在用网页浏览器中打开这个网页时看到如下图所示的布局效果。
+
+    ![用户界面设计示例](./img/html&css/15.png)

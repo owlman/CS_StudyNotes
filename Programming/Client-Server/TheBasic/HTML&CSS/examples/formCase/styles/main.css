@@ -2,10 +2,11 @@
 /* 设置整个页面的字体和背景颜色 */
 body {
     font-family: "Microsoft Yahei" Arial, sans-serif;
+    font-size: 16px;
     background-color: #f2f2f2;
 }
 
-/* 设置表单的样式 */
+/* 设置表单元素的样式 */
 form {
     width: 45vw;
     margin: 0 auto;    
