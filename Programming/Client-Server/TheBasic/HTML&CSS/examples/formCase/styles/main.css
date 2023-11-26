@@ -59,6 +59,16 @@ select {
     margin-bottom: 0.5vh;
 }
 
+/* 设置文本区域元素的特定样式 */
+textarea {
+    width: 100%;
+    padding: 1vh 1.5vw;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-bottom: 0.5vh;
+}
+
 /* 设置按钮元素的特定样式 */
 button {
     padding: 1vh 2vw;
@@ -71,14 +81,4 @@ button {
 }
 button[type="reset"] {
     background-color: #f44336;
-}
-
-/* 设置文本区域的样式 */
-textarea {
-    width: 100%;
-    padding: 1vh 1.5vw;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-    margin-bottom: 0.5vh;
 }
