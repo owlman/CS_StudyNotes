@@ -36,9 +36,14 @@
         - [ ] [[PowerShell 使用笔记]]
   
 - [ ] 关于编程语言的学习
+- [ ] JavaScript 语言学习计划
+  - [ ] [[JavaScript 语言的学习路线图]]
+  - [ ] [[JavaScript 学习笔记：基础篇]]
+  - [ ] [[JavaScript 学习笔记：进阶篇]]
   - [ ] Python 语言学习计划
     - [x] [[Python 语言的学习路线图]]
     - [x] [[Python 学习笔记：基础篇]]
+    - [ ] [[Python 学习笔记：进阶篇]]
   - [ ] Rust 语言学习计划
     - [x] [[Rust 语言的学习路线图]]
     - [x] [[Rust 学习笔记：快速上手篇]]
