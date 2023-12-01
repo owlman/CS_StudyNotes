@@ -1746,3 +1746,105 @@ mp.forEach((value, key) => {             // 请注意参数顺序
 总而言之，`WeakMap`对象的大部分使用方式都与`WeakSet`对象基本相同，它也不支持`values`、`keys`、`forEach`等遍历方法，这里就不再复述了。
 
 那么到底这两种弱化版本到底有什么用呢？基本上，如果我们想在数据结构中临时存储一些对象的引用，但又不想干扰垃圾回收机制对这些对象本身的管理，就可以使用`WeakSet`和`WeakMap`这类数据结构实现了。一个典型应用场景是，在网页的 DOM 上添加节点时，就可以采用`WeakMap`或`WeakSet`这类结构来存储它们。当相关 DOM 节点被移除时，其所对应的记录就会自动被移除。
+
+## 综合练习
+
+在初步学习了函数与对象的相关知识之后，我们打算在结束之前照例要综合演示一下在这篇笔记中介绍的知识点，顺便解决一下之前提出的问题，即如何将“电话交换机测试”程序修改成一个低耦合度的，相对可扩展的实现。到目前为止，我们已经将任务分离出来，封装成了两个独立的函数：
+
+```javascript
+function telephoneExchange(number) {
+    switch (number) {
+        case 1001:
+            console.log('张三');
+            break;
+        case 1002:
+            console.log('李四');
+            break;
+        case 1003:
+            console.log('王五');
+            break;
+        case 1004:
+            console.log('赵六');
+            break;
+        default:
+            console.log('你拨打的是空号！');
+            break;
+    }
+}
+
+function testTelephoneExchange (callback) {
+  for (let number = 1001; number < 1006; ++number) {
+    callback(number);
+  }
+}
+```
+
+接下来，我们要解决`switch`语句带来的线路不可扩展问题。正如之前所说，这里应该用一个“电话簿”来管理线路的增加、删除、修改与查询。很明显，根据之前介绍的数据结构知识，这个“电话簿”应该属于字典类对象，所以，下面我们就用`Map`对象来实现一下这个“电话簿”：
+
+```javascript
+// 电话交换机测试 2.0 版
+// 作者：owlman
+
+class TelephoneExchange {
+    constructor(names) {        // names 形参允许指定加入该电话交换机的初始名单
+        this.mp = new Map();
+        this.firstNum = 1001;     // 该电话交换机的第一个未占用的号码
+
+        for(let name of names) {
+            this.firstNum++;
+            this.mp.set(this.firstNum, name); // 为初始名单分配电话号码
+        }
+    }
+
+    add(name) {                          // 为新客户添加线路
+        this.firstNum++;
+        this.mp.set(this.firstNum, name);
+    }
+
+    delete(number) {                     // 删除线路
+        this.mp.delete(number);
+    }
+
+    update (number, name) {               // 修改已有线路的所属人
+        if (this.mp.has(number)) {
+            this.mp.set(number, name);
+        } else {
+            console.log(number + '是空号！');
+        }
+    }
+
+    call(number) {                       // 拨打指定线路
+        if (this.mp.has(number)) {
+            let name = this.mp.get(number);
+            console.log('你拨打的用户是： ' + name);
+        } else {
+            console.log(number + '是空号！');
+        }
+    }
+
+    callAll() {                          // 拨打所有线路
+        for (let number of this.mp.keys()) {
+            this.call(number);
+        }
+    }
+};
+
+let phoneExch = new TelephoneExchange(['张三', '李四', '王五', '赵六']);
+phoneExch.callAll();
+console.log('-----------');
+phoneExch.add('owlman');
+phoneExch.callAll();
+console.log('-----------');
+phoneExch.delete(1002);
+phoneExch.callAll();
+console.log('-----------');
+phoneExch.update(1003,'batman');
+phoneExch.callAll();
+console.log('-----------');
+```
+
+我们可以将其更新到之前创建的`testTelephoneExchange.js`脚本文件中，然后在命令行终端中执行它，可以看到如下结果：
+
+![电话交换机测试 2.0 版](./img/11.png)
+
+如你所见，我们用`Map`对象创建了“电话簿”，然后围绕着它设置了添加、删除、修改以及呼叫线路的操作。现在我们的电话交换机在逻辑上更像一个可以应对实际需求的程序了。但是，它依然有着不小的问题，譬如，现在它只能根据电话号码查找用户，无法根据用户查找电话号码，而且一旦某条线路被删除，该线路的号码是无法被回收再利用的。另外，现在对电话交换机的测试也不只是将所有线路呼叫一遍这么简单了，我们需要重新编写可重用的测试任务函数，这会涉及到操作接口与操作实现的耦合度问题，这些都将是我们在下一篇笔记中要介绍的内容。
