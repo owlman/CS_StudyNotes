@@ -9,7 +9,7 @@
   - [ ] 前端部分
     - [x] [[HTML 学习笔记]]
     - [x] [[CSS 学习笔记]]
-    - [ ] [[JavaScript 学习笔记]]
+    - [x] [[JavaScript 学习笔记]]
     - [ ] [[jQuery 学习笔记]]
     - [ ] [[Bootstrap 学习笔记]]
     - [x] [[Vue.js 2.x 学习笔记]]
