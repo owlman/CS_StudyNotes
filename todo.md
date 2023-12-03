@@ -9,8 +9,9 @@
   - [ ] 前端部分
     - [x] [[HTML 学习笔记]]
     - [x] [[CSS 学习笔记]]
-    - [x] [[JavaScript 学习笔记]]
-    - [ ] [[jQuery 学习笔记]]
+    - [x] [[JavaScript 学习笔记：基础篇]]
+    - [x] [[JavaScript 学习笔记：进阶篇]]
+    - [ ] [[JavaScript 学习笔记：实战篇]]
     - [ ] [[Bootstrap 学习笔记]]
     - [x] [[Vue.js 2.x 学习笔记]]
     - [x] [[vue-cli 与 Vite 学习笔记]]
