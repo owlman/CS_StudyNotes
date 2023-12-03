@@ -56,6 +56,412 @@
 
 ### DOM 的使用
 
+在这一节中，我们将详细为读者介绍文档对象模型（即 DOM）。首先，我们会简略地回顾一下 DOM 的发展历程。以便读者能更全面地理解 DOM 标准规范的来龙去脉，发展现况以及使用思路。然后，我们会借助大量示例来演示如何在 JavaScript 中用 DOM 处理 HTML 文档中的各种页面元素。
+
+#### DOM 的前世今生
+
+正如我们之前所说，DOM 是 由 W3C 组织负责标准化的一套最初只针对 XML 文档，后来逐步扩展到 HTML 文档的应用程序接口。和 JavaScript 一样，在标准化的文档对象模型出现之前，由于微软和网景这两家公司在浏览器市场上的恶性竞争，Web 应用的开发者们经历过一段较为黑暗的时代。在那个混沌的年代里，Internet Explorer 4 和 Netscape Navigator 4 各自实现的是不同的 DHTML（即 Dynamic HTML）接口，彼此在很多地方都互不兼容，这让 HTML 面临着失去跨平台的先天性优势的危机，而开发者们为了扩展 Web 应用的市场。又必须要尽可能地维持程序在双方浏览器上的兼容性，这往往需要付出非常大的精力来构建一些看起来极不优雅并且后期难以维护的解决方案。时至今日，笔者每每回忆起那些岁月所做的 Web 开发，其过程真是让人苦不堪言。
+
+于是，为了响应广大开发者的呼声，对软件寡头们之间的恶性竞争行为进行约束，负责制定 Web 通信标准的 W3C 组织制定出了一套统一面向 XML 和 HTML 文档的应用程序接口规范，即 DOM 标准。这套标准按照其制定进展，各大浏览器对 DOM 的支持通常被分为以下几个级别：
+
+- **DOM 0**：该级别在标准化的意义上其实是不存在的，因为它实际上是标准化初级阶段的 DOM，大部分实现还停留在实验阶段，但如今开发者们习惯上将其称之为 DOM 0。在实现了这一级别的浏览器中，具有代表性的就是分别在 1997 年的 6 月和 10 月发布的 Internet Explorer 4 和 Netscape Navigator 4、这两款浏览器都各行其是地定义了一组用于操作 HTML 文档的应用程序接口，从而使 JavaScript 的功能得到了大大地扩展，如今我们更习惯将这些扩展称之为 DHTML。需要说明的是，DHTML 并不是一项新技术，而是将 HTML、CSS、JavaScript 技术组合的一种描述。即：
+
+    – 利用 HTML 标签将 Web 页面划分为各种页面元素。
+    – 利用 CSS 样式来设置这些页面元素的外观及位置。
+    – 利用 JavaScript 脚本来操控页面元素及其外观样式。
+
+    但正如之前所说，由于没有统一的规范和标准，这两款浏览器对相同功能的实现确完全不一样。为了保持程序的兼容性，Web 开发者们必须先写一些探测性的代码来检测一下自己编写的 JavaScript 脚本到底运行于哪一款浏览器之下，然后再切换至与之对应的脚本片段。但这就让 Web 应用程序的代码变得前所未有的臃肿，且难以维护，DHTML 也因此在人们心中留下了非常糟糕的印象。
+- DOM 1： W3C 组织在结合了各方浏览器实现的优点之后。于 1998 年的 10 月完成了第 1 级的 DOM，我们习惯上称之为：DOM 1。DOM 1 主要定义了 XML 和 HTML 文档的底层结构，它主要由 DOM Core 和 DOM HTML 两个部分组成。其中，DOM Core 规定的是 XML 文档的结构标准，该标准简化了我们对文档中页面元素的操作。而 DOM HTML 则是在 DOM Core 的基础上做了进一步的扩展，添加了许多面向 HTML 文档的对象和方法，譬如用于表示整个文档的document对象及其方法。
+- DOM 2： DOM 2 引入了更多的交互能力，也支持了更高级的 XML 特性。DOM 2 在原来 DOM 1 的基础上又扩充了鼠标、键盘等用户界面事件，并通过对象接口增加了对 CSS 的支持。DOM 2 中的DOM Core 也经过扩展开始支持 XML 命名空间。具体来说就是，DOM 2 在 DOM 标准中引入了下列模块：
+–	DOM Views：该模块定义了跟踪不同文档视图的接口。
+–	DOM Events：该模块定义了事件和事件处理的接口。
+–	DOM Style：该模块定义了基于 CSS 样式为页面元素设置外观的接口。
+–	DOM Traversal & Range：该模块定义了遍历和操作文档树的接口。
+- DOM 3： DOM 3 在 DOM 2 的基础上进一步扩展了 DOM，它继续在 DOM 标准中引入了以下模块：
+–	DOM Load & Save：该模块定义以统一方式加载和保存文档的接口。
+–	DOM Validation：该模块定义了验证文档的接口。
+–	DOM Core 的扩展：增加了对 XML 1.0 规范的支持，包含了 XML Infoset、XPath 和 XML Base 等组件。
+除此之外，W3C 组织也制定了一系列专用标记语言的 DOM 扩展标准。例如：用于制作矢量图的 SVG，用于编写数学公式的 MathML，用于描述多媒体的 SMIL 等，这些都是基于 XML 扩展而来的标记语言，DOM 标准也为它们定义了专用的应用程序接口。
+当然，W3C 组织只负责制定标准，浏览器对标准的实现完成度才是我们在编程过程中所要面对的实际问题。幸运的是，经过多年的努力，如今的 Chrome 和 Firefox 等主流浏览器都基本实现了 DOM 标准制定的接口，但由于一些历史遗留问题，Internet Explorer 浏览器在实现 DOM 标准的同时，依然保留了大量标准化之前的 OnlyIE 的接口。这样做主要是为了确保大量旧时代的代码依然能正确运行，作为标准化之后的开发者，我们在编写新的代码时就不宜再使用这些接口了。关于这一点，我们稍后在具体介绍 DOM 接口的调用时会特别举例说明。
+7.1.2 DOM 使用思路
+在具体使用 DOM 之前，我们首先要明确一个概念，即 DOM 只是一套用于处理 XML 和 HTML 文档的应用程序接口，它并不是 JavaScript 专有的，VBScript、Python 等脚本语言也一样可以调用这套接口。所以换句话说，DOM 本质上是一套以 XML 这类结构化标记语言为中心的编程工具，它的设计目的是为 XML 和 HTML 这类文档提供一种映射在内存中的数据结构，以便其他编程语言可以在程序运行时通过该数据结构来操作文档，从而改变文档的结构，样式和内容。具体来说就是，DOM 会将其读取到的 XML 和 HTML 文档映射到在内存中的一个树形数据结构上，文档界面中的每个页面元素都会被解析成该树结构上的节点，然后其他脚本语言就可以通过增、删、改。查这些节点来完成对这些文档的处理。举个例子，对于下面这个 HTML 文档：
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览器端JS代码测试</title>
+</head>
+<body>
+    <h1>浏览器端的JavaScript</h1>
+    <div id="content"></div>
+</body>
+</html>
+如果我们要在程序中直接对上述文本进行解析，那就得从上到下逐行读取，然后用词法分析算法处理每一行中的语法标记，整个过程是非常复杂的，基本上是在亲手实现一个浏览器，这完全不符合编程方法中“不重复发明轮子”的原则，现在有了 DOM 标准接口，浏览器就会自行根据其读取到的文档在内存中创建一个与之相对应的树结构，其大致结构如下图所示：
+图 7-1：DOM 树结构示意图
+ 
+然后，我们就只需要直接在 JavaScript 或 VBScript 脚本中对该树结构进行操作即可。换句话说，开发人员现在不必再去亲自解析 XML 和 HTML 文档的具体文本了，DOM 已经将目标文档转换成了内存中一个可直接操作的树结构，并且其接口设计完全适用于面向对象编程，这显然就大大简化了 Web 应用程序开发的复杂度。
+7.2 DOM 的节点
+如果我们之前学过数据结构的基础理论，就该知道“树（Tree）”是一种以开枝展叶的形式将多个节点链接起来的多层结构体。其节点之间的关系非常类似于传统家庭里的父系族谱，从被称为“根”的单一节点往下，每一个节点都与其上下一层的节点之间是父子辈关系，与同一层节点之间是兄弟关系。例如在图 7-1 中，<html>节点是整个树结构的根节点，<head>和<body>则是它的两个子节点，而<h1>和<div>这两个节点则又是<body>节点的子节点。与此同时，由于<h1>和<div>来自同一个父节点，所以它们彼此是兄弟节点的关系。
+7.2.1 统一节点接口
+所以在 DOM 标准所定义的接口中，节点（Node）是我们可操作的最基本类型。DOM 树结构中的每一个节点都对应着 HTML 文档中的一个标签元素。为了便于对所有的节点进行统一处理，DOM 标准定义了一套适用于所有 DOM 节点对象的接口，下面我们来介绍其中比较常用的一些属性和方法：
+nodeType属性：
+该属性值是一个从 1 到 12 的整数常量，每个常量都代表着一种类型的 DOM 节点对象，具体如下：
+表 7-1：DOM 节点类型
+常量标识符	常量值	相关说明
+Node.ELEMENT_NODE	1	代表 XML 或 HTML 文档中的页面元素，通常对应着一个具体的页面标记。
+Node.ATTRIBUTE_NODE	2	代表页面元素的某一个属性，譬如div元素的id属性。
+Node.TEXT_NODE	3	代表页面元素或其属性中的文本内容，譬如p元素中的文本。
+Node.CDATASECTIONNODE	4	代表文档中用<![CDATA[]]>表示声明的不需要解析的文本。
+Node.ENTITYREFERENCENODE	5	代表实体引用，常见于 XML 文档中。
+Node.ENTITY_NODE	6	代表实体，常见于 XML 文档中。
+Node.PROCESSINGINSTRUCTIONNODE	7	代表ProcessingInstruction对象，常见于 XML 文档。
+Node.COMMENT_NODE	8	代表文档中的注释节点，即<!--注释内容-->标签的内容。
+Node.DOCUMENT_NODE	9	代表整个文档，即DOM 树的根节点：document对象。
+Node.DOCUMENTTYPENODE	10	代表文档采用的接口版本，譬如<!DOCTYPE html>代表的是 HTML5。
+Node.DOCUMENTFRAGMENTNODE	11	代表 HTML 文档的某个部分，但它没有对应的元素标签，也不直接显示在浏览器中。
+Node.NOTATION_NODE	12	代表 DTD 中声明的符号。
+但在通常情况下，我们只需要记住以下几种常用的节点类型即可：
+表 7-2：常用的节点类型
+nodeType值	对应的节点类型
+1	元素节点
+2	属性节点
+3	文本节点
+8	注释节点
+9	文档节点
+当然了，我们在表 7-1 中也看到了，DOM 标准事实上是为这些常量定义了相应的常量标识符的，譬如元素节点是node.ELEMENT_NODE、属性节点是node.ATTRIBUTE_NODE、文本节点是node.TEXT_NODE、注释节点是node.COMMENT_NODE、文档节点是node.DOCUMENT_NODE等。奈何并不是所有的浏览器都支持了这些标识符（譬如微软的 IE8 及其更早的版本就不支持它们），所以我们通常还是直接使用数字来判断节点类型。
+nodeName属性：
+该属性的值取决于节点的具体类型，常见情况如下：
+- 元素节点的nodeName属性值是其对应的 HTML 标签名。
+- 属性节点的nodeName属性值与其对应 HTML 标签的属性名相同。
+- 文本节点的nodeName属性值始终为#text。
+- 注释节点的nodeName属性值始终为#comment。
+- 文档节点的nodeName属性值始终为#document，
+nodeValue属性：
+该属性的值也取决于节点的具体类型，常见情况如下：
+- 元素节点的nodeValue属性值是 undefined 或 null。
+- 属性节点的nodeValue属性值是其对应 HTML 标签属性的值。
+- 文本节点的nodeValue属性值是其对应 HTML 标签中的文本本身。
+请注意：如果希望返回指定元素节点中的文本，请务必要记住文本始终位于文本节点中，我们必须先获取该元素节点下面的文本节点，才能读取到这段文本。例如，假设我们要获取element这个元素节点下的文本，就应该这样写：
+const someText = element.childNodes[0].nodeValue;
+childNodees属性：
+如你所见，我们在上面的代码中已经迫不及待地使用该属性了，这也间接说明了它是节点接口中最常用的属性之一。该属性中存储的是当前节点的所有子节点，这是一个实现了迭代器接口的NodeList对象，我们可以将其作为一个数组对象来使用，譬如对其进行如下遍历：
+for(let i = 0; i < element.childNodes.length; ++i) {
+  console.log(element.childNodes[i].nodeName);
+}
+或者直接通过for-of循环，利用迭代器接口来完成遍历：
+for(let aNode of element.childNodes) {
+  console.log(aNode.nodeName);
+}
+firstChild属性：
+该属性引用的是当前节点的第一个子节点，即aNode.childNodes[0]的值。
+lastChild属性：
+该属性引用的是当前节点的最后一个子节点，即aNode.childNodes[aNode.childNodes.length-1]的值，而当某个节点只有一个子节点时，其firstChild属性和lastChild属性指向的是同一个节点。
+parentNode属性：
+该属性引用的是当前节点的父节点，当且仅当当前节点为根节点时，该属性值为 null。
+previousSibling属性：
+该属性引用的是当前节点的前一个兄弟节点，即该节点在其共同父节点的childNodes属性中的索引位置是当前节点的前一个，当且仅当当前节点为其父节点的第一个节点时，该属性值为 null。
+nextSibling属性：
+该属性引用的是当前节点的后一个兄弟节点，即该节点在其共同父节点的childNodes属性中的索引位置是当前节点的后一个，当且仅当当前节点为其父节点的最后一个节点时，该属性值为 null。
+appendChild()方法：
+该方法的作用是在当前节点的childNodes属性的最后一个索引位置后面再继续添加一个子节点，它只接收一个节点类型的实参，用于传递要添加的节点。例如：
+aNode.appendChild(newNode);
+console.log(aNode.lastChild == newNode); // 输出：true
+insertChild()方法：
+该方法的作用是在当前节点的childNodes属性中指定位置的前面再继续添加一个子节点，它接收两个节点类型的实参，第一个实参用于传递要添加的节点，第二个实参用于指示节点的添加位置，通常是childNodes属性中的某个现有节点，新节点会被添加在该节点之前，而当该实参值为 null 时，就相当于调用了appendChild方法，新节点会被添加到childNodes列表的末尾。与此同时，该方法也会返回这个新添加的节点。下面来看几个示例：
+// 将新节点添加到第一个子节点前面
+const returnNode = aNode.insertChild(newNode, aNode.firstChild);
+console.log(aNode.firstChild == newNode);  // 输出：true
+console.log(returnNode == newNode);        // 输出：true
+
+// 将新节点添加到最后一个子节点前面
+aNode.insertChild(newNode, aNode.lastChild);
+console.log(aNode.lastChild.previousSibling == newNode);  // 输出：true
+
+// 将新节点添加为最后一个子节点
+aNode.insertChild(newNode, null);
+console.log(aNode.lastChild == newNode);  // 输出：true
+replaceChild()方法：
+该方法的作用是用一个新节点去替换当前节点的某一个被指定的子节点，它接收两个节点类型的实参，第一个实参传递的是将被用于替换的新节点，第二个实参指向的是当前节点的某个子节点，它是我们的替换目标，并且将作为方法的返回值被返回。下面来看几个示例：
+// 替换当前节点的第一个子节点
+const oldNode = aNode.firstChild;
+const returnNode = replaceChild(newNode, aNode.firstChild);
+console.log(aNode.firstChild == newNode); // 输出：true
+console.log(returnNode == oldNode);       // 输出：true
+
+// 替换当前节点的最后一个子节点
+const oldNode = aNode.lastChild;
+const returnNode = replaceChild(newNode, aNode.lastChild);
+console.log(aNode.lastChild == newNode); // 输出：true
+console.log(returnNode == oldNode);       // 输出：true
+removeChild()方法：
+该方法的作用是移除一个指定的当前节点的子节点，它只接收一个节点类型的实参，用于指定需要被移除的节点，并将其作为返回值返回。下面来看几个示例：
+// 移除当前节点的第一个子节点
+const oldNode = aNode.firstChild;
+const newFirstChild = aNode.firstChild.nextSibling;
+const returnNode = removeChild(aNode.firstChild);
+console.log(aNode.firstChild == newFirstNode); // 输出：true
+console.log(returnNode == oldNode);            // 输出：true
+
+// 移除当前节点的第一个子节点
+const oldNode = aNode.lastChild;
+const newLastChild = aNode.lastChild.previousSibling;
+const returnNode = removeChild(aNode.lastChild);
+console.log(aNode.lastChild == newLastNode);   // 输出：true
+console.log(returnNode == oldNode);            // 输出：true
+cloneNode()方法：
+该方法的作用是复制当前节点，它只接收一个布尔类型的实参。当实参值为 false 时，该方法执行的是浅拷贝，它返回的是当前节点的引用。当实参值为 true 时，该方法执行的是深拷贝，它会将当前节点及其所有子节点全部重新复制一份，并该副本的引用返回。下面来看个示例，假设aNode节点的内容如下：
+<div id="targetID">
+  <p>这是一个 div 区域。</p>
+</div>
+我们就可以对它编写如下代码：
+// 浅拷贝
+const shallowCopy = aNode.cloneNode(false);
+console.log(shallowCopy.childNodes.length);  // 输出：0
+
+// 深拷贝
+const deepCopy = aNode.cloneNode(true);
+console.log(deepCopy.childNodes.length);    // 输出：3
+7.2.2 常用节点类型
+细心的读者可能已经发现了，上一节中的代码示例都无法实际执行，因为我们既没有介绍当前节点aNode如何获取，也没有介绍新节点newNode如何创建，代码根本就是无的放矢，没有具体操作对象。这是因为这两个操作都要取决于节点的具体类型，接下来就让我们来补上这一课吧。
+正如我们之前所说，DOM 节点的类型实际上有 12 种，但其中的绝大部分不是在 HTML 文档中不太常用，就是因在各大浏览器中的行为尚不一致而不被推荐，所以我们实际需要熟悉并时常用到的节点类型只有表 7-2 中列出的元素节点、属性节点、文本节点、注释节点以及文档节点。下面，我们就逐一来介绍一下这些节点类型以及它们所提供的接口。
+7.2.2.1 文档节点
+文档节点通常用于代表一整个 XML 或 HTML 文档，换句话说，一个文档的 DOM 树结构中往往有且只能有一个文档节点。文档节点的nodeType的值为 9、nodeName的值为#document、nodeValue的值为 null。而在浏览器环境下，文档节点事实上是一个名为document的全局对象，我们通常都是通过这个对象来获取当前 HTML 页面中的信息，并对页面中的元素执行各种操作的。下面，我们就来了解一下 DOM 标准为文档节点定义的专用接口（文档节点自然也继承了上一节中介绍的所有统一节点接口，这里就不重复介绍了）：
+- documentElement属性： 在 HTML 文档中，这个属性代表的是当前页面的<html>标签，它在 DOM 树结构中对应着一个元素类型的节点。在某些浏览器的实现中，该节点有时也是文档节点的的第一个子节点。对此，我们可以用下面的代码来验证一下：
+ 	const htmlNode = document.documentElement;
+console.log(htmlNode == document.firstChild);
+        // 某些浏览器会输出 false，而另一些则输出 true。
+- body属性： 在 HTML 文档中，这个属性代表的是当前页面的<body>标签，它在 DOM 树结构中也对应着一个元素类型的节点。由于在 Web 开发中，我们要执行绝大部分操作针对的都是该节点的子节点，所以该属性应该是document对象使用率最高的属性之一了。与此同时，它在通常情况下还应该是上述htmlNode节点的最后一个子节点，我们可以接着上面的代码继续来验证一下：
+ 	const bodyNode = document.body;
+console.log(bodyNode == htmlNode.lastChild);
+- title属性： 该属性中存储的是<title>标签中的文本，该文本会通常出现在浏览器窗口的标题栏和标签页中。我们也可以用该属性来修改当前页面的标题，例如：
+ 	console.log(document.title); // 输出现有标题
+document.title = 'new title';
+console.log(document.title); // 输出：new title
+- URL属性： 该属性中存储的是当前页面在浏览器地址栏中显示的 URL，我们是通过该 URL 来向服务器发送访问当前页面的请求的。
+- domain属性： 该属性中存储的是当前页面的 URL 所属的域名，譬如，假设当前页面的 URL 是http://owlman.org/index.htm，该属性值就是owlman.org。
+- referrer属性： 该属性中存储的是链接到当前页面的那个页面的 URL。譬如，假设我们是通过http://owlman.org/index.htm这个页面访问到http://owlman.org/readme.htm的，那么，后者的该属性值就是http://owlman.org/index.htm。当然了，如果当前页面不来自任何页面，我们是亲自输入 URL 来访问它的，那该属性值就为 null。
+- anchors属性： 该属性是一个类数组对象，其中存储的是当前页面中所有设置了name属性的<a>元素。
+- forms属性： 该属性也是一个类数组对象，其中存储的是当前页面中所有的<form>元素。
+- images属性： 该属性也是一个类数组对象，其中存储的是当前页面中所有的<img>元素。
+- links属性： 该属性也是一个类数组对象，其中存储的是当前页面中所有设置了href属性的<a>元素。
+- getElementById()方法： 该方法的作用是获取当前页面中指定id值的页面元素，如果当前页面中有id值相同的元素，就选取其中的第一个元素。在上一节中频繁出现的aNode节点通常就是用该方法来获取的。例如对于下面的 HTML 文档：
+ 	<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>浏览器端JS代码测试</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script type="module" src="03-test.js"></script>
+</head>
+<body>
+  <noscript>
+    <p>本页面需要浏览器支持或启用JavaScript。</p>
+  </noscript>
+  <h1>浏览器端的JavaScript</h1>
+  <div class="box" id="box_1">
+    <p>这是一个 div 区域。</p>
+  </div>
+  <div class="box" id="box_2">
+    <p>这是另一个 div 区域。</p>
+  </div>
+</body>
+</html>
+ 	如果我们想获取id值为box_1的<div>元素，就可以在其外链的03-test.js文件中编写如下代码：
+ 	const aNode = document.getElementById('box_1');
+
+// 浅拷贝
+const shallowCopy = aNode.cloneNode(false);
+console.log(shallowCopy.childNodes.length);  // 输出：0
+
+// 深拷贝
+const deepCopy = aNode.cloneNode(true);
+console.log(deepCopy.childNodes.length);    // 输出：3
+ 	请注意：这里的id值在大部分浏览器中是严格区分大小写的，或许只有 IE7 及其早期版本例外。
+- getElementsByName()方法： 该方法的作用是返回一个类数组对象，其中包含了当前页面中所有设置了相同name值的元素。我们经常会在处理表单中的单选框时用到它，毕竟为了让浏览器知道哪一些单选框属于同一组互斥性选项，我们会将同一组单选框赋予相同的name值。
+- getElementsByTagName()方法： 该方法的作用是返回一个类数组对象，其中包含了当前页面中所有使用了相同标签的元素，例如，我们上面介绍某些类数组功能的属性也可以使用该方法来实现：
+ 	console.log(document.forms == document.getElementsByTagName('form'));
+console.log(document.images == document.getElementsByTagName('img'));
+- getElementsByClassName()方法： 该方法的作用是返回一个类数组对象，其中包含了当前页面中设置了相同class属性的元素。众所周知，在 HTML 文档中，元素的class属性主要是提供给 CSS 设计样式的，而有时候样式的设置需要 JavaScript 脚本的配合。例如，如果我们想为之前那个 HTML 文档中所有设置了box样式的元素注册一个鼠标单击事件，就可以在其外链的03-test.js文件中这样写：
+ 	const aClassNodes = document.getElementsByClassName('box');
+for(const tmpNode of aClassNodes) {
+  tmpNode.onClick = function() {
+    tmpNode.className = 'newStyle';
+  }
+}
+ 	当然，读者在这里暂时不必理会事件的概念，我们将会在下一章中具体介绍这部分的内容。
+- write()方法： 该方法的作用是将其接收到的字符串类型的实参原样输出到document对象所代表的 HTML 文档中。
+- writeln()方法： 该方法的作用与write()方法基本相同，唯一的区别是该方法会在输出实参字符串的同时加上一个换行符。例如，我们可以在之前使用的 HTML 文档中id值为box_2的div元素后面再添加一个<script>标签，具体如下：
+ 	<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>浏览器端JS代码测试</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script type="module" src="03-test.js"></script>
+</head>
+<body>
+  <noscript>
+    <p>本页面需要浏览器支持或启用JavaScript。</p>
+  </noscript>
+  <h1>浏览器端的JavaScript</h1>
+  <div class="box" id="box_1">
+    <p>这是一个 div 区域。</p>
+  </div>
+  <div class="box" id="box_2">
+    <p>这是另一个 div 区域。</p>
+  </div>
+  <script>
+    document.write('当前时间是：');
+    const now = new Date();
+    document.writeln(now.toLocaleDateString());
+  </script>
+</body>
+</html>
+- createElement()方法： 该方法的作用是创建一个新的元素节点。例如，对于上一节中没有详细说明来历的、代表新节点的newNode对象，我们可以这样创建：
+ 	const newNode = document.createElement('div');
+document.body.appendChild(newNode);
+ 	如你所见，createElement()方法只接收一个代表新建元素标签名的字符串为实参，并且对于 HTML 标签来说，该实参值是不区分大小写的。关于元素节点本身的具体操作，我们稍后会详细介绍。
+- createAttribute()方法： 该方法的作用是创建一个新的属性节点。例如，我们可以这样为上面的newNode节点添加一个属性节点：
+ 	const attrNode = document.createAttribute('class');
+attrNode.value = 'box';
+newNode.setAttributeNode(attrNode);
+ 	如你所见，createAttribute()方法也只接收一个字符串类型的实参，用来指明新建属性节点的名称。关于属性节点本身的操作，我们稍后会做详细介绍。
+- createTextNode()方法： 该方法的作用是创建一个新的文本节点，它也只接收一个字符串类型的实参，用来指定其创建节点所要容纳的文本。例如，我们可以这样为上面的newNode节点所代表的<div>标签中添加一段文本：
+ 	const textNode = document.createTextNode('这是box_4中的文本。');
+newNode.appendChild(textNode);
+ 	关于文本节点本身的操作，我们稍后会做详细介绍。
+- createComment()方法： 该方法的作用是创建一个新的注释节点，它同样只接收一个字符串类型的实参，用来指定注释的内容。例如，如果我们想在上述newNode节点所代表的<div>标签中添加一段注释，可以这样做：
+ 	const myComment = document.createComment('这是一个用脚本添加的div元素。');
+newNode.appendChild(myComment);
+console.log(newNode.lastChild.data); // 输出：这是一个用脚本添加的div元素。
+我们稍后也会具体介绍注释节点本身的属性和方法。在这里需要注意的是，document对象虽然可以往 HTML 文档中写入字符串，或对文档中的特定元素执行各种增、删、改、查操作，但作为文档节点本身，它是只读的。换句话说，我们直接在document对象上调用appendChild()、removeChild()这一类增删直系子节点的方法是无效的。
+7.2.2.2 元素节点
+在 DOM 的定义中，元素节点代表的是 XML 或 HTML 文档中的各种页面元素，其nodeType的值为 1、nodeName的值为它们各自对应的页面标签、nodeValue的值为 null。在 Web 前端开发的语境下，元素节点通常对应着一个具体的 HTML 标签。例如，之前调用的document.body属性返回的就是一个 HTML 标签为<body>的元素节点。严格来说，HTML 的每一种标签都对应着一种类型的元素节点，但在通常情况下，我们在处理元素节点时不需要进行如此细致的分类，只需要熟练掌握一部分通用的属性和方法就足以解决绝大部分问题了。下面就来介绍一下这些属性和方法，首先是任意一种元素节点都有的通用属性：
+- tagName属性： 该属性的作用是返回当前元素节点所对应的 HTML 标签，事实上可以认为这是nodeName属性的一个别名。但该属性专属于元素节点，无论从接口语义上，还是在名称上都显得要更直观一些，例如对于之前所用的 HTML 文档中的第一个<div>元素，我们可以这样查看它的标签名：
+ 	const aNode = document.getElementById('box_1');
+console.log(aNode.tagName);   // 输出：DIV
+ 	需要注意的是，tagName属性返回的 HTML 标签名都是用大写字母来表示的，而对于 XML 标签，它返回的则是文档中实际使用的标签字符。所以，如果我们不清楚自己编写的脚本是用于处理 HTML 还是 XML，就必须要对tagName属性返回的字符串进行统一的大小写转换。
+- id属性： 该属性的作用是返回当前元素节点所对应 HTML 标签的id属性。例如对于上面的aNode节点，我们可以这样查看它的id属性：
+ 	console.log(aNode.id);  // 输出：box_1
+- className属性： 该属性的作用是返回当前元素节点所对应 HTML 标签的class属性，但由于class在 JavaScript 中属于语言本身的关键字，所以只能将其对应属性命名为className。例如我们可以这样查看aNode节点的className属性：
+ 	console.log(aNode.className); // 输出：box
+- title属性： 该属性的作用是返回当前元素节点所对应 HTML 标签的title属性，该属性主要用于对相关的页面元素进行说明，当鼠标悬停在该元素上时就会显示。例如我们可以这样查看aNode节点的title属性：
+ 	console.log(aNode.title);
+- lang属性： 该属性的作用是返回当前元素节点所对应 HTML 标签的lang属性，该属性主要用于声明相关页面元素及其子元素所采用语言的编码。例如在编写中文网页时，我们通常会这样编写<html>标签：<html lang="zh-cn">。当然，在一般元素节点中很少需要设置该属性。到了JavaScript 中，我们可以这样查看aNode节点的lang属性：
+ 	console.log(aNode.lang);
+- dir属性： 该属性的作用是返回当前元素节点所对应 HTML 标签的dir属性，该属性主要用于说明当前页面中文字的走向，它只有两个值，分别是代表从左向右ltr和代表从右向左的rtl，当然了，这一属性在实际开发中也很少被用到，相关的工作一般会交由 CSS 来完成。例如我们可以这样查看aNode节点的dir属性：
+ 	console.log(aNode.dir);
+到目前为止，我们所介绍的这些属性反映的都是一个元素节点的基本信息。这些信息不仅可以读取。也可以在 JavaScript 中修改它们。例如，我们可以这样修改aNode节点的基本信息：
+aNode.id = 'box_3';
+aNode.className = 'newBox';
+aNode.title = '第三段测试文本';
+aNode.lang= 'en';
+aNode.dir = 'rtl';
+当然，上面这些属性对应的都是每个 HTML 标签都有的通用属性，它们自然可以通过 DOM 节点对象的属性方式来操作。除此之外，还会有一些特定标签的专用属性，例如<a>标签的href属性、<img>标签的src属性等。基本上，对于 HTML 规范所定义的标签属性，DOM 中与之对应的元素节点对象都是有相应的属性的。例如，对于下面这个设置了onclick事件的<a>元素：
+<a id="sayhello" href="#" onclick="alert('hello')">打个招呼</a>
+我们仍然可以通过 DOM 对象属性的方式来对其进行操作，像这样：
+const sayhello = document.getElementById('sayhello');
+console.log(typeof sayhello.onclick);                  // 输出：function
+sayhello = function() {};
+除此之外，我们还可以选择调用 DOM 提供的三个属性方法：
+- getAttribute()方法： 该方法的作用是读取当前元素的指定属性，它会接收一个字符串类型的实参，用于指定要读取的属性名。需要注意的是，这里的属性名是要与当前元素对应的 HTML 标签的属性名相同。譬如对于<div>标签的class属性，我们传递给该方法的实参值就应该是class，而不是className了。下面，我们来具体演示一下该方法的使用：
+ 	// 获取当前页面中所有<img>标签的src属性
+for(const image of document.images) {
+  console.log(image.getAttribute('src'));
+}
+
+// 获取当前页面中所有<a>标签的href属性
+for(const link of document.links) {
+  console.log(link.getAttribute('href'));
+}
+ 	另外，需要注意的是，getAttribute()方法的实参值并不区分大小写，换句话说，SRC和src指定的是相同的属性名，如果该方法没有找到指定的属性名，就会返回 null。
+- setAttribute()方法： 该方法的作用是设置当前元素节点所对应 HTML 标签中指定属性的值，如果指定的属性不存在，那就创建该属性。它接收两个实参，第一个实参是一个用于指定目标属性名的字符串，该实参的用法规则与getAttribute()方法的实参完全相同。第二个实参则是目标属性的值。下面，我们来具体演示一下该方法的使用：
+ 	// 为当前页面中所有<img>标签设置src属性
+for(let i = 0; i < document.images.length; ++i) {
+  document.images[i].setAttribute('src', i+'.png');
+}
+- removeAttribute()方法： 该方法的作用是删除当前元素节点对应 HTML 标签中的指定属性，这一方法在实际开发中并不常用。
+但这三个方法存在着一个明显的问题，即它们都是以字符串的形式来增、删、改、查相应 HTML 标签中的属性的。换句话说，它们读取到的onclick属性是一段内容是 JavaScript 代码的字符串，而不是一个function类型的对象。
+我们可以用typeof操作符来验证一下使用 DOM 元素对象的属性与调用getAttribute()方法的区别：
+console.log(typeof sayhello.onclick);                 // 输出：function
+console.log(typeof sayhello.getAttribute('onclick'));  // 输出：string
+正是出于这样的原因，在实际开发中，我们对于 HTML 规范定义的标签属性，基本都会采用 DOM 对象属性的方式来操作。但我们有时候也会为某些标签添加一些自定义属性，譬如在 HTML5 规范中，我们通常会定义一些名称以data-为前缀的可被验证的自定义属性，用来传递某些特定的数据，这些属性在对应的 DOM 对象中是没有相应属性的。通常只有对于这样的自定义属性，我们才会使用到getAttribute()方法。例如，对于下面这个带有自定义属性的<div>标签：
+<div id="box_4" data-sayhello="hello"></div>
+我们可以分别用对象属性和调用getAttribute()方法这两种方式分别来访问一下上述<div>标签中的自定义属性data-sayhello的值，看看各自是什么结果：
+const otherNode = document.getElementById('box_4');
+console.log(otherNode.data-sayhello);                  // 输出：NaN 或 undefined
+console.log(otherNode.getAttribute('data-sayhello'));  // 输出：hello
+如你所见，用对象属性方式访问标签自定义属性的结果是因浏览器而异的，有些浏览器会返回 NaN，有些浏览器则会返回 undefined。所以在实际开发中，我们通常会用getAttribute()方法来访问 HTML 标签的自定义属性。
+最后，如果我们在某些情况下需要以 DOM 节点对象的形式操作相关元素的属性的话，也可以选择调用以下三个方法：
+- getAttributeNode()方法： 该方法的作用是以 DOM 节点对象的形式读取当前元素中的指定属性，它接收一个字符串类型的实参，用于指定要读取的属性，并以节点对象的形式将其返回。
+- setAttributeNode()方法： 该方法的作用是以 DOM 对象节点的形式设置当前元素中的指定属性，它接收一个属性节点类型的实参，用于指定要设置的属性。如果指定属性不存在，就将该属性节点添加为当前元素的新属性。
+- removeAttributeNode()方法： 该方法的作用是以 DOM 对象节点的形式删除当前元素中的指定属性，它接收一个属性节点类型的实参，用于指定要删除的属性。
+关于以上三个方法的具体使用，我们将会留待详细介绍书信节点的时候再加以演示。
+7.2.2.3 属性节点
+在 DOM 的定义中，属性节点代表的是 XML 或 HTML 文档中各种页面元素的属性，其nodeType的值为 2、nodeName的值为节点所代表的标签属性的名称、nodeValue的值为节点所代表的标签属性中存取的数据。在 Web 前端开发的语境下，属性节点通常对应着一个 HTML 标签的属性。例如，之前调用的sayhello.onclick属性返回的就是代表<a>标签元素的onclick属性的节点。属性节点对象主要提供了以下三个接口：
+- name属性： nodeName属性的别名，用于存取节点所代表标签属性的名称。
+- value属性： nodeValue属性的别名，用于存取节点所代表标签属性中的数据。
+- specified属性 该属性是一个布尔类型的值，用来表示该属性是用脚本代码设置的（值为 true），还是原本就设置在 HTML 文档中的（值为 false）。
+下面，我们可以用脚本创建一个 HTML 标签为<div>的元素节点，并在其中演示一下属性节点的使用：
+// 用脚本创建新节点
+const newNode = document.createElement('div');
+document.body.appendChild(newNode);
+// 新建属性节点
+let attrNode = document.createAttribute('class');
+attrNode.value = 'box';
+// 为当前元素添加属性
+newNode.setAttributeNode(attrNode);
+// 重新获取属性节点
+attrNode = newNode.getAttributeNode(attrNode.name);
+// 以节点对象的形式修改当前元素的属性
+attrNode.value = 'newbox';
+newNode.setAttributeNode(attrNode);
+// 以节点对象的形式删除当前元素的属性
+newNode.removeAttributeNode(attrNode);
+console.log(attrNode.specified);  // 输出：true
+严格来说，属性节点通常并不被视为是 HTML 文档所对应 DOM 模型的一部分，它很少被当做独立的节点来使用。
+7.2.2.4 文本节点
+在 DOM 的定义中，文本节点代表的是 XML 或 HTML 文档中各种页面元素中显示的文本，其nodeType的值为 3、nodeName的值为#text、nodeValue的值为节点所代表的那段文本。通常情况下，文本节点都位于 DOM 树结构的末端，被认为是叶子节点，不再有子节点了。因此，文本节点上的操作基本是一些字符串处理，为此，DOM 为文本节点定义了以下接口：
+- data属性： nodeValue属性的别名，用于存取注释节点中的文本。
+- appendData()方法： 该方法的作用是将指定的文本加入到当前节点的现有文本的后面，它接收一个字符串类型的实参，用于指定要插入的文本。
+- deleteData()方法： 该方法的作用是将指定的文本从当前节点的现有文本中删除，它接收两个实参，第一个实参用于指定要删除文本的始起位置，第二个实参用于指定要删除文本的字符数。
+- insertData()方法： 该方法的作用是将指定的文本插入到当前节点的现有文本中，它接收两个实参，第一个实参用于指定要插入文本在现有文本中的始起位置，第二个实参用于指定要插入的文本。
+- replaceData()方法： 该方法的作用是用指定文本替换掉当前节点的现有文本中的某段文本，它接收三个实参，第一个实参用于要替换文本在现有文本中的始起位置，第二个实参用于指定现有文本中要被替换文本的字符数，第三个实参用于指定要替换的文本。
+- splitText()方法： 该方法的作用是按照指定位置分割当前节点中的现有文本，它接收一个用于指定分割位置的实参。
+- subSrtingData()方法： 该方法的作用是从当前节点的现有文本中读取某一段指定的文本，它接收两个实参，第一个实参用于指定要读取文本在现有文本中的始起位置，第二个实参用于指定要读取文本的字符数。
+下面，我们可以用脚本创建一个 HTML 标签为<div>的元素节点，并在其中演示一下上述接口的使用：
+// 用脚本创建新节点
+const newNode = document.createElement('div');
+newNode.id = 'box_4';
+document.body.appendChild(newNode);
+// 创建文本节点
+const textNode = document.createTextNode('这是box_4中的文本。');
+newNode.appendChild(textNode);
+console.log(newNode.lastChild.data); // 输出：这是box_4中的文本。
+// 在现有文本后面添加文本
+textNode.appendData('你好！');
+console.log(newNode.lastChild.data); // 输出：这是box_4中的文本。你好！
+// 在指定位置添加文本
+textNode.insertData(0, 'test: ');
+console.log(newNode.lastChild.data); // 输出：test: 这是box_4中的文本。你好！
+// 读取指定文本
+console.log(textNode.substringData(0, 'test: '.length)); // 输出：test:
+// 替换指定文本
+textNode.replaceData(0,'test: '.length, '测试：');
+console.log(newNode.lastChild.data); 
+                                // 输出：测试：这是box_4中的文本。你好！
+// 删除指定文本
+textNode.deleteData(0, '测试：'.length);
+console.log(newNode.lastChild.data); // 输出：这是box_4中的文本。你好！
+7.2.2.5 注释节点
+在 DOM 的定义中，注释节点代表的是 XML 或 HTML 文档中的注释标签。其nodeType的值为 8、nodeName的值为#comment、nodeValue的值为节点所代表注释标签中的文本。注释节点对象的接口与文本节点对象基本相同，它可以执行文本节点除splitText()方法之外的所有操作，例如对于下面这个带有注释标签的<div>标签：
+<div id="box_5"><!--这是一个注释。--></div>
+如你所见，注释标签应该是该<div>标签的第一个子节点，我们可以通过该子节点的data属性来读取其中的注释文本，并用appentData()方法添加内容，像这样：
+const box_5 = document.getElementById('box_5');
+console.log(box_5.firstChild.data);          // 输出：这是一个注释。
+box_5.firstChild.appendData('测试。');
+console.log(box_5.firstChild.data);          // 输出：这是一个注释。测试。
+
 ### BOM 的使用
 
 ## 引入 jQuery
