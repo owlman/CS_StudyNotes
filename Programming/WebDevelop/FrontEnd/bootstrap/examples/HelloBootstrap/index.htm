@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <title>基于Bootstrap的网页布局</title>
+    </head>
+    <body>
+        <nav class="p-5 navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">导航栏区域</a>
+                <div>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">链接1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">链接2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">链接3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <header class="p-5 bg-secondary text-light">
+            <div class="container">
+                <h1>头部区域</h1>
+                <p>header 标记用于定义网页的头部区域，
+                该区域通常用于放置网站的的标题和LOGO。</p>
+            </div>
+        </header>
+        <main class="p-5">
+            <section class="container">
+                <h2>章节区域</h2>
+                <p class="p-4">
+                    section 标记用于定义网页中的章节区域，
+                    根据要显示的内容类型，同一网页可被划分为多个章节区域。
+                </p> 
+                <div class="d-flex">
+                    <aside class="p-3 bg-secondary text-light">
+                        <h3>侧边栏区域</h3>
+                        <p >aside 标记通常用于设置文章的内部导航。</p>
+                        <nav class="navbar flex-column ">
+                            <a class="nav-link active" href="#">目录 1</a>
+                            <a class="nav-link" href="#">目录 2</a>
+                            <a class="nav-link" href="#">目录 3</a>
+                            <a class="nav-link" href="#">目录 4</a>
+                            <a class="nav-link" href="#">目录 5</a>
+                            <a class="nav-link" href="#">目录 6</a>
+                        </nav>
+                    </aside>
+                    <article class="p-3">
+                        <h3>文章区域</h3>
+                        <p class="mx-3">article 标记通常用于定义一篇文章，
+                            同一章节中可以有多篇文章。</p>
+                        <div class="p-3">
+                            <h4>文章标题</h4>
+                            <p class="mx-3">这是一个段落。这是一个段落。这是一个段落。</p>
+                            <h5>文章子标题</h5>
+                            <p class="mx-3">这是另一个段落。这是另一个段落。这是另一个段落。</p>
+                        </div>
+                    </article>        
+                </div>
+            </section>
+        </main>
+        <footer class="p-3 bg-dark text-light">
+            <div class="container">
+                <p>footer 标记用于定义网页的页脚部分，
+                该区域通常用于放置与网站的合作方、版权相关的信息。</p> 
+            </div>
+        </footer>
+        <script src="scripts/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
