@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/bootstrap.min.css">
         <title>基于Bootstrap的网页布局</title>
     </head>
     <body>
-        <nav class="p-5 navbar navbar-expand-lg bg-dark navbar-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">导航栏区域</a>
-                <div>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">链接1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">链接2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">链接3</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <header class="p-5 bg-secondary text-light">
+        <nav class="p-3 navbar navbar-expand-lg bg-dark navbar-dark">  
+            <div class="container">  
+              <a class="navbar-brand" href="#">
+                <img src="./img/logo.jpg" class="rounded-pill" style="width: 3vw;" >
+                <span style="vertical-align: middle;" >导航栏区域</span>
+            </a>  
+              <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav">  
+                <span class="navbar-toggler-icon"></span>  
+              </button>  
+              <div class="collapse navbar-collapse" id="navbarNav">  
+                <ul class="navbar-nav ms-auto">  
+                  <li class="nav-item">  
+                    <a class="nav-link" href="#">链接1</a>  
+                  </li>  
+                  <li class="nav-item">  
+                    <a class="nav-link" href="#">链接2</a>  
+                  </li>  
+                  <li class="nav-item">  
+                    <a class="nav-link" href="#">链接3</a>  
+                  </li>  
+                </ul>  
+              </div>  
+            </div>  
+          </nav>
+        <header class="p-4 bg-secondary text-light">
             <div class="container">
                 <h1>头部区域</h1>
-                <p>header 标记用于定义网页的头部区域，
-                该区域通常用于放置网站的的标题和LOGO。</p>
+                <p>
+                    header 标记用于定义网页的头部区域，
+                    该区域通常用于放置网站的的标题。
+                </p>
             </div>
         </header>
         <main class="p-5">
@@ -64,12 +75,13 @@
                 </div>
             </section>
         </main>
-        <footer class="p-3 bg-dark text-light">
+        <footer class="p-3 bg-dark text-light fixed-bottom">
             <div class="container">
                 <p>footer 标记用于定义网页的页脚部分，
                 该区域通常用于放置与网站的合作方、版权相关的信息。</p> 
             </div>
         </footer>
-        <script src="scripts/bootstrap.bundle.min.js"></script>
+        <script src="./scripts/bootstrap.min.js"></script>
     </body>
 </html>
+

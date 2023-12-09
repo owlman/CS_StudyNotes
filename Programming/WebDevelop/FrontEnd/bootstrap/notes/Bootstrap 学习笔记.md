@@ -4,7 +4,7 @@
 
 ## 框架简介
 
-Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术实现的前端开发框架。它本质上是一个开源、免费的工具集，其中提供了一系列可重用的页面组件、样式类以及脚本代码，旨在帮助网页设计师快速构建出既充满专业感，又显得精致美观的网页（包括基于网页技术的Web应用程序界面）。Bootstrap框架在网页设计领域的最大竞争优势来自于以下几个方面：
+Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术实现的前端开发框架。它本质上是一个开源、免费的工具集，其中提供了一系列可重用的页面组件、样式类以及脚本代码，旨在帮助网页设计师快速构建出既充满专业感，又显得精致美观的网页（包括基于网页技术的Web应用程序界面）。目前，Bootstrap框架被广泛用于各种主流的Web应用中，例如Bing、LinkedIn、Instagram、Pinterest、Reddit、StackOverflow等，该框架在网页设计领域的最大竞争优势来自于以下几个方面：
 
 - Bootstrap框架对响应式布局的强大支持。通过在项目中引入该框架，设计师们可以非常轻松地设计出能自动适应不同屏幕尺寸的网页，这将有助于提供更好的用户体验。在移动设备越来越普及的今天，响应式布局已经成为了Web开发的标配，Bootstrap框架的出现为开发者提供了一个快速实现响应式布局的工具。
 
@@ -12,38 +12,38 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 - Bootstrap框架的开发者们还为初学者提供了详细的文档、丰富的示例代码以及完善的社区支持，这些资源都极大地平缓了该框架的学习曲线，使得人们快速掌握该框架的使用方法，这也是笔者在这里大力推荐读者基于 Bootstrap框架来学习网页设计的原因之一。
 
-总而言之，Bootstrap框架是一款功能强大、易用性高、可扩展性强的前端开发框架，它为网页设计师们提供了快速构建响应式布局和常见Web界面元素的工具，极大地提高了开发效率和用户体验。如果你是一名前端开发者，Bootstrap框架绝对是你不可或缺的工具之一。目前，Bootstrap框架被广泛用于各种主流的Web应用中，例如Twitter、Bing、LinkedIn、Instagram、Pinterest、Reddit、StackOverflow等。
+总而言之，Bootstrap框架是一款功能强大、易用性高、可扩展性强的前端开发框架，它为网页设计师们提供了快速构建响应式布局和常见Web界面元素的工具，极大地提高了开发效率和用户体验。如果读者想成为一名前端开发者，Bootstrap框架绝对是你应该要学习的工具之一。下面，就让我们根据网页设计工作中不同的任务主题来具体介绍一下该框架的使用方法。
 
-## 页面整体布局
+## 页面整体设计
 
-Bootstrap框架提供了大量的预定义样式，这些样式可以帮助网页设计师快速实现网页的布局设计。具体来说，Bootstrap框架在网页布局设计方面可以提供的便利主要如下：
+正如我们在上一节中所说，Bootstrap框架之所以如此受到欢迎，主要因为它提供了大量可重用的界面组件和CSS样式，这些组件和样式可以帮助设计师们快速有效地完成网页的整体设计任务。具体来说，Bootstrap框架在网页整体设计方面可以提供的便利主要如下：
 
-- 它提供了大量的预定义样式，能够帮助网页设计师快速实现网页的布局设计。
+- 它提供了大量的预定义样式，能够帮助网页设计师快速完成网页的整体布局。
 - 它提供了大量的预定义模板，能够帮助网页设计师快速选择网页的配色方案。
-- 它提供了大量的预定义组件，能够帮助网页设计师快速实现网页的用户交互界面设计。
-- 它采用了基于移动设备优先的策略，能够帮助网页设计师快速实现移动端网页的布局设计。
+- 它提供了大量的预定义组件，能够帮助网页设计师快速构建网页中要使用的界面元素。
+- 它采用了基于移动设备优先的策略，能够帮助网页设计师快速实现网页的响应式布局。
 
-在使用Bootstrap框架时，读者使用该框架提供的一系列CSS类和组件来完成网页设计工作。例如，读者在使用Bootstrap框架时可以采用以下几种常见的方式来完成网页的布局工作：
+例如在考虑网页的整体布局时，Bootstrap框架为我们提供了以下几种常见的布局样式：
 
-1. **固定宽度布局**：如果要采用这种布局方式，设计师需要使用`container`类来为网页内容提供了一个中心对齐且具有固定宽度的容器。这种容器会随着屏幕或视口尺寸的改变而调整其宽度。
+1. **固定宽度布局**：如果要采用这种布局样式，设计师需要使用`container`类来为网页内容提供了一个中心对齐且具有固定宽度的容器。这种容器会随着屏幕或视口尺寸的改变而调整其宽度。
 
-2. **流体宽度布局**：如果要采用这种布局方式，设计师需要使用`container-fluid`类来为网页元素提供一个宽度为100%的容器，意味着它会占据其父元素或视口的整个宽度。
+2. **流体宽度布局**：如果要采用这种布局样式，设计师需要使用`container-fluid`类来为网页元素提供一个宽度为100%的容器，意味着它会占据其父元素或视口的整个宽度。
 
-3. **响应式栅格布局**：如果要采用这种布局方式，设计师需要使用`container`和`row`这两个类来组织内容，然后在每个`row`类定义的页面元素中使用`col`类来安排更具体的网页内容。Bootstrap框架的栅格系统是一个强大的布局工具，它是响应式的，可以让网页自行适应不同视口尺寸。
+3. **响应式栅格布局**：如果要采用这种布局样式，设计师需要使用`container`和`row`这两个类来组织内容，然后在每个`row`类定义的页面元素中使用`col`类来安排更具体的网页内容。Bootstrap框架的栅格系统是一个强大的布局工具，它是响应式的，可以让网页自行适应不同视口尺寸。
 
-4. **Flexbox布局**：Flexbox是一个独立的CSS布局模型，但Bootstrap框架已经整合了这种布局方式，提供了一系列与Flexbox相关的实用类（包括`d-flex`、 `justify-content-*`、 `align-items-*`等）。这种布局方式可以让设计师在一个容器内以更灵活的方式排列、对齐和分配子元素。与传统的浮动或定位方法相比，Flexbox提供了更多的控制和更简单的解决方案，特别是对于复杂的布局和对齐问题。
+4. **Flexbox布局**：Flexbox是一个独立的CSS布局模型，但Bootstrap框架已经整合了这种布局样式，提供了一系列与Flexbox相关的实用类（包括`d-flex`、 `justify-content-*`、 `align-items-*`等）。这种布局样式可以让设计师在一个容器内以更灵活的方式排列、对齐和分配子元素。与传统的浮动或定位方法相比，Flexbox提供了更多的控制和更简单的解决方案，特别是对于复杂的布局和对齐问题。
 
 5. **组件布局**： Bootstrap框架还提供了许多组件，如导航栏、卡片、警报框等，读者可以使用这些组件来构建特定类型的布局。例如，你可以使用导航栏组件来创建一个具有导航功能的网站头部。
 
-另外，读者还可以根据项目的具体需求灵活地混合使用上述布局方式，以便创建各种具有复杂布局的网页。总而言之，Bootstrap框架的灵活性，及其提供的丰富文档资源使读者能够轻松实现各种布局。接下来，我们先通过一个简单项目来为读者演示如何在项目中引入Bootstrap框架，并基于该框架来实现网页的响应式布局，该项目的具体步骤如下。
+当然了，除了选择上面其中一种布局样式之外，读者还可以根据自己的具体需求灵活地混合使用这些样式，以便创建出更具复杂性的网页。Bootstrap框架的灵活性及其提供的丰富文档资源可以帮助我们轻松实现各种复杂的网页布局设计。接下来，让我们通过一个简单项目来为读者演示一下在项目中引入Bootstrap框架的具体步骤，以及如何基于该框架来完成网页的整体布局任务，项目的创建过程如下。
 
-1. 首先，在本地计算机中创建一个名为`HelloBootstrap`的文件夹，并在其中创建一个名为`index.htm`的网页文件和两个分别名为`styles`和`scripts`的子目录。
+1. 在本地计算机中创建一个名为`HelloBootstrap`的文件夹，并在其中创建一个名为`index.htm`的网页文件和两个分别名为`styles`和`scripts`的子目录。
 
 2. 打开网页浏览器，使用搜索引擎找到Bootstrap框架的官网，然后进入到如下图所示的下载页面，并单击图中的「Download」按钮将编译好的CSS和JavaScript文件下载到本地计算机中。
 
     ![Bootstrap官方下载页面](./img/1.png)
 
-3. 下载完成后，读者会得到一个名为`bootstrap-5.3.2-dist.zip`的压缩包文件，接下来的工作就是要该文件解压并将其中的`css/bootstrap.min.css`文件复制到`HelloBootstrap`项目的`styles`目录下，而`js/bootstrap.bundle.min.js`文件夹中的文件则复制到该项目的`scripts`目录下。
+3. 下载完成后，读者会得到一个名为`bootstrap-5.3.2-dist.zip`的压缩包文件，接下来的工作就是要该文件解压并将其中路径为`css/bootstrap.min.css`的文件复制到`HelloBootstrap`项目的`styles`目录下，而路径为`js/bootstrap.min.js`的文件则复制到该项目的`scripts`目录下。
 
 4. 接下来，读者需要使用VS Code编辑器中打开`HelloBootstrap`项目，并在之前创建的`index.htm`文件的输入如下代码：
 
@@ -51,33 +51,46 @@ Bootstrap框架提供了大量的预定义样式，这些样式可以帮助网�
     <!DOCTYPE html>
     <html lang="zh-CN">
         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="styles/bootstrap.min.css">
             <title>基于Bootstrap的网页布局</title>
         </head>
         <body>
-            <nav class="p-5 navbar navbar-expand-lg bg-dark navbar-dark">
-                <div class="container">
-                    <a class="navbar-brand" href="#">导航栏区域</a>
-                    <div>
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">链接1</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">链接2</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">链接3</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <nav class="p-3 navbar navbar-expand-lg bg-dark navbar-dark">  
+                <div class="container">  
+                <a class="navbar-brand" href="#">
+                    <img src="./img/logo.jpg" class="rounded-pill" style="width: 3vw;" >
+                    <span style="vertical-align: middle;" >导航栏区域</span>
+                </a>  
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"  
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>  
+                </button>  
+                <div class="collapse navbar-collapse" id="navbarNav">  
+                    <ul class="navbar-nav ms-auto">  
+                    <li class="nav-item">  
+                        <a class="nav-link" href="#">链接1</a>  
+                    </li>  
+                    <li class="nav-item">  
+                        <a class="nav-link" href="#">链接2</a>  
+                    </li>  
+                    <li class="nav-item">  
+                        <a class="nav-link" href="#">链接3</a>  
+                    </li>  
+                    </ul>  
+                </div>  
+                </div>  
             </nav>
-            <header class="p-5 bg-secondary text-light">
+            <header class="p-4 bg-secondary text-light">
                 <div class="container">
                     <h1>头部区域</h1>
-                    <p>header 标记用于定义网页的头部区域，
-                    该区域通常用于放置网站的的标题和LOGO。</p>
+                    <p>
+                        header 标记用于定义网页的头部区域，
+                        该区域通常用于放置网站的的标题。
+                    </p>
                 </div>
             </header>
             <main class="p-5">
@@ -91,7 +104,7 @@ Bootstrap框架提供了大量的预定义样式，这些样式可以帮助网�
                         <aside class="p-3 bg-secondary text-light">
                             <h3>侧边栏区域</h3>
                             <p >aside 标记通常用于设置文章的内部导航。</p>
-                            <nav class="navbar flex-column ">
+                            <nav class="navbar flex-column">
                                 <a class="nav-link active" href="#">目录 1</a>
                                 <a class="nav-link" href="#">目录 2</a>
                                 <a class="nav-link" href="#">目录 3</a>
@@ -102,11 +115,15 @@ Bootstrap框架提供了大量的预定义样式，这些样式可以帮助网�
                         </aside>
                         <article class="p-3">
                             <h3>文章区域</h3>
-                            <p class="mx-3">article 标记通常用于定义一篇文章，
-                                同一章节中可以有多篇文章。</p>
+                            <p class="mx-3">
+                                article 标记通常用于定义一篇文章，
+                                同一章节中可以有多篇文章。
+                            </p>
                             <div class="p-3">
                                 <h4>文章标题</h4>
-                                <p class="mx-3">这是一个段落。这是一个段落。这是一个段落。</p>
+                                <p class="mx-3">
+                                    这是一个段落。这是一个段落。这是一个段落。
+                                </p>
                                 <h5>文章子标题</h5>
                                 <p class="mx-3">
                                     这是另一个段落。这是另一个段落。这是另一个段落。
@@ -116,13 +133,15 @@ Bootstrap框架提供了大量的预定义样式，这些样式可以帮助网�
                     </div>
                 </section>
             </main>
-            <footer class="p-3 bg-dark text-light">
+            <footer class="p-3 bg-dark text-light  fixed-bottom">
                 <div class="container">
-                    <p>footer 标记用于定义网页的页脚部分，
-                    该区域通常用于放置与网站的合作方、版权相关的信息。</p> 
+                    <p>
+                        footer 标记用于定义网页的页脚部分，
+                        该区域通常用于放置与网站的合作方、版权相关的信息。
+                    </p> 
                 </div>
             </footer>
-            <script src="scripts/bootstrap.bundle.min.js"></script>
+            <script src="./scripts/bootstrap.min.js"></script>
         </body>
     </html>
     ```
@@ -131,9 +150,9 @@ Bootstrap框架提供了大量的预定义样式，这些样式可以帮助网�
 
     ![基于Bootstrap框架的网页布局示例](./img/2.png)
 
-在上述示例中，我们首先在项目中引入了Bootstrap框架的CSS样式文件和JavaScript文件（以便能该框架提供的外观样式及其相关的功能），然后使用了该框架中的CSS类来定义网页的不同区域及其中的界面元素。具体到网页布局方面，我们在这里主要采用了组件布局和Flexbox布局两种方式。其中，组件布局主要运用于导航栏区域，而在作为网页主要区域的章节区域中采用的则是Flexbox布局，具体说明如下：
+在上述示例中，我们首先在项目中引入了Bootstrap框架的CSS样式文件和JavaScript文件（以便能该框架提供的外观样式及其相关的功能），然后使用了该框架提供的样式类来完成网页的整体布局，并安排不同布局元素中的内容。关于页面中的元素安排，我们会在后面的章节中做具体介绍，下面先重点关注网页的整体布局任务。如你所见，我们在这里主要采用了组件布局和Flexbox布局两种方式。其中，组件布局主要运用于导航区域，而在作为网页主要区域的章节区域中采用的则是Flexbox布局，具体说明如下：
 
-- 在导航栏区域，我们首先使用`navbar`和`navbar-expand-lg`这两个类创建了一个响应式的导航栏组件。然后在该组件内部，`navbar-brand`类用于定义导航栏的品牌标识。`navbar-nav`类和`nav-item`类用于创建导航栏的链接列表。
+- 在导航区域，我们使用`navbar`和`navbar-expand-lg`这两个类创建了一个响应式的页面导航栏。在该导航栏内部，`navbar-brand`类用于定义当前网页的Logo元素（包括图片与文字）。`navbar-nav`类和`nav-item`类用于创建导航栏中的链接列表元素。另外在响应式布局方面，我们还利用`navbar-toggler`类创建了一个按钮元素，当网页在小屏幕设备上被访问时它就会被显示出来，而导航链接列表将会被收起，只有当用户点击该按钮时它才会重新被展开或收起。为此，我们需要将导航栏中的链接列表放在一个由`collapse`和`navbar-collapse`这两个类创建的`<div>`元素中。除此之外，我们还为导航链接列表本身添加了一个`ms-auto`类，这也是Bootstrap的响应式工具类之一，它会在小屏幕设备上自动将导航链接移到另一侧，以适应屏幕宽度。
 
 - 在章节区域，我们首先使用`d-flex`类创建了一个以`<div>`标记来定义的弹性容器，然后用于排列和分布该容器内的页面元素，使网页布局更加灵活和响应式。下面是关于`d-flex`类的详细说明：
   - **Flex容器**：`d-flex`类被应用于一个HTML元素（通常是`<div>`），将其定义为Flex容器。这意味着该元素的子元素将遵循Flexbox规则进行排列和布局。
@@ -141,7 +160,7 @@ Bootstrap框架提供了大量的预定义样式，这些样式可以帮助网�
   - **弹性布局**：Flexbox布局提供了一种强大的方式来管理和调整元素之间的空间分配。使用`d-flex`类，你可以轻松实现弹性的网页布局，以适应不同屏幕尺寸和内容需求。
   - **适应性和响应性**：Flexbox是响应式布局的理想选择，因为它可以在不同屏幕尺寸下自动调整元素的排列和大小，无需使用媒体查询。这使得你可以更容易地创建适应各种设备的网页布局。
 
-当然了，上述示例中所做的只是一次关于Bootstrap框架的初体验，目的是让读者对该框架能有一个大致的了解。接下来，我们将分主题具体介绍Bootstrap框架在网页设计工作中的具体使用方法。
+当然了，上述示例中所做的只是一次关于Bootstrap框架的初体验，目的是让读者对该框架能有一个大致的了解。
 
 ## 图文信息排版
 
