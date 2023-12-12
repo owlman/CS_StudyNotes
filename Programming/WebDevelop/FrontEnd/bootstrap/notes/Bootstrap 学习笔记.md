@@ -39,7 +39,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 当然了，除了选择上面其中一种布局样式之外，读者还可以根据自己的具体需求灵活地混合使用这些样式，以便创建出更具复杂性的网页。Bootstrap框架的灵活性及其提供的丰富文档资源可以帮助我们轻松实现各种复杂的网页布局设计。接下来，让我们通过一个简单项目来为读者演示一下在项目中引入Bootstrap框架的具体步骤，以及如何基于该框架来完成网页的整体布局任务，项目的创建过程如下。
 
-1. 在本地计算机中创建一个名为`HelloBootstrap`的文件夹，并在其中创建一个名为`index.htm`的网页文件和两个分别名为`styles`和`scripts`的子目录。
+1. 在本地计算机中创建一个名为`HelloBootstrap`的文件夹（在这里，我将会将它创建在本笔记文件所在的目录下的`examples`目录中），并在其中创建一个名为`index.htm`的网页文件和两个分别名为`styles`和`scripts`的子目录。
 
 2. 打开网页浏览器，使用搜索引擎找到Bootstrap框架的官网，然后进入到如下图所示的下载页面，并单击图中的「Download」按钮将编译好的CSS和JavaScript文件下载到本地计算机中。
 
@@ -216,18 +216,195 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 ## 图文信息排版
 
-在完成了网页的整体设计工作之后，设计师们接下来的工作就是安排要如何显示网页中的具体内容了。而在网页可显示的诸多元素中，最基本的就是图文类元素了，这类元素主要包括标题、段落、强调、引用、链接、列表、表格、图片等。下面，就让我们来继续介绍一下Bootstrap框架中可用于图文信息排版的样式类和界面组件。下面，让我们从最基本的文本类元素开始。
-
-### 文本类元素
-
-对于网页中可显示的文本类元素，我们最常用到的主要包括标题、段落、强调、引用、链接这五种。Bootstrap框架对这些元素都预定义了一系列相应的样式类，并且这些样式类之间还有着一定的相互配合关系。下面，让我们通过一个简单的示例来介绍一下样式类在文字排版任务中的应用，该示例的构建步骤如下：
+在完成了网页的整体设计工作之后，设计师们接下来的工作就是安排要如何显示网页中的具体内容了。而在网页可显示的诸多元素中，最基本的就是图文类元素了，这类元素主要包括标题、段落、强调、引用、链接、列表、表格、图片等。下面，让我们来继续介绍Bootstrap框架中可用于图文信息排版的样式类和界面组件。和之前一样，我们会先通过设计一个简单的示例来演示一下这些样式类和组件在图文排版任务中的应用，该示例的构建步骤如下：
 
 1. 在本地计算机中创建一个名为`TextLayout`的项目（在这里，我将会将它创建在本笔记文件所在的目录下的`examples`目录中），并按照之前示例中演示的方法将Bootstrap框架引入到当前项目中。
 
 2. 在VS Code这样的代码编辑器中打开刚刚创建项目，然后在该项目的根目录下创建一个`index.htm`文件，并在其中输入以下代码：
 
-```html
-```
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="./styles/bootstrap.min.css">
+            <script src="./scripts/bootstrap.min.js" defer></script>
+            <title>网页文本排版示例</title>
+        </head>
+        <body class="p-4 container">
+            <header class="p-3 text-center">
+                <h1 class="p-3 m-3">图文报告标题</h1>
+                <p class="m-0">报告人：owlman</p>
+                <p class="m-0">发布日期：2023年12月</p>
+            </header>
+            <main class="row">
+                <aside class="mt-3 p-3 col-3 text-bg-light">
+                    <h2 class="p-2">目录：</h2>
+                    <ul>
+                        <li>第一部分：概述</li>
+                        <li>第二部分：论述</li>
+                        <li>第三部分：结论</li>
+                        <li>第四部分：文献</li>
+                    </ul>      
+                </aside>
+                <section class="p-2 col-9">
+                    <article class="py-2 my-3 container">
+                        <h2 class="mb-4 pb-2 border-bottom">第一部分：概述</h2>
+                        <p>
+                            在这里主要写一些报告的
+                            <em class="mark">简单概要以及一些背景信息</em>。
+                        </p>
+                        <p>
+                            要报告的问题包括：
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                            Fuga facilis iure consequatur aspernatur! Libero, 
+                        </p>
+                        <p>
+                            报告的相关背景：
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                            Fuga facilis iure consequatur aspernatur! Libero, 
+                        </p>
+                    </article>
+                    <article class="py-2 my-3">
+                        <h2 class="mb-4 pb-2 border-bottom">第二部分：论述</h2>
+                        <p>
+                            在这里可以放置一些与报告内容相关的
+                            <em class="mark">图片、表格以及引用文字</em>。
+                        </p>
+                        <div class="card m-2">
+                            <div class="row  g-0">
+                                <div class="card-body col-6">
+                                    <h3 class="card-title mb-4">图文分析</h3>
+                                    <p class="card-text">
+                                        在这里可以用
+                                        <em class="mark">无序列表和图片</em>
+                                        元素来做一些分析说明。
+                                    </p>
+                                    <ul class="card-text">
+                                        <li>第一项说明：Lorem sit amet。</li>
+                                        <li>第二项说明：Lorem sit amet。</li>
+                                        <li>第三项说明：Lorem sit amet。</li>
+                                        <li>第四项说明：Lorem sit amet。</li>
+                                        <li>第五项说明：Lorem sit amet。</li>
+                                        <li>第六项说明：Lorem sit amet。</li>
+                                        <li>第七项说明：Lorem sit amet。</li>
+                                    </ul>
+                                </div>
+                                <img class="col-6 w-50 card-img"
+                                    src="./img/pic.png" alt="示例图片">
+                            </div> 
+                        </div>
+                        <div class="p-2 m-2">
+                            <h3 class="mb-4">表格分析</h3>
+                            <table class="table table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>项目名称</th>
+                                        <th>报价数据</th>
+                                        <th>相关说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>项目1</td>
+                                        <td>￥30000</td>
+                                        <td>在这里写一段说明文字。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>项目2</td>
+                                        <td>￥25000</td>
+                                        <td>在这里写一段说明文字。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>项目3</td>
+                                        <td>￥50000</td>
+                                        <td>在这里写一段说明文字。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-2 m-2">
+                            <h3 class="mb-4">引用文献</h3>
+                            <blockquote class="p-3 blockquote text-bg-light">
+                                <p>
+                                    在这里可以使用
+                                    <em class="mark">引用元素</em>
+                                    援引一段现有文献中的文本段落。
+                                </p>
+                                <p class="blockquote-footer text-end">
+                                    引用自《参考资料名称》
+                                </p>
+                            </blockquote>
+                        </div>                
+                    </article>
+                    <article class="py-2 my-3 container">
+                        <h2 class="mb-4 pb-2 border-bottom">第三部分：结论</h2>
+                        <p>
+                            在这里可以用
+                            <em class="mark">无序列表</em>
+                            元素来做一个总结。
+                        </p>
+                        <ul>
+                            <li>
+                                <strong class="p-1 text-bg-warning rounded ">
+                                    结论一
+                                </strong>：在这里写一段总结文字，
+                                <span>
+                                    ipsum dolor sit amet consectetur elit。
+                                </span>  
+                            </li>
+                            <li>
+                                <strong  class="p-1 text-bg-warning rounded">
+                                    结论二
+                                </strong>：在这里写一段总结文字，
+                                <span>
+                                    ipsum dolor sit amet consectetur elit。
+                                </span>
+                            </li>
+                            <li>
+                                <strong class="p-1 text-bg-warning rounded">
+                                    结论三
+                                </strong>：在这里写一段总结文字，
+                                <span>
+                                    ipsum dolor sit amet consectetur elit。
+                                </span>
+                            </li>
+                        </ul>
+                    </article>
+                    <article class="py-2 mt-3 container">
+                        <h2 class="mb-4 pb-2 border-bottom">第四部分：文献</h2>
+                        <p>
+                            在这里可以用
+                            <em class="mark">有序列表+超链接元素</em>
+                            来列举报告的参考文献。
+                        </p>
+                        <ol>
+                            <li><a href="https://www.example.com">
+                            【引用期刊格式】[序号]作者.篇名[J].刊名，出版年份，卷号（期号）：起止页码.
+                            </a></li>
+                            <li><a href="https://www.example.com">
+                            【引用论文格式】[序号]作者.篇名[C].出版地：出版者，出版年份：起始页码. 
+                            </a></li>
+                            <li><a href="https://www.example.com">
+                            【引用专着格式】[序号]作者.书名[M].出版地：出版社，出版年份：起止页码.
+                            </a></li>
+                        </ol> 
+                    </article>
+                </section>
+            </main>
+            <footer class="mt-4 p-2 border-top row text-center">
+                <p class="text-muted">&copy; 2023 图文报告公司</p>
+            </footer>        
+        </body>
+    </html>
+    ```
+
+，让我们从最基本的文本类元素开始。
+
+### 文本类元素
+
+对于网页中可显示的文本类元素，我们最常用到的主要包括标题、段落、强调、引用、链接这五种。Bootstrap框架对这些元素都预定义了一系列相应的样式类，并且这些样式类之间还有着一定的相互配合关系。
 
 - **标题类元素**：
 
