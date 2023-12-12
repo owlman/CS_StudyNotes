@@ -148,7 +148,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     </html>
     ```
 
-5. 在保存上述代码之后，读者就可以使用网页浏览器打开`index.htm`文件查看当前网页设计的结果，其外观样式在Google Chrome浏览器中的效果如图2-6所示。
+5. 在保存上述代码之后，读者就可以使用网页浏览器打开`index.htm`文件查看当前网页设计的结果，其外观样式在Google Chrome浏览器中的效果如下图所示。
 
     ![基于Bootstrap框架的网页布局示例](./img/2.png)
 
@@ -246,8 +246,6 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
                         <li>第二部分：论述</li>
                         <li>第三部分：结论</li>
                         <li>第四部分：文献</li>
-                    </ul>      
-                </aside>
                 <section class="p-2 col-9">
                     <article class="py-2 my-3 container">
                         <h2 class="mb-4 pb-2 border-bottom">第一部分：概述</h2>
@@ -400,9 +398,163 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     </html>
     ```
 
-，让我们从最基本的文本类元素开始。
+3. 在保存上述代码之后，读者就可以使用网页浏览器打开`index.htm`文件查看当前网页设计的结果，其外观样式在Google Chrome浏览器中的效果如下图所示。
 
-### 文本类元素
+    ![基于Bootstrap框架的图文排版示例](./img/3.png)
+
+正如读者所见，上述示例仅使用Bootstrap框架提供的一系列样式类就实现了《[[CSS 学习笔记]]》一文中用上百行CSS代码实现的类似效果，下面，就让我们从最基本的内外边距设置开始来逐一介绍这些样式类的使用方法。
+
+### 内外边距设置
+
+<!-- 以下为待整理的资料 -->
+
+影响元素之间的间距是可以通过style的margin或padding属性来实现，但这两个属性本意并不相同；margin影响的是本元素与相邻外界元素之间的距离，这里简称外边距；padding影响的元素本身与其内部子元素之间的距离，简称为内填充。
+
+bootstrap4提供了简写的class名，名称分别以m-开头和p-开头的类。
+
+
+一、影响距离大小的值有
+
+0,1,2,3,4,5,auto
+
+(1)、margin值有
+
+class名
+
+等价的style
+
+m-0
+
+等价于{margin:0 !important}
+
+m-1
+
+等价于{margin:0.25rem !important}
+
+m-2
+
+等价于{margin:0.5rem !important}
+
+m-3
+
+等价于{margin:1rem !important}
+
+m-4
+
+等价于{margin:1.5rem !important}
+
+m-5
+
+等价于{margin:3rem !important}
+
+m-auto
+
+等价于{margin:auto !important}
+
+(2)、padding值有
+
+ 
+
+class名
+
+等价的style
+
+p-0
+
+等价于{padding:0 !important}
+
+p-1
+
+等价于{padding:0.25rem !important}
+
+p-2
+
+等价于{padding:0.5rem !important}
+
+p-3
+
+等价于{padding:1rem !important}
+
+p-4
+
+等价于{padding:1.5rem !important}
+
+p-5
+
+等价于{padding:3rem !important}
+
+p-auto
+
+等价于{padding:auto !important}
+
+二、调整某一侧的边距
+
+有几个缩写,t,b,l,r,x,y含义分别是top,bottom,left,right,left和right,top和bottom
+
+（1）、margin例子，距离大小可以0-5与auto,这里只用期中一个值来说明含义
+
+ 
+
+class名
+
+等价的style
+
+mt-2
+
+{margin-top: 0.5rem !important}
+
+mb-2
+
+{margin-bottom: 0.5rem !important}
+
+ml-2
+
+{margin-left: 0.5rem !important}
+
+mr-2
+
+{margin-right: 0.5rem !important}
+
+mx-2
+
+{margin-right: 0.5rem !important;margin-left: 0.5rem !important}
+
+my-2
+
+{margin-top: 0.5rem !important;margin-bottom: 0.5rem !important}
+
+(2)padding例子
+
+class名
+
+等价的style
+
+pt-2
+
+{padding-top: 0.5rem !important}
+
+pb-2
+
+{padding-bottom: 0.5rem !important}
+
+pl-2
+
+{padding-left: 0.5rem !important}
+
+pr-2
+
+{padding-right: 0.5rem !important}
+
+px-2
+
+{padding-right: 0.5rem !important;margin-left: 0.5rem !important}
+
+py-2
+
+{padding-top: 0.5rem !important;margin-bottom: 0.5rem !important}
+
+
+### 文本元素设置
 
 对于网页中可显示的文本类元素，我们最常用到的主要包括标题、段落、强调、引用、链接这五种。Bootstrap框架对这些元素都预定义了一系列相应的样式类，并且这些样式类之间还有着一定的相互配合关系。
 
@@ -416,6 +568,6 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 - **链接类元素**：
 
-### 图表类元素
+### 图表元素设计
 
 ## 用户界面设计
