@@ -404,155 +404,147 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 正如读者所见，上述示例仅使用Bootstrap框架提供的一系列样式类就实现了《[[CSS 学习笔记]]》一文中用上百行CSS代码实现的类似效果，下面，就让我们从最基本的内外边距设置开始来逐一介绍这些样式类的使用方法。
 
-### 内外边距设置
-
-<!-- 以下为待整理的资料 -->
-
-影响元素之间的间距是可以通过style的margin或padding属性来实现，但这两个属性本意并不相同；margin影响的是本元素与相邻外界元素之间的距离，这里简称外边距；padding影响的元素本身与其内部子元素之间的距离，简称为内填充。
-
-bootstrap4提供了简写的class名，名称分别以m-开头和p-开头的类。
-
-
-一、影响距离大小的值有
-
-0,1,2,3,4,5,auto
-
-(1)、margin值有
-
-class名
-
-等价的style
-
-m-0
-
-等价于{margin:0 !important}
-
-m-1
-
-等价于{margin:0.25rem !important}
-
-m-2
-
-等价于{margin:0.5rem !important}
-
-m-3
-
-等价于{margin:1rem !important}
-
-m-4
-
-等价于{margin:1.5rem !important}
-
-m-5
-
-等价于{margin:3rem !important}
-
-m-auto
-
-等价于{margin:auto !important}
-
-(2)、padding值有
-
- 
-
-class名
-
-等价的style
-
-p-0
-
-等价于{padding:0 !important}
-
-p-1
-
-等价于{padding:0.25rem !important}
-
-p-2
-
-等价于{padding:0.5rem !important}
-
-p-3
-
-等价于{padding:1rem !important}
-
-p-4
-
-等价于{padding:1.5rem !important}
-
-p-5
-
-等价于{padding:3rem !important}
-
-p-auto
-
-等价于{padding:auto !important}
-
-二、调整某一侧的边距
-
-有几个缩写,t,b,l,r,x,y含义分别是top,bottom,left,right,left和right,top和bottom
-
-（1）、margin例子，距离大小可以0-5与auto,这里只用期中一个值来说明含义
-
- 
-
-class名
-
-等价的style
-
-mt-2
-
-{margin-top: 0.5rem !important}
-
-mb-2
-
-{margin-bottom: 0.5rem !important}
-
-ml-2
-
-{margin-left: 0.5rem !important}
-
-mr-2
-
-{margin-right: 0.5rem !important}
-
-mx-2
-
-{margin-right: 0.5rem !important;margin-left: 0.5rem !important}
-
-my-2
-
-{margin-top: 0.5rem !important;margin-bottom: 0.5rem !important}
-
-(2)padding例子
-
-class名
-
-等价的style
-
-pt-2
-
-{padding-top: 0.5rem !important}
-
-pb-2
-
-{padding-bottom: 0.5rem !important}
-
-pl-2
-
-{padding-left: 0.5rem !important}
-
-pr-2
-
-{padding-right: 0.5rem !important}
-
-px-2
-
-{padding-right: 0.5rem !important;margin-left: 0.5rem !important}
-
-py-2
-
-{padding-top: 0.5rem !important;margin-bottom: 0.5rem !important}
-
+### 元素基本设置
+
+正如笔者曾经在《[[CSS 学习笔记]]》一文所介绍的，HTML/XML文档中的元素在CSS视角下是以“盒模型”的形式出现在显示设备中的，因此设置元素的尺寸大小，以及它们之间的间距是网页设计工作中最基本，最重要的任务之一。为了完成这一任务，设计师们通常会需要亲自编写相应的在CSS代码，先使用选择器匹配要设置样式的元素，然后利用`width`和`height`属性设置该元素的尺寸大小，用`margin`属性来设置该元素与相邻外界元素之间的距离（即外边距），而`padding`属性则用来设置该元素与其内部子元素之间的距离（即内边距）。但如果在项目中引入了Bootstrap框架，我们通常只需要直接在HTML/XML文档中使用`w-*`、`h-*`、`m-*`和`p-*`这两组预定义的样式类就可以快速完成这一任务。下面，我们就来详细介绍一下这两组样式类。
+
+- `w-*`样式类：以`w-`为前缀的这组样式类主要用于设置元素的宽度尺寸，其可设定的值主要有`25`、`50`、`75`、`100`和`auto`这五种，其对应的CSS样式值如下表所示：
+
+    | Bootstrap样式类 | CSS样式值 |
+    | :--------------- | :--------- |
+    | `w-25`            | `{width:25% !important}` |
+    | `w-50`            | `{width:50% !important}` |
+    | `w-75`            | `{width:75% !important}` |
+    | `w-100`          | `{width:100% !important}` |
+    | `w-auto`         | `{width:auto !important}` |
+
+- `h-*`样式类：以`h-`为前缀的这组样式类主要用于设置元素的高度尺寸，其可设定的值主要有`25`、`50`、`75`、`100`和`auto`这五种，其对应的CSS样式值如下表所示：
+
+    | Bootstrap样式类 | CSS样式值 |
+    | :--------------- | :--------- |
+    | `h-25`           | `{height:25% !important}` |
+    | `h-50`           | `{height:50% !important}` |
+    | `h-75`           | `{height:75% !important}` |
+    | `h-100`          | `{height:100% !important}` |
+    | `h-auto`         | `{height:auto !important}` |
+
+- `m-*`样式类：以`m-`为前缀的这组样式类主要用于设置元素的外边距，其可设置的值主要有`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种，其对应的CSS样式值如下表所示：
+
+    | Bootstrap样式类 | CSS样式值 |
+    | :--------------- | :--------- |
+    | `m-0`             | `{margin:0 !important}` |
+    | `m-1`             | `{margin:0.25rem !important}` |
+    | `m-2`             | `{margin:0.5rem !important}` |
+    | `m-3`             | `{margin:1rem !important}` |
+    | `m-4`             | `{margin:1.5rem !important}` |
+    | `m-5`             | `{margin:3rem !important}` |
+    | `m-auto`          | `{margin:auto !important}` |
+
+    当然了，我们也可以在`m`之后加上`l`、`r`、`t`、`b`、`x`、`y`和`a`这七个字母中的任意一个，来分别单独设置元素的外左边距、外右边距、外上边距、外下边距、外左右边距和外上下边距，它们同样可以设置`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种值，其对应的CSS样式值如下表所示：
+
+    | Bootstrap样式类 | CSS样式值 |
+    | :--------------- | :--------- |
+    | `ml-0`          | `{margin-left:0 !important}` |
+    | `ml-1`          | `{margin-right:0.25 !important}` |
+    | `ml-2`          | `{margin-right:0.5 !important}` |
+    | `ml-3`          | `{margin-right:1 !important}` |
+    | `ml-4`          | `{margin-right:1.5 !important}` |
+    | `ml-5`          | `{margin-right:3 !important}` |
+    | `ml-auto`       | `{margin-right:auto !important}` |
+    | `mr-0`          | `{margin-right:0 !important}` |
+    | `mr-1`          | `{margin-right:0.25 !important}` |
+    | `mr-2`          | `{margin-right:0.5 !important}` |
+    | `mr-3`          | `{margin-right:1 !important}` |
+    | `mr-4`          | `{margin-right:1.5 !important}` |
+    | `mr-5`          | `{margin-right:3 !important}` |
+    | `mr-auto`       | `{margin-right:auto !important}` |
+    | `mt-0`          | `{margin-top:0 !important}` |
+    | `mt-1`          | `{margin-top:0.25 !important}` |
+    | `mt-2`          | `{margin-top:0.5 !important}` |
+    | `mt-3`          | `{margin-top:1 !important}` |
+    | `mt-4`          | `{margin-top:1.5 !important}` |
+    | `mt-5`          | `{margin-top:3 !important}` |
+    | `mt-auto`       | `{margin-top:auto !important}` |
+    | `mb-0`          | `{margin-bottom:0 !important}` |
+    | `mb-1`          | `{margin-bottom:0.25 !important}` |
+    | `mb-2`          | `{margin-bottom:0.5 !important}` |
+    | `mb-3`          | `{margin-bottom:1 !important}` |
+    | `mb-4`          | `{margin-bottom:1.5 !important}` |
+    | `mb-5`          | `{margin-bottom:3 !important}` |
+    | `mb-auto`       | `{margin-bottom:auto !important}` |
+    | `mx-0`          | `{margin-left:0 !important;margin-right:0 !important}` |
+    | `mx-1`          | `{margin-left:0.25 !important;margin-right:0.25 !important}` |
+    | `mx-2`          | `{margin-left:0.5 !important;margin-right:0.5 !important}` |
+    | `mx-3`          | `{margin-left:1 !important;margin-right:1 !important}` |
+    | `mx-4`          | `{margin-left:1.5 !important;margin-right:1.5 !important}` |
+    | `mx-5`          | `{margin-left:3 !important;margin-right:3 !important}` |
+    | `mx-auto`       | `{margin-left:auto !important;margin-right:auto !important}` |
+    | `my-0`          | `{margin-top:0 !important;margin-bottom:0 !important}` |
+    | `my-1`          | `{margin-top:0.25 !important;margin-bottom:0.25 !important}` |
+    | `my-2`          | `{margin-top:0.5 !important;margin-bottom:0.5 !important}` |
+    | `my-3`          | `{margin-top:1 !important;margin-bottom:1 !important}` |
+    | `my-4`          | `{margin-top:1.5 !important;margin-bottom:1.5 !important}` |
+    | `my-5`          | `{margin-top:3 !important;margin-bottom:3 !important}` |
+    | `my-auto`       | `{margin-top:auto !important;margin-bottom:auto !important}` |
+
+- `p-*`样式类：以`p-`为前缀的这组样式类主要用于设置元素的内边距，其可设置的值也主要有`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种，其对应的CSS样式值如下表所示：
+
+    | Bootstrap样式类 | CSS样式值 |
+    | :--------------- | :--------- |
+    | `p-0`             | `{padding:0 !important}` |
+    | `p-1`             | `{padding:0.25rem !important}` |
+    | `p-2`             | `{padding:0.5rem !important}` |
+    | `p-3`             | `{padding:1rem !important}` |
+    | `p-4`             | `{padding:1.5rem !important}` |
+    | `p-5`             | `{padding:3rem !important}` |
+    | `p-auto`          | `{padding:auto !important}` |
+
+    同样的，我们也可以在`p`之后加上`l`、`r`、`t`、`b`、`x`、`y`和`a`这七个字母中的任意一个，来分别单独设置元素的内左边距、内右边距、内上边距、内下边距、内左右边距和内上下边距，它们同样可以设置`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种值，其对应的CSS样式值如下表所示：
+
+    | Bootstrap样式类 | CSS样式值 |
+    | :--------------- | :--------- |
+    | `pl-0`           | `{padding-left:0 !important}` |
+    | `pl-1`           | `{padding-left:0.25rem !important}` |
+    | `pl-2`           | `{padding-left:0.5rem !important}` |
+    | `pl-3`           | `{padding-left:1rem !important}` |
+    | `pl-4`           | `{padding-left:1.5rem !important}` |
+    | `pl-5`           | `{padding-left:3rem !important}` |
+    | `pl-auto`        | `{padding-left:auto !important}` |
+    | `pr-0`           | `{padding-right:0 !important}` |
+    | `pr-1`           | `{padding-right:0.25rem !important}` |
+    | `pr-2`           | `{padding-right:0.5rem !important}` |
+    | `pr-3`           | `{padding-right:1rem !important}` |
+    | `pr-4`           | `{padding-right:1.5rem !important}` |
+    | `pr-5`           | `{padding-right:3rem !important}` |
+    | `pr-auto`        | `{padding-right:auto !important}` |
+    | `pt-0`           | `{padding-top:0 !important}` |
+    | `pt-1`           | `{padding-top:0.25rem !important}` |
+    | `pt-2`           | `{padding-top:0.5rem !important}` |
+    | `pt-3`           | `{padding-top:1rem !important}` |
+    | `pt-4`           | `{padding-top:1.5rem !important}` |
+    | `pt-5`           | `{padding-top:3rem !important}` |
+    | `pt-auto`        | `{padding-top:auto !important}` |
+    | `pb-0`           | `{padding-bottom:0 !important}` |
+    | `pb-1`           | `{padding-bottom:0.25rem !important}` |
+    | `pb-2`           | `{padding-bottom:0.5rem !important}` |
+    | `pb-3`           | `{padding-bottom:1rem !important}` |
+    | `pb-4`           | `{padding-bottom:1.5rem !important}` |
+    | `pb-5`           | `{padding-bottom:3rem !important}` |
+    | `pb-auto`        | `{padding-bottom:auto !important}` |
+    | `px-0`           | `{padding-left:0 !important; padding-right:0 !important}` |
+    | `px-1`           | `{padding-left:0.25rem !important; padding-right:0.25rem !important}` |
+    | `px-2`           | `{padding-left:0.5rem !important; padding-right:0.5rem !important}` |
+    | `px-3`           | `{padding-left:1rem !important; padding-right:1rem !important}` |
+    | `px-4`           | `{padding-left:1.5rem !important; padding-right:1.5rem !important}` |
+    | `px-5`           | `{padding-left:3rem !important; padding-right:3rem !important}` |
+    | `px-auto`        | `{padding-left:auto !important; padding-right:auto !important}` |
+    | `py-0`           | `{padding-top:0 !important; padding-bottom:0 !important}` |
+    | `py-1`           | `{padding-top:0.25rem !important; padding-bottom:0.25rem !important}` |
+    | `py-2`           | `{padding-top:0.5rem !important; padding-bottom:0.5rem !important}` |
+    | `py-3`           | `{padding-top:1rem !important; padding-bottom:1rem !important}` |
+    | `py-4`           | `{padding-top:1.5rem !important; padding-bottom:1.5rem !important}` |
+    | `py-5`           | `{padding-top:3rem !important; padding-bottom:3rem !important}` |
+    | `py-auto`        | `{padding-top:auto !important; padding-bottom:auto !important}` |
 
 ### 文本元素设置
 
