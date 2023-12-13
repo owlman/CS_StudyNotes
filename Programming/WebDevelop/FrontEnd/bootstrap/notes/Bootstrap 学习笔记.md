@@ -532,14 +532,14 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     | `pb-5`           | `{padding-bottom:3rem !important}` |
     | `pb-auto`        | `{padding-bottom:auto !important}` |
     | `px-0`           | `{padding-left:0 !important; padding-right:0 !important}` |
-    | `px-1`           | `{padding-left:0.25rem !important; padding-right:0.25rem !important}` |
+    | `px-1`          | `{padding-left:0.25rem !important; padding-right:0.25rem !important}` |
     | `px-2`           | `{padding-left:0.5rem !important; padding-right:0.5rem !important}` |
     | `px-3`           | `{padding-left:1rem !important; padding-right:1rem !important}` |
     | `px-4`           | `{padding-left:1.5rem !important; padding-right:1.5rem !important}` |
     | `px-5`           | `{padding-left:3rem !important; padding-right:3rem !important}` |
     | `px-auto`        | `{padding-left:auto !important; padding-right:auto !important}` |
     | `py-0`           | `{padding-top:0 !important; padding-bottom:0 !important}` |
-    | `py-1`           | `{padding-top:0.25rem !important; padding-bottom:0.25rem !important}` |
+    | `py-1`          | `{padding-top:0.25rem !important; padding-bottom:0.25rem !important}` |
     | `py-2`           | `{padding-top:0.5rem !important; padding-bottom:0.5rem !important}` |
     | `py-3`           | `{padding-top:1rem !important; padding-bottom:1rem !important}` |
     | `py-4`           | `{padding-top:1.5rem !important; padding-bottom:1.5rem !important}` |
