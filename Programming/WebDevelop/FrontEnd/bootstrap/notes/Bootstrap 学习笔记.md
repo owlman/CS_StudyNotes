@@ -473,19 +473,19 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     | `mb-5`          | `{margin-bottom:3 !important}` |
     | `mb-auto`       | `{margin-bottom:auto !important}` |
     | `mx-0`          | `{margin-left:0 !important;margin-right:0 !important}` |
-    | `mx-1`          | `{margin-left:0.25 !important;margin-right:0.25 !important}` |
-    | `mx-2`          | `{margin-left:0.5 !important;margin-right:0.5 !important}` |
-    | `mx-3`          | `{margin-left:1 !important;margin-right:1 !important}` |
-    | `mx-4`          | `{margin-left:1.5 !important;margin-right:1.5 !important}` |
-    | `mx-5`          | `{margin-left:3 !important;margin-right:3 !important}` |
-    | `mx-auto`       | `{margin-left:auto !important;margin-right:auto !important}` |
-    | `my-0`          | `{margin-top:0 !important;margin-bottom:0 !important}` |
-    | `my-1`          | `{margin-top:0.25 !important;margin-bottom:0.25 !important}` |
-    | `my-2`          | `{margin-top:0.5 !important;margin-bottom:0.5 !important}` |
-    | `my-3`          | `{margin-top:1 !important;margin-bottom:1 !important}` |
-    | `my-4`          | `{margin-top:1.5 !important;margin-bottom:1.5 !important}` |
-    | `my-5`          | `{margin-top:3 !important;margin-bottom:3 !important}` |
-    | `my-auto`       | `{margin-top:auto !important;margin-bottom:auto !important}` |
+    | `mx-1`   | `{margin-left:0.25 !important;margin-right:0.25 !important}` |
+    | `mx-2`   | `{margin-left:0.5 !important;margin-right:0.5 !important}` |
+    | `mx-3`   | `{margin-left:1 !important;margin-right:1 !important}` |
+    | `mx-4`   | `{margin-left:1.5 !important;margin-right:1.5 !important}` |
+    | `mx-5`   | `{margin-left:3 !important;margin-right:3 !important}` |
+    | `mx-auto`  | `{margin-left:auto !important;margin-right:auto !important}` |
+    | `my-0`   | `{margin-top:0 !important;margin-bottom:0 !important}` |
+    | `my-1`   | `{margin-top:0.25 !important;margin-bottom:0.25 !important}` |
+    | `my-2`   | `{margin-top:0.5 !important;margin-bottom:0.5 !important}` |
+    | `my-3`   | `{margin-top:1 !important;margin-bottom:1 !important}` |
+    | `my-4`   | `{margin-top:1.5 !important;margin-bottom:1.5 !important}` |
+    | `my-5`   | `{margin-top:3 !important;margin-bottom:3 !important}` |
+    | `my-auto` | `{margin-top:auto !important;margin-bottom:auto !important}` |
 
 - `p-*`样式类：以`p-`为前缀的这组样式类主要用于设置元素的内边距，其可设置的值也主要有`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种，其对应的CSS样式值如下表所示：
 
@@ -503,65 +503,109 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
     | Bootstrap样式类 | CSS样式值 |
     | :--------------- | :--------- |
-    | `pl-0`           | `{padding-left:0 !important}` |
-    | `pl-1`           | `{padding-left:0.25rem !important}` |
-    | `pl-2`           | `{padding-left:0.5rem !important}` |
-    | `pl-3`           | `{padding-left:1rem !important}` |
-    | `pl-4`           | `{padding-left:1.5rem !important}` |
-    | `pl-5`           | `{padding-left:3rem !important}` |
-    | `pl-auto`        | `{padding-left:auto !important}` |
-    | `pr-0`           | `{padding-right:0 !important}` |
-    | `pr-1`           | `{padding-right:0.25rem !important}` |
-    | `pr-2`           | `{padding-right:0.5rem !important}` |
-    | `pr-3`           | `{padding-right:1rem !important}` |
-    | `pr-4`           | `{padding-right:1.5rem !important}` |
-    | `pr-5`           | `{padding-right:3rem !important}` |
-    | `pr-auto`        | `{padding-right:auto !important}` |
-    | `pt-0`           | `{padding-top:0 !important}` |
-    | `pt-1`           | `{padding-top:0.25rem !important}` |
-    | `pt-2`           | `{padding-top:0.5rem !important}` |
-    | `pt-3`           | `{padding-top:1rem !important}` |
-    | `pt-4`           | `{padding-top:1.5rem !important}` |
-    | `pt-5`           | `{padding-top:3rem !important}` |
-    | `pt-auto`        | `{padding-top:auto !important}` |
-    | `pb-0`           | `{padding-bottom:0 !important}` |
-    | `pb-1`           | `{padding-bottom:0.25rem !important}` |
-    | `pb-2`           | `{padding-bottom:0.5rem !important}` |
-    | `pb-3`           | `{padding-bottom:1rem !important}` |
-    | `pb-4`           | `{padding-bottom:1.5rem !important}` |
-    | `pb-5`           | `{padding-bottom:3rem !important}` |
-    | `pb-auto`        | `{padding-bottom:auto !important}` |
-    | `px-0`           | `{padding-left:0 !important; padding-right:0 !important}` |
-    | `px-1`          | `{padding-left:0.25rem !important; padding-right:0.25rem !important}` |
-    | `px-2`           | `{padding-left:0.5rem !important; padding-right:0.5rem !important}` |
-    | `px-3`           | `{padding-left:1rem !important; padding-right:1rem !important}` |
-    | `px-4`           | `{padding-left:1.5rem !important; padding-right:1.5rem !important}` |
-    | `px-5`           | `{padding-left:3rem !important; padding-right:3rem !important}` |
-    | `px-auto`        | `{padding-left:auto !important; padding-right:auto !important}` |
-    | `py-0`           | `{padding-top:0 !important; padding-bottom:0 !important}` |
-    | `py-1`          | `{padding-top:0.25rem !important; padding-bottom:0.25rem !important}` |
-    | `py-2`           | `{padding-top:0.5rem !important; padding-bottom:0.5rem !important}` |
-    | `py-3`           | `{padding-top:1rem !important; padding-bottom:1rem !important}` |
-    | `py-4`           | `{padding-top:1.5rem !important; padding-bottom:1.5rem !important}` |
-    | `py-5`           | `{padding-top:3rem !important; padding-bottom:3rem !important}` |
-    | `py-auto`        | `{padding-top:auto !important; padding-bottom:auto !important}` |
+    | `pl-0`   | `{padding-left:0 !important}` |
+    | `pl-1`   | `{padding-left:0.25rem !important}` |
+    | `pl-2`   | `{padding-left:0.5rem !important}` |
+    | `pl-3`   | `{padding-left:1rem !important}` |
+    | `pl-4`   | `{padding-left:1.5rem !important}` |
+    | `pl-5`   | `{padding-left:3rem !important}` |
+    | `pl-auto` | `{padding-left:auto !important}` |
+    | `pr-0`      | `{padding-right:0 !important}` |
+    | `pr-1`     | `{padding-right:0.25rem !important}` |
+    | `pr-2`     | `{padding-right:0.5rem !important}` |
+    | `pr-3`     | `{padding-right:1rem !important}` |
+    | `pr-4`     | `{padding-right:1.5rem !important}` |
+    | `pr-5`     | `{padding-right:3rem !important}` |
+    | `pr-auto` | `{padding-right:auto !important}` |
+    | `pt-0`       | `{padding-top:0 !important}` |
+    | `pt-1`       | `{padding-top:0.25rem !important}` |
+    | `pt-2`       | `{padding-top:0.5rem !important}` |
+    | `pt-3`       | `{padding-top:1rem !important}` |
+    | `pt-4`       | `{padding-top:1.5rem !important}` |
+    | `pt-5`       | `{padding-top:3rem !important}` |
+    | `pt-auto`  | `{padding-top:auto !important}` |
+    | `pb-0`      | `{padding-bottom:0 !important}` |
+    | `pb-1`      | `{padding-bottom:0.25rem !important}` |
+    | `pb-2`      | `{padding-bottom:0.5rem !important}` |
+    | `pb-3`      | `{padding-bottom:1rem !important}` |
+    | `pb-4`      | `{padding-bottom:1.5rem !important}` |
+    | `pb-5`      | `{padding-bottom:3rem !important}` |
+    | `pb-auto` | `{padding-bottom:auto !important}` |
+    | `px-0`      | `{padding-left:0 !important; padding-right:0 !important}` |
+    |`px-1`|`{padding-left:0.25rem !important; padding-right:0.25rem !important}` |
+    |`px-2`| `{padding-left:0.5rem !important; padding-right:0.5rem !important}` |
+    |`px-3` |`{padding-left:1rem !important; padding-right:1rem !important}` |
+    |`px-4`|`{padding-left:1.5rem !important; padding-right:1.5rem !important}` |
+    |`px-5`|`{padding-left:3rem !important; padding-right:3rem !important}` |
+    |`px-auto` | `{padding-left:auto !important; padding-right:auto !important}` |
+    | `py-0`     | `{padding-top:0 !important; padding-bottom:0 !important}` |
+    |`py-1`|`{padding-top:0.25rem !important; padding-bottom:0.25rem !important}` |
+    |`py-2`| `{padding-top:0.5rem !important; padding-bottom:0.5rem !important}` |
+    | `py-3`| `{padding-top:1rem !important; padding-bottom:1rem !important}` |
+    |`py-4`|`{padding-top:1.5rem !important; padding-bottom:1.5rem !important}` |
+    |`py-5`| `{padding-top:3rem !important; padding-bottom:3rem !important}` |
+    |`py-auto` | `{padding-top:auto !important; padding-bottom:auto !important}` |
 
 正如读者在之前的图文排版示例中所看到的，我们利用Bootstrap框架提供的这些样式类对页面中的很多元素都设置了相应的宽度和内外边距，以便它们可以更合适的形态出现在页面中，这些操作都是对网页进行图文信息排版时首先要完成的任务。
 
 ### 文本元素设置
 
-对于网页中可显示的文本类元素，我们最常用到的主要包括标题、段落、强调、引用、链接这五种。Bootstrap框架对这些元素都预定义了一系列相应的样式类，并且这些样式类之间还有着一定的相互配合关系。
+对于网页中可显示的文本类元素，Bootstrap框架首先设置了一些默认的文本样式，然后在此基础上对页面中经常出现的标题、段落、强调、引用、链接等元素预定义了一系列相应的样式类，并且这些样式类之间还有着一定的相互配合关系。下面，我们就来分别介绍一下这部分的内容：
 
-- **标题类元素**：
+- **默认文本样式**：Bootstrap框架对于网页中显示的文本，做了以下默认设置：
+  - `font-family`属性设置为`'Helvetica Neue', Helvetica, Arial, sans-serif`：这是一个常见的字体栈，表示如果用户的设备上有"Helvetica Neue"字体，则使用它，否则依次尝试使用"Helvetica"、"Arial"和"san-serif"字体。
+  - `font-size`属性设置为`16px`：这是文本的默认字体大小。在Bootstrap中，`1rem`等于`16px`，因此可以通过设置`rem`单位来快速调整文本的大小。
+  - `line-height`属性设置为`1.5`：这是文本行高的默认值。行高指的是文本行与行之间的垂直间距，使用相对单位`1.5`可以确保行高与字体大小的比例关系，使文本更易读。
+  - `font-weight`属性设置为`400`：这是文本的默认字体粗细。`400`表示正常的字体粗细，可以通过设置其他值来实现不同的粗细效果，如`bold`表示加粗。
 
-- **段落类元素**：
+- **标题类样式**：对于页面中`<h1>`到`<h6>`六个标题元素，Bootstrap框架中预定义了从`h1`到`h6`六个对应的样式类，以便为它们设置更粗的字体属性（即`font-weight`）以及更具有响应能力的字体大小（即`font-size`）。除此之外，该框架还提供了从`display-1`到`display-6`六个样式类，以便设置更大的字体尺寸（即`font-size`）以及更大的行高（即`line-height`）。这些样式类与相应的样式值的对应关系如下表所示：
 
-- **强调类元素**：
+    | Bootstrap样式类 | CSS样式值 |
+    | :--------------- | :--------- |
+    | `h1` | `font-size: 3.5rem; line-height: 4rem;` |
+    | `h2` | `font-size: 2.5rem; line-height: 3rem;` |
+    | `h3` | `font-size: 2rem; line-height: 2.5rem;` |
+    | `h4` | `font-size: 1.5rem; line-height: 2rem;` |
+    | `h5` | `font-size: 1.25rem; line-height: 1.75rem;` |
+    | `h6` | `font-size: 1rem; line-height: 1.5rem;` |
+    | `display-1` | `font-size: 6rem; line-height: 1.2;` |
+    | `display-2` | `font-size: 5.5rem; line-height: 1.2;` |
+    | `display-3` | `font-size: 4.5rem; line-height: 1.2;` |
+    | `display-4` | `font-size: 3.5rem; line-height: 1.2;` |
+    | `display-5` | `font-size: 2.75rem; line-height: 1.2;` |
+    | `display-6` | `font-size: 2rem; line-height: 1.2;` |
 
-- **引用类元素**：
+    当然了，以上是我根据Bootstrap框架的官方文档所进行的说明，必须要注意的是，这些样式值可能会因为Bootstrap版本的不同而有所变化。建议读者在使用时自行参考该框架的官方文档，以确保信息的准确性。
 
-- **链接类元素**：
+- **段落类文本**：对于页面中`<p>`、`<span>`、`<strong>`、`<em>`、`<small>`、`<abbr>`、`<code>`、`<kbd>`、`<sub>`、`<sup>`、`<ins>`、`<del>`等标记定义的、用于显示普通段落文本的元素，Bootstrap框架提供了一系列常用的预定义样式类，以便设计师们赋予一些文本特定语义的样式，具体如下：
+  - `mark`：表示该文本内容为被标记的内容，显示为类似荧光笔的高亮效果；
+  - `lead`：表示该文本内容为被突出的内容，显示为字体放大的强调效果；
+  - `small`：表示该文本内容为注释说明的内容，显示为字体放小的效果；
+  - `text-uppercase`：表示该文本内容为被大写化的内容，显示为所有字母为大写的形式；
+  - `text-lowercase`：表示该文本内容为被小写化的内容，显示为所有字母为小写的形式；
+  - `text-capitalize`：表示该文本内容为被首字母大写化的内容，显示为所有单词的首字母大写的形式；
+  - `text-start`：表示该文本内容为左对齐的形式，显示为左对齐的形式；
+  - `text-center`：表示该文本内容为居中对齐的形式，显示为居中对齐的形式；
+  - `text-end`：表示该文本内容为右对齐的形式，显示为右对齐的形式；
+  - `text-nowrap`：表示该文本内容为不换行的形式，显示为不换行的形式；
+  - `text-truncate`：表示该文本内容为被截断的形式，显示为被截断的形式；
+  - `text-break`：表示该文本内容为被自动换行的形式，显示为被自动换行的形式；
+  - `text-wrap`：表示该文本内容为被自动换行的形式，显示为被自动换行的形式；
+  - `text-nowrap`：表示该文本内容为被自动换行的形式，显示为被自动换行的形式；
+  - `text-decoration-line-through`：表示该文本内容包含删除线的效果，显示为有删除线的文本；
+  - `text-decoration-none`：表示该文本内容不包含删除线，显示为没有删除线的文本；
+  - `text-decoration-underline`：表示该文本内容包含下划线，显示为有下划线的文本；
+
+- **引用类文本**：
+
+- **链接类文本**：
 
 ### 图表元素设置
+
+- **列表类元素**：
+
+- **表格类元素**：
+
+- **图片类元素**：
 
 ## 用户界面设计
