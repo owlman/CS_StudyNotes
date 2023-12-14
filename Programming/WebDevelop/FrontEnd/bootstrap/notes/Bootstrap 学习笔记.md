@@ -255,13 +255,13 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
                         </p>
                         <p>
                             要报告的问题包括：
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                            Fuga facilis iure consequatur aspernatur! Libero, 
+                            Lorem ipsum dolor sit amet, consectetur elit. 
+                            Fuga facilis iure consequatur aspernatur! Libero。
                         </p>
                         <p>
                             报告的相关背景：
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                            Fuga facilis iure consequatur aspernatur! Libero, 
+                            Lorem ipsum dolor sit amet, consectetur elit. 
+                            Fuga facilis iure consequatur aspernatur! Libero。
                         </p>
                     </article>
                     <article class="py-2 my-3">
@@ -558,7 +558,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `line-height`属性设置为`1.5`：这是文本行高的默认值。行高指的是文本行与行之间的垂直间距，使用相对单位`1.5`可以确保行高与字体大小的比例关系，使文本更易读。
   - `font-weight`属性设置为`400`：这是文本的默认字体粗细。`400`表示正常的字体粗细，可以通过设置其他值来实现不同的粗细效果，如`bold`表示加粗。
 
-- **标题类样式**：对于页面中`<h1>`到`<h6>`六个标题元素，Bootstrap框架中预定义了从`h1`到`h6`六个对应的样式类，以便为它们设置更粗的字体属性（即`font-weight`）以及更具有响应能力的字体大小（即`font-size`）。除此之外，该框架还提供了从`display-1`到`display-6`六个样式类，以便设置更大的字体尺寸（即`font-size`）以及更大的行高（即`line-height`）。这些样式类与相应的样式值的对应关系如下表所示：
+- **标题文本样式**：对于页面中`<h1>`到`<h6>`六个标题元素，Bootstrap框架中预定义了从`h1`到`h6`六个对应的样式类，以便为它们设置更粗的字体属性（即`font-weight`）以及更具有响应能力的字体大小（即`font-size`）。除此之外，该框架还提供了从`display-1`到`display-6`六个样式类，以便设置更大的字体尺寸（即`font-size`）以及更大的行高（即`line-height`）。这些样式类与相应的样式值的对应关系如下表所示：
 
     | Bootstrap样式类 | CSS样式值 |
     | :--------------- | :--------- |
@@ -577,29 +577,45 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
     当然了，以上是我根据Bootstrap框架的官方文档所进行的说明，必须要注意的是，这些样式值可能会因为Bootstrap版本的不同而有所变化。建议读者在使用时自行参考该框架的官方文档，以确保信息的准确性。
 
-- **段落类文本**：对于页面中`<p>`、`<span>`、`<strong>`、`<em>`、`<small>`、`<abbr>`、`<code>`、`<kbd>`、`<sub>`、`<sup>`、`<ins>`、`<del>`等标记定义的、用于显示普通段落文本的元素，Bootstrap框架提供了一系列常用的预定义样式类，以便设计师们赋予一些文本特定语义的样式，具体如下：
-  - `mark`：表示该文本内容为被标记的内容，显示为类似荧光笔的高亮效果；
-  - `lead`：表示该文本内容为被突出的内容，显示为字体放大的强调效果；
-  - `small`：表示该文本内容为注释说明的内容，显示为字体放小的效果；
-  - `text-uppercase`：表示该文本内容为被大写化的内容，显示为所有字母为大写的形式；
-  - `text-lowercase`：表示该文本内容为被小写化的内容，显示为所有字母为小写的形式；
-  - `text-capitalize`：表示该文本内容为被首字母大写化的内容，显示为所有单词的首字母大写的形式；
-  - `text-start`：表示该文本内容为左对齐的形式，显示为左对齐的形式；
-  - `text-center`：表示该文本内容为居中对齐的形式，显示为居中对齐的形式；
-  - `text-end`：表示该文本内容为右对齐的形式，显示为右对齐的形式；
-  - `text-nowrap`：表示该文本内容为不换行的形式，显示为不换行的形式；
-  - `text-truncate`：表示该文本内容为被截断的形式，显示为被截断的形式；
-  - `text-break`：表示该文本内容为被自动换行的形式，显示为被自动换行的形式；
-  - `text-wrap`：表示该文本内容为被自动换行的形式，显示为被自动换行的形式；
-  - `text-nowrap`：表示该文本内容为被自动换行的形式，显示为被自动换行的形式；
-  - `text-decoration-line-through`：表示该文本内容包含删除线的效果，显示为有删除线的文本；
-  - `text-decoration-none`：表示该文本内容不包含删除线，显示为没有删除线的文本；
-  - `text-decoration-underline`：表示该文本内容包含下划线，显示为有下划线的文本；
+- **通用文本样式**：对于页面中的文本类元素，Bootstrap框架提供了一系列通用的样式类，以便设计师们可以为页面赋予不同的文本样式，具体如下：、
+  - `fs-1`到`fs-6`：这组样式类的用法与之前介绍标题文本样式类似，区别是标题文本样式同时包含了对`font-size`和`line-height`这两个属性的设置，而这组样式类只包含对`font-size`属性的设置。
+  - `fst-*`：以`fst-`开头的样式类用于设置文本元素的`font-style`属性，其中`*`表示文本元素的字体样式，具体如下：
+    - `fst-italic`：该样式类会让其作用的文本以斜体的字体来显示；
+    - `fst-normal`：该样式类会让其作用的文本以正常的字体来显示。
+  - `fw-*`：以`fw-`开头的样式类用于设置文本元素的`font-weight`属性，其中`*`表示文本元素的字体粗细，具体如下：
+    - `fw-light`：该样式类会让其作用的文本以细的字体来显示；
+    - `fw-lighter`：该样式类会让其作用的文本以更细的字体来显示；
+    - `fw-normal`：该样式类会让其作用的文本以正常的字体来显示；
+    - `fw-medium`：该样式类会让其作用的文本以中等粗的字体来显示；
+    - `fw-bold`：该样式类会让其作用的文本以粗的字体来显示；
+    - `fw-semibold`：该样式类会让其作用的文本以中粗的字体来显示；
+    - `fw-bolder`：该样式类会让其作用的文本以更粗的字体来显示；
+  - `lh-*`：以`lh-`开头的样式类用于设置文本元素的`line-height`属性，它们的具体作用如下：
+    - `lh-base`：该样式类会让其作用的文本以Bootstrap框架默认的行高来显示。
+    - `lh-1`：该样式类会让其作用的文本以1倍行高来显示。这意味着文本的行高将与字体大小相等，即每行文本之间没有额外的垂直间距。
+    - `lh-sm`：该样式类会让其作用的文本以较小字体大小的行高来显示。具体的行高值会根据具体的字体大小进行调整，以保持一致的比例关系。
+    - `lh-lg`：该样式类会让其作用的文本以较大字体大小的行高来显示。同样，具体的行高值会根据字体大小进行调整，以保持一致的比例关系。
+  - `text-start`：该样式类会让其作用的段落文本以左对齐的形式来显示；
+  - `text-center`：该样式类会让其作用的段落文本以居中对齐的形式来显示；
+  - `text-end`：该样式类会让其作用的段落文本以右对齐的形式来显示；
+  - `text-truncate`：该样式类会让其作用的段落文本对溢出元素大小的部分呈现带有省略号的截断效果；
+  - `text-break`：该样式类会禁止其作用的段落文本对其内容以字母为对象来进行自动换行；
+  - `text-wrap`：该样式类会让其作用的文本元素对其内容以单词为对象来进行自动换行；
+  - `text-nowrap`：该样式类会禁止其作用的文本元素对其内容进行自动换行；
 
-- **引用类文本**：
-
-- **链接类文本**：
-
+- **特定文本样式**：对于页面中用`<a>`、`<span>`、`<strong>`、`<em>`、`<small>`、`<abbr>`、`<blockquote>`、`<cite>`、`<code>`、`<sub>`、`<sup>`、`<del>`等标记定义的、具有某种特别语义的文本类元素，Bootstrap框架提供了一系列常用的预定义样式类，以便设计师们赋予它们一些具有凸显效果的样式，具体如下：
+  - `mark`：该样式类会为其作用的文本元素添加类似荧光笔的高亮效果；
+  - `lead`：该样式类会为其作用的文本元素添加字体放大的强调效果；
+  - `small`：该样式类会为其作用的文本元素添加字体放小的注释效果；
+  - `blockquote`：该样式类通常会搭配`<blockquote>`标签使用，为其作用的元素添加引用语义的样式；
+  - `blockquote-footer`：该样式类通常会搭配`<blockquote>`+`<cite>`标签使用，为其作用的元素添加代表引用出处的样式；
+  - `text-decoration-line-through`：该样式类会为其作用的文本元素添加删除线的效果；
+  - `text-decoration-underline`：该样式类会为其作用的文本元素添加下划线的效果；
+  - `text-decoration-none`：该样式类会去除其作用的文本元素中的下划线、删除线等效果；
+  - `text-uppercase`：该样式类仅对英文文本有效，效果为文本中所有字母都以大写形式显示；
+  - `text-lowercase`：该样式类仅对英文文本有效，样式效果为文本中所有字母都以小写形式；
+  - `text-capitalize`：该样式类仅对英文文本有效，样式效果为文本中所有单词的首字母都显示为大写；
+  
 ### 图表元素设置
 
 - **列表类元素**：
