@@ -195,20 +195,8 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 当然了，我们在上述示例中所制定的配色方案采用的都是Bootstrap框架的默认颜色，如果想改变这八组样式类使用的默认颜色，就需要利用到一项叫做SCSS的样式表技术来修改Bootstrap框架的默认设置。具体操作如下：
 
 1. 使用`npm install sass -g`命令安装SCSS编译工具，并将Bootstrap框架的源文件完整的下载到本地（建议使用`npm install bootstrap`命令来下载）。
-2. 在Bootstrap框架的源文件中找到路径为`/scss/_variables.scss`，然后通过修改其中的`$primary`、`$secondary`、`$success`、`$danger`、`$warning`、`$info`、`$light`和`$dark`这八组变量来重写Bootstrap框架文件中定义的默认颜色，就像下面这样：
 
-    ```scss
-    @import "./scss/bootstrap.scss";
-
-    $primary: #007bff;
-    $secondary: #6c757d;
-    $success: #28a745;
-    $danger: #dc3545;
-    $warning: #ffc107;
-    $info: #17a2b8;
-    $light: #f8f9fa;
-    $dark: #343a40;
-    ```
+2. 在Bootstrap框架的源文件中找到路径为`/scss/_variables.scss`，然后通过修改其中的`$primary`、`$secondary`、`$success`、`$danger`、`$warning`、`$info`、`$light`和`$dark`这八组变量来重写Bootstrap框架文件中定义的默认颜色。
 
 3. 最后在终端环境下进入到Bootstrap框架的根目录中，并使用`npm install`命令重新编译该框架，并重新将需要的`.css`和`.js`文件复制到自己的项目中，这样就可以让默认的配色方案发生改变了。
 
