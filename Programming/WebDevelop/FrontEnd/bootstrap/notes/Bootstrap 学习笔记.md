@@ -204,7 +204,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 在完成了网页的整体设计工作之后，设计师们接下来的工作就是安排要如何显示网页中的具体内容了。而在网页可显示的诸多元素中，最基本的就是图文类元素了，这类元素主要包括标题、段落、强调、引用、链接、列表、表格、图片等。下面，让我们来继续介绍Bootstrap框架中可用于图文信息排版的样式类。和之前的《[[CSS 学习笔记]]》一样，我们在这里也会先通过设计一个简单的示例来演示一下这些样式类在图文信息排版任务中的应用，以便读者能自行去比较相同任务的不同实现方法，从而了解到Bootstrap框架给网页设计工作带来的便利，该示例的构建步骤如下：
 
-1. 在本地计算机中创建一个名为`TextLayout`的项目（在这里，我将会将它创建在本笔记文件所在的目录下的`examples`目录中），并按照之前示例中演示的方法将Bootstrap框架引入到当前项目中。
+1. 在本地计算机中创建一个名为`reportCase`的项目（在这里，我将会将它创建在本笔记文件所在的目录下的`examples`目录中），并按照之前示例中演示的方法将Bootstrap框架引入到当前项目中。
 
 2. 在VS Code这样的代码编辑器中打开刚刚创建项目，然后在该项目的根目录下创建一个`index.htm`文件，并在其中输入以下代码：
 
@@ -651,3 +651,165 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 ## 用户界面设计
 
 自从Ajax等Web2.0技术问世以来，基于HTML+CSS+JavaScript技术的用户界面设计日益成为了网页设计工作中至关重要的一环，一个精心设计的用户界面可以提供直观、易用和愉悦的交互体验。换而言之，只要设计师们为应用程序的前端设计了布局合理，简单直观的操作界面，用户就可以轻松地与应用程序的后端进行交互，这对于该应用程序的推广是至关重要的。在这一节内容中，我们就来介绍Bootstrap框架在用户界面设计方面的应用。和之前的《[[CSS 学习笔记]]》一样，我们在这里也会先通过设计一个简单的示例来演示一下这些样式类在用户界面设计任务中的应用，以便读者能自行去比较相同任务的不同实现方法，从而了解到Bootstrap框架给网页设计工作带来的便利，该示例的构建步骤如下：
+
+1. 在本地计算机中创建一个名为`formCase`的项目（在这里，我将会将它创建在本笔记文件所在的目录下的`examples`目录中），并按照之前示例中演示的方法将Bootstrap框架引入到当前项目中。
+
+2. 在VS Code这样的代码编辑器中打开刚刚创建项目，然后在该项目的根目录下创建一个`index.htm`文件，并在其中输入以下代码：
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="./styles/bootstrap.min.css">
+            <script src="./scripts/bootstrap.min.js" defer></script>
+            <title>基于Bootstrap的用户注册界面</title>
+        </head>
+        <body class="text-bg-dark">
+            <main class="container">
+                <form method="post" action="http://example.com/user-register"
+                    class="text-bg-light border rounded p-4 mt-5 mx-auto" >
+                    <div class="row mb-3">
+                        <label for="username" class="col-form-label col-2">
+                            用户名：
+                        </label>
+                        <div class="col-10">
+                            <input type="text" class="form-control"
+                                id="username" name="username"
+                                placeholder="请输入你的用户名">
+                        </div>    
+                    </div>
+                    <div class="row mb-3">
+                        <label for="password" class="col-form-label col-2">
+                            密码：
+                        </label>
+                        <div class="col-10">
+                            <input type="password" class="form-control"
+                                id="password" name="password"
+                                placeholder="请设置一个新密码">
+                            <input type="password" class="form-control"
+                                id="repassword" name="repassword"
+                                placeholder="请确认你的密码">
+                        </div>    
+                    </div>
+                    <div class="row mb-3">
+                        <label for="email" class="col-form-label col-2">
+                            邮箱：
+                        </label>
+                        <div class="col-10">
+                            <input type="email" class="form-control"
+                                id="email" name="email"
+                                placeholder="请输入邮箱地址">
+                        </div>    
+                    </div>
+                    <div class="row mb-3">
+                        <label for="birthday" class="col-form-label col-2">
+                            生日：
+                        </label>
+                        <div class="col-10">
+                            <input type="date" class="form-control"
+                                id="birthday" name="birthday">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="gender" class="col-form-label col-2">
+                            性别：
+                        </label>
+                        <div class="col-10 row">
+                            <div class="form-check col-2">
+                                <input type="radio" class="form-check-input"
+                                    name="gender" id="male" value="male">
+                                <label class="form-check-label" for="male">
+                                    男
+                                </label>
+                            </div>
+                            <div class="form-check col-2">
+                                <input type="radio"  class="form-check-input"
+                                    name="gender"  id="female" value="female">
+                                <label class="form-check-label" for="female">
+                                    女
+                                </label>
+                            </div>
+                            <div class="form-check col-2">
+                                <input type="radio"  class="form-check-input"
+                                    name="gender"  id="secret" value="secret">
+                                <label class="form-check-label" for="secret">
+                                    保密
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="hobby" class=" col-form-label col-2">
+                            爱好：
+                        </label>
+                        <div class="col-10 row">
+                            <div class="form-check col-2">
+                                <input type="checkbox" class="form-check-input"
+                                    id="hobby" name="hobby" value="football">
+                                <label for="hobby" class="form-check-label">
+                                    足球
+                                </label>
+                            </div>
+                            <div class="form-check  col-2">
+                                <input type="checkbox" class="form-check-input"
+                                    id="hobby" name="hobby" value="basketball">
+                                <label for="hobby" class="form-check-label">
+                                    篮球
+                                </label>
+                            </div>
+                            <div class="form-check col-2">
+                                <input type="checkbox" class="form-check-input"
+                                    id="hobby" name="hobby" value="swimming">
+                                <label for="hobby" class="form-check-label">
+                                    游泳
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="address" class="col-form-label col-2">
+                            居住城市：
+                        </label>
+                        <div class="col-10">
+                            <select class="form-select" name="address" 
+                                id="address">
+                                <option selected>请选择...</option>
+                                <option value="beijing">北京</option>
+                                <option value="shanghai">上海</option>
+                                <option value="guangzhou">广州</option>
+                                <option value="shenzhen">深圳</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="file" class="col-form-label col-2">
+                            个人照片：
+                        </label>
+                        <div class="col-10">
+                            <input type="file" class="form-control"
+                                id="file" name="file">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="textarea" class="col-form-label col-2">
+                            个人描述：
+                        </label>
+                        <div class="col-10">
+                            <textarea class="form-control"
+                                id="textarea" name="textarea" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="w-25 d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">注册</button>
+                        <button type="reset" class="btn btn-danger">重置</button>
+                </form>
+            </main>
+        </body>
+    </html>
+    ```
+
+3. 在保存上述代码之后，读者就可以使用网页浏览器打开`index.htm`文件查看当前网页设计的结果，其外观样式在Google Chrome浏览器中的效果如下图所示。
+
+   ![用户注册界面实例](./img/4.png)
