@@ -648,9 +648,9 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `float-end`：该样式类会为图片元素设置浮动效果，并将其向右浮动；
   - `mx-auto`：该样式类会为已被设置为块级元素的图片设置居中显示的效果；
 
-## 用户界面设计
+## 交互界面设计
 
-自从Ajax等Web2.0技术问世以来，基于HTML+CSS+JavaScript技术的用户界面设计日益成为了网页设计工作中至关重要的一环，一个精心设计的用户界面可以提供直观、易用和愉悦的交互体验。换而言之，只要设计师们为应用程序的前端设计了布局合理，简单直观的操作界面，用户就可以轻松地与应用程序的后端进行交互，这对于该应用程序的推广是至关重要的。在这一节内容中，我们就来介绍Bootstrap框架在用户界面设计方面的应用。和之前的《[[CSS 学习笔记]]》一样，我们在这里也会先通过设计一个简单的示例来演示一下这些样式类在用户界面设计任务中的应用，以便读者能自行去比较相同任务的不同实现方法，从而了解到Bootstrap框架给网页设计工作带来的便利，该示例的构建步骤如下：
+自从Ajax等Web2.0技术问世以来，基于HTML+CSS+JavaScript技术的交互界面设计日益成为了网页设计工作中至关重要的一环，一个精心设计的交互界面可以提供直观、易用和愉悦的用户体验。换而言之，只要设计师们为应用程序的前端设计了布局合理，简单直观的交互界面，用户就可以轻松地实现与应用程序后端的交互，这对于该应用的推广是至关重要的。在这一节内容中，我们就来介绍Bootstrap框架在交互界面设计方面的应用。和之前的《[[CSS 学习笔记]]》一样，我们在这里也会先通过设计一个用于实现用户注册功能的表单示例来演示一下这些样式类在交互界面设计任务中的应用，以便读者能自行去比较这两种对于相同任务的不同实现方法，从而了解到Bootstrap框架给网页设计工作带来的便利，该示例的构建步骤如下：
 
 1. 在本地计算机中创建一个名为`formCase`的项目（在这里，我将会将它创建在本笔记文件所在的目录下的`examples`目录中），并按照之前示例中演示的方法将Bootstrap框架引入到当前项目中。
 
@@ -813,3 +813,136 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 3. 在保存上述代码之后，读者就可以使用网页浏览器打开`index.htm`文件查看当前网页设计的结果，其外观样式在Google Chrome浏览器中的效果如下图所示。
 
    ![用户注册界面实例](./img/4.png)
+
+同样的，上述示例也只使用Bootstrap框架提供的一系列样式类就实现了《[[CSS 学习笔记]]》一文中用上百行CSS代码实现的类似效果，下面继续来介绍一下这部分样式类的使用方法。
+
+### 表单布局设置
+
+默认情况下，表单中的元素是纵向排列的，我们通常只需要使用`<div>`将它们分组并设置好一定的间距即可实现基本的布局，例如下面是一个使用了默认布局的用户登录界面：
+
+```html
+<form class="border rounded p-3 m-5"
+    method="post" action="http://example.com/api">
+    <div class="mb-3">
+        <label for="username" class="form-label">用户名</label>
+        <input type="text" class="form-control" id="username" name="username"
+            placeholder="请输入用户名">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">密码</label>
+        <input type="password" class="form-control" id="password" name="password"
+            placeholder="请输入密码">
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">登录</button>
+        <button type="reset" class="btn btn-danger">重置</button>
+    </div>
+</form>
+```
+
+正如读者所见，在上述代码中，我们使用`<div>`元素将表单中的元素进行了分组，并使用`class="mb-3"`设置了它们之间的间距。另外，由于`<form>`标记本身也可以被视为一个用于组织交互界面元素的布局类元素，所以我们同样也它设置了长宽度、边框以及内外边距等样式，其效果如下图所示：
+
+![采用垂直布局的用户登录界面](./img/5.png)
+
+如果想采用水平布局的表单设计，只需要将`<form>`标记的`class`属性值设置为`row`，然后将分组交互元素的`<div>`的`class`属性设置为`col-*`即可，例如下面是一个使用了水平布局的用户登录界面：
+
+```html
+<form method="post" action="http://example.com/api"
+    class="row border rounded p-3 m-5">
+    <div class="col-4">
+        <input type="" class="form-control" 
+            placeholder="请输入你的用户名">
+    </div>
+    <div class="col-4">
+        <input type="password" class="form-control" 
+            placeholder="请输入你的密码">
+    </div>
+    <div class="col-4">
+        <button type="submit" class="btn btn-primary">登录</button>
+        <button type="reset" class="btn btn-danger">重置</button>
+    </div>
+</form>
+```
+
+上述代码的显示效果如下图所示：
+
+![采用水平布局的用户登录界面](./img/6.png)
+
+当然了，由`row`和`col-*`搭配的栅格布局方式也可以用于设计多行多列的表格元素，例如下面这个用于填写用户信息的表单：
+
+```html
+<form method="post" action="http://example.com/api"
+    class="border rounded p-3 m-5">
+    <div class="row p-1">
+        <div class="col-6">
+            <input type="text" class="form-control"
+                name="firstname" id="firstname"
+                placeholder="姓">
+        </div>
+        <div class="col-6">
+            <input type="text" class="form-control"
+                name="lastname" id="lastname"
+                placeholder="名">
+        </div>
+    </div>
+    <div class="row p-1">
+        <label for="address" class="col-form-label col-12">
+            具体地址：
+        </label>
+        <div class="col-12">
+            <input type="text" class="form-control"
+                name="address" id="address"
+                placeholder="请输入详细街道地址">
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6">
+            <label for="city" class="form-label">城市：</label>
+            <input type="text" class="form-control" 
+                name="city" id="city">
+        </div>
+        <div class="col-4">
+            <label for="state" class="form-label">国家：</label>
+            <input type="text" class="form-control"
+                name="state" id="state">
+        </div>
+        <div class="col-2">
+            <label for="zipcode" class="form-label">邮编：</label>
+            <input type="text" class="form-control"
+                name="zipcode" id="zipcode">
+        </div>
+    </div>
+    <div class="d-flex gap-3 m-2">
+        <button type="submit" class="btn btn-primary">提交</button>
+        <button type="reset" class="btn btn-danger">重置</button>
+    </div>
+</form>
+```
+
+上述代码的显示效果如下图所示：
+
+![采用多行多列布局的表单示例](./img/7.png)
+
+### 表单元素设置
+
+在完成了表单的整体布局之后，接下来就是设置表单中的交互元素了。在Bootstrap中，用于设置表单中交互元素的样式类主要有如下几个：
+
+- `.form-text`：用于设置表单中提示文本的样式。
+- `.form-label`：用于设置表单中标签的样式。
+- `.form-control`：用于设置表单中输入框的样式。
+- `.form-radio`：用于设置表单中单选框的样式。
+- `.form-radio-label`：用于设置表单中单选框的标签样式。
+- `.form-radio-input`：用于设置表单中单选框的输入框样式。
+- `.form-radio-inline`：用于设置表单中单选框的行内样式。
+- `.form-check`：用于设置表单中复选框的样式。
+- `.form-check-label`：用于设置表单中复选框的标签样式。
+- `.form-check-input`：用于设置表单中复选框的输入框样式。
+- `.form-check-inline`：用于设置表单中复选框的行内样式。
+- `.form-switch`：用于设置表单中开关的样式。
+- `.form-file`：用于设置表单中文件上传框的样式。
+- `.form-select`：用于设置表单中下拉框的样式。
+- `.form-range`：用于设置表单中滑块的样式。
+
+### 表单验证设置
+
+## 响应式设计方案
