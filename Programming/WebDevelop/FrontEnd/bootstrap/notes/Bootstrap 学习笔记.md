@@ -652,6 +652,17 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `float-end`：该样式类会为图片元素设置浮动效果，并将其向右浮动；
   - `mx-auto`：该样式类会为已被设置为块级元素的图片设置居中显示的效果；
 
+- **卡片组件样式**：在使用Bootstrap框架设置一些图文混合的页面元素时，我们可以使用`card`样式类及其相关的子样式类来定义一个卡片组件，该样式类及其相关的子样式类的具体名称及其效果如下：
+  - `card`：该样式类通常用于将要设置图文混合元素的`<div>`标记定义为卡片组件，该样式类还提供了用于设置卡片组件的背景色的`bg-*`样式类；
+  - `card-header`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其头部区域；
+  - `card-body`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其主体内容区域；
+  - `card-footer`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其底部区域；
+  - `card-title`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其标题；
+  - `card-subtitle`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其副标题；
+  - `card-text`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其文本内容；
+  - `card-link`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其链接；
+  - `card-img-*`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其图片，其中的`*`可以取值`top`、`bottom`和`overlay`，分别表示该图片位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上；
+
 ## 交互界面设计
 
 自从Ajax等Web2.0技术问世以来，基于HTML+CSS+JavaScript技术的交互界面设计日益成为了网页设计工作中至关重要的一环，一个精心设计的交互界面可以提供直观、易用和愉悦的用户体验。换而言之，只要设计师们为应用程序的前端设计了布局合理，简单直观的交互界面，用户就可以轻松地实现与应用程序后端的交互，这对于该应用的推广是至关重要的。在这一节内容中，我们就来介绍Bootstrap框架在交互界面设计方面的应用。和之前的《[[CSS 学习笔记]]》一样，我们在这里也会先通过设计一个用于实现用户注册功能的表单示例来演示一下这些样式类在交互界面设计任务中的应用，以便读者能自行去比较这两种对于相同任务的不同实现方法，从而了解到Bootstrap框架给网页设计工作带来的便利，该示例的构建步骤如下：
@@ -806,8 +817,12 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
                         </div>
                     </div>
                     <div class="w-25 d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary">注册</button>
-                        <button type="reset" class="btn btn-danger">重置</button>
+                        <button type="submit" class="btn btn-primary">
+                            注册
+                        </button>
+                        <button type="reset" class="btn btn-danger">
+                            重置
+                        </button>
                 </form>
             </main>
         </body>
@@ -1014,4 +1029,4 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `card-img-*-md`：该扩展类用于设置卡片组件中图片元素在中等尺寸的屏幕设备下的样式；
   - `card-img-*-lg`：该扩展类用于设置卡片组件中图片元素在大尺寸的屏幕设备下的样式；
   - `card-img-*-xl`：该扩展类用于设置卡片组件中图片元素在超大尺寸的屏幕设备下的样式；
-  在上述扩展类中，`*`的取值可以是`top`、`bottom`和`overlay`，分别用于表示图片元素是位于卡片组件的上部或下部，还是被设置为卡片的背景图。
+  在上述扩展类中，`*`的取值可以是`top`、`bottom`和`overlay`，分别用于表示图片元素是位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上。
