@@ -10,11 +10,9 @@
     - [ ] 网页设计学习
       - [x] [[HTML 学习笔记]]
       - [x] [[CSS 学习笔记]]
-      - [x] [[Bootstrap 学习笔记：基础篇]]
+      - [x] [[Bootstrap 学习笔记]]
     - [ ] 前端编程学习
-      - [x] [[JavaScript 学习笔记：基础篇]]
-      - [x] [[JavaScript 学习笔记：进阶篇]]
-      - [x] [[JavaScript 学习笔记：前端篇]]
+      - [x] [[JavaScript 语言的学习路线图|JavaScript 学习笔记]]
       - [x] [[Vue.js 2.x 学习笔记]]
       - [x] [[vue-cli 与 Vite 学习笔记]]
   - [ ] 后端部分
