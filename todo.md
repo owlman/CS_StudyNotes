@@ -10,7 +10,7 @@
     - [ ] 网页设计学习
       - [x] [[HTML 学习笔记]]
       - [x] [[CSS 学习笔记]]
-      - [x] [[Bootstrap 学习笔记]]
+      - [x] [[Bootstrap 学习笔记：基础篇]]
     - [ ] 前端编程学习
       - [x] [[JavaScript 学习笔记：基础篇]]
       - [x] [[JavaScript 学习笔记：进阶篇]]
