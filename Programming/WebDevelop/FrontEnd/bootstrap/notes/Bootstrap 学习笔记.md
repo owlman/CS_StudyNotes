@@ -637,7 +637,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `list-unstyled`：该样式类会去除列表类元素中的默认样式，使得列表类元素中的列表项内容不再带有默认的`1.`、`a.`等样式前缀。需要注意的是，该样式类只对其作用的列表元素的直接列表项起作用，如果该列表元素中还嵌套了其他的列表类元素，则这些嵌套的列表类元素依然会带有它们的默认样式；
   - `list-inline`：该样式类会为列表类元素中的列表项内容设置为内联样式，这会使得列表元素中的列表项内容之间没有换行；
 
-- **列表群组样式**：如果我们想在页面中建立一个更为复杂的列表元素，也可以考虑使用由Bootstrap框架提供的、一个名为“列表群组”的专用组件来进行辅助设计。该组件提供的样式类主要如下：
+- **列表群组样式**：如果我们想在页面中建立一个更为复杂的列表元素，也可以考虑使用由Bootstrap框架提供的、一个名为“列表群组”的专用组件来进行辅助设计。与该组件相关的样式类及其效果主要如下：
   - `list-group`：该样式类通常作用于由`<ul>`或`<ol>`标记定义的列表元素上，效果是将列表元素设置为一个列表群组，其基本样式是一个带有圆角边框的`<ul>`或`<ol>`列表元素，其中列表群组中的列表项内容会以垂直方向排列。
     - 如果想让列表项以水平方向排列，则需要在`list-group`类的后面再加上`list-group-horizontal`样式类；
     - 如果想去掉元素的圆角边框，则需要在`list-group`类的后面再加上`list-group-flush`样式类；
@@ -663,7 +663,62 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `float-end`：该样式类会为图片元素设置浮动效果，并将其向右浮动；
   - `mx-auto`：该样式类会为已被设置为块级元素的图片设置居中显示的效果；
 
-- **轮播组件样式**
+- **轮播组件样式**：如果我们想让图片元素以幻灯片的形式呈现在页面中，也可以考虑使用由Bootstrap框架提供的、一个名为“轮播”的专用组件来进行辅助设计，下面是该组件的一个简单示例：
+  
+    ```html
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <!-- 组件指示符 -->
+        <div class="carousel-indicators ">
+            <button type="button" data-bs-target="#carouselExample"
+                data-bs-slide-to="0" class="active" aria-current="true" 
+                aria-label="Slide 1">
+            </button>
+            <button type="button" data-bs-target="#carouselExample" 
+                data-bs-slide-to="1" aria-label="Slide 2">
+            </button>
+            <button type="button" data-bs-target="#carouselExample" 
+                data-bs-slide-to="2" aria-label="Slide 3">
+            </button>
+        </div>
+        <!-- 组件主播放区 -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./img/example.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./img/example.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./img/example.png" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <!-- 组件控制按钮区  -->
+        <button class="carousel-control-prev" type="button"
+            data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visible">上一张</span>
+        </button>
+        <button class="carousel-control-next" type="button" 
+            data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visible">下一张</span>
+        </button>
+    </div>        
+    ```
+
+  下面我们来简单介绍一下与该组件相关的样式类及其效果，具体如下：
+  - `carousel`：该样式类通常作用于组件最外层的`<div>`标记，效果是将该标记所定义的元素设置为轮播组件，并为其设置一些该组件的基本样式。默认情况下，轮播组件采用的是亮色系的样式，如果读者想将其设置为暗色系，则需要在该样式类后面添加`carousel-dark`样式类；
+  - `carousel-inner`：该样式类为`carousel`类的子样式类，通常作用于组件主内容区所在的`<div>`标记，效果是将该标记所定义的元素设置为轮播组件的幻灯片播放器；
+  - `carousel-item`：该样式类为`carousel-inner`类的子样式类，通常作用于组件中每一张幻灯片所在的`<div>`标记，效果是将该标记所定义的元素设置为组件要播放的各张幻灯片。在设置幻灯片元素时，读者需要注意以下事项：
+    - 在被设置了该样式类的各个`<div>`标记中，通常必须要有一个同时设置了`active`样式类，否则轮播组件会无法生效；
+    - 在被设置了该样式类的各个`<div>`标记中，用于放置图片元素的`<img>`标记通常需要设置`d-block`和`w-100`这两个样式类，否则某些浏览器的预定对齐规则可能会破坏该组件的样式；
+    - 如果我们想为组件中的每张幻灯片添加文字说明，可以选择在用于放置图片元素的后面添加一个被设置了`carousel-caption`样式类的`<div>`标记，并在该标记中放置说明文字的标题和其他文本类元素。
+  - `carousel-control-prev`：该样式类为`carousel`类的子样式类，通常用于设置轮播组件中切换至上一张幻灯片的控制按钮元素；
+  - `carousel-control-next`：该样式类为`carousel`类的子样式类，通常用于设置轮播组件中切换至下一张幻灯片的控制按钮元素；
+  - `carousel-indicators`：该样式类为`carousel`类的子样式类，通常作用于组件中指示器按钮所在的`<div>`标记，效果是将该标记所定义的元素设置成位于轮播组件底部中间的指示器按钮列表。在设置这些指示器按钮时，读者需要注意以下事项：
+    - 这些按钮元素的`data-bs-target`属性必须要设置为当前轮播组件的`id`属性值；
+    - 这些按钮元素的`data-bs-slide-to`属性必须要设置为当前幻灯片索引值；
+    - 这些按钮元素中必须要有一个被设置了`active`样式类，否则这些按钮元素将无法正常工作；
 
 - **卡片组件样式**：在使用Bootstrap框架设置一些图文混合的页面元素时，我们可以使用`card`样式类及其相关的子样式类来定义一个卡片组件，该样式类及其相关的子样式类的具体名称及其效果如下：
   - `card`：该样式类通常用于将要设置图文混合元素的`<div>`标记定义为卡片组件，该样式类还提供了用于设置卡片组件的背景色的`bg-*`样式类；

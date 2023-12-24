@@ -3,12 +3,54 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./styles/bootstrap.min.css">
-        <script src="./scripts/bootstrap.min.js" defer></script>
+        <link rel="stylesheet" 
+            href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js" 
+            defer="defer"></script>
         <title>临时演示页面</title>
     </head>
     <body class="container">
         <h1 class="display-1">临时演示页面</h1>
+        
+        <div id="carouselExample" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <!-- 组件指示符 -->
+            <div class="carousel-indicators ">
+                <button type="button" data-bs-target="#carouselExample"
+                    data-bs-slide-to="0" class="active" aria-current="true" 
+                    aria-label="Slide 1">
+                </button>
+                <button type="button" data-bs-target="#carouselExample" 
+                    data-bs-slide-to="1" aria-label="Slide 2">
+                </button>
+                <button type="button" data-bs-target="#carouselExample" 
+                    data-bs-slide-to="2" aria-label="Slide 3">
+                </button>
+            </div>
+            <!-- 组件主播放区 -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./img/example.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/example.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/example.png" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <!-- 组件控制按钮区  -->
+            <button class="carousel-control-prev" type="button"
+                data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visible">上一张</span>
+            </button>
+            <button class="carousel-control-next" type="button" 
+                data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visible">下一张</span>
+            </button>
+        </div>        
+
         <p class="fs-4 fst-italic text-break lh-lg">
             这是一个中文段落，下面是示例文本：
             bootstrap框架是一个前端框架，用于快速开发前端页面，
@@ -116,5 +158,6 @@
                 <button type="reset" class="btn btn-danger">重置</button>
             </div>
         </form>
+
     </body>
 </html>
