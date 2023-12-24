@@ -684,12 +684,24 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="./img/example.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption">
+                    <h2>第一张图</h2>
+                    <p>第一张图的描述</p>
+                </div>
             </div>
             <div class="carousel-item">
                 <img src="./img/example.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption">
+                    <h2>第二张图</h2>
+                    <p>第二张图的描述</p>
+                </div>
             </div>
             <div class="carousel-item">
                 <img src="./img/example.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption">
+                    <h2>第三张图</h2>
+                    <p>第三张图的描述</p>
+                </div>
             </div>
         </div>
         <!-- 组件控制按钮区  -->
