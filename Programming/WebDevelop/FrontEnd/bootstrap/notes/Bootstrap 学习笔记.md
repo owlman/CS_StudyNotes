@@ -686,21 +686,21 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
                 <img src="./img/example.png" class="d-block w-100" alt="...">
                 <div class="carousel-caption">
                     <h2>第一张图</h2>
-                    <p>第一张图的描述</p>
+                    <p>关于第一张图的描述文字。</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="./img/example.png" class="d-block w-100" alt="...">
                 <div class="carousel-caption">
                     <h2>第二张图</h2>
-                    <p>第二张图的描述</p>
+                    <p>关于第二张图的描述文字。</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="./img/example.png" class="d-block w-100" alt="...">
                 <div class="carousel-caption">
                     <h2>第三张图</h2>
-                    <p>第三张图的描述</p>
+                    <p>关于第三张图的描述文字。</p>
                 </div>
             </div>
         </div>
@@ -718,7 +718,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     </div>        
     ```
 
-  下面我们来简单介绍一下与该组件相关的样式类及其效果，具体如下：
+  接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其效果，具体如下：
   - `carousel`：该样式类通常作用于组件最外层的`<div>`标记，效果是将该标记所定义的元素设置为轮播组件，并为其设置一些该组件的基本样式。默认情况下，轮播组件采用的是亮色系的样式，如果读者想将其设置为暗色系，则需要在该样式类后面添加`carousel-dark`样式类；
   - `carousel-inner`：该样式类为`carousel`类的子样式类，通常作用于组件主内容区所在的`<div>`标记，效果是将该标记所定义的元素设置为轮播组件的幻灯片播放器；
   - `carousel-item`：该样式类为`carousel-inner`类的子样式类，通常作用于组件中每一张幻灯片所在的`<div>`标记，效果是将该标记所定义的元素设置为组件要播放的各张幻灯片。在设置幻灯片元素时，读者需要注意以下事项：
@@ -743,9 +743,37 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `card-link`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其链接；
   - `card-img-*`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其图片，其中的`*`可以取值`top`、`bottom`和`overlay`，分别表示该图片位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上；
 
-- **折叠组件样式**
-- **手风琴组件样式**
-- **分页组件样式**
+- **分页组件样式**：如果我们想让页面中的内容分页显示，可以考虑使用Bootstrap框架中提供的分页组件来进行辅助设计，下面是该组件的一个简单示例：
+  
+    ```html
+    <nav id="paginationExample" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" 
+                    aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+    ```
+
+  接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其效果，具体如下：  
+  - `pagination`：该样式类通常作用于`<nav>`标记下面的`<ul>`标记，效果是将该无序列表元素设置为分页组件，并赋予其该组件的基本样式；
+  - `page-item`：该样式类是`pagination`类的子样式类，通常作用于分页组件中的每个`<li>`标记，效果是将这些列表项设置为该组件中跳转按钮的样式。在设置这些跳转按钮元素时，读者还需要注意以下事项：
+    - 如果想让某个跳转按钮处于禁用状态，则需要在`page-item`类后面再添加一个`disabled`样式类；
+    - 如果想将某个跳转按钮设置为默认激活状态，则需要在`page-item`类后面再添加一个`active`样式类；
+  - `page-link`：该样式类是`page-item`类的子样式类，通常被放置在被设置了`page-item`样式类的`<li>`标记的内部，作用是具体设置组件中各个分页所在的链接；
 
 ## 交互界面设计
 
@@ -1047,6 +1075,8 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 - `form-select`：该样式类主要作用于表单中的`<select>`标记，设置的是表单中下拉列表的样式。
 - `form-group`：该样式类主要作用于表单中用来给交互元素分组的`<div>`标记，设置的是表单中某一组交互元素的样式。
 - **按钮组件**
+- **折叠组件样式**：如果我们想让图片元素以幻灯片的形式呈现在页面中，也可以考虑使用由Bootstrap框架提供的、一个名为“轮播”的专用组件来进行辅助设计，下面是该组件的一个简单示例：
+- **手风琴组件样式**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，
 - **下拉菜单组件**
 
 #### 表单验证设置
