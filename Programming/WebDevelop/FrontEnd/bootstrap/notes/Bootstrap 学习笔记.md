@@ -768,7 +768,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     </nav>
     ```
 
-  接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其效果，具体如下：  
+  接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其使用方法，具体如下：  
   - `pagination`：该样式类通常作用于`<nav>`标记下面的`<ul>`标记，效果是将该无序列表元素设置为分页组件，并赋予其该组件的基本样式；
   - `page-item`：该样式类是`pagination`类的子样式类，通常作用于分页组件中的每个`<li>`标记，效果是将这些列表项设置为该组件中跳转按钮的样式。在设置这些跳转按钮元素时，读者还需要注意以下事项：
     - 如果想让某个跳转按钮处于禁用状态，则需要在`page-item`类后面再添加一个`disabled`样式类；
@@ -1104,7 +1104,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     <button type="button" class="btn btn-link">Link</button>
     ```
 
-  接下来，让我们根据上述示例来介绍一下与按钮组件相关的样式类及其效果，具体如下：
+  接下来，让我们根据上述示例来介绍一下与按钮组件相关的样式类及其使用方法，具体如下：
 
   - `btn`：该样式类通常作用于`<button>`或`<a>`标记，效果是将该标记定义的元素设置为按钮组件，并赋予其默认样式。在设置按钮组件时，读者还需要注意以下事项：
     - 如果想改变按钮组件的默认配色，则需要在`btn`样式类后面添加`btn-primary`、`btn-secondary`、`btn-success`、`btn-danger`、`btn-warning`、`btn-info`、`btn-light`或`btn-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
@@ -1123,7 +1123,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     <h6>Example heading <span class="badge badge-dark">New</span></h6>
     ```
 
-  接下来，让我们根据上述示例来介绍一下与徽章组件相关的样式类及其效果，具体如下：
+  接下来，让我们根据上述示例来介绍一下与徽章组件相关的样式类及其使用方法，具体如下：
 
   - `badge`：该样式类通常作用于`<span>`或其他用于表示强调的文本类标记，效果是将该标记定义的元素设置为徽章组件，并赋予其默认样式。
   - 如果想改变徽章组件的默认配色，则需要在`badge`样式类后面添加`badge-primary`、`badge-secondary`、`badge-success`、`badge-danger`、`badge-warning`、`badge-info`、`badge-light`或`badge-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
