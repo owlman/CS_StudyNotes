@@ -211,7 +211,7 @@
                 aria-expanded="false" aria-controls="collapseExample">
                 使用按钮控制
             </button>
-            <div class="collapse" id="collapseExample">
+            <div class="collapse show" id="collapseExample">
                 <!-- 演示卡片组件 -->
                 <div class="card w-25">
                     <div class="card-header">
@@ -235,6 +235,56 @@
                 </div>
             </div>
         </div>
-        
+       <!-- 演示手风琴组件  -->
+       <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne" 
+                        aria-expanded="true" aria-controls="collapseOne">
+                        标题1
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show"
+                    aria-labelledby="headingOne" 
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        第一个元素。
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" 
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        标题2
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse"
+                    aria-labelledby="headingTwo" 
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        第二个元素。
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#collapseThree" 
+                        aria-expanded="false" aria-controls="collapseThree">
+                        标题3
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse"
+                    aria-labelledby="headingThree" 
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        第三个元素。
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

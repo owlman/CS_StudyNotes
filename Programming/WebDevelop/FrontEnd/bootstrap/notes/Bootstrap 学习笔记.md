@@ -720,14 +720,14 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
   接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其效果，具体如下：
   - `carousel`：该样式类通常作用于组件最外层的`<div>`标记，效果是将该标记所定义的元素设置为轮播组件，并为其设置一些该组件的基本样式。默认情况下，轮播组件采用的是亮色系的样式，如果读者想将其设置为暗色系，则需要在该样式类后面添加`carousel-dark`样式类；
-  - `carousel-inner`：该样式类为`carousel`类的子样式类，通常作用于组件主内容区所在的`<div>`标记，效果是将该标记所定义的元素设置为轮播组件的幻灯片播放器；
-  - `carousel-item`：该样式类为`carousel-inner`类的子样式类，通常作用于组件中每一张幻灯片所在的`<div>`标记，效果是将该标记所定义的元素设置为组件要播放的各张幻灯片。在设置幻灯片元素时，读者需要注意以下事项：
+  - `carousel-inner`：该样式类为`carousel`类的次级样式类，通常作用于组件主内容区所在的`<div>`标记，效果是将该标记所定义的元素设置为轮播组件的幻灯片播放器；
+  - `carousel-item`：该样式类为`carousel-inner`类的次级样式类，通常作用于组件中每一张幻灯片所在的`<div>`标记，效果是将该标记所定义的元素设置为组件要播放的各张幻灯片。在设置幻灯片元素时，读者需要注意以下事项：
     - 在被设置了该样式类的各个`<div>`标记中，通常必须要有一个同时设置了`active`样式类，否则轮播组件会无法生效；
     - 在被设置了该样式类的各个`<div>`标记中，用于放置图片元素的`<img>`标记通常需要设置`d-block`和`w-100`这两个样式类，否则某些浏览器的预定对齐规则可能会破坏该组件的样式；
     - 如果我们想为组件中的每张幻灯片添加文字说明，可以选择在用于放置图片元素的后面添加一个被设置了`carousel-caption`样式类的`<div>`标记，并在该标记中放置说明文字的标题和其他文本类元素。
-  - `carousel-control-prev`：该样式类为`carousel`类的子样式类，通常用于设置轮播组件中切换至上一张幻灯片的控制按钮元素；
-  - `carousel-control-next`：该样式类为`carousel`类的子样式类，通常用于设置轮播组件中切换至下一张幻灯片的控制按钮元素；
-  - `carousel-indicators`：该样式类为`carousel`类的子样式类，通常作用于组件中指示器按钮所在的`<div>`标记，效果是将该标记所定义的元素设置成位于轮播组件底部中间的指示器按钮列表。在设置这些指示器按钮时，读者需要注意以下事项：
+  - `carousel-control-prev`：该样式类为`carousel`类的次级样式类，通常用于设置轮播组件中切换至上一张幻灯片的控制按钮元素；
+  - `carousel-control-next`：该样式类为`carousel`类的次级样式类，通常用于设置轮播组件中切换至下一张幻灯片的控制按钮元素；
+  - `carousel-indicators`：该样式类为`carousel`类的次级样式类，通常作用于组件中指示器按钮所在的`<div>`标记，效果是将该标记所定义的元素设置成位于轮播组件底部中间的指示器按钮列表。在设置这些指示器按钮时，读者需要注意以下事项：
     - 这些按钮元素的`data-bs-target`属性必须要设置为当前轮播组件的`id`属性值；
     - 这些按钮元素的`data-bs-slide-to`属性必须要设置为当前幻灯片索引值；
     - 这些按钮元素中必须要有一个被设置了`active`样式类，否则这些按钮元素将无法正常工作；
@@ -760,14 +760,14 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
   接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其使用方法，具体如下：
   - `card`：该样式类用于将要设置图文混合元素的`<div>`标记定义为卡片组件，并赋予了它一些脚本样式；
-  - `card-header`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其头部区域；
-  - `card-body`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其主体内容区域；
-  - `card-footer`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其底部区域；
-  - `card-title`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其标题；
-  - `card-subtitle`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其副标题；
-  - `card-text`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其文本内容；
-  - `card-link`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其链接；
-  - `card-img-*`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其图片，其中的`*`可以取值`top`、`bottom`和`overlay`，分别表示该图片位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上；
+  - `card-header`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其头部区域；
+  - `card-body`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其主体内容区域；
+  - `card-footer`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其底部区域；
+  - `card-title`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其标题；
+  - `card-subtitle`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其副标题；
+  - `card-text`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其文本内容；
+  - `card-link`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其链接；
+  - `card-img-*`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其图片，其中的`*`可以取值`top`、`bottom`和`overlay`，分别表示该图片位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上；
 
 - **分页组件样式**：如果我们想让页面中的内容分页显示，可以考虑使用Bootstrap框架中提供的分页组件来进行辅助设计，下面是该组件的一个简单示例：
   
@@ -796,10 +796,10 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
   接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其使用方法，具体如下：  
   - `pagination`：该样式类通常作用于`<nav>`标记下面的`<ul>`标记，效果是将该无序列表元素设置为分页组件，并赋予其该组件的基本样式；
-  - `page-item`：该样式类是`pagination`类的子样式类，通常作用于分页组件中的每个`<li>`标记，效果是将这些列表项设置为该组件中跳转按钮的样式。在设置这些跳转按钮元素时，读者还需要注意以下事项：
+  - `page-item`：该样式类是`pagination`类的次级样式类，通常作用于分页组件中的每个`<li>`标记，效果是将这些列表项设置为该组件中跳转按钮的样式。在设置这些跳转按钮元素时，读者还需要注意以下事项：
     - 如果想让某个跳转按钮处于禁用状态，则需要在`page-item`类后面再添加一个`disabled`样式类；
     - 如果想将某个跳转按钮设置为默认激活状态，则需要在`page-item`类后面再添加一个`active`样式类；
-  - `page-link`：该样式类是`page-item`类的子样式类，通常被放置在被设置了`page-item`样式类的`<li>`标记的内部，作用是具体设置组件中各个分页所在的链接；
+  - `page-link`：该样式类是`page-item`类的次级样式类，通常被放置在被设置了`page-item`样式类的`<li>`标记的内部，作用是具体设置组件中各个分页所在的链接；
 
 ## 交互界面设计
 
@@ -1168,7 +1168,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
             aria-expanded="false" aria-controls="collapseExample">
             使用按钮控制
         </button>
-        <div class="collapse" id="collapseExample">
+        <div class="collapse show" id="collapseExample">
             <div class="card card-body">
                 这里是一个卡片组件。
             </div>
@@ -1178,14 +1178,72 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
   接下来，我们根据上述示例来介绍一下折叠组件的使用方法以及相关的样式类，具体如下：
   - `collapse`：该样式类通常作用于`<div>`或其他布局类的标记，效果是将该标记定义的元素设置为一个折叠组件，以便用于放置要被控制显示的内容。在使用该样式类设置折叠组件时，读者需要注意以下事项：
-  - `collapse-show`：折叠组件所控制的元素在默认情况下是被隐藏的，如果我们想让折叠组件在页面加载时默认显示，则需要为折叠组件的`<div>`标记添加`collapse-show`样式类；
+  - `show`：折叠组件所控制的元素在默认情况下是被隐藏的，如果我们想让该元素在页面加载时默认显示，则需要为折叠组件的`<div>`标记添加`show`样式类；
     - 如果想让折叠组件真正发挥作用，我们就必须要为它设置一个具有唯一性的`[id属性值]`。然后，如果控制按钮是由`<a>`标记定义的，那么就需要将`<a>`标记的`herf`属性值设置为`#[id属性值]`；如果控制按钮是由`<button>`标记定义的，则需将`<button>`标记的`data-bs-target`属性值设置为`#[id属性值]`；
 
 - **手风琴组件**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，下面是该组件的一个简单示例：
   
-```html
-```
-`
+    ```html
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#collapseOne" 
+                    aria-expanded="true" aria-controls="collapseOne">
+                    标题1
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show"
+                aria-labelledby="headingOne" 
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    第一个元素。
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" 
+                    aria-expanded="false" aria-controls="collapseTwo">
+                    标题2
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse"
+                aria-labelledby="headingTwo" 
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    第二个元素。
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#collapseThree" 
+                    aria-expanded="false" aria-controls="collapseThree">
+                    标题3
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse"
+                aria-labelledby="headingThree" 
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    第三个元素。
+                </div>
+            </div>
+        </div>
+    </div>
+    ```
+
+  接下来，我们根据上述示例来介绍一下手风琴组件的使用方法以及相关的样式类，具体如下：
+  - `accordion`：该样式类通常作用于`<div>`或其他布局类标记，效果是将该标记定义的元素设置为一个手风琴组件，以便用于放置手风琴组件中的各个子项。
+  - `accordion-item`：该样式类是`accordion`类的次级样式类，通常作用于手风琴组件内第一级的`<div>`或其他布局类标记，效果是将该标记定义的元素设置为一个手风琴组件中各个子项的容器，以便具体放置构成这些子项的元素。
+  - `accordion-header`：该样式类是`accordion-item`类的次级样式类，通常作用于手风琴组件内各子项中的标题类标记（从`<h1>`到`<h6>`），效果是将该标记定义的元素设置为一个手风琴组件中各子项的标题，同时用于放置这些子项的控制按钮。默认为显示状态，如果想将其设置为默认隐藏，则需要在该样式类后面添加`collapsed`样式类。
+  - `accordion-button`：该样式类是`accordion-header`类的次级样式类，通常作用于手风琴组件中各子项标题内的`<button>`或`<a>`标记，效果是将该标记定义的元素设置为一个手风琴组件中各子项的控制按钮，以便用于控制该子项主体部分的显示与隐藏。
+  - `accordion-collapse`：该样式类是`accordion-item`类的次级样式类，通常作用于手风琴组件内各子项标题部分的后面，用于充当其主体部分容器的`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的显示内容。
+  - `accordion-body`：该样式类是`accordion-collapse`类的次级样式类，通常作用于被设置了`accordion-collapse`类的元素内部的第一级`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的具体内容。
+  
 - **下拉菜单组件**
 
 - **导航栏组件**
