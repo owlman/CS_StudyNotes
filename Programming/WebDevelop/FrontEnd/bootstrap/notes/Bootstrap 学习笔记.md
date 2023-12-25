@@ -1074,10 +1074,6 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 - `form-control`：该样式类主要作用于表单中用`<input>`或`<textarea>`标记定义的元素（上面已经列出的特定元素除外），设置的是表单中一般输入性元素的样式。
 - `form-select`：该样式类主要作用于表单中的`<select>`标记，设置的是表单中下拉列表的样式。
 - `form-group`：该样式类主要作用于表单中用来给交互元素分组的`<div>`标记，设置的是表单中某一组交互元素的样式。
-- **按钮组件**
-- **折叠组件样式**：如果我们想让图片元素以幻灯片的形式呈现在页面中，也可以考虑使用由Bootstrap框架提供的、一个名为“轮播”的专用组件来进行辅助设计，下面是该组件的一个简单示例：
-- **手风琴组件样式**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，
-- **下拉菜单组件**
 
 #### 表单验证设置
 
@@ -1094,12 +1090,62 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 除了表单元素之外，Bootstrap还提供了一些具有专用功能的交互组件，这些组件可以用来构建更加复杂的交互界面，这些组件主要包括：
 
+- **按钮组件**：对于表单元素或页面其他元素中放置的按钮元素，我们可以考虑使用Bootstrap框架提供的按钮组件来进行辅助设计，下面是该组件的一个简单示例：
+
+    ```html
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-light">Light</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+    <button type="button" class="btn btn-link">Link</button>
+    ```
+
+  接下来，让我们根据上述示例来介绍一下与按钮组件相关的样式类及其效果，具体如下：
+
+  - `btn`：该样式类通常作用于`<button>`或`<a>`标记，效果是将该标记定义的元素设置为按钮组件，并赋予其默认样式。在设置按钮组件时，读者还需要注意以下事项：
+    - 如果想改变按钮组件的默认配色，则需要在`btn`样式类后面添加`btn-primary`、`btn-secondary`、`btn-success`、`btn-danger`、`btn-warning`、`btn-info`、`btn-light`或`btn-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
+    - 如果想将组件设置为链接样式，则需要在`btn`样式类后面添加一个`btn-link`样式类；
+
+- **徽章组件**：对于表单元素或页面其他元素中放置的标签元素，我们可以考虑使用Bootstrap框架提供的标签组件来进行辅助设计，下面是该组件的一个简单示例：
+
+    ```html
+    <h1>Example heading <span class="badge badge-primary">New</span></h1>
+    <h2>Example heading <span class="badge badge-secondary">New</span></h2>
+    <h3>Example heading <span class="badge badge-success">New</span></h3>
+    <h4>Example heading <span class="badge badge-danger">New</span></h4>
+    <h5>Example heading <span class="badge badge-warning">New</span></h5>
+    <h6>Example heading <span class="badge badge-info">New</span></h6>
+    <h6>Example heading <span class="badge badge-light">New</span></h6>
+    <h6>Example heading <span class="badge badge-dark">New</span></h6>
+    ```
+
+  接下来，让我们根据上述示例来介绍一下与徽章组件相关的样式类及其效果，具体如下：
+
+  - `badge`：该样式类通常作用于`<span>`或其他用于表示强调的文本类标记，效果是将该标记定义的元素设置为徽章组件，并赋予其默认样式。
+  - 如果想改变徽章组件的默认配色，则需要在`badge`样式类后面添加`badge-primary`、`badge-secondary`、`badge-success`、`badge-danger`、`badge-warning`、`badge-info`、`badge-light`或`badge-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
+
+- **折叠组件**：如果我们想让在页面中设置一个用于控制单个元素显示的开关，也可以考虑使用由Bootstrap框架提供的折叠组件来进行辅助设计，下面是该组件的一个简单示例：
+
+- **手风琴组件**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，
+
+- **下拉菜单组件**
+
 - **导航栏组件**
+
 - **选项卡组件**
+
 - **模态弹框组件**
+
 - **弹出提示框组件**
+
 - **进度条组件**
+
 - **吐司组件**
+
 - **工具提示组件**
 
 ## 响应式设计扩展
