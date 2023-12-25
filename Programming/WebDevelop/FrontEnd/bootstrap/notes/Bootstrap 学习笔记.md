@@ -1130,7 +1130,32 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 - **折叠组件**：如果我们想让在页面中设置一个用于控制单个元素显示的开关，也可以考虑使用由Bootstrap框架提供的折叠组件来进行辅助设计，下面是该组件的一个简单示例：
 
-- **手风琴组件**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，
+    ```html
+    <div id="collapseDemo">
+        <a class="btn btn-primary" data-bs-toggle="collapse" 
+            href="#collapseExample" role="button" aria-expanded="false" 
+            aria-controls="collapseExample">
+            使用链接控制
+        </a>
+        <button class="btn btn-primary" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#collapseExample" 
+            aria-expanded="false" aria-controls="collapseExample">
+            使用按钮控制
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                这里是一个卡片组件。
+            </div>
+        </div>
+    </div>
+    ```
+
+  接下来，我们根据上述示例来介绍一下折叠组件的使用方法以及相关的样式类，具体如下：
+  - `collapse`：该样式类通常作用于`<div>`或其他布局类的标记，效果是将该标记定义的元素设置为一个折叠组件，以便用于放置要被控制显示的内容。在使用该样式类设置折叠组件时，读者需要注意以下事项：
+  - `collapse-show`：折叠组件所控制的元素在默认情况下是被隐藏的，如果我们想让折叠组件在页面加载时默认显示，则需要为折叠组件的`<div>`标记添加`collapse-show`样式类；
+    - 如果想让折叠组件真正发挥作用，我们就必须要为它设置一个具有唯一性的`[id属性值]`。然后，如果控制按钮是由`<a>`标记定义的，那么就需要将`<a>`标记的`herf`属性值设置为`#[id属性值]`；如果控制按钮是由`<button>`标记定义的，则需将`<button>`标记的`data-bs-target`属性值设置为`#[id属性值]`；
+
+- **手风琴组件**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，下面是该组件的一个简单示例：
 
 - **下拉菜单组件**
 
