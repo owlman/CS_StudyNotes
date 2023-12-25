@@ -732,8 +732,34 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     - 这些按钮元素的`data-bs-slide-to`属性必须要设置为当前幻灯片索引值；
     - 这些按钮元素中必须要有一个被设置了`active`样式类，否则这些按钮元素将无法正常工作；
 
-- **卡片组件样式**：在使用Bootstrap框架设置一些图文混合的页面元素时，我们可以使用`card`样式类及其相关的子样式类来定义一个卡片组件，该样式类及其相关的子样式类的具体名称及其效果如下：
-  - `card`：该样式类通常用于将要设置图文混合元素的`<div>`标记定义为卡片组件，该样式类还提供了用于设置卡片组件的背景色的`bg-*`样式类；
+- **卡片组件样式**：如果我们想在页面中设置一些图文混合的元素，可以考虑使用Bootstrap框架中提供的卡片组件来进行辅助设计，下面是该组件的一个简单示例：
+  
+    ```html
+    <div class="card w-25">
+        <div class="card-header">
+            这里是卡片组件的头部区域
+        </div>
+        <img src="./img/example.png" class="card-img-top" alt="">
+        <div class="card-body">
+            <h4 class="card-title">这是卡片组件的标题</h4>
+            <h5 class="card-subtitle">这是卡片组件的子标题</h5>
+            <p class="card-text">这里是卡片组件的主体部分。</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">列表文本 1</li>
+                <li class="list-group-item">列表文本 2</li>
+                <li class="list-group-item">列表文本 3</li>
+            </ul>
+            <a class="card-link" href="">链接文本 1</a>
+            <a class="card-link" href="">链接文本 2</a>
+        </div>
+        <div class="card-footer">
+            这里是卡片组件的底部区域
+        </div>
+    </div>
+    ```
+
+  接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其使用方法，具体如下：
+  - `card`：该样式类用于将要设置图文混合元素的`<div>`标记定义为卡片组件，并赋予了它一些脚本样式；
   - `card-header`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其头部区域；
   - `card-body`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其主体内容区域；
   - `card-footer`：该样式类为`card`类的子样式类，通常用于为卡片组件定义其底部区域；
@@ -1156,7 +1182,10 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     - 如果想让折叠组件真正发挥作用，我们就必须要为它设置一个具有唯一性的`[id属性值]`。然后，如果控制按钮是由`<a>`标记定义的，那么就需要将`<a>`标记的`herf`属性值设置为`#[id属性值]`；如果控制按钮是由`<button>`标记定义的，则需将`<button>`标记的`data-bs-target`属性值设置为`#[id属性值]`；
 
 - **手风琴组件**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，下面是该组件的一个简单示例：
-
+  
+```html
+```
+`
 - **下拉菜单组件**
 
 - **导航栏组件**

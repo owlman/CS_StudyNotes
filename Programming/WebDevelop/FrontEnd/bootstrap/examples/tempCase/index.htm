@@ -11,7 +11,7 @@
     </head>
     <body class="container">
         <h1 class="display-1">临时演示页面</h1>
-        
+        <!-- 演示轮播组件 -->
         <div id="carouselExample" class="carousel carousel-dark slide" 
             data-bs-ride="carousel">
             <!-- 组件指示符 -->
@@ -63,7 +63,7 @@
                 <span class="visible">下一张</span>
             </button>
         </div>        
-
+        <!-- 演示普通文本 -->        
         <p class="fs-4 fst-italic text-break lh-lg">
             这是一个中文段落，下面是示例文本：
             bootstrap框架是一个前端框架，用于快速开发前端页面，
@@ -75,8 +75,10 @@
         </p>
         <p class="text-muted">
             this is a paragraph example in the English:
-            bootstrap is a front-end framework for quick development of front-end pages,
-            its component library is very rich, and it can meet the needs of front-end development.
+            bootstrap is a front-end framework for quick development of front-end 
+            pages,
+            its component library is very rich, and it can meet the needs of 
+            front-end development.
             bootstrap is a component library developed by
             twitter company, and it is open source and released.
             The latest version of bootstrap is 4.0.0.
@@ -84,24 +86,28 @@
             so you need to introduce the jQuery library first to use bootstrap's
             component library.
         </p>
+        <!-- 演示引用文本 -->
         <blockquote class="blockquote">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum autem ipsum deserunt quo libero quis quisquam, ad rerum doloremque quod amet laudantium, natus eum maxime omnis itaque ratione dolores beatae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum autem 
+            ipsum deserunt quo libero quis quisquam, ad rerum doloremque quod amet 
+            laudantium, natus eum maxime omnis itaque ratione dolores beatae.
             <cite class="blockquote-footer">Lorem ipsum</cite>
         </blockquote>
+        <!-- 演示链接 -->
         <a href="" class="link-primary">链接示例</a>
-        <button class="btn btn-primary">按钮示例</button>
         
+        <!-- 演示表单 -->
         <form class="border rounded p-3 m-5"
              method="post" action="http://example.com/api">
             <div class="mb-3">
                 <label for="username" class="form-label">用户名</label>
-                <input type="text" class="form-control" id="username" name="username"
-                    placeholder="请输入用户名">
+                <input type="text" class="form-control" id="username" 
+                    name="username" placeholder="请输入用户名">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">密码</label>
-                <input type="password" class="form-control" id="password" name="password"
-                    placeholder="请输入密码">
+                <input type="password" class="form-control" id="password" 
+                    name="password" placeholder="请输入密码">
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">登录</button>
@@ -193,6 +199,7 @@
             </ul>
         </nav>
 
+        <!-- 演示折叠组件 -->
         <div id="collapseDemo">
             <a class="btn btn-primary" data-bs-toggle="collapse" 
                 href="#collapseExample" role="button" aria-expanded="false" 
@@ -205,8 +212,26 @@
                 使用按钮控制
             </button>
             <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    这里是一个卡片组件。
+                <!-- 演示卡片组件 -->
+                <div class="card w-25">
+                    <div class="card-header">
+                        这里是卡片组件的头部区域
+                    </div>
+                    <img src="./img/example.png" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">这是卡片组件的标题</h4>
+                        <h5 class="card-subtitle">这是卡片组件的子标题</h5>
+                        <p class="card-text">这里是卡片组件的主体部分。</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">列表文本 1</li>
+                            <li class="list-group-item">列表文本 2</li>
+                            <li class="list-group-item">列表文本 3</li>
+                        </ul>
+                        <a class="card-link" href="">链接文本 1</a>
+                        <a class="card-link" href="">链接文本 2</a>
+                </div>
+                <div class="card-footer">
+                    这里是卡片组件的底部区域
                 </div>
             </div>
         </div>
