@@ -769,10 +769,75 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `card-link`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其链接；
   - `card-img-*`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其图片，其中的`*`可以取值`top`、`bottom`和`overlay`，分别表示该图片位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上；
 
-- **选项导航组件**：如果我们想以选项卡的方式来导航页面中的图文内容，可以考虑使用Bootstrap框架中提供的选项导航组件来进行辅助设计，下面是该组件的一个简单示例：
+- **选项卡组件**：如果我们想以选项卡的方式来组织页面中的图文内容，可以考虑使用Bootstrap框架中提供的选项卡组件来进行辅助设计，下面是该组件的一个简单示例：
 
-```html
-```
+    ```html
+    <div id="tabdemo">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab1-tab" 
+                    data-bs-toggle="tab" data-bs-target="#tab1" 
+                    aria-controls="tab1" aria-selected="true">
+                    选项卡 1
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab2-tab"
+                    data-bs-toggle="tab" data-bs-target="#tab2"
+                    aria-controls="tab2" aria-selected="false">
+                    选项卡 2
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab3-tab"
+                    data-bs-toggle="tab" data-bs-target="#tab3"
+                    aria-controls="tab3" aria-selected="false">
+                    选项卡 3
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link disabled" id="tab4-tab"
+                    data-bs-toggle="tab" data-bs-target="#tab4"
+                    aria-controls="tab4" aria-selected="false">
+                    禁用选项卡
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content container p-3">
+            <div class="tab-pane fade show active" id="tab1"
+                    role="tabpanel" aria-labelledby="tab1-tab">
+                这是选项卡1的内容
+            </div>
+            <div class="tab-pane fade" id="tab2" role="tabpanel"
+                aria-labelledby="tab2-tab">
+                这是选项卡2的内容
+            </div>
+            <div class="tab-pane fade" id="tab3" role="tabpanel" 
+                aria-labelledby="tab3-tab">
+                这是选项卡3的内容
+            </div>
+            <div class="tab-pane fade" id="tab4" role="tabpanel" 
+                aria-labelledby="tab4-tab">
+                这是禁用选项卡的内容
+            </div>
+        </div>
+    </div>
+    ```
+
+  接下来，让我们根据上面的示例来简单介绍一下与该组件相关的样式类及其使用方法，具体如下：
+
+- `nav-tabs`：该样式类通常作用于设置了`nav`样式类的`<ul>`标记，效果是将该无序列表定义为选项卡组件的导航栏部分。另外，如果想让选项卡组件正常工作，我们还需为该`<ul>`标记设置`role`属性，并将该属性的值设置为`tablist`；
+- `nav-item`：该样式类是和`nav`和`nav-tabs`这两个类的次级样式类，通常作用于设置了`nav-tabs`样式类的`<ul>`标记内部的各`<li>`标记，效果是将这些列表项设置为选项卡组件中导航栏部分的各个子项。同样，如果想让这些导航项正常工作，我们还需为这些`<li>`标记设置`role`属性，并将该属性的值设置为`presentation`；
+- `nav-link`：该样式类用于设置选项卡组件中导航项的样式，通常作用于设置了`nav-item`样式类的`<li>`内部的`<a>`或`<button>`标记，效果是将该标记设置为链接样式；在设置这些导航项的样式时，读者需要注意以下事项：
+  - 如果想让当前导航项处于默认被激活的状态，就需要在`nav-link`类后面再加上`active`样式类；
+  - 如果想让当前导航项处于禁用状态，就需要在`nav-link`类后面再加上`disabled`样式类；
+- `tab-content`：该样式类通常作用于选项卡组件中紧跟着导航栏部分后面的`<div>`标记，效果是将该标记定义的元素设置为充当组件中各选项卡元素的容器；
+- `tab-pane`：该样式类通常作用于设置了`tab-content`样式类的`<div>`标记内第一级的各个`<div>`标记，效果是将这些标记设置为选项卡组件中的各个选项卡；在设置这些选项卡元素时，读者需要注意以下事项：
+  - 每个`<div>`标记都应该有一个`id`属性，该属性的值应该与被设置了`nav-link`类的标记中`aria-controls`属性的值相同；
+  - 如果想让组件中的各个选项卡都能正常发挥作用，我们就需要为这些`<div>`标记设置`role`属性，并将该属性的值设置为`tabpanel`；
+  - 如果想赋予组件中的各选项卡元素在被切换时有淡入淡出的效果，我们就需要在`tab-pane`类后面再加上`fade`样式类；
+  - 如果想让组件中的某个选项卡在页面载入时默认显示，我们就需要回到该选项卡所在的`<>`标记的`class`属性中，在`tab-pane`类后面再加上`show`样式类；
+  - 如果想让组件中的某个选项卡默认处于激活状态，我们就需要回到该选项卡所在的`<>`标记的`class`属性中，在`tab-pane`类后面再加上`active`样式类；
 
 - **分页导航组件**：如果我们想让页面中的内容分页显示，可以考虑使用Bootstrap框架中提供的分页组件来进行辅助设计，下面是该组件的一个简单示例：
   
