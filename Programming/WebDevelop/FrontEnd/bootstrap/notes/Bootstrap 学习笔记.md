@@ -161,7 +161,6 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 在上述示例中，我们首先在项目中引入了Bootstrap框架的CSS样式文件和JavaScript文件（以便能该框架提供的外观样式及其相关的功能），然后使用了该框架提供的样式类来完成网页的整体布局，并安排不同布局元素中的内容。关于页面内容的安排，我们会在后面的章节中做专门介绍，现在先来重点关注网页的整体布局。我们在这里主要采用了组件布局和Flexbox布局两大类布局样式。其中，组件布局类的样式主要运用于导航栏区域，而在作为网页主要区域的章节区域中采用的则是Flexbox布局，具体说明如下：
 
 - 在导航栏区域，我们使用`navbar`和`navbar-expand-lg`这两个类创建了一个响应式的`<nav>`元素。在该元素内部，`navbar-brand`类用于定义当前网页的Logo元素（包括图片与文字）。`navbar-nav`类和`nav-item`类用于创建导航栏中的链接列表元素。另外在响应式布局方面，我们还利用`navbar-toggler`类创建了一个按钮元素，当网页在小尺寸的屏幕设备上被访问时它就会被显示出来，而导航链接列表将会被收起，只有当用户点击该按钮时它才会重新被展开或收起。为此，我们需要将导航栏中的链接列表放在一个由`collapse`和`navbar-collapse`这两个类创建的`<div>`元素中。除此之外，我们还为导航链接列表本身添加了一个`ms-auto`类，这也是Bootstrap的响应式工具类之一，它会在小尺寸的屏幕设备上自动将导航链接移到另一侧，以适应屏幕宽度。
-  当然了，关于这里使用的导航栏组件及其相关的样式类，本文在后续章节中还会专门介绍，读者在这里暂时只需要知道它们的大致作用即可。
 
 - 在章节区域，我们首先使用`d-flex`类创建了一个以`<div>`标记来定义的弹性容器，然后用该容器来完成相关页面元素的排列和定位。这里的`d-flex`类也是Bootstrap框架提供的一个响应式工具类，下面是关于该类的使用说明：
   - **Flex容器**：`d-flex`类被应用于一个HTML元素（通常是`<div>`），将其定义为Flex容器。这意味着该元素的子元素将遵循Flexbox规则进行排列和布局。
@@ -1314,19 +1313,96 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `accordion-collapse`：该样式类是`accordion-item`类的次级样式类，通常作用于手风琴组件内各子项标题部分的后面，用于充当其主体部分容器的`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的显示内容。
   - `accordion-body`：该样式类是`accordion-collapse`类的次级样式类，通常作用于被设置了`accordion-collapse`类的元素内部的第一级`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的具体内容。
 
-- **下拉菜单组件**
+- **下拉菜单组件**：如果我们想在页面中设置一个类似于桌面应用程序中的下拉菜单，则可以使用Bootstrap框架提供的下拉菜单组件来进行辅助设计。下面是该组件的一个简单示例：
 
-- **导航栏组件**
+    ```html
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" 
+            id="dropdownMenuButton1" data-bs-toggle="dropdown" 
+            aria-expanded="false">
+            下拉菜单的按钮元素
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">菜单项 1</a></li>
+            <li><a class="dropdown-item" href="#">菜单项 2</a></li>
+            <li><a class="dropdown-item" href="#">菜单项 3</a></li>
+        </ul>
+    </div>
+    ```
 
-- **模态弹框组件**
+  接下来，我们根据上述示例来介绍一下手风琴组件的使用方法以及相关的样式类，具体如下：
+  - `dropdown`：该样式类通常作用于一个`<div>`标记，效果是将该标记定义的元素设置为一个下拉菜单组件；
+  - `dropdown-toggle`：该样式类是`dropdown`类的次级样式类，通常作用于被设置了`dropdown`类的`<div>`标记内的`<button>`或`<a>`标记，效果是将该标记定义的元素设置为一个下拉菜单组件的控制按钮，以便用于控制下拉菜单组件的显示与隐藏；
+  - `dropdown-menu`：该样式类是`dropdown`类的次级样式类，通常作用于被设置了`dropdown`类的`<div>`标记内的`<ul>`标记，效果是将该标记定义的元素设置为一个下拉菜单组件的菜单部分，以便用于放置该组件中的具体菜单项；
+  - `dropdown-item`：该样式类是`dropdown-menu`类的次级样式类，通常作用于被设置了`dropdown-menu`类的`<ul>`标记内的`<li>`标记，效果是将该标记定义的元素设置为一个下拉菜单组件中的菜单项，以便用于放置这些菜单项中的具体链接；
 
-- **弹出提示框组件**
+- **模态对话框组件**：如果我们想在页面中设置一个类似于桌面应用程序中的弹出式对话框，则可以使用Bootstrap框架提供的模态对话框组件来进行辅助设计。下面是该组件的一个简单示例：
 
-- **进度条组件**
+    ```html
+    <button type="button" class="btn btn-primary"
+        data-bs-toggle="modal" data-bs-target="#modalExample">
+        显示模态弹框
+    </button>
+    <dialog class="modal fade" id="modalExample" tabindex="-1"
+        aria-labelledby="modalExampleLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" 
+                        id="modalExampleLabel">
+                        模态弹框标题
+                    </h5>
+                    <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" 
+                        aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>这是一个模态弹框组件的简单示例。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" 
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">关闭</button>
+                    <button type="button" 
+                        class="btn btn-primary">
+                        保存更改
+                    </button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    ```
 
-- **吐司组件**
+  接下来，我们根据上述示例来介绍一下该组件的使用方法以及相关的样式类，具体如下：
+  - `modal`：该样式类通常作用于一个`<div>`或`<dialog>`标记，效果是将该标记定义的元素设置为一个模态对话框组件。在设置该组件时，读者需要注意以下事项：
+    - 由于该组件是一个弹出式对话框，所以我们需要设置一个按钮元素来触发该对话框的弹出。在定义该按钮元素的`<button>`标记中，`data-bs-toggle`属性的值应设置为`modal`，`data-bs-target`属性的值则应为`#[id属性值]`（在这里，`[id属性值]`为模态对话框组件的`id`属性值）。
+    - 如果我们想赋予该模态对话框淡入淡出的效果，就需要在`modal`样式类后面再添加一个`fade`样式类； 
+  - `modal-dialog`：该样式类是`modal`类的次级样式类，通常作用于被设置了`modal`类的`<div>`标记内第一级的`<div>`标记，效果是将该标记定义的元素设置为模态对话框组件的对话框部分。在设置这部分样式时，读者需要注意以下事项：
+    - 如果我们想在对话框中使用滚动条元素，就需要在`modal-dialog`样式类后面再添加一个`modal-dialog-scrollable`样式类；
+    - 如果我们想在对话框中使用居中布局，就需要在`modal-dialog`样式类后面再添加一个`modal-dialog-centered`样式类；
+  - `modal-content`：该样式类是`modal-dialog`类的次级样式类，通常作用于被设置了`modal-dialog`类的`<div>`标记内第一级的`<div>`标记，效果是将该标记定义的元素设置为一个用于放置对话框内部元素的容器；
+  - `modal-header`：该样式类是`modal-content`类的次级样式类，通常作用于被设置了`modal-content`类的`<div>`标记内第一级的`<div>`标记，效果是将该标记定义的元素设置为一个模态对话框组件的头部部分。
+  - `modal-title`：该样式类是`modal-header`类的次级样式类，通常作用于被设置了`modal-header`类的`<div>`标记内的标题类标记，效果是将该标记定义的元素设置为一个模态对话框组件的标题文本。
+  - `modal-body`：该样式类是`modal-content`类的次级样式类，通常作用于被设置了`modal-content`类的`<div>`标记内第一级的`<div>`标记，效果是将该标记定义的元素设置为一个模态对话框组件的身体部分。
+  - `modal-footer`：该样式类是`modal-content`类的次级样式类，通常作用于被设置了`modal-content`类的`<div>`标记内第一级的`<div>`标记，效果是将该标记定义的元素设置为一个模态对话框组件的底部部分；
 
-- **工具提示组件**
+- **进度条组件**：如果我们想在页面中设置一个显示某个操作过程的进度条，就可以使用Bootstrap框架提供的进度条组件来进行辅助设计。下面是该组件的一个简单示例：
+
+    ```html
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" 
+            aria-valuemax="100" style="width: 25%;">
+            25%
+        </div>
+    </div>
+    ```
+
+  接下来，我们根据上述示例来介绍一下该组件的使用方法以及相关的样式类，具体如下：
+  - `progress`：该样式类通常作用于一个`<div>`标记，效果是将该标记定义的元素设置为一个进度条组件；
+  - `progress-bar`：该样式类是`progress`类的次级样式类，通常作用于被设置了`progress`类的`<div>`标记内第一级的`<div>`，效果是将该标记定义的元素设置为一个该组件的进度条本体部分。在设置这部分样式，我们需要将该`<div>`的`role`属性设置为`progressbar`，将`aria-valuemin`属性设置为`0`，将`aria-valuemax`属性设置为`100`，并将`style`属性设置为`width: 25%;`，以实现进度条的25%进度效果。
+  
+需要注意的是，本笔记在这里所介绍的只是笔者在个人实践中常用到的Bootstrap组件及其基本使用方法，如果读者想知道更为详细的资料，可以访问[Bootstrap中文网](http://www.bootcss.com/)来查看相关文档。
 
 ## 响应式设计扩展
 

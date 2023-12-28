@@ -70,6 +70,14 @@
                     演示分页组件
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="modalDemo-tab" 
+                    data-bs-toggle="tab" data-bs-target="#modalDemo" 
+                    type="button" role="tab" 
+                    aria-controls="modalDemo" aria-selected="false">
+                    演示模态弹框组件
+                </button>
+            </li>
         </ul>
         <div class="tab-content p-3" id="demoTabContent">
             <!-- 演示普通文本 -->        
@@ -389,6 +397,44 @@
                 </nav>
             </div>
             <!-- 分页组件演示结束 -->
+            <!-- 演示模态弹框组件 -->
+            <div class="tab-pane fade" id="modalDemo" role="tabpanel"
+                aria-labelledby="modalDemo-tab">
+                <button type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#modalExample">
+                    显示模态弹框
+                </button>
+                <dialog class="modal fade" id="modalExample" tabindex="-1"
+                    aria-labelledby="modalExampleLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" 
+                                    id="modalExampleLabel">
+                                    模态弹框标题
+                                </h5>
+                                <button type="button" class="btn-close"
+                                    data-bs-dismiss="modal" 
+                                    aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>这是一个模态弹框组件的简单示例。</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" 
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal">关闭</button>
+                                <button type="button" 
+                                    class="btn btn-primary">
+                                    保存更改
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </dialog>
+            </div>
+            <!-- 模态弹框组件演示结束 -->
         </div>
     </body>
 </html>
