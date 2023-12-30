@@ -5,7 +5,7 @@
 
 ## 框架简介
 
-Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术实现的前端开发框架。它本质上是一个开源、免费的工具集，其中提供了一系列可重用的页面组件、样式类以及脚本代码，旨在帮助网页设计师快速构建出既充满专业感，又显得精致美观的网页（包括基于网页技术的Web应用程序界面）。目前，Bootstrap框架被广泛用于各种主流的Web应用中，例如Bing、LinkedIn、Instagram、Pinterest、Reddit、StackOverflow等，该框架在网页设计领域的最大竞争优势来自于以下几个方面：
+Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术实现的、用于网页设计的开源工具集，其中提供了一系列可重用的页面组件、样式类以及脚本代码，旨在帮助网页设计师快速构建出既充满专业感，又显得精致美观的网页（以及基于网页技术的应用程序界面）。目前，Bootstrap框架被广泛用于各种主流的Web应用中，例如Bing、LinkedIn、Instagram、Pinterest、Reddit、StackOverflow等，该框架在网页设计领域的最大竞争优势来自于以下几个方面：
 
 - Bootstrap框架对响应式布局的强大支持。通过在项目中引入该框架，设计师们可以非常轻松地设计出能自动适应不同屏幕尺寸的网页，这将有助于提供更好的用户体验。在移动设备越来越普及的今天，响应式布局已经成为了Web开发的标配，Bootstrap框架的出现为开发者提供了一个快速实现响应式布局的工具。
 
@@ -46,11 +46,11 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 1. 在本地计算机中创建一个名为`HelloBootstrap`的文件夹（在这里，我将会将它创建在本笔记文件所在的目录下的`examples`目录中），并在其中创建一个名为`index.htm`的网页文件和两个分别名为`styles`和`scripts`的子目录。
 
-2. 打开网页浏览器，使用搜索引擎找到Bootstrap框架的官网，然后进入到如下图所示的下载页面，并单击图中的「Download」按钮将编译好的CSS和JavaScript文件下载到本地计算机中。
+2. 打开网页浏览器，使用搜索引擎找到Bootstrap框架的官网，然后进入到如下图所示的下载页面，并单击图中的「Download」按钮将编译好的CSS和JavaScript文件下载到本地计算机中。当然了，如果读者想使用NPM包管理器来构建自己的项目，也可以直接在项目的根目录下执行`npm install bootstrap --dev`命令来下载该框架。
 
     ![Bootstrap官方下载页面](./img/1.png)
 
-3. 下载完成后，读者会得到一个名为`bootstrap-5.3.2-dist.zip`的压缩包文件，接下来的工作就是要该文件解压并将其中路径为`css/bootstrap.min.css`的文件复制到`HelloBootstrap`项目的`styles`目录下，而路径为`js/bootstrap.min.js`的文件则复制到该项目的`scripts`目录下。在这里，之所以要使用压缩包中文件名中带有`min`的文件，是因为这些文件已经经过压缩处理，可以大大提高网页加载速度。
+3. 下载完成后，读者会得到一个名为`bootstrap-5.3.2-dist.zip`的压缩包文件，接下来的工作就是要该文件解压并将其中路径为`css/bootstrap.min.css`的文件复制到`HelloBootstrap`项目的`styles`目录下，而路径为`js/bootstrap.min.js`的文件则复制到该项目的`scripts`目录下（如果读者在上一步骤中是使用 NPM来下载框架的，那么这两个文件现在已经存在于当前项目的`/node_modules/bootstrap/dist/css`和`/node_modules/bootstrap/dist/js`这两个目录中，直接使用即可）。在这里，之所以要使用框架中文件名带有`min`的文件，是因为这些文件已经经过压缩处理，可以大大提高网页加载速度。
 
 4. 接下来，读者需要使用VS Code编辑器中打开`HelloBootstrap`项目，并在之前创建的`index.htm`文件的输入如下代码：
 
@@ -1205,23 +1205,24 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     - 如果想改变按钮组件的默认配色，则需要在`btn`样式类后面添加`btn-primary`、`btn-secondary`、`btn-success`、`btn-danger`、`btn-warning`、`btn-info`、`btn-light`或`btn-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
     - 如果想将组件设置为链接样式，则需要在`btn`样式类后面添加一个`btn-link`样式类；
 
-- **徽章组件**：对于表单元素或页面其他元素中放置的标签元素，我们可以考虑使用Bootstrap框架提供的标签组件来进行辅助设计，下面是该组件的一个简单示例：
+- **徽章组件**：对于表单元素或页面其他元素中放置的标签元素，我们可以考虑使用Bootstrap框架提供的徽组件来进行辅助设计，下面是该组件的一个简单示例：
 
     ```html
-    <h1>Example heading <span class="badge badge-primary">New</span></h1>
-    <h2>Example heading <span class="badge badge-secondary">New</span></h2>
-    <h3>Example heading <span class="badge badge-success">New</span></h3>
-    <h4>Example heading <span class="badge badge-danger">New</span></h4>
-    <h5>Example heading <span class="badge badge-warning">New</span></h5>
-    <h6>Example heading <span class="badge badge-info">New</span></h6>
-    <h6>Example heading <span class="badge badge-light">New</span></h6>
-    <h6>Example heading <span class="badge badge-dark">New</span></h6>
+    <h1>Example heading <span class="badge bg-primary">New</span></h1>
+    <h2>Example heading <span class="badge bg-secondary">New</span></h2>
+    <h3>Example heading <span class="badge bg-success">New</span></h3>
+    <h4>Example heading <span class="badge bg-danger">New</span></h4>
+    <h5>Example heading <span class="badge bg-warning">New</span></h5>
+    <h6>Example heading <span class="badge bg-info">New</span></h6>
+    <h6>Example heading <span class="badge bg-light text-dark">New</span></h6>
+    <h6>Example heading <span class="badge bg-dark">New</span></h6>
     ```
 
   接下来，让我们根据上述示例来介绍一下与徽章组件相关的样式类及其使用方法，具体如下：
 
   - `badge`：该样式类通常作用于`<span>`或其他用于表示强调的文本类标记，效果是将该标记定义的元素设置为徽章组件，并赋予其默认样式。
-  - 如果想改变徽章组件的默认配色，则需要在`badge`样式类后面添加`badge-primary`、`badge-secondary`、`badge-success`、`badge-danger`、`badge-warning`、`badge-info`、`badge-light`或`badge-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
+  - 如果想改变徽章组件的背景色，则需要在`badge`样式类后面添加`bg-primary`、`bg-secondary`、`bg-success`、`bg-danger`、`bg-warning`、`bg-info`、`bg-light`或`bg-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
+  - 如果想让徽章组件呈现出更圆的边角、更大的边界半径，则需要在`badge`样式类后面添加一个`rounded-pill`样式类；
 
 - **折叠组件**：如果我们想让在页面中设置一个用于控制单个元素显示的开关，也可以考虑使用由Bootstrap框架提供的折叠组件来进行辅助设计，下面是该组件的一个简单示例：
 
@@ -1452,18 +1453,18 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `btn-block-lg`：该扩展类用于设置按钮元素在大尺寸的屏幕设备下的样式；
   - `btn-block-xl`：该扩展类用于设置按钮元素在超大尺寸的屏幕设备下的样式；
 
-- **导航栏组件**：针对导航栏组件的响应式设计，Bootstrap框架同样也提供了以下扩展类：
-  - `navbar-expand-sm`：该扩展类用于设置导航栏组件在小尺寸的屏幕设备下的样式；
-  - `navbar-expand-md`：该扩展类用于设置导航栏组件在中等尺寸的屏幕设备下的样式；
-  - `navbar-expand-lg`：该扩展类用于设置导航栏组件在大尺寸的屏幕设备下的样式；
-  - `navbar-expand-xl`：该扩展类用于设置导航栏组件在超大尺寸的屏幕设备下的样式；
-
 - **图文卡片组件**：针对图文卡片组件的响应式设计，Bootstrap框架同样也为其中的图片元素提供了以下扩展类：
   - `card-img-*-sm`：该扩展类用于设置卡片组件中图片元素在小尺寸的屏幕设备下的样式；
   - `card-img-*-md`：该扩展类用于设置卡片组件中图片元素在中等尺寸的屏幕设备下的样式；
   - `card-img-*-lg`：该扩展类用于设置卡片组件中图片元素在大尺寸的屏幕设备下的样式；
   - `card-img-*-xl`：该扩展类用于设置卡片组件中图片元素在超大尺寸的屏幕设备下的样式；
   在上述扩展类中，`*`的取值可以是`top`、`bottom`和`overlay`，分别用于表示图片元素是位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上。
+
+- **导航栏组件**：针对导航栏组件的响应式设计，Bootstrap框架同样也提供了以下扩展类：
+  - `navbar-expand-sm`：该扩展类用于设置导航栏组件在小尺寸的屏幕设备下的样式；
+  - `navbar-expand-md`：该扩展类用于设置导航栏组件在中等尺寸的屏幕设备下的样式；
+  - `navbar-expand-lg`：该扩展类用于设置导航栏组件在大尺寸的屏幕设备下的样式；
+  - `navbar-expand-xl`：该扩展类用于设置导航栏组件在超大尺寸的屏幕设备下的样式；
 
 - **分页导航组件**：针对分页导航组件的响应式设计，Bootstrap框架同样也提供了以下扩展类：
   - `pagination-sm`：该扩展类用于设置分页导航组件在小尺寸的屏幕设备下的样式；
