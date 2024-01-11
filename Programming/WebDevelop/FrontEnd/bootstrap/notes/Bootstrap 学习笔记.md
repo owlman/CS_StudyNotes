@@ -1,7 +1,7 @@
 #! https://zhuanlan.zhihu.com/p/673657190
 # Bootstrap 学习笔记
 
-从方法论的角度来说，采用从零开始编写HTML+CSS代码的做法对于网页设计教学是非常有必要的，它能让初学者以“在做中学，学中做”的方式来实现快速入门，但在实际的生产环境中，继续这样做就不见得是最佳实践了，因为它不仅非常耗时费力，而且也极易出错，所以对网页设计师的要求也相对较高。如果我们平常只是一个前端程序员，并没有经历过专业的美术训练，那么大概率会在网页整体布局、图文信息排版、用户界面设计等问题上遇到较大的挑战。因此，在实际生产过程中，设计师们往往更倾向于使用成熟的第三方框架来辅助进行网页设计的工作。这篇笔记中，我们将致力于学习如何基于Bootstrap框架来快速完成网页的设计工作。
+从方法论的角度来说，采用从零开始编写HTML+CSS代码的做法对于网页设计教学是非常有必要的，它能让初学者以“在做中学，学中做”的方式来实现快速入门，但在实际的生产环境中，继续这样做就不见得是最佳实践了，因为它不仅非常耗时费力，而且也极易出错，所以对网页设计师的要求也相对较高。如果我们平常只是一个前端程序员，并没有经历过专业的美术训练，那么大概率会在网页整体布局、图文信息排版、用户界面设计等问题上遇到较大的挑战。因此，在实际生产过程中，设计师们往往更倾向于使用成熟的第三方框架来辅助进行网页设计的工作。这篇笔记中，我们将致力于记录如何学习基于Bootstrap框架来快速完成网页的设计工作。
 
 ## 框架简介
 
@@ -218,7 +218,8 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     <html lang="zh-CN">
         <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="viewport" 
+                content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="./styles/bootstrap.min.css">
             <script src="./scripts/bootstrap.min.js" defer></script>
             <title>网页文本排版示例</title>
