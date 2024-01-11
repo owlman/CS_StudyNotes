@@ -663,6 +663,25 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `float-end`：该样式类会为图片元素设置浮动效果，并将其向右浮动；
   - `mx-auto`：该样式类会为已被设置为块级元素的图片设置居中显示的效果；
 
+- **徽章组件**：对于表单元素或页面其他元素中放置的标签元素，我们可以考虑使用Bootstrap框架提供的徽组件来进行辅助设计，下面是该组件的一个简单示例：
+
+    ```html
+    <h1>Example heading <span class="badge bg-primary">New</span></h1>
+    <h2>Example heading <span class="badge bg-secondary">New</span></h2>
+    <h3>Example heading <span class="badge bg-success">New</span></h3>
+    <h4>Example heading <span class="badge bg-danger">New</span></h4>
+    <h5>Example heading <span class="badge bg-warning">New</span></h5>
+    <h6>Example heading <span class="badge bg-info">New</span></h6>
+    <h6>Example heading <span class="badge bg-light text-dark">New</span></h6>
+    <h6>Example heading <span class="badge bg-dark">New</span></h6>
+    ```
+
+  接下来，让我们根据上述示例来介绍一下与徽章组件相关的样式类及其使用方法，具体如下：
+
+  - `badge`：该样式类通常作用于`<span>`或其他用于表示强调的文本类标记，效果是将该标记定义的元素设置为徽章组件，并赋予其默认样式。
+  - 如果想改变徽章组件的背景色，则需要在`badge`样式类后面添加`bg-primary`、`bg-secondary`、`bg-success`、`bg-danger`、`bg-warning`、`bg-info`、`bg-light`或`bg-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
+  - 如果想让徽章组件呈现出更圆的边角、更大的边界半径，则需要在`badge`样式类后面添加一个`rounded-pill`样式类；
+
 - **轮播组件样式**：如果我们想让图片元素以幻灯片的形式呈现在页面中，也可以考虑使用由Bootstrap框架提供的、一个名为“轮播”的专用组件来进行辅助设计，下面是该组件的一个简单示例：
   
     ```html
@@ -768,6 +787,96 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `card-text`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其文本内容；
   - `card-link`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其链接；
   - `card-img-*`：该样式类为`card`类的次级样式类，通常用于为卡片组件定义其图片，其中的`*`可以取值`top`、`bottom`和`overlay`，分别表示该图片位于卡片组件的顶部、底部，或是覆盖在卡片组件的背景色之上；
+
+- **折叠组件**：如果我们想让在页面中设置一个用于控制单个元素显示的开关，也可以考虑使用由Bootstrap框架提供的折叠组件来进行辅助设计，下面是该组件的一个简单示例：
+
+    ```html
+    <div id="collapseDemo">
+        <a class="btn btn-primary" data-bs-toggle="collapse" 
+            href="#collapseExample" role="button" aria-expanded="false" 
+            aria-controls="collapseExample">
+            使用链接控制
+        </a>
+        <button class="btn btn-primary" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#collapseExample" 
+            aria-expanded="false" aria-controls="collapseExample">
+            使用按钮控制
+        </button>
+        <div class="collapse show" id="collapseExample">
+            <div class="card card-body">
+                这里是一个卡片组件。
+            </div>
+        </div>
+    </div>
+    ```
+
+  接下来，我们根据上述示例来介绍一下折叠组件的使用方法以及相关的样式类，具体如下：
+  - `collapse`：该样式类通常作用于`<div>`或其他布局类的标记，效果是将该标记定义的元素设置为一个折叠组件，以便用于放置要被控制显示的内容。在使用该样式类设置折叠组件时，读者需要注意以下事项：
+  - `show`：折叠组件所控制的元素在默认情况下是被隐藏的，如果我们想让该元素在页面加载时默认显示，则需要为折叠组件的`<div>`标记添加`show`样式类；
+    - 如果想让折叠组件真正发挥作用，我们就必须要为它设置一个具有唯一性的`[id属性值]`。然后，如果控制按钮是由`<a>`标记定义的，那么就需要将`<a>`标记的`herf`属性值设置为`#[id属性值]`；如果控制按钮是由`<button>`标记定义的，则需将`<button>`标记的`data-bs-target`属性值设置为`#[id属性值]`；
+
+- **手风琴组件**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，下面是该组件的一个简单示例：
+  
+    ```html
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#collapseOne" 
+                    aria-expanded="true" aria-controls="collapseOne">
+                    标题1
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show"
+                aria-labelledby="headingOne" 
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    第一个元素。
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" 
+                    aria-expanded="false" aria-controls="collapseTwo">
+                    标题2
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse"
+                aria-labelledby="headingTwo" 
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    第二个元素。
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#collapseThree" 
+                    aria-expanded="false" aria-controls="collapseThree">
+                    标题3
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse"
+                aria-labelledby="headingThree" 
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    第三个元素。
+                </div>
+            </div>
+        </div>
+    </div>
+    ```
+
+  接下来，我们根据上述示例来介绍一下手风琴组件的使用方法以及相关的样式类，具体如下：
+  - `accordion`：该样式类通常作用于`<div>`或其他布局类标记，效果是将该标记定义的元素设置为一个手风琴组件，以便用于放置手风琴组件中的各个子项。
+  - `accordion-item`：该样式类是`accordion`类的次级样式类，通常作用于手风琴组件内第一级的`<div>`或其他布局类标记，效果是将该标记定义的元素设置为一个手风琴组件中各个子项的容器，以便具体放置构成这些子项的元素。
+  - `accordion-header`：该样式类是`accordion-item`类的次级样式类，通常作用于手风琴组件内各子项中的标题类标记（从`<h1>`到`<h6>`），效果是将该标记定义的元素设置为一个手风琴组件中各子项的标题，同时用于放置这些子项的控制按钮。默认为显示状态，如果想将其设置为默认隐藏，则需要在该样式类后面添加`collapsed`样式类。
+  - `accordion-button`：该样式类是`accordion-header`类的次级样式类，通常作用于手风琴组件中各子项标题内的`<button>`或`<a>`标记，效果是将该标记定义的元素设置为一个手风琴组件中各子项的控制按钮，以便用于控制该子项主体部分的显示与隐藏。
+  - `accordion-collapse`：该样式类是`accordion-item`类的次级样式类，通常作用于手风琴组件内各子项标题部分的后面，用于充当其主体部分容器的`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的显示内容。
+  - `accordion-body`：该样式类是`accordion-collapse`类的次级样式类，通常作用于被设置了`accordion-collapse`类的元素内部的第一级`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的具体内容。
 
 - **选项卡组件**：如果我们想以选项卡的方式来组织页面中的图文内容，可以考虑使用Bootstrap框架中提供的选项卡组件来进行辅助设计，下面是该组件的一个简单示例：
 
@@ -1205,115 +1314,6 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `btn`：该样式类通常作用于`<button>`或`<a>`标记，效果是将该标记定义的元素设置为按钮组件，并赋予其默认样式。在设置按钮组件时，读者还需要注意以下事项：
     - 如果想改变按钮组件的默认配色，则需要在`btn`样式类后面添加`btn-primary`、`btn-secondary`、`btn-success`、`btn-danger`、`btn-warning`、`btn-info`、`btn-light`或`btn-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
     - 如果想将组件设置为链接样式，则需要在`btn`样式类后面添加一个`btn-link`样式类；
-
-- **徽章组件**：对于表单元素或页面其他元素中放置的标签元素，我们可以考虑使用Bootstrap框架提供的徽组件来进行辅助设计，下面是该组件的一个简单示例：
-
-    ```html
-    <h1>Example heading <span class="badge bg-primary">New</span></h1>
-    <h2>Example heading <span class="badge bg-secondary">New</span></h2>
-    <h3>Example heading <span class="badge bg-success">New</span></h3>
-    <h4>Example heading <span class="badge bg-danger">New</span></h4>
-    <h5>Example heading <span class="badge bg-warning">New</span></h5>
-    <h6>Example heading <span class="badge bg-info">New</span></h6>
-    <h6>Example heading <span class="badge bg-light text-dark">New</span></h6>
-    <h6>Example heading <span class="badge bg-dark">New</span></h6>
-    ```
-
-  接下来，让我们根据上述示例来介绍一下与徽章组件相关的样式类及其使用方法，具体如下：
-
-  - `badge`：该样式类通常作用于`<span>`或其他用于表示强调的文本类标记，效果是将该标记定义的元素设置为徽章组件，并赋予其默认样式。
-  - 如果想改变徽章组件的背景色，则需要在`badge`样式类后面添加`bg-primary`、`bg-secondary`、`bg-success`、`bg-danger`、`bg-warning`、`bg-info`、`bg-light`或`bg-dark`这八个样式类中的一个。关于这些配色及其代表的含义，我们之前已经做过介绍，整理就不再重复了；
-  - 如果想让徽章组件呈现出更圆的边角、更大的边界半径，则需要在`badge`样式类后面添加一个`rounded-pill`样式类；
-
-- **折叠组件**：如果我们想让在页面中设置一个用于控制单个元素显示的开关，也可以考虑使用由Bootstrap框架提供的折叠组件来进行辅助设计，下面是该组件的一个简单示例：
-
-    ```html
-    <div id="collapseDemo">
-        <a class="btn btn-primary" data-bs-toggle="collapse" 
-            href="#collapseExample" role="button" aria-expanded="false" 
-            aria-controls="collapseExample">
-            使用链接控制
-        </a>
-        <button class="btn btn-primary" type="button" 
-            data-bs-toggle="collapse" data-bs-target="#collapseExample" 
-            aria-expanded="false" aria-controls="collapseExample">
-            使用按钮控制
-        </button>
-        <div class="collapse show" id="collapseExample">
-            <div class="card card-body">
-                这里是一个卡片组件。
-            </div>
-        </div>
-    </div>
-    ```
-
-  接下来，我们根据上述示例来介绍一下折叠组件的使用方法以及相关的样式类，具体如下：
-  - `collapse`：该样式类通常作用于`<div>`或其他布局类的标记，效果是将该标记定义的元素设置为一个折叠组件，以便用于放置要被控制显示的内容。在使用该样式类设置折叠组件时，读者需要注意以下事项：
-  - `show`：折叠组件所控制的元素在默认情况下是被隐藏的，如果我们想让该元素在页面加载时默认显示，则需要为折叠组件的`<div>`标记添加`show`样式类；
-    - 如果想让折叠组件真正发挥作用，我们就必须要为它设置一个具有唯一性的`[id属性值]`。然后，如果控制按钮是由`<a>`标记定义的，那么就需要将`<a>`标记的`herf`属性值设置为`#[id属性值]`；如果控制按钮是由`<button>`标记定义的，则需将`<button>`标记的`data-bs-target`属性值设置为`#[id属性值]`；
-
-- **手风琴组件**：如果我们想在页面中设置一个用于控制多个元素显示的折叠面板，可以考虑使用Bootstrap框架中提供的手风琴组件来进行辅助设计，下面是该组件的一个简单示例：
-  
-    ```html
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#collapseOne" 
-                    aria-expanded="true" aria-controls="collapseOne">
-                    标题1
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show"
-                aria-labelledby="headingOne" 
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    第一个元素。
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" 
-                    aria-expanded="false" aria-controls="collapseTwo">
-                    标题2
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse"
-                aria-labelledby="headingTwo" 
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    第二个元素。
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#collapseThree" 
-                    aria-expanded="false" aria-controls="collapseThree">
-                    标题3
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse"
-                aria-labelledby="headingThree" 
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    第三个元素。
-                </div>
-            </div>
-        </div>
-    </div>
-    ```
-
-  接下来，我们根据上述示例来介绍一下手风琴组件的使用方法以及相关的样式类，具体如下：
-  - `accordion`：该样式类通常作用于`<div>`或其他布局类标记，效果是将该标记定义的元素设置为一个手风琴组件，以便用于放置手风琴组件中的各个子项。
-  - `accordion-item`：该样式类是`accordion`类的次级样式类，通常作用于手风琴组件内第一级的`<div>`或其他布局类标记，效果是将该标记定义的元素设置为一个手风琴组件中各个子项的容器，以便具体放置构成这些子项的元素。
-  - `accordion-header`：该样式类是`accordion-item`类的次级样式类，通常作用于手风琴组件内各子项中的标题类标记（从`<h1>`到`<h6>`），效果是将该标记定义的元素设置为一个手风琴组件中各子项的标题，同时用于放置这些子项的控制按钮。默认为显示状态，如果想将其设置为默认隐藏，则需要在该样式类后面添加`collapsed`样式类。
-  - `accordion-button`：该样式类是`accordion-header`类的次级样式类，通常作用于手风琴组件中各子项标题内的`<button>`或`<a>`标记，效果是将该标记定义的元素设置为一个手风琴组件中各子项的控制按钮，以便用于控制该子项主体部分的显示与隐藏。
-  - `accordion-collapse`：该样式类是`accordion-item`类的次级样式类，通常作用于手风琴组件内各子项标题部分的后面，用于充当其主体部分容器的`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的显示内容。
-  - `accordion-body`：该样式类是`accordion-collapse`类的次级样式类，通常作用于被设置了`accordion-collapse`类的元素内部的第一级`<div>`或其他布局类标记，以便用于放置手风琴组件中各子项主体部分的具体内容。
 
 - **下拉菜单组件**：如果我们想在页面中设置一个类似于桌面应用程序中的下拉菜单，则可以使用Bootstrap框架提供的下拉菜单组件来进行辅助设计。下面是该组件的一个简单示例：
 
