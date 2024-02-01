@@ -9,442 +9,471 @@
             defer="defer"></script>
         <title>临时演示页面</title>
     </head>
-    <div class="container">
-        <h1 class="display-1">临时演示页面</h1>
-        
-        <!-- 演示选项卡组件 -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="textDemo-tab"
-                    data-bs-toggle="tab" data-bs-target="#textDemo" 
-                    type="button" role="tab" 
-                    aria-controls="textDemo" aria-selected="true">
-                    演示普通文本
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" 
+                    data-toggle="collapse" data-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="formDemo-tab" 
-                    data-bs-toggle="tab" data-bs-target="#formDemo" 
-                    type="button" role="tab" aria-controls="formDemo" 
-                    aria-selected="false">
-                    演示表单组件
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="cardDemo-tab" 
-                    data-bs-toggle="tab" data-bs-target="#cardDemo" 
-                    type="button" role="tab" 
-                    aria-controls="cardDemo" aria-selected="false">
-                    演示卡片组件
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="collapseDemo-tab"
-                    data-bs-toggle="tab" data-bs-target="#collapseDemo" 
-                    type="button" role="tab" 
-                    aria-controls="collapseDemo" aria-selected="false">
-                    演示折叠组件
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="carousel" 
-                    data-bs-toggle="tab" data-bs-target="#carouselDemo" 
-                    type="button" role="tab" 
-                    aria-controls="carouselDemo" aria-selected="false">
-                    演示轮播组件
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="accordionDemo-tab" 
-                    data-bs-toggle="tab" data-bs-target="#accordionDemo" 
-                    type="button" role="tab" 
-                    aria-controls="accordionDemo" aria-selected="false">
-                    演示手风琴组件
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="paginationDemo-tab" 
-                    data-bs-toggle="tab" data-bs-target="#paginationDemo" 
-                    type="button" role="tab" 
-                    aria-controls="textDemo" aria-selected="false">
-                    演示分页组件
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="modalDemo-tab" 
-                    data-bs-toggle="tab" data-bs-target="#modalDemo" 
-                    type="button" role="tab" 
-                    aria-controls="modalDemo" aria-selected="false">
-                    演示模态弹框组件
-                </button>
-            </li>
-        </ul>
-        <div class="tab-content p-3" id="demoTabContent">
-            <!-- 演示普通文本 -->        
-            <div class="tab-pane fade show active" id="textDemo" role="tabpanel" 
-                aria-labelledby="textDemo-tab">
-                <p class="fs-4 fst-italic text-break lh-lg">
-                    这是一个中文段落，下面是示例文本：
-                    bootstrap框架是一个前端框架，用于快速开发前端页面，
-                    其组件库非常丰富，可以满足各种前端开发需求。
-                    bootstrap框架的组件库由twitter公司开发，
-                    并开源发布，目前最新版本为4.0.0。
-                    bootstrap框架的组件库基于jQuery库，
-                    因此需要先引入jQuery库，才能使用bootstrap框架的组件库。
-                </p>
-                <p class="text-muted">
-                    this is a paragraph example in the English:
-                    bootstrap is a front-end framework for quick development of 
-                    front-end pages,
-                    its component library is very rich, and it can meet the needs 
-                    of front-end development.
-                    bootstrap is a component library developed by
-                    twitter company, and it is open source and released.
-                    The latest version of bootstrap is 4.0.0.
-                    bootstrap's component library is based on the jQuery library,
-                    so you need to introduce the jQuery library first to use 
-                    bootstrap's component library.
-                </p>
-                <!-- 演示引用文本 -->
-                <blockquote class="blockquote">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    autem ipsum deserunt quo libero quis quisquam, ad rerum 
-                    doloremque 
-                    quod amet laudantium, natus eum maxime omnis itaque ratione 
-                    olores beatae.
-                    <cite class="blockquote-footer">Lorem ipsum</cite>
-                </blockquote>
-                <!-- 演示链接 -->
-                <a href="" class="link-primary">链接示例</a>
-            </div>
-            <!-- 普通文本演示结束 -->
-            <!-- 演示表单组件 -->
-            <div class="tab-pane fade" id="formDemo" role="tabpanel" 
-                aria-labelledby="formDemo-tab">
-                <form class="border rounded p-3 m-5" 
-                    method="post" action="http://example.com/api">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">用户名</label>
-                        <input type="text" class="form-control" id="username" 
-                            name="username" placeholder="请输入用户名">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">密码</label>
-                        <input type="password" class="form-control" id="password" 
-                            name="password" placeholder="请输入密码">
-                    </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">登录</button>
-                        <button type="reset" class="btn btn-danger">重置</button>
-                    </div>
-                </form>
-                <form class="row border rounded p-3 m-5" 
-                    method="post" action="http://example.com/api">
-                    <div class="col-4">
-                        <input type="" class="form-control" 
-                            placeholder="请输入你的用户名">
-                    </div>
-                    <div class="col-4">
-                        <input type="password" class="form-control" 
-                            placeholder="请输入你的密码">
-                    </div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary">登录</button>
-                        <button type="reset" class="btn btn-danger">重置</button>
-                    </div>
-                </form>
-                <form class="border rounded p-3 m-5" 
-                    method="post" action="http://example.com/api">
-                    <div class="row p-1">
-                        <div class="col-6">
-                            <input type="text" class="form-control" 
-                                name="firstname" id="firstname" placeholder="姓">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control" 
-                                name="lastname" id="lastname" placeholder="名">
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                        <label for="address" class="col-form-label col-12">
-                            具体地址：
-                        </label>
-                        <div class="col-12">
-                            <input type="text" class="form-control" name="address" 
-                            id="address" placeholder="请输入详细街道地址">
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                        <div class="col-6">
-                            <label for="city" class="form-label">城市：</label>
-                            <input type="text" class="form-control" 
-                                name="city" id="city">
-                        </div>
-                        <div class="col-4">
-                            <label for="state" class="form-label">国家：</label>
-                            <input type="text" class="form-control" 
-                                name="state" id="state">
-                        </div>
-                        <div class="col-2">
-                            <label for="zipcode" class="form-label">邮编：</label>
-                            <input type="text" class="form-control" 
-                                name="zipcode" id="zipcode">
-                        </div>
-                    </div>
-                    <div class="d-flex gap-3 m-2">
-                        <button type="submit" class="btn btn-primary">提交</button>
-                        <button type="reset" class="btn btn-danger">重置</button>
-                    </div>
-                </form>
-            </div>
-            <!-- 表单组件演示结束 -->
-            <div class="tab-pane fade" id="cardDemo" role="tabpanel" 
-                aria-labelledby="cardDemo-tab">
-                <!-- 演示卡片组件 -->
-                <div class="card w-75">
-                    <div class="card-header">
-                        这里是卡片组件的头部区域
-                    </div>
-                    <img src="./img/example.png" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">这是卡片组件的标题</h4>
-                        <h5 class="card-subtitle">这是卡片组件的子标题</h5>
-                        <p class="card-text">这里是卡片组件的主体部分。</p>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">列表文本 1</li>
-                            <li class="list-group-item">列表文本 2</li>
-                            <li class="list-group-item">列表文本 3</li>
-                        </ul>
-                        <a class="card-link" href="">链接文本 1</a>
-                        <a class="card-link" href="">链接文本 2</a>
-                    </div>
-                    <div class="card-footer">
-                        这里是卡片组件的底部区域
-                    </div>
-                </div>
-            </div>
-            <!-- 卡片组件演示结束 -->
-            <!-- 演示折叠组件 -->
-            <div class="tab-pane fade" id="collapseDemo" role="tabpanel" 
-                aria-labelledby="collapseDemo-tab">
-                <a class="btn btn-primary" data-bs-toggle="collapse" 
-                    href="#collapseExample" role="button" aria-expanded="false" 
-                    aria-controls="collapseExample">
-                    使用链接控制
-                </a>
-                <button class="btn btn-primary" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#collapseExample" 
-                    aria-expanded="false" aria-controls="collapseExample">
-                    使用按钮控制
-                </button>
-                <div class="collapse show" id="collapseExample">
-                        这里是折叠组件的内容区域
-                </div>
-            </div>
-            <!-- 折叠组件演示结束  -->
-            <!-- 演示轮播组件 -->
-            <div class="tab-pane fade" id="carouselDemo" role="tabpanel" 
-                aria-labelledby="carouselDemo-tab">
-                <div id="carouselExample" class="carousel carousel-dark slide" 
-                    data-bs-ride="carousel">
-                    <!-- 组件指示符 -->
-                    <div class="carousel-indicators ">
-                        <button type="button" class="active"
-                            data-bs-target="#carouselExample"
-                            data-bs-slide-to="0"  
-                            aria-label="Slide 1">
-                        </button>
-                        <button type="button" 
-                            data-bs-target="#carouselExample" 
-                            data-bs-slide-to="1" aria-label="Slide 2">
-                        </button>
-                        <button type="button" 
-                            data-bs-target="#carouselExample" 
-                            data-bs-slide-to="2" aria-label="Slide 3">
-                        </button>
-                    </div>
-                    <!-- 组件主播放区 -->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./img/example.png" 
-                                class="d-block w-100" alt="...">
-                            <div class="carousel-caption">
-                                <h2>第一张图</h2>
-                                <p>第一张图的描述</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/example.png" 
-                                class="d-block w-100" alt="...">
-                            <div class="carousel-caption">
-                                <h2>第二张图</h2>
-                                <p>第二张图的描述</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/example.png" 
-                                class="d-block w-100" alt="...">
-                            <div class="carousel-caption">
-                                <h2>第三张图</h2>
-                                <p>第三张图的描述</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 组件控制按钮区  -->
-                    <button class="carousel-control-prev" type="button"
-                        data-bs-target="#carouselExample" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" 
-                            aria-hidden="true">
-                        </span>
-                        <span class="visible">上一张</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" 
-                        data-bs-target="#carouselExample" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" 
-                            aria-hidden="true">
-                        </span>
-                        <span class="visible">下一张</span>
-                    </button>
-                </div>
-            </div>
-            <!-- 轮播组件演示结束 -->
-            <!-- 演示手风琴组件  -->
-            <div class="tab-pane fade" id="accordionDemo" role="tabpanel" 
-                aria-labelledby="accordionDemo-tab">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" 
-                                data-bs-toggle="collapse" 
-                                data-bs-target="#collapseOne" 
-                                aria-expanded="true" 
-                                aria-controls="collapseOne">
-                                标题1
-                            </button>
-                        </h2>
-                        <div id="collapseOne" 
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="headingOne" 
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                第一个元素。
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" 
-                                type="button" data-bs-toggle="collapse" 
-                                data-bs-target="#collapseTwo" 
-                                aria-expanded="false" 
-                                aria-controls="collapseTwo">
-                                标题2
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" 
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingTwo" 
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                第二个元素。
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" 
-                                type="button" data-bs-toggle="collapse" 
-                                data-bs-target="#collapseThree" 
-                                aria-expanded="false" 
-                                aria-controls="collapseThree">
-                                标题3
-                            </button>
-                        </h2>
-                        <div id="collapseThree" 
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingThree" 
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                第三个元素。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 手风琴组件演示结束 -->
-            <!-- 演示分页组件 -->
-            <div class="tab-pane fade" id="paginationDemo" role="tabpanel" 
-                aria-labelledby="paginationDemo-tab">
-                <nav id="paginationExample" aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" 
-                                aria-disabled="true">Previous</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home</a>
                         </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
                         </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
                         </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Disabled</a>
                         </li>
                     </ul>
-                </nav>
+                </div>
             </div>
-            <!-- 分页组件演示结束 -->
-            <!-- 演示模态弹框组件 -->
-            <div class="tab-pane fade" id="modalDemo" role="tabpanel"
-                aria-labelledby="modalDemo-tab">
-                <button type="button" class="btn btn-primary"
-                    data-bs-toggle="modal" data-bs-target="#modalExample">
-                    显示模态弹框
-                </button>
-                <dialog class="modal fade" id="modalExample" tabindex="-1"
-                    aria-labelledby="modalExampleLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" 
-                                    id="modalExampleLabel">
-                                    模态弹框标题
-                                </h5>
-                                <button type="button" class="btn-close"
-                                    data-bs-dismiss="modal" 
-                                    aria-label="Close">
-                                </button>
+        </nav>
+        <main class="container">
+            <h1 class="display-1">临时演示页面</h1>
+            
+            <!-- 演示选项卡组件 -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="textDemo-tab"
+                        data-bs-toggle="tab" data-bs-target="#textDemo" 
+                        type="button" role="tab" 
+                        aria-controls="textDemo" aria-selected="true">
+                        演示普通文本
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="formDemo-tab" 
+                        data-bs-toggle="tab" data-bs-target="#formDemo" 
+                        type="button" role="tab" aria-controls="formDemo" 
+                        aria-selected="false">
+                        演示表单组件
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cardDemo-tab" 
+                        data-bs-toggle="tab" data-bs-target="#cardDemo" 
+                        type="button" role="tab" 
+                        aria-controls="cardDemo" aria-selected="false">
+                        演示卡片组件
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="collapseDemo-tab"
+                        data-bs-toggle="tab" data-bs-target="#collapseDemo" 
+                        type="button" role="tab" 
+                        aria-controls="collapseDemo" aria-selected="false">
+                        演示折叠组件
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="carousel" 
+                        data-bs-toggle="tab" data-bs-target="#carouselDemo" 
+                        type="button" role="tab" 
+                        aria-controls="carouselDemo" aria-selected="false">
+                        演示轮播组件
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="accordionDemo-tab" 
+                        data-bs-toggle="tab" data-bs-target="#accordionDemo" 
+                        type="button" role="tab" 
+                        aria-controls="accordionDemo" aria-selected="false">
+                        演示手风琴组件
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="paginationDemo-tab" 
+                        data-bs-toggle="tab" data-bs-target="#paginationDemo" 
+                        type="button" role="tab" 
+                        aria-controls="textDemo" aria-selected="false">
+                        演示分页组件
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="modalDemo-tab" 
+                        data-bs-toggle="tab" data-bs-target="#modalDemo" 
+                        type="button" role="tab" 
+                        aria-controls="modalDemo" aria-selected="false">
+                        演示模态弹框组件
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content p-3" id="demoTabContent">
+                <!-- 演示普通文本 -->        
+                <div class="tab-pane fade show active" id="textDemo" role="tabpanel" 
+                    aria-labelledby="textDemo-tab">
+                    <p class="fs-4 fst-italic text-break lh-lg">
+                        这是一个中文段落，下面是示例文本：
+                        bootstrap框架是一个前端框架，用于快速开发前端页面，
+                        其组件库非常丰富，可以满足各种前端开发需求。
+                        bootstrap框架的组件库由twitter公司开发，
+                        并开源发布，目前最新版本为4.0.0。
+                        bootstrap框架的组件库基于jQuery库，
+                        因此需要先引入jQuery库，才能使用bootstrap框架的组件库。
+                    </p>
+                    <p class="text-muted">
+                        this is a paragraph example in the English:
+                        bootstrap is a front-end framework for quick development of 
+                        front-end pages,
+                        its component library is very rich, and it can meet the needs 
+                        of front-end development.
+                        bootstrap is a component library developed by
+                        twitter company, and it is open source and released.
+                        The latest version of bootstrap is 4.0.0.
+                        bootstrap's component library is based on the jQuery library,
+                        so you need to introduce the jQuery library first to use 
+                        bootstrap's component library.
+                    </p>
+                    <!-- 演示引用文本 -->
+                    <blockquote class="blockquote">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        autem ipsum deserunt quo libero quis quisquam, ad rerum 
+                        doloremque 
+                        quod amet laudantium, natus eum maxime omnis itaque ratione 
+                        olores beatae.
+                        <cite class="blockquote-footer">Lorem ipsum</cite>
+                    </blockquote>
+                    <!-- 演示链接 -->
+                    <a href="" class="link-primary">链接示例</a>
+                </div>
+                <!-- 普通文本演示结束 -->
+                <!-- 演示表单组件 -->
+                <div class="tab-pane fade" id="formDemo" role="tabpanel" 
+                    aria-labelledby="formDemo-tab">
+                    <form class="border rounded p-3 m-5" 
+                        method="post" action="http://example.com/api">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">用户名</label>
+                            <input type="text" class="form-control" id="username" 
+                                name="username" placeholder="请输入用户名">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">密码</label>
+                            <input type="password" class="form-control" id="password" 
+                                name="password" placeholder="请输入密码">
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">登录</button>
+                            <button type="reset" class="btn btn-danger">重置</button>
+                        </div>
+                    </form>
+                    <form class="row border rounded p-3 m-5" 
+                        method="post" action="http://example.com/api">
+                        <div class="col-4">
+                            <input type="" class="form-control" 
+                                placeholder="请输入你的用户名">
+                        </div>
+                        <div class="col-4">
+                            <input type="password" class="form-control" 
+                                placeholder="请输入你的密码">
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary">登录</button>
+                            <button type="reset" class="btn btn-danger">重置</button>
+                        </div>
+                    </form>
+                    <form class="border rounded p-3 m-5" 
+                        method="post" action="http://example.com/api">
+                        <div class="row p-1">
+                            <div class="col-6">
+                                <input type="text" class="form-control" 
+                                    name="firstname" id="firstname" placeholder="姓">
                             </div>
-                            <div class="modal-body">
-                                <p>这是一个模态弹框组件的简单示例。</p>
+                            <div class="col-6">
+                                <input type="text" class="form-control" 
+                                    name="lastname" id="lastname" placeholder="名">
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" 
-                                    class="btn btn-secondary"
-                                    data-bs-dismiss="modal">关闭</button>
-                                <button type="button" 
-                                    class="btn btn-primary">
-                                    保存更改
+                        </div>
+                        <div class="row p-1">
+                            <label for="address" class="col-form-label col-12">
+                                具体地址：
+                            </label>
+                            <div class="col-12">
+                                <input type="text" class="form-control" name="address" 
+                                id="address" placeholder="请输入详细街道地址">
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col-6">
+                                <label for="city" class="form-label">城市：</label>
+                                <input type="text" class="form-control" 
+                                    name="city" id="city">
+                            </div>
+                            <div class="col-4">
+                                <label for="state" class="form-label">国家：</label>
+                                <input type="text" class="form-control" 
+                                    name="state" id="state">
+                            </div>
+                            <div class="col-2">
+                                <label for="zipcode" class="form-label">邮编：</label>
+                                <input type="text" class="form-control" 
+                                    name="zipcode" id="zipcode">
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 m-2">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                            <button type="reset" class="btn btn-danger">重置</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- 表单组件演示结束 -->
+                <div class="tab-pane fade" id="cardDemo" role="tabpanel" 
+                    aria-labelledby="cardDemo-tab">
+                    <!-- 演示卡片组件 -->
+                    <div class="card w-75">
+                        <div class="card-header">
+                            这里是卡片组件的头部区域
+                        </div>
+                        <img src="./img/example.png" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">这是卡片组件的标题</h4>
+                            <h5 class="card-subtitle">这是卡片组件的子标题</h5>
+                            <p class="card-text">这里是卡片组件的主体部分。</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">列表文本 1</li>
+                                <li class="list-group-item">列表文本 2</li>
+                                <li class="list-group-item">列表文本 3</li>
+                            </ul>
+                            <a class="card-link" href="">链接文本 1</a>
+                            <a class="card-link" href="">链接文本 2</a>
+                        </div>
+                        <div class="card-footer">
+                            这里是卡片组件的底部区域
+                        </div>
+                    </div>
+                </div>
+                <!-- 卡片组件演示结束 -->
+                <!-- 演示折叠组件 -->
+                <div class="tab-pane fade" id="collapseDemo" role="tabpanel" 
+                    aria-labelledby="collapseDemo-tab">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" 
+                        href="#collapseExample" role="button" aria-expanded="false" 
+                        aria-controls="collapseExample">
+                        使用链接控制
+                    </a>
+                    <button class="btn btn-primary" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#collapseExample" 
+                        aria-expanded="false" aria-controls="collapseExample">
+                        使用按钮控制
+                    </button>
+                    <div class="collapse show" id="collapseExample">
+                            这里是折叠组件的内容区域
+                    </div>
+                </div>
+                <!-- 折叠组件演示结束  -->
+                <!-- 演示轮播组件 -->
+                <div class="tab-pane fade" id="carouselDemo" role="tabpanel" 
+                    aria-labelledby="carouselDemo-tab">
+                    <div id="carouselExample" class="carousel carousel-dark slide" 
+                        data-bs-ride="carousel">
+                        <!-- 组件指示符 -->
+                        <div class="carousel-indicators ">
+                            <button type="button" class="active"
+                                data-bs-target="#carouselExample"
+                                data-bs-slide-to="0"  
+                                aria-label="Slide 1">
+                            </button>
+                            <button type="button" 
+                                data-bs-target="#carouselExample" 
+                                data-bs-slide-to="1" aria-label="Slide 2">
+                            </button>
+                            <button type="button" 
+                                data-bs-target="#carouselExample" 
+                                data-bs-slide-to="2" aria-label="Slide 3">
+                            </button>
+                        </div>
+                        <!-- 组件主播放区 -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="./img/example.png" 
+                                    class="d-block w-100" alt="...">
+                                <div class="carousel-caption">
+                                    <h2>第一张图</h2>
+                                    <p>第一张图的描述</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./img/example.png" 
+                                    class="d-block w-100" alt="...">
+                                <div class="carousel-caption">
+                                    <h2>第二张图</h2>
+                                    <p>第二张图的描述</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./img/example.png" 
+                                    class="d-block w-100" alt="...">
+                                <div class="carousel-caption">
+                                    <h2>第三张图</h2>
+                                    <p>第三张图的描述</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 组件控制按钮区  -->
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" 
+                                aria-hidden="true">
+                            </span>
+                            <span class="visible">上一张</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" 
+                            data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" 
+                                aria-hidden="true">
+                            </span>
+                            <span class="visible">下一张</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- 轮播组件演示结束 -->
+                <!-- 演示手风琴组件  -->
+                <div class="tab-pane fade" id="accordionDemo" role="tabpanel" 
+                    aria-labelledby="accordionDemo-tab">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" 
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseOne" 
+                                    aria-expanded="true" 
+                                    aria-controls="collapseOne">
+                                    标题1
                                 </button>
+                            </h2>
+                            <div id="collapseOne" 
+                                class="accordion-collapse collapse show"
+                                aria-labelledby="headingOne" 
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    第一个元素。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" 
+                                    type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseTwo" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapseTwo">
+                                    标题2
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" 
+                                class="accordion-collapse collapse"
+                                aria-labelledby="headingTwo" 
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    第二个元素。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" 
+                                    type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseThree" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapseThree">
+                                    标题3
+                                </button>
+                            </h2>
+                            <div id="collapseThree" 
+                                class="accordion-collapse collapse"
+                                aria-labelledby="headingThree" 
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    第三个元素。
+                                </div>
                             </div>
                         </div>
                     </div>
-                </dialog>
+                </div>
+                <!-- 手风琴组件演示结束 -->
+                <!-- 演示分页组件 -->
+                <div class="tab-pane fade" id="paginationDemo" role="tabpanel" 
+                    aria-labelledby="paginationDemo-tab">
+                    <nav id="paginationExample" aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" 
+                                    aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- 分页组件演示结束 -->
+                <!-- 演示模态弹框组件 -->
+                <div class="tab-pane fade" id="modalDemo" role="tabpanel"
+                    aria-labelledby="modalDemo-tab">
+                    <button type="button" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#modalExample">
+                        显示模态弹框
+                    </button>
+                    <dialog class="modal fade" id="modalExample" tabindex="-1"
+                        aria-labelledby="modalExampleLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" 
+                                        id="modalExampleLabel">
+                                        模态弹框标题
+                                    </h5>
+                                    <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal" 
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>这是一个模态弹框组件的简单示例。</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" 
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">关闭</button>
+                                    <button type="button" 
+                                        class="btn btn-primary">
+                                        保存更改
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+                </div>
+                <!-- 模态弹框组件演示结束 -->
             </div>
-            <!-- 模态弹框组件演示结束 -->
-        </div>
-        <h1>Example heading <span class="badge bg-primary">New</span></h1>
-    <h2>Example heading <span class="badge bg-secondary">New</span></h2>
-    <h3>Example heading <span class="badge bg-success">New</span></h3>
-    <h4>Example heading <span class="badge bg-danger">New</span></h4>
-    <h5>Example heading <span class="badge bg-warning">New</span></h5>
-    <h6>Example heading <span class="badge bg-info">New</span></h6>
-    <h6>Example heading <span class="badge bg-light text-dark">New</span></h6>
-    <h6>Example heading <span class="badge bg-dark">New</span></h6>
-    
+
+            <h1>Example heading <span class="badge bg-primary">New</span></h1>
+            <h2>Example heading <span class="badge bg-secondary">New</span></h2>
+            <h3>Example heading <span class="badge bg-success">New</span></h3>
+            <h4>Example heading <span class="badge bg-danger">New</span></h4>
+            <h5>Example heading <span class="badge bg-warning">New</span></h5>
+            <h6>Example heading <span class="badge bg-info">New</span></h6>
+            <h6>Example heading <span class="badge bg-light text-dark">New</span></h6>
+            <h6>Example heading <span class="badge bg-dark">New</span></h6>
+        </main>
     </body>
 </html>
  
