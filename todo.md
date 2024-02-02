@@ -13,7 +13,8 @@
       - [x] [[Bootstrap 学习笔记]]
     - [x] 前端编程学习
       - [x] [[JavaScript 学习笔记索引|JavaScript 学习笔记]]
-      - [x] [[前端编程学习：DOM与BOM]]
+      - [x] [[前端编程接口：DOM与BOM]]
+      - [x] [[前端编程接口：AJAX]]
       - [x] [[Vue.js 2.x 学习笔记]]
       - [x] [[vue-cli 与 Vite 学习笔记]]
   - [ ] 后端部分
