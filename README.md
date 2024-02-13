@@ -1,6 +1,6 @@
 # 计算机技术研究笔记
 
-由于这是一个基于双链功能建立的笔记库，因此建议各位看官使用 [Obsidian 笔记软件](https://obsidian.md/)或者安装了 [Foam 插件](https://foambubble.github.io/foam/)的 VS Code 编辑器来使用这个笔记项目，该项目中存放的是本人在研究计算机技术过程中所写的各种笔记与代码示例，项目的具体结构如下：
+由于这是一个基于双链功能建立的笔记库项目，因此建议各位看官使用 [Obsidian 笔记软件](https://obsidian.md/)或者安装了 [Foam 插件](https://foambubble.github.io/foam/)的 VS Code 编辑器来使用这个项目，该笔记库中存放的是本人在研究计算机技术过程中所写的各种笔记与代码示例，具体结构如下：
 
 ## 笔记目录结构
 
