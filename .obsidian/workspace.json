@@ -11,7 +11,7 @@
             "id": "510fbbba8e4b212c",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {}
             }
           }
@@ -125,7 +125,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -139,7 +140,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "510fbbba8e4b212c",
+  "active": "b29c2d732007cebf",
   "lastOpenFiles": [
     "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
     "Programming/LanguageStudy/Rust/StudyNotes/Rust 学习笔记：项目实践篇.md",
