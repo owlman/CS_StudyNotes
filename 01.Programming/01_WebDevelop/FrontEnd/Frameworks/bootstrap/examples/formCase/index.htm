@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./styles/bootstrap.min.css">
+        <script src="./scripts/bootstrap.min.js" defer></script>
+        <title>基于Bootstrap的用户注册界面</title>
+    </head>
+    <body class="text-bg-dark">
+        <main class="container">
+            <form method="post" action="http://example.com/user-register"
+                class="text-bg-light border rounded p-4 mt-5 mx-auto" >
+                <div class="row mb-3">
+                    <label for="username" class="col-form-label col-2">
+                        用户名：
+                    </label>
+                    <div class="col-10">
+                        <input type="text" class="form-control"
+                            id="username" name="username"
+                            placeholder="请输入你的用户名">
+                    </div>    
+                </div>
+                <div class="row mb-3">
+                    <label for="password" class="col-form-label col-2">
+                        密码：
+                    </label>
+                    <div class="col-10">
+                        <input type="password" class="form-control"
+                            id="password" name="password"
+                            placeholder="请设置一个新密码">
+                        <input type="password" class="form-control"
+                            id="repassword" name="repassword"
+                            placeholder="请确认你的密码">
+                    </div>    
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-form-label col-2">
+                        邮箱：
+                    </label>
+                    <div class="col-10">
+                        <input type="email" class="form-control"
+                            id="email" name="email"
+                            placeholder="请输入邮箱地址">
+                    </div>    
+                </div>
+                <div class="row mb-3">
+                    <label for="birthday" class="col-form-label col-2">
+                        生日：
+                    </label>
+                    <div class="col-10">
+                        <input type="date" class="form-control"
+                            id="birthday" name="birthday">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="gender" class="col-form-label col-2">
+                        性别：
+                    </label>
+                    <div class="col-10 row">
+                        <div class="form-check col-2">
+                            <input type="radio" class="form-check-input"
+                                name="gender" id="male" value="male">
+                            <label class="form-check-label" for="male">
+                                男
+                            </label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="radio"  class="form-check-input"
+                                name="gender"  id="female" value="female">
+                            <label class="form-check-label" for="female">
+                                女
+                            </label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="radio"  class="form-check-input"
+                                name="gender"  id="secret" value="secret">
+                            <label class="form-check-label" for="secret">
+                                保密
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="hobby" class=" col-form-label col-2">
+                        爱好：
+                    </label>
+                    <div class="col-10 row">
+                        <div class="form-check col-2">
+                            <input type="checkbox" class="form-check-input"
+                                 id="hobby" name="hobby" value="football">
+                            <label for="hobby" class="form-check-label">
+                                足球
+                            </label>
+                        </div>
+                        <div class="form-check  col-2">
+                            <input type="checkbox" class="form-check-input"
+                                id="hobby" name="hobby" value="basketball">
+                            <label for="hobby" class="form-check-label">
+                                篮球
+                            </label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input type="checkbox" class="form-check-input"
+                                id="hobby" name="hobby" value="swimming">
+                            <label for="hobby" class="form-check-label">
+                                游泳
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row mb-3">
+                    <label for="address" class="col-form-label col-2">
+                        居住城市：
+                    </label>
+                    <div class="col-10">
+                        <select class="form-select" name="address" id="address">
+                            <option selected>请选择...</option>
+                            <option value="beijing">北京</option>
+                            <option value="shanghai">上海</option>
+                            <option value="guangzhou">广州</option>
+                            <option value="shenzhen">深圳</option>
+                        </select>
+                    </div>
+                 </div>
+                 <div class="row mb-3">
+                    <label for="file" class="col-form-label col-2">
+                        个人照片：
+                    </label>
+                    <div class="col-10">
+                        <input type="file" class="form-control"
+                            id="file" name="file">
+                    </div>
+                 </div>
+                 <div class="row mb-3">
+                    <label for="textarea" class="col-form-label col-2">
+                        个人描述：
+                    </label>
+                    <div class="col-10">
+                        <textarea class="form-control"
+                            id="textarea" name="textarea" rows="3"></textarea>
+                    </div>
+                 </div>
+                <div class="w-25 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">注册</button>
+                    <button type="reset" class="btn btn-danger">重置</button>
+            </form>
+        </main>
+    </body>
+</html>
