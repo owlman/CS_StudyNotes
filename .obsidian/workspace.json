@@ -14,8 +14,19 @@
               "type": "graph",
               "state": {}
             }
+          },
+          {
+            "id": "fe14be7d0b70fee8",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.5.3"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -140,7 +151,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "b29c2d732007cebf",
+  "active": "fe14be7d0b70fee8",
   "lastOpenFiles": [
     "Programming/LanguageStudy/Python/QuickStart/Python 学习笔记：基础篇.md",
     "Programming/LanguageStudy/Rust/StudyNotes/Rust 学习笔记：项目实践篇.md",
