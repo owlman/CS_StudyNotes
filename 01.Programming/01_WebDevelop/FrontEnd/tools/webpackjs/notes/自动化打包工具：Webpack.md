@@ -1,4 +1,4 @@
-# Webpack 学习笔记
+# 自动化打包工具：Webpack
 
 这篇学习笔记将用于记录本人在学习 Webpack 打包工具过程中所编写的心得体会与代码示例。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Frameworks`目录下创建一个名为的`webpackjs`目录，并在该目录下设置以下两个子目录：
 

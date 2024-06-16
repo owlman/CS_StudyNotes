@@ -1,4 +1,4 @@
-# jQuery 学习笔记
+# 前端编程框架：jQuery
 
 > 本文部分内容节选自笔者于 2021 年出版的[《JavaScript 全栈开发》](https://book.douban.com/subject/35493728/)一书。
 

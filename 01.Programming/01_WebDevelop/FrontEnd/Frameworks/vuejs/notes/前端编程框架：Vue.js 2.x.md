@@ -1,4 +1,4 @@
-# Vue.js 2.x 学习笔记
+# 前端编程框架：Vue.js 2.x 学习笔记
 
 这篇笔记将用于记录个人在学习 Vue.js 2.0 框架过程中所编写的示例代码与心得体会。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Frameworks`目录下创建一个名为的`vuejs`目录，并在该目录下设置以下两个子目录：
 
@@ -152,7 +152,7 @@ import Vue from './node_modules/vue/dist/vue.esm.browser.min.js';
 
    ![Hello_World](img/hello_vue.png)
 
-## 学习数据驱动开发
+## 数据驱动开发
 
 在 Vue.js 框架中，与 HTML 页面元素的交互方式没有像原生 JavaScript 接口那么直接，它是通过先在 HTML 元素标签中嵌入一系列类似于普通标签属性的 Vue 指令属性来绑定数据，然后再通过在 JavaScript 代码中修改这些被绑定的数据来修改页面元素的显示方式与内容。在编程方法上，我们通常将这种用数据内容的变化来驱动整个程序业务运作的方式称之为"**数据驱动开发**"。这部分笔记将记录如何利用数据驱动的开发方式来完成数据绑定、事件响应，以实现控制页面元素与 CSS 样式等各项基本功能。
 
@@ -847,7 +847,7 @@ export default sayHello;
 
 当然了，这里必须要强调，webpack 的配置工作是一个非常复杂和繁琐的过程，各位在这里看到的只是沧海一粟，更复杂的内容请参考 [webpack 的官方文档](https://www.webpackjs.com/concepts/)。
 
-> 关联笔记： [[Webpack 学习笔记]]
+> 关联笔记： [[自动化打包工具：Webpack]]
 
 ## 构建略复杂一些的 Vue 组件
 
