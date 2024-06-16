@@ -1,4 +1,4 @@
-# Kubernetes 使用笔记
+# 容器化部署：Kubernetes
 
 在接下来的这篇笔记中，我将会介绍 Kubernetes 这一强大的容器编排工具，并学习其基本使用方法。该笔记将会被存储在`https://github.com/owlman/study_note`项目的`Software/Container`目录下一个名为`K8s`的子目录中。其具体内容将包含：
 

@@ -1,6 +1,6 @@
-# Node.js 学习笔记
+# 运行时环境：Node.js 
 
-这篇笔记将用于记录个人在研究 Node.js 运行环境过程中所编写的代码示例与学习心得。为此，我会在`https://github.com/owlman/study_note`项目的`Programming/Client-Server/Runtime`目录下创建一个名为的`nodejs`目录，并在该目录下设置以下两个子目录：
+这篇笔记将用于记录个人在研究 Node.js 运行环境过程中所编写的代码示例与学习心得。为此，我会在`https://github.com/owlman/study_note`项目的`01_Programming/01_WebDevelop/BackEnd/Runtime/`目录下创建以下两个子目录：
 
 - `notes`目录用于存放 Markdown 格式的笔记。
 - `examples`目录则用于存放笔记中所记录的代码示例。
@@ -29,7 +29,7 @@ Node.js 是一个 JavaScript 运行时环境，它移植了 Google Chrome 浏览
 
 ### Node.js 能做什么
 
-![Node.js 的应用领域](img/AB-5.png)
+![Node.js 的应用领域](./img/AB-5.png)
 
 ### Node.js 的特性
 
