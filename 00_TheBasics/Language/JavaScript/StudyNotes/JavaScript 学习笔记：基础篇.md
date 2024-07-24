@@ -1,8 +1,7 @@
-#! https://zhuanlan.zhihu.com/p/669613912
-
 # JavaScript 学习笔记：基础篇
 
-> 本文节选自笔者于 2021 年出版的[《JavaScript 全栈开发》](https://book.douban.com/subject/35493728/)一书。
+> [!NOTE] 笔记出处
+> 本笔记节选自笔者于 2021 年出版的[《JavaScript 全栈开发》](https://book.douban.com/subject/35493728/)一书。
 
 在如今琳琅满目的编程语言中，JavaScript 是一个非常特殊的存在。如果从语言设计的角度来分析，JavaScript 应该被归类为基于原型的、解释型的高级编程语言。这也就是说，尽管 JavaScript 在语法上与 Java、C/C++ 非常相似，但在程序设计的思路上，它受 Self 和 Scheme 这类语言的影响恐怕会更多一些，因此在具体使用方式上可能更接近于后者。除此之外，JavaScript 还是一门支持多种编程范式的语言，它支持面向对象编程、指令式编程以及函数式编程，因而具有极为灵活的表达能力。
 
