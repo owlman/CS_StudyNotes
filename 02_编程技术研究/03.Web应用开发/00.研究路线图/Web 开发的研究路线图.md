@@ -54,7 +54,7 @@
 
 > 关联笔记：
 >
-> - [[JavaScript 学习笔记索引|JavaScript 学习笔记]]
+> - [[JavaScript 语言的学习路线图|JavaScript 学习笔记]]
 > - [[前端编程接口：DOM与BOM]]
 > - [[前端编程方法：事件驱动编程]]
 > - [[前端编程方法：AJAX]]
