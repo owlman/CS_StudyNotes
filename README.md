@@ -1,4 +1,4 @@
-# 个人学习/研究笔记
+# 计算机专业学习/研究笔记
 
 ![License](https://img.shields.io/badge/License-GPLv2-green)   ![Markdown](https://img.shields.io/badge/Markdown-CommonMarkv0.31.2-blue)   ![Obsidian](https://img.shields.io/badge/Obsidian-1.8.7-blue) ![Foam](https://img.shields.io/badge/Foam-0.26.5-blue)
 
