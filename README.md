@@ -1,5 +1,7 @@
 # 个人学习/研究笔记
 
+![License](https://img.shields.io/badge/License-GPLv3-green)   ![Markdown](https://img.shields.io/badge/CommonMark-0.31.2-blue)   ![Obsidian](https://img.shields.io/badge/Obsidian-1.8.7-blue) ![Foam](https://img.shields.io/badge/Foam-0.26.5-blue)
+
 由于这是一个基于双链功能建立的笔记库项目，因此建议各位看官使用 [Obsidian 笔记软件](https://obsidian.md/)或者安装了 [Foam 插件](https://foambubble.github.io/foam/)的 VS Code 编辑器来使用这个项目，该笔记库中存放的是本人在从事技术写作过程中所累积的各种学习/研究笔记与翻译文章，具体结构如下：
 
 ## 笔记库的索引目录
