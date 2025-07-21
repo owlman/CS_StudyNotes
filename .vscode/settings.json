@@ -32,5 +32,5 @@
     "pasteImage.path": "${projectRoot}/.tmp",
     "pasteImage.showFilePathConfirmInputBox": true,
     "prettier.singleQuote": false,
-    "editor.fontFamily": "'微软雅黑', 'FiraCode Nerd Font',  'Courier New'"
+    "editor.fontFamily": "'Maple Mono CN',  'Consolas', 'Courier New', 'monospace'"
 }
