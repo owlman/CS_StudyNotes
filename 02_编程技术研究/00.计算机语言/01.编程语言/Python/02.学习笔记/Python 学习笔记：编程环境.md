@@ -90,7 +90,7 @@
 
 1. 在自己的计算机设备上设置一个用于存放演示代码的目录（在这里即`examples`目录），并在该目录下创建一个名为`HelloPython`的目录。
 
-2. 使用 VS Code 编辑器打开刚刚创建的`HelloPython`目录，并在该目录下创建一个名为的`sayHello.py`文件，以作为本示例的程序入口文件，然后在其中编写如下代码：
+2. 使用 VS Code 编辑器打开刚刚创建的`HelloPython`目录，并在该目录下创建一个名为的`say_hello.py`文件，以作为本示例的程序入口文件，然后在其中编写如下代码：
 
     ```python
     #! /usr/bin/env python
@@ -111,6 +111,6 @@
         say_hello(auther_name)
     ```
 
-3. 在保存上述文件之后，打开 VS Code 编辑器中集成的终端环境并进入到`HelloPython`目录下，然后执行`python sayHello.py`命令运行这个 Hello World 程序。如果该程序在终端中输出了如下图所示的信息，就说明我们已经成功配置好了使用 Python 语言的编程工具。
+3. 在保存上述文件之后，打开 VS Code 编辑器中集成的终端环境并进入到`HelloPython`目录下，然后执行`python say_hello.py`命令运行这个 Hello World 程序。如果该程序在终端中输出了如下图所示的信息，就说明我们已经成功配置好了使用 Python 语言的编程工具。
 
     ![Hello World 运行结果](img/helloPython.png)
