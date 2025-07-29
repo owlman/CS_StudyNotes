@@ -617,18 +617,6 @@ else:
 
 在 Python 语言中，除了基本的流程控制语句之外，还有一些专门用于处理特定场景的语句。下面，我们来介绍一下这些专用语句。
 
-- `assert`语句：该语句的作用是用于在程序运行时检查某个条件是否成立，如果不成立，则会抛出一个`AssertionError`异常。它通常被用来进行调试和测试。例如，如果我们希望在读取文本时确保每一行都不是空行，就可以像下面这样做：
-
-    ```python
-    num = 1
-    while line := readLine(text):
-        assert line != "", "读取到空行，程序终止。"
-        print(f"{num}. {line}")
-        num = num + 1
-    else:
-        print(f"读取完毕，共读取了 {num - 1} 行文本。")
-    ```
-
 - `with`语句：该语句的作用是用于简化资源管理，通常被用来处理文件、网络连接等需要在使用后释放的资源。它会自动处理资源的打开和关闭，确保资源在使用完毕后被正确释放。例如，如果我们希望读取一个文件中的内容，可以像下面这样做：
 
     ```python
@@ -636,6 +624,21 @@ else:
         for line in file:
             print(line.strip())
     ```
+
+- `try`、`except`、`finally`语句：这些语句的作用是用于处理异常情况，确保程序在遇到错误时不会崩溃。它们通常被用来捕获和处理运行时错误。例如，如果我们希望在读取文件时处理可能出现的文件不存在错误，可以像下面这样做：
+
+    ```python
+    try:
+        with open("example.txt", "r") as file:
+            for line in file:
+                print(line.strip())
+    except FileNotFoundError:
+        print("文件不存在，请检查文件路径。")
+    finally:
+        print("文件读取操作结束。")
+    ```
+
+    在上述代码中，`try`语句块中的代码会尝试执行，如果出现`FileNotFoundError`异常，则会跳转到`except`语句块中执行相应的错误处理逻辑。无论是否发生异常，`finally`语句块中的代码都会被执行，通常用于清理资源或记录日志。
 
 - `yield`语句：该语句的作用是用于定义生成器函数，它可以在函数执行过程中暂停并返回一个值，等待下一次调用时继续执行。生成器函数通常被用来处理大量数据或无限序列。例如，如果我们希望创建一个生成器函数来逐行读取文件内容，可以像下面这样做：
 
@@ -653,20 +656,17 @@ else:
             print(line)
     ```
 
-- `try`、`except`、`finally`语句：这些语句的作用是用于处理异常情况，确保程序在遇到错误时不会崩溃。它们通常被用来捕获和处理运行时错误。例如，如果我们希望在读取文件时处理可能出现的文件不存在错误，可以像下面这样做：
+- `assert`语句：该语句的作用是用于在程序运行时检查某个条件是否成立，如果不成立，则会抛出一个`AssertionError`异常。它通常被用来进行调试和测试。例如，如果我们希望在读取文本时确保每一行都不是空行，就可以像下面这样做：
 
     ```python
-    try:
-        with open("example.txt", "r") as file:
-            for line in file:
-                print(line.strip())
-    except FileNotFoundError:
-        print("文件不存在，请检查文件路径。")
-    finally:
-        print("文件读取操作结束。")
+    num = 1
+    while line := readLine(text):
+        assert line != "", "读取到空行，程序终止。"
+        print(f"{num}. {line}")
+        num = num + 1
+    else:
+        print(f"读取完毕，共读取了 {num - 1} 行文本。")
     ```
-
-    在上述代码中，`try`语句块中的代码会尝试执行，如果出现`FileNotFoundError`异常，则会跳转到`except`语句块中执行相应的错误处理逻辑。无论是否发生异常，`finally`语句块中的代码都会被执行，通常用于清理资源或记录日志。
 
 ## 标准库的使用
 
