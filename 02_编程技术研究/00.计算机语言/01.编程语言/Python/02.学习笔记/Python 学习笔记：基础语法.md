@@ -745,7 +745,7 @@ else:
 - `profile`、`pstats`模块：这两个模块主要用于执行与性能分析相关的操作。其中，`profile`模块提供了`profile`和`cProfile`两种不同实现的性能分析工具，可用来描述程序各个部分的执行时间和频率，统计后的信息可以通过`pstats`模块保存并使用。
 - `unittest`模块：该模块主要用于执行与单元测试相关的操作，它在设计上受到 JUnit 和其他主流测试库的启发，因此在使用方式方面与它们有着相似的风格。
 
-在 Python 语言中，使用标准库的方式是非常简单且直观的，大体上只需要执行两个步骤即可。下面，让我们借助一个使用`threading`模块的示例来为读者演示一下这两个步骤。具体做法是在之前创建的`HelloPython`目录创建一个名为的`exThreading.py`文件，并在其中输入如下代码。
+在 Python 语言中，使用标准库的方式是非常简单且直观的，大体上只需要执行两个步骤即可。下面，让我们借助一个使用`threading`模块的示例来为读者演示一下这两个步骤。具体做法是在之前创建的`HelloPython`目录创建一个名为的`example_threading.py`文件，并在其中输入如下代码：
 
 ```python
 # 第一步：使用 import 语句在当前作用域中导入要使用的模块：
@@ -775,7 +775,21 @@ t.join()
 print('thread %s ended.' % threading.current_thread().name)
 ```
 
-如读者所见，使用标准库的步骤非常简单，第一步是使用`import`语句将需要使用的模块导入到当前作用域中；第二步则是根据 Python 标准库的文档来选择要调用的方法，用于实现自己的需求。关于这方面的信息，读者可以前往Python 官方的[线上文档](https://docs.python.org/3/library/index.html)来查阅。需要注意的是，Python 的标准库是非常庞大的，包含了大量的模块和函数，因此在实际开发中，我们通常只会使用其中的一小部分。为了更好地掌握标准库的使用方法，建议读者在编写代码时多参考官方文档，并结合实际需求进行学习和实践。
+在保存了上述代码之后，我们就可以在终端中运行`python example_threading.py`命令来执行它。如果一切顺利，我们将会看到类似下面的输出：
+
+```Python
+thread MainThread is running...
+thread LoopThread is running...
+thread LoopThread >>> 1
+thread LoopThread >>> 2
+thread LoopThread >>> 3
+thread LoopThread >>> 4
+thread LoopThread >>> 5
+thread LoopThread ended.
+thread MainThread ended.
+```
+
+正如读者所见，使用标准库的步骤非常简单，第一步是使用`import`语句将需要使用的模块导入到当前作用域中；第二步则是根据 Python 标准库的文档来选择要调用的方法，用于实现自己的需求。关于这方面的信息，读者可以前往Python 官方的[线上文档](https://docs.python.org/3/library/index.html)来查阅。需要注意的是，Python 的标准库是非常庞大的，包含了大量的模块和函数，因此在实际开发中，我们通常只会使用其中的一小部分。为了更好地掌握标准库的使用方法，建议读者在编写代码时多参考官方文档，并结合实际需求进行学习和实践。
 
 ## 学习成果验收
 
