@@ -97,8 +97,7 @@ python get-pip.py
 
 ## 关联笔记索引
 
-### 自动化测试框架
-
-- [[Pytest+Jenkins 学习笔记]]
-- [[Robot 框架学习笔记]]
-- [[Selenium 学习笔记]]
+- **自动化测试框架**：
+  - [[Pytest+Jenkins 学习笔记]]
+  - [[Robot 框架学习笔记]]
+  - [[Selenium 学习笔记]]
