@@ -1,8 +1,8 @@
-# 计算机专业学习/研究笔记
+# 计算机学习笔记库
 
 ![License](https://img.shields.io/badge/License-GPLv2-green)   ![Markdown](https://img.shields.io/badge/Markdown-CommonMarkv0.31.2-blue)   ![Obsidian](https://img.shields.io/badge/Obsidian-1.8.7-blue) ![Foam](https://img.shields.io/badge/Foam-0.26.5-blue)
 
-由于这是一个基于双链功能建立的笔记库项目，因此建议各位看官使用 [Obsidian 笔记软件](https://obsidian.md/)或者安装了 [Foam 插件](https://foambubble.github.io/foam/)的 VS Code 编辑器来使用这个项目，该笔记库中存放的是本人在从事技术写作过程中所累积的各种学习/研究笔记与翻译文章，具体结构如下：
+由于这是一个基于双链功能建立的笔记库项目，建议使用 [Obsidian 笔记软件](https://obsidian.md/)或者安装了 [Foam 插件](https://foambubble.github.io/foam/)的 VS Code 编辑器来使用这个项目，该笔记库中存放的是本人在从事技术写作过程中所累积的各种学习/研究笔记与翻译文章，具体结构如下：
 
 ## 笔记库的索引目录
 
@@ -18,7 +18,7 @@
   - [[编程范式的研究路线图|关于编程范式的研究笔记]]
 
 - 关于具体项目开发的研究笔记：
-  - [[关于 Web 应用的开发|关于Web 应用项目的研究笔记]]
+  - [[关于 Web 应用的开发|关于 Web 应用项目的研究笔记]]
   - [[关于自动化测试的开发|关于编程语言的研究笔记]]
 
 ## 许可证声明
