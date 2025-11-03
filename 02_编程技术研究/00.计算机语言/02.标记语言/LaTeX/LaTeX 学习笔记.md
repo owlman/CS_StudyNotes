@@ -60,11 +60,218 @@
 
 请暂时不用担心看不懂上面这些数学公式中使用的 $\LaTeX$ 标记，因为我稍后会开专题介绍这些标记及其使用方法。在这里，大家只需要对 $\LaTeX$ 标记的引用方式有清楚的认知就可以了。
 
-### 在 LaTeX 专用软件中使用
+### 在专用软件中使用
 
-<!-- 这部分内容亟待补充 -->
+如果我们使用 $\LaTeX$ 的目的并不局限于编辑数学公式，而是希望更充分地发挥它在学术文档排版方面的专业能力，那么就需要使用像 TeX Live、MiKTeX 这样的 $\LaTeX$ 专用软件。在专业术语中，这类软件被称为 **$\TeX$ 发行版（distribution）**，它们能够提供完整的 $\LaTeX$ 编译环境，支持从命令行到图形化界面的多种使用方式。
 
-## 编辑数学公式
+在简体中文写作环境中，为了简化排版配置，我们通常会选择安装 CTeX 套装（基于 MiKTeX 的发行版），或在 TeX Live 中添加 ctex 宏包，以搭建专用的 $\LaTeX$ 编译与编辑环境。下面，让我们以 CTeX 套装为例来介绍一下 $\LaTeX$ 专用环境的搭建与使用方法。
+
+#### 安装 CTeX 套装
+
+CTeX 套装是在 Windows 系统中最为常见的中文 $\LaTeX$ 发行版之一。它以 MiKTeX 为核心发行版，集成了常用的中文宏包（如 `ctex`、`xeCJK` 等）和若干常用编辑器（如 WinEdt、TeXworks 等），从而为用户提供了一个**即装即用**的中文 $\LaTeX$ 编译与编辑环境。与手动配置相比，CTeX 套装最大的优点在于安装简单、中文支持完善，非常适合初学者或以中文文档排版为主的用户。下面，让我们来具体介绍一下它的安装过程。
+
+##### 一、下载 CTeX 套装
+
+CTeX 套装目前提供独立的 Windows 安装包。虽然该项目已多年未更新，但其稳定性和兼容性仍然能够满足一般的中文排版需求。
+
+1. 在网页浏览器中打开 [CTeX 官方主页](http://www.ctex.org)在[清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/ctex/legacy/)。[^4]
+
+2. 根据自己所在的操作系统（例如 64 位的 Windows）下载最新版本的安装包，例如：
+   `CTeX_3.0.215.2.exe`
+
+##### 二、运行安装程序
+
+接下来，我们只需要双击之前下载的安装文件，启动 CTeX 的图形化安装界面，并根据界面的提示执行如下设置：
+
+1. 在下面的界面中选择[简体中文]，并点击“下一步”按钮。
+
+   ![选择安装语言](./img/ctex1.png)
+
+2. 勾选下面界面中所有的组件以确保安装 CTeX 所有的功能，然后点击“下一步”按钮。
+
+   ![选择要安装的组件](./img/ctex2.png)
+
+3. 在下面界面中设置安装路径（我在这里将其设置为`D:\CTeX`），然后点击“安装”按钮。
+
+   ![选择安装路径](./img/ctex3.png)
+
+4. 安装过程可能持续数分钟，请耐心等待安装完成。
+
+   ![安装过程的进度条](img/ctex4.png)
+
+5. 待安装完成之后，我们将会看到如下界面，现在只需点击“完成”按钮即可结束安装。
+
+   ![安装完成](./img/ctex5.png)
+
+##### 三、配置环境变量（可选）
+
+安装完成后，系统会自动将 CTeX 的可执行文件路径加入到 Windows 的环境变量中。
+若在命令行终端环境（例如 Bash 或 Powershell）中运行 `latex`、`xelatex` 或 `pdflatex` 时出现“命令未找到”等提示，可以手动检查路径设置：
+
+1. 打开“系统属性 → 高级 → 环境变量”。
+
+2. 在“系统变量”中找到`Path`，根据自己安装时的设置确保其中包含类似以下路径：
+
+   ```text
+   D:\CTeX\MiKTeX\miktex\bin\
+   D:\CTeX\CTeX\bin\
+   ```
+
+##### 四、在 VS Code 编辑器中试用 CTeX 套件
+
+待安装完成之后，我们可以在 VS Code 编辑器中按照如下步骤试用 CTeX 套件，以便验证其安装是否成功：
+
+1. 打开 VS Code编辑器，并安装 LaTeX Workshop 和 LaTeX 这两个插件。
+
+   ![安装 VS Code 编辑器的 LaTeX 插件](./img/ctex6.png)
+
+2. 在 VS Code 编辑器的命令面板中执行[首选项：打开工作区设置（JSON）]命令。
+
+   ![打开 VS Code 编辑器的工作区配置文件](./img/ctex7.png)
+
+3. 在`settings.json`文件中添加如下内容，完成插件的配置工作：
+
+   ```json
+   "latex-workshop.latex.tools": [
+    {
+        "name": "pdflatex",
+        "command": "pdflatex",
+        "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOCFILE%"
+        ]
+    },
+    {
+        "name": "xelatex",
+        "command": "xelatex",
+        "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOCFILE%"
+        ]
+    },
+    {
+        "name": "bibtex",
+        "command": "bibtex",
+        "args": [
+            "%DOCFILE%"
+        ]
+    }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ],
+        },
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "xe->bib->xe->xe",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdf->bib->pdf->pdf",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk"
+    ],
+    //tex文件浏览器，可选项为"none" "browser" "tab" "external"
+    "latex-workshop.view.pdf.viewer": "tab",
+    //自动编译tex文件
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    //显示内容菜单：（1）编译文件；（2）定位游标
+    "latex-workshop.showContextMenu": true,
+    //显示错误
+    "latex-workshop.message.error.show": false,
+    //显示警告
+    "latex-workshop.message.warning.show": false,
+    //从使用的包中自动补全命令和环境
+    "latex-workshop.intellisense.package.enabled": true,
+    //设置为never，为不清除辅助文件
+    "latex-workshop.latex.autoClean.run": "never",
+    //设置vscode编译tex文档时的默认编译链
+    "latex-workshop.latex.recipe.default": "lastUsed",
+    // 用于反向同步的内部查看器的键绑定。ctrl/cmd +点击(默认)或双击
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+   ```
+
+4. 在用于演示的`example`目录中新建一个名为`hello_latex.tex`的文件，并在其中输入以下内容：
+
+   ```latex
+   \documentclass{ctexart}
+   \begin{document}
+   你好，\LaTeX！
+   \end{document}
+   ```
+
+5. 在 VS Code 编辑器的命令面板中执行[LaTeX workshop: 构建 LaTeX 项目]命令。
+
+   ![执行构建 LaTeX 项目的命令](./img/ctex8.png)
+
+6. 如果一切顺利，我们就会在`example`目录中一个文件名为`hello_latex.pdf`，内容包含“你好，LaTeX！”字样的 PDF 文件，这表明基于 CTeX 套件的中文排版环境已配置成功。
+
+   ![构建 LaTeX 项目的结果](./img/ctex9.png)
+
+同样的，读者现在也不用担心看不懂上述`hello_latex.tex`文件中所用到的这些 $\LaTeX$ 标记，因为我们稍后也会开专题介绍 $\LaTeX$ 的文献排版功能，目前只需知道如何搭建 $\LaTeX$ 的中文排版环境即可。
+
+##### 五、安装后的注意事项
+
+- CTeX 套装自带的宏包版本较旧，若遇到兼容性问题，可通过 **MiKTeX Console** 进行在线更新。
+
+   ![更新 MiKTeX 宏包](./img/ctex10.png)
+
+   如果 MiKTeX Console 启动失败，通常会看到类似“this application failed to start because no Qt platform plugin could be initialized”的错误信息。这通常是由于缺少或损坏的 Qt 插件导致的。该问题可通过执行如下步骤解决：
+
+   1. 去 [CTAN 网站](https://ctan.net/systems/win32/miktex/tm/packages/)上找到并下载名为`miktex-qt6-bin-x64.tar.lzma`的文件。
+   2. 使用 7-Zip 解压缩该文件（WinRAR 可能不支持 lzma 算法）。
+   3. 将解压后的文件复制到 MiKTeX 的安装目录中的`bin\x64`文件夹中，替换所有现有文件。
+
+- 如果计划编写大型文档或需要使用现代字体与宏包，建议考虑使用 **TeX Live + ctex 宏包** 的方案，以获得更好的可维护性和长期支持。
+
+- 在 Windows 10 及其后续版本的 Windows 系统中，编译器路径和字体兼容性通常较好，但在旧版本系统上可能需要额外配置字体映射。
+
+总而言之，CTeX 套装为中文用户提供了一个开箱即用的 $\LaTeX$ 工作环境，它简化了复杂的配置过程，使用户能够专注于内容创作与排版逻辑的学习。虽然其更新频率较低，但作为入门与教学用途，依然具有较高的实用价值。
+
+## 专题讨论：数学公式的编辑
 
 数学公式的编辑一直以来都是我们在撰写科学类文章过程中所面临的最大麻烦之一，相信各位之前应该都尝试过各种在电子文档中输入数学公式的方法，但这些方法多数都不尽如人意，这恐怕也是驱使很多人最终下定决心来学习 $\LaTeX$ 的主要原因。毕竟，对数学公式进行编辑和排版本身就是 $\TeX$ 最重要的设计初衷之一，目前似乎也找不到比它更强大的数学公式编辑方法了。所以在接下来的内容中，我们就来详细、深入地介绍一下如何用 $\LaTeX$ 编辑数学公式。
 
@@ -633,7 +840,7 @@ $$
 $$
 ```
 
-## 编写专业文献
+## 专题讨论：专业文献的排版
 
 <!-- 这部分内容亟待补充 -->
 
@@ -642,3 +849,4 @@ $$
 [^1]:注释：高德纳教授是现代计算机科学的先驱人物，他创立了算法分析理论，并在数个计算机理论分支上都做出了犹如基石一般的贡献，于1974年荣获图灵奖。
 [^2]:注释：莱斯利·兰伯特是来自纽约的一位计算机科学家，LaTeX排版系统的开发者，2013年荣获图灵奖。
 [^3]:注释：amsmath宏组是LaTeX中最常用的组件之一，由美国数学协会（AMS）设计开发，它全面扩展了LaTeX的数学表述能力，目前已经成为了LaTeX中的必备组件。
+[^4]:注释：CTeX的官方网站已经停止维护多年，但我们可以通过它在国内的各种镜像站点下载到CTeX套装。
