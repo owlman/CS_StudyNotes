@@ -1,4 +1,4 @@
-# 容器化部署：Docker
+# 容器化工具：Docker
 
 这篇笔记将用于记录本人在学习 Docker 服务端运维工具过程中所记录的心得体会，它将会被存储在`https://github.com/owlman/study_note`项目的`SoftwareTool/Container`目录下一个名为的`Docker`子目录中。
 
@@ -513,6 +513,3 @@ RUN npm install pm2 --global \
 在编写完`Dockerfile`文件并将其保存之后，我们就只需要在该文件所在目录上执行`docker image build -t <镜像名> <Dockerfile文件的路径>`命令来构建镜像文件即可。在这里，`-t`参数用于指定`<镜像名>`，该名称中可以包含镜像的版本标签，如果没有特别指定标签，其创建的默认版本标签就是`latest`；而`<Dockerfile文件的路径>`具体在这里就应该是我们执行该命令时所在的当前目录。
 
 基于篇幅方面的考虑，我们在这里记录的只是在使用Docker这一工具容器化 Express.js 应用程序时可能会用到的常用指令。如果读者希望更全面地了解在使用`Dockerfile`文件构建 Docker 镜像文件时所有可用的指令，可以自行前往 Docker 的官方网站查看其提供的文档资料。
-
-----
-#已完成
