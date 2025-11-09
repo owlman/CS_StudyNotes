@@ -1,6 +1,6 @@
 # Python 学习笔记：编程环境
 
-承接之前在[《[[学习路线图]]》](https://www.cnblogs.com/owlman/p/17546847.html)一文中的规划，接下来，我将会提供一份针对学习 Python 语言基础的笔记（该笔记将会被保存在[我的个人笔记库项目](https://github.com/owlman/study_note)中），目的是帮助读者学习以下技能：
+承接之前在[《[[汇编语言的学习路线图]]》](https://www.cnblogs.com/owlman/p/17546847.html)一文中的规划，接下来，我将会提供一份针对学习 Python 语言基础的笔记（该笔记将会被保存在[我的个人笔记库项目](https://github.com/owlman/study_note)中），目的是帮助读者学习以下技能：
 
 - 安装并配置好 Python 语言的运行时环境与相关的编程工具；
 - 熟练掌握 Python 语言的基本语法及其标准库的使用方法；
