@@ -1,4 +1,4 @@
-# 关于Android应用开发的研究笔记
+# 关于 Android 应用开发的研究笔记
 
 ## 配置应用开发环境
 
@@ -52,3 +52,4 @@ Android Studio是Android系统官方指定的IDE，它不仅包含了用于构�
 
     **图8**：Android Studio的项目管理界面
 
+#未完成
