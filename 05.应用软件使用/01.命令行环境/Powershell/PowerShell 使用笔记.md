@@ -1,4 +1,4 @@
-# PowerShell 研究笔记（持续更新中）
+# PowerShell 使用笔记（持续更新中）
 
 ## scoop 包管理器
 
@@ -263,4 +263,4 @@ scoop install main/git
 好了，scoop的基本使用就是这些了，希望对大家有用。使用时可以输入scoop help ，查看帮助文档自行研究。
 
 ----
-#研究中
+#未完成
