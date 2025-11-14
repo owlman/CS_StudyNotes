@@ -85,27 +85,47 @@
 
 当然，除了上面列出的常用文档类型之外，一些特定的学术期刊或机构可能会要求我们按照特定的文档类型来排版，例如`IEEEtran`、`acm_proc_article-sp`等。虽然在通常情况下，这些文档类型也只需使用`\documentclass`命令来指定即可，但在某些特定情况下，如果想让这些第三方文档类型充分发挥作用，还需通过`\usepackage`命令来加载这些第三方文档类型指定的宏包，以扩展 $\LaTeX$ 的排版功能，下面就让我们继续来看这个命令的使用方法吧。
 
-<!-- 以下待整理 -->
 ### 加载所需的宏包
 
-
-为了达到专业排版效果，推荐加载以下宏包（可根据实际需求增减）：
+从程序员的角度，我们可以将 $\LaTeX$ 中的`\usepackage`命令理解成 Python 中的`import`语句，C/C++ 语言中的`#include`语句，它们的作用都是在当前源文件中引入 $\LaTeX$ 自带或者第三方提供的扩展包，以便获得特定的功能。在 $\LaTeX$ 中，这些扩展包都是以“宏包（package）”的形式提供的，例如`amsmath`、`graphicx`、`hyperref`等。具体来说，就是我们需要在使用`\documentclass`命令指定了当前文档所要采用的排版类型之后，就紧接着使用`\usepackage`命令来加载我们需要的宏包，以便获得这些宏包提供的扩展功能。例如，如果我们既想使用标准类`article`排版，又想在文档中使用中文，就可以通过`\usepackage`命令加载`ctex`这个宏包来实现，就像下面这样：
 
 ```tex
-\usepackage[utf8]{inputenc}     % 设定源文件编码
-\usepackage[T1]{fontenc}        % 使用 T1 字体编码
-\usepackage{lmodern}            % 使用 Latin Modern 字体
-\usepackage{geometry}           % 设置页面尺寸与边距
-\usepackage{amsmath,amssymb}    % 数学公式支持
-\usepackage{graphicx}           % 插入图形支持
-\usepackage{booktabs}           % 专业表格线支持
-\usepackage{hyperref}           % 超链接支持（目录、引用、书签）
-\usepackage{cleveref}           % 智能引用宏包
-\usepackage{biblatex}           % 参考文献管理（可选）
+\documentclass{article}
+\usepackage{ctex}
+% 其他命令 ...
 ```
 
-在加载宏包时，建议遵循“少而精”原则：只加载必要宏包，避免发生冲突或冗余。
+除此之外，为了达到专业排版效果，我们通常还会推荐加载以下宏包（可根据实际需求增减）：
 
+```tex
+% 基础
+\usepackage{ctex}        % 中文支持
+\usepackage{geometry}    % 页面设置
+
+% 数学
+\usepackage{amsmath,amssymb}   % 数学公式
+
+% 图形
+\usepackage{graphicx,float,caption,subcaption}
+
+% 表格
+\usepackage{booktabs}
+
+% 超链接与引用
+\usepackage{hyperref,cleveref}
+
+% 文献管理
+\usepackage{biblatex}
+
+% 微排版
+\usepackage{microtype}
+```
+
+当然，在加载宏包时，需要注意遵循“少而精”原则：只加载必要宏包即可，以避免发生冲突或冗余。例如，在上述推荐中，如果我们事前已经加载了`ctex`宏包，那么`inputenc`、`fontenc`、`lmodern`这几个宏包就无需再加载了。因为使用`ctex`宏包时，我们采用的排版引擎大概率是 XeLaTeX 或 LuaLaTeX，它们已经内置了 UTF-8 编码、T1 字体编码以及 Latin Modern 字体，无需再额外加载。
+
+另外，加载宏包也需要特别注意一下加载的顺序，因为某些宏包之间存在着特定的依赖关系，对加载的顺序是敏感的，例如，我们通常建议先加载数学宏包（`amsmath`、`amssymb`），再加载`hyperref`；而`cleveref`则必须在`hyperref`之后加载。总而言之，读者最好在具体使用之前查阅一下这些宏包的文档，以了解它们之间的依赖关系。
+
+<!-- 以下待整理 -->
 ### 定义文档的元信息
 
 版式设置直接影响阅读体验。常见设置示例：
