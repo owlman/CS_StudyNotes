@@ -6,11 +6,11 @@
 
 ## 定义排版结构
 
-在 $\LaTeX$ 中，文档的整体排版结构是通过一系列**结构性命令**（structural commands）来定义的。这些命令用于给文档指定排版类型，加载功能扩展包，设置页面板式，设置标题、作者等元信息，并生成文档的开篇部分。最常用的命令包括：
+在 $\LaTeX$ 中，文档的整体排版结构是通过一系列**结构性命令**（structural commands）来定义的。这些命令用于给文档指定排版类型，加载功能扩展包，设置页面版式，设置标题、作者等元信息，并生成文档的开篇部分。最常用的命令包括：
 
 - `\documentclass`：用于指定文档所要采用的排版类型；
 - `\usepackage`：用于通过加载宏包的方式来获得扩展功能；
-- `\geometry`：用于设置文档的页面尺寸与页边距等页面板式信息
+- `\geometry`：用于设置文档的页面尺寸与页边距等页面版式信息
 - `\title`、`\author`、`\date`：用于定义文档的标题、作者等元信息；
 
 接下来，我将会按照功能逐一介绍这些命令的使用方法。
@@ -26,9 +26,9 @@
    - `book`：用于排版书籍类文档，例如专着、教材等；
    - `letter`：用于排版信件类文档，包括个人书信、商务信函等；
 
-2. **扩展文档类**，由`extsizes`宏包提供，提供有`extarticle`、`extreport`、`extbook`三个类，它们分别是上述前三个标准文档类的扩展版，主要区别是支持更大的字号选项（如 `14pt`、`17pt`、`20pt`）
+2. **扩展文档类**：由`extsizes`宏包提供，提供有`extarticle`、`extreport`、`extbook`三个类，它们分别是上述前三个标准文档类的扩展版，主要区别是支持更大的字号选项（如 `14pt`、`17pt`、`20pt`）
 
-3.**中文文档类**，由`ctex`宏包提供，提供有`ctexart`、`ctexrep`、`ctexbook`、`ctexletter`四个类，它们分别是上述四个标准文档类的中文增强版本，可自动配置中文字体、字号、段落间距与标题格式，更适合中文排版。值得一提的是：在新版 CTeX 宏包中（自 2.0 以后），`ctexletter`类尽管仍然存在，但默认情况下不会随发行版安装，读者如有需要可通过 texdoc ctex 查阅详细信息。
+3.**中文文档类**：由`ctex`宏包提供，提供有`ctexart`、`ctexrep`、`ctexbook`、`ctexletter`四个类，它们分别是上述四个标准文档类的中文增强版本，可自动配置中文字体、字号、段落间距与标题格式，更适合中文排版。值得一提的是：在新版 CTeX 宏包中（自 2.0 以后），`ctexletter`类尽管仍然存在，但默认情况下不会随发行版安装，读者如有需要可通过 texdoc ctex 查阅详细信息。
 
 下面，让我们来具体演示一下`\documentclass`命令的使用。假设，你现在想要让目标文档按照`ctexart`类型来排版，那么就需要在其 $\LaTeX$ 源文件的开头添加以下命令：
 
@@ -124,26 +124,109 @@
 
 另外，加载宏包也需要特别注意一下加载的顺序，因为某些宏包之间存在着特定的依赖关系，对加载的顺序是敏感的，例如，我们通常建议先加载数学宏包（`amsmath`、`amssymb`），再加载`hyperref`；而`cleveref`则必须在`hyperref`之后加载。总而言之，读者最好在具体使用之前查阅一下这些宏包的文档，以了解它们之间的依赖关系。
 
-<!-- 以下待整理 -->
-### 设置页面板式信息
+### 设置页面版式信息
 
-版式设置直接影响阅读体验。常见设置示例：
+之前在介绍`\documentclass`命令时，我们曾提到过一些与页面版式相关的可选参数，例如`a4paper`、`twoside`、`oneside`等。这些参数属于文档类中的全局配置接口，只能对排版进行一些**粗粒度的默认设置**，例如采用的纸张类型、单/双面打印模式等，但并不能精确控制页面边距或版心尺寸。
+
+如果希望文档在阅读体验和排版细节上达到专业水准，就需要对页面布局进行更精细的控制。通常的做法是先通过`\usepackage`命令加载名为`geometry`的宏包，然后再使用`\geometry`命令设置页面的具体版式。例如像下面这样
 
 ```tex
+\documentclass{article}
+\usepackage{geometry} % 加载 geometry 宏包
+
 \geometry{
-  a4paper,
-  left=3cm,
-  right=3cm,
-  top=3cm,
-  bottom=3cm
+  a4paper,       % 设置纸张尺寸
+  left=3cm,      % 左页边距
+  right=3cm,     % 右页边距
+  top=3cm,       % 上页边距
+  bottom=3cm     % 下页边距
 }
-\linespread{1.2}  % 设置行距为1.2倍
 ```
 
-此设置适用于 A4 纸、左右边距 3 cm、行距适中。若为 US Letter 纸或双栏排版（two‑column），可相应调整。
+与`\documentclass`命令中的可选参数相比，`\geometry`命令提供了更细粒度的页面布局控制，内容包括页边距、版心大小、装订线、页眉页脚高度等。因此，它广泛应用于技术文档、学术论文与书籍排版中。下面，让我们来看一个用于给专业书籍排版的示例：
+
+```tex
+\documentclass[12pt,twoside]{book} % 双面打印常用于书籍排版
+\usepackage{geometry}
+
+\geometry{
+  paper=a5paper,          % 书籍常用 A5 尺寸
+  inner=2.8cm,            % 订口（内侧边距）
+  outer=2.2cm,            % 外侧边距
+  top=2.5cm,              % 上边距
+  bottom=2.5cm,           % 下边距
+  headheight=14pt,        % 页眉高度
+  headsep=0.8cm,          % 页眉到正文距离
+  footskip=1.2cm          % 页脚到正文距离
+}
+```
+
+在上面这个示例中，我们通过`\geometry`命令对文档进行了精确的页面布局设置，其中：
+
+- 参数`twoside`用于将书籍设置为“奇偶页镜像布局”，即将内侧边距设置得更大一些，以便装订。
+- 参数`inner/outer`是专为双页面打印的选项，用于取代参数`left/right`相对死板的页边距设置。
+- `headsep`、`footskip`等参数的作用是用于细调页眉页脚与正文间的距离。
+
+通过这种方式，我们可以在维持文档类整体结构的基础上，对页面版式进行专业级的精细化定义。当然，`\geometry`命令可设置的参数远不止这些，如果读者想了解更多该命令的参数，可以查阅该`geometry`宏包的官方文档。
+
+另外在 $\LaTeX$ 语言中，关于版式设置的命令也并不只有`\geometry`。还包括用于设置行距、页眉页脚、分栏等多方面的命令或宏包。下面让我们来做个简单的了解：
+
+1. **`\linespread`命令**：主要利用行间距调整正文可读性，常用于论文或技术报告。例如`\linespread{1.2}`。通常情况下，`1.0`属于正常行间距，大于`1.0`则是选择拉开行距，小于`1.0`则属于紧凑行距。当然，相同的功能也可以通过加载 `setspace` 宏包来实现，例如：
+
+    ```tex
+    \usepackage{setspace}
+    \singlespacing     % 单倍行距
+    \onehalfspacing    % 1.5 倍行距
+    \doublespacing     % 双倍行距
+    ```
+
+2. **`\pagestyle`命令**：用于设置页眉页脚的样式，它的参数可以是`plain`、`empty`、`headings`、`myheadings`等。其中，`plain`是默认的页眉页脚样式（只显示页码）；`empty`则不显示页眉页脚；`headings`则会在页眉中显示章节标题和页码；`myheadings`则允许用户自定义页眉内容。同样的，`\pagestyle`命令的功能也可以通过加载`fancyhdr`宏包来得到扩展，例如：
+
+    ```tex
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhf{} % 清空页眉页脚
+    \fancyhead[L]{左页眉}
+    \fancyhead[C]{中页眉}
+    \fancyhead[R]{右页眉}
+    \fancyfoot[L]{左页脚}
+    \fancyfoot[C]{中页脚}
+    \fancyfoot[R]{右页脚}
+    ```
+
+    在上述示例中：
+
+    - `\fancyhf{}`命令用于清空页眉页脚；
+    - `\fancyhead`命令用于设置页眉内容；
+    - `\fancyfoot`命令用于设置页脚内容。
+    - `[L]`、`[C]`、`[R]`分别表示左、中、右三个位置。
+    - `fancy`参数表示采用`fancyhdr`宏包提供的页眉页脚样式。
+
+3. **`\twocolumn`、`\onecolumn`**命令：用于控制正文是否双栏排版。例如`\twocolumn`是双栏排版，`\onecolumn`则是单栏排版。
+
+4. **`\topmargin`、`\oddsidemargin`等命令**：它们是传统 LaTeX 提供的命令，可直接控制页边距，例如：
+
+    ```tex
+    \setlength{\topmargin}{-0.5in}
+    \setlength{\oddsidemargin}{0.2in}
+    \setlength{\textwidth}{6in}
+    \setlength{\textheight}{9in}
+    ```
+
+    **请注意**：上述命令使用起来不如`\geometry`命令直观，很容易出错，现代文档推荐使用`geometry`宏包提供的功能。
+
+除了上面列出的这些命令和相关宏包之外，与版式相关的宏包还包括以下这些，读者如有需要可以查阅相关文档：
+
+- `titlesec`：用于设置章节标题样式；
+- `caption`：用于设置图表标题格式；
+- `parskip`：用于设置段落间的垂直间距；
+- `microtype`：用于字间距微调，提高排版质量；
+- `layout`：用于设置可视化页面布局;
+- `typearea`：用于设置页面版式，与`geometry`类似，但功能更强大。
 
 ### 设置文档元信息
 
+<!-- 以下待整理 -->
 ## 组织文档内容
 
 ### 定义标题页

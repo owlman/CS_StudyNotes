@@ -1,4 +1,4 @@
-# PowerShell 使用笔记（持续更新中）
+# PowerShell 使用笔记（待完善）
 
 ## scoop 包管理器
 
