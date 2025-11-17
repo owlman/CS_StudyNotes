@@ -1,10 +1,22 @@
 \documentclass[oneside, 12pt, a4paper]{article}
-\usepackage{ctex} % 支持中文
+\usepackage{ctex}     % 用于提供中文支持
+\usepackage{geometry} % 用于设置页面版式
 
-\title{LaTeX 排版快速入门}
+\geometry{
+  a4paper,       % 设置纸张尺寸
+  left=3cm,      % 左页边距
+  right=3cm,     % 右页边距
+  top=3cm,       % 上页边距
+  bottom=3cm     % 下页边距
+}
+
+
+% 设置文档元信息
+\title{\LaTeX 快速入门}
 \author{张三}
 \date{\today}
 
+% 开始组织文档内容
 \begin{document}
-    \maketitle
+    \maketitle        % 生成标题页
 \end{document}
