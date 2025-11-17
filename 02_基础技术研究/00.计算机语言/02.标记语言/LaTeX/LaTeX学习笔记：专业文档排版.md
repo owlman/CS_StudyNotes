@@ -23,7 +23,7 @@
 
    - `article`：用于排版短篇文章，包括期刊投稿、技术文档等；
    - `report`：用于排版学术报告，包括毕业论文、技术报告等；
-   - `book`：用于排版书籍类文档，例如专着、教材等；
+   - `book`：用于排版书籍类文档，例如专著、教材等；
    - `letter`：用于排版信件类文档，包括个人书信、商务信函等；
 
 2. **扩展文档类**：由`extsizes`宏包提供，提供有`extarticle`、`extreport`、`extbook`三个类，它们分别是上述前三个标准文档类的扩展版，主要区别是支持更大的字号选项（如 `14pt`、`17pt`、`20pt`）
@@ -268,12 +268,23 @@
 
 这些属性不会根据`\title`或`\author`命令来自动推断，因此通常需要手动指定。总体来说，**LaTeX 的元信息系统是“按需扩展”的**：基础类只提供最小集合，而不同的文档类和宏包根据场景添加自己的元数据接口。这也是 LaTeX 在学术论文、演示文稿、技术报告等场景中具有高度可扩展性的原因。
 
-<!-- 以下待整理 -->
 ## 组织文档内容
 
-### 定义标题页
+在一般情况下，如果我们需要用到 $\LaTeX$ 这种复杂的系统来排版一份文档，那么该文档通常会是一篇有相当规模和专业性的作品，例如学术论文、技术报告、出版书籍等。这些作品中往往会包含封标题页、目录结构、章节层级、正文段落、插图、表格、参考文献等元素。这些元素通常都有着来自出版社、学术机构的，既定且严格的格式规范。在本节，我们将带你逐一学习这些元素在 $\LaTeX$ 中的组织方式。
 
-### 设置章节结构
+### 文档标题页面
+
+<!-- 以下待整理 -->
+
+### 自动生成目录
+
+```tex
+\tableofcontents
+```
+
+生成目录并自动建立书签。若希望目录自动更新页码，建议在文档编译过程中多运行两次。
+
+### 章节层级设计
 
 专业文献通常采用三层或四层标题结构：
 
@@ -293,17 +304,11 @@
 
 建议分节时保持每节内容在合理长度（如 300–600 字）范围内，不宜一节过长或过短。
 
-### 生成文档目录
-
 加载 `\usepackage{hyperref}` 后，可直接使用：
 
-```tex
-\tableofcontents
-```
+### 正文段落样式
 
-生成目录并自动建立书签。若希望目录自动更新页码，建议在文档编译过程中多运行两次。
-
-### 设置文本样式
+#### 标题与链接
 
 若需要调整标题样式，可使用 `titlesec` 宏包。例如：
 
@@ -314,83 +319,28 @@
 
 将一级标题设置为大号粗体。请注意，一定要保证标题样式与整体排版风格一致，不宜随意混用多种风格。
 
-## 专业内容排版
+链接与文档书签
 
-### 定理环境
-
-专业文献常用“定理–引理–证明–推论”结构，可用 `amsthm` 宏包定义。例如：
+加载 hyperref 后，建议如下设置：
 
 ```tex
-\usepackage{amsthm}
-\newtheorem{theorem}{定理}[section]
-\newtheorem{lemma}{引理}[section]
-\theoremstyle{definition}
-\newtheorem{definition}{定义}[section]
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdfauthor={你的名字},
+  pdftitle={文档标题}
+}
 ```
 
-然后在文中使用：
+这样生成的 PDF 在阅读器中可直接跳转目录、图表、参考文献，提高阅读体验。
 
-```tex
-\begin{theorem}
-假设 …，则 …
-\end{theorem}
+#### 强调与注释
 
-\begin{proof}
-由 … 及 … 可得 …。
-\end{proof}
-```
+### 图表元素应用
 
-务必保持定理编号方式的一致性，推荐 “章节号+定理号”的编号方式（例如 2.1、2.2…）。
-
-### 算法排版
-
-对于算法伪代码，可使用 `algorithm` 或 `algorithm2e` 宏包。例如：
-
-```tex
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-
-\begin{algorithm}
-\caption{快速排序 (QuickSort)}
-\begin{algorithmic}[1]
-\Procedure{QuickSort}{$A,p,r$}
-  \If{$p<r$}
-    \State $q \gets \Call{Partition}{A,p,r}$
-    \State \Call{QuickSort}{$A,p,q-1$}
-    \State \Call{QuickSort}{$A,q+1,r$}
-  \EndIf
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-```
-
-这样，算法将自动编号、格式清晰、带行号，读者阅读更方便。
-
-### 公式与数学环境
-
-虽然你当前可能已熟悉公式编辑技巧，但在专业文档排版中，需要额外注意以下事项：
-
-- 行间公式（使用 `\[ … \]` 或 `\begin{equation}…\end{equation}`）适合重要公式；
-- 行内公式（使用 `$…$`）适合文本相关符号；
-- 对于多行推导，推荐使用 `amsmath` 提供的 `align` 环境，保持对齐，利于阅读；
-- 公式编号应统一使用 `(1)`, `(2)`, … 样式，并在文中引用公式使用 `\eqref{}` 或 `\ref{}`。
-  示例：
-
-```tex
-\begin{align}
-\label{eq:energy}
-E &= mc^2 \\
-\label{eq:momentum}
-p &= mv
-\end{align}
-```
-
-并在文中写：“如公式 \eqref{eq:energy} 所示，…”
-以上方式保证公式清晰、可引用、结构一致。
-
-## 图表、插图与表格排版
-
-### 插图
+#### 插图元素
 
 插图是文献中增强可视化理解的重要元素。建议使用 `graphicx` 宏包，并按如下方式插入：
 
@@ -409,7 +359,7 @@ p &= mv
 - 图宽度建议为文档宽度的 0.5–0.8 倍，不宜过大或过小；
 - 为保证输出质量，推荐使用矢量图（如 PDF、EPS）而非低分辨率 raster 图。
 
-### 表格
+#### 表格元素
 
 表格应清晰、对齐规范。建议使用 `booktabs` 宏包，避免使用粗 \hline 或密集边框。例如：
 
@@ -435,15 +385,87 @@ p &= mv
 - 表格中避免竖线（`|`）分隔，视觉更干净；
 - 给 \caption 与 \label 排序如上，确保标签引用正确。
 
-### 引用与浮动体管理
-
 图与表都属于“浮动体”（float），建议将 `\begin{figure}` / `\begin{table}` 放在能表达相关语义的合适位置，并在文本中引用（如“见图 \ref{fig:architecture}”）。加载 `\usepackage{caption}` 或 `\usepackage{subcaption}` 可进一步增强图注或子图处理能力。
 
----
+### 专业内容环境
 
-## 参考文献与引用管理
+#### 定理证明
 
-### 文献管理工具
+专业文献常用“定理–引理–证明–推论”结构，可用 `amsthm` 宏包定义。例如：
+
+```tex
+\usepackage{amsthm}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+```
+
+然后在文中使用：
+
+```tex
+\begin{theorem}
+假设 …，则 …
+\end{theorem}
+
+\begin{proof}
+由 … 及 … 可得 …。
+\end{proof}
+```
+
+务必保持定理编号方式的一致性，推荐 “章节号+定理号”的编号方式（例如 2.1、2.2…）。
+
+#### 数学公式
+
+虽然你当前可能已熟悉公式编辑技巧，但在专业文档排版中，需要额外注意以下事项：
+
+- 行间公式（使用 `\[ … \]` 或 `\begin{equation}…\end{equation}`）适合重要公式；
+- 行内公式（使用 `$…$`）适合文本相关符号；
+- 对于多行推导，推荐使用 `amsmath` 提供的 `align` 环境，保持对齐，利于阅读；
+- 公式编号应统一使用 `(1)`, `(2)`, … 样式，并在文中引用公式使用 `\eqref{}` 或 `\ref{}`。
+  示例：
+
+```tex
+\begin{align}
+\label{eq:energy}
+E &= mc^2 \\
+\label{eq:momentum}
+p &= mv
+\end{align}
+```
+
+并在文中写：“如公式 \eqref{eq:energy} 所示，…”
+以上方式保证公式清晰、可引用、结构一致。
+
+#### 算法描述
+
+对于算法伪代码，可使用 `algorithm` 或 `algorithm2e` 宏包。例如：
+
+```tex
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{algorithm}
+\caption{快速排序 (QuickSort)}
+\begin{algorithmic}[1]
+\Procedure{QuickSort}{$A,p,r$}
+  \If{$p<r$}
+    \State $q \gets \Call{Partition}{A,p,r}$
+    \State \Call{QuickSort}{$A,p,q-1$}
+    \State \Call{QuickSort}{$A,q+1,r$}
+  \EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+
+这样，算法将自动编号、格式清晰、带行号，读者阅读更方便。
+
+#### 代码展示
+
+### 参考文献管理
+
+#### 文献管理工具
 
 专业文献中，参考文献往往篇幅较多、格式规范。推荐使用 `\usepackage{biblatex}` 或经典的 `\usepackage{natbib}`。以 biblatex 为例：
 
@@ -467,7 +489,7 @@ p &= mv
 \printbibliography
 ```
 
-### 参考文献格式
+#### 参考文献格式
 
 根据期刊或出版社的要求，参考文献可能需要按照 IEEE、ACM、APA、GB/T 7714 等格式排列。biblatex 的 style 参数通常能满足；如需定制，可手动修改 .bbx/.cbx 模块。
 
@@ -478,45 +500,7 @@ p &= mv
 - 多篇引用可用 `\cite{ref1,ref2,ref3}`；
 - 保持与正文、表格、图中的引用一致；即使文献量大，也应通过自动化工具统一管理。
 
----
-
 ## 排版优化与版式细节
-
-### 字体与行距
-
-建议选用适于学术排版的字体，如 Latin Modern、Times New Roman 等。加载 `\linespread{1.2}` 或 `\setlength{\baselineskip}{1.2\baselineskip}` 可提升可读性。
-
-### 边距与页眉页脚
-
-为了论文打印与装订，需要考虑边距、页眉页脚设置。例如：
-
-```tex
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhead[L]{}
-\fancyhead[C]{}
-\fancyhead[R]{\thepage}
-\fancyfoot{}
-```
-
-若为双面打印，应使用 `twoside` 选项。
-
-### 链接与文档书签
-
-加载 hyperref 后，建议如下设置：
-
-```tex
-\hypersetup{
-  colorlinks=true,
-  linkcolor=blue,
-  citecolor=blue,
-  urlcolor=blue,
-  pdfauthor={你的名字},
-  pdftitle={文档标题}
-}
-```
-
-这样生成的 PDF 在阅读器中可直接跳转目录、图表、参考文献，提高阅读体验。
 
 ### 可重用的模板结构
 
@@ -533,4 +517,5 @@ p &= mv
 ## 结语
 
 通过以上各章内容，我们系统介绍了 LaTeX 在“专业文档排版”中的关键要素：从文档框架与宏包选择、标题结构、定理环境、图表插入、参考文献管理，到排版优化与细节建议。掌握这些技巧，能极大提升你的稿件专业性与排版质量。
+
 接下来，建议你选择一个实际写作项目（如论文、技术报告或学位论文）作为练习对象，逐步应用本文所述方法。与此同时，多查看优秀已发表文献的排版风格，从中吸收灵感与规范。祝你排版顺利、文稿精彩！
