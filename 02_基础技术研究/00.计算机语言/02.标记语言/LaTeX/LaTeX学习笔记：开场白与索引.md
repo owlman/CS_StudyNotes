@@ -32,16 +32,17 @@
 
 这一系列的笔记的内容将包括介绍它的前世今生，基本使用方式，以及在数学公式编辑、专业文献排版等方面的具体应用。下面是这一系列笔记的索引：
 
-- [[LaTeX学习笔记：快速上手指南]]
-- [[LaTeX学习笔记：数学公式编辑]]
-- [[LaTeX学习笔记：专业文档排版]]
+- [[LaTeX学习笔记：快速上手指南]]：[博客园链接](https://www.cnblogs.com/owlman/p/19202175)；
+- [[LaTeX学习笔记：数学公式编辑]]：[博客园链接](https://www.cnblogs.com/owlman/p/19199330)；
+- [[LaTeX学习笔记：专业文档排版]]：[博客园链接]()；
 
-上述笔记将陆续更新在我于github上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)的`[02_基础技术研究/00.计算机语言/02.标记语言/LaTeX]`目录下，并予以长期维护，欢迎读者随时参考。
+除我的个人博客之外，上述笔记将陆续更新在我于github上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护，欢迎读者随时参考。
 
 ## 学习资源推荐
 
 - 参考书籍：
   - [《LaTeX入门》](https://book.douban.com/subject/24703731/)：作者是刘海洋，电子工业出版社于2013年出版，适合初学入门。
+  - [《The TeXbook》](https://book.douban.com/subject/1418351/)：作者是高德纳本人，系 $\TeX$ 领域最权威的参考书籍，适合有一定基础后进阶学习。
 - 网络资源：
   - [LaTeX官方网站](https://www.latex-project.org/)：官方文档和教程。
   - [CTeX官方网站](http://www.ctex.org/)：中文 $\LaTeX$ 社区，提供中文文档和教程。
