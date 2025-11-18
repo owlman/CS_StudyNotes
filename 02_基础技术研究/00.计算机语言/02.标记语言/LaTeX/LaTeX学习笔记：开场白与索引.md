@@ -34,19 +34,19 @@
 
 - [[LaTeX学习笔记：快速上手指南]]：[博客园链接](https://www.cnblogs.com/owlman/p/19202175)；
 - [[LaTeX学习笔记：数学公式编辑]]：[博客园链接](https://www.cnblogs.com/owlman/p/19199330)；
-- [[LaTeX学习笔记：专业文档排版]]：[博客园链接]()；
+- [[LaTeX学习笔记：文档排版基础]]：[博客园链接]()；
 
 除我的个人博客之外，上述笔记将陆续更新在我于github上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护，欢迎读者随时参考。
 
 ## 学习资源推荐
 
 - 参考书籍：
-  - [《LaTeX入门》](https://book.douban.com/subject/24703731/)：作者是刘海洋，电子工业出版社于2013年出版，适合初学入门。
+  - [《LaTeX 入门》](https://book.douban.com/subject/24703731/)：作者是刘海洋，电子工业出版社于2013年出版，适合初学入门。
   - [《The TeXbook》](https://book.douban.com/subject/1418351/)：作者是高德纳本人，系 $\TeX$ 领域最权威的参考书籍，适合有一定基础后进阶学习。
 - 网络资源：
-  - [LaTeX官方网站](https://www.latex-project.org/)：官方文档和教程。
-  - [CTeX官方网站](http://www.ctex.org/)：中文 $\LaTeX$ 社区，提供中文文档和教程。
-  - [TeX Live官方网站](https://www.tug.org/texlive/)：最完整的跨平台 $\TeX$ 发行版，包含 LaTeX、XeTeX、LuaTeX 等编译器与宏包集合。
+  - [LaTeX 官方网站](https://www.latex-project.org/)：官方文档和教程。
+  - [CTeX 官方网站](http://www.ctex.org/)：中文 $\LaTeX$ 社区，提供中文文档和教程。
+  - [TeX Live 官方网站](https://www.tug.org/texlive/)：最完整的跨平台 $\TeX$ 发行版，包含 LaTeX、XeTeX、LuaTeX 等编译器与宏包集合。
   - [Overleaf](https://www.overleaf.com/)：在线的 $\LaTeX$ 编辑器，支持实时预览和协作编辑。
   - [CTAN](https://www.ctan.org/)：$\LaTeX$ 的官方包仓库，提供了大量的宏包和模板。
   - [LaTeX wikibook](https://en.wikibooks.org/wiki/LaTeX)：一个详细的 $\LaTeX$ 学习指南，适合初学者。
