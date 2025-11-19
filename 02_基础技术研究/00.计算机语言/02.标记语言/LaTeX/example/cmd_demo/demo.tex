@@ -1,7 +1,7 @@
 \documentclass[oneside, 12pt, a4paper]{article}
 
 % 导入必要的宏包
-\usepackage[indentfirst=false]{ctex} % 用于提供中文支持
+\usepackage{ctex} % 用于提供中文支持
 \usepackage{geometry} % 用于设置页面版式
 \usepackage{hyperref} % 用于创建超链接
 
@@ -31,12 +31,17 @@
 \begin{document}
     \section{正文样式示例}
         \subsection{正文段落}
-        这是一段正文，它没有特殊的样式，我们只需\textbf{直接写在章节标题下面}即可。在这里继续添加文本，丰富一些内容以展示段落效果。
+        \noindent 这是一段正文，它没有特殊的样式，我们只需\textbf{直接写在章节标题下面}即可。在这里继续添加文本，丰富一些内容以展示段落效果。
 
         这是另一段正文，它也没有特殊的样式，它\textit{与上一段正文之间用空行分割}即可。在这里\underline{继续添加文本，丰富一些内容以展示段落效果}。
 
         我们还可以在正文中插入一个能跳转到 \href{https://www.tug.org/texlive/}{TeX Live 官方网站}的超链接。
-        \subsection{引言文本}
+        \subsection{引言文本}       
+        \noindent 下面是一个引言文本的示例：
+
+            \begin{quote}
+                \textit{“\LaTeX 是一种排版系统，它使用TeX排版引擎，并遵循一套文档类和宏包的规范，以实现文档的自动化排版。”}
+            \end{quote}
         \subsection{列表项目}
         \subsection{注释说明}
     \section{图表元素示例}
