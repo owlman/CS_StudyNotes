@@ -1,19 +1,28 @@
 \documentclass[oneside, 12pt, a4paper]{article}
 
+% 导入必要的宏包
 \usepackage[indentfirst=false]{ctex} % 用于提供中文支持
 \usepackage{geometry} % 用于设置页面版式
 \usepackage{hyperref} % 用于创建超链接
 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue,
-    pdfauthor={凌杰},
-    pdftitle={\LaTeX 排版示例},
-}
 % 设置页面边距
-\geometry{a4paper, left=3cm, right=3cm, top=3cm, bottom=3cm}
+\geometry{
+    a4paper, 
+    left=3cm, 
+    right=3cm, 
+    top=3cm, 
+    bottom=3cm
+}
+
+% 设置超链接样式
+\hypersetup{
+    colorlinks=true,  % 将超链接文本设置为彩色
+    linkcolor=blue,   % 将超链接文本的颜色设置为蓝色
+    citecolor=blue,   % 将引用文本的颜色设置为蓝色
+    urlcolor=blue,    % 将超链接地址的颜色设置为蓝色
+    pdfauthor={凌杰}, % 设置 PDF 文档的作者信息
+    pdftitle={\LaTeX 排版示例} % 设置 PDF 文档的标题信息
+}
 % 设置文档元信息
 \title{\LaTeX 排版示例}
 \author{凌杰}
