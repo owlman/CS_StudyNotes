@@ -44,7 +44,7 @@
 
 - 参考书籍：
   - [《LaTeX 入门》](https://book.douban.com/subject/24703731/)：作者是刘海洋，电子工业出版社于2013年出版，适合初学入门。
-  - [《The TeXbook》](https://book.douban.com/subject/1418351/)：作者是高德纳本人，系 $\TeX$ 领域最权威的参考书籍，适合有一定基础后进阶学习。
+  - [《The TeXbook》](https://book.douban.com/subject/1418351/)：作者是高德纳本人，系 $\TeX$ 领域最权威的参考书籍。这虽并不是 $\LaTeX$ 直接相关的教材，但如果想更好地理解 $\LaTeX$ 的工作原理，以及掌握其底层的排版机制，回头去读一下这本书，系统性地学习一下 $\TeX$ 是一个非常好的选择。
 - 网络资源：
   - [LaTeX 官方网站](https://www.latex-project.org/)：官方文档和教程。
   - [CTeX 官方网站](http://www.ctex.org/)：中文 $\LaTeX$ 社区，提供中文文档和教程。
