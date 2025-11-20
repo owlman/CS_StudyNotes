@@ -31,17 +31,27 @@
 \begin{document}
     \section{正文样式示例}
         \subsection{正文段落}
-        \noindent 这是一段正文，它没有特殊的样式，我们只需\textbf{直接写在章节标题下面}即可。在这里继续添加文本，丰富一些内容以展示段落效果。
+            这是一段正文，它没有特殊的样式，我们只需\textbf{直接写在章节标题下面}即可。在这里继续添加文本，丰富一些内容以展示段落效果。
 
-        这是另一段正文，它也没有特殊的样式，它\textit{与上一段正文之间用空行分割}即可。在这里\underline{继续添加文本，丰富一些内容以展示段落效果}。
+            这是另一段正文，它也没有特殊的样式，它\textit{与上一段正文之间用空行分割}即可。在这里\underline{继续添加文本，丰富一些内容以展示段落效果}。
 
-        我们还可以在正文中插入一个能跳转到 \href{https://www.tug.org/texlive/}{TeX Live 官方网站}的超链接。
+            我们还可以在正文中插入一个能跳转到 \href{https://www.tug.org/texlive/}{TeX Live 官方网站}的超链接。
         \subsection{引言文本}       
-        \noindent 下面是一个引言文本的示例：
-
+            下面将显示的是一段引言文本的示例：
             \begin{quote}
                 \textit{“\LaTeX 是一种排版系统，它使用TeX排版引擎，并遵循一套文档类和宏包的规范，以实现文档的自动化排版。”}
+        
+                {\raggedleft -- 高德纳（Donald E. Knuth） \par}
             \end{quote}
+
+            下面是一个较长的引用文本示例：
+            \begin{quotation}
+                \textit{“Leslie Lamport 在 1980 年代初期开发了 \LaTeX 系统，以简化 \TeX 的使用。\LaTeX 提供了一套宏和命令，使用户能够专注于文档内容，而无需过多关注排版细节。\LaTeX 迅速成为学术界和技术文档撰写的标准工具，尤其在数学、计算机科学等领域得到了广泛应用。}
+
+                \textit{\LaTeX 的设计理念强调结构化文档和内容优先，这使得它在处理复杂文档时表现出色。通过使用各种宏包，用户可以轻松地扩展 \LaTeX 的功能，以满足不同的排版需求。今天，\LaTeX 已经发展成为一个庞大的生态系统，拥有丰富的资源和活跃的社区支持。”}
+                
+                {\raggedleft -- 节选自维基百科 \par}
+            \end{quotation}
         \subsection{列表项目}
         \subsection{注释说明}
     \section{图表元素示例}
