@@ -23,6 +23,9 @@
     pdfauthor={凌杰}, % 设置 PDF 文档的作者信息
     pdftitle={\LaTeX 排版示例} % 设置 PDF 文档的标题信息
 }
+\marginparwidth=2cm  % 设置边注的宽度
+\marginparsep=0.2cm  % 设置边注与正文的间距
+
 % 设置文档元信息
 \title{\LaTeX 排版示例}
 \author{凌杰}
@@ -88,8 +91,12 @@
                     \end{enumerate}
                 \end{enumerate}
             \end{enumerate}
-
         \subsection{注释说明}
+            \noindent 这是一段要被脚注的文本。
+            \footnote{这是脚注的内容。}
+
+            \noindent 这是一段要被边注的文本。
+            \marginpar{这是右侧边注内容。}
     \section{图表元素示例}
         \subsection{插图元素}
         \subsection{表格元素}
