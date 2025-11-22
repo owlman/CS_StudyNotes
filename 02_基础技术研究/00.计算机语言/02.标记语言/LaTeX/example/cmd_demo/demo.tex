@@ -25,6 +25,7 @@
 }
 \marginparwidth=2cm  % 设置边注的宽度
 \marginparsep=0.2cm  % 设置边注与正文的间距
+\setcounter{tocdepth}{2}  % 设置目录的层级深度
 
 % 设置文档元信息
 \title{\LaTeX 排版示例}
@@ -32,6 +33,9 @@
 \date{\today}
 % 开始组织文档内容
 \begin{document}
+    \maketitle       % 生成标题
+    \tableofcontents % 生成目录
+    \newpage         % 插入分页符
     \section{正文样式示例}
         \subsection{正文段落}
             \noindent 这是一段正文，它没有特殊的样式，我们只需\textbf{直接写在章节标题下面}即可。在这里继续添加文本，丰富一些内容以展示段落效果。
