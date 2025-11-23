@@ -102,11 +102,11 @@
 \usepackage{geometry}    % 页面设置
 
 % 数学相关
-\usepackage{amsmath}    % 数学公式
-\usepackage{amssymb}    % 数学符号
+\usepackage{amsmath}    % 数学公式扩展
+\usepackage{amssymb}    % 数学符号扩展
 
 % 图形相关
-\usepackage{graphicx}    % 图片支   持
+\usepackage{graphicx}    % 图片支持
 \usepackage{float}       % 浮动体
 \usepackage{subcaption}  % 子图
 
