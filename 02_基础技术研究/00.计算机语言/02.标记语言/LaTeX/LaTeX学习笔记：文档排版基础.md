@@ -102,16 +102,20 @@
 \usepackage{geometry}    % 页面设置
 
 % 数学相关
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath}    % 数学公式
+\usepackage{amssymb}    % 数学符号
 
 % 图形相关
-\usepackage{graphicx,float,caption,subcaption}
+\usepackage{graphicx}    % 图片支   持
+\usepackage{float}       % 浮动体
+\usepackage{subcaption}  % 子图
 
 % 表格相关
 \usepackage{booktabs}
 
 % 超链接与引用相关
-\usepackage{hyperref,cleveref}
+\usepackage{hyperref}    % 超链接
+\usepackage{cleveref}    % 智能引用
 
 % 文献管理相关
 \usepackage{biblatex}
