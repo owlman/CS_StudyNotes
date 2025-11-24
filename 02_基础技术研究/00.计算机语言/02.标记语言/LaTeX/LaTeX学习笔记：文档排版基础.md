@@ -102,8 +102,8 @@
 \usepackage{geometry}    % 页面设置
 
 % 数学相关
-\usepackage{amsmath}    % 数学公式扩展
-\usepackage{amssymb}    % 数学符号扩展
+\usepackage{amsmath}     % 数学公式扩展
+\usepackage{amssymb}     % 数学符号扩展
 
 % 图形相关
 \usepackage{graphicx}    % 图片支持
@@ -237,14 +237,14 @@
 \usepackage{ctex} % 支持中文
 
 % 设置文档元信息
-\title{\LaTeX 快速入门} % 设置文档标题
-\author{张三}           % 设置文档作者，如果有多个作者，可使用“\and”分隔，
-                        % 例如：“张三\and 李四”
-\date{\today}           % 设置文档日期，如果不想设置，可以写 \date{}
+\title{\LaTeX 快速入门}  % 设置文档标题
+\author{张三}            % 设置文档作者，如果有多个作者，可使用“\and”分隔，
+                         % 例如：“张三\and 李四”
+\date{\today}            % 设置文档日期，如果不想设置，可以写 \date{}
 
 % 开始组织文档内容
 \begin{document}
-    \maketitle          % 生成标题页
+    \maketitle           % 生成标题页
 \end{document}
 ```
 
