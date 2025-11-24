@@ -1,4 +1,4 @@
-# VS Code 使用笔记
+# VS Code 配置笔记
 
 > **在正式开始本文的内容之前，请允许我先做一些自我介绍：**
 >
@@ -8,7 +8,8 @@
 
 Visual Studio Code（以下简称 VS Code）是一款由微软公司开发并维护的现代化代码编辑器，它是一款基于 Node.js 这个跨平台运行时环境的开源项目，所以在 Windows、macOS 以及各种类 UNIX 系统上均可使用。VS Code 编辑器的安装非常简单，在通过搜索引擎找到并打开它的官方下载页面之后，就会看到如下图所示的内容：
 
-![VS Code 的官方下载页面](./img/vscode_web.png)
+<!-- ![VS Code 的官方下载页面](./img/vscode_web.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202511/691082-20251124111641642-1211612532.png)
 
 然后，读者需要根据自己所在的操作系统平台来下载相应的安装包。待下载完成之后，我们就可以通过鼠标双击安装包的方式来启动它的图形化安装向导了。在安装的开始阶段，安装向导会要求用户设置一些选项，例如选择程序的安装目录、是否在系统中添加环境变量（如果读者想从命令行终端中启动 VS Code 编辑器，就需要激活这个选项）等，大多数时候只需采用默认选项，直接一路点击「Next」就可以完成安装了。
 
@@ -18,7 +19,8 @@ Visual Studio Code（以下简称 VS Code）是一款由微软公司开发并维
 
 众所周知，VS Code 编辑器的最强大之处在于它有一个非常完善的插件生态系统，我们可以通过安装插件的方式将其打造成面向不同编程语言与开发框架的集成开发环境。在 VS Code 编辑器中安装插件的方式非常简单，只需要打开该编辑器的主界面，然后在其左侧纵向排列的图标按钮中找到「扩展」按钮并单击它，或直接在键盘上敲击快捷键「Ctrl + Shift + X」，就会看到如下图所示的插件安装界面：
 
-![VS Code 的插件安装界面](./img/vscode_plugin.png)
+<!-- ![VS Code 的插件安装界面](./img/vscode_plugin.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202511/691082-20251124111623288-1863856132.png)
 
 按照自身的工作需要，笔者会经常在 VS Code 编辑器中安装以下插件。
 
@@ -68,3 +70,21 @@ Visual Studio Code（以下简称 VS Code）是一款由微软公司开发并维
   - **rust test lens**：该插件可以用于快速运行某个 Rust 测试。
   - **rust-analyzer**：该插件会实时编译和分析我们编写的 Rust 代码，提示代码中的错误，并对类型进行标注。
   - **better toml**：由于 Rust 开发使用 toml 格式的文件来充当项目配置文件，所以我们通常会需要一个能方便用于编辑该格式文件的插件。
+
+## 配置字体
+
+在 VS Code 编辑器中，为了在编写代码和技术文档时解决中英文之间因字符宽度导致的各种排版问题，我们通常会选用等宽字体。在众多等宽字体中，Ubuntu Mono 字体是一款非常出色的选择，它不仅支持中文，而且对英文字符的宽度控制得非常精准。其具体配置步骤如下：
+
+1. 前往 Ubuntu Mono 字体所在 github 页面，并下载以下这四个`.ttf`文件：
+
+    ```bash
+    Ubuntu Mono derivative Powerline Bold Italic.ttf
+    Ubuntu Mono derivative Powerline Bold.ttf
+    Ubuntu Mono derivative Powerline Italic.ttf
+    Ubuntu Mono derivative Powerline.ttf
+    ```
+
+2. 将以上四个字体安装到自己当前所在的操作系统中。然后重新打开 VS Code 编辑器，并依次点击菜单栏中的「文件」→「首选项」→「设置」，然后在打开的设置界面中，找到「文本编辑器：字体」选项卡下面的「Font Family」选项，并在其现有的字体列表前面加入`'Ubuntu Mono derivative Powerline'`（注意：字体名称之间是用逗号隔开的），如下图所示：
+
+    <!-- ![VS Code 编辑器的字体设置界面](./img/vscode_font.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202511/691082-20251124111544135-757859151.png)
