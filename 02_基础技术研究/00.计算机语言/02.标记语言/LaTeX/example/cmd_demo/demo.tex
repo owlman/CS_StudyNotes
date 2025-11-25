@@ -5,6 +5,7 @@
 \usepackage{ctex}     % 用于提供中文支持
 \usepackage{geometry} % 用于设置页面版式
 \usepackage{hyperref} % 用于创建超链接
+\usepackage{graphicx} % 用于插入图片
 
 % 设置页面边距
 \geometry{
@@ -101,9 +102,18 @@
 
             \noindent 这是一段要被边注的文本。
             \marginpar{这是右侧边注内容。}
+        \newpage         % 插入分页符
     \section{图表元素示例}
         \subsection{插图元素}
+            勾股定理，是一个基本的几何定理，指直角三角形的两条直角边的平方和等于斜边的平方。中国古代称直角三角形为勾股形，并且直角边中较小者为勾，另一长直角边为股，斜边为弦，所以称这个定理为勾股定理，也有人称商高定理，其几何关系如图\ref{fig:勾股定理示意图}所示。
+            \begin{figure}[htbp]
+                \centering     % 居中对齐
+                \includegraphics[width=0.6\textwidth]{./img/img.png}
+                \caption{勾股定理示意图} % 图片标题
+                \label{fig:勾股定理示意图} % 图片标签
+            \end{figure}
         \subsection{表格元素}
+        \newpage         % 插入分页符
     \section{专业内容示例}
         \subsection{定理证明}
         \subsection{数学公式}
