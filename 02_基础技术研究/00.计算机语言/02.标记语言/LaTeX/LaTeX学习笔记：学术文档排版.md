@@ -39,23 +39,47 @@
 
 ### 绘制表格
 
-表格应清晰、对齐规范。建议使用 `booktabs` 宏包，避免使用粗 \hline 或密集边框。例如：
+除了插图元素之外，表格也是学术文档中经常会出现的元素。我们经常使用它来罗列一些统计性的、汇总性的数据，以便对要说明的学术理论进行进一步的论证。在 $\LaTeX$ 中，表格元素可以通过定义一个名为`table`的环境来实现。例如在之前的《$\LaTeX$ 排版示例》文稿中，如果我们想在“表格元素”这个二级标题下面以表格的形式列出勾股定理的所有公式，就可以像下面这样写：
 
 ```tex
-\begin{table}[htbp]
-  \centering
-  \caption{实验结果对比}
-  \label{tab:results}
-  \begin{tabular}{lcc}
-    \toprule
-    方法 & 精度 (%) & 召回率 (%) \\
-    \midrule
-    方法 A & 92.5 & 88.3 \\
-    方法 B & 94.1 & 90.2 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+% 省略之前的文档结构定义部分
+\usepackage{amsmath} % 用于插入数学公式
+% 开始组织文档内容
+\begin{document}
+    % 省略之前的章节
+    \section{图表元素示例}
+        % 省略之前的插图元素
+        \subsection{表格元素}
+            勾股定理的公式有多种不同的表达形式，下面的表格\ref{tab:pythagorean_formulas}总结了一些常见的勾股定理公式。
+            \begin{table}[htbp]
+                \centering  % 表格居中
+                \caption{勾股定理公式汇总} % 表格标题
+                \label{tab:pythagorean_formulas} % 表格标签
+                \resizebox{0.7\textwidth}{!}{ % 调整表格大小以适应页面宽度
+                    % 设置表格的每列都采用左对齐
+                    \begin{tabular}{|l|l|}
+                        \hline   % 表格行间线
+                        \textbf{公式名称} & \textbf{数学表达式} \\
+                        \hline   % 表格行间线
+                        标准形式 & \( a^2 + b^2 = c^2 \) \\
+                        \hline   % 表格行间线
+                        求斜边 \(c\) & \( c = \sqrt{a^2 + b^2} \) \\
+                        \hline  % 表格行间线
+                        求直角边 \(a\) & \( a = \sqrt{c^2 - b^2} \) \\
+                        \hline  % 表格行间线
+                        求直角边 \(b\) & \( b = \sqrt{c^2 - a^2} \) \\
+                        \hline  % 表格行间线
+                        三角函数形式（正弦与余弦） & \( \sin^2(\theta) + \cos^2(\theta) = 1 \) \\
+                        \hline  % 表格行间线
+                        向量形式（二维空间） & \( \|\mathbf{v}\|^2 = v_x^2 + v_y^2 \) \\
+                        \hline  % 表格行间线   
+                    \end{tabular}
+                }
+            \end{table}
+    % 省略之后的章节
+\end{document}
 ```
+
 
 注意：
 
