@@ -87,4 +87,4 @@ Visual Studio Code（以下简称 VS Code）是一款由微软公司开发并维
 2. 将以上四个字体安装到自己当前所在的操作系统中。然后重新打开 VS Code 编辑器，并依次点击菜单栏中的「文件」→「首选项」→「设置」，然后在打开的设置界面中，找到「文本编辑器：字体」选项卡下面的「Font Family」选项，并在其现有的字体列表前面加入`'Ubuntu Mono derivative Powerline'`（注意：字体名称之间是用逗号隔开的），如下图所示：
 
     <!-- ![VS Code 编辑器的字体设置界面](./img/vscode_font.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202511/691082-20251124111544135-757859151.png)
+    ![img](https://img2024.cnblogs.com/blog/691082/202511/691082-20251124111544135-757859151.png
