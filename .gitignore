@@ -79,3 +79,13 @@ SoftwareTool/Git/code/demo_repo/
 
 # IDE files
 */*/.idea/*
+
+# vscode project
+.vscode
+.vscode/settings.json
+
+# obsidian workspace files
+*.code-workspace
+# Local Obsidian settings
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
