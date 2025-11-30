@@ -5,9 +5,9 @@
 \contentsline {subsection}{\numberline {1.4}注释说明}{3}{subsection.1.4}%
 \contentsline {section}{\numberline {2}图表元素示例}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}插图元素}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}表格元素}{4}{subsection.2.2}%
-\contentsline {section}{\numberline {3}专业内容示例}{5}{section.3}%
-\contentsline {subsection}{\numberline {3.1}定理证明}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}数学公式}{5}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}算法描述}{5}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}代码高亮}{5}{subsection.3.4}%
+\contentsline {subsection}{\numberline {2.2}表格元素}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}专业内容示例}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}定理证明}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}数学公式}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}算法描述}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}代码高亮}{6}{subsection.3.4}%
