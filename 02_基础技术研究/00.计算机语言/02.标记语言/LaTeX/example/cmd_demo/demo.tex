@@ -7,7 +7,8 @@
 \usepackage{hyperref} % 用于创建超链接
 \usepackage{amsmath}  % 提供数学公式支持
 \usepackage{graphicx} % 用于插入图片
-\usepackage{wrapfig} % 用于实现文字环绕
+\usepackage{wrapfig}  % 用于实现文字环绕
+\usepackage{multirow} % 用于表格中的单元格合并
 
 % 设置页面边距
 \geometry{
@@ -119,7 +120,7 @@
             勾股定理，是一个基本的几何定理，指直角三角形的两条直角边的平方和等于斜边的平方。中国古代称直角三角形为勾股形，并且直角边中较小者为勾，另一长直角边为股，斜边为弦，所以称这个定理为勾股定理，也有人称商高定理，其几何关系如图\ref{fig:勾股定理示意图}所示。
 
             在这里，我们使用了 wrapfig 宏包提供的 wrapfigure 环境，该环境会自动将图片元素放置在右侧，并让文字环绕在图片的左侧。
-
+        \newpage         % 插入分页符
         \subsection{表格元素}
             \noindent
             勾股定理的公式有多种不同的表达形式，下面的表格\ref{tab:pythagorean_formulas}总结了一些常见的勾股定理公式。
@@ -144,6 +145,31 @@
                     \hline  % 表格行间线
                     向量形式（二维空间） & \( \|\mathbf{v}\|^2 = v_x^2 + v_y^2 \) \\
                     \hline  % 表格行间线   
+                \end{tabular}
+            \end{table}
+
+            \begin{table}[htbp]
+                \centering
+                \caption{勾股定理公式汇总（单元格合并示例）}
+                \label{tab:pythagorean_formulas_merge}
+                \vspace{0.3cm}
+                \begin{tabular}{|p{6cm}|p{8cm}|}
+                    \hline
+                    \textbf{公式名称} & \textbf{数学表达式} \\
+                    \hline
+                    标准形式 & \( a^2 + b^2 = c^2 \) \\
+                    \hline                    
+                    %------ 这里开始合并三行 ------
+                    \multirow{3}{*}{求边公式} 
+                        & \( c = \sqrt{a^2 + b^2} \) \\ \cline{2-2}
+                        & \( a = \sqrt{c^2 - b^2} \) \\ \cline{2-2}
+                        & \( b = \sqrt{c^2 - a^2} \) \\ 
+                    \hline
+                    %------ 合并结束 ------                    
+                    三角函数形式（正弦与余弦） & \( \sin^2(\theta) + \cos^2(\theta) = 1 \) \\ 
+                    \hline
+                    向量形式（二维空间） & \( \|\mathbf{v}\|^2 = v_x^2 + v_y^2 \) \\
+                    \hline
                 \end{tabular}
             \end{table}
         \newpage         % 插入分页符
