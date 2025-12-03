@@ -9,6 +9,8 @@
 \usepackage{graphicx} % 用于插入图片
 \usepackage{wrapfig}  % 用于实现文字环绕
 \usepackage{multirow} % 用于表格中的单元格合并
+\usepackage{amsthm}   % 用于定义定理环境
+
 
 % 设置页面边距
 \geometry{
@@ -186,10 +188,30 @@
                     \hline
                 \end{tabular}
             \end{table}
-
         \newpage         % 插入分页符
-    \section{专业内容示例}
-        \subsection{定理证明}
+    \section{专用环境示例}
+        \subsection{定理引用}
+            \newtheorem{theorem}{定理}[section] % 定义定理环境，按章节编号
+            \newtheorem{lemma}[theorem]{引理}    % 定义引理环境，与定理共享编号
+            \newtheorem{corollary}[theorem]{推论} % 定义推论环境，与定理共享编号
+
+            \begin{theorem}[勾股定理]
+                在直角三角形中，斜边的平方等于两条直角边的平方和。
+                \[
+                    c^2 = a^2 + b^2
+                \]
+            \end{theorem}
+
+            \begin{lemma}[辅助引理]
+                如果一个三角形的两条边的平方和等于第三条边的平方，那么这个三角形是直角三角形。
+            \end{lemma}
+
+            \begin{corollary}[推论]
+                直角三角形的面积可以通过两条直角边的长度计算得出。
+                \[
+                    \text{面积} = \frac{1}{2}ab
+                \]
+            \end{corollary}
         \subsection{数学公式}
         \subsection{算法描述}
         \subsection{代码高亮}

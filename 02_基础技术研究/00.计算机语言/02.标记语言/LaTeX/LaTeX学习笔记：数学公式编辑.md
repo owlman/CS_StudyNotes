@@ -1,7 +1,7 @@
 ---
 title: LaTeX学习笔记：数学公式编辑
 author: 凌杰
-date: 2025-11-07
+date: 2025-11-14
 tags: 技术写作
 ---
 

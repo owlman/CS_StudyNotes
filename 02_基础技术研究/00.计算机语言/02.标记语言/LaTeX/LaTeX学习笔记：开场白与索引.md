@@ -1,7 +1,7 @@
 ---
 title: LaTeX学习笔记：开场白与索引
 author: 凌杰
-date: 2025-11-01
+date: 2025-10-31
 tags: 技术写作
 ---
 
