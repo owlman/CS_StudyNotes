@@ -1,8 +1,12 @@
-# zsh 配置笔记
+---
+title: zsh 配置笔记
+date: 2025-12-04
+tags: 软件配置
+categories: 待整理笔记
+---
 
-zsh 是我日常开发过程中最常用的 shell，它大幅提升了开发效率，也不再为忘记命令而苦恼。配合使用 oh-my-zsh 在短时间内就可以配置出一个高效的命令行，推荐大家使用。这篇文章记录了 Neo 自用的 zsh 安装配置流程，共 9 步，10 分钟内就可以完成。
+## zsh 简介
 
-zsh 介绍
 zsh 是一个兼容 bash 的 shell，相较 bash 具有以下优点：
 
 Tab 补全功能强大。命令、命令参数、文件路径均可以补全。
@@ -26,7 +30,6 @@ sudo pacman -S zsh
 若你使用的是其他发行版本，则使用对应的包管理器安装即可。
 
 安装好后，使用 cat /etc/shells 查看系统可以用的 shell：
-
 
 系统内可用的shell
 使用 chsh -s /bin/zsh 命令将 zsh 设置为系统默认 shell。新开一个 Shell Session，就可以开始使用 zsh 了。
