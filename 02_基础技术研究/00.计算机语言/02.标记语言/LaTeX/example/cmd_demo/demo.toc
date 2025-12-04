@@ -7,7 +7,5 @@
 \contentsline {subsection}{\numberline {2.1}插图元素}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}表格元素}{5}{subsection.2.2}%
 \contentsline {section}{\numberline {3}专用环境示例}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}定理引用}{6}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}数学公式}{6}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}算法描述}{6}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}代码高亮}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.1}公式与定理}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}算法与代码}{6}{subsection.3.2}%
