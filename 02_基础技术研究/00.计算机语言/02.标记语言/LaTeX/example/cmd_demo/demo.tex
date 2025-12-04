@@ -11,6 +11,10 @@
 \usepackage{multirow} % 用于表格中的单元格合并
 \usepackage{amsthm}   % 用于定义定理环境
 
+% 定义定理环境，按章节编号
+\newtheorem{theorem}{定理}[section] % 定义定理环境，按章节编号
+\newtheorem{lemma}[theorem]{引理}    % 定义引理环境，与定理共享编号
+\newtheorem{corollary}[theorem]{推论} % 定义推论环境，与定理共享编号
 
 % 设置页面边距
 \geometry{
@@ -191,9 +195,22 @@
         \newpage         % 插入分页符
     \section{专用环境示例}
         \subsection{公式与定理}
-            \newtheorem{theorem}{定理}[section] % 定义定理环境，按章节编号
-            \newtheorem{lemma}[theorem]{引理}    % 定义引理环境，与定理共享编号
-            \newtheorem{corollary}[theorem]{推论} % 定义推论环境，与定理共享编号
+            \noindent 下面是一些数学公式的示例：
+            
+            行内公式示例：$a^2 + b^2 = c^2$。
+            
+            \vspace{0.8cm} 
+            不带编号的行间公式：
+            \[
+                E = mc^2
+            \]
+
+            带编号的行间公式：
+            \begin{equation}
+                \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+            \end{equation}
+
+            \noindent 下面是定理、引理和推论的示例：
 
             \begin{theorem}[勾股定理]
                 在直角三角形中，斜边的平方等于两条直角边的平方和。
@@ -214,4 +231,5 @@
             \end{corollary}
         \newpage         % 插入分页符
         \subsection{算法与代码}
+
 \end{document}
