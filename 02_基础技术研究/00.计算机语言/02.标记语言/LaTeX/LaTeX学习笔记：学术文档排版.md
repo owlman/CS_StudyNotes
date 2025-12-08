@@ -364,6 +364,7 @@ categories: 标记语言
             \noindent 下面是定理、引理和推论的示例：
 
             \begin{theorem}[勾股定理]
+                \label{thm:pythagorean}
                 在直角三角形中，斜边的平方等于两条直角边的平方和。
                 \[
                     c^2 = a^2 + b^2
@@ -371,17 +372,35 @@ categories: 标记语言
             \end{theorem}
 
             \begin{lemma}[辅助引理]
+                \label{lem:auxiliary}
                 如果一个三角形的两条边的平方和等于第三条边的平方，那么这个三角形是直角三角形。
             \end{lemma}
 
             \begin{corollary}[推论]
+                \label{cor:area}
                 直角三角形的面积可以通过两条直角边的长度计算得出。
                 \[
                     \text{面积} = \frac{1}{2}ab
                 \]
             \end{corollary}
-        \newpage         % 插入分页符
+
+            接下来，我们可以这样引用这些定理和公式：
+            \begin{itemize}
+                \item 定理 \ref{thm:pythagorean} 表明了勾股定理。
+                \item 引理 \ref{lem:auxiliary} 是勾股定理的一个辅助结论。
+                \item 推论 \ref{cor:area} 则是勾股定理的一个直接应用。
+                \item 勾股定理的公式 \ref{eq:pythagorean} 可以用来计算直角三角形的斜边长度。
+            \end{itemize}
+        \newpage
+    % 省略之后的章节
+\end{document}
 ```
+
+现在，如果我们再次编译这个文档，就可以看到“公式与定理”这个二级标题下面已经出现了这个勾股定理相关的定理、引理、推论，以及我们在后续正文中对它们的引用（使用`\ref`命令），如图 7 所示：
+
+![图 7：定理与公式的示例](./img/Theorem.png)
+
+**图 7**：定理与公式的示例
 
 ### 算法与代码
 
@@ -395,7 +414,7 @@ categories: 标记语言
 \caption{快速排序 (QuickSort)}
 \begin{algorithmic}[1]
 \Procedure{QuickSort}{$A,p,r$}
-  \If{$p<r$}
+      \If{$p<r$}
     \State $q \gets \Call{Partition}{A,p,r}$
     \State \Call{QuickSort}{$A,p,q-1$}
     \State \Call{QuickSort}{$A,q+1,r$}
