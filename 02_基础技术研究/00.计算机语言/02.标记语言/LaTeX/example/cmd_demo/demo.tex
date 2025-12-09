@@ -10,7 +10,30 @@
 \usepackage{wrapfig}  % 用于实现文字环绕
 \usepackage{multirow} % 用于表格中的单元格合并
 \usepackage{amsthm}   % 用于定义定理环境
+\usepackage[ruled, linesnumbered]{algorithm2e} 
+    % 提供算法描述环境，其设置参数如下：
+    % ruled: 设置算法主体部分有顶部和底部的横线
+    % linesnumbered: 设置算法主体部分显示行号
+\usepackage{listings} % 用于插入代码片段
+\usepackage{xcolor}   % 用于定义颜色
 
+\lstset{
+    basicstyle=\ttfamily\small,        % 基本字体：等宽、小号
+    numbers=left,                       % 行号在左侧
+    numberstyle=\color{gray}\tiny,      % 行号样式：灰色、更小
+    frame=single,                       % 边框：单线框
+    framesep=3pt,                       % 边框与代码内容的间隔
+    rulecolor=\color{lightgray},        % 边框颜色：浅灰
+    breaklines=true,                    % 自动换行
+    captionpos=b,                       % 标题位置：底部 (bottom)
+    tabsize=4,                          % 制表符等效空格数
+    % 以下为语法高亮色彩配置 (可自定义)
+    keywordstyle=\color{blue}\bfseries, % 关键字样式：蓝色粗体
+    commentstyle=\color{green!60!black}\itshape, % 注释样式：墨绿色斜体
+    stringstyle=\color{orange},         % 字符串样式：橙色
+    showstringspaces=false,             % 不显示字符串中的空格
+    xleftmargin=15pt,                   % 代码块整体左侧边距，为行号留出空间
+}
 % 定义定理环境，按章节编号
 \newtheorem{theorem}{定理}[section] % 定义定理环境，按章节编号
 \newtheorem{lemma}[theorem]{引理}    % 定义引理环境，与定理共享编号
@@ -241,7 +264,48 @@
                 \item 推论 \ref{cor:area} 则是勾股定理的一个直接应用。
                 \item 勾股定理的公式 \ref{eq:pythagorean} 可以用来计算直角三角形的斜边长度。
             \end{itemize}
-        \newpage    
+        \newpage
         \subsection{算法与代码}
+            \noindent 下面是计算斐波那契数列的算法描述：
 
+            \begin{algorithm}
+                \caption{计算斐波那契数列}
+                \label{alg:fibonacci}
+                % 使用更常见的 \KwIn 和 \KwOut 来明确表示输入/输出
+                \KwIn{一个非负整数 $n$}
+                \KwOut{数组 $F$，包含斐波那契数列的前 $n$ 项（$F[0]=0, F[1]=1, \dots$）}
+                
+                \If{$n \leq 0$}{
+                    \Return $[\,]$ \tcp*{返回空数组表示无效输入}
+                }
+                \If{$n = 1$}{
+                    \Return $[0]$ \tcp*{基础情况：仅第0项}
+                }
+                $F[0] \gets 0$\;
+                $F[1] \gets 1$\;
+                \For{$i \gets 2$ \KwTo $n-1$}{
+                    $F[i] \gets F[i-1] + F[i-2]$\;
+                }
+                \Return $F$\;
+            \end{algorithm}
+
+            \noindent 在算法~\ref{alg:fibonacci} 中，我们描述了计算斐波那契数列的迭代方法。下面来看看上述算法的 Python 代码实现：
+
+            \begin{lstlisting}[language=Python, caption=斐波那契数列的 Python 实现, label=lst:fibonacci_python]
+                def fibonacci(n):
+                    if n <= 0:
+                        return "Input error"
+                    if n == 1:
+                        return [0]
+                    if n == 2:
+                        return [0, 1]
+                    
+                    f = [0, 1]
+                    for i in range(2, n):
+                        f.append(f[i-1] + f[i-2])
+                    return f
+            \end{lstlisting}
+
+            \noindent 上述代码实现了斐波那契数列的计算，并且使用了迭代的方法。你可以通过调用 `fibonacci(n)` 来计算斐波那契数列的前 $n$ 项。
+        \newpage
 \end{document}
