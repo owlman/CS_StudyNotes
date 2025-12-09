@@ -404,27 +404,137 @@ categories: 标记语言
 
 ### 算法与代码
 
-对于算法伪代码，可使用 `algorithm` 或 `algorithm2e` 宏包。例如：
+在计算机类的学术文档中，我们常常需要使用一些伪代码来描述针对某一问题的算法设计结果，而后还会用某一具体的编程语言来展示该算法的实现代码。在 $\LaTeX$ 中，我们通常通过加载`algorithm`或`algorithm2e`宏包来获得用于书写算法描述与实现代码的功能，其基本语法如下：
 
 ```tex
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-
+% 需要先在文档的全局设置区加载 algorithm2e 宏包
 \begin{algorithm}
-\caption{快速排序 (QuickSort)}
-\begin{algorithmic}[1]
-\Procedure{QuickSort}{$A,p,r$}
-      \If{$p<r$}
-    \State $q \gets \Call{Partition}{A,p,r}$
-    \State \Call{QuickSort}{$A,p,q-1$}
-    \State \Call{QuickSort}{$A,q+1,r$}
-  \EndIf
-\EndProcedure
-\end{algorithmic}
+    \caption{算法标题}
+    \label{alg:算法标签}
+    \KwIn{输入数据}
+    \KwOut{输出结果}
+    \For{$i \gets 1$ \KwTo $n$}{
+        \If{$i$ 是偶数}{
+            \Return $i$
+        }
+    }
 \end{algorithm}
 ```
 
-这样，算法将自动编号、格式清晰、带行号，读者阅读更方便。
+在上述语法中，我们首先定义了一个名为`algorithm`的环境，这是一个专用于进行算法描述的环境（需要预先加载`algorithm2e`宏包）。在该环境的定义中，我们可以使用`\caption`和`\label`命令来为该算法添加标题和引用标签，而`\KwIn`和`\KwOut`命令可分别用于定义该算法的输入数据和输出结果，`\For`和`\If`命令则可用于定义该算法中的循环和条件语句。另外，`\KwTo`命令用于定义循环的终止条件，`\Return`命令用于定义函数的返回值。例如在之前的《$\LaTeX$ 排版示例》文稿中，如果我们想在其"算法与代码"这个二级标题下面插入一段用于计算斐波那契数列的算法描述，就可以像下面这样写：
+
+```tex
+% 省略之前的文档结构定义部分
+\usepackage[ruled, linesnumbered]{algorithm2e} 
+    % 提供算法描述环境，其设置参数如下：
+    % ruled: 设置算法主体部分有顶部和底部的横线
+    % linesnumbered: 设置算法主体部分显示行号
+
+% 开始组织文档内容
+\begin{document}
+    % 省略之前的章节
+    \section{专用环境示例}
+        \subsection{算法与代码}
+            \noindent 下面是计算斐波那契数列的算法描述：
+
+            \begin{algorithm}
+                \caption{计算斐波那契数列}
+                \label{alg:fibonacci}
+                % 使用更常见的 \KwIn 和 \KwOut 来明确表示输入/输出
+                \KwIn{一个非负整数 $n$}
+                \KwOut{数组 $F$，包含斐波那契数列的前 $n$ 项（$F[0]=0, F[1]=1, \dots$）}
+                
+                \If{$n \leq 0$}{
+                    \Return $[\,]$ \tcp*{返回空数组表示无效输入}
+                }
+                \If{$n = 1$}{
+                    \Return $[0]$ \tcp*{基础情况：仅第0项}
+                }
+                $F[0] \gets 0$\;
+                $F[1] \gets 1$\;
+                \For{$i \gets 2$ \KwTo $n-1$}{
+                    $F[i] \gets F[i-1] + F[i-2]$\;
+                }
+                \Return $F$\;
+            \end{algorithm}
+
+            在算法~\ref{alg:fibonacci} 中，我们描述了计算斐波那契数列的迭代方法。
+        \newpage
+    % 省略之后的章节
+\end{document}
+```
+
+现在，如果我们再次编译这个文档，就可以看到“算法与代码”这个二级标题下面已经出现了这个计算斐波那契数列的算法描述，如图 8 所示：
+
+![图 8：算法描述的示例](img/algorithm_description.png)
+
+**图 8**：算法描述的示例
+
+在完成了对算法设计的描述之后，我们通常会需要用一种具体的编程语言来展示该算法的实现代码。在 $\LaTeX$ 中，我们通常通过加载`listings`宏包来获得用于书写代码的功能，其基本语法如下：
+
+```tex
+% 需要先在文档的全局设置区加载 listings 宏包
+\begin{lstlisting}[language=编程语言, caption=代码标题, label=代码标签]
+    % 代码内容
+\end{lstlisting}
+```
+
+在上述语法中，我们首先定义了一个名为`lstlisting`的环境，这是一个专用于进行代码展示的环境（需要预先加载`listings`宏包，并进行相应的全局设置）。在该环境的定义中，我们可以使用`language`参数来指定该代码所使用的编程语言，使用`\caption`和`\label`命令来为该代码添加标题和引用标签。例如在之前的《$\LaTeX$ 排版示例》文稿中，如果我们想在其"算法与代码"这个二级标题下面插入一段用 Python 语言实现的计算斐波那契数列的代码，就可以像下面这样写：
+
+```tex
+% 省略之前的文档结构定义部分
+\usepackage{listings} % 提供代码展示环境
+\usepackage{xcolor}   % 用于定义颜色
+
+\lstset{
+    basicstyle=\ttfamily\small,        % 基本字体：等宽、小号
+    numbers=left,                       % 行号在左侧
+    numberstyle=\color{gray}\tiny,      % 行号样式：灰色、更小
+    frame=single,                       % 边框：单线框
+    framesep=3pt,                       % 边框与代码内容的间隔
+    rulecolor=\color{lightgray},        % 边框颜色：浅灰
+    breaklines=true,                    % 自动换行
+    captionpos=b,                       % 标题位置：底部 (bottom)
+    tabsize=4,                          % 制表符等效空格数
+    % 以下为语法高亮色彩配置 (可自定义)
+    keywordstyle=\color{blue}\bfseries, % 关键字样式：蓝色粗体
+    commentstyle=\color{green!60!black}\itshape, % 注释样式：墨绿色斜体
+    stringstyle=\color{orange},         % 字符串样式：橙色
+    showstringspaces=false,             % 不显示字符串中的空格
+    xleftmargin=15pt,                   % 代码块整体左侧边距，为行号留出空间
+}
+
+% 开始组织文档内容
+\begin{document}
+    % 省略之前的章节
+    \section{专用环境示例}
+        \subsection{算法与代码}
+            % 省略之前的算法描述
+            \noindent 下面是上述算法的 Python 代码实现：
+
+            \begin{lstlisting}[language=Python, caption=斐波那契数列的 Python 实现, label=lst:fibonacci_python]
+                def fibonacci(n):
+                    if n <= 0:
+                        return "Input error"
+                    if n == 1:
+                        return [0]
+                    if n == 2:
+                        return [0, 1]
+                    
+                    f = [0, 1]
+                    for i in range(2, n):
+                        f.append(f[i-1] + f[i-2])
+                    return f
+            \end{lstlisting}
+        \newpage
+\end{document}
+```
+
+现在，如果我们再次编译这个文档，就可以看到“算法与代码”这个二级标题下面已经出现了这个用 Python 语言实现的计算斐波那契数列的代码，如图 9 所示：
+
+![图 9：代码展示的示例](./img/code_display.png)
+
+**图 9**：代码展示的示例
 
 ## 参考文献管理
 
