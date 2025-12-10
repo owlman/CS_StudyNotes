@@ -329,16 +329,17 @@ categories: 标记语言
     行内公式示例：$a^2 + b^2 = c^2$。
     ```
 
-- 行间公式：主要用于在文档中用独立的行展示重要的数学公式，它可以有带编号（`\begin{equation}…\end{equation}`）和不带编号（`\[… \]`）两种编辑形式。
+- 行间公式：主要用于在文档中用独立的行展示重要的数学公式，它按照是否带有编号和标签可分为以下两种编辑形式：
 
     ```tex
-    不带编号的行间公式：
+    不带编号和标签的行间公式：
     \[
         E = mc^2
     \]
 
-    带编号的行间公式：
+    带编号和标签的行间公式：
     \begin{equation}
+        \label{eq:einstein} % 为该公式定义引用标签
         \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
     \end{equation}
     ```
@@ -384,19 +385,19 @@ categories: 标记语言
                 \]
             \end{corollary}
 
-            接下来，我们可以这样引用这些定理和公式：
+            接下来，我们可以这样引用这些公式和定理：
             \begin{itemize}
                 \item 定理 \ref{thm:pythagorean} 表明了勾股定理。
                 \item 引理 \ref{lem:auxiliary} 是勾股定理的一个辅助结论。
                 \item 推论 \ref{cor:area} 则是勾股定理的一个直接应用。
-                \item 勾股定理的公式 \ref{eq:pythagorean} 可以用来计算直角三角形的斜边长度。
+                \item 公式 \ref{eq:einstein} 是高斯积分的结果。
             \end{itemize}
         \newpage
     % 省略之后的章节
 \end{document}
 ```
 
-现在，如果我们再次编译这个文档，就可以看到“公式与定理”这个二级标题下面已经出现了这个勾股定理相关的定理、引理、推论，以及我们在后续正文中对它们的引用（使用`\ref`命令），如图 7 所示：
+现在，如果我们再次编译这个文档，就可以看到“公式与定理”这个二级标题下面已经出现了这个勾股定理相关的定理、引理、推论，以及我们在后续正文中对它们以及之前那个高斯积分公式的引用（使用`\ref`命令），如图 7 所示：
 
 ![图 7：定理与公式的示例](./img/Theorem.png)
 
@@ -404,7 +405,7 @@ categories: 标记语言
 
 ### 算法与代码
 
-在计算机类的学术文档中，我们常常需要使用一些伪代码来描述针对某一问题的算法设计结果，而后还会用某一具体的编程语言来展示该算法的实现代码。在 $\LaTeX$ 中，我们通常通过加载`algorithm`或`algorithm2e`宏包来获得用于书写算法描述与实现代码的功能，其基本语法如下：
+在计算机类的学术文档中，我们常常需要使用一些伪代码来描述针对某一问题的算法设计结果，而后还会用某一具体的编程语言来展示该算法的实现代码。在 $\LaTeX$ 中，我们通常会通过加载`algorithm2e`宏包来获得用于书写算法描述与实现代码的功能，其基本语法如下：
 
 ```tex
 % 需要先在文档的全局设置区加载 algorithm2e 宏包
@@ -427,8 +428,8 @@ categories: 标记语言
 % 省略之前的文档结构定义部分
 \usepackage[ruled, linesnumbered]{algorithm2e} 
     % 提供算法描述环境，其设置参数如下：
-    % ruled: 设置算法主体部分有顶部和底部的横线
-    % linesnumbered: 设置算法主体部分显示行号
+    %   ruled: 设置算法主体部分有顶部和底部的横线
+    %   linesnumbered: 设置算法主体部分显示行号
 
 % 开始组织文档内容
 \begin{document}
@@ -473,7 +474,8 @@ categories: 标记语言
 在完成了对算法设计的描述之后，我们通常会需要用一种具体的编程语言来展示该算法的实现代码。在 $\LaTeX$ 中，我们通常通过加载`listings`宏包来获得用于书写代码的功能，其基本语法如下：
 
 ```tex
-% 需要先在文档的全局设置区加载 listings 宏包
+% 需要先在文档的全局设置区加载 listings 宏包，
+% 并进行相应的全局设置
 \begin{lstlisting}[language=编程语言, caption=代码标题, label=代码标签]
     % 代码内容
 \end{lstlisting}
@@ -487,7 +489,7 @@ categories: 标记语言
 \usepackage{xcolor}   % 用于定义颜色
 
 \lstset{
-    basicstyle=\ttfamily\small,        % 基本字体：等宽、小号
+    basicstyle=\ttfamily\small,         % 基本字体：等宽、小号
     numbers=left,                       % 行号在左侧
     numberstyle=\color{gray}\tiny,      % 行号样式：灰色、更小
     frame=single,                       % 边框：单线框
@@ -526,6 +528,8 @@ categories: 标记语言
                         f.append(f[i-1] + f[i-2])
                     return f
             \end{lstlisting}
+
+            \noindent 代码清单\ref{lst:fibonacci_python}中实现了斐波那契数列的计算，并且使用了迭代的方法。你可以通过调用 `fibonacci(n)` 来计算斐波那契数列的前 $n$ 项。
         \newpage
 \end{document}
 ```
@@ -577,4 +581,4 @@ categories: 标记语言
 
 若你经常撰写论文或报告，建议构建一个个人 LaTeX 模板，包含常用宏包、页眉页脚、定理环境、算法环境、图表样式、参考文献设定等。每次写作时只需复制模板，替换标题、作者、内容即可，使撰写流程更高效。
 
-## 笔记小节
+## 笔记小结

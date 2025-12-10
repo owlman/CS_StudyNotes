@@ -230,7 +230,7 @@
 
             带编号的行间公式：
             \begin{equation}
-                \label{eq:pythagorean}
+                \label{eq:einstein}
                 \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
             \end{equation}
 
@@ -259,10 +259,10 @@
 
             \noindent 接下来，我们可以这样引用这些定理和公式：
             \begin{itemize}
+                \item 公式 \ref{eq:einstein} 是高斯积分的结果。
                 \item 定理 \ref{thm:pythagorean} 表明了勾股定理。
                 \item 引理 \ref{lem:auxiliary} 是勾股定理的一个辅助结论。
                 \item 推论 \ref{cor:area} 则是勾股定理的一个直接应用。
-                \item 勾股定理的公式 \ref{eq:pythagorean} 可以用来计算直角三角形的斜边长度。
             \end{itemize}
         \newpage
         \subsection{算法与代码}
@@ -306,6 +306,6 @@
                     return f
             \end{lstlisting}
 
-            \noindent 上述代码实现了斐波那契数列的计算，并且使用了迭代的方法。你可以通过调用 `fibonacci(n)` 来计算斐波那契数列的前 $n$ 项。
+            \noindent 代码清单 \ref{lst:fibonacci_python} 中实现了斐波那契数列的计算，并且使用了迭代的方法。你可以通过调用 `fibonacci(n)` 来计算斐波那契数列的前 $n$ 项。
         \newpage
 \end{document}
