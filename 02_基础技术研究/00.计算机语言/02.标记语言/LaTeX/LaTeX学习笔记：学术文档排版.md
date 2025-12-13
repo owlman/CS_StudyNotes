@@ -542,43 +542,116 @@ categories: 标记语言
 
 ## 参考文献管理
 
-### 文献管理工具
+在撰写学术文档时，我们通常需要引入相当数量的参考文献来支持自己所要表达的学术观点。在 $\LaTeX$ 系统中，大部分参考文献信息都会先以一种特定的格式被存储在一个扩展名为`.bib`的文献数据库中（以便进行集中管理）。下面，让我们来看一份名为`refs.bib`的文献数据库示例：
 
-专业文献中，参考文献往往篇幅较多、格式规范。推荐使用 `\usepackage{biblatex}` 或经典的 `\usepackage{natbib}`。以 biblatex 为例：
-
-```tex
-\usepackage[
-  backend=biber,
-  style=ieee,     % 或 numeric、alphabetic 等
-]{biblatex}
-\addbibresource{refs.bib}
+```bib
+@article{smith2022deep,
+    title={Deep Learning for Image Recognition},
+    author={Smith, John and Brown, Alice and Davis, Bob},
+    journal={Journal of Artificial Intelligence},
+    volume={2},
+    number={1},
+    pages={1--20},
+    year={2022},
+    publisher={Springer}
+}
+@book{johnson2021machine,
+    title={Machine Learning: A Comprehensive Guide},
+    author={Johnson, David and Wang, Emily and Zhang, Michael},
+    year={2021},
+    publisher={O'Reilly Media}
+}
+@inproceedings{lee2020deep,
+    title={Deep Learning for Natural Language Processing},
+    author={Lee, Sarah and Kim, James and Park, Emily},
+    booktitle={Proceedings of the International Conference on Natural Language Processing},
+    pages={123--140},
+    year={2020},
+    organization={IEEE}
+}
 ```
 
-然后在文中用：
+在上述文文献数据库示例中，我们存储了三条参考文献信息，它们分别是一篇短篇文档，一本参考书籍以及一篇会议论文。接下来，如果我们需要在自己的学术文档中引用这些文献，就需要通过以下步骤来进行处理：
 
-```tex
-如文献\cite{smith2022deep}所示，…
-```
+1. 在文档的全局设置区加载`biblatex`宏包，并使用`\addbibresource{[文件名]}`命令来指定自己要使用的文献数据库，就像下面这样：[^1]
 
-最后在文末：
+    ```tex
+    % 在文档的全局设置区加载 biblatex 宏包，并设置如下参数：
+    %   backend=biber: 使用 biber 作为后端
+    %   style=ieee: 使用 IEEE 样式的参考文献格式
+    \usepackage[backend=biber, style=ieee]{biblatex}
+    % 使用 \addbibresource{[文件名]} 命令来指定文献数据库
+    \addbibresource{refs.bib}
+    ```
 
-```tex
-\printbibliography
-```
+2. 在文档的正文中找到需要引用文献的地方，并使用`\cite{[文献标签]}`命令来引用文献，就像下面这样：
 
-### 参考文献格式
+    ```tex
+    % 在文档中需要引用文献的地方使用 \cite{[文献标签]} 命令
+    在正文中引用文献数据库中的短篇文档：\cite{smith2022deep}
+    在正文中引用文献数据库中的参考书籍：\cite{johnson2021machine}
+    在正文中引用文献数据库中的会议论文：\cite{lee2020deep}
+    ```
 
+3. 在文档的末尾，使用`\printbibliography`命令来生成参考文献列表，就像下面这样：
+
+    ```tex
+    % 在文档的末尾，使用 \printbibliography 命令来生成参考文献列表
+    \printbibliography
+    ```
+
+例如在之前的《$\LaTeX$ 排版示例》文稿中，如果我们想使用`refs.bib`这个文献数据库中的文献信息，就可以按照以下步骤来进行：
+
+1. 将`refs.bib`这个文献数据库存储到该文稿源码所在的目录下（即`example/cmd_demo/demo.tex`文件所在的目录下）。
+
+2. 在文稿的全局设置区加载`biblatex`宏包，并使用`\addbibresource{refs.bib}`命令来指定自己要使用的文献数据库，就像下面这样：
+
+    ```tex
+    % 省略之前的文档结构定义部分
+    \usepackage[backend=biber, style=ieee]{biblatex}
+    \addbibresource{refs.bib}
+    ```
+
+3. 在文稿的正文中找到需要"引用文献示例"这一节所在的地方，并使用`\cite{[文献标签]}`命令来引用文献，就像下面这样：
+
+    ```tex
+    % 省略之前的文档内容部分
+    
+    ```
+
+4. 在文稿的末尾，使用`\printbibliography`命令来生成参考文献列表，就像下面这样：
+
+    ```tex
+    % 省略之前的文档内容部分
+    ```
+
+5. 在我们使用的 $\LaTeX$ 编辑器（例如如 VS Code 的 LaTeX Workshop插件）中将参考文献处理工具设置为 Biber 之后，我们只需按照“pdflatex your_document.tex  ->  biber your_document  ->  pdflatex your_document.tex  (再编译1-2次)”顺序编译`demo.tex`文稿源码，就可以《$\LaTeX$ 排版示例》文稿中引用文献的效果，如图 10 所示：
+
+![图 10：参考文献展示的示例](./img/bibliography_display.png)
+
+**图 10**：参考文献展示的示例
+
+文档的完整编译流程与传统的 BibTeX 不同。请务必告知读者正确的顺序，否则他们可能会遇到“引用未定义”的错误。
+正确编译顺序（以 pdflatex 为例）：
+
+
+您可以在教程中提醒读者，
+
+关于 .bib 文件中的引用键
+您可以在教程中简要强调：.bib 文件中每个 @article{...}、@book{...} 等条目第一行花括号内的标识符（如 smith2022deep）就是引用键。
+
+作用：在正文中通过 \cite{smith2022deep} 来唯一指向这篇文献。
+
+命名建议：通常采用“作者+年份+关键词”的格式，使其具有描述性且唯一。
 根据期刊或出版社的要求，参考文献可能需要按照 IEEE、ACM、APA、GB/T 7714 等格式排列。biblatex 的 style 参数通常能满足；如需定制，可手动修改 .bbx/.cbx 模块。
-
-### 引用规范建议
 
 - 文中引用应简洁明了，如 “Smith 等人在 \cite{smith2022deep} 中提出…”；
 - 避免 “作者在其论文中” 而不注明文献编号；
 - 多篇引用可用 `\cite{ref1,ref2,ref3}`；
 - 保持与正文、表格、图中的引用一致；即使文献量大，也应通过自动化工具统一管理。
 
-## 使用排版模板
-
-若你经常撰写论文或报告，建议构建一个个人 LaTeX 模板，包含常用宏包、页眉页脚、定理环境、算法环境、图表样式、参考文献设定等。每次写作时只需复制模板，替换标题、作者、内容即可，使撰写流程更高效。
-
 ## 笔记小结
+
+<!-- 以下为注释区 -->
+
+[^1]: 在现代LaTeX文档中，我们通常使用`biblatex`宏包来管理参考文献，它提供了`\printbibliography`命令来生成文献列表。而传统的 BibTeX 方式则使用`\bibliography{}`命令。
