@@ -80,7 +80,8 @@ categories: 标记语言
 
 然后在该浮动体的内部，我们除了使用`\includegraphics`命令指定要插入的图片之外，还分别使用`\label{}`命令为浮动体添加标签（以便能在文档中使用`\ref`命令对其进行引用），`\caption{}`命令为浮动体添加了标题，使用`\centering`命令将浮动体居中显示（如果想要将其设置为左对齐或右对齐，可以使用`\raggedleft`或`\raggedright`命令）。现在，如果我们再次编译这个文档，就可以看到“插图元素”这个二级标题下面已经出现了这个勾股定理的示意图，如图 1 所示：
 
-![图 1：在文档中插入图片](./img/Pythagorean_Theorem.png)
+<!-- ![图 1：在文档中插入图片](./img/Pythagorean_Theorem.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133234037-1178789463.png)
 
 **图 1**：在文档中插入图片
 
@@ -113,7 +114,8 @@ categories: 标记语言
 
 在上述示例中，我将原本位于图片之前的说明文字放到了`figure`环境的定义中，并用两个名为`minipage`的环境将图片与文字分割成左右两个部分。在 $\LaTeX$ 中，`figure`环境会被视为一个独立的行单位，而`minipage`环境则被视为一个小盒子或格子，将这独立的行分割成不同的列，具体到这里，我们用`minipage`环境将浮动体分割成了左右两列，左边的那列用于放置文字，右边则用于放置插图，他们都被设置了两个参数，第一个参数设置的是其将采用的垂直对齐方式，它可设置的值包括`t`（顶部对齐）、`c`（中线对齐）、`b`（底部对齐）；第二个参数设置的是其宽度，左右两列分别为`0.6\linewidth`和`0.35\linewidth`（在这里，`\linewidth`表示当前环境的行宽，即浮动体的宽度）。在左右两个`minipage`环境之间，我还使用了`\hfill`命令插入了一个可伸缩的空白，这样左右两个`minipage`环境就可以尽可能对称地排列在浮动体的左右两端，如图 2 所示：
 
-![图 2：在文档中插入并排显示的图片](./img/Pythagorean_Theorem2.png)
+<!-- ![图 2：在文档中插入并排显示的图片](./img/Pythagorean_Theorem2.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133321826-464302107.png)
 
 **图 2**：在文档1中插入并排显示的图片
 
@@ -147,7 +149,8 @@ categories: 标记语言
 
 现在，如果我们再次编译这个文档，就可以看到“插图元素”这个二级标题下面已经出现了这个勾股定理的示意图，如图 3 所示：
 
-![图 3：由`wrapfigure`环境定义的文字环绕效果](./img/Pythagorean_Theorem3.png)
+<!-- ![图 3：由`wrapfigure`环境定义的文字环绕效果](./img/Pythagorean_Theorem3.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133349945-212642691.png)
 
 **图 3**：由`wrapfigure`环境定义的文字环绕效果
 
@@ -235,7 +238,8 @@ categories: 标记语言
 
 在上述示例中，我们之所以选择`tabular`环境来定义表格本体，是因为这是一个由文本与数学公式混合而成的表格，而`array`环境只支持纯数字或数学公式的内容。现在，如果我们再次编译这个文档，就可以看到“表格元素”这个二级标题下面已经出现了这个勾股定理公式汇总的表格，如图 4 所示：
 
-![图 4：由`tabular`环境定义的表格元素](./img/Pythagorean_Formulas.png)
+<!-- ![图 4：由`tabular`环境定义的表格元素](./img/Pythagorean_Formulas.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133533205-1276817300.png)
 
 **图 4**：由`tabular`环境定义的表格元素
 
@@ -285,7 +289,8 @@ categories: 标记语言
 
 现在，如果我们再次编译这个文档，就可以看到“表格元素”这个二级标题下面已经出现了这个勾股定理公式汇总的表格，如图 5 所示：
 
-![图 5：跨行合并单元格的表格示例](./img/Multi_Rows.png)
+<!-- ![图 5：跨行合并单元格的表格示例](./img/Multi_Rows.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133603350-819180406.png)
 
 **图 5**：跨行合并单元格的表格示例
 
@@ -307,7 +312,8 @@ categories: 标记语言
 
 上述代码在我们示例文档中的编译效果如图 6 所示：
 
-![图 6：跨列合并单元格的表格示例](./img/Multi_Column.png)
+<!-- ![图 6：跨列合并单元格的表格示例](./img/Multi_Column.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133637125-1767545942.png)
 
 **图 6**：跨列合并单元格的表格示例
 
@@ -399,7 +405,8 @@ categories: 标记语言
 
 现在，如果我们再次编译这个文档，就可以看到“公式与定理”这个二级标题下面已经出现了这个勾股定理相关的定理、引理、推论，以及我们在后续正文中对它们以及之前那个高斯积分公式的引用（使用`\ref`命令），如图 7 所示：
 
-![图 7：定理与公式的示例](./img/Theorem.png)
+<!-- ![图 7：定理与公式的示例](./img/Theorem.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133730740-1794182139.png)
 
 **图 7**：定理与公式的示例
 
@@ -467,7 +474,8 @@ categories: 标记语言
 
 现在，如果我们再次编译这个文档，就可以看到“算法与代码”这个二级标题下面已经出现了这个计算斐波那契数列的算法描述，如图 8 所示：
 
-![图 8：算法描述的示例](img/algorithm_description.png)
+<!-- ![图 8：算法描述的示例](img/algorithm_description.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133816478-687554830.png)
 
 **图 8**：算法描述的示例
 
@@ -536,7 +544,8 @@ categories: 标记语言
 
 现在，如果我们再次编译这个文档，就可以看到“算法与代码”这个二级标题下面已经出现了这个用 Python 语言实现的计算斐波那契数列的代码，如图 9 所示：
 
-![图 9：代码展示的示例](./img/code_display.png)
+<!-- ![图 9：代码展示的示例](./img/code_display.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133852012-641094078.png)
 
 **图 9**：代码展示的示例
 
@@ -596,8 +605,8 @@ categories: 标记语言
 3. 在文档的末尾，使用`\printbibliography`命令来生成参考文献列表，就像下面这样：
 
     ```tex
-    % 在文档的末尾，使用 \printbibliography 命令来生成参考文献列表
-    \printbibliography
+    % 在 document 环境的末尾生成文献列表
+    \printbibliography[title=参考文献列表]
     ```
 
 例如在之前的《$\LaTeX$ 排版示例》文稿中，如果我们想使用`refs.bib`这个文献数据库中的文献信息，就可以按照以下步骤来进行：
@@ -612,46 +621,74 @@ categories: 标记语言
     \addbibresource{refs.bib}
     ```
 
-3. 在文稿的正文中找到需要"引用文献示例"这一节所在的地方，并使用`\cite{[文献标签]}`命令来引用文献，就像下面这样：
+3. 在文稿的正文中找到需要"引用文献示例"这一节所在的地方，并使用`\cite{[文献标签]}`命令来引用文献，并用`\printbibliography`命令来生成参考文献列表，就像下面这样：
 
     ```tex
-    % 省略之前的文档内容部分
-    
+    % 开始组织文档内容
+    \begin{document}
+        % 省略之前的章节
+        \section{引用文献示例}
+            \begin{itemize}
+                \item 在正文中引用文献数据库中的短篇文档：\cite{smith2022deep}
+                \item 在正文中引用文献数据库中的参考书籍：\cite{johnson2021machine}
+                \item 在正文中引用文献数据库中的会议论文：\cite{lee2020deep}
+            \end{itemize}    
+        \printbibliography[title=参考文献列表] % 打印参考文献列表，标题为“参考文献列表”
+    \end{document}
     ```
 
-4. 在文稿的末尾，使用`\printbibliography`命令来生成参考文献列表，就像下面这样：
+4. 在 $\LaTeX$ 编辑器中将参考文献处理工具设置为 Biber，具体到 VS Code 的 LaTeX Workshop 插件中，其设置步骤如下：
+   1. 重写打开之前在《[[LaTeX学习笔记：快速上手指南]]》一文中创建的`settings.json`文件；
+   2. 找到其中的`"latex-workshop.latex.tools"`字段，并添加如下内容：
 
-    ```tex
-    % 省略之前的文档内容部分
-    ```
+        ```json
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+        ``` 
 
-5. 在我们使用的 $\LaTeX$ 编辑器（例如如 VS Code 的 LaTeX Workshop插件）中将参考文献处理工具设置为 Biber 之后，我们只需按照“pdflatex your_document.tex  ->  biber your_document  ->  pdflatex your_document.tex  (再编译1-2次)”顺序编译`demo.tex`文稿源码，就可以《$\LaTeX$ 排版示例》文稿中引用文献的效果，如图 10 所示：
+   3. 找到其中的`"latex-workshop.latex.recipes"`字段，并添加如下内容：
 
-![图 10：参考文献展示的示例](./img/bibliography_display.png)
+        ```json
+        {
+            "name": "xelatex -> biber -> xelatex*2",
+            "tools": [
+                "xelatex",
+                "biber",
+                "xelatex",
+                "xelatex"
+            ]
+        }
+        ```
+
+5. 在完成上述设置之后，我们只需选择按照“xelatex ->  biber ->  xelatex*2”的顺序编译`demo.tex`文稿源码，就可以《$\LaTeX$ 排版示例》文稿中引用文献的效果，如图 10 所示：
+
+<!-- ![图 10：参考文献展示的示例](./img/bibliography_display.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202512/691082-20251214133928241-623635240.png)
 
 **图 10**：参考文献展示的示例
 
-文档的完整编译流程与传统的 BibTeX 不同。请务必告知读者正确的顺序，否则他们可能会遇到“引用未定义”的错误。
-正确编译顺序（以 pdflatex 为例）：
+关于上述示例，需要特别说明的是：`.bib`文献数据库中所存储的每条文献信息，无论是`@article{...}`、`@book{...}`，还是`@inproceedings{...}`，它们所在定义的第一行都被分配有唯一的标识符（譬如上述短篇文档中的`smith2022deep`），这些标识符就是我们使用`\cite{[文献标签]}`命令来引用文献时所需要使用的“文献标签”。对于这些文献标签的命名，我们通常会建议采用“作者+年份+关键词”的格式，以便确保其具有描述性和唯一性。
 
+另外，根据不同的期刊或出版社的要求，参考文献可能需要按照 IEEE、ACM、APA、GB/T 7714 等格式排列，这一般可以通过设置`biblatex`宏包的`style`参数来实现，例如：
 
-您可以在教程中提醒读者，
+```tex
+\usepackage[backend=biber, style=ieee]{biblatex}    % 使用 IEEE 样式的参考文献格式
+\usepackage[backend=biber, style=acm]{biblatex}     % 使用 ACM 样式的参考文献格式
+\usepackage[backend=biber, style=apa]{biblatex}     % 使用 APA 样式的参考文献格式
+\usepackage[backend=biber, style=gbt7714]{biblatex} % 使用 GB/T 7714 样式的参考文献格式
+```
 
-关于 .bib 文件中的引用键
-您可以在教程中简要强调：.bib 文件中每个 @article{...}、@book{...} 等条目第一行花括号内的标识符（如 smith2022deep）就是引用键。
-
-作用：在正文中通过 \cite{smith2022deep} 来唯一指向这篇文献。
-
-命名建议：通常采用“作者+年份+关键词”的格式，使其具有描述性且唯一。
-根据期刊或出版社的要求，参考文献可能需要按照 IEEE、ACM、APA、GB/T 7714 等格式排列。biblatex 的 style 参数通常能满足；如需定制，可手动修改 .bbx/.cbx 模块。
-
-- 文中引用应简洁明了，如 “Smith 等人在 \cite{smith2022deep} 中提出…”；
-- 避免 “作者在其论文中” 而不注明文献编号；
-- 多篇引用可用 `\cite{ref1,ref2,ref3}`；
-- 保持与正文、表格、图中的引用一致；即使文献量大，也应通过自动化工具统一管理。
+如果读者想了解更全面的参考文献格式，可以查阅相应的[LaTeX 文档](https://www.overleaf.com/learn/latex/Biblatex_bibliography_styles)。
 
 ## 笔记小结
 
+在这篇笔记中，我们学习了如何使用 $\LaTeX$ 来排版学术文档。我们首先介绍了如何使用 $\LaTeX$ 来排版图表元素，包括插入图片、绘制图形以及插入表格。接着，我们学习了如何使用 $\LaTeX$ 来排版各种专用元素，包括如何插入数学公式、定理、引理、推论、算法描述以及代码块。最后，我们学习了如何使用 $\LaTeX$ 来引用文献，包括如何创建文献数据库、如何引用文献以及如何生成参考文献列表。
+
 <!-- 以下为注释区 -->
 
-[^1]: 在现代LaTeX文档中，我们通常使用`biblatex`宏包来管理参考文献，它提供了`\printbibliography`命令来生成文献列表。而传统的 BibTeX 方式则使用`\bibliography{}`命令。
+[^1]: 在现代LaTeX文档中，我们通常更倾向于使用`biblatex`宏包来管理参考文献，它提供了`\printbibliography`命令来生成文献列表。而传统的BibTeX方式则使用`\bibliography{}`命令。

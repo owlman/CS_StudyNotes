@@ -1,0 +1,141 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{smith2022deep}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=5d0ddda3a367ceb26fbaeca02e391c22}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3402e48ad20aec46b51fd1a626538089}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Alice},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2dcc406979860361991c276bfec26b83}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Bob},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{2d05b2cf738af6ea5fe08887b681d257}
+      \strng{fullhash}{9db876d6a73ef57a0b91b9c343c04295}
+      \strng{fullhashraw}{9db876d6a73ef57a0b91b9c343c04295}
+      \strng{bibnamehash}{9db876d6a73ef57a0b91b9c343c04295}
+      \strng{authorbibnamehash}{9db876d6a73ef57a0b91b9c343c04295}
+      \strng{authornamehash}{2d05b2cf738af6ea5fe08887b681d257}
+      \strng{authorfullhash}{9db876d6a73ef57a0b91b9c343c04295}
+      \strng{authorfullhashraw}{9db876d6a73ef57a0b91b9c343c04295}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Artificial Intelligence}
+      \field{number}{1}
+      \field{title}{Deep Learning for Image Recognition}
+      \field{volume}{2}
+      \field{year}{2022}
+      \field{pages}{1\bibrangedash 20}
+      \range{pages}{20}
+    \endentry
+    \entry{johnson2021machine}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=e2089f792c7e0314a9d5734744414015}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=48106bd40bc22508c06f4c6460560e7a}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Emily},
+           giveni={E\bibinitperiod}}}%
+        {{hash=3214f9487d07db5ea11795e7d6ea416d}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly Media}%
+      }
+      \strng{namehash}{909a4e871487949a8fbd16f43fc60345}
+      \strng{fullhash}{324985a31b8a0927793b37b5e47a755d}
+      \strng{fullhashraw}{324985a31b8a0927793b37b5e47a755d}
+      \strng{bibnamehash}{324985a31b8a0927793b37b5e47a755d}
+      \strng{authorbibnamehash}{324985a31b8a0927793b37b5e47a755d}
+      \strng{authornamehash}{909a4e871487949a8fbd16f43fc60345}
+      \strng{authorfullhash}{324985a31b8a0927793b37b5e47a755d}
+      \strng{authorfullhashraw}{324985a31b8a0927793b37b5e47a755d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Machine Learning: A Comprehensive Guide}
+      \field{year}{2021}
+    \endentry
+    \entry{lee2020deep}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=fed56306e0b43cc270e6d75eb460b5f9}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6f64f80e749e821406dd252006e992a8}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e1646c65755dd6ccb227252181e5b5f3}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Emily},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{b82434dcfbe883e6b7ddcc8a225e091c}
+      \strng{fullhash}{bb56975572b3b7e3fcc5ebbe48f39eff}
+      \strng{fullhashraw}{bb56975572b3b7e3fcc5ebbe48f39eff}
+      \strng{bibnamehash}{bb56975572b3b7e3fcc5ebbe48f39eff}
+      \strng{authorbibnamehash}{bb56975572b3b7e3fcc5ebbe48f39eff}
+      \strng{authornamehash}{b82434dcfbe883e6b7ddcc8a225e091c}
+      \strng{authorfullhash}{bb56975572b3b7e3fcc5ebbe48f39eff}
+      \strng{authorfullhashraw}{bb56975572b3b7e3fcc5ebbe48f39eff}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the International Conference on Natural Language Processing}
+      \field{title}{Deep Learning for Natural Language Processing}
+      \field{year}{2020}
+      \field{pages}{123\bibrangedash 140}
+      \range{pages}{18}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

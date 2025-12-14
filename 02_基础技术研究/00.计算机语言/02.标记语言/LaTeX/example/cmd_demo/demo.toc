@@ -9,3 +9,4 @@
 \contentsline {section}{\numberline {3}专用环境示例}{6}{section.3}%
 \contentsline {subsection}{\numberline {3.1}公式与定理}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}算法与代码}{7}{subsection.3.2}%
+\contentsline {section}{\numberline {4}引用文献示例}{8}{section.4}%
