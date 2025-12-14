@@ -10,6 +10,12 @@
 \usepackage{wrapfig}  % 用于实现文字环绕
 \usepackage{multirow} % 用于表格中的单元格合并
 \usepackage{amsthm}   % 用于定义定理环境
+\usepackage[backend=biber, style=ieee]{biblatex} 
+    % 用于处理参考文献，其设置参数如下：
+    % backend=biber: 指定使用 biber 作为后端处理程序
+    % style=ieee: 指定参考文献的引用样式为 IEEE 样式
+\addbibresource{refs.bib} % 添加参考文献数据库文件
+
 \usepackage[ruled, linesnumbered]{algorithm2e} 
     % 提供算法描述环境，其设置参数如下：
     % ruled: 设置算法主体部分有顶部和底部的横线
@@ -308,4 +314,11 @@
 
             \noindent 代码清单 \ref{lst:fibonacci_python} 中实现了斐波那契数列的计算，并且使用了迭代的方法。你可以通过调用 `fibonacci(n)` 来计算斐波那契数列的前 $n$ 项。
         \newpage
+    \section{引用文献示例}
+            \begin{itemize}
+                \item 在正文中引用文献数据库中的短篇文档：\cite{smith2022deep}
+                \item 在正文中引用文献数据库中的参考书籍：\cite{johnson2021machine}
+                \item 在正文中引用文献数据库中的会议论文：\cite{lee2020deep}
+            \end{itemize}    
+    \printbibliography[title=参考文献列表] % 打印参考文献列表，标题为“参考文献列表”
 \end{document}
