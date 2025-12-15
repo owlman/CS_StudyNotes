@@ -1,7 +1,7 @@
 ---
-title: zsh 使用笔记
+title: Zsh 使用笔记
 date: 2025-12-04
-tags: 软件使用
+tags: 命令行工具
 categories: 待整理笔记
 ---
 
@@ -183,24 +183,3 @@ alias cdblog="cd ~/projects/alicode/blog"
 用户社区网站"Oh My Zsh"收集Z shell的第三方插件及主题。<sup id="cite_ref-8"><a href="https://zh.wikipedia.org/wiki/Z_shell#cite_note-8"><span>[</span>8<span>]</span></a></sup>截止于2018年，其[GitHub](https://zh.wikipedia.org/wiki/GitHub "GitHub")源共有超过1000位贡献者、200多款插件和超过140款主题。同时也带有更新已安装插件及主题的自动更新工具。<sup id="cite_ref-9"><a href="https://zh.wikipedia.org/wiki/Z_shell#cite_note-9"><span>[</span>9<span>]</span></a></sup>
 
 -   [Shell对比](https://zh.wikipedia.org/w/index.php?title=Shell%E5%AF%B9%E6%AF%94&action=edit&redlink=1 "Shell对比（页面不存在）")
-
-1.  ^ [跳转到： <sup><b>1.0</b></sup>](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-ZshManual_1-0) [<sup><b>1.1</b></sup>](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-ZshManual_1-1) [The Z Shell Manual](http://zsh.sourceforge.net/Doc/Release/Introduction.html#Author) (Version 5.0.0). Sourceforge.net. July 21, 2012 \[September 18, 2012\]. （原始内容[存档](https://web.archive.org/web/20180220011558/http://zsh.sourceforge.net/Doc/Release/Introduction.html#Author)于2018-02-20）.
-2.  ^ [跳转到： <sup><b>2.0</b></sup>](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-wikidata-6a09ee00ad86b0d9690112bdc4da420046938ba0-v3_2-0) [<sup><b>2.1</b></sup>](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-wikidata-6a09ee00ad86b0d9690112bdc4da420046938ba0-v3_2-1) [zsh 5.9 released](https://www.zsh.org/mla/announce/msg00134.html).
-3.  **[^](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-3 "跳转")** [zsh / Code / \[281031\] /LICENCE](http://sourceforge.net/p/zsh/code/ci/master/tree/LICENCE). Paul Falstad. \[February 7, 2015\]. （原始内容[存档](https://web.archive.org/web/20210302213122/https://sourceforge.net/p/zsh/code/ci/master/tree/LICENCE)于2021-03-02）.
-4.  **[^](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-4 "跳转")** [zsh - a ksh/tcsh-like shell (part 1 of 8)](https://groups.google.com/group/alt.sources/msg/936c7876941058ed). alt.sources. December 14, 1990 \[September 18, 2012\].
-5.  **[^](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-5 "跳转")** [Z-Shell Frequently-Asked Questions](http://zsh.sourceforge.net/FAQ/zshfaq01.html#l3). Sourceforge.net. February 15, 2010 \[September 18, 2012\]. （原始内容[存档](https://web.archive.org/web/20210302213122/http://zsh.sourceforge.net/FAQ/zshfaq01.html#l3)于2021-03-02）.
-6.  **[^](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-6 "跳转")** [The Z-Shell (ZSH) Lovers' Page](http://www.guckes.net/zsh/lover.html). Guckes.net. c. 2004 \[October 2, 2012\]. （原始内容[存档](https://web.archive.org/web/20170517213919/http://www.guckes.net/zsh/lover.html)于2017-05-17）.
-7.  **[^](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-7 "跳转")** [Zsh Mailing List Archive](http://www.zsh.org/mla/users/2005/msg00951.html). Zsh.org. August 8, 2005 \[October 2, 2012\]. （原始内容[存档](https://web.archive.org/web/20210302213117/https://www.zsh.org/mla/users/2005/msg00951.html)于2021-03-02）.
-8.  **[^](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-8 "跳转")** [Oh My ZSH - Community driven framework with 150+ plugins and 100+ themes](https://ohmyz.sh/). \[May 7, 2014\]. （原始内容[存档](https://web.archive.org/web/20220320201812/https://ohmyz.sh/)于2022-03-20）.
-9.  **[^](https://zh.wikipedia.org/wiki/Z_shell#cite_ref-9 "跳转")** [robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). \[2018-10-17\]. （原始内容[存档](https://web.archive.org/web/20210302213118/https://github.com/ohmyzsh/ohmyzsh)于2021-03-02）. A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community.
-
--   [主要网站](https://www.zsh.org/) （[页面存档备份](https://web.archive.org/web/20220401133343/https://www.zsh.org/)，存于[互联网档案馆](https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E6%A1%A3%E6%A1%88%E9%A6%86 "互联网档案馆")）
--   [Sourceforge 项目页](https://sourceforge.net/projects/zsh/) （[页面存档备份](https://web.archive.org/web/20220401051958/https://sourceforge.net/projects/zsh/)，存于[互联网档案馆](https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E6%A1%A3%E6%A1%88%E9%A6%86 "互联网档案馆")）
--   [邮件列表存档](https://www.zsh.org/mla/) （[页面存档备份](https://web.archive.org/web/20220330215106/https://www.zsh.org/mla/)，存于[互联网档案馆](https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E6%A1%A3%E6%A1%88%E9%A6%86 "互联网档案馆")）
--   [ZSH维基](http://zshwiki.org/) （[页面存档备份](https://web.archive.org/web/20090106034724/http://zshwiki.org/)，存于[互联网档案馆](https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E6%A1%A3%E6%A1%88%E9%A6%86 "互联网档案馆")）
-
--   [Zzapper的ZSH小技巧](http://www.zzapper.co.uk/zshtips.html) （[页面存档备份](https://web.archive.org/web/20220212184448/http://www.zzapper.co.uk/zshtips.html)，存于[互联网档案馆](https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E6%A1%A3%E6%A1%88%E9%A6%86 "互联网档案馆")）
--   [TuxRadar：轻松上手Z Shell](http://www.tuxradar.com/content/z-shell-made-easy) （[页面存档备份](https://web.archive.org/web/20170512140142/http://www.tuxradar.com/content/z-shell-made-easy)，存于[互联网档案馆](https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E6%A1%A3%E6%A1%88%E9%A6%86 "互联网档案馆")）
--   [用户指南](http://zsh.sourceforge.net/Guide/zshguide.html) （[页面存档备份](https://web.archive.org/web/20210426213352/http://zsh.sourceforge.net/Guide/zshguide.html)，存于[互联网档案馆](https://zh.wikipedia.org/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E6%A1%A3%E6%A1%88%E9%A6%86 "互联网档案馆")）
-
--   [开放目录项目](https://zh.wikipedia.org/wiki/%E5%BC%80%E6%94%BE%E5%BC%8F%E7%9B%AE%E5%BD%95 "开放式目录")中的“[zsh](https://curlie.org/Computers/Software/Operating_Systems/Unix/Shell/zsh/)”
