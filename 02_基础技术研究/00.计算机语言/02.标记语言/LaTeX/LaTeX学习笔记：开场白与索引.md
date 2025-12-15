@@ -39,7 +39,7 @@ categories: 标记语言
 - [[LaTeX学习笔记：快速上手指南]]：[博客园链接](https://www.cnblogs.com/owlman/p/19202175)；
 - [[LaTeX学习笔记：文档排版基础]]：[博客园链接](https://www.cnblogs.com/owlman/p/19256216)；
 - [[LaTeX学习笔记：数学公式编辑]]：[博客园链接](https://www.cnblogs.com/owlman/p/19199330)；
-- [[LaTeX学习笔记：学术文档排版]]：[博客园链接]()；
+- [[LaTeX学习笔记：学术文档排版]]：[博客园链接](https://www.cnblogs.com/owlman/p/19348573)；
 
 除我的个人博客之外，上述笔记将陆续更新在我于 github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护，欢迎读者随时参考。
 
