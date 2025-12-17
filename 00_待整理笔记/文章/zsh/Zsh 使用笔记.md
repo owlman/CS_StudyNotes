@@ -78,13 +78,33 @@ oh-my-zsh 是一款 Zsh 的配置管理工具，它提供了丰富的主题和�
 | `you-should-use`       | 命令行错误提示。           |
 | `zsh-history-substring-search` | 命令行历史记录搜索。|
 
-启用方式（在 `~/.zshrc`）：
+在 Oh-my-zsh 中安装和启用插件通常可按照以下三个步骤来进行（如果是 Oh-My-Zsh 自带插件，则可跳过第一步）：
 
-```zsh
-plugins=(git z sudo)
+1，如果我们要启用的不是 Oh-My-Zsh 自带的插件，那该插件通常会在 github 上有独立的仓库，人们需要先使用`git clone`命令将其下载到 Oh-My-Zsh 安装目录下的`custom/plugins`目录中，例如，我们要启用`zsh-autosuggestions`插件，就需要执行以下命令：
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 ```
 
----
+2，使用编辑器打开`.zshrc`文件，并在其中找到`plugins`字段，并将要启用的插件名称添加到该字段中（该字段是一个用空格符/换行符分隔的字符串），例如，我们现在要启用的插件包括`git`、`z`、`sudo`、`zsh-autosuggestions`、`zsh-completions`、`zsh-syntax-highlighting`、`you-should-use`、`zsh-history-substring-search`，那么`.zshrc`文件中`plugins`字段的值就该被设置如下：
+
+
+```bash
+plugins=(
+    git
+    z 
+    sudo 
+    zsh-autosuggestions 
+    zsh-completions 
+    zsh-syntax-highlighting 
+    you-should-use 
+    zsh-history-substring-search
+)
+```
+
+3，保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`命令使配置生效。
+
+<!-- 以下待整理 -->
 
 ### 2️⃣ 主题（Themes）
 
