@@ -1,4 +1,9 @@
-# Clang 使用笔记
+---
+title: Clang 使用笔记
+date: 2020-12-04
+tags: 命令行工具
+categories: 应用软件使用
+---
 
 > 本文部分内容引用：
 >

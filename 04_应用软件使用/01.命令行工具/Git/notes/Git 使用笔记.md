@@ -1,6 +1,11 @@
-# Git 使用笔记
+---
+title: Git 使用笔记
+date: 2018-05-11
+tags: 命令行工具
+categories: 应用软件使用
+---
 
-这篇笔记将用于记录本人在学习 Git 版本控制系统过程中的心得体会，它会被存储在在`https://github.com/owlman/study_note`项目的`SoftwareTool/VCS`目录下一个名为的`Git`目录中。
+> 这篇笔记将用于记录本人在学习 Git 版本控制系统过程中的心得体会，它会被存储在在`https://github.com/owlman/CS_StudyNotes`项目中，以便长期维护。
 
 ## 学习规划
 
