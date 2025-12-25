@@ -95,7 +95,7 @@ Oh-My-Zsh 是一款 Zsh 的配置管理工具，它提供了丰富的主题和�
 
     **图 3**：Oh-My-Zsh 的安装过程
 
-待安装顺利完成之后，用户的`home`目录下会出现一个名为`.oh-my-zsh`的目录，该目录中存储的就是 Oh-My-Zsh 框架本身，及其主题和插件的实现代码。下面，我们从功能插件和外观配置两个方面来介绍 Oh-My-Zsh 的主要配置方法。
+待安装顺利完成之后，用户的`home`目录下会出现一个名为`.oh-my-zsh`的目录，该目录中存储的就是 Oh-My-Zsh 框架本身，及其主题和插件的实现代码。下面，我们从功能插件、外观配置与快捷命令三个方面来介绍基于 Oh-My-Zsh 配置 Zsh 的主要方法。
 
 ### 功能插件
 
@@ -194,19 +194,12 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
 
     **图 8**：powerlevel10k 主题的配置效果
 
-<!-- 以下待整理 -->
 ## 快捷命令
 
-zsh 支持为较长命令设置一个别名，这样在使用时可以快捷输入。
+对于类似于进入某个特定工作目录的常用命令，Zsh 提供了一种被称为 alias 的机制，让我们可以为其设置一个快捷命令。例如，`~/working/notes`目录是我们每次写笔记时要打开的目录，如果我们想使用 Zsh 的 alias 机制为`cd ~/working/notes`命令设置一个快捷命令，就可以使用 vim 编辑器打开在`.zshrc`文件，并在其中恰当的位置上添加如下配置：
 
-这里以 cd ~/projects/alicode/blog 这个命令来举例：
+```bash
+alias cd-notes="cd ~/working/notes"
+```
 
-在 .zshrc 中键入：
-alias cdblog="cd ~/projects/alicode/blog" 
-2. 开启新的 Shell 或 source ~/.zshrc，以使配置生效。生效后就可以使用 cdblog 进行跳转了。
-
-除了自己设置 alias 之外，一些插件也内置内很多 alias。最常用的是 git 插件内置的 alias。例如，ga 就代表 git add，更多 git 插件内置 alias 可以在 git plugin alias 中查看。
-
-其他
-
-遇事不决，多敲 Tab。
+配置完成后，我们就可以使用`cd-notes`这个快捷命令命令来执行进入`~/working/notes`目录了。当然，除了手动配置的 Zsh alias 之外，在安装了Oh-My-Zsh 之后，我们还可以使用该框架所内置的一系列常用的 alias。例如在启用了`git`插件之后，我们就可以使用它提供的 alias 来执行 git 相关操作了，具体命令列表可查阅 Oh-My-Zsh 官方提供的 [git 插件文档](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)。
