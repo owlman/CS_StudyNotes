@@ -1,8 +1,14 @@
-# Makefile 简易教程
+---
+title: Makefile 使用笔记
+date: 2018-04-16
+tags: 命令行工具
+categories: 应用软件使用
+---
 
 > 本文部分内容引用：
-	+ [中文维基百科](https://zh.wikipedia.org/wiki/Make)。
-	+ [一个简单的 Makefile 教程](http://blog.163.com/weidao_xue/blog/static/2045410462012102222755897/)。
+>
+> - [中文维基百科](https://zh.wikipedia.org/wiki/Make)。
+> - [一个简单的 Makefile 教程](http://blog.163.com/weidao_xue/blog/static/2045410462012102222755897/)。
 
 ## Makefile简介
 
@@ -150,6 +156,3 @@ GNU make对make的标准功能（通过clean-room工程）进行了重新改写�
 其中，shell函数主要用于执行shell命令，具体到这里就是找出当前目录下所有的.c和.h文件。而$(src:%.c=%.o)则是一个字符替换函数，它会将src所有的.c字串替换成.o，实际上就等于列出了所有.c文件要编译的结果。有了这两个设定，无论我们今后在该工程加入多少.c和.h文件，Makefile都能自动将其纳入到工程中来。
 
 到这里，我们就基本上将日常会用到的Makefile写法介绍了一遍。如果你想了解更多关于makefile和make的知识，请参考[GNU Make Manual](http://www.cs.utexas.edu/~cannata/cs345/GNU%20Make%20Manual.pdf)。
-
-----
-#已完成

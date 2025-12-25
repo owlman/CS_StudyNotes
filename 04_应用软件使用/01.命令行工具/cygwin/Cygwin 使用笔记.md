@@ -1,6 +1,11 @@
-# Cygwin 研究笔记
+---
+title: Cygwin 使用笔记
+date: 2015-2-14
+tags: 命令行工具
+categories: 应用软件使用
+---
 
-这篇笔记将用于记录个人在研究 Cygwin 这一 UNIX-like 模拟环境过程中所获取的学习心得与使用经验，我会将笔记的原始文本存储在`https://github.com/owlman/study_note`项目的`OperatingSystem/Windows/ShellTool`目录下，并予以长期维护。
+> 这篇笔记将用于记录个人在研究 Cygwin 这一 UNIX-like 模拟环境过程中所获取的学习心得与使用经验，我会将笔记的原始文本存储在`https://github.com/owlman/CS_StudyNotes`项目中，并予以长期维护。
 
 ## Cygwin 简介
 
