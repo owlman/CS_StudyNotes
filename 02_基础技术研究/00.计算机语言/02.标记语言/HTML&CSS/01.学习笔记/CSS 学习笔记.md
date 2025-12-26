@@ -106,15 +106,15 @@ CSS语言最初由Netscape公司发明，后来被W3C组织标准化，并最终
 下面，让我们用一张表格来具体地整理一下CSS语言所走过的标准化历程，及其每一版规范所添加的内容。
 
 | 年份 | CSS版本 | 标准化组织 | 描述 |
-|------|---------|-----------|------|
-| 1996 | CSS 1    | W3C       | CSS 1是第一个CSS标准版本，定义了基本的样式属性和选择器。 |
-| 1998 | CSS 2    | W3C       | CSS 2扩展了CSS1的功能，引入了浮动、定位、背景、字体等新特性。 |
-| 2001 | CSS 2.1  | W3C       | CSS 2.1是对CSS2的修订版本，解决了一些CSS2规范中的错误和模糊之处。 |
-| 2005 | CSS 3    | W3C       | CSS 3是一个模块化的标准，将CSS分为多个模块，每个模块独立发展。 |
-| 2011 | CSS 4    | 无        | CSS 4并没有成为官方标准，而是将新特性分为CSS模块级别的工作草案。 |
+| ---- | ------- | ---------- | ---- |
+| 1996 | CSS 1 | W3C | CSS 1是第一个CSS标准版本，定义了基本的样式属性和选择器。 |
+| 1998 | CSS 2 | W3C | CSS 2扩展了CSS1的功能，引入了浮动、定位、背景、字体等新特性。 |
+| 2001 | CSS 2.1 | W3C | CSS 2.1是对CSS2的修订版本，解决了一些CSS2规范中的错误和模糊之处。 |
+| 2005 | CSS 3 | W3C | CSS 3是一个模块化的标准，将CSS分为多个模块，每个模块独立发展。 |
+| 2011 | CSS 4 | 无 | CSS 4并没有成为官方标准，而是将新特性分为CSS模块级别的工作草案。 |
 | 2017 | CSS Grid Layout | W3C | CSS Grid Layout引入了一种新的布局方式，可以创建复杂的网格布局。 |
-| 2019 | CSS Scroll Snap | W3C    | CSS Scroll Snap定义了滚动容器的分割点，使得滚动更加精确和流畅。 |
-| 2021 | CSS Contain | W3C       | CSS Contain提供了一种优化CSS性能的方式，通过限制样式的影响范围。 |
+| 2019 | CSS Scroll Snap | W3C | CSS Scroll Snap定义了滚动容器的分割点，使得滚动更加精确和流畅。 |
+| 2021 | CSS Contain | W3C | CSS Contain提供了一种优化CSS性能的方式，通过限制样式的影响范围。 |
 
 在这篇笔记中，我们介绍所有的内容都将主要基于CSS 3这一版最新的官方标准来展开。该标准新增了圆角效果、渐变效果、图形化边界、文字阴影、透明度设置、多背景图设置、可定制字体、媒体查询、多列布局以及弹性盒模型布局等诸多更为丰富的新样式特性，这将有助于我们设计出更为丰富多彩的网页。
 
@@ -742,55 +742,55 @@ z-index: 2;
 
 值得特别注意的是，由于CSS本身为用户提供了一系列预定义了名称的颜色，我们在这里会更倾向于建议读者在使用自定义的颜色编码之前，最好先查看一下该颜色编码是否已经存在于下面的预定义颜色表中，以避免重复发明轮子，浪费了自己宝贵的时间。
 
-| 颜色名称   | 颜色值       | 颜色名称   | 颜色值       | 颜色名称   | 颜色值       |
-| ----------- | ------------ | ----------- | ------------ | ----------- |---------- |
-| AliceBlue   | #F0F8FF      | AntiqueWhite | #FAEBD7      | Aqua        | #00FFFF      |
-| Aquamarine  | #7FFFD4      | Azure       | #F0FFFF      | Beige       | #F5F5DC      |
-| Bisque      | #FFE4C4      | Black       | #000000      | BlanchedAlmond | #FFEBCD   |
-| Blue        | #0000FF      | BlueViolet  | #8A2BE2      | Brown       | #A52A2A      |
-| BurlyWood   | #DEB887      | CadetBlue   | #5F9EA0      | Chartreuse  | #7FFF00      |
-| Chocolate   | #D2691E      | Coral       | #FF7F50      | CornflowerBlue | #6495ED   |
-| Cornsilk    | #FFF8DC      | Crimson     | #DC143C      | Cyan        | #00FFFF      |
-| DarkBlue    | #00008B      | DarkCyan    | #008B8B      | DarkGoldenRod | #B8860B   |
-| DarkGray    | #A9A9A9      | DarkGreen   | #006400      | DarkKhaki   | #BDB76B      |
-| DarkMagenta | #8B008B      | DarkOliveGreen | #556B2F   | DarkOrange  | #FF8C00      |
-| DarkOrchid  | #9932CC      | DarkRed     | #8B0000      | DarkSalmon  | #E9967A      |
-| DarkSeaGreen | #8FBC8F    | DarkSlateBlue | #483D8B    | DarkSlateGray | #2F4F4F    |
-| DarkTurquoise | #00CED1    | DarkViolet  | #9400D3      | DeepPink    | #FF1493      |
-| DeepSkyBlue | #00BFFF      | DimGray     | #696969      | DodgerBlue  | #1E90FF      |
-| FireBrick   | #B22222      | FloralWhite | #FFFAF0      | ForestGreen | #228B22      |
-| Fuchsia     | #FF00FF      | Gainsboro   | #DCDCDC      | GhostWhite  | #F8F8FF      |
-| Gold        | #FFD700      | GoldenRod   | #DAA520      | Gray        | #808080      |
-| Green       | #008000      | GreenYellow | #ADFF2F      | HoneyDew    | #F0FFF0      |
-| HotPink     | #FF69B4      | IndianRed   | #CD5C5C      | Indigo      | #4B0082      |
-| Ivory       | #FFFFF0      | Khaki       | #F0E68C      | Lavender    | #E6E6FA      |
-| LavenderBlush | #FFF0F5    | LawnGreen   | #7CFC00      | LemonChiffon | #FFFACD    |
-| LightBlue   | #ADD8E6      | LightCoral  | #F08080      | LightCyan   | #E0FFFF      |
-| LightGoldenRodYellow | #FAFAD2 | LightGray   | #D3D3D3      | LightGreen  | #90EE90      |
-| LightPink   | #FFB6C1      | LightSalmon | #FFA07A      | LightSeaGreen | #20B2AA    |
-| LightSkyBlue | #87CEFA     | LightSlateGray | #778899   | LightSteelBlue | #B0C4DE   |
-| LightYellow | #FFFFE0      | Lime        | #00FF00      | LimeGreen   | #32CD32      |
-| Linen       | #FAF0E6      | Magenta     | #FF00FF      | Maroon      | #800000      |
-| MediumAquaMarine | #66CDAA | MediumBlue  | #0000CD      | MediumOrchid | #BA55D3    |
-| MediumPurple | #9370DB     | MediumSeaGreen | #3CB371   | MediumSlateBlue | #7B68EE   |
-| MediumSpringGreen | #00FA9A | MediumTurquoise | #48D1CC  | MediumVioletRed | #C71585  |
-| MidnightBlue | #191970    | MintCream   | #F5FFFA      | MistyRose   | #FFE4E1      |
-| Moccasin    | #FFE4B5      | NavajoWhite | #FFDEAD      | Navy        | #000080      |
-| OldLace     | #FDF5E6      | Olive       | #808000      | OliveDrab   | #6B8E23      |
-| Orange      | #FFA500      | OrangeRed   | #FF4500      | Orchid      | #DA70D6      |
-| PaleGoldenRod | #EEE8AA   | PaleGreen   | #98FB98      | PaleTurquoise | #AFEEEE    |
-| PaleVioletRed | #DB7093   | PapayaWhip  | #FFEFD5      | PeachPuff   | #FFDAB9      |
-| Peru        | #CD853F      | Pink        | #FFC0CB      | Plum        | #DDA0DD      |
-| PowderBlue  | #B0E0E6      | Purple      | #800080      | RebeccaPurple | #663399    |
-| Red         | #FF0000      | RosyBrown   | #BC8F8F      | RoyalBlue   | #4169E1      |
-| SaddleBrown | #8B4513      | Salmon      | #FA8072      | SandyBrown  | #F4A460      |
-| SeaGreen    | #2E8B57      | SeaShell    | #FFF5EE      | Sienna      | #A0522D      |
-| Silver      | #C0C0C0      | SkyBlue     | #87CEEB      | SlateBlue   | #6A5ACD      |
-| SlateGray   | #708090      | Snow        | #FFFAFA      | SpringGreen | #00FF7F      |
-| SteelBlue   | #4682B4      | Tan        | #D2B48C      | Teal        | #008080      |
-| Thistle     | #D8BFD8      | Tomato      | #FF6347      | Turquoise   | #40E0D0      |
-| Violet      | #EE82EE      | Wheat       | #F5DEB3      | White       | #FFFFFF      |
-| WhiteSmoke  | #F5F5F5      | Yellow      | #FFFF00      | YellowGreen | #9ACD32      |
+| 颜色名称 | 颜色值 | 颜色名称 | 颜色值 | 颜色名称 | 颜色值 |
+| -------- | ------ | -------- | ------ | -------- | ------ |
+| AliceBlue | #F0F8FF | AntiqueWhite | #FAEBD7 | Aqua | #00FFFF |
+| Aquamarine | #7FFFD4 | Azure | #F0FFFF | Beige | #F5F5DC |
+| Bisque | #FFE4C4 | Black | #000000 | BlanchedAlmond | #FFEBCD |
+| Blue | #0000FF | BlueViolet | #8A2BE2 | Brown | #A52A2A |
+| BurlyWood | #DEB887 | CadetBlue | #5F9EA0 | Chartreuse | #7FFF00 |
+| Chocolate | #D2691E | Coral | #FF7F50 | CornflowerBlue | #6495ED |
+| Cornsilk | #FFF8DC | Crimson | #DC143C | Cyan | #00FFFF |
+| DarkBlue | #00008B | DarkCyan | #008B8B | DarkGoldenRod | #B8860B |
+| DarkGray | #A9A9A9 | DarkGreen | #006400 | DarkKhaki | #BDB76B |
+| DarkMagenta | #8B008B | DarkOliveGreen | #556B2F | DarkOrange | #FF8C00 |
+| DarkOrchid | #9932CC | DarkRed | #8B0000 | DarkSalmon | #E9967A |
+| DarkSeaGreen | #8FBC8F | DarkSlateBlue | #483D8B | DarkSlateGray | #2F4F4F |
+| DarkTurquoise | #00CED1 | DarkViolet | #9400D3 | DeepPink | #FF1493 |
+| DeepSkyBlue | #00BFFF | DimGray | #696969 | DodgerBlue | #1E90FF |
+| FireBrick | #B22222 | FloralWhite | #FFFAF0 | ForestGreen | #228B22 |
+| Fuchsia | #FF00FF | Gainsboro | #DCDCDC | GhostWhite | #F8F8FF |
+| Gold | #FFD700 | GoldenRod | #DAA520 | Gray | #808080 |
+| Green | #008000 | GreenYellow | #ADFF2F | HoneyDew | #F0FFF0 |
+| HotPink | #FF69B4 | IndianRed | #CD5C5C | Indigo | #4B0082 |
+| Ivory | #FFFFF0 | Khaki | #F0E68C | Lavender | #E6E6FA |
+| LavenderBlush | #FFF0F5 | LawnGreen | #7CFC00 | LemonChiffon | #FFFACD |
+| LightBlue | #ADD8E6 | LightCoral | #F08080 | LightCyan | #E0FFFF |
+| LightGoldenRodYellow | #FAFAD2 | LightGray | #D3D3D3 | LightGreen | #90EE90 |
+| LightPink | #FFB6C1 | LightSalmon | #FFA07A | LightSeaGreen | #20B2AA |
+| LightSkyBlue | #87CEFA | LightSlateGray | #778899 | LightSteelBlue | #B0C4DE |
+| LightYellow | #FFFFE0 | Lime | #00FF00 | LimeGreen | #32CD32 |
+| Linen | #FAF0E6 | Magenta | #FF00FF | Maroon | #800000 |
+| MediumAquaMarine | #66CDAA | MediumBlue | #0000CD | MediumOrchid | #BA55D3 |
+| MediumPurple | #9370DB | MediumSeaGreen | #3CB371 | MediumSlateBlue | #7B68EE |
+| MediumSpringGreen | #00FA9A | MediumTurquoise | #48D1CC | MediumVioletRed | #C71585 |
+| MidnightBlue | #191970 | MintCream | #F5FFFA | MistyRose | #FFE4E1 |
+| Moccasin | #FFE4B5 | NavajoWhite | #FFDEAD | Navy | #000080 |
+| OldLace | #FDF5E6 | Olive | #808000 | OliveDrab | #6B8E23 |
+| Orange | #FFA500 | OrangeRed | #FF4500 | Orchid | #DA70D6 |
+| PaleGoldenRod | #EEE8AA | PaleGreen | #98FB98 | PaleTurquoise | #AFEEEE |
+| PaleVioletRed | #DB7093 | PapayaWhip | #FFEFD5 | PeachPuff | #FFDAB9 |
+| Peru | #CD853F | Pink | #FFC0CB | Plum | #DDA0DD |
+| PowderBlue | #B0E0E6 | Purple | #800080 | RebeccaPurple | #663399 |
+| Red | #FF0000 | RosyBrown | #BC8F8F | RoyalBlue | #4169E1 |
+| SaddleBrown | #8B4513 | Salmon | #FA8072 | SandyBrown | #F4A460 |
+| SeaGreen | #2E8B57 | SeaShell | #FFF5EE | Sienna | #A0522D |
+| Silver | #C0C0C0 | SkyBlue | #87CEEB | SlateBlue | #6A5ACD |
+| SlateGray | #708090 | Snow | #FFFAFA | SpringGreen | #00FF7F |
+| SteelBlue | #4682B4 | Tan | #D2B48C | Teal | #008080 |
+| Thistle | #D8BFD8 | Tomato | #FF6347 | Turquoise | #40E0D0 |
+| Violet | #EE82EE | Wheat | #F5DEB3 | White | #FFFFFF |
+| WhiteSmoke | #F5F5F5 | Yellow | #FFFF00 | YellowGreen | #9ACD32 |
 
 在实际项目实践中，设计师常常会根据自己的偏好和项目的具体需求来搭配使用上面这些颜色表述方法，以便设计出可文档化的网页配色方案，比如使用RGB或Hex代码来表示颜色，同时使用HSL来调整颜色的亮度和饱和度。
 
@@ -984,21 +984,21 @@ z-index: 2;
 
 在为移动端设备设计网页时，设计师们需要更进一步考虑如何让网页动态适配各种大小不一的显示设备。正如读者所知，Apple、Google、三星以及华为等各大移动设备制造商如今在设备屏幕上的设计方案可谓是八仙过海、各显神通，且不说不同设备制造商之间产品的屏幕参数各不相同，就连出自同一设备制造商在每一年推出同品牌同系列的产品时的屏幕设计方案也都会存在些许差异。例如在下表中，我们可以看到当前一些主流品牌系列的手机屏幕情况：[^2]
 
-| 设备名称                       | 操作系统 | 尺寸 (英寸) | 纵横比   | 分辨率（px）    |
-| ------------------------------ | -------- | ----------- | -------- | -------- |
-| iPhone 12 Pro Max              | iOS      | 6.7         | 19 : 9   | 1284 x 2778    |
-| iPhone 12 Pro                  | iOS      | 6.1         | 19 : 9   | 1170 x 2532    |
-| iPhone 12 Mini                 | iOS      | 5.4         | 19 : 9   | 1080 x 2340    |
-| iPhone 11 Pro                  | iOS      | 5.8         | 19 : 9   | 1125 x 2436    |
-| iPhone 11 Pro Max              | iOS      | 6.5         | 19 : 9   | 1242 x 2688    |
-| iPhone 11                      | iOS      | 6.1         | 19 : 9   | 828 x 1792     |
-| iPhone SE（SE, 5S, 5C）        | iOS      | 4.0         | 16 : 9   | 640 x 1136     |
-| Google Pixel 3,Lite            | Android  | 5.5         | 2:1      | 1080 x 2160    |
-| Google Pixel                   | Android  | 5.0         | 16 : 9   | 1080 x 1920    |
-| Samsung Galaxy A70，A80        | Android  | 6.7         | 20 : 9   | 1080 x 2400    |
-| Samsung Galaxy A60             | Android  | 6.3         | 19.5 : 9 | 1080 x 2340    |
-| Huawei P40 Pro+                | 鸿蒙 OS  | 6.58        | 11 : 5   | 1200 x 2640    |
-| Huawei P40 Pro                 | 鸿蒙 OS  | 6.58        | 11 : 5   | 1200 x 2640    |
+| 设备名称                | 操作系统 | 尺寸 (英寸) | 纵横比   | 分辨率（px）|
+| ----------------------- | -------- | ----------- | -------- | ----------- |
+| iPhone 12 Pro Max       | iOS      | 6.7         | 19 : 9   | 1284 x 2778 |
+| iPhone 12 Pro           | iOS      | 6.1         | 19 : 9   | 1170 x 2532 |
+| iPhone 12 Mini          | iOS      | 5.4         | 19 : 9   | 1080 x 2340 |
+| iPhone 11 Pro           | iOS      | 5.8         | 19 : 9   | 1125 x 2436 |
+| iPhone 11 Pro Max       | iOS      | 6.5         | 19 : 9   | 1242 x 2688 |
+| iPhone 11               | iOS      | 6.1         | 19 : 9   | 828 x 1792  |
+| iPhone SE（SE, 5S）     | iOS      | 4.0         | 16 : 9   | 640 x 1136  |
+| Google Pixel 3,Lite     | Android  | 5.5         | 2:1      | 1080 x 2160 |
+| Google Pixel            | Android  | 5.0         | 16 : 9   | 1080 x 1920 |
+| Samsung Galaxy A70，A80 | Android  | 6.7         | 20 : 9   | 1080 x 2400 |
+| Samsung Galaxy A60      | Android  | 6.3         | 19.5 : 9 | 1080 x 2340 |
+| Huawei P40 Pro+         | 鸿蒙 OS  | 6.58        | 11 : 5   | 1200 x 2640 |
+| Huawei P40 Pro          | 鸿蒙 OS  | 6.58        | 11 : 5   | 1200 x 2640 |
 
 [^2] 自iPhone 12发布之后。各大主流手机制造商在屏幕设计上的选择都逐渐趋于统一，因此这里对于那之后的产品就不再进行罗列了。
 
