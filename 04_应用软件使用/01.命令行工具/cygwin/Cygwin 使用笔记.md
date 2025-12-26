@@ -1,17 +1,17 @@
 ---
 title: Cygwin 使用笔记
 date: 2015-2-14
-tags: 命令行工具
-categories: 应用软件使用
+tags: Shell终端
+categories: 命令行工具
 ---
 
-> 这篇笔记将用于记录个人在研究 Cygwin 这一 UNIX-like 模拟环境过程中所获取的学习心得与使用经验，我会将笔记的原始文本存储在`https://github.com/owlman/CS_StudyNotes`项目中，并予以长期维护。
+> 这篇笔记将用于记录个人在研究 Cygwin 这一 UNIX-like 终端环境过程中所获取的学习心得与使用经验，我会将笔记的原始文本存储在`https://github.com/owlman/CS_StudyNotes`项目中，并予以长期维护。
 
 ## Cygwin 简介
 
 Cygwin 的开发始于 1995 年，它最初是 Cygnus 工程师 Steve Chamberlain 的一个私人项目。当时，Windows NT 和 Windows 95 中的可执行文件、共享库文件使用的都是 COFF（即 Common File format，中文可译为“通用目标文件格式”）的文件格式，而 GNU 工具集已经支持了面向 x86 和 COFF 的编译，以及 C 语言库 newlib。因而 Steve Chamberlain 认为至少在理论上，人们已经可以考虑通过将 gcc 编译器重定向来实现交叉编译（cross-compile），从而产生能在 Windows 系统上运行之前只能在 UNIX-like 系统中运行的程序。正是基于这一设想，他才在后来的不断实践中成就了 Cygwin 项目。
 
-到了1996 年后，由于看到 Cygwin 可以在 Windows 系统上很好地为用户提供 Cygnus 嵌入式工具（以往的方案是使用 DJGPP），该公司的其他工程师也陆续加入到了这个项目中。该项目最吸引人的地方是：人们可以使用 Cygwin 提供的模拟环境来实现三方交叉编译（即 three-way cross-compile），例如，我们可以选择在 Sun 工作站上编译并建构应用程序，如此就形成 Windows-x-MIPS cross-compile，这样比单纯在 PC 上编译要快上不少。于是自 1998 年起，Cygnus 开始将 Cygwin 包作为公司的主打产品来提供。目前，Cygwin 项目已经被 Red Hat 公司收购，并交由其下属社区来负责维护，但 Cygwin 本身依然 声明遵守 GPL 许可协议，并可以跟符合开源定义的自由软件进行链接。
+到了 1996 年后，由于看到 Cygwin 可以在 Windows 系统上很好地为用户提供 Cygnus 嵌入式工具（以往的方案是使用 DJGPP），该公司的其他工程师也陆续加入到了这个项目中。该项目最吸引人的地方是：人们可以使用 Cygwin 提供的模拟环境来实现三方交叉编译（即 three-way cross-compile），例如，我们可以选择在 Sun 工作站上编译并建构应用程序，如此就形成 Windows-x-MIPS cross-compile，这样比单纯在 PC 上编译要快上不少。于是自 1998 年起，Cygnus 开始将 Cygwin 包作为公司的主打产品来提供。目前，Cygwin 项目已经被 Red Hat 公司收购，并交由其下属社区来负责维护，但 Cygwin 本身依然 声明遵守 GPL 许可协议，并可以跟符合开源定义的自由软件进行链接。
 
 总而言之，Cygwin 就是一个在 Windows 平台上运行的 UNIX-like 模拟环境，在 WSL 出现之前，该软件对于在 Windows 环境中学习 UNIX-like Shell 操作环境，或者实现应用程序从 UNIX-like 到 Windows 的跨系统移植与开发工作都是非常有使用价值的。
 

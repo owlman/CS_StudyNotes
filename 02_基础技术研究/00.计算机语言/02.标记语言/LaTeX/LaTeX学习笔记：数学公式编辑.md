@@ -1,7 +1,6 @@
 ---
 title: LaTeX学习笔记：数学公式编辑
 date: 2025-11-14
-author: 凌杰
 tags: 技术写作
 categories: 标记语言
 ---

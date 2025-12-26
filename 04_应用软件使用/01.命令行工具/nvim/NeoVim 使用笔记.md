@@ -1,8 +1,8 @@
 ---
 title: NeoVim 使用笔记
 date: 2020-07-15
-tags: 命令行工具
-categories: 应用软件使用
+tags: 文本编辑器
+categories: 命令行工具
 ---
 
 > 这篇笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/CS_StudyNotes`项目中，并予以长期维护。

@@ -1,7 +1,6 @@
 ---
 title: LaTeX学习笔记：文档排版基础
 date: 2025-11-20
-author: 凌杰
 tags: 技术写作
 categories: 标记语言
 ---
