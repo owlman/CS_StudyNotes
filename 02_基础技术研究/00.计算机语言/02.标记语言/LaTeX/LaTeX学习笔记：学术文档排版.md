@@ -1,7 +1,6 @@
 ---
 title: LaTeX学习笔记：学术文档排版
 date: 2025-11-28
-author: 凌杰
 tags: 技术写作
 categories: 标记语言
 ---

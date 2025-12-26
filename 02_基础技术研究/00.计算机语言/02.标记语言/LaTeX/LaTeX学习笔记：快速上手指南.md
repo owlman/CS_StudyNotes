@@ -1,7 +1,6 @@
 ---
 title: LaTeX学习笔记：快速上手指南
 date: 2025-11-07
-author: 凌杰
 tags: 技术写作
 categories: 标记语言
 ---

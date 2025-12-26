@@ -1,7 +1,7 @@
 ---
 title: VS Code 配置笔记
 date: 2024-10-04
-tags: 编辑器软件
+tags: 图形化工具
 categories: 应用软件使用
 ---
 

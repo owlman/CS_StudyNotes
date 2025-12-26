@@ -1,8 +1,8 @@
 ---
 title: Zsh 配置笔记
 date: 2025-12-04
-tags: 命令行工具
-categories: 应用软件使用
+tags: Shell终端
+categories: 命令行工具
 ---
 
 ## Zsh 简介
