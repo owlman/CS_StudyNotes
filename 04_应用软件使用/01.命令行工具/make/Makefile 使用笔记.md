@@ -5,6 +5,10 @@ tags: 项目构建
 categories: 命令行工具
 ---
 
+> [!NOTE] 笔记说明
+>
+> 这篇笔记将用于记录本人在使用 make 这款项目构建工具过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
+>
 > 本文部分内容引用：
 >
 > - [中文维基百科](https://zh.wikipedia.org/wiki/Make)。

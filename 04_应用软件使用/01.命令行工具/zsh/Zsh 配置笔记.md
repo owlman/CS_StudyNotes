@@ -5,6 +5,10 @@ tags: Shell终端
 categories: 命令行工具
 ---
 
+> [!NOTE] 笔记说明
+>
+> 这篇笔记主要记录了我在使用 Zsh 这款模拟终端的过程中所记录的一些心得体会。它将会被存储在我个人的 [计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
+
 ## Zsh 简介
 
 Z shell（以下简称 Zsh）是保罗·弗斯塔德（Paul Falstad）于 1990 年在普林斯顿大学求学时编写的、一款可用作交互式登录的 Shell 及脚本编写的命令解释器。Zsh 对 [Bourne shell](https://zh.wikipedia.org/wiki/Bourne_shell)做出了大量改进，同时加入了 [Bash](https://zh.wikipedia.org/wiki/Bash)、[ksh](https://zh.wikipedia.org/wiki/Korn_shell) 及 [tcsh](https://zh.wikipedia.org/wiki/Tcsh) 的某些功能。

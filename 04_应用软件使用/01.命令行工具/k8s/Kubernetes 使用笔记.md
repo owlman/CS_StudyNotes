@@ -1,10 +1,13 @@
-# 容器化部署：Kubernetes
+---
+title: Kubernetes 使用笔记
+date: 2022-10-08
+tags: 运维工具 容器化
+categories: 命令行工具
+---
 
-在接下来的这篇笔记中，我将会介绍 Kubernetes 这一强大的容器编排工具，并学习其基本使用方法。该笔记将会被存储在`https://github.com/owlman/study_note`项目的`Software/Container`目录下一个名为`K8s`的子目录中。其具体内容将包含：
-
-- 了解 Kubernetes 的核心设计理念和它的基本组成结构；
-- 掌握使用 Kubernetes 构建服务器集群的基本工作流程；
-- 掌握如何在服务器集群中实现应用程序的容器化运维；
+> [!NOTE] 笔记说明
+>
+> 这篇笔记将用于记录本人在使用  Kubernetes 这款容器编排工具过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
 
 ## 学习规划
 
