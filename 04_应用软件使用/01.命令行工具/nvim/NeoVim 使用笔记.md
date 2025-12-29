@@ -5,7 +5,9 @@ tags: 文本编辑器
 categories: 命令行工具
 ---
 
-> 这篇笔记将用于记录本人在学习使用 NeoVim 编辑器过程中所编写的学习心得与代码。该笔记将会存放在`https://github.com/owlman/CS_StudyNotes`项目中，并予以长期维护。
+> [!NOTE] 笔记说明
+>
+> 这篇笔记将用于记录本人在使用 NeoVim 这款文本编辑器过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
 
 ## 学习规划
 

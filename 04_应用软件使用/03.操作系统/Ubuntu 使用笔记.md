@@ -1,6 +1,13 @@
-# Ubuntu 使用笔记
+---
+title: Ubuntu 使用笔记
+date: 2021-06-02
+tags: Linux
+categories: 操作系统
+---
 
-这篇学习笔记将用于记录本人在使用 Ubuntu 系统过程中的学习心得，它会被存储在在`https://github.com/owlman/study_note`项目的`OperatingSystem/UNIX-like/Linux/`目录下一个名为的`Distribution`目录中。
+> [!NOTE] 笔记说明
+>
+> 这篇笔记将用于记录本人在使用 Ubuntu 系统过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
 
 ## 使用 Linux 的动机和理由
 
