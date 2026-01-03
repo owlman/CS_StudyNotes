@@ -2,7 +2,7 @@
 title: JavaScript的学习路线图
 date: 2023-03-21
 tags: 学习规划路线图
-categories: 学习笔记索引
+categories: 编程语言
 ---
 
 ## 学习笔记索引
