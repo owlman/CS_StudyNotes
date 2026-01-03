@@ -163,6 +163,7 @@
     //---------markdownlint 配置开始-----------
     "markdownlint.config": {
         "no-duplicate-heading": false,
+        "single-h1": false
     }
     //----------markdownlint 配置结束-----------
 }
