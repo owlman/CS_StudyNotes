@@ -1,8 +1,6 @@
-以下为参考资料：
+# 参考资料
 
-https://www.amazon.com/Python-Programming-Language-QuickStudy-Laminated/dp/1423251652
-
-Python Programming Language: a QuickStudy Laminated Reference Guide
+[Python Programming Language: a QuickStudy Laminated Reference Guide](https://www.amazon.com/Python-Programming-Language-QuickStudy-Laminated/dp/1423251652)
 
 为各个技能水平的开发者打造，汇集常见操作的核心要点，并提供编写代码时最快捷的参考指南。这本实用的 **6 页覆膜速查卡** 是一份简明的桌面参考资料，涵盖 Python 逻辑、语法和操作背后的关键概念。内容由专家精心编写，重点讲解使用 Python 进行程序规划、变量的初始赋值、导入其他库、格式化输出字符串以及创建类等内容。无论是初学者还是经验丰富的程序员，都会发现它是查阅核心概念的理想工具。超高的性价比，让你可以轻松将这份参考指南加入程序员的工具箱。
 
