@@ -14,8 +14,8 @@
 
 - [[关于计算机语言的学习]]
   - **关于编程语言的学习**：
-    - [[jJavaScript的学习路线图|JavaScript 学习笔记]]
-    - [[Python的学习路线图|Python 学习笔记]]
+    - [[关于jJavaScript的学习|JavaScript 学习笔记]]
+    - [[关于Python的学习|Python 学习笔记]]
   - **关于标记语言的学习**：
     - [[HTML 学习笔记]] + [[CSS 学习笔记]]
     - [[JSON 学习笔记]]
