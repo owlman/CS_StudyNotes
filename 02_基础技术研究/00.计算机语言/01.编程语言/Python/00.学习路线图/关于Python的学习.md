@@ -1,8 +1,8 @@
 ---
-title: Python 的学习路线图
+title: 关于Python的学习
 date: 2023-05-26
 tags: 学习路线图规划
-categories:编程语言
+categories: 计算机语言学习
 ---
 
 > [!NOTE] 笔记说明
