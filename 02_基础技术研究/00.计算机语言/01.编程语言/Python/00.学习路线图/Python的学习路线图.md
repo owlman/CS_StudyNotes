@@ -2,7 +2,7 @@
 title: Python 的学习路线图
 date: 2023-05-26
 tags: 学习路线图规划
-categories: 学习笔记索引
+categories:编程语言
 ---
 
 > [!NOTE] 笔记说明
