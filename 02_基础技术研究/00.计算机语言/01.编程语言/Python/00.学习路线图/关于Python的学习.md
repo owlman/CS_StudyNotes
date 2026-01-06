@@ -7,7 +7,7 @@ categories: 计算机语言学习
 
 > [!NOTE] 笔记说明
 >
-> 在这个系列笔记中，我将陆续整理自己在学习 Python 这门编程语言过程中留下的笔记和代码，它们将被存储在我个人的[计算机学习笔记库](https://github.com/ChenYilin1024/CS_Studynotes)中，并予以长期维护。
+> 在这个系列笔记中，我将陆续整理自己在学习 Python 这门编程语言过程中所累积的心得与体会，它们将被存储在我个人的[计算机学习笔记库](https://github.com/owlman/CS_Studynotes)中，并予以长期维护。
 >
 > 和这个笔记库中其他系列的笔记一样，我会先花费一点篇幅来介绍一下这个系列笔记要学习的目标，鸟瞰一下这门编程语言所涉及的领域，以便试着从全局视野来规划接下来的学习路线图。
 
@@ -80,7 +80,7 @@ categories: 计算机语言学习
 - [《Visual Studio Code for Python Programmer》](https://book.douban.com/subject/35562032/)
 - [《Visual Studio Code 权威指南》](https://book.douban.com/subject/35125617/)
 
-> 关联笔记：[[环境配置]]
+> 关联笔记：[[编程环境]]
 
 ### 掌握编程语言的基础语法
 
