@@ -7,12 +7,7 @@ categories: 命令行工具
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记主要记录了我个人在使用 Clang 编译器时所累积的一些心得体会。它将会被存储在我个人的[计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
->
-> 本文参考了如下资源：
->
-> - [中文维基百科](https://zh.wikipedia.org/wiki/Clang)。
-> - [结构化编译器前端--Clang介绍](http://blog.163.com/bjtornado@yeah/blog/static/6951048420126201578983/)。
+> 这篇笔记主要记录了我个人在使用 Clang 编译器时所累积的一些心得体会。它将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。
 
 ## 什么是 Clang 编译器？
 
@@ -129,5 +124,7 @@ if(os.path.exists("example")):
 
 ![hello_c_test](./img/hello_c_test.png)
 
-----
-#已完成
+## 参考资料
+
+- [中文维基百科](https://zh.wikipedia.org/wiki/Clang)。
+- [结构化编译器前端--Clang介绍](http://blog.163.com/bjtornado@yeah/blog/static/6951048420126201578983/)。

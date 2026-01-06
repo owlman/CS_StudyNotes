@@ -7,7 +7,7 @@ categories: 命令行工具
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记主要记录了我个人在使用 Git 版本控制系统过程中的心得体会。它将会被存储在我个人的[计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
+> 这篇笔记主要记录了我个人在使用 Git 版本控制系统过程中的心得体会。它将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，以便日后查阅。
 
 ## 学习规划
 

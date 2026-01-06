@@ -7,12 +7,7 @@ categories: 命令行工具
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记将用于记录本人在使用 make 这款项目构建工具过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
->
-> 本文部分内容引用：
->
-> - [中文维基百科](https://zh.wikipedia.org/wiki/Make)。
-> - [一个简单的 Makefile 教程](http://blog.163.com/weidao_xue/blog/static/2045410462012102222755897/)。
+> 这篇笔记将用于记录本人在使用 make 这款项目构建工具过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。
 
 ## Makefile简介
 
@@ -154,4 +149,8 @@ make程序经历过各方多次的改写与重写，各方都依据自己的需�
 
 其中，shell函数主要用于执行shell命令，具体到这里就是找出当前目录下所有的.c和.h文件。而$(src:%.c=%.o)则是一个字符替换函数，它会将src所有的.c字串替换成.o，实际上就等于列出了所有.c文件要编译的结果。有了这两个设定，无论我们今后在该工程加入多少.c和.h文件，Makefile都能自动将其纳入到工程中来。
 
-到这里，我们就基本上将日常会用到的Makefile写法介绍了一遍。如果你想了解更多关于makefile和make的知识，请参考[GNU Make Manual](http://www.cs.utexas.edu/~cannata/cs345/GNU%20Make%20Manual.pdf)。
+## 参考资料
+
+- [中文维基百科](https://zh.wikipedia.org/wiki/Make)。
+- [一个简单的 Makefile 教程](http://blog.163.com/weidao_xue/blog/static/2045410462012102222755897/)。
+- [GNU Make Manual](http://www.cs.utexas.edu/~cannata/cs345/GNU%20Make%20Manual.pdf)

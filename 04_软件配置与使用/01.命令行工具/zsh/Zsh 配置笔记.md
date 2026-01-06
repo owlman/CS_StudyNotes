@@ -1,19 +1,19 @@
 ---
 title: Zsh 配置笔记
 date: 2025-12-04
-tags: Shell终端
+tags: Shell
 categories: 命令行工具
 ---
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记主要记录了我在使用 Zsh 这款模拟终端的过程中所记录的一些心得体会。它将会被存储在我个人的 [计算机专业笔记库](https://github.com/ChenYilin1015/CS_Studynotes) 中，以便日后查阅。
+> 这篇笔记主要记录了我在使用 Zsh 这款 Shell 的过程中所记录的一些心得与体会。它将会被存储在我个人的 [计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，以便日后查阅。
 
 ## Zsh 简介
 
-Z shell（以下简称 Zsh）是保罗·弗斯塔德（Paul Falstad）于 1990 年在普林斯顿大学求学时编写的、一款可用作交互式登录的 Shell 及脚本编写的命令解释器。Zsh 对 [Bourne shell](https://zh.wikipedia.org/wiki/Bourne_shell)做出了大量改进，同时加入了 [Bash](https://zh.wikipedia.org/wiki/Bash)、[ksh](https://zh.wikipedia.org/wiki/Korn_shell) 及 [tcsh](https://zh.wikipedia.org/wiki/Tcsh) 的某些功能。
+Z shell（以下简称 Zsh）是保罗·弗斯塔德（Paul Falstad）于 1990 年在普林斯顿大学求学时编写的、一款可用作交互式登录的 Shell。Zsh 对 [Bourne shell](https://zh.wikipedia.org/wiki/Bourne_shell)做出了大量改进，同时加入了 [Bash](https://zh.wikipedia.org/wiki/Bash)、[ksh](https://zh.wikipedia.org/wiki/Korn_shell) 及 [tcsh](https://zh.wikipedia.org/wiki/Tcsh) 的某些功能。
 
-2019 年，由于 Bash 的版本已經很旧，而新版本的 Bash v5 改采 GPLv3 授权，这是 Apple 公司无法接受的。于是自从那时起，macOS 系统上的预置 Shell 就已从 Bash 改为了 Zsh。另外，[Kali Linux](https://zh.wikipedia.org/wiki/Kali_Linux) 也使用 Zsh 作为预置 Shell。其主要特性包括：
+2019 年，由于新版本的 Bash v5 将开源授权改成了 GPLv3 协议，而 Apple 公司一贯避免在系统组件中引入 GPLv3 软件。于是自从那时起，macOS 系统上的预置 Shell 就已从 Bash 改为了 Zsh。另外，[Kali Linux](https://zh.wikipedia.org/wiki/Kali_Linux) 也使用 Zsh 作为预置 Shell。其主要特性包括：
 
 - 提供可编程的命令行补全功能，该功能可帮助用户键入常用命令选项及参数；
 - 提供可编程的命令行界面，包括将提示行信息显示在屏幕右侧，以及自动隐藏过长指令等功能；
@@ -47,13 +47,15 @@ sudo pacman -S zsh
 
 如果您使用的是上述操作系统之一，在执行完相应的安装命令之后，就可以使用`cat /etc/shells`命令查看当前系统可以用的 Shell 了。然后，只要在该命令返回的结果中看到`/bin/zsh`，就说明 Zsh 已经安装好了，如图 1 所示。
 
-![图 1：当前可用的 Shell](./img/show_shell.png)
+<!-- ![图 1：当前可用的 Shell](./img/show_shell.png) -->
+![图 1：当前可用的 Shell](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195509700-1475784110.png)
 
 **图 1**：当前可用的 Shell
 
 接下来，我们可以使用`chsh -s /bin/zsh`命令将 Zsh 设置为系统默认 Shell 了。如果到目前为止的操作一切顺利，现在只需要重新启动一个 Shell 会话（通常是一个命令行终端窗口），就会看到 Zsh 的初始配置了，如图 2 所示。
 
-![图 2：Zsh 的配置引导界面](./img/initial.png)
+<!-- ![图 2：Zsh 的配置引导界面](./img/initial.png) -->
+![图 2：Zsh 的配置引导界面](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195545492-898979643.png)
 
 **图 2**：Zsh 的配置引导界面
 
@@ -61,9 +63,9 @@ sudo pacman -S zsh
 
 ## Oh-My-Zsh
 
-Oh-My-Zsh 是一款 Zsh 的配置管理工具，它提供了丰富的主题和插件，可以极大地美化命令行界面，并提高工作效率。我们需要这项工具的原因在于：原生的 Zsh 虽然很强大，但存在着以下几个问题：
+Oh-My-Zsh 是一款 Zsh 的配置管理工具，它提供了丰富的主题和插件，可以极大地美化命令行界面，并提高工作效率。我们需要这项工具的原因在于：原生的 Zsh 虽然很强大，但存在着以下几个配置成本方面的问题：
 
-- 稍复杂一些的配置就需要使用编码的方式修改`.zshrc`文件；
+- 稍复杂的配置就需要使用编码的方式修改`.zshrc`文件；
 - 命令的自动补全和提示需要手动调教；
 - 引入第三方主题与插件的相关配置就更为复杂了。
 
@@ -95,7 +97,8 @@ Oh-My-Zsh 是一款 Zsh 的配置管理工具，它提供了丰富的主题和�
 
 - 在执行上述命令过程中，我们需要同意 Oh-My-Zsh 使用自身的配置模板覆盖已有的`.zshrc`文件，如图 3 所示（由于我已完成配置，不便截图，此处引用来自[网络的截图](https://www.haoyep.com/posts/zsh-config-oh-my-zsh/)）：
 
-    ![图 3：Oh-My-Zsh 的安装界面](./img/install_OMZ.png)
+    <!-- ![图 3：Oh-My-Zsh 的安装界面](./img/install_OMZ.png) -->
+    ![图 3：Oh-My-Zsh 的安装界面](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195313417-1869352098.png)
 
     **图 3**：Oh-My-Zsh 的安装过程
 
@@ -103,37 +106,35 @@ Oh-My-Zsh 是一款 Zsh 的配置管理工具，它提供了丰富的主题和�
 
 ### 功能插件
 
-Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性的，高度可定制的插件系统，这让我们可以根据自己的喜好进行选择和配置，打造一个富有个性的命令行终端界面。下面，先让我们来介绍一些常见的功能性插件：
+Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性的，高度可定制的插件系统，这让我们可以根据自己的喜好进行选择和配置，打造一个富有个性的命令行终端界面。下面是我个人常用的一些插件及其相关介绍：
 
-| 插件                           | 功能                           |
-| ------------------------------ | ------------------------------ |
-| `z`                            | 可实现智能目录跳转。           |
-| `git`                          | Git 相关增强。                 |
-| `sudo`                         | 可通过双击`Esc`添加 sudo 权限。|
-| `docker`                       | Docker 相关增强。              |
-| `python`                       | Python 相关增强。              |
-| `extract`                      | 提供`x`压缩包解压命令。        |
-| `you-should-use`               | 命令行错误提示功能。           |
-| `zsh-completions`              | 命令行自动补齐功能。           |
-| `zsh-autosuggestions`          | 命令行自动提示功能。           |
-| `zsh-syntax-highlighting`      | 命令行语法高亮功能。           |
-| `zsh-history-substring-search` | 命令行历史记录搜索功能。       |
+| 插件                     | 功能                        | 使用说明                                  |
+| ------------------------ | --------------------------- | ----------------------------------------- |
+| `z`                      | 可实现智能目录跳转。        | `z <目录名>` （该目录需历史记录中出现过） |
+| `git`                    | 可用`ga`、`gc`等快捷命令。  | `gc -m "commit message"`                  |
+| `extract`                | 提供`x`压缩包解压命令。     | `x file_name.tar.gz`                      |
+| `web-search`             | 可实现网页搜索。            | `google <搜索内容>`或`baidu <搜索内容>`   |
+| `you-should-use`         | 命令行错误提示功能。        | 在命令输入错误时，会给出正确的命令提示。  |
+| `zsh-completions`        | 命令行自动补齐功能。        | 在输入命令时按`Tab`键会自动补齐。         |
+| `zsh-autosuggestions`    | 命令行自动提示功能。        | 在输入命令时会自动给出提示。              |
+| `zsh-syntax-highlighting`| 命令行语法高亮功能。        | 在输入命令时会根据语法高亮。              |
 
 在 Oh-My-Zsh 中安装和启用插件通常可按照以下三个步骤来进行（如果是自带插件，则可跳过第一步）：
 
-1. 如果我们要启用的不是 Oh-My-Zsh 自带的插件，那该插件通常会在 github 上有独立的仓库，人们需要先使用`git clone`命令将其下载到 Oh-My-Zsh 安装目录下的`custom/plugins`目录中，例如，我们要启用`zsh-autosuggestions`插件，就需要执行以下命令：
+1. 如果我们要启用的不是 Oh-My-Zsh 的内置插件，那该插件通常会在 Github 上有独立的仓库，人们需要先使用`git clone`命令将其下载到 Oh-My-Zsh 安装目录下的`custom/plugins`目录中（而内置插件则已存在于 Oh-My-Zsh 安装目录下的`plugins`目录中，无需下载），例如，我们现在要启用的是`zsh-autosuggestions`插件，这是一个第三方插件，这就需要先执行以下命令，将其下载到 Oh-My-Zsh 安装目录下的`custom/plugins`目录中：
 
     ```bash
     git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
     ```
 
-2. 使用 vim 这样的文本编辑器打开`.zshrc`文件，并在其中找到`plugins`字段，并将要启用的插件名称添加到该字段中（该字段的值是一个用空白符分隔的字符串），例如，如果我们现在要启用的插件包括`z`、`git`、`extract`、`you-should-use`、`zsh-completions`、`zsh-autosuggestions`、`zsh-syntax-highlighting`、`zsh-history-substring-search`，那么`.zshrc`文件中`plugins`字段的值就该被设置如下：
+2. 使用 vim 这样的文本编辑器打开`.zshrc`文件，并在其中找到`plugins`字段，并将要启用的插件名称添加到该字段中（该字段的值是一个用空白符分隔的字符串），例如，如果我们现在要启用的插件包括`z`、`git`、`extract`、`web-search`、`you-should-use`、`zsh-completions`、`zsh-autosuggestions`、`zsh-syntax-highlighting`，那么`.zshrc`文件中`plugins`字段的值就该被设置如下：
 
     ```bash
     plugins=(
         z 
         git
         extract
+        web-search
         you-should-use 
         zsh-completions 
         zsh-autosuggestions 
@@ -142,17 +143,19 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
     )
     ```
 
-3. 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`命令使配置生效。例如，图 4 所示的是启用`extract`插件之后，使用`x`命令解压文件的效果：
+3. 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`或`omz reload`命令使配置生效。例如，图 4 所示的是启用`extract`插件之后，使用`x`命令解压文件的效果：
 
-    ![图 4：extract 插件的效果](./img/extract.png)
+    <!-- ![图 4：extract 插件的效果](./img/extract.png) -->
+    ![图 4：extract 插件的效果](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195637290-2033293748.png)
 
     **图 4**：extract 插件的效果
 
 ### 外观配置
 
-在 Oh-My-Zsh 中，我们可以通过一种被称之为“主题”的特殊插件来配置 Zsh 界面所呈现的外观，目的是通过各种特定的颜色和提示信息让命令行界面的易用性和美观性达到一个平衡。Oh-My-Zsh 内置了大量的主题，它们都位于 Oh-My-Zsh 安装目录下的`custom/themes`目录中（也可以前往 [Oh-My-Zsh 官方文档](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)查看），如图 5 所示：
+在 Oh-My-Zsh 中，我们可以通过一种被称之为“主题”的特殊插件来配置 Zsh 界面所呈现的外观，目的是通过各种特定的颜色和提示信息让命令行界面的易用性和美观性达到一个平衡。Oh-My-Zsh 内置了大量的主题，它们都被存放在 Oh-My-Zsh 安装目录下的`themes`目录中（也可以前往 [Oh-My-Zsh 官方文档](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)查看），如图 5 所示：
 
-![图 5：Oh-My-Zsh 内置的主题](./img/themes.png)
+<!-- ![图 5：Oh-My-Zsh 内置的主题](./img/themes.png) -->
+![图 5：Oh-My-Zsh 内置的主题](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195719176-616308269.png)
 
 **图 5**：Oh-My-Zsh 内置的主题
 
@@ -168,16 +171,17 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
 
 - 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`命令使配置生效，其效果如图 6 所示：
   
-    ![图 6：agnoster 主题的效果](./img/agnoster.png)
+    <!-- ![图 6：agnoster 主题的效果](./img/agnoster.png) -->
+    ![图 6：agnoster 主题的效果](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195816172-926042684.png)
 
     **图 6**：agnoster 主题的效果
 
-当然，除了 Oh-My-Zsh 自带的这些主题之外，我们还可以选择安装其他开源的主题，例如，[powerlevel10k](https://github.com/romkatv/powerlevel10k)就是一个非常受欢迎的，功能强大的主题，它提供了丰富的配置选项，可以让我们打造出各种个性化的命令行界面，其安装与配置步骤如下：
+当然，除了上述内置主题之外，我们还可以选择安装其他开源的主题，例如，[powerlevel10k](https://github.com/romkatv/powerlevel10k)就是一个非常受欢迎的，功能强大的主题，它提供了丰富的配置选项，可以让我们打造出各种个性化的命令行界面，其安装与配置步骤如下：
 
 1. 使用`git clone`命令将主题下载到 Oh-My-Zsh 安装目录下的`custom/themes`目录中：
 
     ```bash
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
     ```
 
 2. 使用 vim 这样的文本编辑器打开`.zshrc`文件，并在其中找到`ZSH_THEME`变量，并将它的值设置为我们刚刚下载的主题名称即可：
@@ -186,19 +190,21 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
     ZSH_THEME="powerlevel10k/powerlevel10k"
     ```
 
-3. 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`命令使配置生效。在该主题配置首次生效时会启动一个配置向导（之后也可以通过执行`p10k configure`命令来启动该向导），引导我们完成主题的配置，如图 7 所示：
+3. 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`或`omz reload`命令使配置生效。在该主题配置首次生效时会启动一个配置向导（之后也可以通过执行`p10k configure`命令来启动该向导），引导我们完成主题的配置，如图 7 所示：
 
-    ![图 7：powerlevel10k 主题的配置向导](./img/powerlevel10k.png)
+    <!-- ![图 7：powerlevel10k 主题的配置向导](./img/powerlevel10k.png) -->
+    ![图 7：powerlevel10k 主题的配置向导](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195900044-666707535.png)
 
     **图 7**：powerlevel10k 主题的配置向导
 
 4. 接下来，我们只需要根据上述配置向导的提示，按照自己的喜欢一步一步地做出选择，就可以完成主题的配置，我个人的配置效果如图 8 所示：
 
-    ![图 8：powerlevel10k 主题的配置效果](./img/powerlevel10k2.png)
+    <!-- ![图 8：powerlevel10k 主题的配置效果](./img/powerlevel10k2.png) -->
+    ![图 8：powerlevel10k 主题的配置效果](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195953413-92453986.png)
 
     **图 8**：powerlevel10k 主题的配置效果
 
-## 快捷命令
+### 快捷命令
 
 对于类似于进入某个特定工作目录的常用命令，Zsh 提供了一种被称为 alias 的机制，让我们可以为其设置一个快捷命令。例如，`~/working/notes`目录是我们每次写笔记时要打开的目录，如果我们想使用 Zsh 的 alias 机制为`cd ~/working/notes`命令设置一个快捷命令，就可以使用 vim 编辑器打开在`.zshrc`文件，并在其中恰当的位置上添加如下配置：
 
