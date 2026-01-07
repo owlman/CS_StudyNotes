@@ -194,7 +194,7 @@ const /Year;
 | Short | static | super | switch | synchronized |
 | This | throw | throws | transient | true |
 | Try | typeof | var | void | volatile |
-| While | with | yield |  |  |
+| While | with | yield |    |     |
 
 与此同时，我们在原则上还应该避免使用一些 JavaScript 标准库中使用的对象及其属性和方法的名称。下面，我们继续来罗列一下使用时需要注意，不要意外与标准库冲突的变量名：
 

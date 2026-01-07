@@ -2,7 +2,7 @@
 title: 关于JavaScript的学习
 date: 2023-03-21
 tags: 学习规划路线图
-categories: 计算机语言学习
+categories: 编程语言
 ---
 
 ## 学习笔记索引
