@@ -1,16 +1,20 @@
 #! /usr/bin/env python
 '''
-    Created on 2023-03-01
-
-    @name : say_hello
-    @author: lingjie
+    Simple example to say hello
+    
+    Author: lingjie
+    Created on: 2024-06-15
     '''
 
-author_name = "lingjie"
-
-def say_hello(name):
-    '''this is a function to say hello.'''
+def say_hello(name: str):
+    '''
+        Say hello by name.
+     
+        Args:
+            name: name to greet
+    '''
     print("Hello World! My name is", name)
 
 if __name__ == "__main__":
+    author_name = "lingjie"    
     say_hello(author_name)
