@@ -6,7 +6,7 @@
     Created on: 2024-06-15
     '''
 
-def say_hello(name: str):
+def say_hello(name: str) -> None:
     '''
         Say hello by name.
      
