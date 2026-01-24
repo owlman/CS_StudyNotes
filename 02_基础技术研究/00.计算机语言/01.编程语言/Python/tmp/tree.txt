@@ -1,6 +1,6 @@
-hello_python
-├── main.py
-├── pyproject.toml
-└── README.md
+    [build-system]
+    requires = ["poetry-core>=1.0.0"]
+    build-backend = "poetry.core.masonry.api"
 
-1 directory, 3 files
+    [project.scripts]
+    web-hello = "python_demo.main:main"
