@@ -1,5 +1,5 @@
 ---
-title: 关于现代人工智能的学习
+title: 关于 AI 的学习路线图
 author: 凌杰
 date: 2026-01-29
 tags: 学习路线图规划
@@ -20,8 +20,8 @@ categories: 人工智能
 - Prompt：即提示词，泛指用户与 LLM 交互时输入的文本内容，用于引导模型生成特定输出。
 - MCP：模型上下文协议（Model Context Protocol）的缩写，这是由 Anthropic 公司提出的、用于在 AI Agent 系统中，标准化描述上下文、工具能力与外部资源的通信协议规范。
 - AI Agent：即 AI 智能体，泛指以 LLM 为核心，具备状态管理、工具调用与任务执行能力的智能代理系统，可在授权范围内执行本地或远程操作，其典型应用可按交互/部署的方式划分为：
-  - Web UI 型 AI Agent：如 Google AI Studio、腾讯元宝；
-  - 本地客户端型 AI Agent：如 Claude Code、OpenCode；
+  - 人机通信型 AI Agent：如 Google AI Studio、腾讯元宝；
+  - 命令行工具型 AI Agent：如 Claude Code、OpenCode；
   - 可部署服务型 AI Agent：如 Moltbot（原名 Clawdbot）；
 - AI Agent Skills：即 AI 智能体的技能单元，通常可被视为是对 prompt 及其相关工具描述、执行逻辑的封装。
 
