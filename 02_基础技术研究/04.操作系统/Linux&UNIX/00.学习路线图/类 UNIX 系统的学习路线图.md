@@ -1,6 +1,6 @@
 ---
-title；类 UNIX 系统的学习路线图
-author：凌杰
+title: 类 UNIX 系统的学习路线图
+author: 凌杰
 date: 2022-02-28
 tags: 学习路线图
 categories: Linux&UNIX
