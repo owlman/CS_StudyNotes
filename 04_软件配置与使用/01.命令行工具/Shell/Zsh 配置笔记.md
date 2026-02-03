@@ -7,7 +7,7 @@ categories: 命令行工具
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记主要记录了我在使用 Zsh 这款 Shell 的过程中所记录的一些心得与体会。它将会被存储在我个人的 [计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，以便日后查阅。
+> 这篇笔记主要记录了我在使用 Zsh 这款 Shell 的过程中所记录的一些心得与体会。它将会被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes) 中，并予以长期维护。
 
 ## Zsh 简介
 
