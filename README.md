@@ -85,9 +85,10 @@
    - [《关于计算机语言的学习》](https://github.com/owlman/CS_StudyNotes/blob/master/02_%E5%9F%BA%E7%A1%80%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/00.%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/00.%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AD%A6%E4%B9%A0/%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AD%A6%E4%B9%A0.md)
    - [《类 UNIX 系统的学习路线图》](https://github.com/owlman/CS_StudyNotes/blob/master/02_%E5%9F%BA%E7%A1%80%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/04.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%26UNIX/00.%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E5%9B%BE/%E7%B1%BB%20UNIX%20%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E5%9B%BE.md)
 
-3. ⚙️ **工程工具**
-   - Git / Makefile / Docker 使用笔记
-   - NeoVim / VS Code 配置思路
+3. ⚙️ **软件工具**
+   - 工程管理：[Git](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/Git/Git%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [Makefile](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/make/Makefile%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [Docker](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/Docker/Docker%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md)
+
+   - 编辑器配置：[NeoVim](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/nvim/NeoVim%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [VS Code](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/02.%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%B7%A5%E5%85%B7/VSCode/VS%20Code%20%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0.md)
 
 这些内容可以帮助你快速判断：  
 **这个仓库是否与你的学习方式和目标一致。**
@@ -96,7 +97,8 @@
 
 ## 如何阅读？
 
-所有笔记均使用 **Markdown** 编写，可直接在 GitHub 上浏览，但若希望获得更好的体验（双链、反向链接、知识网络），推荐使用 [Obsidian](https://obsidian.md/)或在 VS Code 中配合 [Foam](https://foambubble.github.io/foam/) 插件，从项目根目录下的 `Obsidian-README.md` 开始阅读
+- 首先，所有笔记均使用 **Markdown** 编写，可直接在 GitHub 上浏览。
+- 其次，若希望获得更好的体验（双链、反向链接、知识网络），推荐使用 [Obsidian](https://obsidian.md/)或在 VS Code 中配合 [Foam](https://foambubble.github.io/foam/) 插件，可将项目根目录下的 `Obsidian-README.md` 当做入口文档进行阅读。
 
 > 使用 Obsidian / Foam 是 **增强体验**，而不是前置条件。
 
@@ -104,8 +106,7 @@
 
 ## 关于这个仓库的背景
 
-本仓库是作者在 **学习、研究、写作、翻译与开发实践** 过程中逐步积累的个人知识库。  
-内容长期维护，并会随着认知更新而持续修订。
+本仓库的作者长期从事计算机相关技术的学习、研究、写作与翻译工作，这些笔记是他在工作实践中逐步积累的个人知识库。内容长期维护，并会随着认知更新而持续修订。
 
 它既是一个个人工作系统，也被有意整理为 **可供他人参考与复用的公共资源**。
 
