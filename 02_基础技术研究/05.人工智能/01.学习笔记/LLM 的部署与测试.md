@@ -28,14 +28,15 @@ Ollama 是一款基于 MIT 协议开源的、面向本地环境的 LLM 运行与
 
 Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方下载页面](https://ollama.com/download)，并根据该页面中的提示，基于自己所在的操作系统完成安装即可，具体如图 1 所示。
 
-![图1：Ollama 的下载页面](./img/ollama_download.png)
+<!-- ![图1：Ollama 的下载页面](./img/ollama_download.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260207135244485-526117339.png)
 
 **图 1**：Ollama 的下载页面
 
 如果安装过程一切顺利，我们就可以通过在命令行中输入 `ollama` 命令来验证安装是否成功。如果安装成功了，该命令会返回 Ollama 的使用提示信息，如图 2 所示。
 
-![图2：Ollama 的使用提示信息](./img/ollama_help.png)
-
+<!-- ![图2：Ollama 的使用提示信息](./img/ollama_help.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260207135316960-391511463.png)
 **图 2**：Ollama 的使用提示信息
 
 接下来，我们要做的就是选择一款适合当前学习任务的 LLM，并尝试使用 Ollama 来将其部署到我们的本地环境中。
@@ -68,7 +69,8 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
 1. **拉取模型**：打开命令行终端并输入`ollama pull llama3.2:3b`命令，即可从 Ollama 的官方服务器上拉取我们所选择的 LLM 镜像，如图 3 所示。
 
-    ![图3：使用 Ollama 拉取 LLM 镜像](./img/ollama_pulling.png)
+    <!-- ![图3：使用 Ollama 拉取 LLM 镜像](./img/ollama_pulling.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260207135403290-1666170993.png)
 
     **图 3**：使用 Ollama 拉取 LLM 镜像
 
@@ -76,7 +78,8 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
 2. **运行测试**：继续在图 3 所示命令行界面中输入 `ollama run llama3.2:3b`命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的“Hello World”，如图 4 所示。
 
-    ![图4：使用 Ollama 运行 LLM 镜像](./img/ollama_running.png)
+    <!-- ![图4：使用 Ollama 运行 LLM 镜像](./img/ollama_running.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260207135512344-1330487987.png)
 
     **图 4**：使用 Ollama 运行 LLM 镜像
 
@@ -86,136 +89,187 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
 下面，让我们来具体测试一下这个基于 Ollama 完成本地部署的 LLM。当然，首先要明确的是，我们在这里的测试任务并不是在评估模型的“聪明程度”，而是设法通过一组尽可能简单、可复现的测试来观察 LLM 与用户交互时的行为模式。换句话说，我们希望通过测试来了解 **LLM 作为系统组件时的响应方式、失败模式以及可控性边界。**
 
-因此，在测试方式的选择上，我刻意避开了交互式对话，而是选择使用 Python 脚本通过 API 的方式来调用本地运行的模型，以模拟更接近实际生产环境中的使用场景。
+因此，在测试方式的选择上，我在这里选择使用 Python 脚本通过 HTTP API 的方式来调用本地运行的 LLM，用于模拟更接近实际生产环境的使用场景。
 
 ### 使用 Python 调用本地 Ollama 模型
 
-Ollama 在本地启动后，会默认提供一个 HTTP API，用于模型的程序化调用。我们可以通过普通的 HTTP 客户端，在 Python 中直接与其交互。
+在默认情况下，Ollama 会在本地运行 LLM 的同时为用户提供一套 RESTful API（具体文档请参考本文最后的“参考资料”），这让我们可以使用 Python 脚本来模拟 HTTP 客户端，从而实现对 LLM 的自动化测试。其基本调用步骤如下：
 
-以下示例展示了一个最基本的调用方式。
+1. **启动 LLM**：在命令行终端中输入`ollama run llama3.2:3b`命令，启动 LLM 的本地运行实例。
 
-```python
-import requests
+2. **创建 Python 脚本**；创建一个名为 `ollama_python.py` 的 Python 脚本，并在其中输入以下代码：
 
-url = "http://localhost:11434/api/generate"
+    ```python
+    import requests
 
-payload = {
-    "model": "llama3.2:3b",
-    "prompt": "请用一句话解释什么是操作系统。",
-    "stream": False
-}
+    url = "http://localhost:11434/api/generate"
 
-response = requests.post(url, json=payload)
-result = response.json()
+    payload = {
+        "model": "llama3.2:3b",
+        "prompt": "请用一句话解释什么是操作系统。",
+        "stream": False
+    }
 
-print(result["response"])
-```
+    response = requests.post(url, json=payload)
+    result = response.json()
 
-这个示例的意义并不在于输出内容本身，而在于确认以下几点：
+    print(result["response"])
+    ```
 
-- 模型是否能够被稳定调用；
+3. **运行 Python 脚本**：在命令行终端中输入 `python ollama_python.py` 命令，运行 Python 脚本，即可看到 LLM 的输出结果，如图 5 所示。
+
+    <!-- ![图5：使用 Python 调用 Ollama API](./img/ollama_python.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260207135612961-1830938264.png)
+
+    **图 5**：使用 Python 调用 Ollama API
+
+在上述示例中，我们首先定义了 Ollama API 的调用地址，然后构造了一个包含模型名称、提示词以及是否以流式方式返回结果的请求体。最后，我们通过 requests 库的 post 方法将请求发送给 Ollama API，并打印出返回结果，这个示例的意义并不在于输出内容本身，而在于确认以下几点：
+
+- Ollama API 是否能够被稳定调用；
 - 请求—响应链路是否完整；
 - 返回结果是否符合预期的数据结构。
 
-一旦上述代码可以稳定运行，我们就具备了一个**最小可用的 LLM 测试环境**。
+### 使用 PyTest 编写测试用例
 
-### 测试一：响应延迟与阻塞行为
+在确认了 LLM 的调用链路是完整且稳定的前提下，我们就可以开始编写测试用例了。
+一旦上述代码可以稳定运行，我们就具备了一个**最小可用的 LLM 测试环境**。下面，让我们基于 PyTest 这个自动化测试框架来正式为这个 LLM 编写一个可用于观察其行为模式的测试用例，其具体步骤如下：
 
-在工程环境中，一个最常见、但又容易被忽视的问题是：**模型调用是否会阻塞系统流程**。
+1. **新建测试项目**：在计算机的任意位置上创建一个名为`llm_tests`的目录，并在其中创建下列 Python 脚本文件：
 
-为此，我们可以通过简单的计时方式，对模型响应延迟进行观察。
+    ```bash
+    llm_tests
+    ├── test_basic_call.py           # 基础调用测试
+    ├── test_latency.py              # 响应延迟与阻塞行为测试
+    ├── test_nondeterminism.py       # 非确定性输出与重复调用差异测试
+    ├── test_ambiguous_prompt.py     # 模糊指令下的“过度推断”行为测试
+    └── conftest.py                  # PyTest 配置文件
+    ```
 
-```python
-import time
-import requests
+2. **编写项目公共配置**：使用代码编辑器打开`conftest.py`文件，并其中输入以下代码：
 
-start_time = time.time()
+    ```python
+    # llm_tests/conftest.py
+    '''
+    这个文件用于存放 PyTest 的公共配置，例如 HTTP API 的调用地址和模型名称。
+    '''
+    import pytest
+    import requests
 
-response = requests.post(
-    "http://localhost:11434/api/generate",
-    json={
-        "model": "llama3.2:3b",
-        "prompt": "请简要说明 TCP 和 UDP 的区别。",
-        "stream": False
-    }
-)
+    OLLAMA_URL = "http://localhost:11434/api/generate"
+    MODEL_NAME = "llama3.2:3b"
 
-elapsed = time.time() - start_time
-print(f"Response time: {elapsed:.2f} seconds")
-```
 
-在多次运行后，可以观察到一个非常直观的现象：
-**即便是同一模型、同一输入，其响应时间也存在明显波动**。
+    @pytest.fixture
+    def ollama_client():
+        def call_llm(prompt, stream=False):
+            response = requests.post(
+                OLLAMA_URL,
+                json={
+                    "model": MODEL_NAME,
+                    "prompt": prompt,
+                    "stream": stream,
+                },
+                timeout=120,
+            )
+            response.raise_for_status()
+            return response.json()
+        return call_llm
+    ```
 
-这说明，在系统设计中：
+3. **编写基础测试连通性测试**：使用代码编辑器打开`test_basic_call.py`文件，并其中输入以下代码：
 
-- LLM 调用不应被放在强实时或低延迟要求的关键路径上；
-- 模型推理更适合作为**异步、可延迟处理的组件**。
+    ```python
+    # llm_tests/test_basic_call.py
+    '''
+    这个测试用例用于验证 LLM 的基础连通性，具体包括：
+    - LLM 是否能够被稳定调用；
+    - 请求—响应链路是否完整；
+    - 返回结果是否符合预期的数据结构。
+    '''
 
-这一点与模型“是否聪明”完全无关，而是其作为计算资源密集型组件的天然属性。
+    def test_llm_basic_response(ollama_client):
+        result = ollama_client("请用一句话解释什么是操作系统。")
 
-### 测试二：非确定性输出与重复调用差异
+        assert "response" in result
+        assert isinstance(result["response"], str)
+        assert len(result["response"].strip()) > 0
+    ```
 
-接下来，我们测试一个经常在工程实践中引发问题的特性：**非确定性输出**。
+4. **编写响应延迟测试**：使用代码编辑器打开`test_latency.py`文件，并其中输入以下代码：
 
-```python
-prompt = "请给出一个 JSON，对象中包含 name 和 age 两个字段。"
+    ```python
+    # llm_tests/test_latency.py
+    '''
+    这个测试用例用于验证 LLM 的响应延迟与阻塞行为，具体包括：
+    - LLM 的响应延迟是否在可接受范围内；
+    - LLM 是否会阻塞调用链路。
+    '''
+    import time
 
-for i in range(3):
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": "llama3.2:3b",
-            "prompt": prompt,
-            "stream": False
-        }
-    )
-    print(f"Run {i+1}:")
-    print(response.json()["response"])
-    print("-" * 30)
-```
+    def test_llm_response_latency(ollama_client):
+        start = time.time()
 
-即使提示词完全一致，多次运行后也可以观察到：
+        ollama_client("请简要说明 TCP 和 UDP 的区别。")
 
-- 字段顺序可能不同；
-- 输出格式可能出现自然语言混杂；
-- 个别情况下甚至会出现无法直接解析的内容。
+        elapsed = time.time() - start
 
-这说明一个关键事实：
+        # 不设过严阈值，只验证“不是瞬时返回”
+        assert elapsed > 0.5
+    ```
 
-> **LLM 的输出不应被直接当作结构化数据使用。**
+    **请注意**：这里的测试仅用于观察同步调用的响应时延，并不涉及并发或异步场景下的阻塞分析。
 
-如果系统的下游组件依赖稳定的数据格式，那么在模型输出之后，必须引入额外的校验、解析与纠错机制。
+5. **编写非确定性输出测试**：使用代码编辑器打开`test_nondeterminism.py`文件，并其中输入以下代码：
 
-### 测试三：模糊指令下的“过度推断”行为
+    ```python
+    # llm_tests/test_nondeterminism.py
+    '''
+    这个测试用例用于验证 LLM 的非确定性输出，具体包括：
+    - LLM 的输出是否具有非确定性；
+    - LLM 的输出是否具有重复性。
+    '''
 
-为了观察模型在输入不充分时的行为，我们可以刻意提供一个信息不足的指令。
+    def test_llm_nondeterministic_output(ollama_client):
+        prompt = "请给出一个 JSON，对象中包含 name 和 age 两个字段。"
 
-```python
-response = requests.post(
-    "http://localhost:11434/api/generate",
-    json={
-        "model": "llama3.2:3b",
-        "prompt": "请判断这个方案是否合理。",
-        "stream": False
-    }
-)
+        outputs = set()
 
-print(response.json()["response"])
-```
+        for _ in range(3):
+            result = ollama_client(prompt)
+            outputs.add(result["response"].strip())
 
-在这种情况下，模型通常会：
+        # 允许偶然一致，但通常不会完全相同
+        assert len(outputs) >= 1
+    ```
 
-* 主动假设不存在的背景信息；
-* 构造一个“看似合理”的上下文；
-* 给出逻辑完整但事实基础不足的回答。
+    **请注意**：由于 Ollama 默认启用了缓存与固定推理参数，在不显式调整 temperature / seed 的情况下，输出可能表现为“弱非确定性”甚至表面确定性，因此这里的测试重点并不在于断言差异存在，而在于承认这种不确定性无法通过传统断言机制可靠捕获。
 
-这类现象在工程语境中常被称为“幻觉”，但从系统角度来看，它更像是一种：
+6. **编写模糊指令测试**：使用代码编辑器打开`test_ambiguous_prompt.py`文件，并其中输入以下代码：
 
-> **在输入约束不足时的必然补全行为。**
+    ```python
+    # llm_tests/test_ambiguous_prompt.py
+    '''
+    这个测试用例用于验证 LLM 在面对模糊指令时的行为，具体包括：
+    - LLM 是否会主动进行推断与补全；
+    - LLM 是否会给出完整的叙述。
+    '''
 
-因此，这并不能简单归咎为模型缺陷，而是提醒我们：
-**系统必须对模型的输入进行严格约束，而不是依赖模型自行理解上下文。**
+    def test_llm_over_inference_on_ambiguous_prompt(ollama_client):
+        prompt = "请判断这个方案是否合理。"
+
+        result = ollama_client(prompt)
+        response_text = result["response"]
+
+        # 不判断“对错”，只确认模型会生成完整叙述
+        assert len(response_text) > 50
+    ```
+
+7. **安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录，并输入如图 6 所示的命令序列来安装 PyTest，并运行测试：
+
+    <!-- ![图6：安装 PyTest 并运行测试](./img/pytest_ollama.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260207135944110-1883364792.png)
+
+    **图 6**：安装 PyTest 并运行测试
 
 ### 小结：测试得到的关键观察结论
 
@@ -230,4 +284,6 @@ print(response.json()["response"])
 
 ## 参考资料
 
-<!-- 以下为待整理的资料 -->
+- [Ollama 中文文档](https://ollama.cadn.net.cn/#quickstart)
+- [Ollama-Python 文档](https://github.com/ollama/ollama-python)
+- [PyTest 官方文档](https://docs.pytest.org/en/stable/)
