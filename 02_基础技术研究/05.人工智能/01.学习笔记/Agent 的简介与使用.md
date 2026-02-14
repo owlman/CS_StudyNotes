@@ -68,9 +68,11 @@ categories: 人工智能
 
 ### 命令行工具型 Agent
 
-对于大多数开发者而言，以命令行工具的形式使用 AI Agent 是一种更符合工程直觉的方式。它运行在熟悉的终端环境中，可以直接访问文件系统与系统命令，因此看起来类似于自动化脚本。当然了，与传统脚本不同的是，AI Agent的内部决策路径并非预先编写，而是由 LLM 在循环结构中动态生成。
+对于大多数开发者而言，以命令行工具的形式使用 AI Agent 是一种更符合工程直觉的方式。它运行在熟悉的终端环境中，可以直接访问文件系统与系统命令，因此看起来类似于自动化脚本。当然了，与传统脚本不同的是，AI Agent 的内部决策路径并非预先编写，而是由 LLM 在循环结构中动态生成。这类 AI Agent 应用的典型代表是 [Claude Code](https://github.com/anthropics/claude-code)，同类应用包括 [OpenCode](https://github.com/anomalyco/opencode)、[Codex CLI](https://github.com/openai/codex)、[Gemini CLI](https://github.com/google-gemini/gemini-cli)、[iFlow CLI](https://github.com/iflow-ai/iflow-cli) 等。下面，我们首先要做的就是：先将这些工具安装到自己所在的操作系统中。
 
-这类应用的典型代表是 Claude Code，同类应用包括 opencode、Codex CLI、Gemini CLI、iflow CLI 等。这类工具的安装非常简单，虽然它们各自针对 MacOS/Linux/Windows 系统提供了不同的 bash/powershell 安装脚本，或者基于 homeberw/pacman/scoop 等针对不同操作系统平台的包管理器安装命令，但基本都提供了基于 NPM 这一包管理器的跨平台安装方式。因此，读者在大多数情况下都可以按照以下步骤来安装并使用这些工具：
+### 安装与配置
+
+命令行工具型 Agent 的安装方式其实是非常简单的。因为，虽然它们各自针对 MacOS/Linux/Windows 系统提供了不同的 bash/powershell 安装脚本，或者基于 homeberw/pacman/scoop 等针对不同操作系统平台的包管理器安装命令，但基本都提供了基于 NPM 这一包管理器的跨平台安装方式。所以，读者在大多数情况下都可以按照以下步骤来安装并使用这些工具：
 
 1. 确保自己所在的操作系统中已经安装了版本在 20.0.0 之上的 Node.js 运行环境，其中自带了 npm 包管理器；
 2. 在管理员权限下执行`npm install -g <agent-name>@<version>`命令，在这里，`<agent-name>`可以通过查询相关工具的官方网站来获得，而`<version>`则除了可以是我们在工具官网中查到的具体版本号之外，也可以用`latest`来表示最新版本。例如，如果我们需要安装最新版本的 opencode，就只需要在命令行终端中使用管理员权限执行`npm install -g opencode@latest`命令即可。
