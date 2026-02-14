@@ -48,7 +48,7 @@ categories: 人工智能
 
 换言之，这一阶段的学习重点应放在对方法论的理解上，为此，我在这里会推荐阅读以下经典教材：
 
-- [《人工智能现代方法》（第 4 版）](https://book.douban.com/subject/36152133/)
+- [《人工智能：现代方法》（第 4 版）](https://book.douban.com/subject/36152133/)
   - 原作名：Artificial Intelligence: A Modern Approach；
   - 作者：Stuart Russell, Peter Norvig；
   - 出版社: 人民邮电出版社；
