@@ -64,9 +64,16 @@ categories: 人工智能
 
 ## AI Agent 的使用方法
 
-在了解了使用 AI Agent 的必要性及其工作原理之后，接下来就可以正式开始研究如何将它运用到自己的实际工作中了。而当我们要讨论 AI Agent 在实际工作中的使用方法时，首先需要回答的问题是“它运行在哪里、由谁控制、承担什么责任”。不同的运行形态，决定了它在工程系统中的角色边界。下面，让我们按照"运行在哪里"这个维度分三类来介绍 AI Agent 的使用方法，以及它们在这些应用场景中所承担的任务角色。
+在了解了使用 AI Agent 的必要性及其工作原理之后，接下来就可以正式开始研究如何将它运用到自己的日常工作中了。而当我们要讨论 AI Agent 在实际工作中的使用方法时，首先需要回答的问题是“它运行在哪里、由谁控制、承担什么责任”。不同的运行形态，决定了它在工程系统中的角色边界。下面，让我们按照"运行在哪里"这个维度分三类来介绍 AI Agent 的使用方法，以及它们在这些应用场景中所承担的任务角色。
 
 ### 命令行工具型 Agent
+
+对于大多数开发者而言，以命令行工具的形式使用 AI Agent 是一种更符合工程直觉的方式。它运行在熟悉的终端环境中，可以直接访问文件系统与系统命令，因此看起来类似于自动化脚本。当然了，与传统脚本不同的是，AI Agent的内部决策路径并非预先编写，而是由 LLM 在循环结构中动态生成。
+
+这类应用的典型代表是 Claude Code，同类应用包括 opencode、Codex CLI、Gemini CLI、iflow CLI 等。这类工具的安装非常简单，虽然它们各自针对 MacOS/Linux/Windows 系统提供了不同的 bash/powershell 安装脚本，或者基于 homeberw/pacman/scoop 等针对不同操作系统平台的包管理器安装命令，但基本都提供了基于 NPM 这一包管理器的跨平台安装方式。因此，读者在大多数情况下都可以按照以下步骤来安装并使用这些工具：
+
+1. 确保自己所在的操作系统中已经安装了版本在 20.0.0 之上的 Node.js 运行环境，其中自带了 npm 包管理器；
+2. 在管理员权限下执行`npm install -g <agent-name>@<version>`命令，在这里，`<agent-name>`可以通过查询相关工具的官方网站来获得，而`<version>`则除了可以是我们在工具官网中查到的具体版本号之外，也可以用`latest`来表示最新版本。例如，如果我们需要安装最新版本的 opencode，就只需要在命令行终端中使用管理员权限执行`npm install -g opencode@latest`命令即可。
 
 ### 编辑器插件型 Agent
 
@@ -77,6 +84,8 @@ categories: 人工智能
 #### MCP 服务
 
 #### Agent Skills
+
+[^1]
 
 ## 结束语
 
@@ -100,4 +109,4 @@ Agent 并没有让系统变得更简单，反而让系统的边界变得更加�
   - [基于 Agent skills 和 MCP 服务的协同工作流](https://claude.com/blog/extending-claude-capabilities-with-skills-mcp-servers)
   - [Agent skills 构建指南](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
 
-AI Agent Skills：2025年10月16日由Anthropic正式推出，同年12月18日将其发布为开放标准。
+[^1]:AI Agent Skills：2025年10月16日由Anthropic正式推出，同年12月18日将其发布为开放标准。
