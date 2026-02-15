@@ -68,16 +68,62 @@ categories: 人工智能
 
 ### 命令行工具型 Agent
 
-对于大多数开发者而言，以命令行工具的形式使用 AI Agent 是一种更符合工程直觉的方式。它运行在熟悉的终端环境中，可以直接访问文件系统与系统命令，因此看起来类似于自动化脚本。当然了，与传统脚本不同的是，AI Agent 的内部决策路径并非预先编写，而是由 LLM 在循环结构中动态生成。这类 AI Agent 应用的典型代表是 [Claude Code](https://github.com/anthropics/claude-code)，同类应用包括 [OpenCode](https://github.com/anomalyco/opencode)、[Codex CLI](https://github.com/openai/codex)、[Gemini CLI](https://github.com/google-gemini/gemini-cli)、[iFlow CLI](https://github.com/iflow-ai/iflow-cli) 等。下面，我们首先要做的就是：先将这些工具安装到自己所在的操作系统中。
+对于大多数开发者而言，以命令行工具的形式使用 AI Agent 是一种更符合工程直觉的方式。它运行在熟悉的终端环境中，可以直接访问文件系统与系统命令，因此看起来类似于自动化脚本。当然了，与传统脚本不同的是，AI Agent 的内部决策路径并非预先编写，而是由 LLM 在循环结构中动态生成。这类 AI Agent 应用的典型代表是 [Claude Code](https://github.com/anthropics/claude-code)，目前同类的主流应用还包括 [OpenCode](https://github.com/anomalyco/opencode)、[Codex CLI](https://github.com/openai/codex)、[Gemini CLI](https://github.com/google-gemini/gemini-cli)、[iFlow CLI](https://github.com/iflow-ai/iflow-cli) 等。下面，我们首先要做的就是：先将这些工具安装到自己所在的操作系统中。
 
 ### 安装与配置
 
 命令行工具型 Agent 的安装方式其实是非常简单的。因为，虽然它们各自针对 MacOS/Linux/Windows 系统提供了不同的 bash/powershell 安装脚本，或者基于 homeberw/pacman/scoop 等针对不同操作系统平台的包管理器安装命令，但基本都提供了基于 NPM 这一包管理器的跨平台安装方式。所以，读者在大多数情况下都可以按照以下步骤来安装并使用这些工具：
 
-1. 确保自己所在的操作系统中已经安装了版本在 20.0.0 之上的 Node.js 运行环境，其中自带了 npm 包管理器；
-2. 在管理员权限下执行`npm install -g <agent-name>@<version>`命令，在这里，`<agent-name>`可以通过查询相关工具的官方网站来获得，而`<version>`则除了可以是我们在工具官网中查到的具体版本号之外，也可以用`latest`来表示最新版本。例如，如果我们需要安装最新版本的 opencode，就只需要在命令行终端中使用管理员权限执行`npm install -g opencode@latest`命令即可。
+1. 确保自己所在的操作系统中已经安装了版本在 20.0.0 之上的 Node.js 运行环境，其中自带了 NPM 包管理器；
 
-### 编辑器插件型 Agent
+2. 在管理员权限下执行`npm install -g <agent-name>@<version>`命令，在这里，`<agent-name>`可以通过查询相关工具的官方网站来获得，而`<version>`则除了可以是我们在工具官网中查到的具体版本号之外，也可以用`latest`来表示最新版本。例如，如果我们需要安装最新版本的 OpenCode，就只需要在命令行终端中使用管理员权限执行`npm install -g opencode@latest`命令即可。
+
+在安装完成之后，我们就可以用 CLI 和 TUI 两种方式来使用这种命令行工具型的 Agent 了。其中，TUI 的方式已经被大家所熟知，它实际上就是一个基于命令行界面的交互式程序，运作方式类似于 Python Shell 或 Node.js REPL，拥有属于自己的独立线程。例如在安装完 OpenCode 之后，我们只需要直接在命令行终端中输入`opencode`命令，就可以启动它的 TUI 界面了，具体如图 1 所示：
+
+![图1：OpenCode TUI 界面](img/opencode_tui.png)
+
+**图 1**：OpenCode TUI 界面
+
+在初次进入上次界面时，我们可以对自己使用的 AI Agent 进行一些基本的配置，这些工具的配置方式基本上是大同小异的。一般来说，我们会先使用`/model`命令设置以下自己默认要使用的 LLM，例如您在图 2 中所看到的就是 OpenCode 的 LLM 选择界面：
+
+![图2：OpenCode LLM 选择界面](img/opencode_llm.png)
+
+**图 2**：OpenCode LLM 选择界面
+
+通常情况下，在选择 LLM 之后，这些 AI Agent 会要求我们提供一个 API Key，用于在调用 LLM 时进行身份验证。这个 API key 可以通过登录我们在相应 LLM 官网的个人账户来获得。例如，我在这里选择使用的是智普的 GLM 模型，就需要登录到[智普 AI 的官网](https://bigmodel.cn/)，并为 OpenCode 创建一个专属的 API Key，如图 3 所示：
+
+![图3：创建智普 AI 的 API Key](img/zhipu_api_key.png)
+
+**图 3**：创建智普 AI 的 API Key
+
+接下来，我们就只需要将上述 API Key 复制到 OpenCode 提示输入 key 的位置，并选择具体要使用的 GLM 版本并确认即可。完成这些配置之后，我们就可以通过一个 AI Agent 版的“Hello World”测试来确认它是否已经可以正常工作了，如图 4 所示：
+
+![图4：OpenCode Hello World 测试](img/opencode_hello.png)
+
+**图 4**：OpenCode Hello World 测试
+
+如果 AI Agent 返回了类似上面这样的信息，就意味着我们已经可以开始使用它进行实际的工作了。当然了，如果您还想对 AI Agent 进行一些更复杂的配置，例如强制它只用中文来显示思考过程，已经回答的内容，也可以选择在您的系统用户目录下为其创建一个全局的提示词文件。以 OpenCode 为例，其具体步骤如下：
+
+1. 根据自己所在的操作系统为 OpenCode 创建一个全局配置目录。在默认情况下，该目录的路径应该为`~/.config/opencode`，其中`~`表示您的系统用户目录。
+
+2. 在该目录下创建一个名为`AGENTS.md`的提示词文件，并在其中输入以下内容：
+
+    ```markdown
+    # Agent 配置
+
+    ## 语言设置
+    - **默认语言**: 中文
+    - **强制使用中文**: 是
+
+    ## 指令
+    - 所有回答必须使用中文
+    - 所有思考过程也显示中文
+    - 除非用户明确要求使用其他语言提问，否则保持中文回答
+    ```
+
+当然，其他 AI Agent 在全局配置目录与提示词文件的名称上会有些许不同，但基本是大同小异的，读者可以通过查询它们的官方文档来举一反三的。例如 Claude Code 的全局提示词文件路径为`~/.claude/claude.md`（虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方对中文用户的态度，以及因此带来的诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明）。
+
+#### AI Agent 的使用
 
 ### 可部署服务型 Agent
 
@@ -105,7 +151,7 @@ Agent 并没有让系统变得更简单，反而让系统的边界变得更加�
 
 - 视频教程：
   - [Claude Code 教程](https://www.youtube.com/watch?v=AT4b9kLtQCQ) [B站链接](https://www.bilibili.com/video/BV14rzQB9EJj)
-  - [agent skills 教程](https://www.youtube.com/watch?v=yDc0_8emz7M) [B站链接](https://www.bilibili.com/video/BV1cGigBQE6n)
+  - [Agent Skills 教程](https://www.youtube.com/watch?v=yDc0_8emz7M) [B站链接](https://www.bilibili.com/video/BV1cGigBQE6n)
 - 官方文档：
   - [OpenCode 官方文档](https://opencode.ai/docs) 
   - [基于 Agent skills 和 MCP 服务的协同工作流](https://claude.com/blog/extending-claude-capabilities-with-skills-mcp-servers)
