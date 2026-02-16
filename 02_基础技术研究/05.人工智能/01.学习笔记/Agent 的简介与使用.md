@@ -8,7 +8,7 @@ categories: 人工智能
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第四个学习阶段。其中记录了我学习 AI Agent 并将其应用于实际工作场景的全过程，以及在该过程中所获得的心得体会。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
+> 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第四个学习阶段。其中记录了我学习 AI Agent 的工作原理，并将其应用于实际工作场景的全过程，以及在该过程中所获得的心得体会。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
 
 ## AI Agent 简介
 
@@ -127,11 +127,13 @@ categories: 人工智能
 
 **图 5**：OpenCode 的项目初始化命令
 
-**请注意**，虽然其他 AI Agent 在全局配置目录与提示词文件的名称上会有些许不同，但基本是大同小异的，读者可以通过查询它们的官方文档来举一反三的。例如 Claude Code 的全局提示词文件路径为`~/.claude/claude.md`（虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方对中文用户的态度，以及因此带来的诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明）。
+至于其他 AI Agent，虽然会在全局配置目录与提示词文件上有各自的名称，但应用的工作流/机制基本是大同小异的，用户只需简单查询一下它们的官方文档，就可以轻松做到举一反三的，例如通过快速查询 Claude Code 的官方文档，立即就会知道它的全局提示词文件路径为`~/.claude/claude.md`。
+
+> 顺便说一句题外话，虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方政策会给中文用户带来诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明。
 
 #### 基本操作方式
 
-下面，让我们来具体介绍一下命令行工具型 Agent 的基本操作方式，正如之前所说，这类命令行工具通常有 CLI 和 TUI 两种使用方式，TUI 会单独打开一个工作线程来执行交互式操作，通常用于执行一些需要使用多轮提示词交互，并确认内容的复杂任务。因此，Agent 的 TUI 界面往往会至少提供“计划（plan）”和“构建（build）”两个模式（个别 Agent 还会提供”自动（auto）“之类的第三种模式，或者在模式名称上存在差异，但其在基本使用逻辑上是一致的），其中，”计划“模式通常没有执行外部命令的权限，主要用于与 LLM 执行多轮交互，并确认某一杂任务的解决方案。例如在之前展示的 OpenCode TUI 中，读者可以在其输入框的下方看到，它默认处于“构建”模式。现在，我们可以通过输入`<tab>`键来将其切换到“计划”模式，然后再试着让它执行“使用 Python 编写并执行一个 hello world 程序”的操作，就会得到类似图 5 的输出：
+下面，让我们来具体介绍一下命令行工具型 Agent 的基本操作方式，正如之前所说，这类命令行工具通常有 CLI 和 TUI 两种使用方式，TUI 会单独打开一个工作线程来执行交互式操作，通常用于执行一些需要使用多轮提示词交互，并确认内容的复杂任务。因此，这些 Agent 应用的 TUI 往往至少会提供“计划（plan）”和“构建（build）”两个模式（个别 Agent 还会提供”自动（auto）“之类的第三种模式，或者在模式名称上存在差异，但其在基本使用逻辑上是一致的），其中，”计划“模式通常没有执行外部命令的权限，主要用于与 LLM 执行多轮交互，并确认某一杂任务的解决方案。例如在之前展示的 OpenCode TUI 中，读者可以在其输入框的下方看到，它默认处于“构建”模式。现在，我们可以通过输入`<tab>`键来将其切换到“计划”模式，然后再试着让它执行“使用 Python 编写并执行一个 hello world 程序”的操作，就会得到类似图 5 的输出：
 
 ![图6：OpenCode 的计划模式](img/opencode_plan.png)
 
@@ -149,7 +151,44 @@ categories: 人工智能
 
 **图 8**：OpenCode 的 CLI 模式
 
-如读者所见，上述命令直接在 powershell 所在的当前线程中输出了 OpenCode 的执行结果。这样做的好处，除了避免因一些简单的任务反复启动和关闭 OpenCode TUI 之外，在必要情况下还可以使用 Shell/Python 这样的脚本语言来实现对 AI Agent 的批量调用。
+如读者所见，上述命令直接在 powershell 所在的当前线程中输出了 OpenCode 的执行结果。这样做的好处，除了避免因一些简单的任务反复启动和关闭 OpenCode TUI 之外，在必要情况下还可以使用 Shell/Python 这样的脚本语言来实现对 AI Agent 应用的批量调用，例如，如果我们想使用 Python 脚本批量调用 OpenCode CLI 来执行 5 个不同的任务，就可以像下面这样编写一个简单的 Python 脚本：
+
+```python
+import subprocess
+
+tasks = [
+    "使用 Python 编写并执行一个 hello world 程序",
+    "使用 Python 编写并执行一个计算斐波那契数列的程序",
+    "使用 Python 编写并执行一个计算阶乘的程序",
+    "使用 Python 编写并执行一个计算素数的程序",
+    "使用 Python 编写并执行一个计算回文数的程序",
+]
+
+for task in tasks:
+    try:
+        result = subprocess.run(
+            ["opencode", "run", task],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=120
+        )
+        print(f"任务成功: {task}")
+        print(result.stdout)
+    except subprocess.CalledProcessError as e:
+        print(f"任务失败: {task}")
+        print(e.stderr)
+    except subprocess.TimeoutExpired:
+        print(f"任务超时: {task}")
+```
+
+除了`opencode run`命令之外，我们还可以通过执行`opencode -h`命令来查看其他可用 CLI 方式执行的 OpenCode 操作，如图 9 所示：
+
+![图9：OpenCode 的 CLI 帮助信息](img/opencode_cli_help.png)
+
+**图 9**：OpenCode 的 CLI 帮助信息
+
+虽然，上面这种多次调用`opencode run`命令的做法，在某些特定的情况下并不是最佳的任务编排方式。例如在某些时候，先将所有的需求写入一个 Markdown 文档中，再将其作为提示词一次性发给 AI Agent 可能会是一种更合适的做法。但是，我们可以基于这一思路发展出许多更复杂的 AI Agent 工作流，例如利用部署在服务端的 Agent 来操作这些命令行工具型的 Agent。下面，就让我们基于 OpenClaw 这一可部署服务型的 AI Agent 来了解一下这一工作流的具体实现方式。
 
 ### 可部署服务型 Agent
 
