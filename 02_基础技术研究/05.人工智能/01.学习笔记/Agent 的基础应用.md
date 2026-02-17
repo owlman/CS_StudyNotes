@@ -1,5 +1,5 @@
 ---
-title: Agent 的简介与使用
+title: Agent 的基础应用
 author: 凌杰
 date: 2026-02-10
 tags: agent opencode
@@ -129,7 +129,7 @@ categories: 人工智能
 
 至于其他 AI Agent，虽然会在全局配置目录与提示词文件上有各自的名称，但应用的工作流/机制基本是大同小异的，用户只需简单查询一下它们的官方文档，就可以轻松做到举一反三的，例如通过快速查询 Claude Code 的官方文档，立即就会知道它的全局提示词文件路径为`~/.claude/claude.md`。
 
-> 顺便说一句题外话，虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方政策会给中文用户带来诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明。
+> 顺便说一句题外话，虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方政策会给中文用户带来诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明。如果读者想切实了解 Claude Code 的某些具体用法，也可参考本文在最后一节中提供的视频资料：《Claude Code 教程》。
 
 #### 基本操作方式
 
@@ -192,34 +192,158 @@ for task in tasks:
 
 ### 可部署服务型 Agent
 
-### Agent 的扩展机制
+如果我们将命令行工具型的 AI Agent 视为一种增强型的自动化工具，那么以 OpenClaw 为代表的、可在服务端部署的 AI Agent 则就是一种系统级执行单元，二者的差异主要在于运行形态与系统边界。具体来说就是，命令行工具型 Agent 的运行方式通常是：
 
-#### MCP 服务
+- 被用户触发
+- 执行一轮或多轮任务
+- 输出结果
+- 退出进程
 
-#### Agent Skills
+而可部署服务型 Agent 则具有以下完全不同的特征：
 
-[^1]
+- 常驻运行
+- 通过 HTTP / RPC / WebSocket 等方式对外提供能力
+- 持续维护会话状态
+- 支持多用户并发访问
+- 可以被其他系统调用
+
+在这种形态下，Agent 就不再是一个功能类似于自动化脚本的增强型工具了，它成为了常驻在操作系统中的一个服务组件。具体来说，如果从程序架构的角度来看，这两种 Agent 的差别主要体现在以下几个方面：
+
+1. 生命周期管理：命令行工具型 Agent 的生命周期通常是一次性的，执行完成即销毁，而可部署服务型 Agent 则具有长生命周期，需要考虑健康检查、日志管理、异常恢复机制。
+2. 会话与状态管理：命令行工具型 Agent 的状态通常也是一次性的，而可部署服务型 Agent 则需要维护会话状态，这意味着它需要支持用户级会话隔离、长期上下文存储、记忆机制（Memory）以及外部数据库支持。
+3. 多 Agent 编排能力：一旦 Agent 以系统服务组件的形式存在，它就可以调用其他 Agent，被其他 Agent 调用，参与更复杂的任务链。例如像这样：
+
+    ```plaintext
+    用户请求
+    ↓
+    调度 Agent
+    ↓
+    分析 Agent → 代码生成 Agent → 测试 Agent
+    ↓
+    结果汇总
+    ```
+
+    这种执行结构显然已经不再是单纯的工具调用，它关注的实际上已经是任务的编排与调度了。这也就意味着，我们需要在服务型的 Agent 中引入任务队列、消息队列、异步任务调度系统等机制。
+
+下面，让我们以 OpenClaw 为例来具体介绍一下使用这种服务型 Agent 的一些基本工作流。假设，我们现在想使用 OpenClaw 指挥 OpenCode 来完成一个简单的网站重构任务，通常需要按照以下步骤来完成。
+
+#### 步骤 1：安装并配置一个 OpenClaw 服务
+
+正如之前所说，OpenClaw 本质上是一个系统服务，这意味着免不了要赋予它较大的操作权限，基于安全方面的考虑，我个人不建议用户将其安装在自己日常的工作设备上。另外，如果想最大限度地发挥 OpenClaw 的功能，最好要能让它长时间持续运行，并执行一定程度的实际设备管理能力。因此，我们在安装 OpenClaw 时通常需要执行的操作如下：
+
+- 配置好一台可与我们日常工作设备相连通的独立计算机（如果仅用于学习目的，也可以是一台虚拟机），并在其中安装好操作系统与 Node.js 20.x 以上版本的运行环境。
+
+- 在这台独立计算机上打开命令行终端，并执行`npm install -g openclaw@latest`命令来安装 OpenClaw。
+
+- 待安装完成之后，继续执行`openclaw onboard --install-daemon`命令来启动新手安装向导，进一步安装 OpenClaw 的服务端组件（例如飞书机器人、WhatsApp 机器人等），关于这方面的内容，读者可参考本文最后一节中提供的视频资料：《OpenClaw +飞书的工具流搭建过程》。
+
+- 在配置完相关服务端组件之后，我们还需要通过执行如下命令来配置 OpenClaw 的 Gateway 网关：
+
+    ```bash
+    openclaw channels login
+    openclaw gateway --port 18789
+    ```
+
+    在这里，`--port`参数用于指定 OpenClaw Gateway 的监听端口，如果读者希望使用默认的 18789 端口，则可以省略该参数。
+
+- 待 Gateway 启动之后，我们就可以使用浏览器打开`http://localhost:18789`来访问 OpenClaw 的 Web 端了，如果我们能看到如图 10 所示的界面，就说明 OpenClaw 已经成功安装并完成了初步的配置工作。
+
+![图10：OpenClaw 的 Web 端](img/openclaw_web.png)
+
+**图 10**：OpenClaw 的 Web 端
+
+#### 步骤 2：配置 OpenClaw 调用 OpenCode 的方式
+
+截止到目前为止，我们主要有**两种方式**可以让 OpenClaw 使用 OpenCode 来连接 LLM 并执行指定的任务。如果用户已购买了 OpenCode 的官方模型服务（即 OpenCode Zen），可以选择直接使用 OpenClaw 自带的 Zen 插件来调用 OpenCode，这种方式的具体操作如下：
+
+- 先获取到 OpenCode Zen 的 API Key，然后通过执行如下命令之一，将其添加到 OpenClaw 的配置中：
+
+    ```bash
+    # 使用交互式命令，这需要根据该命令的提示输入你的 API Key
+    openclaw onboard --auth-choice opencode-zen
+    # 或非交互式命令，直接将 API Key 作为参数传入
+    openclaw onboard --opencode-zen-api-key "<你的 API Key>"
+    ```
+
+- 如果需要的话，还可以通过执行如下命令来设置自己要使用的默认模型：
+
+    ```bash
+    openclaw config set agents.defaults.model.primary "opencode/claude-opus-4-6"
+    ```
+
+当然了，选择上述方式需要用户不计较按量计费所带来的开销。如果我们想使用免费的 LLM 的话（譬如  kimi-k2.5-free），也可以通过给 OpenClaw 安装 `opencode-to-openai`这样的第三方插件来实现。这第二种方式的具体操作如下：
+
+- 安装`opencode-to-openai`插件，这需要通过执行如下命令来完成：
+
+    ```bash
+    openclaw plugins install https://github.com/dxxzst/opencode-to-openai
+    ```
+
+- 安装完成后，需要执行如下命令来重启 OpenClaw，并确保插件已启用：
+
+    ```bash
+    openclaw gateway restart
+    ```
+
+    在这里，如果我们在 OpenClaw 中启用了插件白名单，就还需要通过执行如下命令将该加入该白名单：
+
+    ```bash
+    openclaw config get plugins.allow --json
+    # 假设返回 ["a","b"]
+
+    openclaw config set plugins.allow '["a","b","opencode-to-openai"]' --json
+    openclaw gateway restart
+    ```
+
+- 同步模型并认证 LLM 服务，这需要通过执行如下命令来完成：
+
+    ```bash
+    openclaw models auth login --provider opencode-to-openai --method local
+    ```
+
+    如果你想顺便设置默认模型：
+
+    ```bash
+    openclaw models auth login --provider opencode-to-openai --method local --set-default
+    ```
+
+- 选择模型，这需要通过执行如下命令来完成：
+
+    ```bash
+    openclaw models set opencode-to-openai/opencode/kimi-k2.5-free
+    ```
+
+    在这里，如果担心对 LLM 的请求会被卡住，也可以用`useIsolatedHome=false`这个插件配置让 OpenCode 使用真实 HOME，具体配置命令如下：
+
+    ```bash
+    openclaw config set plugins.opencode-to-openai.useIsolatedHome false
+    ```
+
+#### 步骤 3：与 OpenClaw 进行对话
+
+如果上述操作一切顺利，我们就可以在步骤 1 中配置好的 Web 端或飞书之类的应用中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 完成相关任务了，如图 11 所示：
+
+![图11：与 OpenClaw 的对话窗口](img/openclaw_chat.png)
+
+**图 11**：与 OpenClaw 的对话窗口
+
+当然了，如果想让提示词发挥到最大的作用，我们还需要再配置一下 OpenClaw/OpenCode 所接入的 MCP 服务和 Agent Skills 机制了。关于这部分的内容，我将会在《[[Agent 的进阶应用]]》这一篇笔记中进行详细介绍。
 
 ## 结束语
 
-在完成了对 AI Agent 的学习与实践之后，一个明显的感受是：
-Agent 并没有让系统变得更简单，反而让系统的边界变得更加清晰。
-
-与传统的自动化脚本或工具不同，Agent 并不是一组固定规则的集合，而是一个基于语言模型进行任务理解、规划与执行的系统组件。这意味着，在很多场景下，它所做的并不是“按预期运行”，而是“尽力完成任务”。
+在完成了对 AI Agent 的学习与实践之后，我最为明显的体会之一是：Agent 并没有让系统变得更简单，反而让系统的边界变得更加清晰。与传统的自动化脚本或工具不同，Agent 并不是一组固定规则的集合，而是一个基于语言模型进行任务理解、规划与执行的系统组件。这意味着，在很多场景下，它所做的并不是“按预期运行”，而是“尽力完成任务”。
 
 正因如此，Agent 的引入并没有削弱人类在系统中的作用，反而对人的判断能力提出了更高要求：
-我们需要能够理解 Agent 在做什么、为什么这么做，以及在什么情况下应该介入、修正甚至中止它的行为。
-
-从这个角度来看，学习和使用 AI Agent，并不意味着把控制权完全交给 AI，而是学会如何在一个由 AI 参与执行的系统中，重新定位人的职责与边界。这也正是本学习阶段的核心目标。
+我们需要能够理解 Agent 在做什么、为什么这么做，以及在什么情况下应该介入、修正甚至中止它的行为。从这个角度来看，学习和使用 AI Agent，并不意味着把控制权完全交给 AI，而是学会如何在一个由 AI 参与执行的系统中，重新定位人的职责与边界。这也正是本学习阶段的核心目标。
 
 ## 参考资料
 
-- 视频教程：
-  - [Claude Code 教程](https://www.youtube.com/watch?v=AT4b9kLtQCQ) [B站链接](https://www.bilibili.com/video/BV14rzQB9EJj)
-  - [Agent Skills 教程](https://www.youtube.com/watch?v=yDc0_8emz7M) [B站链接](https://www.bilibili.com/video/BV1cGigBQE6n)
 - 官方文档：
-  - [OpenCode 官方文档](https://opencode.ai/docs) 
+  - [Claude Code 官方文档](https://code.claude.com/docs/zh-CN/overview?utm_source=copilot.com)
+  - [OpenCode 官方文档](https://opencode.doczh.com/docs/)
   - [基于 Agent skills 和 MCP 服务的协同工作流](https://claude.com/blog/extending-claude-capabilities-with-skills-mcp-servers)
-  - [Agent skills 构建指南](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
+  - [OpenClaw 官方文档](https://docs.openclaw.ai/zh-CN)
 
-[^1]:AI Agent Skills：2025年10月16日由Anthropic正式推出，同年12月18日将其发布为开放标准。
+- 视频教程：
+  - Claude Code 教程：[YouTube 链接](https://www.youtube.com/watch?v=AT4b9kLtQCQ) / [Bilibili 链接](https://www.bilibili.com/video/BV14rzQB9EJj)
+  - OpenClaw +飞书的工具流搭建过程：[YouTube 链接](https://www.youtube.com/watch?v=giv63OtX720) / [Bilibili 链接](https://www.bilibili.com/video/BV1rvcpzDEsH)
