@@ -70,7 +70,7 @@ categories: 人工智能
 
 对于大多数开发者而言，以命令行工具的形式使用 AI Agent 是一种更符合工程直觉的方式。它运行在熟悉的终端环境中，可以直接访问文件系统与系统命令，因此看起来类似于自动化脚本。当然了，与传统脚本不同的是，AI Agent 的内部决策路径并非预先编写，而是由 LLM 在循环结构中动态生成。这类 AI Agent 应用的典型代表是 [Claude Code](https://github.com/anthropics/claude-code)，目前同类的主流应用还包括 [OpenCode](https://github.com/anomalyco/opencode)、[Codex CLI](https://github.com/openai/codex)、[Gemini CLI](https://github.com/google-gemini/gemini-cli)、[iFlow CLI](https://github.com/iflow-ai/iflow-cli) 等。下面，我们首先要做的就是：先将这些工具安装到自己所在的操作系统中。
 
-### 安装与配置
+#### 安装与配置
 
 命令行工具型 Agent 的安装方式其实是非常简单的。因为，虽然它们各自针对 MacOS/Linux/Windows 系统提供了不同的 bash/powershell 安装脚本，或者基于 homeberw/pacman/scoop 等针对不同操作系统平台的包管理器安装命令，但基本都提供了基于 NPM 这一包管理器的跨平台安装方式。所以，读者在大多数情况下都可以按照以下步骤来安装并使用这些工具：
 
@@ -129,7 +129,7 @@ categories: 人工智能
 
 至于其他 AI Agent，虽然会在全局配置目录与提示词文件上有各自的名称，但应用的工作流/机制基本是大同小异的，用户只需简单查询一下它们的官方文档，就可以轻松做到举一反三的，例如通过快速查询 Claude Code 的官方文档，立即就会知道它的全局提示词文件路径为`~/.claude/claude.md`。
 
-> 顺便说一句题外话，虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方政策会给中文用户带来诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明。如果读者想切实了解 Claude Code 的某些具体用法，也可参考本文在最后一节中提供的视频资料：《Claude Code 教程》。
+> 顺便说一句题外话，虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方政策会给中文用户带来诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明。如果读者想切实了解 Claude Code 的某些具体用法，也可参考本文在“参考资料”一节中提供的视频教程：《Claude Code 教程》。
 
 #### 基本操作方式
 
@@ -231,11 +231,22 @@ for task in tasks:
 
 正如之前所说，OpenClaw 本质上是一个系统服务，这意味着免不了要赋予它较大的操作权限，基于安全方面的考虑，我个人不建议用户将其安装在自己日常的工作设备上。另外，如果想最大限度地发挥 OpenClaw 的功能，最好要能让它长时间持续运行，并执行一定程度的实际设备管理能力。因此，我们在安装 OpenClaw 时通常需要执行的操作如下：
 
-- 配置好一台可与我们日常工作设备相连通的独立计算机（如果仅用于学习目的，也可以是一台虚拟机），并在其中安装好操作系统与 Node.js 20.x 以上版本的运行环境。
+- 配置好一台可与我们日常工作设备相连通的独立计算机（如果仅用于学习目的，也可以是一台虚拟机），并在其中安装好操作系统与 Node.js 22.x 以上版本的运行环境。
 
-- 在这台独立计算机上打开命令行终端，并执行`npm install -g openclaw@latest`命令来安装 OpenClaw。
+- 在这台独立计算机上打开命令行终端，并执行`npm install -g openclaw@latest`命令来安装 OpenClaw。当然了，这是使用跨平台的方式。如果读者不想使用 NPM，也可以通过直接执行 bash/powershell 的安装脚本来完成这个操作，相关命令如下：
 
-- 待安装完成之后，继续执行`openclaw onboard --install-daemon`命令来启动新手安装向导，进一步安装 OpenClaw 的服务端组件（例如飞书机器人、WhatsApp 机器人等），关于这方面的内容，读者可参考本文最后一节中提供的视频资料：《OpenClaw +飞书的工具流搭建过程》。
+    ```bash
+    # MacOS/Linux 系统下使用 bash 脚本安装：
+    curl -fsSL https://openclaw.ai/install.sh | bash
+    # Windows 系统下使用 powershell 脚本安装：
+    iwr -useb https://openclaw.ai/install.ps1 | iex
+    ```
+
+- 待安装完成之后，继续执行`openclaw onboard --install-daemon`命令来启动新手安装向导（如图 10 所示），进一步安装 OpenClaw 的服务端组件（例如飞书机器人、WhatsApp 机器人等），关于这方面的内容，读者可参考本文在“参考资料”一节中提供的视频教程：《OpenClaw +飞书的工具流搭建过程》。
+
+  ![图10：OpenClaw 的安装向导](img/openclaw_onboard.png)
+
+  **图 10**：OpenClaw 的安装向导
 
 - 在配置完相关服务端组件之后，我们还需要通过执行如下命令来配置 OpenClaw 的 Gateway 网关：
 
@@ -246,11 +257,11 @@ for task in tasks:
 
     在这里，`--port`参数用于指定 OpenClaw Gateway 的监听端口，如果读者希望使用默认的 18789 端口，则可以省略该参数。
 
-- 待 Gateway 启动之后，我们就可以使用浏览器打开`http://localhost:18789`来访问 OpenClaw 的 Web 端了，如果我们能看到如图 10 所示的界面，就说明 OpenClaw 已经成功安装并完成了初步的配置工作。
+- 待 Gateway 启动之后，我们就可以使用浏览器打开`http://localhost:18789`来访问 OpenClaw 的 Web 端了，如果我们能看到如图 11 所示的界面，就说明 OpenClaw 已经成功安装并完成了初步的配置工作。
 
-![图10：OpenClaw 的 Web 端](img/openclaw_web.png)
+    ![图11：OpenClaw 的 Web 端](img/openclaw_web.png)
 
-**图 10**：OpenClaw 的 Web 端
+    **图 11**：OpenClaw 的 Web 端
 
 #### 步骤 2：配置 OpenClaw 调用 OpenCode 的方式
 
@@ -276,7 +287,9 @@ for task in tasks:
 - 安装`opencode-to-openai`插件，这需要通过执行如下命令来完成：
 
     ```bash
-    openclaw plugins install https://github.com/dxxzst/opencode-to-openai
+    git clone https://github.com/dxxzst/opencode-to-openai
+    cd opencode-to-openai
+    openclaw plugins install .
     ```
 
 - 安装完成后，需要执行如下命令来重启 OpenClaw，并确保插件已启用：
@@ -321,11 +334,11 @@ for task in tasks:
 
 #### 步骤 3：与 OpenClaw 进行对话
 
-如果上述操作一切顺利，我们就可以在步骤 1 中配置好的 Web 端或飞书之类的应用中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 完成相关任务了，如图 11 所示：
+如果上述操作一切顺利，我们就可以在步骤 1 中配置好的 Web 端或飞书之类的应用中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 完成相关任务了，如图 12 所示：
 
-![图11：与 OpenClaw 的对话窗口](img/openclaw_chat.png)
+![图12：与 OpenClaw 的对话窗口](img/openclaw_chat.png)
 
-**图 11**：与 OpenClaw 的对话窗口
+**图 12**：与 OpenClaw 的对话窗口
 
 当然了，如果想让提示词发挥到最大的作用，我们还需要再配置一下 OpenClaw/OpenCode 所接入的 MCP 服务和 Agent Skills 机制了。关于这部分的内容，我将会在《[[Agent 的进阶应用]]》这一篇笔记中进行详细介绍。
 
