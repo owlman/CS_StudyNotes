@@ -2,13 +2,13 @@
 title: Agent 的基础应用
 author: 凌杰
 date: 2026-02-10
-tags: agent opencode
+tags: agent opencode openclaw
 categories: 人工智能
 ---
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第四个学习阶段。其中记录了我学习 AI Agent 的工作原理，并将其应用于实际工作场景的全过程，以及在该过程中所获得的心得体会。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
+> 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第四个学习阶段。其中记录了我学习 AI Agent 的工作原理，以及初步掌握其基础应用方法的全过程，以及在该过程中所获得的心得体会。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
 
 ## AI Agent 简介
 
@@ -80,25 +80,29 @@ categories: 人工智能
 
 在安装完成之后，我们就可以用 CLI 和 TUI 两种方式来使用这种命令行工具型的 Agent 了。其中，TUI 的方式已经被大家所熟知，它实际上就是一个基于命令行界面的交互式程序，运作方式类似于 Python Shell 或 Node.js REPL，拥有属于自己的独立线程。例如在安装完 OpenCode 之后，我们只需要直接在命令行终端中输入`opencode`命令（如果想延续之前与 OpenCode 的会话，还在该命令后面加上一个`--continue`或`-c`参数），就可以启动它的 TUI 界面了，具体如图 1 所示：
 
-![图1：OpenCode TUI 界面](img/opencode_tui.png)
+<!-- ![图1：OpenCode TUI 界面](img/opencode_tui.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218160322816-1525296787.png)
 
 **图 1**：OpenCode TUI 界面
 
 在初次进入上次界面时，我们可以对自己使用的 AI Agent 进行一些基本的配置，这些工具的配置方式基本上是大同小异的。一般来说，我们会先使用`/model`命令设置以下自己默认要使用的 LLM，例如您在图 2 中所看到的就是 OpenCode 的 LLM 选择界面：
 
-![图2：OpenCode LLM 选择界面](img/opencode_llm.png)
+<!-- ![图2：OpenCode LLM 选择界面](img/opencode_llm.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218160253302-210062309.png)
 
 **图 2**：OpenCode LLM 选择界面
 
 通常情况下，在选择 LLM 之后，这些 AI Agent 会要求我们提供一个 API Key，用于在调用 LLM 时进行身份验证。这个 API key 可以通过登录我们在相应 LLM 官网的个人账户来获得。例如，我在这里选择使用的是智普的 GLM 模型，就需要登录到[智普 AI 的官网](https://bigmodel.cn/)，并为 OpenCode 创建一个专属的 API Key，如图 3 所示：
 
-![图3：创建智普 AI 的 API Key](img/zhipu_api_key.png)
+<!-- ![图3：创建智普 AI 的 API Key](img/zhipu_api_key.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218160222119-632981045.png)
 
 **图 3**：创建智普 AI 的 API Key
 
 接下来，我们就只需要将上述 API Key 复制到 OpenCode 提示输入 key 的位置，并选择具体要使用的 GLM 版本并确认即可。完成这些配置之后，我们就可以通过一个 AI Agent 版的“Hello World”测试来确认它是否已经可以正常工作了，如图 4 所示：
 
-![图4：OpenCode Hello World 测试](img/opencode_hello.png)
+<!-- ![图4：OpenCode Hello World 测试](img/opencode_hello.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218160150344-1916655373.png)
 
 **图 4**：OpenCode Hello World 测试
 
@@ -123,31 +127,35 @@ categories: 人工智能
 
 当然了，我们更多时候会希望上述提示词文件只针对当前项目有效，这可以进行更多个性化的配置。为此，我们也可以选择在该项目的根目录下打开 OpenCode TUI，然后在其中通过执行`/init`命令来创建一个针对当前项目的`AGENTS.md`文件，并将上述内容复制到该文件中即可，该命令的具体效果如图 5 所示：
 
-![图5：OpenCode 的项目初始化命令](img/opencode_init.png)
+<!-- ![图5：OpenCode 的项目初始化命令](img/opencode_init.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218160119508-1547442074.png)
 
 **图 5**：OpenCode 的项目初始化命令
 
 至于其他 AI Agent，虽然会在全局配置目录与提示词文件上有各自的名称，但应用的工作流/机制基本是大同小异的，用户只需简单查询一下它们的官方文档，就可以轻松做到举一反三的，例如通过快速查询 Claude Code 的官方文档，立即就会知道它的全局提示词文件路径为`~/.claude/claude.md`。
 
-> 顺便说一句题外话，虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方政策会给中文用户带来诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明。如果读者想切实了解 Claude Code 的某些具体用法，也可参考本文在“参考资料”一节中提供的视频教程：《Claude Code 教程》。
+> 顺便说一句题外话，虽然 Claude Code 在各方面都为 AI Agent 应用建立了接近于标准的工作流/机制，但考虑到其官方的某些做法会给中文用户带来诸多没必要的额外配置，我在接下来还是会以 OpenCode 为例进行说明。如果读者想切实了解 Claude Code 的某些具体用法，也可参考本文在“参考资料”一节中提供的视频教程：《Claude Code 教程》。
 
 #### 基本操作方式
 
 下面，让我们来具体介绍一下命令行工具型 Agent 的基本操作方式，正如之前所说，这类命令行工具通常有 CLI 和 TUI 两种使用方式，TUI 会单独打开一个工作线程来执行交互式操作，通常用于执行一些需要使用多轮提示词交互，并确认内容的复杂任务。因此，这些 Agent 应用的 TUI 往往至少会提供“计划（plan）”和“构建（build）”两个模式（个别 Agent 还会提供”自动（auto）“之类的第三种模式，或者在模式名称上存在差异，但其在基本使用逻辑上是一致的），其中，”计划“模式通常没有执行外部命令的权限，主要用于与 LLM 执行多轮交互，并确认某一杂任务的解决方案。例如在之前展示的 OpenCode TUI 中，读者可以在其输入框的下方看到，它默认处于“构建”模式。现在，我们可以通过输入`<tab>`键来将其切换到“计划”模式，然后再试着让它执行“使用 Python 编写并执行一个 hello world 程序”的操作，就会得到类似图 5 的输出：
 
-![图6：OpenCode 的计划模式](img/opencode_plan.png)
+<!-- ![图6：OpenCode 的计划模式](img/opencode_plan.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218160040673-1077571178.png)
 
 **图 6**：OpenCode 的计划模式
 
 正如读者所见，现在 OpenCode TUI 输入框下面提示其当前处于“计划”模式，并且告诉用户自己当前不能编辑文件和执行程序，然后开始与用户讨论任务的具体解决方案。而当我们切换到“构建”模式时，OpenCode 就会直接执行这个解决方案，并输出类似图 7 的结果：
 
-![图7：OpenCode 的构建模式](img/opencode_build.png)
+<!-- ![图7：OpenCode 的构建模式](img/opencode_build.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218160004275-1878144736.png)
 
 **图 7**：OpenCode 的构建模式
 
 当然了，就上面这种仅需一句简短的提示词就可以完成的任务而言，我们实际上更适合使用 CLI 的方式来执行。这种方式允许我们在 bash/powershell 这类命令行终端程序所在的当前线程中直接执行 AI Agent，并输出结果。例如，如果我们想使用 OpenCode CLI 的方式来编写并执行上面那个 Python 程序，可以直接在命令行终端中输入`opencode run "使用 Python 编写并执行一个 hello world 程序"`命令，并得到类似图 8 的输出：
 
-![图8：OpenCode 的 CLI 模式](img/opencode_cli.png)
+<!-- ![图8：OpenCode 的 CLI 模式](img/opencode_cli.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218155937910-1298759938.png)
 
 **图 8**：OpenCode 的 CLI 模式
 
@@ -184,7 +192,8 @@ for task in tasks:
 
 除了`opencode run`命令之外，我们还可以通过执行`opencode -h`命令来查看其他可用 CLI 方式执行的 OpenCode 操作，如图 9 所示：
 
-![图9：OpenCode 的 CLI 帮助信息](img/opencode_cli_help.png)
+<!-- ![图9：OpenCode 的 CLI 帮助信息](img/opencode_cli_help.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218155909459-1029247200.png)
 
 **图 9**：OpenCode 的 CLI 帮助信息
 
@@ -244,7 +253,8 @@ for task in tasks:
 
 - 待安装完成之后，继续执行`openclaw onboard --install-daemon`命令来启动新手安装向导（如图 10 所示），进一步安装 OpenClaw 的服务端组件（例如飞书机器人、WhatsApp 机器人等），关于这方面的内容，读者可参考本文在“参考资料”一节中提供的视频教程：《OpenClaw +飞书的工具流搭建过程》。
 
-  ![图10：OpenClaw 的安装向导](img/openclaw_onboard.png)
+  <!-- ![图10：OpenClaw 的安装向导](img/openclaw_onboard.png) -->
+  ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218155800997-2144742020.png)
 
   **图 10**：OpenClaw 的安装向导
 
@@ -259,7 +269,8 @@ for task in tasks:
 
 - 待 Gateway 启动之后，我们就可以使用浏览器打开`http://localhost:18789`来访问 OpenClaw 的 Web 端了，如果我们能看到如图 11 所示的界面，就说明 OpenClaw 已经成功安装并完成了初步的配置工作。
 
-    ![图11：OpenClaw 的 Web 端](img/openclaw_web.png)
+    <!-- ![图11：OpenClaw 的 Web 端](img/openclaw_web.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218155717170-227815528.png)
 
     **图 11**：OpenClaw 的 Web 端
 
@@ -336,11 +347,12 @@ for task in tasks:
 
 如果上述操作一切顺利，我们就可以在步骤 1 中配置好的 Web 端或飞书之类的应用中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 完成相关任务了，如图 12 所示：
 
-![图12：与 OpenClaw 的对话窗口](img/openclaw_chat.png)
+<!-- ![图12：与 OpenClaw 的对话窗口](img/openclaw_chat.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218155645024-1895778692.png)
 
 **图 12**：与 OpenClaw 的对话窗口
 
-当然了，如果想让提示词发挥到最大的作用，我们还需要再配置一下 OpenClaw/OpenCode 所接入的 MCP 服务和 Agent Skills 机制了。关于这部分的内容，我将会在《[[Agent 的进阶应用]]》这一篇笔记中进行详细介绍。
+当然了，如果想让提示词发挥到最大的作用，并在生产环境中实际使用 OpenClaw/OpenCode 来完成具体的项目任务，我们还需要再配置一下 OpenClaw/OpenCode 所接入的 MCP 服务和 Agent Skills 机制了。关于这部分的内容，我将会在《[[Agent 的进阶应用]]》这一篇笔记中进行详细介绍。
 
 ## 结束语
 
