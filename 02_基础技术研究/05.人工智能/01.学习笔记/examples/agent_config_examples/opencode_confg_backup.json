@@ -1,0 +1,50 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "mcp": {
+        "playwright": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@playwright/mcp@latest"
+            ]
+        },
+        "fetch": {
+            "type": "local",
+            "command": [
+                "uvx",
+                "mcp-server-fetch"
+            ]
+        },
+        "github": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ],
+            "environment": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "<your github personal access token>"
+            }
+        },
+        "gitee": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@gitee/mcp-gitee@latest"
+            ],
+            "environment": {
+                "GITEE_API_BASE": "https://gitee.com/api/v5",
+                "GITEE_ACCESS_TOKEN": "<your gitee access token>"
+            }
+        },
+        "git": {
+            "type": "local",
+            "command": [
+                "uvx",
+                "mcp-server-git"
+            ]
+        }
+    }
+}
