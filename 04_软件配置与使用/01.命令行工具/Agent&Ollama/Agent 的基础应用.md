@@ -354,7 +354,7 @@ for task in tasks:
 
 **图 12**：与 OpenClaw 的对话窗口
 
-当然了，如果想让提示词发挥到最大的作用，并在生产环境中实际使用 OpenClaw/OpenCode 来完成具体的项目任务，我们还需要再配置一下 OpenClaw/OpenCode 所接入的 MCP 服务和 Agent Skills 机制了。关于这部分的内容，我将会在《[[Agent 的进阶应用]]》这一篇笔记中进行详细介绍。
+当然了，如果想让提示词发挥到最大的作用，并在生产环境中实际使用 OpenClaw/OpenCode 来完成具体的项目任务，我们还需要再配置一下 OpenClaw/OpenCode 所接入的 MCP 服务和 Agent Skills 机制了。关于这部分的内容，我将会在《[[Agent 的能力体系]]》这一篇笔记中进行详细介绍。
 
 ## 结束语
 
