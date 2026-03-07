@@ -16,6 +16,8 @@ categories: 人工智能
 
 很显然，就目前阶段的学习任务来看，如果我们从直接编译源码、手动配置推理引擎、管理模型权重与依赖环境来着手，大概率会让自己的学习重心过早地偏向底层细节，而模糊了我们真正想观察的目标 —— LLM 在生产环境中所扮演的角色。因此，我个人会推荐读者从一款名为 Ollama 的开源模型管理工具来着手，该工具可以让人们在不必关心底层实现细节的情况下，快速地完成 LLM 的部署与测试。下面，就让我们来具体介绍一下 Ollama 及其使用方法。
 
+> 如果想直接基于深度学习框架来部署 LLM，也可以参考本文在“参考资料”一节中提供的视频教程：《基于 Transformer 库的 LLM 部署演示》。
+
 ### 了解并安装 Ollama
 
 Ollama 是一款基于 MIT 协议开源的、面向本地环境的 LLM 运行与管理工具，它的核心设计目标是以尽可能低的使用门槛，将“运行一个 LLM”这件事变成一项标准化、可重复的工程操作。具体来说就是，Ollama 在整个与 LLM 相关的系统中大致承担了以下职责：
@@ -285,6 +287,9 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
 ## 参考资料
 
-- [Ollama 中文文档](https://ollama.cadn.net.cn/#quickstart)
-- [Ollama-Python 文档](https://github.com/ollama/ollama-python)
-- [PyTest 官方文档](https://docs.pytest.org/en/stable/)
+- 文档资料：
+  - [Ollama 中文文档](https://ollama.cadn.net.cn/#quickstart)
+  - [Ollama-Python 文档](https://github.com/ollama/ollama-python)
+  - [PyTest 官方文档](https://docs.pytest.org/en/stable/)
+- 视频资料：
+  - 基于 Transformer 库的 LLM 部署演示：[YouTube 链接](https://www.youtube.com/watch?v=aHAmg_1q41M) / [Bilibili 链接](https://www.bilibili.com/video/BV1xNAiziEhP)
