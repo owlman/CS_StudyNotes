@@ -291,5 +291,6 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
   - [Ollama 中文文档](https://ollama.cadn.net.cn/#quickstart)
   - [Ollama-Python 文档](https://github.com/ollama/ollama-python)
   - [PyTest 官方文档](https://docs.pytest.org/en/stable/)
+
 - 视频资料：
   - 基于 Transformer 库的 LLM 部署演示：[YouTube 链接](https://www.youtube.com/watch?v=aHAmg_1q41M) / [Bilibili 链接](https://www.bilibili.com/video/BV1xNAiziEhP)
