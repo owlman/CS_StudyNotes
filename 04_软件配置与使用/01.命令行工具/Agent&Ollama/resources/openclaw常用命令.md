@@ -1,23 +1,18 @@
-# OpenClaw 常用命令[持续更新]
+# OpenClaw 常用命令
 
-OpenClaw 好用也不好用,开始配置时,遇到了一堆不会的东西,慢慢熟悉。
+尽管，OpenClaw 是一款可部署在服务器上的 AI Agent，它拥有强大的自动化操作能力，支持通过接入 Telegram、Whatsapp、飞书等即时通讯软件来进行远程操控计算机，颇受业界人士喜欢。但是，由于该项目目前版本更新频繁，一些操作命令经常会发生细微的变化，而官方文档更新又不够不及时，导致我们在使用过程中经常会遇到各种问题。因此，本文将整理它一些常用的命令，并将其维护在 GitHub 上，以便日常参考。
 
-青小蛙折腾了三天了,基本上跑起来了,也碰到不少坑。
-
-核心就一点:在安装完成之后,首选 Qwen 登录,先让他跑起来,后面遇到问题了,只要服务不挂,就可以让它自己修复 😂
-
-以下是青小蛙这两天使用时,记录下来的一些,持续更新
-
-## 安装
-
-是的,一行就行了。但是因为 OpenClaw 拥有管理员权限,建议不要使用人类电脑,而是给他一个隔离的、虚拟的电脑,比如 VPS、虚拟机等等。
+## 安装命令
 
 ```bash
-# macOS / Linux
+# 使用 Bash 安装（MacOS/Linux/WSL）
 curl -fsSL https://openclaw.ai/install.sh | bash
 
-# Windows(不建议,推荐在 wsl 中使用)
+# 使用 PowerShell 安装（Windows）
 iwr -useb https://openclaw.ai/install.ps1 | iex
+
+# 使用 NPM 安装
+npm i -g @openclaw/cli
 ```
 
 ### 安装后台服务
@@ -158,6 +153,3 @@ openclaw doctor --fix
 openclaw status
 ```
 
-## 当前的 OpenClaw 操作建议
-
-虽然 OpenClaw 带着自动化操作的名头,但它目前已久是一款强命令行工具,很多操作避免不了在终端中操作,所以还是要对此有耐心。
