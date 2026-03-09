@@ -47,6 +47,8 @@ categories: 人工智能
 
 这意味着：如果我们在实际生产环境中不可避免地需要高频调用 LLM，那么其“臃肿的系统提示词”无疑就会成为长期的成本负担，这将大大限制 Agent 应用的能力扩展空间。也正是在这样的背景下，业界才会一直持续不断地寻求在更高层次上对 Agent 应用的能力体系展开进一步的探索，这探索的结果中就包括了由 Anthropic 公司提出的 MCP 服务与 Skills 机制，它们也正是我们接下来要讨论的重点。
 
+> 如果读者想更详细地了解提示词与上下文工程在 Agent 应用中的工作原理，也可以参考本文在“参考资料”一节中提供的视频教程：《关于提示词与上下文工程的科普》。
+
 ## MCP 服务
 
 MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”）是由 Anthropic 公司提出并推广的，一种用于连接 LLM 与外部服务/工具的通信协议，它的设计目标是寻求在 Agent 应用的底层架构上解决以下三个问题：
@@ -168,7 +170,7 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 
 如果从能力体系的层次来看，MCP 服务属于“能力接入层”。它解决的是 LLM 的外部调用能力，而提示词则是用于控制 LLM 的单次推理行为与输出表现的。二者并不冲突，但也不在同一层级。理解这一点，才能避免将 MCP 误解为一种“高级提示词技巧”，从而在架构设计上做出错误决策。
 
-> 顺带一提，如果读者想了解更多常用的 MCP 服务，以及它们在 Claude Code/Codex CLI 中的配置方法，也可以参考本文在“参考资料”一节中提供的视频教程：《15 款常用 MCP 服务的配置方法》。
+> 如果读者想了解更多常用的 MCP 服务，以及它们在 Claude Code/Codex CLI 中的配置方法，也可以参考本文在“参考资料”一节中提供的视频教程：《15 款常用 MCP 服务的配置方法》。
 
 ## Skills 机制
 
@@ -228,7 +230,7 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 
 **图 6**：Anthropic 官方提供的 Skills
 
-> 顺带一提，如果读者想基于 Anthropic 的官方产品 Claude Code 进一步研究 Skills 机制的构建与使用方法，也可以参考本文在“参考资料”一节中提供的官方文档：《Agent Skills 构建指南》。
+> 如果读者想基于 Anthropic 的官方产品 Claude Code 进一步研究 Skills 机制的构建与使用方法，也可以参考本文在“参考资料”一节中提供的官方文档：《Agent Skills 构建指南》。
 
 ### Skills 机制 VS 提示词模板
 
@@ -277,6 +279,7 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 
 - 视频教程
   - 关于 Token 的科普：[YouTube 链接](https://www.youtube.com/watch?v=QNiaoD5RxPA) / [Bilibili 链接](https://www.bilibili.com/video/BV1S5miBvEsu)
+  - 关于提示词与上下文工程的科普：[YouTube 链接](https://www.youtube.com/watch?v=-8Ygq9AVWZ8) / [Bilibili 链接](https://www.bilibili.com/video/BV1iweMzXEm2)
   - MCP 教程（基础篇）： [YouTube 链接](https://www.youtube.com/watch?v=yjBUnbRgiNs) / [Bilibili 链接](https://www.bilibili.com/video/BV1uronYREWR/)
   - MCP 教程（进阶篇）：[YouTube 链接](https://www.youtube.com/watch?v=zrs_HWkZS5w) / [Bilibili 链接](https://www.bilibili.com/video/BV1Y854zmEg9)
   - 15 款常用 MCP 服务的配置方法：[YouTube 链接](https://www.youtube.com/watch?v=UW5iQGE3264) / [Bilibili 链接](https://www.bilibili.com/video/BV1ZJsBznEt3)
