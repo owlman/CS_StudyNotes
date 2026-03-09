@@ -2,7 +2,7 @@
 
 尽管，OpenClaw 是一款可部署在服务器上的 AI Agent，它拥有强大的自动化操作能力，支持通过接入 Telegram、Whatsapp、飞书等即时通讯软件来进行远程操控计算机，颇受业界人士喜欢。但是，由于该项目目前版本更新频繁，一些操作命令经常会发生细微的变化，而官方文档更新又不够不及时，导致我们在使用过程中经常会遇到各种问题。因此，本文将整理它一些常用的命令，并将其维护在 GitHub 上，以便日常参考。
 
-## 安装命令
+## 安装与升级
 
 ```bash
 # 使用 Bash 安装（MacOS/Linux/WSL）
@@ -12,7 +12,15 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 iwr -useb https://openclaw.ai/install.ps1 | iex
 
 # 使用 NPM 安装
-npm i -g @openclaw/cli
+npm i -g openclaw@latest
+```
+
+> 由于 OpenClaw 的版本更新频率非常高，如果想要随时使用上它的最新功能，可以每隔几日就重新执行一下上述安装命令将其升级。请放心，这些重新安装动作只会进行程序的版本升级，不会破坏你此前的设置。
+
+### 启动新手安装向导
+
+```bash
+openclaw onboard --install-daemon
 ```
 
 ### 安装后台服务
@@ -21,21 +29,15 @@ npm i -g @openclaw/cli
 openclaw gateway install
 ```
 
-他会生成 /home/appinn/.config/systemd/user/openclaw-gateway.service 自启动配置文件
+该命令会生成`~/appinn/.config/systemd/user/openclaw-gateway.service`自启动配置文件。
 
-### 后台启动(兼基础向导)
-
-```bash
-openclaw onboard --install-daemon
-```
-
-### 配置向导
+### 启动配置向导
 
 ```bash
 openclaw configure
 ```
 
-虽然可以直接修改配置文件,但使用向导配置是最稳的。
+虽然我们也可以直接修改配置文件，但使用向导配置是最稳的。
 
 ### 配对控制台
 
@@ -45,20 +47,16 @@ openclaw devices approve <requestId>
 openclaw devices reject <requestId>
 ```
 
-list 之后可以看到 id,然后在运行第二行就行了。
-
-## 使用浏览器链接
-
-这个时候,就可以使用 http://127.0.0.1:18789 打开你的 OpenClaw 了。
+list 之后可以看到 id，然后在运行第二行就行了。
 
 ## 维护
 
 ### 重启
 
 ```bash
-#重启
+# 重启
 systemctl --user restart openclaw-gateway
-#查看日志
+# 查看日志
 journalctl --user -u openclaw-gateway.service -f
 ```
 
@@ -76,7 +74,7 @@ openclaw update
 
 ### 修复
 
-如果出了小问题,但还没彻底坏,可以让他自己修复:
+如果出了小问题，只要程序本身还没彻底坏，可以执行如下命令让他自己修复:
 
 ```bash
 openclaw doctor --fix
@@ -125,18 +123,6 @@ openclaw models set <openrouter/auto>
 openclaw tui
 ```
 
-## 升级
-
-OpenClaw 基本上保持着日更的节奏,想要跟上最新功能,最好的办法是直接升级。
-
-放心升级不会破坏你此前的设置,只需要:
-
-```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
-```
-
-运行重新安装即可。
-
 ## 错误检查
 
 一旦遇到问题,不要慌,只需要运行:
@@ -152,4 +138,3 @@ openclaw doctor --fix
 ```bash
 openclaw status
 ```
-
