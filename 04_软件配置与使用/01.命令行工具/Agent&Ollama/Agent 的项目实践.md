@@ -9,4 +9,4 @@
 ## 参考资料
 
 - 视频教程
-  - 关于提示词工程的实战演示：[YouTube 链接](https://www.youtube.com/watch?v=YCswP_xmxu0) | [Bilibili 链接](https://www.bilibili.com/video/BV1dY411n7qk/)
+  - 关于提示词工程的实战演示：[YouTube 链接](https://www.youtube.com/watch?v=YCswP_xmxu0) | [Bilibili 链接](https://www.bilibili.com/video/BV1ubaVzXEdM)
