@@ -238,7 +238,7 @@ for task in tasks:
 
 下面，让我们以 OpenClaw 为例来具体介绍一下使用这种服务型 Agent 的一些基本工作流。假设，我们现在想使用 OpenClaw 指挥 OpenCode 来完成一个简单的网站重构任务，通常需要按照以下步骤来完成。
 
-#### 步骤 1：安装并配置一个 OpenClaw 服务
+#### 安装并配置 OpenClaw 服务
 
 正如之前所说，OpenClaw 本质上是一个系统服务，这意味着免不了要赋予它较大的操作权限，基于安全方面的考虑，我个人不建议用户将其安装在自己日常的工作设备上。另外，如果想最大限度地发挥 OpenClaw 的功能，最好要能让它长时间持续运行，并执行一定程度的实际设备管理能力。因此，我们在安装 OpenClaw 时通常需要执行的操作如下：
 
@@ -276,7 +276,7 @@ for task in tasks:
 
     **图 11**：OpenClaw 的 Web 端
 
-#### 步骤 2：配置 OpenClaw 调用 OpenCode 的方式
+#### 配置调用 OpenCode 的方式
 
 截止到目前为止，我们主要有**两种方式**可以让 OpenClaw 使用 OpenCode 来连接 LLM 并执行指定的任务。如果用户已购买了 OpenCode 的官方模型服务（即 OpenCode Zen），可以选择直接使用 OpenClaw 自带的 Zen 插件来调用 OpenCode，这种方式的具体操作如下：
 
@@ -345,9 +345,9 @@ for task in tasks:
     openclaw config set plugins.opencode-to-openai.useIsolatedHome false
     ```
 
-#### 步骤 3：与 OpenClaw 进行对话
+#### 与 OpenClaw 服务进行对话
 
-如果上述操作一切顺利，我们就可以在步骤 1 中配置好的 Web 端或飞书之类的应用中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 完成相关任务了，如图 12 所示：
+如果上述操作一切顺利，我们就可以在配置好的 Web 端或飞书之类的应用中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 这在本地运行的 Agent 应用来完成相关任务了，如图 12 所示：
 
 <!-- ![图12：与 OpenClaw 的对话窗口](img/openclaw_chat.png) -->
 ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218155645024-1895778692.png)
