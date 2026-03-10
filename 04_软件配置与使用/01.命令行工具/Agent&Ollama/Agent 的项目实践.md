@@ -1,12 +1,23 @@
-## 项目实践演示
+---
+title: Agent 的项目实践
+date: 2026-03-20
+tags: opencode openclaw
+categories: 软件配置与使用
+---
 
-### 项目1：个人网站的重构
+> [!NOTE] 笔记说明
+>
+> 
 
-### 项目2：文档的格式转换
+## 项目1：论文写作
 
-### 项目3：笔记系统的建构
+## 项目2：网站重构
+
+## 项目3：个人助理
 
 ## 参考资料
 
-- 视频教程
+- 文档资料
+  - 
+- 视频资料
   - 关于提示词工程的实战演示：[YouTube 链接](https://www.youtube.com/watch?v=YCswP_xmxu0) | [Bilibili 链接](https://www.bilibili.com/video/BV1ubaVzXEdM)
