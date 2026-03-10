@@ -3,7 +3,7 @@ title: Agent 的基础应用
 author: 凌杰
 date: 2026-02-10
 tags: agent opencode openclaw
-categories: 人工智能
+categories: 软件配置与使用
 ---
 
 > [!NOTE] 笔记说明
