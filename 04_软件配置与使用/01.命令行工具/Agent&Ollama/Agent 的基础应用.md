@@ -364,12 +364,12 @@ for task in tasks:
 
 ## 参考资料
 
-- 官方文档：
+- 文档资料：
   - [Claude Code 官方文档](https://code.claude.com/docs/zh-CN/overview?utm_source=copilot.com)
   - [OpenCode 官方文档](https://opencode.doczh.com/docs/)
   - [基于 Agent skills 和 MCP 服务的协同工作流](https://claude.com/blog/extending-claude-capabilities-with-skills-mcp-servers)
   - [OpenClaw 官方文档](https://docs.openclaw.ai/zh-CN)
 
-- 视频教程：
+- 视频资料：
   - Claude Code 教程：[YouTube 链接](https://www.youtube.com/watch?v=AT4b9kLtQCQ) / [Bilibili 链接](https://www.bilibili.com/video/BV14rzQB9EJj)
   - OpenClaw +飞书的工具流搭建过程：[YouTube 链接](https://www.youtube.com/watch?v=giv63OtX720) / [Bilibili 链接](https://www.bilibili.com/video/BV1rvcpzDEsH)
