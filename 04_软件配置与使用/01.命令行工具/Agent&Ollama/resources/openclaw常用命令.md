@@ -12,7 +12,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 iwr -useb https://openclaw.ai/install.ps1 | iex
 
 # 使用 NPM 安装
-npm i -g openclaw@latest
+    npm i -g openclaw@latest
 ```
 
 > 由于 OpenClaw 的版本更新频率非常高，如果想要随时使用上它的最新功能，可以每隔几日就重新执行一下上述安装命令将其升级。请放心，这些重新安装动作只会进行程序的版本升级，不会破坏你此前的设置。
