@@ -278,6 +278,7 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 - 官方文档：
   - [Anthropic 对 MCP 服务的官方简介](https://www.anthropic.com/news/model-context-protocol)
   - [Agent Skills 构建指南](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
+  - [基于 Agent skills 和 MCP 服务的协同工作流](https://claude.com/blog/extending-claude-capabilities-with-skills-mcp-servers)
 
 - 视频教程
   - 关于 Token 的科普：[YouTube 链接](https://www.youtube.com/watch?v=QNiaoD5RxPA) / [Bilibili 链接](https://www.bilibili.com/video/BV1S5miBvEsu)
