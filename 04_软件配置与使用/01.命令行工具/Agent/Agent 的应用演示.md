@@ -22,3 +22,5 @@ categories: 软件配置与使用
 
 - 视频资料
   - 关于提示词工程的实战演示：[YouTube 链接](https://www.youtube.com/watch?v=YCswP_xmxu0) | [Bilibili 链接](https://www.bilibili.com/video/BV1ubaVzXEdM)
+  - Oh-My-OpenCode 插件使用演示：[YouTube 链接](https://www.youtube.com/watch?v=twFjLiy2Pmc) | [Bilibili 链接](https://www.bilibili.com/video/BV1SYrTBMEzB)
+  - ClawTeam-OpenClaw 插件使用演示：[YouTube 链接](https://www.youtube.com/watch?v=aZT9d8qrirY) | [Bilibili 链接](https://www.bilibili.com/video/BV1FVApz9EQj)
