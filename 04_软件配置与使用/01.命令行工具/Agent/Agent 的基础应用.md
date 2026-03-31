@@ -372,3 +372,4 @@ for task in tasks:
 - 视频资料：
   - Claude Code 教程：[YouTube 链接](https://www.youtube.com/watch?v=AT4b9kLtQCQ) / [Bilibili 链接](https://www.bilibili.com/video/BV14rzQB9EJj)
   - OpenClaw +飞书的工具流搭建过程：[YouTube 链接](https://www.youtube.com/watch?v=giv63OtX720) / [Bilibili 链接](https://www.bilibili.com/video/BV1rvcpzDEsH)
+  - OpenCode 的基本使用演示：[YouTube 链接](https://www.youtube.com/watch?v=JYVTUU9ClUA) / [Bilibili 链接](https://www.bilibili.com/video/BV1BVrXBUEbR)
