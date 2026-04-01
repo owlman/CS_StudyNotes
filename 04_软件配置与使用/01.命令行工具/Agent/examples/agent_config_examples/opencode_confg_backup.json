@@ -45,6 +45,14 @@
                 "uvx",
                 "mcp-server-git"
             ]
+        }  ,
+        "computer-use": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "computer-use-mcp"
+            ]
         }
     }
 }
