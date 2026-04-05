@@ -1,59 +1,59 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
-  "agents": {
-    "oracle": {
-      "model": "google/gemini-3.1-pro-preview",
-      "variant": "high"
+    "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+    "agents": {
+        "oracle": {
+            "model": "google/gemini-3.1-pro-preview",
+            "variant": "high"
+        },
+        "explore": {
+            "model": "opencode/gpt-5-nano"
+        },
+        "multimodal-looker": {
+            "model": "opencode/gpt-5-nano"
+        },
+        "prometheus": {
+            "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
+        },
+        "metis": {
+            "model": "moonshotai-cn/kimi-k2.5"
+        },
+        "momus": {
+            "model": "google/gemini-3.1-pro-preview",
+            "variant": "high"
+        },
+        "atlas": {
+            "model": "opencode/gpt-5-nano"
+        },
+        "sisyphus-junior": {
+            "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
+        },
+        "sisyphus": {
+            "model": "minimax-cn-coding-plan/MiniMax-M2.7"
+        }
     },
-    "explore": {
-      "model": "opencode/gpt-5-nano"
-    },
-    "multimodal-looker": {
-      "model": "opencode/gpt-5-nano"
-    },
-    "prometheus": {
-      "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
-    },
-    "metis": {
-      "model": "moonshotai-cn/kimi-k2.5"
-    },
-    "momus": {
-      "model": "google/gemini-3.1-pro-preview",
-      "variant": "high"
-    },
-    "atlas": {
-      "model": "opencode/gpt-5-nano"
-    },
-    "sisyphus-junior": {
-      "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
-    },
-    "sisyphus": {
-      "model": "minimax-cn-coding-plan/MiniMax-M2.7"
+    "categories": {
+        "visual-engineering": {
+            "model": "google/gemini-3.1-pro-preview",
+            "variant": "high"
+        },
+        "ultrabrain": {
+            "model": "moonshotai-cn/kimi-k2.5"
+        },
+        "artistry": {
+            "model": "google/gemini-3.1-pro-preview",
+            "variant": "high"
+        },
+        "quick": {
+            "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
+        },
+        "unspecified-low": {
+            "model": "google/gemini-3-flash-preview"
+        },
+        "unspecified-high": {
+            "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
+        },
+        "writing": {
+            "model": "google/gemini-3-flash-preview"
+        }
     }
-  },
-  "categories": {
-    "visual-engineering": {
-      "model": "google/gemini-3.1-pro-preview",
-      "variant": "high"
-    },
-    "ultrabrain": {
-      "model": "moonshotai-cn/kimi-k2.5"
-    },
-    "artistry": {
-      "model": "google/gemini-3.1-pro-preview",
-      "variant": "high"
-    },
-    "quick": {
-      "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
-    },
-    "unspecified-low": {
-      "model": "google/gemini-3-flash-preview"
-    },
-    "unspecified-high": {
-      "model": "minimax-cn-coding-plan/MiniMax-M2.7-highspeed"
-    },
-    "writing": {
-      "model": "google/gemini-3-flash-preview"
-    }
-  }
 }
