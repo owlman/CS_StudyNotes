@@ -22,6 +22,7 @@ Sisyphus 使用 Todo 列表来跟踪复杂任务的进度。
 | 任务取消 | `cancelled` |
 
 ### 特性
+
 - 支持优先级标记：`high`, `medium`, `low`
 - 每个任务包含：`content`（任务内容）、`status`、`priority`
 - **实时更新**：每完成一个逻辑单元立即标记为 `completed`，绝不批量确认
@@ -38,6 +39,7 @@ Session 是我最重要的记忆载体，实现了真正的跨对话上下文保
 ### 2.1 Session 信息存储
 
 每次对话都会生成一个唯一的 `session_id`（格式：`ses_xxx`），包含：
+
 - **消息数量**: 对话中的消息总数
 - **日期范围**: 对话开始和结束时间
 - **使用的 Agent**: build、oracle、librarian 等
@@ -47,6 +49,7 @@ Session 是我最重要的记忆载体，实现了真正的跨对话上下文保
 ### 2.2 核心能力
 
 #### `session_list` - 列举所有会话
+
 ```
 返回：session_id | 消息数 | 日期 | 使用的 Agents
 ```
