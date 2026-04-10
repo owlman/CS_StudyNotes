@@ -168,7 +168,7 @@ background_cancel(all=true)      # ❌ 禁止使用
 │  2. Todo 状态同步?       │
 │  3. 计划文件存在?        │
 └─────────────────────────┘
-    │
+        │
     ├─── 需要 Research ───→ Explore + Librarian (并行)
     │
     ├─── 需要规划 ───────→ Metis / Momus

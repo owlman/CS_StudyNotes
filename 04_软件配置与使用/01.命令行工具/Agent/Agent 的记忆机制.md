@@ -60,7 +60,11 @@ categories: 软件配置与使用
 
 当然，长上下文窗口也存在着不可忽视的问题，例如它对计算资源的需求会显著增加，并且它对 LLM 的注意力分配能力提出了更高的要求。所以在具体实践中，我们还需要通过合理的上下文组织方式（如分段结构、显式提示、层级摘要等）来提升 LLM 在长上下文中的信息利用效率。
 
-目前在关于长上下文窗口方面的实践，最为典型的就是由[[Andrej Karpathy的LLM知识库方法论]]了，这种方法论主张先让 LLM 将我们日常所构建的个人知识库“预编译”成结构化的 Wiki，目的是将其转化为可被 LLM 的长上下文窗口直接处理的语料，以便减少实时检索带来的不确定性（其流程如图 2 所示）。这意味着，我们现在可以将某一特定领域的知识库进行预编译并保存在本地，然后让 Agent 应用在需要时加载这个预编译的结果，并利用长上下文窗口的特性来提升 LLM 的推理效果。
+目前在关于长上下文窗口方面的实践，最为典型的就是由[[Andrej Karpathy的LLM知识库方法论]]了，这种方法论主张先让 LLM 将我们日常所构建的个人知识库“预编译”成结构化的 Wiki，目的是将其转化为可被 LLM 的长上下文窗口直接处理的语料，以便减少实时检索带来的不确定性（其工作流程如图 2 所示）。这意味着，我们现在可以将某一特定领域的知识库进行预编译并保存在本地，然后让 Agent 应用在需要时加载这个预编译的结果，并利用长上下文窗口的特性来提升 LLM 的推理效果。
+
+![Andrej Karpathy的LLM知识库工作流](./img/karpathy-workflow-diagram.png)
+
+**图 2**：Andrej Karpathy的LLM知识库工作流
 
 需要再次强调的是，从工程角度来看，长上下文窗口与 RAG 并不是相互替代的关系，而是两种不同的“记忆访问策略”：前者通过扩大上下文来提升信息整合能力，后者通过检索机制来降低信息获取成本。在实际系统设计中，如何在这两种策略之间进行权衡，才是 Agent 记忆机制设计的核心问题。
 
@@ -72,35 +76,35 @@ categories: 软件配置与使用
 
 对于 OpenClaw 这类需要以系统服务形式长期运行的 Agent 应用来说，增强跨会话的长期记忆能力可能比保证它在单一长会话的短期记忆更重要一些，因为这直接关系到它作为一款服务端应用，能否长期与用户保持协作关系的能力，这需要它能记住用户之前执行过操作，制定的解决方案，甚至在某程度上了解用户的使用习惯与偏好，形成某种意义上的任务协同经验，我会推荐读者直接借助 GitHub 上一款名为`memory-lancedb-pro`的开源项目来为其增强长期记忆能力，以便在实践中去体验 RAG 架构的实际效果，其具体步骤如下。
 
-1. 在 Github 上搜索`memory-lancedb-pro-skill`，找到该项目的作者为方便用户安装这个插件提供的 Skill，如图 2 所示。
+1. 在 Github 上搜索`memory-lancedb-pro-skill`，找到该项目的作者为方便用户安装这个插件提供的 Skill，如图 3 所示。
 
     ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_skill.png)
 
-    **图 2**：memory-lancedb-pro-skill
+    **图 3**：memory-lancedb-pro-skill
 
-2. 使用`git clone`命令将这个 Skill 下载到本地，并复制到 OpenClaw 的用户自定义 Skills 目录中（`~/.openclaw/workspace/skills`），然后在飞书客户端中确认该 Skill 是否已经成功加载，如图 3 所示。
+2. 使用`git clone`命令将这个 Skill 下载到本地，并复制到 OpenClaw 的用户自定义 Skills 目录中（`~/.openclaw/workspace/skills`），然后在飞书客户端中确认该 Skill 是否已经成功加载，如图 4 所示。
 
     ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_skill_load.png)
 
-    **图 3**：确认`memory-lancedb-pro-skill`加载成功
+    **图 4**：确认`memory-lancedb-pro-skill`加载成功
 
-3. 继续在飞书客户端中输入内容为“请通过这个 skill，替我自动从零安装 memory-lancedb-pro 插件”的提示词，让 OpenClaw 自动安装`memory-lancedb-pro`插件，如图 4 所示。
+3. 继续在飞书客户端中输入内容为“请通过这个 skill，替我自动从零安装 memory-lancedb-pro 插件”的提示词，让 OpenClaw 自动安装`memory-lancedb-pro`插件，如图 5 所示。
 
     ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_install.png)
 
-    **图 4**：自动安装`memory-lancedb-pro`插件
+    **图 5**：自动安装`memory-lancedb-pro`插件
 
 4. 接着输入内容为“请按照你的理解自动帮我配置”的提示词，让 OpenClaw 自动选择配置`memory-lancedb-pro`插件的最佳方案，如图 5 所示。
 
     ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_config.png)
 
-    **图 5 **：自动配置`memory-lancedb-pro`插件
+    **图 6**：自动配置`memory-lancedb-pro`插件
 
-5. 待配置完成之后，我们就可以继续在飞书客户端中输入内容为“请为我测试写入与检索记忆”的提示词，让OpenClaw自动测试`memory-lancedb-pro`插件的效果。如果一切顺利，读者应该会看到类似于图 6 的回复效果。
+5. 待配置完成之后，我们就可以继续在飞书客户端中输入内容为“请为我测试写入与检索记忆”的提示词，让OpenClaw自动测试`memory-lancedb-pro`插件的效果。如果一切顺利，读者应该会看到类似于图 7 的回复效果。
 
     ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_test.png)
 
-    **图 6**：测试`memory-lancedb-pro`插件的效果
+    **图 7**：测试`memory-lancedb-pro`插件的效果
 
 至此，我们就赋予了 OpenClaw 长期记忆能力。这意味着，OpenClaw 在执行任务时，可以借助记忆能力来增强其生成效果，从而解决幻觉现象、知识滞后、数据孤岛等问题。与此同时，读者也应该从上述过程中看到 Agent Skills 在工程化应用中的实际价值：通过封装 Skills，我们可以将复杂行为模块化，降低系统复杂度，提高复用效率。
 
