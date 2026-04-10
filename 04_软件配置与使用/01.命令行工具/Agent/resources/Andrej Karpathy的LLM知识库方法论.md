@@ -1,4 +1,4 @@
-# 从代码到知识：Andrej Karpathy 的 LLM 知识库方法论
+# Andrej Karpathy 的 LLM 知识库方法论
 
 **作者**：时光的沙盒  
 **来源**：[知乎专栏](https://zhuanlan.zhihu.com/p/2023803203725135995)
