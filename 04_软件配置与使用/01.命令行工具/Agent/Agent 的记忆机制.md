@@ -60,7 +60,7 @@ categories: 软件配置与使用
 
 当然，长上下文窗口也存在着不可忽视的问题，例如它对计算资源的需求会显著增加，并且它对 LLM 的注意力分配能力提出了更高的要求。所以在具体实践中，我们还需要通过合理的上下文组织方式（如分段结构、显式提示、层级摘要等）来提升 LLM 在长上下文中的信息利用效率。
 
-目前在关于长上下文窗口方面的实践，最为典型的就是由[[Andrej Karpathy的LLM知识库方法论]]了，这种方法论主张先让 LLM 将我们日常所构建的个人知识库“预编译”成结构化的 Wiki，将其转化为可被 LLM 的长上下文窗口直接处理的语料，从而减少实时检索带来的不确定性。这意味着，我们现在可以将某一特定领域的知识库进行预编译并保存在本地，然后让 Agent 应用在需要时加载这个预编译的结果，并利用长上下文窗口的特性来提升 LLM 的推理效果。
+目前在关于长上下文窗口方面的实践，最为典型的就是由[[Andrej Karpathy的LLM知识库方法论]]了，这种方法论主张先让 LLM 将我们日常所构建的个人知识库“预编译”成结构化的 Wiki，目的是将其转化为可被 LLM 的长上下文窗口直接处理的语料，以便减少实时检索带来的不确定性（其流程如图 2 所示）。这意味着，我们现在可以将某一特定领域的知识库进行预编译并保存在本地，然后让 Agent 应用在需要时加载这个预编译的结果，并利用长上下文窗口的特性来提升 LLM 的推理效果。
 
 需要再次强调的是，从工程角度来看，长上下文窗口与 RAG 并不是相互替代的关系，而是两种不同的“记忆访问策略”：前者通过扩大上下文来提升信息整合能力，后者通过检索机制来降低信息获取成本。在实际系统设计中，如何在这两种策略之间进行权衡，才是 Agent 记忆机制设计的核心问题。
 
@@ -108,11 +108,14 @@ categories: 软件配置与使用
 
 ## 参考资料
 
-- 参考文献
-  - [[Andrej Karpathy的LLM知识库方法论]]：[原文链接](https://zhuanlan.zhihu.com/p/2023803203725135995)
+- 博客文章
+  - [[Andrej Karpathy的LLM知识库方法论]]：[这篇博客来自名为“时光的沙盒”的知乎专栏](https://zhuanlan.zhihu.com/p/2023803203725135995)
 
 - 开源项目
-  - 
+  - [memory-lancedb-pro-skill](https://github.com/win4r/memory-lancedb-pro-skill)
+  - [memory-lancedb-pro](https://github.com/win4r/memory-lancedb-pro)
+  - [graphify](https://github.com/safishamsi/graphify)
 
 - 视频资料
-  - 
+  - memory-lancedb-pro 插件的安装与使用演示：[Youtube 链接](https://www.youtube.com/watch?v=bhuGrjuCM_g) / [Bilibili 链接](https://www.bilibili.com/video/BV1iWwtztEQf)
+  - graphify 编程知识库的使用演示：[Youtube 链接](https://www.youtube.com/watch?v=m_5OLW52JwI) / [Bilibili 链接](https://www.bilibili.com/video/BV1G9DiBSEmj)
