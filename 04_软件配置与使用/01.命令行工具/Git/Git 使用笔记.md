@@ -771,6 +771,11 @@ $ git remote
 origin
 ```
 
+在这里，需要特别说明的是，除了 Github、gitee 这样的远程仓库服务平台之外，我们其实也可以将本地磁盘（包括外接硬盘）上的另一个目录设置为当前仓库的远程仓库，用于当做项目备份的一种方式，具体操作步骤如下。
+
+- 在当前计算机的本地磁盘（或外界硬盘）上创建一个仓库备份目录（在这里，我将该目录命名为`demo_repo_backup`），并使用`git init`命令将其初始化为一个 Git 仓库。
+- 回到之前的`demo_repo`项目目录中，执行`git remote add localbackup <备份仓库所在的绝对路径>`命令，将这个备份目录设置为当前项目的远程仓库。
+
 #### 查看远程仓库
 
 接下来，我们可以通过`git remote show <远程仓库标识>`这个命令来查看某个指定远程仓库的具体信息。例如在之前的`demo_repo`项目中，如果我们想查看`github`这个远程仓库的信息，就可以这样做：
@@ -797,10 +802,12 @@ $ git remote show github
 $ git remote
 origin
 gitee
+localbackup
 $ git remote rename origin github
 $ git remote
 github
 gitee
+localbackup
 ```
 
 需要注意的是，在改变了远程仓库的标识之后，执行数据同步操作时所对应的分支名称也会发生变化。例如在执行了上述重命名操作之后，原来要推送数据的默认远程分支就变成了`github/master`。
@@ -814,9 +821,10 @@ gitee
 $ git remote rm gitee
 $ git remote
 github
+localbackup
 ```
 
-### 同步项目数据
+#### 同步项目数据
 
 接下来，我们就可以将本地仓库中的数据推送（push）到远程仓库了。在 Git 中，将本地数据推送到远程仓库的操作是通过`git push <远程仓库标识> <本地分支>:<远程分支>`这个命令来实现的。例如在之前的`demo_repo`项目中，如果我们想要将本地仓库的`master`分支中的数据推送到标识为`github`的远程仓库的`master`分支中，就可以在项目根目录下执行`git push github master:master`命令，具体如下：
 
@@ -919,6 +927,3 @@ Fast-forward
 ```
 
 最后需要说明的是，在将远程分支上的数据何必到本地分支的过程中，也有可能会遇到报告合并冲突的情况。其处理方法与解决本地分支的合并冲突是一样的，只需要在引发冲突文件中去除合并冲突产生的标记，然后将其修改成我们想要的内容，并重新提交即可。
-
-----
-#已完成
