@@ -46,13 +46,21 @@
                 "mcp-server-git"
             ]
         }  ,
-        "computer-use": {
-            "type": "local",
-            "command": [
-                "npx",
-                "-y",
-                "computer-use-mcp"
-            ]
-        }
+            "computer-use": {
+                "type": "local",
+                "command": [
+                    "npx",
+                    "-y",
+                    "computer-use-mcp"
+                ]
+            },
+            "context7": {
+                "type": "local",
+                "command": [
+                    "npx",
+                    "-y",
+                    "@upstash/context7-mcp"
+                ]
+            }
     }
 }
