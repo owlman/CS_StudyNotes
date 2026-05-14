@@ -1,5 +1,5 @@
 ---
-title: 关于 Hermes Agent 的补充
+title: 关于 Hermes Agent
 author: 凌杰
 date: 2026-05-05
 tags: Hermes-Agent OpenClaw
