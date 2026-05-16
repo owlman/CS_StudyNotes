@@ -31,9 +31,9 @@ categories: 软件配置与使用
 
 ### 应用演示3：内容审评
 
-## 场景4：程序开发
+## 场景4：编程项目
 
-### 应用演示1：氛围编程
+### 应用演示1：程序开发
 
 ### 应用演示2：代码测试
 
@@ -52,3 +52,4 @@ categories: 软件配置与使用
   - Oh-My-OpenCode 插件使用演示：[YouTube 链接](https://www.youtube.com/watch?v=twFjLiy2Pmc) | [Bilibili 链接](https://www.bilibili.com/video/BV1SYrTBMEzB)
   - ClawTeam-OpenClaw 插件使用演示：[YouTube 链接](https://www.youtube.com/watch?v=aZT9d8qrirY) | [Bilibili 链接](https://www.bilibili.com/video/BV1FVApz9EQj)
   - OpenCLI 使用介绍：[YouTube 链接](https://www.youtube.com/watch?v=YbyAv2W1YGQ) | 该视频无Bilibili 链接
+  - 关于 Vibe Coding 的实战演示：[YouTube 链接](https://www.youtube.com/watch?v=ytT4-lGEf6A) | [Bilibili 链接](https://www.bilibili.com/video/BV1YP5W6ZEP9)

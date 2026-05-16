@@ -160,5 +160,5 @@ irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/ins
   - [Hermes Agent 官方文档](https://hermes-agent.nousresearch.com/docs/)
   - [Hermes Agent 中文文档](https://hermesagent.org.cn/docs/getting-started/quickstart)
 
-- 视频资料：    
+- 视频资料：
   - [Hermes Agent 安装与配置演示](https://www.bilibili.com/video/BV1PMRTBYEdV)
