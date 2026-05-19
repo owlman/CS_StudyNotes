@@ -8,7 +8,7 @@ categories: 软件配置与使用
 
 > [!NOTE] 笔记说明
 >
-> 这篇文章是 Agent 系列笔记的后续补充，主要用于补充介绍 Hermes Agent 的使用方法以及相关的个人体验。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
+> 这篇文章是 Agent 系列笔记的后续补充，主要用于补充介绍 Hermes Agent 的使用方法以及相关的个人体验。同样的，这些内容也将被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
 
 Hermes Agent 于 2026 年 2 月由一家名为 Nous Research 公司发布在 Github 上，首月即斩获 2.2 万个 stars，截至 2026 年 4 月中旬，其周均新增 stars 数达 9500 个，增速达同期主流智能代理产品的三倍以上，连续两周登顶 GitHub 全球趋势榜首位。Hermes Agent 的核心竞争力源于其独特的技术架构设计，构建了”记忆-技能-训练数据”的三层闭环体系，这让它具备了如下主要特性：
 
