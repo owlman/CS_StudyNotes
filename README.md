@@ -1,12 +1,15 @@
 # CS_StudyNotes · 计算机学习笔记库
 
-> 这是一个面向 **CS 学习者与工程实践者** 的长期维护型计算机知识笔记库，
-> 强调 **概念理解、知识结构与可复用判断**，而非零散技巧。
+[![C++](https://img.shields.io/badge/C/C%2B%2B-00599C?logo=c%2B%2B&logoColor=white)](https://en.cppreference.com/)
+[![Python](https://img.shields.io/badge/Python-green?logo=python&logoColor=white&style=flat-square)](https://www.python.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Markdown](https://img.shields.io/badge/Markdown-083FA1?logo=markdown&style=flat-square)](https://www.markdownguide.org/)
+[![LaTeX](https://img.shields.io/badge/LaTeX-008080?logo=latex&style=flat-square)](https://www.latex-project.org/)
+[![Obsidian](https://img.shields.io/badge/Obsidian-8284FF?logo=obsidian&style=flat-square)](https://obsidian.md/)
+[![VSCode](https://img.shields.io/badge/VSCode-007ACC?logo=vscodium&logoColor=white&style=flat-square)](https://code.visualstudio.com/)
+![License](https://img.shields.io/badge/GPLv2-green?logo=gnu&logoColor=white&style=flat-square)
 
-![License](https://img.shields.io/badge/License-GPLv2-green)
-![Markdown](https://img.shields.io/badge/Markdown-CommonMarkv0.31.2-blue)
-![Obsidian](https://img.shields.io/badge/Obsidian-1.8.7-blue)
-![Foam](https://img.shields.io/badge/Foam-0.26.5-blue)
+> 这是一个面向 **CS 学习者与工程实践者** 的长期维护型计算机知识笔记库，强调 **概念理解、知识结构与可复用判断**，而非零散技巧。
 
 ## 这个仓库适合谁？
 
