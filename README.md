@@ -7,7 +7,7 @@
 [![LaTeX](https://img.shields.io/badge/LaTeX-008080?logo=latex&style=flat-square)](https://www.latex-project.org/)
 [![Obsidian](https://img.shields.io/badge/Obsidian-8284FF?logo=obsidian&style=flat-square)](https://obsidian.md/)
 [![VSCode](https://img.shields.io/badge/VSCode-007ACC?logo=vscodium&logoColor=white&style=flat-square)](https://code.visualstudio.com/)
-![License](https://img.shields.io/badge/GPLv2-green?logo=gnu&logoColor=white&style=flat-square)
+[![License](https://img.shields.io/badge/GPLv2-green?logo=gnu&logoColor=white&style=flat-square)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 > 这是一个面向 **CS 学习者与工程实践者** 的长期维护型计算机知识笔记库，强调 **概念理解、知识结构与可复用判断**。
 
