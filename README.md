@@ -9,7 +9,7 @@
 [![VSCode](https://img.shields.io/badge/VSCode-007ACC?logo=vscodium&logoColor=white&style=flat-square)](https://code.visualstudio.com/)
 ![License](https://img.shields.io/badge/GPLv2-green?logo=gnu&logoColor=white&style=flat-square)
 
-> 这是一个面向 **CS 学习者与工程实践者** 的长期维护型计算机知识笔记库，强调 **概念理解、知识结构与可复用判断**，而非零散技巧。
+> 这是一个面向 **CS 学习者与工程实践者** 的长期维护型计算机知识笔记库，强调 **概念理解、知识结构与可复用判断**。
 
 ## 这个仓库适合谁？
 
