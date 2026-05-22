@@ -1,6 +1,13 @@
-# Shields.io 使用参考
+---
+title: Shields.io 使用参考
+date: 2026-05-22
+tags: shildes.io
+categories: 软件配置与使用
+---
 
-Shields.io 是一个功能强大且灵活的工具，通过简单的 URL 参数即可生成专业级状态徽章。无论是展示项目健康度、集成实时数据，还是增强文档可读性，合理使用 Shields.io 都能显着提升项目的可视化效果与用户体验。以下是这个工具的详细使用参考，涵盖基础用法、动态数据集成、高级自定义及常见场景示例。通过 URL 参数和模板化配置，你可以生成高度定制化的状态徽章。
+> [!NOTE] 笔记说明
+>
+> Shields.io 是一个功能强大且灵活的工具，它可以通过简单的 URL 参数即可生成专业级状态徽章。无论是展示项目健康度、集成实时数据，还是增强文档可读性，合理使用 Shields.io 都能显着提升项目的可视化效果与用户体验。这篇笔记中所整理的是这个工具的详细使用参考，涵盖基础用法、动态数据集成、高级自定义及常见场景示例。通过 URL 参数和模板化配置，你可以生成高度定制化的状态徽章。
 
 ## 基础语法与参数说明
 
@@ -20,14 +27,14 @@ https://img.shields.io/badge/{LABEL}-{VALUE}-{COLOR}?{OPTIONS}
 
 ### 2. 常用可选参数
 
-| 参数          | 说明                                                         | 示例                              |
-|---------------|--------------------------------------------------------------|-----------------------------------|
-| `logo`        | 标签前的图标（ [Simple Icons](https://simpleicons.org/) ）   | `logo=github`                     |
-| `logoColor`   | 图标颜色（十六进制或颜色名称）                               | `logoColor=white`                 |
-| `style`       | 徽章样式（`flat`、`plastic`、`flat-square`、`for-the-badge`）| `style=for-the-badge`             |
-| `link`        | 徽章点击跳转链接                                             | `link=https://example.com`        |
-| `labelColor`  | 左侧标签背景颜色                                             | `labelColor=%23234`               |
-| `color`       | 右侧值背景颜色（等同于 `{COLOR}`，优先级更高）               | `color=blue`                      |
+| 参数          | 作用说明                                                       | 示例                        |
+|---------------|----------------------------------------------------------------|-----------------------------|
+| `logo`        | 标签前的图标（支持 Simple Icons）                              | `logo=github`               |
+| `logoColor`   | 图标颜色（十六进制或颜色名称）                                 | `logoColor=white`           |
+| `style`       | 徽章样式（`flat`、`plastic`、`flat-square`、`for-the-badge`）  | `style=for-the-badge`       |
+| `link`        | 徽章点击跳转链接                                               | `link=https://example.com`  |
+| `labelColor`  | 左侧标签背景颜色                                               | `labelColor=%23234`         |
+| `color`       | 右侧值背景颜色（等同于 `{COLOR}`，优先级更高）                 | `color=blue`                |
 
 ---
 
@@ -52,6 +59,7 @@ https://img.shields.io/badge/{LABEL}-{VALUE}-{COLOR}?{OPTIONS}
 ```
 
 效果：  
+
 ![GitHub Stars](https://img.shields.io/github/stars/vuejs/vue?label=Stars&logo=github)
 
 ---
@@ -92,25 +100,25 @@ https://img.shields.io/badge/{LABEL}-{VALUE}-{COLOR}?{OPTIONS}
 
 ---
 
-## 四、集成动态服务
+## 集成动态服务
 
 Shields.io 支持与多种开发工具和平台集成，自动生成实时数据徽章。
 
 ### 1. GitHub 相关
 
-| 示例                                                          | 说明                     |
-|---------------------------------------------------------------|----000-------------------|
-| `https://img.shields.io/github/issues/{user}/{repo}`          | 仓库 Issue 数量          |
-| `https://img.shields.io/github/last-commit/{user}/{repo}`     | 最后提交时间             |
-| `https://img.shields.io/github/license/{user}/{repo}`         | 许可证类型               |
+| 示例                                                                                 | 说明                  |
+|--------------------------------------------------------------------------------------|-----------------------|
+| `https://img.shields.io/github/issues/{user}/{repo}`                                 | 仓库 Issue 数量       |
+| `https://img.shields.io/github/last-commit/{user}/{repo}`                            | 最后提交时间          |
+| `https://img.shields.io/github/license/{user}/{repo}`                                | 许可证类型            |
 
 ### 2. npm 包管理
 
-| 示例                                      | 说明                     |
-|-------------------------------------------|--------------------------|
-| `https://img.shields.io/npm/v/{package}`  | 包版本号                 |
-| `https://img.shields.io/npm/dm/{package}` | 月度下载量               |
-| `https://img.shields.io/npm/dt/{package}` | 总下载量                 |
+| 示例                                                                                 | 说明                  |
+|--------------------------------------------------------------------------------------|-----------------------|
+| `https://img.shields.io/npm/v/{package}`                                             | 包版本号              |
+| `https://img.shields.io/npm/dm/{package}`                                            | 月度下载量            |
+| `https://img.shields.io/npm/dt/{package}`                                            | 总下载量              |
 
 ### 3. CI/CD 构建状态
 
@@ -120,7 +128,7 @@ Shields.io 支持与多种开发工具和平台集成，自动生成实时数据
 
 ---
 
-## 五、常用场景模板
+## 常用场景模板
 
 ### 1. GitHub README 展示
 
@@ -130,7 +138,7 @@ Shields.io 支持与多种开发工具和平台集成，自动生成实时数据
 [![Build Status](https://img.shields.io/github/actions/workflow/status/vuejs/vue/ci.yml)](https://github.com/vuejs/vue/actions)
 ```
 
-效果：  
+效果：
 
 [![GitHub License](https://img.shields.io/github/license/vuejs/vue)](https://github.com/vuejs/vue)  
 [![npm version](https://img.shields.io/npm/v/vue)](https://www.npmjs.com/package/vue)  
@@ -174,3 +182,4 @@ Shields.io 支持与多种开发工具和平台集成，自动生成实时数据
 - [Shields.io 官方文档](https://shields.io/)
 - [GitHub Actions 文档](https://docs.github.com/en/actions)
 - [Travis CI 文档](https://docs.travis-ci.com/)
+- [Simple Icons](https://simpleicons.org/)
