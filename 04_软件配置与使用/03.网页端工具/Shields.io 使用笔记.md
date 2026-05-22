@@ -20,14 +20,14 @@ https://img.shields.io/badge/{LABEL}-{VALUE}-{COLOR}?{OPTIONS}
 
 ### 2. 常用可选参数
 
-| 参数          | 说明                                             | 示例                              |
-|---------------|--------------------------------------------------|-----------------------------------|
-| `logo`        | 标签前的图标（ [Simple Icons](https://simpleicons.org/) ） | `logo=github`           |
-| `logoColor`   | 图标颜色（十六进制或颜色名称）                   | `logoColor=white`                 |
-| `style`       | 徽章样式（`flat`、`plastic`、`flat-square`、`for-the-badge`）| `style=for-the-badge` |
-| `link`        | 徽章点击跳转链接                                 | `link=https://example.com`        |
-| `labelColor`  | 左侧标签背景颜色                                 | `labelColor=%23234`               |
-| `color`       | 右侧值背景颜色（等同于 `{COLOR}`，优先级更高）   | `color=blue`                      |
+| 参数          | 说明                                                         | 示例                              |
+|---------------|--------------------------------------------------------------|-----------------------------------|
+| `logo`        | 标签前的图标（ [Simple Icons](https://simpleicons.org/) ）   | `logo=github`                     |
+| `logoColor`   | 图标颜色（十六进制或颜色名称）                               | `logoColor=white`                 |
+| `style`       | 徽章样式（`flat`、`plastic`、`flat-square`、`for-the-badge`）| `style=for-the-badge`             |
+| `link`        | 徽章点击跳转链接                                             | `link=https://example.com`        |
+| `labelColor`  | 左侧标签背景颜色                                             | `labelColor=%23234`               |
+| `color`       | 右侧值背景颜色（等同于 `{COLOR}`，优先级更高）               | `color=blue`                      |
 
 ---
 
@@ -98,26 +98,25 @@ Shields.io 支持与多种开发工具和平台集成，自动生成实时数据
 
 ### 1. GitHub 相关
 
-| 示例                                                                 | 说明                     |
-|----------------------------------------------------------------------|--------------------------|
-| `https://img.shields.io/github/issues/{user}/{repo}`                 | 仓库 Issue 数量          |
-| `https://img.shields.io/github/last-commit/{user}/{repo}`            | 最后提交时间             |
-| `https://img.shields.io/github/license/{user}/{repo}`                | 许可证类型               |
+| 示例                                                          | 说明                     |
+|---------------------------------------------------------------|----000-------------------|
+| `https://img.shields.io/github/issues/{user}/{repo}`          | 仓库 Issue 数量          |
+| `https://img.shields.io/github/last-commit/{user}/{repo}`     | 最后提交时间             |
+| `https://img.shields.io/github/license/{user}/{repo}`         | 许可证类型               |
 
 ### 2. npm 包管理
 
-| 示例                                                                 | 说明                     |
-|----------------------------------------------------------------------|--------------------------|
-| `https://img.shields.io/npm/v/{package}`                             | 包版本号                 |
-| `https://img.shields.io/npm/dm/{package}`                            | 月度下载量               |
-| `https://img.shields.io/npm/dt/{package}`                            | 总下载量                 |
+| 示例                                      | 说明                     |
+|-------------------------------------------|--------------------------|
+| `https://img.shields.io/npm/v/{package}`  | 包版本号                 |
+| `https://img.shields.io/npm/dm/{package}` | 月度下载量               |
+| `https://img.shields.io/npm/dt/{package}` | 总下载量                 |
 
 ### 3. CI/CD 构建状态
 
-| 示例                                                                 | 说明                     |
-|----------------------------------------------------------------------|--------------------------|
-| `https://img.shields.io/github/actions/workflow/status/{user}/{repo}/{workflow}.yml` | GitHub Actions 状态      |
-| `https://img.shields.io/travis/{user}/{repo}`                        | Travis CI 构建状态       |
+| 示例                                                                                 | 说明                  |
+|--------------------------------------------------------------------------------------|-----------------------|
+| `https://img.shields.io/github/actions/workflow/status/{user}/{repo}/{workflow}.yml` | GitHub Actions 状态   |
 
 ---
 
