@@ -238,7 +238,45 @@ categories: 软件配置与使用
 
 在白领的日常工作中，经常需要绘制图形和表格、制作演示文稿，用于工作简报、方案展示、数据分析等场景。尤其是在面对“临时需求、隔天交付”这类高压任务时，可视化内容的制作往往会成为加班的重要来源之一。在传统工作流中，人们通常需要借助 Microsoft Visio、Adobe Illustrator、Figma、PPT、Excel 等工具完成相关任务。这些工具虽然功能强大，但往往存在一定学习成本，即使是熟练使用者，要在短时间内制作出兼顾信息表达与视觉效果的图表，也仍然需要投入大量时间。
 
-而通过借助 Agent，我们可以在很大程度上降低图表生成与内容整理的时间成本，使许多原本需要数小时完成的工作，能够更快完成图表初稿与演示内容的搭建。下面，我将以更适合本地项目工作流的 OpenCode 为例，演示如何通过引入第三方 Skill 来完成演示文稿的生成任务。
+而借助 Agent，我们可以在很大程度上降低图表生成与内容整理的时间成本，使许多原本需要数小时完成的工作，能够在更短时间内完成图表初稿与演示内容的搭建。下面，我将以更适合本地项目工作流的 OpenCode 为例，演示如何通过引入第三方 Skill 来完成演示文稿的生成任务。
+
+假设现在需要制作一份演示文稿，用于向项目团队介绍近期受到关注的 Hermes Agent，以及其与 OpenClaw 之间的主要区别，并且第二天早上就需要用于会议演示。这个任务显然十分紧急，但好在此前已经编写过一篇关于 Hermes Agent 的学习笔记，并将其保存为 Markdown 文档。现在要做的，就是按照演示文稿的逻辑，将这篇笔记整理成一份 PPT。如果采用传统方式，这项工作至少需要两个小时；而借助 OpenCode，则可以在半小时左右完成整个流程，具体步骤如下。
+
+1. 按照《[[Agent 的能力体系]]》一文中的介绍，确保 OpenCode 已经安装 Anthropic 官方 Skills 中名为 pptx 的 Skill。对此，可以在 OpenCode 中使用 /skills 命令进行确认，如图 11 所示。
+
+    ![确认 OpenCode 中已安装的 Skills](.\img\check_pptx_skill.png)
+
+    **图 11** 确认 OpenCode 中已安装的 Skills
+
+2. 在《[[关于 Hermes Agent]]》这篇笔记所在的目录中打开 OpenCode，并输入如下提示词：
+
+    ```markdown
+    请阅读 @关于 Hermes Agent.md，根据其内容为我生成一份题为《关于 Hermes Agent》的 PPT，并将其保存到 examples 目录下，风格为现代简约。
+    ```
+
+    随后，OpenCode 会自动调用 pptx Skill 来完成演示文稿的生成任务，如图 12 所示。
+
+    ![使用 OpenCode 生成演示文稿](.\img\use_pptx_skill.png)
+
+    **图 12** 使用 OpenCode 生成演示文稿
+
+3. 在执行过程中，OpenCode 会自动编写生成 PPT 所需的 Python 脚本，并下载脚本运行所需的扩展库与 CLI 工具（例如 markitdown），如图 13 所示。
+
+    ![OpenCode 开始自动生成 PPT](.\img\opencode_start_ppt.png)
+
+    **图 13** OpenCode 开始自动生成 PPT
+
+4. 几分钟后，OpenCode 会生成一份名为 关于 Hermes Agent.pptx 的演示文稿，并将其保存到 examples 目录下。随后，我们可以使用 Microsoft PowerPoint 打开该文件查看最终效果，如图 14 所示。
+
+    ![OpenCode 生成的 PPT 文档](.\img\opencode_output_ppt.png)
+
+    **图 14** OpenCode 生成的 PPT 文档
+
+总而言之，相比于直接使用提示词，在 Agent 应用中引入 Skills 机制会带来以下几个明显优势：
+
+- **输出品质可控**：有了 Skills 机制所做的规范，我们可以大概率地降低 LLM 因提示词细微变化而出现输出漂移；
+- **输出格式稳定**：Skills 机制可确保 LLM 每次以相对统一的文档结构输出，这有助于日后的复用以及批量处理；
+- **可组合使用**：Skills 机制中的不同 Skill（如`feishu-doc`、`pdf`等）可以进行联动，以便读取不同格式的文件，并将生成的内容保存到指定的文档中。
 
 ## 高级应用：编程项目
 
