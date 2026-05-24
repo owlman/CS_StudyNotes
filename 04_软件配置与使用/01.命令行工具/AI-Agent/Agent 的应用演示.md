@@ -282,7 +282,7 @@ categories: 软件配置与使用
 
 1. 确保部署了 OpenClaw 的服务端环境中已经安装了 Python（3.10 及以上版本）和 tmux，并且 OpenClaw 服务端已经启动。
   
-2. 安装一款名为`ClawTeam-OpenClaw`的多Agent调用插件（这是个开源项目，读者可以自行去GitHub上搜索它），它需要通过执行如下命令来完成。
+2. 安装一款名为`ClawTeam-OpenClaw`的多 Agent 协同插件，它是一个开源项目，读者可以通过执行如下命令来完成安装。
   
     ```bash
     git clone https://github.com/win4r/ClawTeam-OpenClaw.git
@@ -302,7 +302,7 @@ categories: 软件配置与使用
     openclaw gateway restart
     ```
   
-如果上述操作一切顺利，我们就可以在配置好的飞书中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 这个在本地运行的Agent应用来完成相关的自动化编程与测试任务了，如图 16 所示。
+如果上述操作一切顺利，我们就可以在配置好的飞书中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 这个在本地运行的 Agent 应用来完成相关的自动化编程与测试任务了，如图 16 所示。
 
 ![向 OpenClaw 发送编程任务](.\img\use_clawteam_openclaw.png)
 
