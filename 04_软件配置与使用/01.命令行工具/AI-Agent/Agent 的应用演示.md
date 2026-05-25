@@ -7,7 +7,7 @@ categories: 软件配置与使用
 
 > [!NOTE] 笔记说明
 >
-> 这篇文章是 Agent 系列笔记的最后一篇，其中记录了我在使用 Agent 过程中所累积的具有代表性的、可复现的应用场景（涵盖私人助理、职场办公、技术写作、编程项目等领域）及其具体解决方案。同样的，这些内容也将被收录在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
+> 这篇文章是 Agent 系列笔记的最后一篇，其中记录了我在使用 Agent 过程中所累积的具有代表性的、可复现的应用场景（包括私人助理、职场办公、开发测试、代码分析等）及其具体解决方案。同样的，这些内容也将被收录在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
 
 ## 初级应用：私人助理
 
@@ -19,19 +19,22 @@ categories: 软件配置与使用
 
 现在，我们只需要简单地在 OpenClaw/Hermes Agent 所接入的通讯平台中输入一段提示词，就能让它以指定的方式自动提醒我们完成这些琐事。例如，如果我有腰间盘突出的问题，就只需要在接入了 OpenClaw 的飞书中输入内容为“我是一个长期坐着工作的人，腰间盘突出，请每隔 1 小时提醒我起来活动一下”的提示词即可，如图 1 所示。
 
-![在飞书中设置提醒任务](.\img\setting_reminder.png)
+<!-- ![在飞书中设置提醒任务](.\img\setting_reminder.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525185706625-369962753.png)
 
 **图 1** 在飞书中设置提醒任务
 
 如果上述操作一切顺利，之后每隔 1 小时，飞书所接入的 OpenClaw 就会像人工提醒一样给我发消息，提醒我起来活动一下，如图 2 所示。
 
-![在飞书中收到的提醒消息](.\img\get_reminder.png)
+<!-- ![在飞书中收到的提醒消息](.\img\get_reminder.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525185818378-282062010.png)
 
 **图 2** 在飞书中收到的提醒消息
 
 这种设置提醒的方式除了可以让我们避免为了单一功能而安装一堆不必要的软件之外，还能让 OpenClaw 或 Hermes Agent 更了解我们的一些生活与工作习惯，这将帮助它在后续的自动化任务中更好地为我们服务。例如，现在它记住了我是一个长期坐着工作的人，患有腰间盘突出，那么如果我在后续的日程设置提到一些不适合自身健康状况的计划时（譬如“我明天计划与张三去打篮球，你有什么建议？”），它就会给我提出“你患有腰间盘突出，做篮球运动需注意保护”之类的提醒，如图 3 所示。
 
-![OpenClaw针对篮球运动计划给出的提醒](.\img\basketball_suggestion.png)
+<!-- ![OpenClaw针对篮球运动计划给出的提醒](.\img\basketball_suggestion.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525185900524-1771749204.png)
 
 **图 3** OpenClaw 针对篮球运动计划给出的提醒
 
@@ -43,19 +46,22 @@ categories: 软件配置与使用
 
 现在，我们同样只需要简单地在 OpenClaw/Hermes Agent 所接入的通讯平台中输入一段提示词，就能让这些 Agent 自动帮我们完成这些繁琐的计算工作。例如，如果我有投资理财的需求，就只需要在接入了 OpenClaw 的飞书中输入内容为“我一个月的收入大约 1 万元，生活日常支出大约 4000 元，三年后打算在杭州贷款买房，请结合 2026 年的经济形势，给我一份投资建议”的提示词即可，如图 4 所示。
 
-![OpenClaw 针对个人情况给出的投资建议](.\img\investment_suggestion.png)
+<!-- ![OpenClaw 针对个人情况给出的投资建议](.\img\investment_suggestion.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190039722-721776680.png)
 
 **图 4** OpenClaw 针对个人情况给出的投资建议
 
 同样的，由于 OpenClaw 现在已经记住了我的收入、支出情况，以及我打算在杭州买房的计划，它后续也能基于这些信息对我日后一些不理性的消费计划提出相关的提醒。例如，当我接着上面的问题继续问它“我明天打算去买一款价值 5 万的手表，你有什么建议？”时，它就会提醒我大意为“你打算在杭州买房，但你的月收入只有1万元，购买这款手表会严重影响你的生活质量，建议你先考虑一下”之类的内容，如图 5 所示。
 
-![OpenClaw针对手表消费计划给出的建议](.\img\watch_suggestion.png)
+<!-- ![OpenClaw针对手表消费计划给出的建议](.\img\watch_suggestion.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190116852-934913064.png)
 
 **图 5** OpenClaw 针对手表消费计划给出的建议
 
 很显然，这样的功能也是传统的记账/理财软件所不具备的。OpenClaw 这样的 Agent 不仅能帮助我们完成一些日常的收支计算，还能根据我们的一些消费习惯，提醒我们避免做一些不理性的消费计划。当然，在必要情况下还能帮助我们调整投资计划（例如在图 6 中的演示中，我增加了车贷的情况）。这让它成为了一个能力更接近于人类的人消费/理财顾问。
 
-![OpenClaw针对车贷情况给出的投资建议](.\img\car_suggestion.png)
+<!-- ![OpenClaw针对车贷情况给出的投资建议](.\img\car_suggestion.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190145729-1982124169.png)
 
 **图 6** OpenClaw 针对车贷情况给出的投资建议
 
@@ -71,7 +77,8 @@ categories: 软件配置与使用
 
 1. **安装`feishu-doc`**，这是用于处理飞书文档的 Skill，它通常在我们将 OpenClaw 接入飞书客户端时就已经自动安装了。读者可以通过 OpenClaw 的 Web 端管理界面确认这个 Skill 的状态，如图 7 所示。
   
-    ![确认feishu-doc Skill的状态](.\img\check_feishu_doc_skill.png)
+    <!-- ![确认feishu-doc Skill的状态](.\img\check_feishu_doc_skill.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190221157-1004483261.png)
   
     **图 7** 确认`feishu-doc` Skill的状态
   
@@ -136,13 +143,15 @@ categories: 软件配置与使用
   
 3. **让 Agent 自动测试一下这个 Skill**。如果一切顺利，我们应该可以在它的飞书客户端中看到如图 8 所示的测试报告。
   
-    ![让 Agent 自动测试 Skilll](.\img\test_meeting_minutes.png)
+    <!-- ![让 Agent 自动测试 Skilll](.\img\test_meeting_minutes.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190404863-84136589.png)
   
     **图 8** 让 Agent 自动测试 Skill
   
 之后，我们只需要将会议的录音用飞书妙记这样的工具转换成纯文本文档（例如`txt`或`md`格式），然后通过飞书将文档分享给 OpenClaw，它就会自动帮我们完成会议纪要的整理工作，如图 9 所示。
 
-![让 Agent 自动整理会议纪要](.\img\use_meeting_minutes.png)
+<!-- ![让 Agent 自动整理会议纪要](.\img\use_meeting_minutes.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190430688-990097485.png)
 
 **图 9** 让 Agent 自动整理会议纪要
 
@@ -224,7 +233,8 @@ categories: 软件配置与使用
   
 2. 在保存上述文件之后，我们就可以在实际工作中直接调用这个 Skill 来处理各种文档摘要任务。例如：将一篇技术博客链接发送给接入了 OpenClaw 的飞书，并要求它“总结一下这篇文章”，OpenClaw 就会自动识别用户意图，并调用`doc-summary`来完成任务，如图 10 所示。
   
-    ![让 OpenClaw 自动生成文档摘要](.\img\use_doc_summary.png)
+    <!-- ![让 OpenClaw 自动生成文档摘要](.\img\use_doc_summary.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190539842-1269146559.png)
   
     **图 10** 让 OpenClaw 自动生成文档摘要
 
@@ -238,7 +248,8 @@ categories: 软件配置与使用
 
 1. 按照《[[Agent 的能力体系]]》一文中的介绍，确保 OpenCode 已经安装 Anthropic 官方 Skills 中名为 pptx 的 Skill。对此，可以在 OpenCode 中使用 /skills 命令进行确认，如图 11 所示。
 
-    ![确认 OpenCode 中已安装的 Skills](.\img\check_pptx_skill.png)
+    <!-- ![确认 OpenCode 中已安装的 Skills](.\img\check_pptx_skill.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190636827-265359837.png)
 
     **图 11** 确认 OpenCode 中已安装的 Skills
 
@@ -250,19 +261,22 @@ categories: 软件配置与使用
 
     随后，OpenCode 会自动调用 pptx Skill 来完成演示文稿的生成任务，如图 12 所示。
 
-    ![使用 OpenCode 生成演示文稿](.\img\use_pptx_skill.png)
+    <!-- ![使用 OpenCode 生成演示文稿](.\img\use_pptx_skill.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190707422-264475603.png)
 
     **图 12** 使用 OpenCode 生成演示文稿
 
 3. 在执行过程中，OpenCode 会自动编写生成 PPT 所需的 Python 脚本，并下载脚本运行所需的扩展库与 CLI 工具（例如 markitdown），如图 13 所示。
 
-    ![OpenCode 开始自动生成 PPT](.\img\opencode_start_ppt.png)
+    <!-- ![OpenCode 开始自动生成 PPT](.\img\opencode_start_ppt.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190752237-1509854527.png)
 
     **图 13** OpenCode 开始自动生成 PPT
 
 4. 几分钟后，OpenCode 会生成一份名为 关于 Hermes Agent.pptx 的演示文稿，并将其保存到 examples 目录下。随后，我们可以使用 Microsoft PowerPoint 打开该文件查看最终效果，如图 14 所示。
 
-    ![OpenCode 生成的 PPT 文档](.\img\opencode_output_ppt.png)
+    <!-- ![OpenCode 生成的 PPT 文档](.\img\opencode_output_ppt.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190854758-1230649904.png)
 
     **图 14** OpenCode 生成的 PPT 文档
 
@@ -292,7 +306,8 @@ categories: 软件配置与使用
   
 3. 在上述安装脚本执行完成之后，我们应该可以看到如图 15 所示的提示信息，它告诉我们，OpenClaw 已经成功安装了`ClawTeam-OpenClaw`插件，并且可以通过`openclaw`命令来调用它。
   
-    ![安装 ClawTeamOpenClaw 插件](.\img\install_clawteam_openclaw.png)
+    <!-- ![安装 ClawTeamOpenClaw 插件](.\img\install_clawteam_openclaw.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525190956450-128992693.png)
   
     **图 15** 安装 ClawTeam-OpenClaw 插件
   
@@ -304,13 +319,15 @@ categories: 软件配置与使用
   
 如果上述操作一切顺利，我们就可以在配置好的飞书中打开与 OpenClaw 的对话窗口，通过发送提示词来调度 OpenCode 这个在本地运行的 Agent 应用来完成相关的自动化编程与测试任务了，如图 16 所示。
 
-![向 OpenClaw 发送编程任务](.\img\use_clawteam_openclaw.png)
+<!-- ![向 OpenClaw 发送编程任务](.\img\use_clawteam_openclaw.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525191019638-1187325767.png)
 
 **图 16** 向 OpenClaw 发送多 Agent 协同的编程任务
 
 现在，我们只需要让 OpenClaw 将生成的 Python 脚本文件通过飞书发送到自己所在的计算机，然后执行一下`python snake.py`这个命令，就可以看到这个由 OpenClaw 主持任务规划，并调用多个 Agent 应用协同完成的这个贪吃蛇游戏了，运行效果如图 17 所示。
 
-![OpenClaw 调用多个 Agent 应用协同完成编程任务](.\img\snake_game.png)
+<!-- ![OpenClaw 调用多个 Agent 应用协同完成编程任务](.\img\snake_game.png) -->
+![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525191049593-195819451.png)
 
 **图 17** OpenClaw 调用多个 Agent 应用协同完成编程任务
 
@@ -391,7 +408,8 @@ categories: 软件配置与使用
 
 4. **主 Agent 汇总结果**。通过 OpenClaw 的多 Agent 协同能力，让各服务器上的 Agent 并行执行检查，然后将结果汇总后生成一份统一的巡检报告并推送到我们的飞书对话窗口中。最终效果如图 18 所示。
 
-    ![服务器健康检查报告](.\img\server_health_check.png)
+    <!-- ![服务器健康检查报告](.\img\server_health_check.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525191138973-1901348011.png)
 
     **图 18** 服务器健康检查报告
 
@@ -417,25 +435,29 @@ categories: 软件配置与使用
 
 2. **配置 GitNexus 插件**：如果我们在执行上述命令之后，看到命令行终端返回了 GitNexus 插件的版本信息，就证明我们已经成功安装了 GitNexus 插件。接下来，我们需要在命令行终端中执行`gitnexus setup`命令来将该插件配置到当前计算机中所安装的 Agent 应用中，如图 19 所示。
 
-    ![配置 GitNexus 插件](.\img\gitnexus_setup.png)
+    <!-- ![配置 GitNexus 插件](.\img\gitnexus_setup.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525191214440-116109752.png)
 
     **图 19** 配置 GitNexus 插件
 
 3. **为现有代码库建立知识图谱**：这需要我们在目标项目所在的位置上打开命令行终端，并执行`npx gitnexus analyze`这个命令。 例如，我现在想要为自己的个人项目[pythonShell](https://github.com/owlman/pythonShell)建立知识图谱，在其根目录下使用 Powershell 执行这个命令的效果如图 20 所示。
 
-    ![为现有代码库建立知识图谱](.\img\gitnexus_init.png)
+    <!-- ![为现有代码库建立知识图谱](.\img\gitnexus_init.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525191249216-434929241.png)
 
     **图 20** 为现有代码库建立知识图谱
 
 4. **查看知识图谱**：在完成上述操作之后，我们就可以通过执行`gitnexus serve`命令，并根据命令行终端返回的信息使用网页浏览器打开`http://localhost:4747`这个 URL 来查看刚刚生成的知识图谱了，如图 21 所示。
 
-    ![查看知识图谱](.\img\gitnexus_graph.png)
+    <!-- ![查看知识图谱](.\img\gitnexus_graph.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525191308535-789066338.png)
 
     **图 21** 查看知识图谱
 
 5. **使用知识图谱**：由 graphify 插件生成的知识图谱实际上就是一个针对 Andrej Karpathy 工作流的具体实现。接下来，我们就可以基于这个知识图谱在 OpenCode 中用对话的形式对这个项目进行探索了。例如，我们可以通过在 OpenCode 输入内容类似于“使用 GitNexus 为我解释一下 git-push-remote 这个工具的用法与实现”这样的提示词，来让它帮助我开始探索这个项目，如图 22 所示。
 
-    ![使用知识图谱](.\img\gitnexus_use.png)
+    <!-- ![使用知识图谱](.\img\gitnexus_use.png) -->
+    ![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260525191328748-1844761634.png)
 
     **图 22** 使用知识图谱
 
