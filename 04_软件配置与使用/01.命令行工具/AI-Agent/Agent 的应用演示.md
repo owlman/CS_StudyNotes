@@ -403,18 +403,54 @@ categories: 软件配置与使用
 
 通过上述示例我们可以看到，Agent 在运维场景中的核心价值在于：**将人工巡检变为自动化检查，将被动响应变为主动预警**，这不仅能大幅提升运维效率，还能显著降低因人工疏忽导致的安全风险。
 
-### 场景 8：代码分析
+### 场景 8：代码库分析
+
+对于开发者来说，开源社区是一个巨大的知识宝库。我们可以从中获得各种不同的设计创意、功能实现的方法以及现成好用的工具，但前提是要能读懂这些开源项目的代码和文档。这可不是一件容易的事，因为这些项目往往都有多位不同的开发者，以非常散漫的形式进行写作，很可能会出现代码风格不统一、文档不完整、注释缺失等问题。因此长期以来，如果人们想要快速上手一个开源项目，往往需要花费大量的时间来阅读它的代码和文档，甚至很多时候依然还会无功而返。
+
+直到人们最近开始学习 Agent 应用，尤其再搭配最近由 Andrej Karpathy 提出的 LLM Wiki 工作流，这个问题的解决才迎来了简化的可能性。下面，让我们借助给 OpenCode 安装一款名为`GitNexus`的插件，来演示如何使用 Agent 来实现对现有代码库的分析工作。
+
+1. **安装 GitNexus 插件**：先确保自己所在的计算机中已经安装了 Python 并且版本在 3.10 以上，然后在命令行终端中执行如下命令，即可完成插件的安装。
+
+    ```bash
+    npm install -g gitnexus
+    ```
+
+2. **配置 GitNexus 插件**：如果我们在执行上述命令之后，看到命令行终端返回了 GitNexus 插件的版本信息，就证明我们已经成功安装了 GitNexus 插件。接下来，我们需要在命令行终端中执行`gitnexus setup`命令来将该插件配置到当前计算机中所安装的 Agent 应用中，如图 19 所示。
+
+    ![配置 GitNexus 插件](.\img\gitnexus_setup.png)
+
+    **图 19** 配置 GitNexus 插件
+
+3. **为现有代码库建立知识图谱**：这需要我们在目标项目所在的位置上打开命令行终端，并执行`npx gitnexus analyze`这个命令。 例如，我现在想要为自己的个人项目[pythonShell](https://github.com/owlman/pythonShell)建立知识图谱，在其根目录下使用 Powershell 执行这个命令的效果如图 20 所示。
+
+    ![为现有代码库建立知识图谱](.\img\gitnexus_init.png)
+
+    **图 20** 为现有代码库建立知识图谱
+
+4. **查看知识图谱**：在完成上述操作之后，我们就可以通过执行`gitnexus serve`命令，并根据命令行终端返回的信息使用网页浏览器打开`http://localhost:4747`这个 URL 来查看刚刚生成的知识图谱了，如图 21 所示。
+
+    ![查看知识图谱](.\img\gitnexus_graph.png)
+
+    **图 21** 查看知识图谱
+
+5. **使用知识图谱**：由 graphify 插件生成的知识图谱实际上就是一个针对 Andrej Karpathy 工作流的具体实现。接下来，我们就可以基于这个知识图谱在 OpenCode 中用对话的形式对这个项目进行探索了。例如，我们可以通过在 OpenCode 输入内容类似于“使用 GitNexus 为我解释一下 git-push-remote 这个工具的用法与实现”这样的提示词，来让它帮助我开始探索这个项目，如图 22 所示。
+
+    ![使用知识图谱](.\img\gitnexus_use.png)
+
+    **图 22** 使用知识图谱
+
+关于 gitnexus 插件更详细的使用方法，读者可以参考这篇笔记最后在“参考资料”部分所列出的 GitNexus 插件的项目链接与演示视频，这里限于篇幅就不一一展开了。
 
 ## 参考资料
 
 - 开源项目
   - [飞书 CLI](https://github.com/larksuite/cli)
-  - [OpenCLI](https://github.com/jackwener/opencli)
-  - [CLI Anything](https://github.com/HKUDS/CLI-Anything)
+  - [ClawTeam-OpenClaw](https://github.com/win4r/ClawTeam-OpenClaw)
+  - [GitNexus](https://github.com/abhigyanpatwari/GitNexus)
 
 - 视频资料
   - 关于提示词工程的实战演示：[YouTube 链接](https://www.youtube.com/watch?v=YCswP_xmxu0) | [Bilibili 链接](https://www.bilibili.com/video/BV1ubaVzXEdM)
-  - 关于 Harmess 工程的科普：[YouTube 链接](https://www.youtube.com/watch?v=3DlXq9nsQOE) | [Bilibili 链接](https://www.bilibili.com/video/BV1Zk9FBwELs)
-  - ClawTeam-OpenClaw 插件使用演示：[YouTube 链接](https://www.youtube.com/watch?v=aZT9d8qrirY) | [Bilibili 链接](https://www.bilibili.com/video/BV1FVApz9EQj)
-  - OpenCLI 使用介绍：[YouTube 链接](https://www.youtube.com/watch?v=YbyAv2W1YGQ) | 该视频无Bilibili 链接
   - 关于 Vibe Coding 的实战演示：[YouTube 链接](https://www.youtube.com/watch?v=ytT4-lGEf6A) | [Bilibili 链接](https://www.bilibili.com/video/BV1YP5W6ZEP9)
+  - 关于 Harness Engineering 的科普：[YouTube 链接](https://www.youtube.com/watch?v=3DlXq9nsQOE) | [Bilibili 链接](https://www.bilibili.com/video/BV1Zk9FBwELs)
+  - 关于 ClawTeam-OpenClaw 插件的使用演示：[YouTube 链接](https://www.youtube.com/watch?v=aZT9d8qrirY) | [Bilibili 链接](https://www.bilibili.com/video/BV1FVApz9EQj)
+  - 关于 GitNexus 插件的使用演示；[YouTube 链接](https://www.youtube.com/watch?v=Zy6tS-7xg9M) | [Bilibili 链接](https://www.bilibili.com/video/BV1vy9XBrExq)
