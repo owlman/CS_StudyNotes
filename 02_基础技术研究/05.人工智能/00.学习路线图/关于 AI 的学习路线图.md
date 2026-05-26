@@ -171,14 +171,14 @@ categories: 基础技术研究
 只有在完成了这些目标之后，AI Agent 应用才能真正成为我们在执行具体项目开发时的“得力助手”，而非因媒体炒作而焦虑、恐惧的“黑盒子”。为此，我在这里会推荐读者根据自身的能力选择以下一条路径来完成对 AI Agent 应用的有效学习：
 
 - 基于 OpenCode 这类可在本地运行的 AI Agent 完成针对一个中小型项目的开发工作；
-- 基于 OpenClaw 这类可容器化部署的 AI Agent 完成针对一个中小型项目的运维工作；
+- 基于 OpenClaw 这类可在远端部署的 AI Agent 提升个人或团队在特定场景下的工作效率；
 
 > 📌 关联笔记：  
 >
 > - [[Agent 的基础应用]]：[博客园链接](https://www.cnblogs.com/owlman/p/19623216)
 > - [[Agent 的能力体系]]：[博客园链接](https://www.cnblogs.com/owlman/p/19669961)
 > - [[Agent 的记忆机制]]：[博客园链接](https://www.cnblogs.com/owlman/p/19854861)
-> - [[Agent 的应用演示]]：[博客园链接](https://www.cnblogs.com/owlman/p/20159722) 
+> - [[Agent 的应用演示]]：[博客园链接](https://www.cnblogs.com/owlman/p/20159722)
 
 完成这一阶段的学习后，我们应当能够回答以下问题：
 
