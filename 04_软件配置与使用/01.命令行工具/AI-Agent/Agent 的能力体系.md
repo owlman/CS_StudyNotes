@@ -230,7 +230,7 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 
 **图 6**：Anthropic 官方提供的 Skills
 
-> 如果读者想基于 Anthropic 的官方产品 Claude Code 进一步研究 Skills 机制的构建与使用方法，也可以参考本文在“参考资料”一节中提供的官方文档：《Agent Skills 构建指南》。
+> 如果读者想基于 Anthropic 的官方产品 Claude Code 进一步研究 Skills 机制的构建与使用方法，也可以参考本文在“参考资料”一节中列出的官方文档：《Agent Skills 构建指南》，或[[关于 Claude 官方 Skill]] 这篇参考文献
 
 ### Skills 机制 VS 提示词模板
 
