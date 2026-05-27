@@ -1,6 +1,10 @@
-# node-llama-cpp 全平台安装与配置教程
-
-> 文章出处：[node-llama-cpp 全平台安装与配置教程](https://blog.csdn.net/gitblog_00839/article/details/148577870)
+---
+title: 基于 node-llama-cpp 的 LLM 部署演示
+from: https://blog.csdn.net/gitblog_00839/article/details/148577870
+date: 2026-05-27
+tags: LLM本地部署, llama-cpp
+categories: 人工智能
+---
 
 node-llama-cpp是一个基于llama.cpp的Node.js绑定库，让你能够在本地机器上运行AI模型，并在生成级别强制模型输出符合JSON模式。本文将为你提供Windows、Linux和Mac全平台的安装与配置教程，帮助你快速上手这款强大的AI工具。
 

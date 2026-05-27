@@ -2,7 +2,7 @@
 title: 关于 Hermes Agent
 author: 凌杰
 date: 2026-05-05
-tags: Hermes-Agent OpenClaw
+tags: Hermes-Agent, OpenClaw
 categories: 软件配置与使用
 ---
 

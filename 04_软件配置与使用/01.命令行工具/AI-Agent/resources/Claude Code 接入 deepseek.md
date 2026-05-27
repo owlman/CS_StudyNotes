@@ -1,7 +1,8 @@
 ---
 title: Claude Code 接入 deepseek
-date: 2023-11-15 15:39:00
-author: [DeepSeek 官方](https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/claude_code)
+author: DeepSeek 官方
+from: https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/claude_code
+date: 2026-05-27
 tags: Claude_Code deepseek
 categories: 软件配置与使用
 ---
@@ -61,7 +62,8 @@ DeepSeek API 原生支持 Claude Code 中的 Web Search 功能。在使用 Claud
 
 在使用 Claude Code 或者 Claude Desktop APP 时，我们会对您传入的 claude 模型名进行映射：
 
-claude-opus 开头的模型，会映射到 deepseek-v4-pro
-claude-haiku、claude-sonnet 开头的模型，会映射到 deepseek-v4-flash
-以 claude-haiku、claude-sonnet 开头的模型，会映射到 deepseek-v4-flash
+- claude-opus 开头的模型，会映射到 deepseek-v4-pro
+- claude-haiku、claude-sonnet 开头的模型，会映射到 deepseek-v4-flash
+- 以 claude-haiku、claude-sonnet 开头的模型，会映射到 deepseek-v4-flash
+
 通过这样的映射，您在使用新版 Claude Desktop APP 的 developer 模式时，可以绕过 APP 对模型名的限制，只需改动 base_url 和 api_key，即可在其中接入 DeepSeek 模型。
