@@ -1,9 +1,13 @@
-# Andrej Karpathy 的 LLM 知识库方法论
-
-**作者**：时光的沙盒  
-**来源**：[知乎专栏](https://zhuanlan.zhihu.com/p/2023803203725135995)
-
 ---
+title: Andrej Karpathy的LLM知识库方法论
+author: 时光的沙盒
+from: https://zhuanlan.zhihu.com/p/2023803203725135995
+date: 2026-05-27
+tags: LLM, 知识库
+categories: 软件配置与使用
+---
+
+# Andrej Karpathy 的 LLM 知识库方法论
 
 > 当 AI 大牛开始用 LLM 管理知识而非编写代码，这标志着个人知识管理范式的根本性转变。
 

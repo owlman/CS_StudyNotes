@@ -2,7 +2,7 @@
 title: Agent 的记忆机制
 author: 凌杰
 date: 2026-03-11
-tags: RAG 长上下文窗口
+tags: RAG, 长上下文窗口
 categories: 软件配置与使用
 ---
 
@@ -219,7 +219,7 @@ graphify trae-cn uninstall
 ## 参考资料
 
 - 博客文章
-  - [[Andrej Karpathy的LLM知识库方法论]]：[这篇博客来自名为“时光的沙盒”的知乎专栏](https://zhuanlan.zhihu.com/p/2023803203725135995)
+  - [[Andrej Karpathy 的 LLM 知识库方法论]]：[这篇博客来自名为“时光的沙盒”的知乎专栏](https://zhuanlan.zhihu.com/p/2023803203725135995)
 
 - 开源项目
   - [memory-lancedb-pro](https://github.com/win4r/memory-lancedb-pro)

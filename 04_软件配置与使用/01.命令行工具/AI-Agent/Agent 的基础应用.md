@@ -2,7 +2,7 @@
 title: Agent 的基础应用
 author: 凌杰
 date: 2026-02-10
-tags: OpenCode OpenClaw Hermes-Agent
+tags: OpenCode, OpenClaw, Hermes-Agent
 categories: 软件配置与使用
 ---
 
@@ -74,7 +74,7 @@ categories: 软件配置与使用
 
 #### 安装与配置
 
-命令行工具型 Agent 的安装方式其实是非常简单的。因为，虽然它们各自针对 MacOS/Linux/Windows 系统提供了不同的 bash/powershell 安装脚本，或者基于 homeberw/pacman/scoop 等针对不同操作系统平台的包管理器安装命令，但基本都提供了基于 NPM 这一包管理器的跨平台安装方式。所以，读者在大多数情况下都可以按照以下步骤来安装并使用这些工具：
+命令行工具型 Agent 的安装方式其实是非常简单的。因为，虽然它们各自针对 MacOS/Linux/Windows 系统提供了不同的 bash/powershell 安装脚本，或者基于 homebrew/pacman/scoop 等针对不同操作系统平台的包管理器安装命令，但基本都提供了基于 NPM 这一包管理器的跨平台安装方式。所以，读者在大多数情况下都可以按照以下步骤来安装并使用这些工具：
 
 1. 确保自己所在的操作系统中已经安装了版本在 22.0.0 之上的 Node.js 运行环境，其中自带了 NPM 包管理器；
 
@@ -275,6 +275,8 @@ for task in tasks:
     ![img](https://img2024.cnblogs.com/blog/691082/202602/691082-20260218155717170-227815528.png)
 
     **图 11**：OpenClaw 的 Web 端
+
+值得一提的是，OpenClaw 和 OpenCode 一样也提供有 TUI 终端界面，读者可以通过执行`openclaw tui`命令来启动它，这个界面主要用于该 Agent 的服务端维护工作，毕竟在其服务端出问题时，我们在大多数情况下也只能以 SSH 的方式登录到其所在的服务器上进行排查。关于该界面的具体用法，可参考我在[[openclaw 常用命令]]一文中提供的详细说明。
 
 #### 借助 OpenCode 连接 LLM 服务
 

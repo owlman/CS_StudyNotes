@@ -1,7 +1,11 @@
-# Claude 官方开源 Skill
-
-> 来源：知乎
-> 链接：`https://zhuanlan.zhihu.com/p/1998758838342547118
+---
+title: 关于 Claude 官方 Skill
+author: MoLa
+from: https://zhuanlan.zhihu.com/p/1998758838342547118
+date: 2026-05-27
+tags: Claude_Code, Skill
+categories: 软件配置与使用
+---
 
 今天就直接上手最权威的起点：**Anthropic 官方的 Skills 仓库** → [anthropics/skills](https://github.com/anthropics/skills)。这个库是 Claude Skills 的「官方示范包」，里面放了 50+ 个高质量、可直接用的技能示例。安装后，Claude 瞬间变身你的专属「文档专家」「代码测试员」「创意设计师」……再也不用每次狂塞长 prompt 了。
 
