@@ -72,15 +72,16 @@
 
 如果你是第一次访问，可以从以下内容入手：
 
-1. 📖 **学习方法**
-   - [《关于卡片盒笔记法的实践》](https://github.com/owlman/CS_StudyNotes/blob/master/01_%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E8%AE%BA/%E5%8D%A1%E7%89%87%E7%9B%92%E7%AC%94%E8%AE%B0%E6%B3%95/%E5%85%B3%E4%BA%8E%E5%8D%A1%E7%89%87%E7%9B%92%E7%AC%94%E8%AE%B0%E6%B3%95%E7%9A%84%E5%AE%9E%E8%B7%B5.md)
-   - [《怎样进行有意义的线上讨论》](https://github.com/owlman/CS_StudyNotes/blob/master/01_%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E8%AE%BA/%E4%BA%92%E8%81%94%E7%BD%91%E4%BA%A4%E6%B5%81%E6%96%B9%E6%B3%95/%E6%80%8E%E6%A0%B7%E8%BF%9B%E8%A1%8C%E6%9C%89%E6%84%8F%E4%B9%89%E7%9A%84%E7%BA%BF%E4%B8%8A%E8%AE%A8%E8%AE%BA.md)
+1. 📖 **个人在学习与研究时使用的方法论**：
+   - [《关于卡片盒笔记法的实践》](./01_个人使用方法/卡片盒笔记法/关于卡片盒笔记法的实践.md)
+   - [《怎样进行有意义的线上讨论》](./01_个人使用方法/互联网交流方法/怎样进行有意义的线上讨论.md)
 
-2. 🧠 **整体认知**
-   - [《关于计算机语言的学习》](https://github.com/owlman/CS_StudyNotes/blob/master/02_%E5%9F%BA%E7%A1%80%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/00.%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/00.%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AD%A6%E4%B9%A0/%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AD%A6%E4%B9%A0.md)
-   - [《类 UNIX 系统的学习路线图》](https://github.com/owlman/CS_StudyNotes/blob/master/02_%E5%9F%BA%E7%A1%80%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/04.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%26UNIX/00.%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E5%9B%BE/%E7%B1%BB%20UNIX%20%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E5%9B%BE.md)
+2. 🧠 **学习/研究特定课题的路线图**；
+   - [《关于计算机语言的学习路线图》](./03_编程技术学习/00.计算机语言/00.关于计算机语言的学习/关于计算机语言的学习.md)
+   - [关于人工智能的学习路线图](./02_基础理论学习/05.人工智能/00.学习路线图/关于%20AI%20的学习路线图.md)
+   - [《关于类 UNIX 系统的学习路线图》](./02_基础理论学习/04.操作系统/Linux&UNIX/00.学习路线图/类%20UNIX%20系统的学习路线图.md)
 
-3. ⚙️ **软件工具**
+3. ⚙️ **特定软件工具的使用经验**：
    - 工程管理：[Git](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/Git/Git%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [Makefile](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/make/Makefile%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [Docker](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/Docker/Docker%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md)
 
    - 编辑器配置：[NeoVim](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/nvim/NeoVim%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [VS Code](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/02.%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%B7%A5%E5%85%B7/VSCode/VS%20Code%20%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0.md)
