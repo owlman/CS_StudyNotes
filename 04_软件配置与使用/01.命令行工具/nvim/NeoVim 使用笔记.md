@@ -174,7 +174,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
    set nu
 
    " 要安装的插件列表
-   call plug#begin('~/.vim/plugged')
+   call plug#begin()
    " tab键补全功能插件
    Plug 'ervandew/supertab'
    call plug#end()
@@ -207,11 +207,11 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 3. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，我们再次重启 NeoVim 编辑器，就可以根据自己使用的编程语言来安装智能补全插件了。
 
-4. 由于 Coc 本身并不提供具体语言的补全功能，所以在安装完成后，我们需要安装具体的语言服务以支持对应的补全功能。例如想要配置 C++环境，我们就需要在 NeoVim 的命令模式下执行以下命令来安装相关的插件：
+4. 由于 Coc 本身并不提供具体语言的补全功能，所以在安装完成后，我们需要安装具体的语言服务以支持对应的补全功能。例如想要配置 C++ 环境，我们就需要在 NeoVim 的命令模式下执行以下命令来安装相关的插件：
 
   ```vim
-  :CocInstall coc-clangd # C++环境插件
-  :CocInstall coc-cmake  # Cmake 支持
+  :CocInstall coc-clangd          # C++ 环境插件
+  :CocInstall coc-cmake           # Cmake 支持
   ```
   
   在上述命令执行完成之后，我们可以试着用 NeoVim 打开一个`.cpp`文件，然后就会在编辑器的底部看到这样一段提示：
@@ -223,15 +223,15 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
   这时候，我们可以继续在命令模式中输入`:CocCommand clangd.instal`命令来安装 clangd。然后，当我们再次重启 NeoVim 之后，编写 C++ 代码就会看到相关的智能补全提示了。当然了，我们可以执行以下命令来配置其他编程语言和工具的智能补全插件：
 
   ```vim
-  :CocInstall coc-git            # git 支持
-  :CocInstall coc-highlight  # 高亮支持
-  :CocInstall coc-jedi           # jedi
-  :CocInstall coc-json          # json 文件支持
-  :CocInstall coc-python     # python 环境支持
-  :CocInstall coc-sh             # bash 环境支持
-  :CocInstall coc-snippets   # python提供 snippets
-  :CocInstall coc-vimlsp      # lsp
-  :CocInstall coc-yaml         # yaml
+  :CocInstall coc-git             # git 支持
+  :CocInstall coc-highlight       # 高亮支持
+  :CocInstall coc-jedi            # jedi
+  :CocInstall coc-json            # json 文件支持
+  :CocInstall coc-python          # python 环境支持
+  :CocInstall coc-sh              # bash 环境支持
+  :CocInstall coc-snippets        # python 提供 snippets
+  :CocInstall coc-vimlsp          # lsp
+  :CocInstall coc-yaml            # yaml
   ```
 
 #### vim-airline 插件
