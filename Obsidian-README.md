@@ -46,7 +46,7 @@
     - [[Makefile 使用笔记]]
     - [[NeoVim 使用笔记]]
     - [[Docker 使用笔记]]
-    - [[kubernetes 使用笔记]]
+    - [[Kubernetes 使用笔记]]
     - [[Vagrant 使用笔记]]
   - 图形化工具
     - [[VS Code 配置笔记]]
