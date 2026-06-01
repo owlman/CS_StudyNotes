@@ -82,9 +82,9 @@
    - [《关于类 UNIX 系统的学习路线图》](./02_基础理论学习/04.操作系统/Linux&UNIX/00.学习路线图/类%20UNIX%20系统的学习路线图.md)
 
 3. ⚙️ **特定软件工具的使用经验**：
-   - 工程管理：[Git](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/Git/Git%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [Makefile](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/make/Makefile%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [Docker](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/Docker/Docker%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md)
+   - 工程&项目：[Git](./04_软件使用经验/01.命令行工具/Git/Git%20使用笔记.md) / [Zsh](./04_软件使用经验/01.命令行工具/Shell/Zsh%20配置笔记.md) / [Docker](./04_软件使用经验/01.命令行工具/Docker/Docker%20使用笔记.md) / [Kubernetes](./04_软件使用经验/01.命令行工具/k8s/Kubernetes%20使用笔记.md) / [AI Agent](./04_软件使用经验/01.命令行工具/AI-Agent/Agent%20的基础应用.md)
 
-   - 编辑器配置：[NeoVim](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/01.%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/nvim/NeoVim%20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0.md) / [VS Code](https://github.com/owlman/CS_StudyNotes/blob/master/04_%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/02.%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%B7%A5%E5%85%B7/VSCode/VS%20Code%20%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0.md)
+   - 编码&编译：[NeoVim](./04_软件使用经验/01.命令行工具/nvim/NeoVim%20使用笔记.md) / [VS Code](./04_软件使用经验/02.图形化工具/VSCode/VS%20Code%20配置笔记.md) / [clang](./04_软件使用经验/01.命令行工具/clang/Clang%20使用笔记.md) / [Make](./04_软件使用经验/01.命令行工具/make/Makefile%20使用笔记.md)
 
 这些内容可以帮助你快速判断：  
 **这个仓库是否与你的学习方式和目标一致。**
