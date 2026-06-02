@@ -1,13 +1,13 @@
 # CS_StudyNotes · 计算机学习笔记库
 
-[![C++](https://img.shields.io/badge/C/C%2B%2B-00599C?logo=c%2B%2B&logoColor=white)](https://en.cppreference.com/)
-[![Python](https://img.shields.io/badge/Python-green?logo=python&logoColor=white&style=flat-square)](https://www.python.org/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Markdown](https://img.shields.io/badge/Markdown-083FA1?logo=markdown&style=flat-square)](https://www.markdownguide.org/)
-[![LaTeX](https://img.shields.io/badge/LaTeX-008080?logo=latex&style=flat-square)](https://www.latex-project.org/)
-[![Obsidian](https://img.shields.io/badge/Obsidian-8284FF?logo=obsidian&style=flat-square)](https://obsidian.md/)
-[![VSCode](https://img.shields.io/badge/VSCode-007ACC?logo=vscodium&logoColor=white&style=flat-square)](https://code.visualstudio.com/)
-[![License](https://img.shields.io/badge/GPLv2-green?logo=gnu&logoColor=white&style=flat-square)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![C++](https://img.shields.io/badge/C%2B%2B-00599C?logo=c%2B%2B&logoColor=white)](https://en.cppreference.com/)
+[![Python](https://img.shields.io/badge/Python-green?logo=python&logoColor=white)](https://www.python.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Markdown](https://img.shields.io/badge/Markdown-083FA1?logo=markdown)](https://www.markdownguide.org/)
+[![LaTeX](https://img.shields.io/badge/LaTeX-008080?logo=latex)](https://www.latex-project.org/)
+[![Obsidian](https://img.shields.io/badge/Obsidian-8284FF?logo=obsidian)](https://obsidian.md/)
+[![VSCode](https://img.shields.io/badge/VSCode-007ACC?logo=vscodium&logoColor=white)](https://code.visualstudio.com/)
+[![License](https://img.shields.io/badge/GPLv2-green?logo=gnu&logoColor=white)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 > 这是一个面向 **CS 学习者与工程实践者** 的长期维护型计算机知识笔记库，整体风格倾向于 **概念理解、知识结构与可复用判断**。
 
@@ -22,50 +22,18 @@
 - ✍️ **技术写作者 / 研究者**  
   对知识整理方法、卡片笔记法、技术表达本身感兴趣；
 
-## 这个仓库不是什么？
+## 这个仓库不提供什么？
 
-在开始之前，有必要说清楚边界：
+- ❌ 不提供速成教程；
+- ❌ 不提供面试八股合集；  
+- ❌ 不提供某一门语言 / 框架的完整手册；  
 
-- ❌ 不是速成教程  
-- ❌ 不是面试八股合集  
-- ❌ 不是某一门语言 / 框架的完整手册  
-
-它更接近于：
+它更倾向于提供给读者：
 
 > **一个长期演化的计算机知识工作台**  
 > 用于支持学习、研究、写作与工程判断
 
-## 内容范围一览
-
-本仓库的内容围绕 **计算机科学与软件工程的核心领域**，包括但不限于：
-
-### 📌 计算机语言的学习与应用
-
-- 计算机语言学习方法与抽象层次理解
-- 语言特性与工程实践的关系
-
-### 🖥️ 操作系统与系统环境
-
-- 类 UNIX 系统学习路线
-- Ubuntu 使用与系统配置笔记
-
-### 🌐 应用程序与 Web 开发
-
-- Web 应用开发的基础结构
-- 自动化测试相关实践
-
-### 🛠️ 工具链与工程环境
-
-- Git / Makefile / Docker / Kubernetes
-- NeoVim / VS Code / Zsh
-- 构建、调试与部署相关经验
-
-### 🧠 学习方法与研究方法
-
-- 卡片盒笔记法（Zettelkasten）的实践
-- 技术学习、线上讨论与知识沉淀的方法论
-
-## 推荐阅读路径（第一次来建议从这里开始）
+## 推荐阅读路径
 
 如果你是第一次访问，可以从以下内容入手：
 
@@ -88,8 +56,8 @@
 
 ## 如何阅读？
 
-- 首先，所有笔记均使用 **Markdown** 编写，可直接在 GitHub 上浏览。
-- 其次，若希望获得更好的体验（双链、反向链接、知识网络），推荐使用 [Obsidian](https://obsidian.md/)或在 VS Code 中配合 [Foam](https://foambubble.github.io/foam/) 插件，可将项目根目录下的 `Obsidian-README.md` 当做入口文档进行阅读。
+- 首先，所有笔记均使用 **Markdown** 编写，可直接在 GitHub 上按目录的自然分类进行阅读。
+- 其次，若希望获得更好的体验（双链、反向链接、知识网络），推荐使用 [Obsidian](https://obsidian.md/)或在 VS Code 中配合 [Foam](https://foambubble.github.io/foam/) 插件，可将项目根目录下的 [`Obsidian-README.md`](./Obsidian-README.md) 当做入口文档进行阅读。
 
 > 使用 Obsidian / Foam 是 **增强体验**，而不是前置条件。
 
