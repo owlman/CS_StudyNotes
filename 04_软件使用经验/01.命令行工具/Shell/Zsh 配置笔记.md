@@ -1,5 +1,6 @@
 ---
 title: Zsh 配置笔记
+author: 凌杰
 date: 2025-12-04
 tags: Shell
 categories: 命令行工具

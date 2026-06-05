@@ -2,7 +2,7 @@
 title: 关于Python的学习
 author: 凌杰
 date: 2023-05-26
-tags: 学习路线图规划
+tags: 学习路线图
 categories: 编程语言
 ---
 

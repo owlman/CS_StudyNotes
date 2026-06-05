@@ -1,5 +1,6 @@
 ---
 title: JavaScript 学习笔记：进阶篇
+author: 凌杰
 date: 2024-02-02
 tags: 程序设计
 categories: 编程语言

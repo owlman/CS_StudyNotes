@@ -1,5 +1,6 @@
 ---
 title: Clang 使用笔记
+author: 凌杰
 date: 2020-12-04
 tags: 代码编译器
 categories: 命令行工具

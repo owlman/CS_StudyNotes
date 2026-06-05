@@ -1,5 +1,6 @@
 ---
 title: Git 使用笔记
+author: 凌杰
 date: 2018-05-11
 tags: 版本控制
 categories: 命令行工具

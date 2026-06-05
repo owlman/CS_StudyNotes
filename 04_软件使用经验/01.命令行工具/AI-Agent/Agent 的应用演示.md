@@ -2,7 +2,7 @@
 title: Agent 的应用演示
 author: 凌杰
 date: 2026-05-20
-tags: opencode, openclaw
+tags: [opencode, openclaw]
 categories: 软件配置与使用
 ---
 

@@ -3,7 +3,7 @@ title: Andrej Karpathy的LLM知识库方法论
 author: 时光的沙盒
 from: https://zhuanlan.zhihu.com/p/2023803203725135995
 date: 2026-05-27
-tags: LLM, 知识库
+tags: [LLM, 知识库]
 categories: 软件配置与使用
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: Kubernetes 使用笔记
+author: 凌杰
 date: 2022-10-08
-tags: 运维工具 容器化
+tags: [运维工具, 容器编排]
 categories: 命令行工具
 ---
 
@@ -525,6 +526,3 @@ k8s-worker2   Ready      <none>                 21h   v1.21.1
 
 [^1]: 在这里，“K8s”这个简称是由将kubernetes中间的“ubernete”八个字母缩写为“8”而来。
 [^2]: 在搜索参考文献时最好不要使用“K8s”这样的缩写形式，这会让我们错过一些正式的官方文档。
-
-----
-#已完成
