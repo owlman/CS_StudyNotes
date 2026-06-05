@@ -4,7 +4,7 @@ author: DeepSeek 官方
 from: https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/claude_code
 date: 2026-05-27
 tags: Claude_Code deepseek
-categories: 软件配置与使用
+categories: 软件使用经验
 ---
 
 

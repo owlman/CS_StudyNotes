@@ -1,5 +1,6 @@
 ---
 title:Vagrant 使用笔记 
+author: 凌杰
 date: 2022-09-04
 tags: 虚拟机管理
 categories: 命令行工具
@@ -558,6 +559,3 @@ vagrant-vbguest (0.30.0, global)
     ```
 
 如果读者想获得上述示例的源码，也可以前往`https://github.com/owlman/vagrant-ubuntu-k8s-cluster`处获得。
-
-----
-#已完成

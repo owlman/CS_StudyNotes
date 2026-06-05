@@ -1,5 +1,6 @@
 ---
 title: LaTeX学习笔记：数学公式编辑
+author: 凌杰
 date: 2025-11-14
 tags: 技术写作
 categories: 标记语言
@@ -95,7 +96,7 @@ $$ c = \sqrt{a^{2} + b^{2}} $$
 
 除此之外。我们还可以使用`amsmath`宏包中提供的六种带箭头的线条，它们分别是`\overrightarrow`、`\overleftarrow`、`\overleftrightarrow`、`\underrightarrow`、`\underleftarrow`和`\underleftrightarrow`。下面，我们就来演示一下这些命令的用法（见表 5）：
 
-| 公式编码                       | 渲染效果                          |
+| 公式编码                      | 渲染效果                          |
 |-------------------------------|-----------------------------------|
 | `$\overrightarrow{a+b}$`      | $\overrightarrow{a+b}$            |
 | `$\overleftarrow{a+b}$`       | $\overleftarrow{a+b}$             |

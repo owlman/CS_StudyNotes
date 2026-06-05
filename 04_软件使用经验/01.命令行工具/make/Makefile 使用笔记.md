@@ -1,7 +1,8 @@
 ---
 title: Makefile 使用笔记
+author: 凌杰
 date: 2018-04-16
-tags: 项目构建
+tags: 自动化构建
 categories: 命令行工具
 ---
 

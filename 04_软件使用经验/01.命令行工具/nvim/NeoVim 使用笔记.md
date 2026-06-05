@@ -1,5 +1,6 @@
 ---
 title: NeoVim 使用笔记
+author: 凌杰
 date: 2020-07-15
 tags: 文本编辑器
 categories: 命令行工具

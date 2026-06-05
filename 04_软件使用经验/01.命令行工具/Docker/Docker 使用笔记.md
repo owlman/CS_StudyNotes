@@ -1,7 +1,8 @@
 ---
 title: Docker 使用笔记
+author: 凌杰
 date: 2022-10-08
-tags: 运维工具 容器化
+tags: [运维工具, 容器化]
 categories: 命令行工具
 ---
 
