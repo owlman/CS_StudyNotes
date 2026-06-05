@@ -2,10 +2,9 @@
 title: Agent 的基础应用
 author: 凌杰
 date: 2026-02-10
-tags: OpenCode, OpenClaw, Hermes-Agent
+tags: [OpenCode, OpenClaw, Hermes-Agent]
 categories: 软件配置与使用
 ---
-
 > [!NOTE] 笔记说明
 >
 > 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第四个学习阶段。其中记录了我学习 AI Agent（以下简称 Agent）的工作原理，以及初步掌握其基础应用方法的全过程，以及在该过程中所获得的心得体会。这些内容也将被收录在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
