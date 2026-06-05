@@ -2,7 +2,7 @@
 title: Agent 的能力体系
 author: 凌杰
 date: 2026-02-19
-tags: Prompt, MCP, Skills
+tags: [Prompt, MCP, Skills]
 categories: 软件配置与使用
 ---
 
