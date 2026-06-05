@@ -69,8 +69,10 @@ target/
 .DS_Store
 */.DS_Store
 
-# vscode project
-node_modules
+# Node.js dependencies
+node_modules/
+**/node_modules/
+**/node_modules
 
 SoftwareTool/Git/code/demo_repo/
 
