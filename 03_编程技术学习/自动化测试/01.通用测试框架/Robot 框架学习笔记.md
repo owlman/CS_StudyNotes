@@ -243,5 +243,8 @@ category: 自动化测试
 
 总而言之，对于如今的项软件工程师来说，在一个月内快速掌握某个新框架的能力远比之前已经掌握了多少个框架重要得多，例如当开发团队的管理员在面试新成员时，如果这位面试者有五年 A 框架的使用经验，那固然是很好，但团队中很多人都有，未必需要再多一个同类型的人才、但如果该面试者能在一个礼拜快速上手基于 Python 开发的任意一种框架，那么这位人才的重要性就会被凸显出来。
 
-----
-#已完成
+## 参考资料
+
+- [框架教程](https://docs.robotframework.org/docs)
+- [用户手册](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html)
+- [API 文档](https://robot-framework.readthedocs.io/en/stable/)
