@@ -51,9 +51,11 @@
    - [《关于人工智能的学习路线图》](./02_基础理论学习/人工智能/00.学习路线图/关于%20AI%20的学习路线图.md)
 
 3. ⚙️ **特定软件工具的使用经验**：
-   - 工程 & 项目：[Git](./04_软件使用经验/Git/Git%20使用笔记.md) / [Zsh](./04_软件使用经验/Shell/Zsh%20配置笔记.md) / [Make](./04_软件使用经验/make/Makefile%20使用笔记.md) / [Docker](./04_软件使用经验/Docker/Docker%20使用笔记.md) / [Kubernetes](./04_软件使用经验/k8s/Kubernetes%20使用笔记.md) / [AI Agent](./04_软件使用经验/AI-Agent/Agent%20的基础应用.md)
+   - 工程 & 项目：[Git](./04_软件使用经验/Git/Git%20使用笔记.md) / [Zsh](./04_软件使用经验/Shell/Zsh%20配置笔记.md) / [Make](./04_软件使用经验/make/Makefile%20使用笔记.md) / [Docker](./04_软件使用经验/Docker/Docker%20使用笔记.md) / [Kubernetes](./04_软件使用经验/k8s/Kubernetes%20使用笔记.md)
 
    - 编码 & 编译：[NeoVim](./04_软件使用经验/nvim/NeoVim%20使用笔记.md) / [VS Code](./04_软件使用经验/VSCode/VS%20Code%20配置笔记.md) / [clang](./04_软件使用经验/clang/Clang%20使用笔记.md) / [LaTeX](./03_编程技术学习/计算机语言/02.标记语言/LaTeX/LaTeX学习笔记：快速上手指南.md)
+
+   - 辅助 & 查询：[AI Agent](./04_软件使用经验/AI-Agent/Agent%20的基础应用.md)
 
 4. 📚 **特定应用程序的开发实践**：
     - [Web 应用的开发实践](./03_编程技术学习/Web%20应用开发/00.学习路线图/关于%20Web%20应用的开发.md)
