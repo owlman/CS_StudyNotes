@@ -254,7 +254,7 @@ categories: 软件配置与使用
 
     **图 11** 确认 OpenCode 中已安装的 Skills
 
-2. 在《[[关于 Hermes Agent]]》这篇笔记所在的目录中打开 OpenCode，并输入如下提示词：
+2. 在《[[补充 Hermes Agent]]》这篇笔记所在的目录中打开 OpenCode，并输入如下提示词：
 
     ```markdown
     请阅读 @关于 Hermes Agent.md，根据其内容为我生成一份题为《关于 Hermes Agent》的 PPT，并将其保存到 examples 目录下，风格为现代简约。
