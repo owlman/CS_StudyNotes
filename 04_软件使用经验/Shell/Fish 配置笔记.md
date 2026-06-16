@@ -126,8 +126,6 @@ sudo zypper install fish
 
     ![自定义函数](./img/fish_custom_func.png)
 
-
-
 - **completions**：自定义补全目录，用于存放用户自定义的补全脚本。例如，我们之前在执行`fish_update_completions`命令时，fish 就会自动在该目录下生成一些补全脚本。
 
 ## 使用 Oh My Fish
