@@ -42,6 +42,14 @@ sudo zypper install fish
     chsh -s /usr/bin/fish    
     ```
 
+> [!WARNING] 修改默认 Shell 的风险
+> 修改系统级默认 Shell 存在一定风险：如果 Fish 的配置出现错误，或者在某些受限环境中 Fish 不可用，可能导致无法正常登录系统。
+>
+> 建议先执行以下操作来降低风险：
+>
+> - 确认`/usr/bin/fish`已添加到`/etc/shells`文件中（可通过`cat /etc/shells`查看）。
+> - 初次体验时，可以选择**只在终端模拟器中**将默认命令设为`fish`（如 GNOME Terminal、Konsole 等的设置项），而**不修改系统级默认 Shell**。这样即使 Fish 出现问题，回退到 tty 登录时仍可使用 Bash。
+
 下面，让我们来简单介绍一下 Fish Shell 几个最基本的常用功能。
 
 - **自动补全**：当我们在 fish shell 中键入任何命令时，它会在输入几个字母后以浅灰色自动建议一个命令。
@@ -78,18 +86,49 @@ sudo zypper install fish
 
     ```bash
     $ fish_update_completions
-    Parsing man pages and writing completions to /home/daygeek/.local/share/fish/generated_completions/
+    Parsing man pages and writing completions to ~/.config/fish/completions
     3466 / 3466 : zramctl.8.gz
     ```
 
-以上是关于 Fish 的基本用法。如果想跟进一步深入，我们就需要来详细介绍一下它的配置文件体系了。
+以上只是关于 Fish 的基本用法。如果想进一步深入使用 Fish，就需要来具体了解一下它的配置体系了。该体系的文件默认保存在`~/.config/fish/`目录下，主要由以下文件和目录组成。
 
-~/.config/fish/config.fish（主配置文件）
-~/.config/fish/functions/（自定义函数目录）
-~/.config/fish/completions/（自定义补全目录）
+- **config.fish**：主配置文件，用于定义启动时自动执行的命令。例如，如果我们想让 Fish 在每次启动时自动激活指定的 Python 虚拟环境（假设它位于`~/.venv`目录下），那么就可以在该文件中添加如下内容。
 
-环境变量设置方式（set -gx 等）
-这部分是 Fish 配置的核心，建议补充
+    ```bash
+    if test -f $HOME/.venv/bin/activate.fish
+        source $HOME/.venv/bin/activate.fish
+    end
+    ```
+
+    除此之外，我们还可以在这个主配置文件中给命令设置别名、设置环境变量等，例如像下面这样：
+
+    ```bash
+    # 给命令设置别名
+    alias ll='ls -lah'
+    alias gs='git status'
+
+    # 设置环境变量，用于指定默认的文本编辑器
+    set -gx EDITOR nvim
+
+    # 初始化 fzf 插件，用于实现模糊搜索
+    fzf --fish | source
+    ```
+
+- **functions**：自定义函数目录，用于存放用户自定义的函数。例如，如果我们想定义一个名为`myfunc`的函数，那么就可以在该目录下创建一个名为`say_hello.fish`的文件，并在其中添加如下内容。
+
+    ```bash
+    function say_hello
+        echo "Hello, World!"
+    end
+    ```
+
+    然后，我们就可以在 Fish shell 中通过执行`say_hello`命令来调用该函数了，如下图所示。
+
+    ![自定义函数](./img/fish_custom_func.png)
+
+
+
+- **completions**：自定义补全目录，用于存放用户自定义的补全脚本。例如，我们之前在执行`fish_update_completions`命令时，fish 就会自动在该目录下生成一些补全脚本。
 
 ## 使用 Oh My Fish
 
@@ -103,7 +142,7 @@ curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install 
 
 现在，让我们执行`omf theme`命令，先来看一下可用的和已安装的主题列表。读者可以看到，我们只有一个已安装的主题，这是默认的，但是还有大量可用的主题。在安装之前，读者可以先前往 omf 的主仓库查看一下相关文档，以便预览所有可用主题的细节、特性、截图示例。
 
-接下来，假设我在这里选择的是 chain 这个极简风格的主题，那么久只需要执行`omf install chain`命令来安装它即可。该主题启用之后的效果如下图所示。
+接下来，假设我在这里选择的是 chain 这个极简风格的主题，那么就只需要执行`omf install chain`命令来安装它即可。该主题启用之后的效果如下图所示。
 
 ![chain 主题](./img/fish_chain_theme.png)
 
@@ -115,7 +154,7 @@ curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install 
 
 ![weather 插件](./img/fish_weather_plugin.png)
 
-请注意，这个天气插件依赖于一个名为 jq 的轻量级 JSON 处理器），因此，我们需要先使用包管理器来安装它。例如在 ubuntu 系统中执行`sudo apt install jq`命令即可。另外，如果我们想搜索某个插件，可以使用`omf search <search_string>`命令，例如在执行了`omf search python`命令之后，我们就可以看到 omf 返回了关于 Python 插件的相关信息。
+请注意，这个天气插件依赖于一个名为 jq 的轻量级 JSON 处理器，因此，我们需要先使用包管理器来安装它。例如在 ubuntu 系统中执行`sudo apt install jq`命令即可。另外，如果我们想搜索某个插件，可以使用`omf search <search_string>`命令，例如在执行了`omf search python`命令之后，我们就可以看到 omf 返回了关于 Python 插件的相关信息。
 
 ![搜索插件](./img/fish_search_plugin.png)
 
@@ -153,6 +192,16 @@ omf repositories remove <repository-name>
 ```
 
 如果出现了错误，omf 也会列出解决问题的方法。例如，我之前在安装 clearance 时遇到了文件冲突错误。然后，我只是简单地运行了`omf doctor`命令，而 omf 就建议我执行`rm ~/.config/fish/functions/fish_prompt.fish`命令来解决问题。最后，如果我们想卸载 omf，可以执行`omf destroy`命令来完成。
+
+## 扩展阅读
+
+如果这篇笔记的内容已经满足不了读者的需求，有以下方向可以进一步地探索：
+
+- **`abbr`缩写机制**：Fish 的`abbr`（缩写）比传统 alias 更智能——它会在输入时展开为完整命令，但命令行中实际显示的是展开后的内容，适合管理带参数的长命令。
+- **`tide`主题引擎**：一个现代化的 Fish 主题管理器，支持右侧提示符、异步渲染和丰富的自定义选项，是 Oh My Fish 的热门替代品。
+- **`starship`提示符**：跨 Shell 的极简提示符工具，只需在`config.fish`中添加一行`starship init fish | source`即可使用，支持`$rustc`、`$node`等众多语言版本信息。
+- **与 `fzf` 深度集成**：除本文提到的初始化之外，还可以利用 `fzf` 实现历史命令模糊搜索、文件路径快速跳转等高级交互功能。
+- **函数与事件系统**：Fish 支持事件驱动的编程模型（`fish --event`、`fish_exit`、`fish_preexec`等），可以编写更智能的自动化脚本。
 
 ## 参考资料
 
