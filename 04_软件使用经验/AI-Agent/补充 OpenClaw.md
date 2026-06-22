@@ -1,27 +1,65 @@
 ---
-title: 关于 OpenClaw
+title: 补充 OpenClaw
 author: 凌杰
 date: 2026-04-01
 tags: OpenClaw
 categories: 软件使用经验
 ---
 
-尽管，OpenClaw 是一款可部署在服务器上的 AI Agent，它拥有强大的自动化操作能力，支持通过接入 Telegram、Whatsapp、飞书等即时通讯软件来进行远程操控计算机，颇受业界人士喜欢。但是，由于该项目目前版本更新频繁，一些操作命令经常会发生细微的变化，而官方文档更新又不够不及时，导致我们在使用过程中经常会遇到各种问题。因此，本文将整理它一些常用的命令，并将其维护在 GitHub 上，以便日常参考。
+> [!NOTE] 笔记说明
+>
+> 尽管，我已经在之前的 Agent 系列笔记中介绍过了 OpenClaw 中的一些通用于所有 Agent 的使用方法，但为了让[这个笔记库](https://github.com/owlman/CS_StudyNotes)中记录的知识更为系统，我决定再写一篇补充性的笔记，用于记录那些独属于 OpenClaw 的使用经验，并予以长期维护。
 
-## 安装与升级
+正如我在《[[Agent 的基础应用]]》一文中所介绍的，OpenClaw 是一款可部署在服务器上的 AI Agent，它拥有强大的自动化操作能力，支持通过接入 Telegram、Whatsapp、飞书等即时通讯软件来进行远程操控计算机，颇受业界人士喜欢。但是，由于该项目目前版本更新频繁，一些操作命令经常会发生细微的变化，而官方文档更新又不够不及时，导致我们在使用过程中经常会遇到各种问题。因此，本文将整理它的一些常用配置与应用场景，以作为 Agent 系列笔记的补充。
+
+## 接入 IM
+
+### 接入 Whatsapp
+
+### 接入飞书
+
+### 接入微信
+
+## 服务端维护
+
+### 网关重启
 
 ```bash
-# 使用 Bash 安装（MacOS/Linux/WSL）
-curl -fsSL https://openclaw.ai/install.sh | bash
-
-# 使用 PowerShell 安装（Windows）
-iwr -useb https://openclaw.ai/install.ps1 | iex
-
-# 使用 NPM 安装
-npm i -g openclaw@latest
+# 重启
+systemctl --user restart openclaw-gateway
+# 查看日志
+journalctl --user -u openclaw-gateway.service -f
 ```
 
-> 由于 OpenClaw 的版本更新频率非常高，如果想要随时使用上它的最新功能，可以每隔几日就重新执行一下上述安装命令将其升级。请放心，这些重新安装动作只会进行程序的版本升级，不会破坏我们此前的设置。
+或者
+
+```bash
+openclaw gateway restart
+```
+
+### 版本升级
+
+```bash
+openclaw update
+```
+
+### 修复
+
+如果出了小问题，只要程序本身还没彻底坏，可以执行如下命令让他自己修复:
+
+```bash
+openclaw doctor --fix
+```
+
+之后它会帮你修改配置文件
+
+* Updated ~/.openclaw/openclaw.json
+* Backup: ~/.openclaw/openclaw.json.bak
+
+### 自我学习
+
+
+<!-- 以下待整理 -->
 
 ### 启动新手安装向导
 
@@ -55,41 +93,7 @@ openclaw devices reject <requestId>
 
 list 之后可以看到 id，然后在运行第二行就行了。
 
-## 维护
 
-### 重启
-
-```bash
-# 重启
-systemctl --user restart openclaw-gateway
-# 查看日志
-journalctl --user -u openclaw-gateway.service -f
-```
-
-或者
-
-```bash
-openclaw gateway restart
-```
-
-### 升级
-
-```bash
-openclaw update
-```
-
-### 修复
-
-如果出了小问题，只要程序本身还没彻底坏，可以执行如下命令让他自己修复:
-
-```bash
-openclaw doctor --fix
-```
-
-之后它会帮你修改配置文件
-
-* Updated ~/.openclaw/openclaw.json
-* Backup: ~/.openclaw/openclaw.json.bak
 
 ## Telegram 频道配置
 
@@ -119,28 +123,4 @@ openclaw doctor --fix
 openclaw models
 # 设置模型 <模型名称>
 openclaw models set <openrouter/auto>
-```
-
-### 启动 TUI 模式(在终端对话)
-
-有时候在升级维护时，或者 bot 坏了的时候，可以直接在终端对话
-
-```bash
-openclaw tui
-```
-
-## 错误检查
-
-一旦遇到问题，不要慌，只需要运行:
-
-```bash
-openclaw doctor --fix
-```
-
-它就会帮你自动检测、自动修复，多数情况下就好了。少部分情况会搞砸,不过跟着页面的错误提示，也能修好，
-
-## 查看当前状态
-
-```bash
-openclaw status
 ```
