@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap');
+      text { font-family: 'JetBrains Mono', 'Noto Sans SC', 'PingFang SC', sans-serif; }
+    </style>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrow-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fb923c"/>
+    </marker>
+    <marker id="arrow-slate" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="920" height="400" fill="#0f172a"/>
+  <rect width="920" height="400" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="30" y="36" fill="white" font-size="15" font-weight="700">OpenClaw 消息流转架构</text>
+  <text x="30" y="54" fill="#94a3b8" font-size="10">多 IM 平台通过消息网关与 OpenClaw 服务端双向通信</text>
+
+  <!-- ====== Section labels ====== -->
+  <text x="120" y="96" fill="#64748b" font-size="10" font-weight="600" text-anchor="middle">IM 客户端层</text>
+  <text x="420" y="96" fill="#64748b" font-size="10" font-weight="600" text-anchor="middle">网关层（Gateway）</text>
+  <text x="740" y="96" fill="#64748b" font-size="10" font-weight="600" text-anchor="middle">服务端层</text>
+
+  <!-- ====== IM Clients ====== -->
+
+  <!-- WhatsApp -->
+  <rect x="50" y="112" width="140" height="56" rx="6" fill="#0f172a"/>
+  <rect x="50" y="112" width="140" height="56" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="120" y="136" fill="white" font-size="12" font-weight="600" text-anchor="middle">WhatsApp</text>
+  <text x="120" y="152" fill="#94a3b8" font-size="9" text-anchor="middle">国际即时通讯</text>
+
+  <!-- 飞书 -->
+  <rect x="50" y="182" width="140" height="56" rx="6" fill="#0f172a"/>
+  <rect x="50" y="182" width="140" height="56" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="120" y="206" fill="white" font-size="12" font-weight="600" text-anchor="middle">飞书</text>
+  <text x="120" y="222" fill="#94a3b8" font-size="9" text-anchor="middle">企业协作平台</text>
+
+  <!-- 微信 -->
+  <rect x="50" y="252" width="140" height="56" rx="6" fill="#0f172a"/>
+  <rect x="50" y="252" width="140" height="56" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="120" y="276" fill="white" font-size="12" font-weight="600" text-anchor="middle">微信</text>
+  <text x="120" y="292" fill="#94a3b8" font-size="9" text-anchor="middle">社交即时通讯</text>
+
+  <!-- More indicator -->
+  <text x="120" y="326" fill="#64748b" font-size="10" text-anchor="middle">……</text>
+  <text x="120" y="338" fill="#64748b" font-size="8" text-anchor="middle">Telegram 等</text>
+
+  <!-- ====== Gateway ====== -->
+  <rect x="310" y="160" width="220" height="100" rx="8" fill="#0f172a"/>
+  <rect x="310" y="160" width="220" height="100" rx="8" fill="rgba(251,146,60,0.3)" stroke="#fb923c" stroke-width="1.5"/>
+
+  <!-- Gateway icon placeholder - a small routing symbol -->
+  <text x="420" y="188" fill="white" font-size="14" font-weight="600" text-anchor="middle">消息网关</text>
+  <text x="420" y="206" fill="#94a3b8" font-size="10" text-anchor="middle">Gateway</text>
+
+  <line x1="340" y1="222" x2="500" y2="222" stroke="#fb923c" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="420" y="238" fill="#fb923c" font-size="9" text-anchor="middle">消息路由 / 协议转换</text>
+
+  <!-- ====== OpenClaw Server ====== -->
+  <rect x="630" y="170" width="200" height="80" rx="6" fill="#0f172a"/>
+  <rect x="630" y="170" width="200" height="80" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="730" y="200" fill="white" font-size="14" font-weight="600" text-anchor="middle">OpenClaw 服务端</text>
+  <text x="730" y="220" fill="#94a3b8" font-size="9" text-anchor="middle">消息处理 / AI 生成回复</text>
+
+  <!-- ====== Connections: Client → Gateway (step ①②) ====== -->
+
+  <!-- WhatsApp → Gateway (step ①: Webhook) -->
+  <line x1="190" y1="130" x2="303" y2="180" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+  <rect x="201" y="136" width="58" height="16" rx="3" fill="#0f172a"/>
+  <rect x="201" y="136" width="58" height="16" rx="3" fill="none" stroke="#22d3ee" stroke-width="0.5"/>
+  <text x="230" y="148" fill="#22d3ee" font-size="7" font-weight="600" text-anchor="middle">Webhook</text>
+
+  <!-- 飞书 → Gateway -->
+  <line x1="190" y1="210" x2="303" y2="210" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+  <rect x="201" y="216" width="58" height="16" rx="3" fill="#0f172a"/>
+  <rect x="201" y="216" width="58" height="16" rx="3" fill="none" stroke="#22d3ee" stroke-width="0.5"/>
+  <text x="230" y="228" fill="#22d3ee" font-size="7" font-weight="600" text-anchor="middle">Webhook</text>
+
+  <!-- 微信 → Gateway -->
+  <line x1="190" y1="280" x2="303" y2="240" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+  <rect x="201" y="274" width="58" height="16" rx="3" fill="#0f172a"/>
+  <rect x="201" y="274" width="58" height="16" rx="3" fill="none" stroke="#22d3ee" stroke-width="0.5"/>
+  <text x="230" y="286" fill="#22d3ee" font-size="7" font-weight="600" text-anchor="middle">Webhook</text>
+
+  <!-- ====== Connection: Gateway → Server (step ③) ====== -->
+  <line x1="530" y1="195" x2="622" y2="195" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+
+  <!-- Step badge: ③ -->
+  <circle cx="576" cy="182" r="9" fill="#fb923c"/>
+  <text x="576" y="186" fill="#0f172a" font-size="9" font-weight="700" text-anchor="middle">3</text>
+  <text x="576" y="227" fill="#fb923c" font-size="8" text-anchor="middle">转发请求</text>
+
+  <!-- ====== Connection: Server → Gateway (step ④) ====== -->
+  <line x1="622" y1="225" x2="530" y2="225" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+
+  <circle cx="576" cy="238" r="9" fill="#34d399"/>
+  <text x="576" y="242" fill="#0f172a" font-size="9" font-weight="700" text-anchor="middle">4</text>
+  <text x="576" y="252" fill="#34d399" font-size="8" text-anchor="middle">返回响应</text>
+
+  <!-- ====== Connections: Gateway → Client (step ⑤ - implicit as 2nd half of ④) ====== -->
+
+  <!-- Gateway → WhatsApp -->
+  <line x1="303" y1="198" x2="190" y2="148" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+
+  <!-- Gateway → 飞书 -->
+  <line x1="303" y1="215" x2="190" y2="215" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+
+  <!-- Gateway → 微信 -->
+  <line x1="303" y1="232" x2="190" y2="282" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+
+  <!-- ====== Step sequence labels (top right) ====== -->
+
+  <!-- Step number box -->
+  <rect x="710" y="280" width="180" height="90" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="0.5"/>
+
+  <text x="720" y="300" fill="#94a3b8" font-size="9" font-weight="600">处理流程</text>
+
+  <circle cx="726" cy="316" r="6" fill="#22d3ee"/>
+  <text x="726" y="319" fill="#0f172a" font-size="7" font-weight="700" text-anchor="middle">1</text>
+  <text x="738" y="319" fill="#cbd5e1" font-size="8">IM 平台接收消息</text>
+
+  <circle cx="726" cy="334" r="6" fill="#22d3ee"/>
+  <text x="726" y="337" fill="#0f172a" font-size="7" font-weight="700" text-anchor="middle">2</text>
+  <text x="738" y="337" fill="#cbd5e1" font-size="8">Webhook/API → 网关</text>
+
+  <circle cx="726" cy="352" r="6" fill="#fb923c"/>
+  <text x="726" y="355" fill="#0f172a" font-size="7" font-weight="700" text-anchor="middle">3</text>
+  <text x="738" y="355" fill="#cbd5e1" font-size="8">网关转发 → 服务端处理</text>
+
+  <circle cx="726" cy="370" r="6" fill="#34d399"/>
+  <text x="726" y="373" fill="#0f172a" font-size="7" font-weight="700" text-anchor="middle">4</text>
+  <text x="738" y="373" fill="#cbd5e1" font-size="8">服务端回复 → 网关 → 客户端</text>
+
+</svg>
