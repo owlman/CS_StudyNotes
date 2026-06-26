@@ -236,9 +236,9 @@ OpenClaw 服务端的配置文件通常位于`~/.openclaw/`这个目录下（`~`
 - **优先考虑修改工作区（`~/.openclaw/workspace/`）中的配置文件**。尽可能避免修改全局配置，例如`~/.openclaw/openclaw.json`，除非你非常清楚自己在做什么；
 - **修改配置之前，务必要先做好备份工作**。例如，对`~/.openclaw/workspace/`目录进行 git 版本管理并定期将配置文件备份至 github 仓库（通常是私有仓库），或者在每次不得已修改`~/.openclaw/openclaw.json`之前，先执行`cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.bak-$(date +%Y%m%d%H%M%S)`命令来执行备份（在这里，`$(date +%Y%m%d%H%M%S)`表示当前时间）。
 
-事实上，我们可以直接通过 IM 工具，用对话的方式来修改配置。例如在飞书平台中，我们可以通过直接对话来让 OpenClaw 对这个月所有的会话记忆进行一次复盘，并从中提取有用的工作技能，如图 21 所示。
+事实上，我们可以直接通过 IM 工具，用对话的方式来修改配置。例如在飞书平台中，我们可以通过直接对话来配置 OpenClaw 的模型调用顺序，如图 21 所示。
 
-![在飞书中与OpenClaw进行配置](./img/feishu_configure.jpeg)
+![在飞书中与OpenClaw进行配置](./img/feishu_configure.png)
 
 **图 21** 在飞书中与 OpenClaw 进行配置
 
