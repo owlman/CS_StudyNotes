@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap');
+      text { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f8fafc"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="0.5"/>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
+  <text x="350" y="35" fill="#0f172a" font-size="17" font-weight="700" text-anchor="middle">感知机的局限：线性可分 vs XOR 问题</text>
+
+  <!-- ===== LEFT: AND 线性可分 ===== -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="60" width="290" height="330" rx="10" fill="#ffffff" stroke="#10b981" stroke-width="2"/>
+    <rect x="30" y="60" width="290" height="36" rx="10" fill="#ecfdf5"/>
+    <rect x="30" y="84" width="290" height="12" fill="#ecfdf5"/>
+    <text x="175" y="83" fill="#047857" font-size="13" font-weight="600" text-anchor="middle">AND 问题 · 线性可分 ✓</text>
+
+    <!-- 2D coordinate plane -->
+    <g transform="translate(175, 185)">
+      <line x1="-100" y1="0" x2="100" y2="0" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="0" y1="-100" x2="0" y2="100" stroke="#cbd5e1" stroke-width="1"/>
+      <!-- x₁ axis -->
+      <line x1="-100" y1="95" x2="100" y2="95" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="4,2"/>
+      <text x="-100" y="112" fill="#94a3b8" font-size="9" text-anchor="middle">0</text>
+      <text x="100" y="112" fill="#94a3b8" font-size="9" text-anchor="middle">1</text>
+      <!-- x₂ axis -->
+      <line x1="-105" y1="-90" x2="-105" y2="90" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="4,2"/>
+      <text x="-120" y="-90" fill="#94a3b8" font-size="9" text-anchor="end">1</text>
+      <text x="-120" y="90" fill="#94a3b8" font-size="9" text-anchor="end">0</text>
+
+      <!-- Points for AND -->
+      <!-- (0,0) → 0 -->
+      <circle cx="-70" cy="70" r="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+      <text x="-70" y="68" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">0</text>
+      <!-- (1,0) → 0 -->
+      <circle cx="70" cy="70" r="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+      <text x="70" y="68" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">0</text>
+      <!-- (0,1) → 0 -->
+      <circle cx="-70" cy="-70" r="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+      <text x="-70" y="-72" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">0</text>
+      <!-- (1,1) → 1 -->
+      <circle cx="70" cy="-70" r="8" fill="#86efac" stroke="#22c55e" stroke-width="2"/>
+      <text x="70" y="-72" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">1</text>
+
+      <!-- Decision boundary line -->
+      <line x1="-65" y1="80" x2="80" y2="-65" stroke="#10b981" stroke-width="2" stroke-dasharray="8,4"/>
+    </g>
+
+    <text x="175" y="310" fill="#475569" font-size="10" text-anchor="middle">可以用一条直线分割不同类别的点</text>
+    <text x="175" y="330" fill="#94a3b8" font-size="9" text-anchor="middle">感知机收敛定理保证能学到这条线</text>
+  </g>
+
+  <!-- ===== RIGHT: XOR 线性不可分 ===== -->
+  <g filter="url(#shadow)">
+    <rect x="380" y="60" width="290" height="330" rx="10" fill="#ffffff" stroke="#ef4444" stroke-width="2"/>
+    <rect x="380" y="60" width="290" height="36" rx="10" fill="#fef2f2"/>
+    <rect x="380" y="84" width="290" height="12" fill="#fef2f2"/>
+    <text x="525" y="83" fill="#b91c1c" font-size="13" font-weight="600" text-anchor="middle">XOR 问题 · 线性不可分 ✗</text>
+
+    <!-- 2D coordinate plane -->
+    <g transform="translate(525, 185)">
+      <line x1="-100" y1="0" x2="100" y2="0" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="0" y1="-100" x2="0" y2="100" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="-100" y1="95" x2="100" y2="95" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="4,2"/>
+      <text x="-100" y="112" fill="#94a3b8" font-size="9" text-anchor="middle">0</text>
+      <text x="100" y="112" fill="#94a3b8" font-size="9" text-anchor="middle">1</text>
+      <line x1="-105" y1="-90" x2="-105" y2="90" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="4,2"/>
+      <text x="-120" y="-90" fill="#94a3b8" font-size="9" text-anchor="end">1</text>
+      <text x="-120" y="90" fill="#94a3b8" font-size="9" text-anchor="end">0</text>
+
+      <!-- Points for XOR -->
+      <!-- (0,0) → 0 -->
+      <circle cx="-70" cy="70" r="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+      <text x="-70" y="68" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">0</text>
+      <!-- (1,0) → 1 -->
+      <circle cx="70" cy="70" r="8" fill="#86efac" stroke="#22c55e" stroke-width="2"/>
+      <text x="70" y="68" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">1</text>
+      <!-- (0,1) → 1 -->
+      <circle cx="-70" cy="-70" r="8" fill="#86efac" stroke="#22c55e" stroke-width="2"/>
+      <text x="-70" y="-72" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">1</text>
+      <!-- (1,1) → 0 -->
+      <circle cx="70" cy="-70" r="8" fill="#fca5a5" stroke="#ef4444" stroke-width="2"/>
+      <text x="70" y="-72" fill="#fff" font-size="7" font-weight="700" text-anchor="middle">0</text>
+    </g>
+
+    <text x="525" y="310" fill="#475569" font-size="10" text-anchor="middle">无法用一条直线分割两类点</text>
+    <text x="525" y="330" fill="#94a3b8" font-size="9" text-anchor="middle">单层感知机的致命局限</text>
+  </g>
+
+  <!-- Bottom conclusion -->
+  <g transform="translate(350, 405)">
+    <text x="0" y="0" fill="#64748b" font-size="10" text-anchor="middle">多层感知机（MLP）通过隐藏层 + 非线性激活函数解决了 XOR 问题</text>
+  </g>
+</svg>
