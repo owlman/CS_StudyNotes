@@ -1,7 +1,7 @@
 [project]
 name = "llm-tests"
 version = "0.1.0"
-description = "Add your description here"
+description = "LLM 行为模式自动化测试套件"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

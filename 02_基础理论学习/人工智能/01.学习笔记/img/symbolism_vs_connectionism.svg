@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap');
+      text { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f8fafc"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="0.5"/>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
+  <text x="400" y="38" fill="#0f172a" font-size="17" font-weight="700" text-anchor="middle">符号主义 vs 联结主义：两种智能范式</text>
+
+  <!-- ===== LEFT: 符号主义 ===== -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="65" width="330" height="320" rx="12" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+
+    <!-- Header -->
+    <rect x="40" y="65" width="330" height="40" rx="12" fill="#eff6ff"/>
+    <rect x="40" y="93" width="330" height="12" fill="#eff6ff"/>
+    <circle cx="65" cy="85" r="12" fill="#3b82f6"/>
+    <text x="65" y="89" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">S</text>
+    <text x="205" y="89" fill="#1d4ed8" font-size="14" font-weight="600" text-anchor="middle">符号主义 Symbolism</text>
+
+    <!-- Core idea -->
+    <text x="55" y="125" fill="#334155" font-size="11" font-weight="600">核心主张</text>
+    <text x="55" y="143" fill="#475569" font-size="10">智能 = 符号操作与逻辑推理</text>
+
+    <!-- Knowledge flow -->
+    <rect x="80" y="158" width="120" height="36" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="140" y="180" fill="#1e40af" font-size="9" font-weight="500" text-anchor="middle">领域专家编码知识</text>
+
+    <line x1="200" y1="176" x2="230" y2="176" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+    <rect x="235" y="158" width="120" height="36" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="295" y="180" fill="#1e40af" font-size="9" font-weight="500" text-anchor="middle">IF-THEN 规则库</text>
+
+    <line x1="295" y1="194" x2="295" y2="214" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+    <rect x="235" y="218" width="120" height="36" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text x="295" y="240" fill="#1e40af" font-size="9" font-weight="500" text-anchor="middle">推理引擎求解</text>
+
+    <!-- Limitations -->
+    <text x="55" y="275" fill="#ef4444" font-size="11" font-weight="600">暴露的边界</text>
+    <text x="55" y="293" fill="#64748b" font-size="9">• 知识获取瓶颈：隐性知识难以编码</text>
+    <text x="55" y="308" fill="#64748b" font-size="9">• 脆性：超出规则边界即完全失效</text>
+    <text x="55" y="323" fill="#64748b" font-size="9">• 组合爆炸：规则越多，搜索越慢</text>
+
+    <g transform="translate(170, 340)">
+      <circle r="3" fill="#3b82f6"/>
+    </g>
+  </g>
+
+  <!-- VS Badge -->
+  <circle cx="400" cy="225" r="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="400" cy="225" r="20" fill="#f1f5f9"/>
+  <text x="400" y="230" fill="#64748b" font-size="12" font-weight="700" text-anchor="middle">VS</text>
+
+  <!-- ===== RIGHT: 联结主义 ===== -->
+  <g filter="url(#shadow)">
+    <rect x="430" y="65" width="330" height="320" rx="12" fill="#ffffff" stroke="#10b981" stroke-width="2"/>
+
+    <!-- Header -->
+    <rect x="430" y="65" width="330" height="40" rx="12" fill="#ecfdf5"/>
+    <rect x="430" y="93" width="330" height="12" fill="#ecfdf5"/>
+    <circle cx="455" cy="85" r="12" fill="#10b981"/>
+    <text x="455" y="89" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">C</text>
+    <text x="595" y="89" fill="#047857" font-size="14" font-weight="600" text-anchor="middle">联结主义 Connectionism</text>
+
+    <!-- Core idea -->
+    <text x="445" y="125" fill="#334155" font-size="11" font-weight="600">核心主张</text>
+    <text x="445" y="143" fill="#475569" font-size="10">智能 = 神经元连接的涌现结果</text>
+
+    <!-- Neural network visual -->
+    <!-- Layer 1: input -->
+    <circle cx="470" cy="170" r="8" fill="#a7f3d0" stroke="#34d399" stroke-width="1.5"/>
+    <circle cx="505" cy="170" r="8" fill="#a7f3d0" stroke="#34d399" stroke-width="1.5"/>
+    <circle cx="540" cy="170" r="8" fill="#a7f3d0" stroke="#34d399" stroke-width="1.5"/>
+    <text x="470" y="195" fill="#94a3b8" font-size="8" text-anchor="middle">x₁</text>
+    <text x="505" y="195" fill="#94a3b8" font-size="8" text-anchor="middle">x₂</text>
+    <text x="540" y="195" fill="#94a3b8" font-size="8" text-anchor="middle">x₃</text>
+
+    <!-- Connections input→hidden -->
+    <line x1="470" y1="178" x2="505" y2="218" stroke="#d1d5db" stroke-width="0.8"/>
+    <line x1="505" y1="178" x2="505" y2="218" stroke="#d1d5db" stroke-width="0.8"/>
+    <line x1="540" y1="178" x2="505" y2="218" stroke="#d1d5db" stroke-width="0.8"/>
+
+    <!-- Hidden layer -->
+    <circle cx="505" cy="226" r="8" fill="#6ee7b7" stroke="#10b981" stroke-width="1.5"/>
+    <text x="505" y="251" fill="#94a3b8" font-size="8" text-anchor="middle">隐藏层</text>
+
+    <!-- Connections hidden→output -->
+    <line x1="505" y1="234" x2="505" y2="272" stroke="#d1d5db" stroke-width="0.8"/>
+
+    <!-- Output -->
+    <circle cx="505" cy="282" r="8" fill="#34d399" stroke="#059669" stroke-width="2"/>
+    <text x="505" y="307" fill="#94a3b8" font-size="8" text-anchor="middle">输出 y</text>
+
+    <!-- Label -->
+    <text x="445" y="332" fill="#475569" font-size="9">权重从数据中自动学习</text>
+    <text x="445" y="347" fill="#94a3b8" font-size="9">无需人工编码规则</text>
+  </g>
+
+  <!-- Bottom legend -->
+  <g transform="translate(400, 400)">
+    <text x="0" y="0" fill="#94a3b8" font-size="9" text-anchor="middle">核心张力：知识工程 vs. 数据驱动</text>
+  </g>
+</svg>
