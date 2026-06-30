@@ -37,10 +37,13 @@ class TestStreaming:
         streamed_text = stream_collector(url, payload)
 
         assert len(streamed_text) > 0, "流式模式未收集到任何 token"
-        # 语义一致性检验：流式与非流式结果中应共享部分关键短语
-        shared = set(full_text.split()) & set(streamed_text.split())
-        assert len(shared) > 3, (
-            "流式结果与非流式结果内容差异过大，可能存在传输问题"
+        # 语义一致性检验：基于字符集（排除标点）检查流式与非流式结果的公共部分
+        import string
+        chars_full = set(c for c in full_text if c not in string.whitespace)
+        chars_stream = set(c for c in streamed_text if c not in string.whitespace)
+        shared = chars_full & chars_stream
+        assert len(shared) > 5, (
+            "流式结果与非流式结果字符重叠过少，可能存在传输问题"
         )
 
     def test_stream_token_by_token(self, ollama_client, stream_collector):

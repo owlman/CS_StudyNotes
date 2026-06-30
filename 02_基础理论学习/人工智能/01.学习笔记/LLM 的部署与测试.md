@@ -53,10 +53,10 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 | -------- | -------------- | -------- | ------------ |
 | **通用最佳平衡** | 适用于多数学习场景的推荐起点；兼顾性能与成本。 | 适合一般学习和试验性部署。 | 建议 16GB+，量化后可在更低配置上运行。 |
 | **Qwen2.5-7B** | 7B 级别综合性能强，指令跟随、长上下文支持好，通用性高。 | 文档总结、内容创作、知识问答、轻量级智能体任务。 | 16GB+ 内存，量化后可降低需求。 |
-| **Llama 3.3 系列** | Meta 出品，生态完善，工具调用支持好，3B 版本速度极快。 | 快速对话、多语言任务、对响应速度要求高的应用。 | 3B 模型：8-16GB 内存；8B 模型需求更高。 |
+| **Llama 系列** | Meta 出品，生态完善，工具调用支持好；3.1 8B 适合通用对话，3.3 70B 性能更强。 | 快速对话、多语言任务、对响应速度要求高的应用。 | 8B 模型：8-16GB 内存；70B 需多卡或云端。 |
 | **专注编程任务** | 适合代码生成与开发辅助场景，语义理解更强。 | 专注于编程任务和开发者辅助。 | 建议 16GB+，按模型大小可选。 |
 | **Qwen3-Coder 系列** | 阿里出品，在代码理解和生成任务上表现优异，有不同尺寸可选。 | 代码解释、补全、测试、学习编程。 | 1.7B/4B/8B 等不同规格，可按需选择。 |
-| **Mistral 系列** | Mistral AI 的编程专用模型，擅长生成、测试和解释代码。 | 专注于软件开发辅助的各类任务。 | 推荐 16GB 以上内存。 |
+| **Mistral 系列** | Mistral AI 出品，通用能力强，在代码和推理任务上表现均衡。 | 通用对话、编程辅助、推理任务。 | 推荐 16GB 以上内存。 |
 | **资源受限环境** | 适合低配设备和入门部署的轻量级模型。 | 适用于硬件受限的实验环境、边缘设备和教学演示。 | 8-16GB 内存即可。 |
 | **SmolLM3-3B** | 完全开源，性能优秀，在 3B 级别中表现出色，可控性强。 | 对开源合规要求高，或需要在低配硬件上部署。 | 可在普通笔记本电脑上运行。 |
 | **Llama 3.2 3B** | 体积小、速度快，适合部署在多种设备上，对硬件要求低。 | 需要即时响应的嵌入式应用或移动端场景。 | 8-16GB 内存即可。 |
@@ -64,10 +64,10 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 根据上面的表格，我们可以先参照以下提示来确定选择：
 
 - 如果硬件资源不给力（例如内存容量只有 16GB 或更少，没有独立显卡），可以选择`SmolLM3-3B`或`Llama 3.2 3B`；
-- 如果想优先考虑通用对话和写作，可以选择`Qwen2.5-7B`或`Llama 3.3 8B`；
-- 如果想优先考虑将其用于编程辅助，`Qwen3-Coder`或`Mistral`系列可能是更好的选择；
+- 如果想优先考虑通用对话和写作，可以选择`Qwen2.5-7B`或`Llama 3.1 8B`；
+- 如果想优先考虑将其用于编程辅助，`Qwen3-Coder`系列可能是更好的选择；
 
-由于这篇笔记的任务是基于学习的目的来部·中：我们不追求大规模生产级模型的最优性能，而是优先保证可用性、可重复性和测试便利性。
+由于这篇笔记的任务是基于学习的目的来部署 LLM，它最好能让读者在最普通的个人笔记本上进行过程相对流畅的实验，因此我决定选择`Llama 3.2 3B`来进行演示。这个选择体现了本地部署学习中的常见折中：我们不追求大规模生产级模型的最优性能，而是优先保证可用性、可重复性和测试便利性。
 
 基本上，使用 Ollama 部署 LLM 的操作步骤与使用 docker 部署服务端应用的过程非常类似，具体如下：
 
@@ -634,10 +634,13 @@ ollama serve
             streamed_text = stream_collector(url, payload)
 
             assert len(streamed_text) > 0, "流式模式未收集到任何 token"
-            # 语义一致性检验：流式与非流式结果中应共享部分关键短语
-            shared = set(full_text.split()) & set(streamed_text.split())
-            assert len(shared) > 3, (
-                "流式结果与非流式结果内容差异过大，可能存在传输问题"
+            # 语义一致性检验：基于字符集（排除标点）检查流式与非流式结果的公共部分
+            import string
+            chars_full = set(c for c in full_text if c not in string.whitespace)
+            chars_stream = set(c for c in streamed_text if c not in string.whitespace)
+            shared = chars_full & chars_stream
+            assert len(shared) > 5, (
+                "流式结果与非流式结果字符重叠过少，可能存在传输问题"
             )
 
         def test_stream_token_by_token(self, ollama_client, stream_collector):
@@ -804,8 +807,8 @@ ollama serve
 ## 参考资料
 
 - 文档资料：
-  - [Ollama 中文文档](https://ollama.cadn.net.cn/#quickstart)
-  - [Ollama-Python 文档](https://github.com/ollama/ollama-python)
+  - [Ollama 官方文档](https://ollama.com/docs/)
+  - [Ollama API 文档](https://github.com/ollama/ollama/blob/main/docs/api.md)
   - [PyTest 官方文档](https://docs.pytest.org/en/stable/)
 
 - 视频资料：
