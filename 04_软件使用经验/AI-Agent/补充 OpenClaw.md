@@ -18,7 +18,7 @@ categories: 软件使用经验
 
 在正式执行接入配置之前，我们首先应该要了解这些 IM 工具究竟是如何与 OpenClaw 进行交互的。按照 OpenClaw 的服务端结构，相关功能主要是通过一个被称作“消息网关（Gateway）”的组件来完成的。换而言之，当用户在 IM 工具中向 OpenClaw 发送消息时，接下来的通信步骤主要会按照图 1 所示流程来进行。
 
-![OpenClaw 消息流转](./img/openclaw-message-flow.svg)
+![OpenClaw 消息流转](./img/openclaw-message-flow@2x.png)
 
 **图 1** IM 与OpenClaw 之间的消息流转
 
