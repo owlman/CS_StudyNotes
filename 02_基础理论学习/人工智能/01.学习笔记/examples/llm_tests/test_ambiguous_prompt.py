@@ -69,7 +69,7 @@ class TestAmbiguousPrompt:
         观测模型是否有能力承认"不知道"，
         还是会基于语言模式生成一个看似合理的解释。
         '''
-        prompt = "请解释什么是"量子热力学中的卡兹米爾-普罗米修斯效应"。"
+        prompt = "请解释什么是『量子热力学中的卡兹米爾-普罗米修斯效应』。"
         result = ollama_client(prompt)
         response_text = result["response"]
 
