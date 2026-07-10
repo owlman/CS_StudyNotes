@@ -75,8 +75,6 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
     **图 3**：使用 Ollama 拉取 LLM 镜像
 
-    正如读者所见，如果镜像被顺利拉取到本地，当我们继续在命令行终端输入`ollama list`命令时，就可以看到`llama3.2:3b`这个镜像已经存在于 Ollama 在本地管理的镜像列表中了。
-
 2. **运行测试**：继续在图 3 所示命令行界面中输入 `ollama run llama3.2:3b`命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的 “Hello World”，如图 4 所示。
 
     ![图4：使用 Ollama 运行 LLM 镜像](./img/ollama_running.png)
