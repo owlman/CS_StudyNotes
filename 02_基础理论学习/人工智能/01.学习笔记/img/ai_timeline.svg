@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 460">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap');
@@ -38,8 +38,8 @@
   </g>
   <circle cx="162" cy="250" r="8" fill="#3b82f6" stroke="#ffffff" stroke-width="2"/>
   <line x1="260" y1="250" x2="440" y2="250" stroke="#3b82f6" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
-  <rect x="315" y="258" width="95" height="22" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
-  <text x="362" y="273" fill="#3b82f6" font-size="9" font-weight="500" text-anchor="middle">暴露：知识获取瓶颈</text>
+  <rect x="315" y="298" width="95" height="22" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="362" y="313" fill="#3b82f6" font-size="9" font-weight="500" text-anchor="middle">暴露：知识获取瓶颈</text>
 
   <!-- ===== Stage 2: 概率转向 (green) ===== -->
   <g filter="url(#shadow)">
@@ -52,11 +52,11 @@
     <text x="362" y="207" fill="#94a3b8" font-size="9" text-anchor="middle">贝叶斯网 · HMM · CRF</text>
   </g>
   <circle cx="362" cy="250" r="8" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
-  <text x="362" y="277" fill="#10b981" font-size="9" font-weight="500" text-anchor="middle">数据驱动</text>
+  <text x="362" y="270" fill="#10b981" font-size="9" font-weight="500" text-anchor="middle">数据驱动</text>
 
   <line x1="460" y1="250" x2="640" y2="250" stroke="#10b981" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
-  <rect x="505" y="258" width="95" height="22" rx="4" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
-  <text x="552" y="273" fill="#d97706" font-size="9" font-weight="500" text-anchor="middle">暴露：特征工程天花板</text>
+  <rect x="505" y="298" width="95" height="22" rx="4" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+  <text x="552" y="313" fill="#d97706" font-size="9" font-weight="500" text-anchor="middle">暴露：特征工程天花板</text>
 
   <!-- ===== Stage 3: 统计学习 (orange) ===== -->
   <g filter="url(#shadow)">
@@ -69,11 +69,11 @@
     <text x="562" y="207" fill="#94a3b8" font-size="9" text-anchor="middle">SVM · 集成方法 · 表征学习</text>
   </g>
   <circle cx="562" cy="250" r="8" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
-  <text x="562" y="277" fill="#f59e0b" font-size="9" font-weight="500" text-anchor="middle">表征学习</text>
+  <text x="562" y="270" fill="#f59e0b" font-size="9" font-weight="500" text-anchor="middle">表征学习</text>
 
   <line x1="660" y1="250" x2="860" y2="250" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
-  <rect x="705" y="258" width="110" height="22" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
-  <text x="760" y="273" fill="#9333ea" font-size="9" font-weight="500" text-anchor="middle">暴露：任务专用模型</text>
+  <rect x="705" y="298" width="110" height="22" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="760" y="313" fill="#9333ea" font-size="9" font-weight="500" text-anchor="middle">暴露：任务专用模型</text>
 
   <!-- ===== Stage 4: 基础模型 (purple) ===== -->
   <g filter="url(#shadow)">
@@ -86,10 +86,10 @@
     <text x="782" y="207" fill="#94a3b8" font-size="9" text-anchor="middle">Transformer · RLHF · Agent</text>
   </g>
   <circle cx="782" cy="250" r="8" fill="#8b5cf6" stroke="#ffffff" stroke-width="2"/>
-  <text x="782" y="277" fill="#8b5cf6" font-size="9" font-weight="500" text-anchor="middle">大规模预训练</text>
+  <text x="782" y="270" fill="#8b5cf6" font-size="9" font-weight="500" text-anchor="middle">大规模预训练</text>
 
   <!-- ===== Bottom: Key paradigm shifts ===== -->
-  <g transform="translate(490, 310)">
+  <g transform="translate(490, 340)">
     <text x="0" y="0" fill="#334155" font-size="10" font-weight="600" text-anchor="middle">三次核心转向</text>
     <line x1="-200" y1="12" x2="200" y2="12" stroke="#e2e8f0" stroke-width="1"/>
     <text x="-130" y="35" fill="#3b82f6" font-size="9" text-anchor="middle">知识驱动 → 数据驱动</text>
