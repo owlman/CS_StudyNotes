@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 600">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8b5cf6"/>
+    </marker>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Kalam:wght@300;400;700&amp;display=swap');
+      text { font-family: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Noto Sans SC', monospace; }
+      .hw { font-family: 'Kalam', 'Caveat', 'Comic Sans MS', cursive; font-weight: 400; }
+      .hw-bold { font-family: 'Kalam', 'Caveat', 'Comic Sans MS', cursive; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#fafbfc"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
+  <!-- 标题 -->
+  <text x="60" y="68" fill="#0f172a" font-size="28" font-weight="700">图 1. 多层感知机的前向传播</text>
+  <text x="60" y="100" fill="#475569" font-size="16">以识别手写数字（0-9）为例：输入灰度图 → 输出"这是几"</text>
+
+  <!-- 层标签（顶部） -->
+  <text x="200" y="158" fill="#0ea5e9" font-size="16" font-weight="600" text-anchor="middle">输入层</text>
+  <text x="555" y="158" fill="#10b981" font-size="16" font-weight="600" text-anchor="middle">隐藏层 1</text>
+  <text x="925" y="158" fill="#10b981" font-size="16" font-weight="600" text-anchor="middle">隐藏层 2</text>
+  <text x="1295" y="158" fill="#8b5cf6" font-size="16" font-weight="600" text-anchor="middle">输出层</text>
+
+  <!-- ========== 输入层 x ∈ ℝ⁷⁸⁴ ========== -->
+  <rect x="40" y="200" width="320" height="220" rx="12" fill="#ffffff"/>
+  <rect x="40" y="200" width="320" height="220" rx="12" fill="rgba(14,165,233,0.08)" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="200" y="250" fill="#0f172a" font-size="26" font-weight="700" text-anchor="middle" class="hw-bold">x ∈ ℝ⁷⁸⁴</text>
+  <text x="200" y="282" fill="#475569" font-size="15" text-anchor="middle">28 × 28 灰度图展平后的向量</text>
+
+  <!-- 内部示意：列表示像素 -->
+  <g transform="translate(80, 318)">
+    <text x="0" y="0" fill="#475569" font-size="13">像素 1</text>
+    <rect x="0" y="8" width="240" height="14" rx="2" fill="rgba(14,165,233,0.25)" stroke="#0ea5e9" stroke-width="1.2"/>
+    <text x="6" y="20" fill="#0ea5e9" font-size="12" text-anchor="start" class="hw">x₁</text>
+    <text x="240" y="20" fill="#0ea5e9" font-size="12" text-anchor="end" class="hw">x₇₈₄</text>
+  </g>
+
+  <text x="200" y="394" fill="#475569" font-size="14" text-anchor="middle" font-style="italic">不参与训练</text>
+
+  <!-- ========== 隐藏层 1 h⁽¹⁾ ========== -->
+  <rect x="395" y="200" width="320" height="220" rx="12" fill="#ffffff"/>
+  <rect x="395" y="200" width="320" height="220" rx="12" fill="rgba(16,185,129,0.08)" stroke="#10b981" stroke-width="2"/>
+  <text x="555" y="250" fill="#0f172a" font-size="26" font-weight="700" text-anchor="middle" class="hw-bold">h⁽¹⁾</text>
+  <text x="555" y="282" fill="#475569" font-size="15" text-anchor="middle">第一层隐藏表示</text>
+
+  <!-- 公式（两行布局避免溢出） -->
+  <text x="555" y="320" fill="#0f172a" font-size="22" font-weight="500" text-anchor="middle" class="hw">h⁽¹⁾ = σ( W⁽⁰⁾x + b⁽⁰⁾ )</text>
+  <text x="555" y="345" fill="#475569" font-size="13" text-anchor="middle">线性变换  +  ReLU 激活</text>
+
+  <!-- 内部示意：节点群（7 个示意节点） -->
+  <g transform="translate(425, 376)">
+    <circle cx="20"  cy="0" r="6" fill="#10b981" opacity="0.6"/>
+    <circle cx="55"  cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="90"  cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="125" cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="160" cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="195" cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="230" cy="0" r="6" fill="#10b981" opacity="0.6"/>
+  </g>
+  <text x="555" y="408" fill="#94a3b8" font-size="12" text-anchor="middle" font-style="italic">（节点为示意，实际维度常 64-512）</text>
+
+  <!-- ========== 隐藏层 2 h⁽²⁾ ========== -->
+  <rect x="765" y="200" width="320" height="220" rx="12" fill="#ffffff"/>
+  <rect x="765" y="200" width="320" height="220" rx="12" fill="rgba(16,185,129,0.08)" stroke="#10b981" stroke-width="2"/>
+  <text x="925" y="250" fill="#0f172a" font-size="26" font-weight="700" text-anchor="middle" class="hw-bold">h⁽²⁾</text>
+  <text x="925" y="282" fill="#475569" font-size="15" text-anchor="middle">第二层隐藏表示</text>
+
+  <text x="925" y="320" fill="#0f172a" font-size="22" font-weight="500" text-anchor="middle" class="hw">h⁽²⁾ = σ( W⁽¹⁾h⁽¹⁾ + b⁽¹⁾ )</text>
+  <text x="925" y="345" fill="#475569" font-size="13" text-anchor="middle">线性变换  +  ReLU 激活</text>
+
+  <g transform="translate(795, 376)">
+    <circle cx="20"  cy="0" r="6" fill="#10b981" opacity="0.6"/>
+    <circle cx="55"  cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="90"  cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="125" cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="160" cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="195" cy="0" r="6" fill="#10b981" opacity="0.85"/>
+    <circle cx="230" cy="0" r="6" fill="#10b981" opacity="0.6"/>
+  </g>
+  <text x="925" y="408" fill="#94a3b8" font-size="12" text-anchor="middle" font-style="italic">（节点为示意，实际维度常 64-512）</text>
+
+  <!-- ========== 输出层 ŷ ∈ ℝ¹⁰ ========== -->
+  <rect x="1135" y="200" width="320" height="220" rx="12" fill="#ffffff"/>
+  <rect x="1135" y="200" width="320" height="220" rx="12" fill="rgba(139,92,246,0.08)" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="1295" y="250" fill="#0f172a" font-size="26" font-weight="700" text-anchor="middle" class="hw-bold">ŷ ∈ ℝ¹⁰</text>
+  <text x="1295" y="282" fill="#475569" font-size="15" text-anchor="middle">10 类预测概率分布</text>
+
+  <text x="1295" y="320" fill="#0f172a" font-size="22" font-weight="500" text-anchor="middle" class="hw">ŷ = softmax( W⁽²⁾h⁽²⁾ + b⁽²⁾ )</text>
+  <text x="1295" y="345" fill="#475569" font-size="13" text-anchor="middle">线性变换  +  Softmax 归一化</text>
+
+  <!-- 输出示意：10 列概率分布（one-hot: 第 7 个最高） -->
+  <g transform="translate(1170, 376)">
+    <text x="0"   y="-2" fill="#475569" font-size="12">0</text>
+    <rect x="0"   y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="28"  y="-2" fill="#475569" font-size="12">1</text>
+    <rect x="28"  y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="56"  y="-2" fill="#475569" font-size="12">2</text>
+    <rect x="56"  y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="84"  y="-2" fill="#475569" font-size="12">3</text>
+    <rect x="84"  y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="112" y="-2" fill="#475569" font-size="12">4</text>
+    <rect x="112" y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="140" y="-2" fill="#475569" font-size="12">5</text>
+    <rect x="140" y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="168" y="-2" fill="#475569" font-size="12">6</text>
+    <rect x="168" y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="196" y="-2" fill="#8b5cf6" font-size="12" font-weight="600">7</text>
+    <rect x="196" y="0" width="26" height="38" rx="1" fill="rgba(139,92,246,0.85)" stroke="#8b5cf6" stroke-width="1.4"/>
+    <text x="196" y="55" fill="#8b5cf6" font-size="12" font-weight="600" text-anchor="middle" class="hw">argmax</text>
+    <text x="224" y="-2" fill="#475569" font-size="12">8</text>
+    <rect x="224" y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+    <text x="252" y="-2" fill="#475569" font-size="12">9</text>
+    <rect x="252" y="0" width="26" height="10" rx="1" fill="rgba(139,92,246,0.3)" stroke="#8b5cf6" stroke-width="0.8"/>
+  </g>
+
+  <!-- ========== 连接箭头 ========== -->
+  <!-- 输入层 → 隐藏层 1 -->
+  <line x1="360" y1="310" x2="395" y2="310" stroke="#0ea5e9" stroke-width="3" marker-end="url(#arrow-cyan)"/>
+  <text x="377" y="298" fill="#0ea5e9" font-size="13" font-weight="500" text-anchor="middle" class="hw">W⁽⁰⁾</text>
+
+  <!-- 隐藏层 1 → 隐藏层 2 -->
+  <line x1="715" y1="310" x2="765" y2="310" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-cyan)"/>
+  <text x="740" y="298" fill="#10b981" font-size="13" font-weight="500" text-anchor="middle" class="hw">W⁽¹⁾</text>
+
+  <!-- 隐藏层 2 → 输出层 -->
+  <line x1="1085" y1="310" x2="1135" y2="310" stroke="#8b5cf6" stroke-width="3" marker-end="url(#arrow-violet)"/>
+  <text x="1110" y="298" fill="#8b5cf6" font-size="13" font-weight="500" text-anchor="middle" class="hw">W⁽²⁾</text>
+
+  <!-- ========== 底部注释 ========== -->
+  <text x="740" y="470" fill="#475569" font-size="15" text-anchor="middle" font-style="italic">
+    每一层 = 一次"线性投影 → 非线性激活"；线性投影让数据进入新空间，非线性激活让"深"有意义。
+  </text>
+  <text x="740" y="495" fill="#64748b" font-size="13" text-anchor="middle" font-style="italic">
+    Softmax 将 10 个输出归一化为概率分布（和为 1），argmax 即为预测类别。
+  </text>
+
+  <!-- 图例 -->
+  <g transform="translate(60, 525)">
+    <rect x="0" y="-10" width="18" height="18" rx="2" fill="rgba(14,165,233,0.25)" stroke="#0ea5e9" stroke-width="1.4"/>
+    <text x="28" y="0" fill="#334155" font-size="14">输入层（fixed）</text>
+
+    <rect x="170" y="-10" width="18" height="18" rx="2" fill="rgba(16,185,129,0.25)" stroke="#10b981" stroke-width="1.4"/>
+    <text x="198" y="0" fill="#334155" font-size="14">隐藏层（learned）</text>
+
+    <rect x="370" y="-10" width="18" height="18" rx="2" fill="rgba(139,92,246,0.25)" stroke="#8b5cf6" stroke-width="1.4"/>
+    <text x="398" y="0" fill="#334155" font-size="14">输出层（learned）</text>
+  </g>
+
+  <!-- ========== 通俗解读（科普向） ========== -->
+  <g transform="translate(60, 552)">
+    <rect x="0" y="0" width="1360" height="42" rx="8" fill="rgba(14,165,233,0.05)" stroke="#0ea5e9" stroke-width="0.8" stroke-dasharray="4,4"/>
+
+    <text x="14" y="18" fill="#0ea5e9" font-size="14" font-weight="600">通俗解读</text>
+
+    <text x="14" y="35" fill="#334155" font-size="13">▸ 人脑类比：每个圆圈 ≈ 一个"判断单元"，每条线 ≈ "判断依据"——大量单元协作产生智能</text>
+
+    <text x="850" y="18" fill="#64748b" font-size="12" font-style="italic">⚠ 灵感来自大脑，但工作方式差异巨大</text>
+    <text x="850" y="35" fill="#64748b" font-size="12" font-style="italic">——更接近"统计模式识别"而非"真正思考"</text>
+  </g>
+
+</svg>
