@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1980 920">
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#eef0f2" stroke-width="0.5"/>
+    </pattern>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+    <marker id="arrow-green" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#059669"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#dc2626"/>
+    </marker>
+    <style>
+      text { font-family: 'Microsoft YaHei', 'Noto Sans SC', 'PingFang SC', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace; }
+      .hw { font-family: 'Comic Sans MS', 'Kalam', 'Caveat', cursive; font-weight: 400; }
+      .hw-bold { font-family: 'Comic Sans MS', 'Kalam', 'Caveat', cursive; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#fafbfc"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
+  <g transform="translate(-55, 0)">
+    <!-- ===== Title ===== -->
+    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 2. 反向传播示意：沿计算图反向调用链式法则</text>
+    <text x="95" y="98" fill="#64748b" font-size="24">前向传播得到损失 L，反向传播沿图反向传递梯度 ∂L/∂θ，逐层算出所有参数的梯度</text>
+
+    <!-- ===== Top: Forward pass ===== -->
+    <text x="95" y="160" fill="#059669" font-size="28" font-weight="700">① 前向传播（Forward）：x → ŷ → L</text>
+    <text x="95" y="192" fill="#475569" font-size="20">从输入开始逐层计算，得到最终的损失值 L（绿色实线，数据流动方向）</text>
+
+    <!-- Forward nodes -->
+    <!-- Input x -->
+    <g filter="url(#shadow)">
+      <rect x="115" y="225" width="280" height="150" rx="14" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+      <rect x="115" y="225" width="280" height="32" rx="14" fill="#f0fdf4"/>
+      <rect x="115" y="245" width="280" height="12" fill="#f0fdf4"/>
+      <line x1="115" y1="257" x2="395" y2="257" stroke="#059669" stroke-width="2.5"/>
+      <text x="255" y="247" fill="#059669" font-size="18" font-weight="600" text-anchor="middle">输入</text>
+    </g>
+    <text x="255" y="320" fill="#0f172a" font-size="42" font-weight="700" text-anchor="middle" class="hw-bold">x</text>
+    <text x="255" y="358" fill="#64748b" font-size="18" text-anchor="middle">前向值：x</text>
+
+    <!-- Hidden h -->
+    <g filter="url(#shadow)">
+      <rect x="595" y="225" width="280" height="150" rx="14" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+      <rect x="595" y="225" width="280" height="32" rx="14" fill="#f0fdf4"/>
+      <rect x="595" y="245" width="280" height="12" fill="#f0fdf4"/>
+      <line x1="595" y1="257" x2="875" y2="257" stroke="#059669" stroke-width="2.5"/>
+      <text x="735" y="247" fill="#059669" font-size="18" font-weight="600" text-anchor="middle">隐藏层</text>
+    </g>
+    <text x="735" y="320" fill="#0f172a" font-size="38" font-weight="700" text-anchor="middle" class="hw-bold">h = σ(Wx + b)</text>
+    <text x="735" y="358" fill="#64748b" font-size="18" text-anchor="middle">前向值：h</text>
+
+    <!-- Output ŷ -->
+    <g filter="url(#shadow)">
+      <rect x="1075" y="225" width="380" height="150" rx="14" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+      <rect x="1075" y="225" width="380" height="32" rx="14" fill="#f0fdf4"/>
+      <rect x="1075" y="245" width="380" height="12" fill="#f0fdf4"/>
+      <line x1="1075" y1="257" x2="1455" y2="257" stroke="#059669" stroke-width="2.5"/>
+      <text x="1265" y="247" fill="#059669" font-size="18" font-weight="600" text-anchor="middle">预测</text>
+    </g>
+    <text x="1265" y="320" fill="#0f172a" font-size="36" font-weight="700" text-anchor="middle" class="hw-bold">ŷ = softmax(Wh)</text>
+    <text x="1265" y="358" fill="#64748b" font-size="18" text-anchor="middle">前向值：ŷ</text>
+
+    <!-- Loss L -->
+    <g filter="url(#shadow)">
+      <rect x="1655" y="225" width="320" height="150" rx="14" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+      <rect x="1655" y="225" width="320" height="32" rx="14" fill="#f0fdf4"/>
+      <rect x="1655" y="245" width="320" height="12" fill="#f0fdf4"/>
+      <line x1="1655" y1="257" x2="1975" y2="257" stroke="#059669" stroke-width="2.5"/>
+      <text x="1815" y="247" fill="#059669" font-size="18" font-weight="600" text-anchor="middle">损失</text>
+    </g>
+    <text x="1815" y="320" fill="#0f172a" font-size="36" font-weight="700" text-anchor="middle" class="hw-bold">L = Loss(ŷ, y)</text>
+    <text x="1815" y="358" fill="#64748b" font-size="18" text-anchor="middle">前向值：L</text>
+
+    <!-- Forward arrows -->
+    <line x1="395" y1="300" x2="595" y2="300" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+    <line x1="875" y1="300" x2="1075" y2="300" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+    <line x1="1455" y1="300" x2="1655" y2="300" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+
+    <!-- Forward arrow labels (params) -->
+    <g transform="translate(420, 260)">
+      <rect x="0" y="-12" width="150" height="24" rx="4" fill="rgba(255,255,255,0.9)" stroke="#059669" stroke-width="1.2"/>
+      <text x="75" y="5" fill="#059669" font-size="14" font-weight="600" text-anchor="middle">W₀, b₀ · σ</text>
+    </g>
+    <g transform="translate(900, 260)">
+      <rect x="0" y="-12" width="150" height="24" rx="4" fill="rgba(255,255,255,0.9)" stroke="#059669" stroke-width="1.2"/>
+      <text x="75" y="5" fill="#059669" font-size="14" font-weight="600" text-anchor="middle">W₁, b₁ · σ</text>
+    </g>
+    <g transform="translate(1510, 260)">
+      <rect x="0" y="-12" width="90" height="24" rx="4" fill="rgba(255,255,255,0.9)" stroke="#059669" stroke-width="1.2"/>
+      <text x="45" y="5" fill="#059669" font-size="12" font-weight="600" text-anchor="middle">softmax · Loss</text>
+    </g>
+
+    <!-- ===== Bottom: Backward pass ===== -->
+    <text x="95" y="445" fill="#dc2626" font-size="28" font-weight="700">② 反向传播（Backward）：∂L/∂x ← ∂L/∂h ← ∂L/∂ŷ ← 1</text>
+    <text x="95" y="477" fill="#475569" font-size="20">从损失 L 开始（梯度=1），沿链式法则反向计算每个节点的梯度（红色虚线，梯度流动方向）</text>
+
+    <!-- Backward nodes -->
+    <!-- dL/dx -->
+    <g filter="url(#shadow)">
+      <rect x="115" y="510" width="280" height="150" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+      <rect x="115" y="510" width="280" height="32" rx="14" fill="#fee2e2"/>
+      <rect x="115" y="530" width="280" height="12" fill="#fee2e2"/>
+      <line x1="115" y1="542" x2="395" y2="542" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="255" y="532" fill="#dc2626" font-size="18" font-weight="600" text-anchor="middle">输入梯度</text>
+    </g>
+    <text x="255" y="608" fill="#0f172a" font-size="38" font-weight="700" text-anchor="middle" class="hw-bold">∂L/∂x</text>
+    <text x="255" y="643" fill="#64748b" font-size="18" text-anchor="middle">末端的梯度</text>
+
+    <!-- dL/dh -->
+    <g filter="url(#shadow)">
+      <rect x="595" y="510" width="280" height="150" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+      <rect x="595" y="510" width="280" height="32" rx="14" fill="#fee2e2"/>
+      <rect x="595" y="530" width="280" height="12" fill="#fee2e2"/>
+      <line x1="595" y1="542" x2="875" y2="542" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="735" y="532" fill="#dc2626" font-size="18" font-weight="600" text-anchor="middle">隐藏层梯度</text>
+    </g>
+    <text x="735" y="608" fill="#0f172a" font-size="38" font-weight="700" text-anchor="middle" class="hw-bold">∂L/∂h</text>
+    <text x="735" y="643" fill="#64748b" font-size="18" text-anchor="middle">用于更新 W₀</text>
+
+    <!-- dL/dŷ -->
+    <g filter="url(#shadow)">
+      <rect x="1075" y="510" width="380" height="150" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+      <rect x="1075" y="510" width="380" height="32" rx="14" fill="#fee2e2"/>
+      <rect x="1075" y="530" width="380" height="12" fill="#fee2e2"/>
+      <line x1="1075" y1="542" x2="1455" y2="542" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="1265" y="532" fill="#dc2626" font-size="18" font-weight="600" text-anchor="middle">预测梯度</text>
+    </g>
+    <text x="1265" y="608" fill="#0f172a" font-size="38" font-weight="700" text-anchor="middle" class="hw-bold">∂L/∂ŷ</text>
+    <text x="1265" y="643" fill="#64748b" font-size="18" text-anchor="middle">用于更新 W₁</text>
+
+    <!-- ∂L/∂L = 1 (起点) -->
+    <g filter="url(#shadow)">
+      <rect x="1655" y="510" width="320" height="150" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+      <rect x="1655" y="510" width="320" height="32" rx="14" fill="#fee2e2"/>
+      <rect x="1655" y="530" width="320" height="12" fill="#fee2e2"/>
+      <line x1="1655" y1="542" x2="1975" y2="542" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="1815" y="532" fill="#dc2626" font-size="18" font-weight="600" text-anchor="middle">起点 · 损失梯度</text>
+    </g>
+    <text x="1815" y="608" fill="#0f172a" font-size="40" font-weight="700" text-anchor="middle" class="hw-bold">∂L/∂L = 1</text>
+    <text x="1815" y="643" fill="#64748b" font-size="18" text-anchor="middle">反向的起点</text>
+
+    <!-- Backward arrows (right → left) -->
+    <line x1="1655" y1="585" x2="1455" y2="585" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-dasharray="10,6" marker-end="url(#arrow-red)"/>
+    <line x1="1075" y1="585" x2="875" y2="585" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-dasharray="10,6" marker-end="url(#arrow-red)"/>
+    <line x1="595" y1="585" x2="395" y2="585" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-dasharray="10,6" marker-end="url(#arrow-red)"/>
+
+    <!-- Backward arrow labels (chain rule) -->
+    <g transform="translate(420, 545)">
+      <rect x="0" y="-12" width="150" height="24" rx="4" fill="rgba(255,255,255,0.9)" stroke="#dc2626" stroke-width="1.2"/>
+      <text x="75" y="5" fill="#dc2626" font-size="14" font-weight="600" text-anchor="middle">∂L/∂ŷ · ∂ŷ/∂h · ∂h/∂x</text>
+    </g>
+    <g transform="translate(900, 545)">
+      <rect x="0" y="-12" width="150" height="24" rx="4" fill="rgba(255,255,255,0.9)" stroke="#dc2626" stroke-width="1.2"/>
+      <text x="75" y="5" fill="#dc2626" font-size="14" font-weight="600" text-anchor="middle">∂L/∂ŷ · ∂ŷ/∂h</text>
+    </g>
+    <g transform="translate(1510, 545)">
+      <rect x="0" y="-12" width="90" height="24" rx="4" fill="rgba(255,255,255,0.9)" stroke="#dc2626" stroke-width="1.2"/>
+      <text x="45" y="5" fill="#dc2626" font-size="14" font-weight="600" text-anchor="middle">∂L/∂ŷ</text>
+    </g>
+
+    <!-- ===== Core chain rule formula ===== -->
+    <g transform="translate(95, 705)">
+      <rect x="0" y="0" width="1770" height="110" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+      <text x="24" y="38" fill="#dc2626" font-size="24" font-weight="700">核心：链式法则（Chain Rule）</text>
+      <text x="24" y="86" fill="#0f172a" font-size="30" font-weight="500" class="hw">∂L/∂h[l-1] = ∂L/∂h[l] · ∂h[l]/∂h[l-1]</text>
+      <text x="1010" y="86" fill="#475569" font-size="20" font-style="italic">每层梯度 = 上游梯度 × 局部导数</text>
+    </g>
+
+    <!-- ===== Footer ===== -->
+    <g transform="translate(95, 850)">
+      <text x="0" y="0" fill="#475569" font-size="22" font-style="italic">1 次前向 + 1 次反向 = 所有参数的梯度；时间复杂度 ≈ 一次前向传播的量级——这就是反向传播成为深度学习"标配"的根本原因</text>
+    </g>
+  </g>
+</svg>
