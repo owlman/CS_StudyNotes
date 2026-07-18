@@ -26,7 +26,7 @@
 
   <g transform="translate(-30, 0)">
     <!-- ===== Title ===== -->
-    <text x="80" y="60" fill="#0f172a" font-size="42" font-weight="700">图 3. 高维损失曲面的临界点分布</text>
+    <text x="80" y="60" fill="#0f172a" font-size="42" font-weight="700">图 4. 高维损失曲面的鞍点分布</text>
     <text x="80" y="98" fill="#64748b" font-size="24">在百万至十亿维的参数空间中，绝大多数临界点是鞍点，而非局部最优（Dauphin et al., 2014）</text>
 
     <!-- ===== Main 3D landscape (pseudo-3D isometric contour map) ===== -->
