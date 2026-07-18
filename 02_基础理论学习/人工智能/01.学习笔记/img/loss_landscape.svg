@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1980 980">
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#eef0f2" stroke-width="0.5"/>
+    </pattern>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow-blue" markerWidth="20" markerHeight="8" refX="18" refY="4" orient="auto">
+      <polygon points="0 0, 20 4, 0 8" fill="#0f172a"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="18" markerHeight="7" refX="16" refY="3.5" orient="auto">
+      <polygon points="0 0, 18 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <linearGradient id="contour-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dbeafe" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#bfdbfe" stop-opacity="0.4"/>
+    </linearGradient>
+    <style>
+      text { font-family: 'Microsoft YaHei', 'Noto Sans SC', 'PingFang SC', 'JetBrains Mono', monospace; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#fafbfc"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
+  <g transform="translate(-30, 0)">
+    <!-- ===== Title ===== -->
+    <text x="80" y="60" fill="#0f172a" font-size="42" font-weight="700">图 3. 高维损失曲面的临界点分布</text>
+    <text x="80" y="98" fill="#64748b" font-size="24">在百万至十亿维的参数空间中，绝大多数临界点是鞍点，而非局部最优（Dauphin et al., 2014）</text>
+
+    <!-- ===== Main 3D landscape (pseudo-3D isometric contour map) ===== -->
+    <g transform="translate(80, 150)">
+      <!-- Background bounding box -->
+      <rect x="0" y="0" width="900" height="640" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+      <!-- Title for this panel -->
+      <text x="20" y="32" fill="#0f172a" font-size="22" font-weight="700">高维损失曲面的等高线视图（自上而下俯视）</text>
+      <text x="20" y="58" fill="#64748b" font-size="16">同心闭合曲线 = 等高线；中心 = 低损失（山谷）；发散方向 = 高损失（山脊）</text>
+
+      <!-- Outer high-loss ring -->
+      <ellipse cx="450" cy="340" rx="400" ry="240" fill="url(#contour-grad)" stroke="#94a3b8" stroke-width="1.5"/>
+      <ellipse cx="450" cy="340" rx="350" ry="210" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+      <ellipse cx="450" cy="340" rx="300" ry="180" fill="none" stroke="#cbd5e1" stroke-width="1.2"/>
+      <ellipse cx="450" cy="340" rx="240" ry="145" fill="none" stroke="#cbd5e1" stroke-width="1.2"/>
+
+      <!-- Hill 1 (left) - leading to a local minimum -->
+      <g>
+        <ellipse cx="200" cy="220" rx="120" ry="65" fill="url(#contour-grad)" stroke="#94a3b8" stroke-width="1.5"/>
+        <ellipse cx="200" cy="220" rx="90" ry="48" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+        <ellipse cx="200" cy="220" rx="60" ry="32" fill="none" stroke="#cbd5e1" stroke-width="1.2"/>
+        <ellipse cx="200" cy="220" rx="30" ry="16" fill="#dbeafe" stroke="#64748b" stroke-width="1"/>
+        <!-- Local minimum marker -->
+        <circle cx="200" cy="220" r="9" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+        <text x="200" y="155" fill="#dc2626" font-size="20" font-weight="700" text-anchor="middle">A: 局部最小</text>
+        <text x="200" y="178" fill="#7f1d1d" font-size="14" text-anchor="middle">low loss · narrow basin</text>
+      </g>
+
+      <!-- Saddle point (center) -->
+      <g>
+        <ellipse cx="450" cy="340" rx="80" ry="22" fill="url(#contour-grad)" stroke="#f59e0b" stroke-width="2"/>
+        <ellipse cx="450" cy="340" rx="50" ry="14" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+        <ellipse cx="450" cy="340" rx="25" ry="7" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+        <!-- Saddle marker -->
+        <circle cx="450" cy="340" r="10" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
+        <text x="450" y="392" fill="#92400e" font-size="20" font-weight="700" text-anchor="middle">B: 鞍点（绝大多数临界点）</text>
+        <text x="450" y="415" fill="#92400e" font-size="14" text-anchor="middle">high in one direction, low in the other</text>
+      </g>
+
+      <!-- Hill 2 (right) - leading to a local minimum -->
+      <g>
+        <ellipse cx="700" cy="220" rx="130" ry="70" fill="url(#contour-grad)" stroke="#94a3b8" stroke-width="1.5"/>
+        <ellipse cx="700" cy="220" rx="100" ry="50" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+        <ellipse cx="700" cy="220" rx="70" ry="35" fill="none" stroke="#cbd5e1" stroke-width="1.2"/>
+        <ellipse cx="700" cy="220" rx="40" ry="20" fill="#dbeafe" stroke="#64748b" stroke-width="1"/>
+        <!-- Local minimum marker -->
+        <circle cx="700" cy="220" r="9" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+        <text x="700" y="155" fill="#dc2626" font-size="20" font-weight="700" text-anchor="middle">C: 局部最小</text>
+        <text x="700" y="178" fill="#7f1d1d" font-size="14" text-anchor="middle">low loss · narrow basin</text>
+      </g>
+
+      <!-- Global minimum (bottom) -->
+      <g>
+        <ellipse cx="450" cy="540" rx="180" ry="50" fill="url(#contour-grad)" stroke="#059669" stroke-width="2"/>
+        <ellipse cx="450" cy="540" rx="135" ry="37" fill="none" stroke="#059669" stroke-width="1.5"/>
+        <ellipse cx="450" cy="540" rx="90" ry="25" fill="none" stroke="#059669" stroke-width="1.2"/>
+        <ellipse cx="450" cy="540" rx="45" ry="13" fill="#d1fae5" stroke="#059669" stroke-width="1"/>
+        <!-- Global minimum marker -->
+        <circle cx="450" cy="540" r="11" fill="#059669" stroke="#064e3b" stroke-width="2.5"/>
+        <text x="450" y="595" fill="#059669" font-size="22" font-weight="700" text-anchor="middle">D: 全局最小（目标）</text>
+        <text x="450" y="618" fill="#064e3b" font-size="14" text-anchor="middle">lowest loss · wide basin · hard to reach</text>
+      </g>
+
+      <!-- Gradient flow arrows (downhill) -->
+      <g stroke="#0f172a" stroke-width="1.5" fill="none" stroke-dasharray="4,3">
+        <!-- A → saddle -->
+        <path d="M 200 220 Q 280 280, 410 330" marker-end="url(#arrow-blue)"/>
+        <text x="305" y="270" fill="#475569" font-size="12" font-style="italic">-grad</text>
+        <!-- saddle → D -->
+        <path d="M 450 365 Q 450 450, 450 525" marker-end="url(#arrow-blue)"/>
+        <text x="465" y="450" fill="#475569" font-size="12" font-style="italic">-grad</text>
+        <!-- C → saddle -->
+        <path d="M 700 220 Q 600 280, 490 325" marker-end="url(#arrow-blue)"/>
+        <text x="595" y="270" fill="#475569" font-size="12" font-style="italic">-grad</text>
+      </g>
+
+      <!-- Annotation: "most critical points are saddles, not local minima" -->
+      <g transform="translate(20, 580)">
+        <rect x="0" y="0" width="860" height="44" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="430" y="28" fill="#92400e" font-size="16" font-weight="600" text-anchor="middle">高维空间中：鞍点 B 是常态，局部最小 A、C 是少数——这也是朴素 SGD 能持续工作的几何基础</text>
+      </g>
+    </g>
+
+    <!-- ===== Side: low-dimensional intuition (2D mountain) ===== -->
+    <g transform="translate(1040, 150)">
+      <rect x="0" y="0" width="820" height="640" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+      <text x="20" y="32" fill="#0f172a" font-size="22" font-weight="700">低维直觉（2D 山地）——几何直觉在这里会骗人</text>
+      <text x="20" y="58" fill="#64748b" font-size="16">在二维画布里"局部最小"很显眼；高维里鞍点远比局部最小常见</text>
+
+      <!-- 2D mountain curve (one cross-section) -->
+      <g transform="translate(40, 90)">
+        <!-- x-axis -->
+        <line x1="0" y1="380" x2="740" y2="380" stroke="#94a3b8" stroke-width="2"/>
+        <!-- y-axis -->
+        <line x1="0" y1="20" x2="0" y2="380" stroke="#94a3b8" stroke-width="2"/>
+
+        <!-- Axis labels -->
+        <text x="370" y="410" fill="#475569" font-size="16" text-anchor="middle">参数 θ 在某一切片上的值</text>
+        <text x="-15" y="20" fill="#475569" font-size="16" text-anchor="end">L(θ)</text>
+        <text x="-15" y="200" fill="#475569" font-size="13" text-anchor="end" font-style="italic">loss</text>
+        <text x="-15" y="370" fill="#475569" font-size="13" text-anchor="end">低</text>
+
+        <!-- Mountain silhouette (cross-section) -->
+        <path d="M 0 350
+                 Q 60 350, 100 320
+                 Q 140 270, 180 200
+                 Q 220 130, 260 90
+                 Q 300 60, 340 50
+                 Q 380 60, 420 110
+                 Q 460 180, 500 250
+                 Q 540 300, 580 340
+                 Q 620 360, 660 370
+                 Q 700 375, 740 378"
+              fill="none" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+
+        <!-- Local minimum A -->
+        <circle cx="180" cy="200" r="8" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+        <line x1="180" y1="200" x2="180" y2="380" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="180" y="190" fill="#dc2626" font-size="16" font-weight="700" text-anchor="middle">A</text>
+
+        <!-- Peak (between two minima) -->
+        <circle cx="340" cy="50" r="8" fill="#0f172a" stroke="#0f172a" stroke-width="2"/>
+        <text x="340" y="38" fill="#0f172a" font-size="16" font-weight="700" text-anchor="middle">peak</text>
+
+        <!-- Local minimum B (smaller basin) -->
+        <circle cx="500" cy="250" r="8" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+        <line x1="500" y1="250" x2="500" y2="380" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="500" y="240" fill="#dc2626" font-size="16" font-weight="700" text-anchor="middle">B</text>
+
+        <!-- Annotation: "在 1D 切面上看，每个鞍点 = 局部最大" -->
+        <g transform="translate(60, 460)">
+          <rect x="0" y="0" width="680" height="44" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="340" y="28" fill="#7f1d1d" font-size="15" font-weight="600" text-anchor="middle">陷阱：从 1D 切片看，"局部最小"到处都是——但这是几何幻觉，高维里它们大多是鞍点</text>
+        </g>
+
+        <g transform="translate(60, 520)">
+          <rect x="0" y="0" width="680" height="44" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="1.5"/>
+          <text x="340" y="28" fill="#064e3b" font-size="15" font-weight="600" text-anchor="middle">鞍点的工程含义：梯度下降沿"看起来平"的方向也能继续走——总有"出口"</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- ===== Bottom footer: takeaway ===== -->
+    <g transform="translate(80, 820)">
+      <rect x="0" y="0" width="1820" height="120" rx="14" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+      <text x="40" y="40" fill="#064e3b" font-size="22" font-weight="700">核心结论</text>
+      <text x="40" y="74" fill="#0f172a" font-size="18">高维非凸损失面 = 大量鞍点 + 少量局部最小 + 极少数全局最小。鞍点丰富 ≠ 优化器总能到达全局最小，但梯度下降一般能从鞍点继续下降。</text>
+      <text x="40" y="100" fill="#475569" font-size="16" font-style="italic">"梯度必须有效传播"是这条工程结论的前提——一旦进入梯度消失区，优化器会卡在"假局部最小"，这才是真正的工程陷阱。</text>
+    </g>
+  </g>
+</svg>
