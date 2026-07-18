@@ -24,7 +24,7 @@
 
   <g transform="translate(-55, 0)">
     <!-- ===== Title ===== -->
-    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 2. 反向传播示意：沿计算图反向调用链式法则</text>
+    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 3. 反向传播示意：沿计算图反向调用链式法则</text>
     <text x="95" y="98" fill="#64748b" font-size="24">前向传播得到损失 L，反向传播沿图反向传递梯度 ∂L/∂θ，逐层算出所有参数的梯度</text>
 
     <!-- ===== Top: Forward pass ===== -->
