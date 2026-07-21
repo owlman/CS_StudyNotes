@@ -16,8 +16,7 @@ Hermes Agent 于 2026 年 2 月由一家名为 Nous Research 公司发布在 Git
 
 Hermes Agent 打破了传统的全量存储模式，它借鉴 CPU 缓存的设计思想打造出了一个分层记忆系统，这一解决方案在一定程度上缓解了由 OpenClaw 在跨会话记忆方面的缺陷所带来的一系列问题，为 Agent 应用的持久记忆机制提供了一种更稳定的工程实现。具体来说，这个记忆机制主要有如图 1 所示的四个分层结构组成。
 
-<!-- ![Hermes Agent 的记忆系统](./img/Hermes_agent_memory_system.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513152546804-1547140810.png)
+![Hermes Agent 的记忆系统](./img/Hermes_agent_memory_system.png)
 
 **图 1**：Hermes Agent 的记忆系统
 
@@ -78,8 +77,7 @@ irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/ins
 
 在上述命令启动之后，我们会先下载到 Hermes Agent 的安装脚本，然后该脚本会自动检测其所在的计算机系统环境，并安装部署环境所依赖的 Node.js、Python、Git 等基础设施，如图 2 所示。
 
-<!-- ![Hermes Agent 的安装过程](./img/Hermes_agent_install.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513152656290-1194796035.png)
+![Hermes Agent 的安装过程](./img/Hermes_agent_install.png)
 
 **图 2**：Hermes Agent 的安装过程
 
@@ -87,8 +85,7 @@ irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/ins
 
 如果安装过程一切顺利，用户就只需要继续在命令行终端中执行`hermes`命令，Hermes Agent 就会启动一个如图 3 所示的 TUI 对话窗口，它的作用和我们之前在[[Agent 的基础应用]]这篇笔记中介绍过的 OpenClaw TUI 是一样的，只不过它的界面更美观一些。
 
-<!-- ![Hermes Agent TUI](./img/Hermes_agent_tui.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513152737056-1982214737.png)
+![Hermes Agent TUI](./img/Hermes_agent_tui.png)
 
 **图 3**：Hermes Agent TUI 的对话窗口
 
@@ -96,22 +93,19 @@ irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/ins
 
 内置统一消息网关，通过适配器模式支持包括微信、飞书在内的 15+ 个主流通讯平台。记忆与技能数据在各平台间完全互通，解决传统智能代理”平台孤岛”问题。用户通过执行`hermes gateway setup`命令即可完成通信平台的接入配置，如图 4 所示：
 
-<!-- ![Hermes Agent 的通讯平台接入配置](./img/Hermes_agent_messaging.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513152815929-1024475850.png)
+![Hermes Agent 的通讯平台接入配置](./img/Hermes_agent_messaging.png)
 
 **图 4**：Hermes 的通讯平台接入配置
 
 例如，如果我们在上述界面中选择飞书（Feishu / lark），就会看到如图 5 所示的接入方式界面。然后，我们在这里既可以选择第一项，然后用手机端的飞书通过扫二维码方式自动在飞书开放平台中创建机器人（它会按照指定的智能体模版配置好机器人被赋予的执行权限）；也可以和之前在 OpenClaw 种所做的一样，先去飞书开放平台手动创建机器人，并为它配置好你想赋予的权限，然后再回到这里选择第二项，将该机器人的 App ID 和 App Secret 填入。前者比较方便，后者则比较自由，我们可以根据自己的需求来做出选择。
 
-<!-- ![hermes 的飞书接入方式](./img/Hermes_feishu_config.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513152859368-422665907.png)
+![hermes 的飞书接入方式](./img/Hermes_feishu_config.png)
 
 **图 5**：Hermes Agent 的飞书接入方式
 
 如果一切顺利，我们就可以利用配置的飞书机器人与 Hermes Agent 进行对话了，如图 6 所示：
 
-<!-- ![hermes 的对话窗口](./img/Hermes_feishu.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513152931782-948451245.png)
+![hermes 的对话窗口](./img/Hermes_feishu.png)
 
 **图 6**：Hermes Agent 与飞书的对话窗口
 
@@ -121,8 +115,7 @@ irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/ins
 
 由于 Hermes Agent 归根结底还是和 OpenClaw 一样，同属于运行在服务器环境中的 Agent，主要使用方式依然是基于命令行界面的，毕竟目前还没有什么图形化界面的程序在远程登录到服务器上并执行运维相关工作时，能获得好于命令行界面程序的用户体验。但相对于 OpenClaw 来说，Hermes Agent 的常用命令集要精简许多，而且这些命令的命名也相对规范，用户可以很容易地通过`hermes --help`命令查看到所有可用的命令，如图 7 所示。
 
-<!-- ![Hermes Agent 的常用命令](./img/Hermes_agent_help.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513153016365-937022105.png)
+![Hermes Agent 的常用命令](./img/Hermes_agent_help.png)
 
 **图 7**：Hermes Agent 的可用命令
 
@@ -139,8 +132,7 @@ irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/ins
 
 例如，如果我们想要看看当前运行的 Hermes Agent 服务是否正常，就可以执行`hermes doctor`命令，如图 8 所示：
 
-<!-- ![Hermes Agent 的诊断结果](./img/Hermes_agent_doctor.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202605/691082-20260513153028648-1474467614.png)
+![Hermes Agent 的诊断结果](./img/Hermes_agent_doctor.png)
 
 **图 8**：Hermes Agent 的诊断结果
 
