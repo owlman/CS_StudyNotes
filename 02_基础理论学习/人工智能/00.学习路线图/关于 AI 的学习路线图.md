@@ -129,8 +129,8 @@ categories: 基础理论学习
 
 在这一阶段，我会建议读者根据自身条件来选择以下路径之一，来完成一次对 AI Agent 的实践应用：
 
-- 基于 **OpenCode** 这类本地运行的 Agent 完成一个中小型项目；
-- 基于 **OpenClaw** 这类可远端部署的 Agent 提升个人或团队效率。
+- 基于 **OpenCode** 这类本地运行的 Agent 完成一个中小型项目的开发；
+- 基于 **OpenClaw** 这类可远端部署的 Agent 提升个人或团队的工作效率。
 
 同样的，无论我们选择的是上面的哪条路径，目标都应该是寻求基于亲身使用体验来明确以下问题：
 
@@ -142,10 +142,16 @@ categories: 基础理论学习
 
 > 📌 关联笔记：  
 >
-> - [[Agent 的基础应用]]：在这篇笔记中，我会通过 OpenCode 等工具从零上手 Agent，介绍安装配置与基础使用流程。[博客园链接](https://www.cnblogs.com/owlman/p/19623216)
-> - [[Agent 的能力体系]]：在这篇笔记中，我会从提示词边界出发，展开 MCP 协议、Skills 技能体系等扩展能力。[博客园链接](https://www.cnblogs.com/owlman/p/19669961)
-> - [[Agent 的记忆机制]]：在这篇笔记中，我会介绍如何为 Agent 构建记忆机制，涵盖 RAG 架构与长上下文窗口的实践经验。[博客园链接](https://www.cnblogs.com/owlman/p/19854861)
-> - [[Agent 的应用演示]]：，在这篇笔记中，我会汇总具有代表性的可复现应用场景，包括私人助理、职场办公、开发测试、代码分析等。[博客园链接](https://www.cnblogs.com/owlman/p/20159722)
+> - agent 应用的使用笔记：
+>   - [[Agent 的基础应用]]：在这篇笔记中，我会通过 OpenCode 等工具从零上手 Agent，介绍安装配置与基础使用流程。[博客园链接](https://www.cnblogs.com/owlman/p/19623216)
+>   - [[Agent 的能力体系]]：在这篇笔记中，我会从提示词边界出发，展开 MCP 协议、Skills 技能体系等扩展能力。[博客园链接](https://www.cnblogs.com/owlman/p/19669961)
+>   - [[Agent 的记忆机制]]：在这篇笔记中，我会介绍如何为 Agent 构建记忆机制，涵盖 RAG 架构与长上下文窗口的实践经验。[博客园链接](https://www.cnblogs.com/owlman/p/19854861)
+>   - [[Agent 的应用演示]]：在这篇笔记中，我会汇总具有代表性的可复现应用场景，包括私人助理、职场办公、开发测试、代码分析等。[博客园链接](https://www.cnblogs.com/owlman/p/20159722)
+>
+> - Vibe Coding 实践笔记：
+>   - [[基于 Vibe Coding 的个人网站重构]]：在这篇笔记中，我会介绍如何基于 Vibe Coding 实现个人网站的重构，并分享一些个人经验。（未完成）
+>   - [[基于 Vibe Coding 的 Android 应用开发]]：在这篇笔记中，我会介绍如何基于 Vibe Coding 实现 Android 应用的开发，并分享一些个人经验。（未完成）
+>   - [[基于 Vibe Coding 的围棋游戏开发]]：在这篇笔记中，我会介绍如何基于 Vibe Coding 实现围棋游戏开发，并分享一些个人经验。（未完成）
 
 ## 结束语
 
