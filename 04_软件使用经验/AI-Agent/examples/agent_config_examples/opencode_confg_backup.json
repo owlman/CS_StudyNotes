@@ -54,7 +54,6 @@
                 "mcp-server-git"
             ]
         },
-        
         "context7": {
             "type": "local",
             "command": [
