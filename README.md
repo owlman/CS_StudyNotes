@@ -54,7 +54,7 @@
 
    - 编码 & 编译：[NeoVim](./04_软件使用经验/editor/NeoVim%20使用笔记.md) / [VS Code](./04_软件使用经验/IDE/VS%20Code%20配置笔记.md) / [Clang](./04_软件使用经验/Compilers/Clang%20使用笔记.md) / [LaTeX](./03_编程技术学习/计算机语言/02.标记语言/LaTeX/LaTeX学习笔记：快速上手指南.md)
 
-   - 构建 & 运维：[Git](./04_软件使用经验/Git/Git%20使用笔记.md) / [Zsh](./04_软件使用经验/Shell/Zsh%20配置笔记.md) / [Fish](./04_软件使用经验/Shell/Fish%20配置笔记.md) / [Make](./04_软件使用经验/Make/Makefile%20使用笔记.md) / [Docker](./04_软件使用经验/Docker/Docker%20使用笔记.md) / [Kubernetes](./04_软件使用经验/k8s/Kubernetes%20使用笔记.md)
+   - 构建 & 运维：[Git](./04_软件使用经验/Git/Git%20使用笔记.md) / [Zsh](./04_软件使用经验/Shell/Zsh%20配置笔记.md) / [Fish](./04_软件使用经验/Shell/Fish%20配置笔记.md) / [Make](./04_软件使用经验/Builder/Makefile%20使用笔记.md) / [Docker](./04_软件使用经验/Docker/Docker%20使用笔记.md) / [Kubernetes](./04_软件使用经验/k8s/Kubernetes%20使用笔记.md)
 
    - 辅助 & 查询：[AI Agent](./04_软件使用经验/AI-Agent/Agent%20的基础应用.md)
 
@@ -68,7 +68,7 @@
 ## 如何阅读？
 
 - 首先，所有笔记均使用 **Markdown** 编写，可直接在 GitHub 上按目录的自然分类进行阅读。
-- 其次，若希望获得更好的体验（双链、反向链接、知识网络），推荐使用 [Obsidian](https://obsidian.md/)或在 VS Code 中配合 [Foam](https://foambubble.github.io/foam/) 插件，可将项目根目录下的 [`Obsidian-README.md`](./Obsidian-README.md) 当做入口文档进行阅读。
+- 其次，若希望获得更好的体验（例如基于双链构建的知识网络），推荐使用 [Obsidian](https://obsidian.md/)或在 VS Code 中配合 [Foam](https://foambubble.github.io/foam/) 插件，可将项目根目录下的 [`Obsidian-README.md`](./Obsidian-README.md) 当做入口文档进行阅读。
 
 > 使用 Obsidian / Foam 是 **增强体验**，而不是前置条件。
 
