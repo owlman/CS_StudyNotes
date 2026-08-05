@@ -3,42 +3,37 @@ title: Ninja 使用笔记
 author: 凌杰
 date: 2026-08-05
 tags: 自动化构建
-categories: 命令行工具
-source: https://zhuanlan.zhihu.com/p/676733751
+categories: 软件使用经验
 ---
 
 > [!NOTE] 笔记说明
 >
-> 本篇笔记转载自知乎专栏文章《一文读懂 ninja 构建系统》（作者：游凯超）。原文章用于介绍 ninja 这款轻量级构建工具，作者正是 PyTorch 等大型项目 ninja 集成的开发者。为便于本人计算机笔记库的长期维护与检索，对原文段落进行了 Markdown 结构化整理（标题、代码块、列表），正文内容与原作一致。原文出处：[zhuanlan.zhihu.com/p/676733751](https://zhuanlan.zhihu.com/p/676733751)。
+> 本篇笔记由于系统性地介绍 ninja 这款轻量级的项目构建工具。它最初参考自知乎专栏文章[《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，我在对该文章的内容进行二次整理和内容补充之后，将其纳入到了[本人的计算机笔记库](https://github.com/owlman/CS_StudyNotes)，并进行长期维护与检索。
 
-## 写在前面
+## ninja 简介
 
-很多大型项目（例如 PyTorch）都采用了 ninja 作为构建系统的一部分，为了阅读并了解这些大型项目，有必要对 ninja 有初步理解。
+ninja 是时下较为流行的一款项目构建工具，主要用于通过调用代码生成器、编译器、链接器等各种工具来完成软件项目的编译工作。如今的很多大型项目（例如 PyTorch ）都是采用基于 ninja 来进行系统构建的，为了阅读并维护这些项目，我们恨有必要学习一下这款工具的基本使用方法。
 
-## ninja 简单介绍
+与 cmake / make 等传统的项目构建工具不同，ninja 在设计之初就不是让人类去手动编写项目构建逻辑的，后者基本上是要由其它程序来自动生成的，这样做可以最大限度地避免模糊化的描述。例如在 makefile 中，我们经常会用 `dir/*.cpp` 来表示源文件，但这通常需要构建工具去遍历/查询文件系统才能得到具体内容，是一个很慢而且很不确定的操作。ninja 把这些模糊的操作都交给元构建系统（meta-build system，例如 cmake），只留下真正需要编译的命令。
 
-ninja 是一种构建工具，用来调用各种工具（代码生成器、编译器、链接器等）来编译大型项目。与 cmake / make 等工具不同，ninja 在设计之初就不是给人写的，只是用于作为其它程序生成的目标。
+因此在本质上，我们可以认为 ninja 就是一条一条地列出了具体要执行的命令，然后执行即可。在执行过程中，ninja 会自行去分析这一系列命令之间的依赖关系，并根据依赖关系的不同分以下两种方式进行编译：
 
-ninja 的设计哲学就是避免任何模糊的内容。比如 makefile 里面可能经常会用 `dir/*.cpp` 来表示源文件，但是这需要查询文件系统才能得到具体内容，是一个很慢而且很不确定的操作。ninja 把这些模糊的操作都交给元构建系统（meta-build system，例如 cmake），只留下真正需要编译的命令。
-
-因此，本质上我们可以认为 ninja 就是一条一条地列出了具体要执行的命令，然后执行即可。
-
-ninja 会分析这一系列命令之间的依赖关系，并根据这个依赖关系实现两个重要特点：
-
-- **并行编译**：没有依赖的命令可以并行执行。ninja 默认使用的并行数为 CPU 数量，一般不用手动设置并行数，除非想限制 ninja 使用的 CPU 数量（例如有其他任务在运行，只让 ninja 用一半 CPU）。
+- **并行编译**：对彼此没有依赖关系的命令采用并行执行。ninja 默认使用的并行数为 CPU 数量，一般不用手动设置并行数，除非想限制 ninja 使用的 CPU 数量（例如有其他任务在运行，只让 ninja 用一半 CPU）。
 - **增量编译**：根据文件的时间戳进行分析，如果某个文件的时间戳发生了改变，则依赖于这个文件的命令以及其他依赖于这个命令的命令都会被重新执行，以此达到增量编译的效果（比如修改了一个文件之后重新编译）。
 
-## ninja 安装方式
+## 安装方法
 
-ninja 是一个工具，而且体量很小。各个系统都有相关的安装方法，具体可参见文档。总的来说，有三种安装方式：
+ninja 是一个体量很小的 CLI 工具，根据不同的操作系统以及开发环境，我们通常以下有三种安装方式：
 
-- **系统级安装**：例如 Ubuntu 上的 `apt-get install ninja-build`、MacOS 上的 `brew install ninja`，安装后 ninja 就是一个系统命令，类似 `ls` / `cat` 等命令。
-- **用户级安装**：例如通过 pip 或者 conda 都可以安装 ninja：`conda install ninja` / `pip install ninja`。
-- **自定义安装**：在 GitHub 下载页面下载安装包并解压即可，或者下载源码自己编译。
+- **系统级安装**：例如 Ubuntu 上的 `apt install ninja-build`、Windows 上的 `scoop install ninja`、MacOS 上的 `brew install ninja`，安装好之后，ninja 就可以像 `ls` / `cat` 等系统命令一样使用了。
+- **项目级安装**：例如通过 pip 或 conda 这样的项目环境来安装 ninja：`conda install ninja` / `pip install ninja`。
+- **自定义安装**：在 GitHub 找到 ninja 项目所在页面（如图 1 所示）下载安装包并解压即可，特定情况下也可下载源码自己编译。
 
-ninja 是个非常小的工具，从下面的下载页面可以看出，整个工具的压缩包也就一两百 KB 级别。
+![Ninja 项目页面](./img/ninja_github.png)
 
-其实官方只通过 GitHub 来发布新版本，其它的安装方式都是社区自己搞的。比如 `pip install ninja`，安装的是 scikit-build 社区维护的 [ninja-python-distributions](https://github.com/scikit-build/ninja-python-distributions)，他们把 ninja 包装成了一个 pip 包。很多人不知道他们下载的不是官方 ninja，这个 GitHub 项目才 46 个 star，但是有二百五十万次下载。`conda install ninja` 也是一个类似的东西。
+**图 1** Ninja 项目页面
+
+从项目的下载页面也可以看出，ninja 是个非常小的工具，整个压缩包也就一两百 KB 的大小。其实官方只通过 GitHub 来发布新版本，其它的安装方式都是社区自己搞的。比如 `pip install ninja`，安装的是 scikit-build 社区维护的 [ninja-python-distributions](https://github.com/scikit-build/ninja-python-distributions)，他们把 ninja 包装成了一个 pip 包。很多人不知道他们下载的不是官方 ninja，这个 GitHub 项目才 46 个 star，但是有二百五十万次下载。`conda install ninja` 也是一个类似的东西。
 
 总之，如果需要保证安全，可以通过 ninja 的 GitHub release 页面下载；如果图方便，可以用各种社区维护的安装方式。
 
@@ -153,7 +148,3 @@ ninja 的高级用法一般都在 `ninja -t` 下面，例如 `ninja -t clean` �
 ## 总结
 
 本文简单介绍了 ninja 的一些原理及用法。虽然简单，但依然起了个"一文读懂 ninja 构建系统"的标题，就是因为 ninja 真的很小，它的全部文档差不多也就这些值得我们关心的内容。
-
-## 参考资料
-
-- [原文链接](https://zhuanlan.zhihu.com/p/676733751)
