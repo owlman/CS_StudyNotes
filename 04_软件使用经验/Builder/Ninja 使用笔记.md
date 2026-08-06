@@ -14,7 +14,7 @@ categories: 软件使用经验
 
 ninja 是时下较为流行的一款项目构建工具，主要用于通过调用代码生成器、编译器、链接器等各种工具来完成软件项目的编译工作。如今的很多大型项目（例如 PyTorch ）都是采用基于 ninja 来进行系统构建的，为了阅读并维护这些项目，我们恨有必要学习一下这款工具的基本使用方法。
 
-与 cmake / make 等传统的项目构建工具不同，ninja 在设计之初就不是让人类去手动编写项目构建逻辑的，后者基本上是要由其它程序来自动生成的，这样做可以最大限度地避免模糊化的描述。例如在 makefile 中，我们经常会用 `dir/*.cpp` 来表示源文件，但这通常需要构建工具去遍历/查询文件系统才能得到具体内容，是一个很慢而且很不确定的操作。ninja 把这些模糊的操作都交给元构建系统（meta-build system，例如 cmake），只留下真正需要编译的命令。
+与 cmake / make 等传统的项目构建工具不同，ninja 在设计之初就不是让人类去手动编写项目构建配置的，该配置文件基本上是要由其它程序来自动生成的，这样做可以最大限度地避免模糊化的描述。例如在 makefile 中，我们经常会用 `dir/*.cpp` 来表示源文件，但这通常需要构建工具去遍历/查询文件系统才能得到具体内容，是一个很慢而且很不确定的操作。ninja 把这些模糊的操作都交给元构建系统（meta-build system，例如 cmake），只留下真正需要编译的命令。
 
 因此在本质上，我们可以认为 ninja 就是一条一条地列出了具体要执行的命令，然后执行即可。在执行过程中，ninja 会自行去分析这一系列命令之间的依赖关系，并根据依赖关系的不同分以下两种方式进行编译：
 
@@ -25,23 +25,19 @@ ninja 是时下较为流行的一款项目构建工具，主要用于通过调�
 
 ninja 是一个体量很小的 CLI 工具，根据不同的操作系统以及开发环境，我们通常以下有三种安装方式：
 
-- **系统级安装**：例如 Ubuntu 上的 `apt install ninja-build`、Windows 上的 `scoop install ninja`、MacOS 上的 `brew install ninja`，安装好之后，ninja 就可以像 `ls` / `cat` 等系统命令一样使用了。
-- **项目级安装**：例如通过 pip 或 conda 这样的项目环境来安装 ninja：`conda install ninja` / `pip install ninja`。
-- **自定义安装**：在 GitHub 找到 ninja 项目所在页面（如图 1 所示）下载安装包并解压即可，特定情况下也可下载源码自己编译。
+- **系统级安装**：可以通过我们所在系统的软件包管理器来进行安装，例如 Ubuntu 上的 `apt install ninja-build`、Windows 上的 `scoop install ninja`、MacOS 上的 `brew install ninja`，安装好之后，ninja 就可以像 `ls` / `cat` 等系统命令一样使用了。
+- **项目级安装**：可以通过 pip 或 conda 这样的项目管理工具来安装 ninja，例如 `conda install ninja` / `pip install ninja`。
+- **自定义安装**：在 GitHub 找到 ninja 项目（如图 1 所示）下载它的安装包并解压即可。当然，如果有特殊需求，也可以选择下载它的源码，然后进行本地编译。
 
-![Ninja 项目页面](./img/ninja_github.png)
+![Ninja 项目在 github 上的主页](./img/ninja_github.png)
 
-**图 1** Ninja 项目页面
+**图 1** Ninja 项目在 GitHub 上的主页
 
-从项目的下载页面也可以看出，ninja 是个非常小的工具，整个压缩包也就一两百 KB 的大小。其实官方只通过 GitHub 来发布新版本，其它的安装方式都是社区自己搞的。比如 `pip install ninja`，安装的是 scikit-build 社区维护的 [ninja-python-distributions](https://github.com/scikit-build/ninja-python-distributions)，他们把 ninja 包装成了一个 pip 包。很多人不知道他们下载的不是官方 ninja，这个 GitHub 项目才 46 个 star，但是有二百五十万次下载。`conda install ninja` 也是一个类似的东西。
+事实上，ninja 的官方项目组只会通过 GitHub 来发布他们的新版本，其它的安装方式都是相关的社区自己打包的。例如，`pip install ninja` 命令安装的是 scikit-build 社区维护的 [ninja-python-distributions](https://github.com/scikit-build/ninja-python-distributions)，他们把 ninja 包装成了一个 pip 包。很多人不知道他们下载的不是官方 ninja，这个 GitHub 项目才 46 个 star，但是有二百五十万次下载。`conda install ninja` 命令安装的也是一个类似的东西。总之，如果读者比较在意安全问题，我会建议尽可能去 ninja 的 GitHub release 页面下载安装包；如果图方便，可以用各种社区维护的安装方式。
 
-总之，如果需要保证安全，可以通过 ninja 的 GitHub release 页面下载；如果图方便，可以用各种社区维护的安装方式。
+## 理解`build.ninja`
 
-## 理解 ninja 文件
-
-ninja 的构建配置文件一般叫 `build.ninja`。虽然我们一般不写它，但是需要大致看懂它，以便调试或者理解构建过程。
-
-下面以一个简单的例子来说明常见的 ninja 配置：
+基于 ninja 的项目构建配置文件一般被命名为 `build.ninja`。虽然该文件一般并不需要人们亲自去编写，但基于项目维护方面的需要，程序员们至少还是要能看得懂它才行。下面，我们将通过一个简单的例子来介绍一下该文件中会出现的常见内容。
 
 有两个头文件 `a1.h` 和 `a2.h`，分别定义了一个变量 `a`，但是有不同的值：
 
