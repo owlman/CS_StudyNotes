@@ -51,13 +51,13 @@
 # clean:
 # 	rm -rf $(obj) $(prom)
 
-# Version 5 （仅适用于 Linux/MacOS）
+# Version 5 （修正版：$(wildcard) 接 glob，不是 find 的 -name）
 
 cc = gcc
 prom = out/calc
-deps = $(shell find calc/ -name "*.h")
-src = $(shell find calc/ -name "*.c")
-obj = $(src:calc/%.c=out/%.o) 
+deps = $(wildcard calc/*.h)
+src = $(wildcard calc/*.c)
+obj = $(src:calc/%.c=out/%.o)
 
 $(prom): $(obj)
 	$(cc) -o $(prom) $(obj)
@@ -67,4 +67,4 @@ out/%.o: calc/%.c $(deps)
 
 .PHONY: clean
 clean:
-	rm -rf $(obj) $(prom)
+	-rm -f $(obj) $(prom)
