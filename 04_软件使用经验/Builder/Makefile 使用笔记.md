@@ -144,7 +144,7 @@ out/%.o: calc/%.c $(deps)
 
 .PHONY: clean
 clean:
-    -rm -rf $(obj) $(prom)
+    -rm -f $(obj) $(prom)
 ```
 
 有了上面最后两行代码，当我们在终端中执行`make clean`命令时，它就会去删除该工程生成的所有编译文件。注意这里把`clean`声明成了伪目标（`.PHONY`）：伪目标不代表真实文件，声明之后即使项目目录下恰好存在一个名为`clean`的文件，`make clean` 也不会被误判为“无需执行”。
