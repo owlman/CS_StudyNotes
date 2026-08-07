@@ -8,7 +8,7 @@ categories: 软件使用经验
 
 > [!NOTE] 笔记说明
 >
-> 本篇笔记由于系统性地介绍 ninja 这款轻量级的项目构建工具。它最初参考自知乎专栏文章[《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，我在对该文章的内容进行二次整理和内容补充之后，将其纳入到了[本人的计算机笔记库](https://github.com/owlman/CS_StudyNotes)，并进行长期维护与检索。
+> 这篇笔记用于系统性地介绍 ninja 这款轻量级的项目构建工具。它最初参考自知乎专栏文章[《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，我在对该文章的内容进行二次整理和内容补充之后，将其纳入到了本人的[计算机专业笔记库](https://github.com/owlman/CS_StudyNotes)，并打算予以长期维护。
 
 ## ninja 简介
 
