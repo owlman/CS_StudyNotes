@@ -36,15 +36,15 @@ make 程序经历过各方多次的改写与重写，各方都依据自己的需
 ```bash
 example
 ├── calc
-│   ├── calc.h 
+│   ├── calc.h
 │   ├── getch.c
 │   ├── getop.c
 │   ├── stack.c
 │   └── main.c
-├── out
-│   └── calc
 ├── test
+│   ├── input.txt
 │   └── run_calc.py
+├── out
 └── makefile
 ```
 
@@ -60,7 +60,7 @@ gcc main.c getch.c getop.c stack.c -o ../out/calc
 
 2. 任何时候，只要我们修改了项目中任何一个文件，上述编译命令就会重新编译所有的文件，当文件足够多时这样的编译会非常耗时。
 
-那么 make 又能做什么呢？让我们打开项目根目录下的`makefile`文件，先输入一条最简单的编译规则：
+那么 make 又能做什么呢？让我们打开位于项目根目录下的`makefile`文件，先输入一条最简单的构建规则：
 
 ```makefile
 out/calc: calc/main.c calc/getch.c calc/getop.c calc/stack.c
@@ -120,7 +120,7 @@ deps = calc/calc.h
 obj = out/main.o out/getch.o out/getop.o out/stack.o
 
 $(prom): $(obj)
-    $(cc) -o $(prom) $(obj)
+    $(cc) $(obj) -o $(prom)
 
 out/%.o: calc/%.c $(deps)
     $(cc) -c $< -o $@
@@ -137,7 +137,7 @@ deps = calc/calc.h
 obj = out/main.o out/getch.o out/getop.o out/stack.o
 
 $(prom): $(obj)
-    $(cc) -o $(prom) $(obj)
+    $(cc) $(obj) -o $(prom)
 
 out/%.o: calc/%.c $(deps)
     $(cc) -c $< -o $@
@@ -162,7 +162,7 @@ src = $(shell find calc/ -name "*.c")
 obj = $(src:calc/%.c=out/%.o) 
 
 $(prom): $(obj)
-    $(cc) -o $(prom) $(obj)
+    $(cc) $(obj)  -o $(prom)
 
 out/%.o: calc/%.c $(deps)
     $(cc) -c $< -o $@
@@ -206,11 +206,11 @@ example
 │   ├── getop.c
 │   ├── stack.c
 │   └── main.c
-├── makefile        # 当前激活版（使用 wildcard）；V1–V4 保留为注释掉的对照版本
+├── test
+│   ├── input.txt   # 手工调试用的 RPN 输入样本（+ - * /），测试套件不使用
+│   └── run_calc.py # 9 个针对 out/calc 行为的回归用例
 ├── out             # make 生成的中间产物（已通过 example/.gitignore 排除）
-└── test
-    ├── input.txt   # 手工调试用的 RPN 输入样本（+ - * /），测试套件不使用
-    └── run_calc.py # 9 个针对 out/calc 行为的回归用例
+└── makefile        # 当前激活版（使用 wildcard）；V1–V4 保留为注释掉的对照版本
 ```
 
 动手跑一遍的最小步骤（GNU Make 适用，Git Bash / WSL / MSYS 或 Linux 上均可）：
@@ -222,7 +222,11 @@ make
 python test/run_calc.py
 ```
 
-PowerShell 下同样可用，只是要确认`make`已在 PATH 上、`python`（或`py`）指向 Python 3。
+当然，上述操作在 PowerShell 下也同样可用，前提是要确认`make`已在 PATH 上、`python`（或`py`）指向 Python 3，具体效果如图 1 所示：
+
+![calc 程序的构建与测试](calc_make.png)
+
+**图 1** calc 程序的构建与测试
 
 ## 小结
 
