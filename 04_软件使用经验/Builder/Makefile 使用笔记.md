@@ -149,7 +149,7 @@ clean:
 
 有了上面最后两行代码，当我们在终端中执行`make clean`命令时，它就会去删除该工程生成的所有编译文件。注意这里把`clean`声明成了伪目标（`.PHONY`）：伪目标不代表真实文件，声明之后即使项目目录下恰好存在一个名为`clean`的文件，`make clean` 也不会被误判为“无需执行”。
 
-另外在上面示例中，`clean`这个伪目标所对应执行的`-rm -f`命令有两层意思：一是`-`前缀告诉 make 即便命令返回非零也继续往下走；二是避免 `rm`把整个`out`目录都连带删除掉。这两个特性结合在一起，让 `clean` 成为一个稳定可复用的维护入口。
+另外在上面示例中，`clean`这个伪目标所对应执行的`-rm -f`命令有两层意思：一是`-`前缀告诉 make 即便命令返回非零也继续往下走（GNU make 与 BSD make 等主流实现都支持；Windows 上常见的 Microsoft nmake 不识别此前缀）；二是避免 `rm`把整个`out`目录都连带删除掉。这两个特性结合在一起，让 `clean` 成为一个稳定可复用的维护入口。
 
 最后，如果我们还需要往工程中添加一个`.c`或`.h`，可能同时就要再手动为`obj`变量再添加第一个`.o`文件，如果这列表很长，代码会非常难看，为此，我们需要用到 Makefile 语法中的函数功能，这里演示其中的两个：
 
@@ -185,7 +185,44 @@ clean:
   src  = $(wildcard calc/*.c)
   ```
 
-- **PowerShell 替代**：如果环境只能是原生 PowerShell，则需要把`find`替换为`Get-ChildItem -Recurse`等价的命令；不过由于这个改写成本较高，更推荐直接换用上述两种方案之一。
+- **PowerShell 替代**：如果环境只能用原生 PowerShell，可以用`$(shell ...)`调起`Get-ChildItem`，但写起来很啰嗦：
+
+  ```makefile
+  deps = $(shell powershell -NoProfile -Command "Get-ChildItem -Path calc -Filter *.h -Recurse | Select-Object -ExpandProperty FullName")
+  src  = $(shell powershell -NoProfile -Command "Get-ChildItem -Path calc -Filter *.c -Recurse | Select-Object -ExpandProperty FullName")
+  ```
+
+在这里，我会建议读者仅在`wildcard`无法满足需求（例如需要按 mtime 排序、按子目录排除）时才退回到这条路径；其它场景强烈建议直接用上面的`wildcard`写法。
+
+## 运行示例
+
+本文里出现的所有 makefile 版本都已落到仓库的`example/`目录中，结构如下：
+
+```bash
+example
+├── calc
+│   ├── calc.h
+│   ├── getch.c
+│   ├── getop.c
+│   ├── stack.c
+│   └── main.c
+├── makefile        # 当前激活版（使用 wildcard）；V1–V4 保留为注释掉的对照版本
+├── out             # make 生成的中间产物（已通过 example/.gitignore 排除）
+└── test
+    ├── input.txt   # 手工调试用的 RPN 输入样本（+ - * /），测试套件不使用
+    └── run_calc.py # 9 个针对 out/calc 行为的回归用例
+```
+
+动手跑一遍的最小步骤（GNU Make 适用，Git Bash / WSL / MSYS 或 Linux 上均可）：
+
+```bash
+cd 04_软件使用经验/Builder/example
+mkdir -p out          # 首次构建需要，make / gcc 都不会自动创建目录
+make
+python test/run_calc.py
+```
+
+PowerShell 下同样可用，只是要确认`make`已在 PATH 上、`python`（或`py`）指向 Python 3。
 
 ## 小结
 
