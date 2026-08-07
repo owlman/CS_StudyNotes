@@ -49,12 +49,16 @@
 
 # .PHONY: clean
 # clean:
-# 	rm -rf $(obj) $(prom)
+# 	-rm -f $(obj) $(prom)
 
-# Version 5 （修正版：$(wildcard) 接 glob，不是 find 的 -name）
+# Version 5
 
 cc = gcc
 prom = out/calc
+# shell 函数调用的 find 命令只适用于类 UNIX 系统
+# deps = $(shell find calc/ -name "*.h")
+# src = $(shell find calc/ -name "*.c")
+# 建议改用 wildcard，这是 GNU Make 中定义的一个扩展函数
 deps = $(wildcard calc/*.h)
 src = $(wildcard calc/*.c)
 obj = $(src:calc/%.c=out/%.o)
@@ -63,6 +67,7 @@ $(prom): $(obj)
 	$(cc) -o $(prom) $(obj)
 
 out/%.o: calc/%.c $(deps)
+	mkdir -p out
 	$(cc) -c $< -o $@
 
 .PHONY: clean
