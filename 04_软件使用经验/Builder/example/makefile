@@ -42,7 +42,7 @@
 # obj = out/main.o out/getch.o out/getop.o out/stack.o
 
 # $(prom): $(obj)
-# 	$(cc) $(obj)  -o $(prom)
+# 	$(cc) $(obj) -o $(prom)
 
 # out/%.o: calc/%.c $(deps)
 # 	$(cc) -c $< -o $@
@@ -64,7 +64,7 @@ src = $(wildcard calc/*.c)
 obj = $(src:calc/%.c=out/%.o)
 
 $(prom): $(obj)
-	$(cc) $(obj)  -o $(prom)
+	$(cc) $(obj) -o $(prom)
 
 out/%.o: calc/%.c $(deps)
 	mkdir -p out
