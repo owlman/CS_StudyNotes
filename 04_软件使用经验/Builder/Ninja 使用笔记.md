@@ -1,8 +1,7 @@
 ---
 title: Ninja 使用笔记
 author: 凌杰
-date: 2026-08-05
-updated: 2026-08-09
+date: 2026-08-09
 tags: 自动化构建
 categories: 软件使用经验
 ---
@@ -209,29 +208,29 @@ ninja help         # 列出所有可构建目标
 
 ## Ninja 进阶用法
 
-回头看`example/build.ninja`，里面大量用到了`phony` 规则。这是 Ninja 的内建规则，意思是"假冒的"——它不代表任何真实文件，只在输入和输出之间建立依赖关系。我们可以理解为：
+如果读者回头再看看`example/build.ninja`，就会发现里面大量用到了`phony`规则。这是 Ninja 的内建规则，意思是"假冒的"——它不代表任何真实文件，只在输入和输出之间建立依赖关系。我们可以理解为：
 
 ```ninja
 rule phony
     command = :
 ```
 
-其中冒号 `:` 是 Unix 系统里 `true` 命令的简写，不管参数是什么都正常退出；因此 `phony` 的 command 本身什么都不做，只是把 `$in` 列为必须先构建好的依赖、把 `$out` 注册成一个"伪目标"。仓库的 `build.ninja` 里至少出现三处：order-only 的 `cmake_object_order_depends_target_calc`、聚合用的 `calc`、`all` 等。
+在这里，冒号`:`是 Unix 系统里`true`命令的简写，它用于确保不管参数是什么都正常退出；因此`phony`的 command 本身什么都不做，只是把`$in`列为必须先构建好的依赖、把`$out`注册成一个伪目标。仓库的`build.ninja`里至少出现三处：order-only 的`cmake_object_order_depends_target_calc`、聚合用的`calc`、`all`等。
 
-不带参数的 `ninja` 命令会构建文件里 `default` 声明的目标（即上一节末尾那些 `ninja` / `ninja calc` / `ninja test` 之类）。构建多个目标时 ninja 会展示进度条，每行的内容来自对应 `build` 条目下方的 `DESC = ...` 字段——本仓库示例里就有 `DESC = Running tests...`、`DESC = Install the project...` 等，进度条会按构建顺序依次打印。
+不带参数的`ninja`命令会构建文件里`default`声明的目标（即上一节末尾那些`ninja` / `ninja calc` / `ninja test`之类）。构建多个目标时 Ninja 会展示进度条，每行的内容来自对应`build`条目下方的`DESC = ...`字段。这篇笔记的示例里就有`DESC = Running tests...`、`DESC = Install the project...`等，进度条会按构建顺序依次打印。
 
-ninja 的高级工具主要在 `ninja -t` 下面，常用子命令：
+Ninja 的高级工具主要在`-t`参数下面，常用的子命令如下。
 
-- `ninja -t targets all`：列出全部构建目标（等价于 `ninja help` 的内容），适合 `grep` 过滤；
-- `ninja -t clean`：与 `ninja clean`（即 `build.ninja` 里 `build clean: CLEAN` 这条内建目标）等价，删除全部生成文件；
-- `ninja -t deps`：扫描 `.ninja_deps` 数据库，输出每条 build 的依赖关系，方便定位"为什么 A 改了会触发 B 重编"；
-- `ninja -t browse`：起一个本地 HTTP 服务（默认 `http://localhost:8000`）用浏览器可视化整张依赖图；`ninja -t graph` 则把同一张图导出成 dot 格式供 Graphviz 渲染；
-- `ninja -t compdb`：把每条编译命令以 JSON 数组形式输出，常被 clangd / VS Code 等工具用来反查"这个 `.c` 对应的编译参数"，对排查 IDE 索引异常很关键。
+- `ninja -t targets all`：列出全部构建目标（等价于`ninja help`的内容），适合`grep`过滤；
+- `ninja -t clean`：与`ninja clean`（即`build.ninja`里`build clean: CLEAN`这条内建目标）等价，删除全部生成文件；
+- `ninja -t deps`：扫描`.ninja_deps`数据库，输出每条 build 的依赖关系，方便定位 "为什么 A 改了会触发 B 重编"；
+- `ninja -t browse`：起一个本地 HTTP 服务（默认`http://localhost:8000`）用浏览器可视化整张依赖图；`ninja -t graph`则把同一张图导出成 dot 格式供 Graphviz 渲染；
+- `ninja -t compdb`：把每条编译命令以 JSON 数组形式输出，常被 clangd / VS Code 等工具用来反查 "这个 `.c` 对应的编译参数"，对排查 IDE 索引异常很关键。
 
-`ninja -C /path/to/dir -f /path/to/file` 用来切换构建根目录与配置文件：`-C` 进入指定目录后再跑命令（默认 `.`），`-f` 指定要读的配置文件（默认 `build.ninja`）。日常使用 `-C` 多一些，比如用多份构建目录时切换；`-f` 用得很少。
+另外，我们还可以用`ninja -C /path/to/dir -f /path/to/file`命令来切换构建根目录与配置文件。在这里，`-C`用于指定目录后再跑命令（默认 `.`），`-f`用于指定要读的配置文件（默认`build.ninja`）。日常使用`-C`多一些，比如用多份构建目录时切换。
 
 ## 总结
 
-与《[[Makefile 使用笔记]]》里手写 makefile 的范式相比，使用 ninja 的核心工作流是：人维护 `CMakeLists.txt`（项目元信息），CMake 把它编译成 `build.ninja`（执行计划），ninja 再去执行 build.ninja。两件事的解耦让项目复杂度的天花板被推到了 CMake 那侧——这也是为什么 PyTorch 这样的大型项目选择"CMake + Ninja"而不是"巨型手写 makefile"的根本原因。
+与《[[Makefile 使用笔记]]》里手写 makefile 的范式相比，使用 ninja 的核心工作流是：程序员负责人工维护`CMakeLists.txt`（项目元信息），而 CMake 负责把它编译成`build.ninja`文件（执行计划），再交由 Ninja 去执行`build.ninja`。这两件事的解耦让项目复杂度的天花板被推到了 CMake 那侧。这也是为什么 PyTorch 这样的大型项目选择 "CMake + Ninja" 而不是巨型手写`makefile`的根本原因。
 
-`build.ninja` 不是给人手维护的：它由 CMake 自动生成、文件头就有一行 `CMAKE generated file: DO NOT EDIT!`。本文逐段拆解它的目的，是让读者在 build 报错时能快速定位问题出在 CMake 侧（`CMakeLists.txt` 没写对）还是 ninja 侧（命令执行环境有问题），而不是鼓励手动改 `build.ninja`。日常开发只要记住：改 `CMakeLists.txt` 后跑一次 `cmake -G Ninja` 重新生成 build.ninja，之后用 `ninja` 做增量即可。工具的简洁本身是设计目标——ninja 的核心语法确实就只有这些值得关心的内容。
+总而言之，`build.ninja`文件通常不是给人手动维护的：它由 CMake 自动生成、文件头就有`CMAKE generated file: DO NOT EDIT!`。本文逐段拆解它的目的，是让读者在 build 报错时能快速定位问题出在 CMake 那边（`CMakeLists.txt`没写对），还是`ninja`命令这边（命令执行环境有问题）。这样一来，我们在日常开发中只要记住：改`CMakeLists.txt`后跑一次`cmake -G Ninja`命令来重新生成`build.ninja`，之后再用`ninja`命令做增量即可。工具的简洁本身是设计目标 —— Ninja 的核心语法确实就只有这些值得关心的内容。
