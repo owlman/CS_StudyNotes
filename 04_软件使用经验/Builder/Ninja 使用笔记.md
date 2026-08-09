@@ -2,145 +2,257 @@
 title: Ninja 使用笔记
 author: 凌杰
 date: 2026-08-05
+updated: 2026-08-09
 tags: 自动化构建
 categories: 软件使用经验
 ---
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记用于系统性地介绍 ninja 这款轻量级的项目构建工具。它最初参考自知乎专栏文章[《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，我在对该文章的内容进行二次整理和内容补充之后，将其纳入到了本人的[计算机专业笔记库](https://github.com/owlman/CS_StudyNotes)，并打算予以长期维护。
+> 这篇笔记用于系统性地介绍 Ninja 这款轻量级的项目构建工具。它最初参考自知乎专栏文章[《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，我在对文章的内容进行二次整理和内容补充之后，将其纳入到了本人的[计算机专业笔记库](https://github.com/owlman/CS_StudyNotes)，并打算予以长期维护。
 
-## ninja 简介
+## Ninja 简介
 
-ninja 是时下较为流行的一款项目构建工具，主要用于通过调用代码生成器、编译器、链接器等各种工具来完成软件项目的编译工作。如今的很多大型项目（例如 PyTorch ）都是采用基于 ninja 来进行系统构建的，为了阅读并维护这些项目，我们恨有必要学习一下这款工具的基本使用方法。
+Ninja 是时下较为流行的一款项目构建工具，主要用于通过调用代码生成器、编译器、链接器等各种工具来完成软件项目的编译工作。如今的很多大型项目（例如 PyTorch）都是采用基于 Ninja 来进行系统构建的，为了阅读并维护这些项目，我们很有必要学习一下这款工具的基本使用方法。
 
-与 cmake / make 等传统的项目构建工具不同，ninja 在设计之初就不是让人类去手动编写项目构建配置的，该配置文件基本上是要由其它程序来自动生成的，这样做可以最大限度地避免模糊化的描述。例如在 makefile 中，我们经常会用 `dir/*.cpp` 来表示源文件，但这通常需要构建工具去遍历/查询文件系统才能得到具体内容，是一个很慢而且很不确定的操作。ninja 把这些模糊的操作都交给元构建系统（meta-build system，例如 cmake），只留下真正需要编译的命令。
+与我在《[[Makefile 使用笔记]]》中所介绍的那种传统的自动化构建工具不同，ninja 在设计之初就没打算让人类去手动编写项目的构建规则，这些规则基本上是要由专用程序来负责生成的，这可以帮助我们最大限度地避免人类语言不够精确的问题，例如在`makefile`中，我们经常会用`src/*.c`这样的字符串来表示源码文件（其实这包括了文件的路径），这通常需要构建工具去执行遍历目录、匹配文件名才能获得正确的输入。这些操作不仅会拖慢项目的构建速度，且通常还会引入各种不确定的因素。Ninja 选择将这些操作都交给元构建系统（meta-build system，例如 cmake）来处理，自身只负责处理真正需要编译的命令。
 
-因此在本质上，我们可以认为 ninja 就是一条一条地列出了具体要执行的命令，然后执行即可。在执行过程中，ninja 会自行去分析这一系列命令之间的依赖关系，并根据依赖关系的不同分以下两种方式进行编译：
+因此在本质上，我们可以认为基于 Ninja 的构建规则就只需要一条一条地列出了具体的命令，然后执行它们即可。在执行过程中，Ninja 会自行去分析这一系列命令之间的依赖关系，并根据依赖关系的不同分以下两种方式来进行处理。
 
-- **并行编译**：对彼此没有依赖关系的命令采用并行执行。ninja 默认使用的并行数为 CPU 数量，一般不用手动设置并行数，除非想限制 ninja 使用的 CPU 数量（例如有其他任务在运行，只让 ninja 用一半 CPU）。
-- **增量编译**：根据文件的时间戳进行分析，如果某个文件的时间戳发生了改变，则依赖于这个文件的命令以及其他依赖于这个命令的命令都会被重新执行，以此达到增量编译的效果（比如修改了一个文件之后重新编译）。
+- **并行编译**：对彼此没有依赖关系的编译命令采用并行化处理。Ninja 默认使用的并行数为 CPU 数量，除非我们想限制 Ninja 使用的 CPU 数量，一般不用手动设置并行数。
+- **增量编译**：对彼此有依赖关系的编译命令，分析目标文件的时间戳，如果发现某个文件的时间戳发生了改变，则依赖于该文件的命令以及其他依赖于这个命令的命令都会被重新执行，以此达到增量编译的效果。
 
 ## 安装方法
 
-ninja 是一个体量很小的 CLI 工具，根据不同的操作系统以及开发环境，我们通常以下有三种安装方式：
+Ninja 是一个体量很小的 CLI 工具，根据它所要作用的项目环境，我们通常有以下三种安装方式：
 
-- **系统级安装**：可以通过我们所在系统的软件包管理器来进行安装，例如 Ubuntu 上的 `apt install ninja-build`、Windows 上的 `scoop install ninja`、MacOS 上的 `brew install ninja`，安装好之后，ninja 就可以像 `ls` / `cat` 等系统命令一样使用了。
-- **项目级安装**：可以通过 pip 或 conda 这样的项目管理工具来安装 ninja，例如 `conda install ninja` / `pip install ninja`。
-- **自定义安装**：在 GitHub 找到 ninja 项目（如图 1 所示）下载它的安装包并解压即可。当然，如果有特殊需求，也可以选择下载它的源码，然后进行本地编译。
+- **系统级环境**：可以使用我们所在系统的软件包管理器命令来进行安装，例如 Ubuntu 上的`apt install ninja-build`、Windows 上的`scoop install ninja`、MacOS 上的`brew install ninja`，安装好之后，Ninja 就可以像`ls`、`cat`等系统命令一样被使用了。
+- **单一项目环境**：可以使用 pip 或 conda 这样的项目依赖管理器命令来进行安装，例如`conda install ninja`或`pip install ninja`。
+- **自定义环境**：在 GitHub 找到 ninja 项目（如图 1 所示）下载它的安装包并解压即可。当然，如果有特殊需求，也可以选择下载它的源码，然后进行本地编译。
 
 ![Ninja 项目在 github 上的主页](./img/ninja_github.png)
 
 **图 1** Ninja 项目在 GitHub 上的主页
 
-事实上，ninja 的官方项目组只会通过 GitHub 来发布他们的新版本，其它的安装方式都是相关的社区自己打包的。例如，`pip install ninja` 命令安装的是 scikit-build 社区维护的 [ninja-python-distributions](https://github.com/scikit-build/ninja-python-distributions)，他们把 ninja 包装成了一个 pip 包。很多人不知道他们下载的不是官方 ninja，这个 GitHub 项目才 46 个 star，但是有二百五十万次下载。`conda install ninja` 命令安装的也是一个类似的东西。总之，如果读者比较在意安全问题，我会建议尽可能去 ninja 的 GitHub release 页面下载安装包；如果图方便，可以用各种社区维护的安装方式。
+需要特别说明的是：Ninja 的官方项目事实上只会通过 GitHub 来发布他们的新版本，其它获取该工具的渠道都是相关的开发社区自己负责维护的。例如，`pip install ninja`命令安装的是 scikit-build 社区维护的 [ninja-python-distributions](https://github.com/scikit-build/ninja-python-distributions)，他们把 Ninja 打包成了一个 pip 包。很多人不知道他们下载的不是官方的版本。同样的，`conda install ninja`命令所安装的也是一个类似的东西。总之，如果读者比较在意 Ninja 的原生功能以及安全问题，那就应该尽可能去 GitHub release 页面下载它的安装包。当然，在大多数情况下，用各种开发社区维护的安装方式已经够满足需求了。
 
 ## 理解`build.ninja`
 
-基于 ninja 的项目构建配置文件一般被命名为 `build.ninja`。虽然该文件一般并不需要人们亲自去编写，但基于项目维护方面的需要，程序员们至少还是要能看得懂它才行。下面，我们将通过一个简单的例子来介绍一下该文件中会出现的常见内容。
+基于 Ninja 的项目构建配置文件一般会被命名为`build.ninja`。虽然该文件通常并不需要我们亲自去编写，但基于项目维护方面的考虑，程序员们还是至少要能看得懂它才行。下面，让我们继续基于《[[Makefile 使用笔记]]》中所使用的那个`calc`示例程序来介绍一下`build.ninja`文件中会出现的常见内容。想必读者还记得，这个示例程序的项目结构如下：
 
-有两个头文件 `a1.h` 和 `a2.h`，分别定义了一个变量 `a`，但是有不同的值：
-
-```cpp
-// a1.h
-int a = 1;
-
-// a2.h
-int a = 2;
+```bash
+example
+├── calc                     # 源码：main.c / getch.c / getop.c / stack.c / calc.h
+├── test                     # 测试：input.txt / run_calc.py
+├── makefile                 # 手写 Makefile 版本（详见《Makefile 使用笔记》）
+└── .gitignore               # 排除 cmake 运行后产生的 CMakeFiles/、CMakeCache.txt 等中间产物
 ```
 
-一份源文件 `a.cpp` 里根据宏的不同来包含这两个文件中的某一个：
+之前，我们是使用 make 这种传统的项目构建工具来处理这个 C 项目的。如果现在想改用 Ninja 来构建这个项目，首先要做的是用 CMake 来生成一个`build.ninja`文件。目前最为常见的操作步骤如下。
 
-```cpp
-// a.cpp
-#include<iostream>
+1. 确保项目所在的开发环境中已经安装了 gcc/clang 编译器，以及 CMake、Ninja 构建工具。
 
-using namespace ::std;
+   > 关联笔记：[[Clang 使用笔记]] [[CMake 使用笔记]]
 
-#ifdef USE_A1
-#include "a1.h"
-#endif
+2. 在项目的根目录下创建一个名为`CMakeLists.txt`的文件，并写入以下内容：
 
-#ifdef USE_A2
-#include "a2.h"
-#endif
+   ```cmake
+    cmake_minimum_required(VERSION 3.10)
+    project(calc C)
 
-int main()
-{
-    cout << "hello, world from " << a << "!\n";
-}
+    # ---- 编译选项 ----
+    set(CMAKE_C_STANDARD 99)
+    set(CMAKE_C_STANDARD_REQUIRED ON)
+    set(CMAKE_C_EXTENSIONS OFF)
+
+    if(NOT CMAKE_BUILD_TYPE)
+        set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+    endif()
+
+    if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-Wall -Wextra)
+    endif()
+
+    # ---- 目标 ----
+    add_executable(calc
+        calc/main.c
+        calc/getch.c
+        calc/getop.c
+        calc/stack.c
+    )
+
+    target_include_directories(calc PRIVATE calc)
+   
+    # ---- 测试 ----
+    # 集成 test/run_calc.py 作为 ctest 用例
+    find_package(Python3 COMPONENTS Interpreter QUIET)
+
+    if(Python3_Interpreter_FOUND)
+        enable_testing()
+        add_test(
+            NAME calc_pytest
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/test/run_calc.py
+        )
+    else()
+        message(STATUS "Python3 not found; skipping calc_pytest test target")
+    endif()
+
+    # ---- 安装 ----
+    include(GNUInstallDirs)
+    install(TARGETS calc RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    ```
+
+3. 在项目根目录下打开命令行终端程序（例如 Powershell、Bash），并执行`cmake -G Ninja`命令，其执行过程如图 2 所示。
+
+    ![cmake -G Ninja 命令执行过程](./img/cmake_ninja.png)
+
+    **图 2** cmake -G Ninja 命令执行过程
+
+如果上述过程一切顺利，我们就会在项目根目录下看到一个名为`build.ninja`的文件。该文件的内容虽然有 250+ 行，但结构是高度模板化的，下面按从上到下的"段落"逐段拆解（下面所有片段都直接取自这篇笔记的示例项目）：
+
+- **文件头声明**。最开头是`CMAKE generated file: DO NOT EDIT!`与版本信息，紧跟一段由注释划分的小节：
+
+    ```ninja
+    ninja_required_version = 1.5
+    CONFIGURATION = Debug
+    cmake_ninja_workdir = D$:/Working/writing/CS_StudyNotes/04_软件使用经验/Builder/example/
+    ```
+
+    在这里，`ninja_required_version`的作用是让 Ninja 的低版本在不兼容当前配置文件时提早报错；`CONFIGURATION`用于配置项目当前使用的构建类型（`Debug` / `Release`等），后面 rule 的`FLAGS`会根据它切换；`cmake_ninja_workdir`是当前项目根目录所在的绝对路径。
+
+- **`include CMakeFiles/rules.ninja`**。真正的`rule`定义都被抽出到`CMakeFiles/rules.ninja`里，主文件通过`include`引入。这种**主文件 + 规则子文件**的拆分是 CMake 的惯例：主文件只放`build`条目，规则（编译、链接、自定义命令等）统一放在`rules.ninja`，方便生成器增量更新。
+
+- **order-only phony**。每个可执行目标都先声明一个 order-only phony：
+
+    ```ninja
+    build cmake_object_order_depends_target_calc: phony || .
+    ```
+
+    它的作用是：在编译任何一个`.o`之前，确保工作目录存在；`||`后面是 order-only dependencies（只保证顺序，不参与 mtime 比较）。
+
+- **`.c` → `.o` 编译条目**。每个源文件一条 build：
+
+    ```ninja
+    build CMakeFiles/calc.dir/calc/main.c.obj: C_COMPILER__calc_unscanned_Debug
+        D$:/Working/writing/CS_StudyNotes/04_软件使用经验/Builder/example/calc/main.c
+        || cmake_object_order_depends_target_calc
+    CONFIG = Debug
+    DEP_FILE = CMakeFiles\calc.dir\calc\main.c.obj.d
+    FLAGS = -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=c99 -Wall -Wextra
+    INCLUDES = -ID:/Working/writing/CS_StudyNotes/04_软件使用经验/Builder/example/calc
+    OBJECT_DIR = CMakeFiles/calc.dir
+    ...
+    ```
+
+    在这里，`C_COMPILER__calc_unscanned_Debug`是个 rule 名（定义在 `rules.ninja` 里），冒号后面的`calc/main.c`是`$in`。每条 build 自己的局部变量（`FLAGS` / `INCLUDES` / `OBJECT_DIR`等）覆盖同名全局变量，传入对应 rule 的 command。
+
+- **链接条目**。将所有`.o`汇总成一个名为`calc`的程序（具体到 Windows 环境，就是`calc.exe`），并链接所需库。
+
+    ```ninja
+    build calc.exe: C_EXECUTABLE_LINKER__calc_Debug
+        CMakeFiles/calc.dir/calc/main.c.obj
+        CMakeFiles/calc.dir/calc/getch.c.obj
+        CMakeFiles/calc.dir/calc/getop.c.obj
+        CMakeFiles/calc.dir/calc/stack.c.obj
+    LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 ...
+    ```
+
+- **utility 命令**。`test` / `edit_cache` / `rebuild_cache` / `install` / `install/local` / `install/strip` 等子命令也是 build 条目，rule 是 `CUSTOM_COMMAND`，由 `cmake -P` 脚本驱动。例如：
+
+    ```ninja
+    build CMakeFiles/test.util: CUSTOM_COMMAND
+    COMMAND = C:\Windows\system32\cmd.exe /C "cd /D ... && ctest.exe "
+    DESC = Running tests...
+    pool = console
+    restat = 1
+    build test: phony CMakeFiles/test.util
+    ```
+
+    在这里，`pool = console`强制让这些命令串行执行（避免与并行编译抢同一行 stdout），`restat = 1`告诉 ninja 在 command 跑完后重新 stat 一次输出文件（很多 custom command 的输出 mtime 不可靠，需要重 stat）。
+
+- **`RERUN_CMAKE` 钩子**。文件末尾有一段很长的 build 条目，触发条件是`CMakeLists.txt`或 CMake 内置 module 发生变化：
+
+    ```ninja
+    build build.ninja ... : RERUN_CMAKE | ...
+    pool = console
+    ```
+
+    它的作用是：如果`CMakeLists.txt`被修改了，就先自动重跑 cmake 重新生成`build.ninja`文件本身，再继续构建。这等于把 CMake 自身的再生也嵌进了 ninja 的 DAG 里。
+
+- **内建目标 + default**。最后三行：
+
+    ```ninja
+    build clean: CLEAN
+    build help: HELP
+    default all
+    ```
+
+    在这里，`CLEAN`和`HELP`是 ninja 内建规则。`default all`声明裸跑`ninja`命令，等价于`ninja all`；而`all` 在上面被定义为`phony calc.exe`，所以等价于构建`calc.exe`。
+
+在有了这份 `build.ninja`之后，我们就可以根据自己的需要构建项目了，其常用命令如下：
+
+```bash
+ninja              # 等价于 ninja all → 构建 calc.exe
+ninja calc         # 只构建 calc alias（phony calc.exe）
+ninja test         # 通过 ctest 跑 test/run_calc.py
+ninja clean        # 清理全部构建产物
+ninja help         # 列出所有可构建目标
 ```
 
-一份 `build.ninja` 文件包含 ninja 的构建配置（注意最后的换行，是必要的）：
+第一次跑会全量编译`calc/main.c`、`calc/getch.c`、`calc/getop.c`、`calc/stack.c`四个源文件并链接成`calc.exe`，如图 3 所示。之后如果只改了`calc/main.c`，`ninja`就会只重编`main.c.obj`并重新链接——这正是下一节要讲的增量编译的价值所在。
 
-```ninja
-# build.ninja
-cxxflags = -DUSE_A1
+![ninja 编译 calc.exe](./img/ninja-build-calc.png)
 
-rule compile
-    description = compile with $cxxflags
-    command = g++ -MM -MF $out.d -MT $out $cxxflags $in && g++ $cxxflags $in -o $out
-    depfile = $out.d
-
-build compile_with_default_cxxflags: compile a.cpp
-
-build compile_with_shadow_cxxflags: compile a.cpp
-    cxxflags = -DUSE_A2
-
-default compile_with_default_cxxflags
-```
-
-这份配置里包含了以下常见内容：
-
-- **注释（comment）**，`build.ninja` 里用 `#` 开头的行表示注释，这个没什么好解释的。
-- **变量（variable）**，`cxxflags = -DUSE_A1` 定义了一个变量 `cxxflags`，其值为 `-DUSE_A1`。这个变量的值在后面的代码中都可以用，引用方式为 `$cxxflags`。具体来说，`-DUSE_A1` 就是在编译之前定义名为 `USE_A1` 的宏。
-- **规则（rule）**，语法为 `rule` 加上规则的名字。这里我们定义了一个名为 `compile` 的规则。规则内有默认变量 `$in` 和 `$out`，`$in` 表示输入文件的列表，`$out` 表示输出文件名。
-- **规则的文字描述（description）**，用于在编译过程中展示并告诉用户目前在干什么。
-- **规则的具体命令（command）**，写明具体的编译命令。
-- **规则的依赖项记录文件（depfile）**，用于增量编译，详见后面的解释。
-- **构建（build）**，语法为 `build` 加上构建的文件名，加上冒号 `:` 以及规则名、输入文件列表。本质上 `build $out: $rule $in` 就是把 `$in` 和 `$out` 传给 `$rule`，然后运行它的 `command` 命令。
-- **构建里的局部变量**，在 `build` 下面的任意变量，在本次构建命令中覆盖全局的变量。具体来说，`build compile_with_shadow_cxxflags` 里定义的 `cxxflags` 会覆盖本次 `compile` 命令用到的 `cxxflags`。
-- **默认构建目标（default）**。可以存在多行 `default`，最后的默认构建目标就是它们的并集。如果没有任何 `default`，则默认构建全部的 `build` 条目。
-
-有了这份 `build.ninja`，我们可以通过 `ninja` 或者 `ninja compile_with_default_cxxflags` 来构建默认的代码，得到可执行文件 `compile_with_default_cxxflags`（执行后输出 `hello, world from 1!`）；也可以通过 `ninja compile_with_shadow_cxxflags` 得到可执行文件 `compile_with_shadow_cxxflags`（执行后输出 `hello, world from 2!`）。我们也可以修改 `a1.h` 或者 `a2.h`，观察 ninja 是否会重新编译。
+**图 3** ninja 构建 calc.exe
 
 ## 理解 ninja 的增量编译
 
-这份 `build.ninja` 里的大部分内容简单易懂，唯一难以理解的就是用于增量编译的 `depfile = $out.d`。
+CMake 生成的 `build.ninja` 用 `DEP_FILE` 字段来实现头文件级增量。本仓库的 in-source Debug 配置(对应 `example/build.ninja`)里,`main.c.obj` 这条 build 的实际形式是:
 
-首先，`$out` 是 ninja 的默认变量，表示构建的目标文件名。所以 `$out.d` 就是目标文件名加上 `.d`。比如 `build compile_with_default_cxxflags` 里，`depfile` 就是 `compile_with_default_cxxflags.d`。
-
-然后我们需要理解增量构建的目标：我们的 `build compile_with_default_cxxflags` 构建条目中，只传入了 `a.cpp` 这一个文件，但是实际上我们的代码里面包含了 `a1.h` 或者 `a2.h`。如何能够让 ninja 知道增量构建的时候需要检查 `a1.h` 或者 `a2.h` 呢？这就需要编译器的支持了：`g++` 的 `-MM -MF $out.d` 参数会将文件与头文件的依赖关系输出到 `$out.d` 中，下次 ninja 就会通过这个文件的内容来判断具体需要检查发生改变的文件。
-
-例如，`compile_with_default_cxxflags.d` 文件里，就有以下内容：
-
-```makefile
-compile_with_default_cxxflags: a.cpp a1.h
+```ninja
+build CMakeFiles/calc.dir/calc/main.c.obj: C_COMPILER__calc_unscanned_Debug
+    D$:/Working/writing/CS_StudyNotes/04_软件使用经验/Builder/example/calc/main.c
+    || cmake_object_order_depends_target_calc
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles\calc.dir\calc\main.c.obj.d
+  ...
 ```
 
-下次 ninja 再 `build compile_with_default_cxxflags` 的时候，就会检查这个文件，然后查看 `a.cpp` 与 `a1.h` 的修改时间，如果任何一个文件被修改了，就重新编译。另外，如果 `compile_with_default_cxxflags` 文件不在了，ninja 也会重新编译（这个很好理解）。
+注意 `|| cmake_object_order_depends_target_calc` 这一段——它是用 `||` 分隔的 **order-only dependencies**(只保证执行顺序,不参与 mtime 比较):在编译 `main.c.obj` 之前,需要先把所有源文件的顺序建好,这样后面的链接才能拿到完整的 .o 列表。
+
+`DEP_FILE` 指向的 `.d` 文件由编译器在编译时生成,里面记录了"实际 include 了哪些文件"。下一次 ninja 跑时:
+
+1. 先读 `.d` 文件,把里面的所有路径加入"实际依赖列表";
+2. 比较这些文件的 mtime 与 `.o` 的 mtime;
+3. 只要有一个比 `.o` 新,就触发重编。
+
+所以哪怕 `main.c` 没改、`calc.h` 改了,ninja 也能识别。这是"头文件变了,重编"的最小机制。
 
 ## ninja 进阶用法
 
-很多 `ninja.build` 里存在 `phony` 规则。这是一个内置规则，意思是"假冒的"，就是一个不存在规则的规则。我们可以理解为：
+回头看`example/build.ninja`，里面大量用到了`phony` 规则。这是 Ninja 的内建规则，意思是"假冒的"——它不代表任何真实文件，只在输入和输出之间建立依赖关系。我们可以理解为：
 
 ```ninja
 rule phony
-    command = : $in $out
+    command = :
 ```
 
-其中冒号 `:` 是 unix 系统里的一个命令，不管参数是什么，永远正常退出。因此，`phony` 规则不会做什么，但是会在输入和输出之间建立依赖关系。
+其中冒号 `:` 是 Unix 系统里 `true` 命令的简写，不管参数是什么都正常退出；因此 `phony` 的 command 本身什么都不做，只是把 `$in` 列为必须先构建好的依赖、把 `$out` 注册成一个"伪目标"。仓库的 `build.ninja` 里至少出现三处：order-only 的 `cmake_object_order_depends_target_calc`、聚合用的 `calc`、`all` 等。
 
-不带参数的 `ninja` 命令会构建文件里的 `default` 构建目标。我们也可以用 `ninja compile_with_shadow_cxxflags` 来手动构建某个目标。
+不带参数的 `ninja` 命令会构建文件里 `default` 声明的目标（即上一节末尾那些 `ninja` / `ninja calc` / `ninja test` 之类）。构建多个目标时 ninja 会展示进度条，每行的内容来自对应 `build` 条目下方的 `DESC = ...` 字段——本仓库示例里就有 `DESC = Running tests...`、`DESC = Install the project...` 等，进度条会按构建顺序依次打印。
 
-构建多个目标（比如 PyTorch 有上千个目标）的时候，ninja 会展示一个进度条，进度条展现的内容就是 `rule` 下面的 `description` 字段的内容。
+ninja 的高级工具主要在 `ninja -t` 下面，常用子命令：
 
-ninja 的高级用法一般都在 `ninja -t` 下面，例如 `ninja -t clean` 可以清理全部生成文件、`ninja -t browse` 可以打开一个网页浏览器查看文件之间的依赖图（默认查看的是名为 `all` 的依赖图）：
+- `ninja -t targets all`：列出全部构建目标（等价于 `ninja help` 的内容），适合 `grep` 过滤；
+- `ninja -t clean`：与 `ninja clean`（即 `build.ninja` 里 `build clean: CLEAN` 这条内建目标）等价，删除全部生成文件；
+- `ninja -t deps`：扫描 `.ninja_deps` 数据库，输出每条 build 的依赖关系，方便定位"为什么 A 改了会触发 B 重编"；
+- `ninja -t browse`：起一个本地 HTTP 服务（默认 `http://localhost:8000`）用浏览器可视化整张依赖图；`ninja -t graph` 则把同一张图导出成 dot 格式供 Graphviz 渲染；
+- `ninja -t compdb`：把每条编译命令以 JSON 数组形式输出，常被 clangd / VS Code 等工具用来反查"这个 `.c` 对应的编译参数"，对排查 IDE 索引异常很关键。
 
-> 通过这个浏览器界面，我们可以很方便地查看什么文件依赖于什么文件。打开 `http://localhost:8000/?libtorch.so` 就可以看到完整的 `libtorch.so` 对应的依赖，再也不用对着 `CMakeLists.txt` 瞎猜了。（还可以通过 `ninja -t graph` 直接导出依赖图的 dot graph 文件，但是大型项目的依赖图一般都非常复杂，看起来不方便。）
-
-最后，`ninja -t targets all` 得到的是全部的构建目标，可以用于 grep 搜索想要的内容；`ninja -C /path/to/dir -f /path/to/file` 可以让 ninja 切换到 `/path/to/dir` 去执行命令、并读取 `/path/to/file` 配置文件来执行。`-f` 的默认参数是 `build.ninja`，`-C` 的默认参数为 `.`，也就是当前路径。一般来说 `-f` 参数用得很少，`-C` 参数用得比较多。
+`ninja -C /path/to/dir -f /path/to/file` 用来切换构建根目录与配置文件：`-C` 进入指定目录后再跑命令（默认 `.`），`-f` 指定要读的配置文件（默认 `build.ninja`）。日常使用 `-C` 多一些，比如用多份构建目录时切换；`-f` 用得很少。
 
 ## 总结
 
-本文简单介绍了 ninja 的一些原理及用法。虽然简单，但依然起了个"一文读懂 ninja 构建系统"的标题，就是因为 ninja 真的很小，它的全部文档差不多也就这些值得我们关心的内容。
+与《Makefile 使用笔记》里手写 makefile 的范式相比，使用 ninja 的核心工作流是：人维护 `CMakeLists.txt`（项目元信息），CMake 把它编译成 `build.ninja`（执行计划），ninja 再去执行 build.ninja。两件事的解耦让项目复杂度的天花板被推到了 CMake 那侧——这也是为什么 PyTorch 这样的大型项目选择"CMake + Ninja"而不是"巨型手写 makefile"的根本原因。
+
+`build.ninja` 不是给人手维护的：它由 CMake 自动生成、文件头就有一行 `CMAKE generated file: DO NOT EDIT!`。本文逐段拆解它的目的，是让读者在 build 报错时能快速定位问题出在 CMake 侧（`CMakeLists.txt` 没写对）还是 ninja 侧（命令执行环境有问题），而不是鼓励手动改 `build.ninja`。日常开发只要记住：改 `CMakeLists.txt` 后跑一次 `cmake -G Ninja` 重新生成 build.ninja，之后用 `ninja` 做增量即可。工具的简洁本身是设计目标——ninja 的核心语法确实就只有这些值得关心的内容。
