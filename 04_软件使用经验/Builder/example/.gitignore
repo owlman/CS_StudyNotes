@@ -1,6 +1,21 @@
-# 构建产物（不要入库）
+# 构建产物(不要入库)
 out/
 
-# 目标文件 / Windows 可执行文件（理论上都落在 out/，这里再兜一道）
+# 目标文件 / Windows 可执行文件(理论上都落在 out/,这里再兜一道)
 *.o
 *.exe
+
+# CMake 中间产物(in-source 构建时全部会落到 example/ 根下)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+build.ninja
+
+# Ninja 运行时数据
+.ninja_deps
+.ninja_log
+
+# MSVC 调试符号
+*.pdb
