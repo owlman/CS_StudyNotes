@@ -146,6 +146,8 @@ example
 
     在这里，`C_COMPILER__calc_unscanned_Debug`是个 rule 名（定义在 `rules.ninja` 里），冒号后面的`calc/main.c`是`$in`。每条 build 自己的局部变量（`FLAGS` / `INCLUDES` / `OBJECT_DIR`等）覆盖同名全局变量，传入对应 rule 的 command。
 
+    另外，请注意`DEP_FILE = CMakeFiles\calc.dir\calc\main.c.obj.d`这一行。它的作用是让编译器在编译时会把"该 build 实际 include 了哪些文件"写到这份`.d`里。这样一来，`ninja`命令下次再执行构建任务时，就会先读`.d`，并把里面的所有路径加入实际依赖列表，再与`.o`的 mtime 比对，任何一个比`.o`新就触发重编。这就是改了`calc.h`也会重编`main.c`的机制基础。
+
 - **链接条目**。将所有`.o`汇总成一个名为`calc`的程序（具体到 Windows 环境，就是`calc.exe`），并链接所需库。
 
     ```ninja
@@ -199,36 +201,13 @@ ninja clean        # 清理全部构建产物
 ninja help         # 列出所有可构建目标
 ```
 
-第一次跑会全量编译`calc/main.c`、`calc/getch.c`、`calc/getop.c`、`calc/stack.c`四个源文件并链接成`calc.exe`，如图 3 所示。之后如果只改了`calc/main.c`，`ninja`就会只重编`main.c.obj`并重新链接——这正是下一节要讲的增量编译的价值所在。
+第一次跑会全量编译`calc/main.c`、`calc/getch.c`、`calc/getop.c`、`calc/stack.c`四个源文件并链接成`calc.exe`，如图 3 所示。之后如果只改了`calc/main.c`，`ninja`就会只重编`main.c.obj`并重新链接。
 
 ![ninja 编译 calc.exe](./img/ninja-build-calc.png)
 
 **图 3** ninja 构建 calc.exe
 
-## 理解 ninja 的增量编译
-
-CMake 生成的 `build.ninja` 用 `DEP_FILE` 字段来实现头文件级增量。本仓库的 in-source Debug 配置(对应 `example/build.ninja`)里,`main.c.obj` 这条 build 的实际形式是:
-
-```ninja
-build CMakeFiles/calc.dir/calc/main.c.obj: C_COMPILER__calc_unscanned_Debug
-    D$:/Working/writing/CS_StudyNotes/04_软件使用经验/Builder/example/calc/main.c
-    || cmake_object_order_depends_target_calc
-  CONFIG = Debug
-  DEP_FILE = CMakeFiles\calc.dir\calc\main.c.obj.d
-  ...
-```
-
-注意 `|| cmake_object_order_depends_target_calc` 这一段——它是用 `||` 分隔的 **order-only dependencies**(只保证执行顺序,不参与 mtime 比较):在编译 `main.c.obj` 之前,需要先把所有源文件的顺序建好,这样后面的链接才能拿到完整的 .o 列表。
-
-`DEP_FILE` 指向的 `.d` 文件由编译器在编译时生成,里面记录了"实际 include 了哪些文件"。下一次 ninja 跑时:
-
-1. 先读 `.d` 文件,把里面的所有路径加入"实际依赖列表";
-2. 比较这些文件的 mtime 与 `.o` 的 mtime;
-3. 只要有一个比 `.o` 新,就触发重编。
-
-所以哪怕 `main.c` 没改、`calc.h` 改了,ninja 也能识别。这是"头文件变了,重编"的最小机制。
-
-## ninja 进阶用法
+## Ninja 进阶用法
 
 回头看`example/build.ninja`，里面大量用到了`phony` 规则。这是 Ninja 的内建规则，意思是"假冒的"——它不代表任何真实文件，只在输入和输出之间建立依赖关系。我们可以理解为：
 
@@ -253,6 +232,6 @@ ninja 的高级工具主要在 `ninja -t` 下面，常用子命令：
 
 ## 总结
 
-与《Makefile 使用笔记》里手写 makefile 的范式相比，使用 ninja 的核心工作流是：人维护 `CMakeLists.txt`（项目元信息），CMake 把它编译成 `build.ninja`（执行计划），ninja 再去执行 build.ninja。两件事的解耦让项目复杂度的天花板被推到了 CMake 那侧——这也是为什么 PyTorch 这样的大型项目选择"CMake + Ninja"而不是"巨型手写 makefile"的根本原因。
+与《[[Makefile 使用笔记]]》里手写 makefile 的范式相比，使用 ninja 的核心工作流是：人维护 `CMakeLists.txt`（项目元信息），CMake 把它编译成 `build.ninja`（执行计划），ninja 再去执行 build.ninja。两件事的解耦让项目复杂度的天花板被推到了 CMake 那侧——这也是为什么 PyTorch 这样的大型项目选择"CMake + Ninja"而不是"巨型手写 makefile"的根本原因。
 
 `build.ninja` 不是给人手维护的：它由 CMake 自动生成、文件头就有一行 `CMAKE generated file: DO NOT EDIT!`。本文逐段拆解它的目的，是让读者在 build 报错时能快速定位问题出在 CMake 侧（`CMakeLists.txt` 没写对）还是 ninja 侧（命令执行环境有问题），而不是鼓励手动改 `build.ninja`。日常开发只要记住：改 `CMakeLists.txt` 后跑一次 `cmake -G Ninja` 重新生成 build.ninja，之后用 `ninja` 做增量即可。工具的简洁本身是设计目标——ninja 的核心语法确实就只有这些值得关心的内容。
