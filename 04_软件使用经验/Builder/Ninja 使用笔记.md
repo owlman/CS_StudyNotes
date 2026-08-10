@@ -219,7 +219,7 @@ ninja help         # 列出所有可构建目标
 
 ## Ninja 进阶用法
 
-如果读者回头再看看`example/out/build.ninja`，就会发现里面大量用到了`phony`规则。这是 Ninja 的内建规则，意思是"假冒的"——它不代表任何真实文件，只在输入和输出之间建立依赖关系。我们可以理解为：
+如果读者回头再看看我们在上述示例中生成的那份`build.ninja`文件，会注意到其中用到了大量的`phony`规则。这是 Ninja 的内建规则，它的作用与`makefile`中的伪目标是相同的，只用于在输入和输出之间建立依赖关系，本身并不代表任何真实文件。我们可以理解为：
 
 ```ninja
 rule phony
@@ -242,6 +242,11 @@ Ninja 的高级工具主要在`-t`参数下面，常用的子命令如下。
 
 ## 总结
 
-与《[[Makefile 使用笔记]]》里手写 makefile 的范式相比，使用 ninja 的核心工作流是：程序员负责人工维护`CMakeLists.txt`（项目元信息），而 CMake 负责把它编译成`build.ninja`文件（执行计划），再交由 Ninja 去执行`build.ninja`。这两件事的解耦让项目复杂度的天花板被推到了 CMake 那侧。这也是为什么 PyTorch 这样的大型项目选择 "CMake + Ninja" 而不是巨型手写`makefile`的根本原因。
+与《[[Makefile 使用笔记]]》中介绍的那种需要手写项目构建规则的范式相比，使用 Ninja 的核心工作流是：程序员们负责人工维护`CMakeLists.txt`（项目元信息），而 CMake 负责先将它编译成`build.ninja`文件（执行计划），再交由 Ninja 去执行`build.ninja`。这两件事的解耦让项目复杂度的天花板被推到了 CMake 那侧。这也是为什么 PyTorch 这样的大型项目选择使用 CMake + Ninja 的范式来替代手写`makefile`文件的根本原因。
 
 总而言之，`build.ninja`文件通常不是给人手动维护的：它由 CMake 自动生成、文件头就有`CMAKE generated file: DO NOT EDIT!`。本文逐段拆解它的目的，是让读者在 build 报错时能快速定位问题出在 CMake 那边（`CMakeLists.txt`没写对），还是`ninja`命令这边（命令执行环境有问题）。这样一来，我们在日常开发中只要记住：改`CMakeLists.txt`后跑一次`cmake --preset default`命令来重新生成`build.ninja`，之后再用`ninja`命令做增量即可。工具的简洁本身是设计目标 —— Ninja 的核心语法确实就只有这些值得关心的内容。
+
+## 参考资料
+
+- [Ninja 官方网站](https://ninja-build.org/)
+- [Ninja 在 GitHub 上的仓库](https://github.com/ninja-build/ninja)
