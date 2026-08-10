@@ -1,0 +1,12 @@
+# LaTeX 中间产物（不要入库）
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# .pdf 保留——hello_latex.pdf 在笔记里被引用为示例图 11。
