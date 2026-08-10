@@ -22,8 +22,7 @@ $$ c = \sqrt{a^{2} + b^{2}} $$
 
 在了解了数学公式在文档中的独特排版方式之后，接下来就可以正式开始学习数学公式的编辑了。让我们先从最基本的加减法开始。使用 $\LaTeX$ 命令编写加减运算的公式很简单，就是在相应的数学表达式加上引入 $\LaTeX$ 命令的方式，譬如在 Markdown 文档中，如果我们想编写 $x=a+b-c$ 这样的公式，就只需要输入`$x=a+b-c$`即可（当然也可以使用行间公式的形式）。在这里，大家心里可能会有一个疑问：加减运算中使用的符号都是可以直接从键盘输入的，描述这类运算时似乎没有必要使用 $\LaTeX$ 命令吧？要想回答这个疑问，我们不妨先来看看使用 $\LaTeX$ 命令前后的区别（见图 1）。
 
-<!-- ![图1：使用LaTeX命令前后的区别](img/LaTeX_Show.png) -->
-![图1：使用LaTeX命令前后的区别](https://img2024.cnblogs.com/blog/691082/202511/691082-20251107123756528-839274329.png)
+![图1：使用LaTeX命令前后的区别](img/LaTeX_Show.png)
 
 我们在图 1 中可以看到，相同的表达式在使用了 $\LaTeX$ 命令之后，表达式中的每个字符都被设置了特定的字体。譬如，字母采用了倾斜的意大利字体，而数字和加号则采用的是直立的等宽字体，并且每个字符之间也都设置了相应的间距。正是这些排版样式将一个干巴巴的表达式变成了具有学术质感的数学公式。所以，即使没有用到任何特殊符号，我们也会选择尽量使用 $\LaTeX$ 语言来描述数学问题。
 
@@ -63,8 +62,7 @@ $$ c = \sqrt{a^{2} + b^{2}} $$
 
 在求和、积分等这类算子符号上，$\LaTeX$ 基于排版因素的考虑，为避免文字过于拥挤或难看的行间距，对于行内公式和行间公式的上下标位置有不同的处理，譬如以求和式为例，其行内公式的上下标位于求和符号的右上角和右下角，而行间公式则位于求和符号的正上方和正下方。当然，我们也可以使用特定的 $\LaTeX$ 命令来指定上下标的位置。例如，如果想让求和式的行内公式采用与行间公式相同的上下标位置，可以对它使用`\limits`命令。下面，让我们来具体演示一下求和式的上下标结构（图 2）：
 
-<!-- ![图2：求和式的上下标](img/sum.png) -->
-![图2：求和式的上下标](https://img2024.cnblogs.com/blog/691082/202511/691082-20251107123914885-841918721.png)
+![图2：求和式的上下标](img/sum.png)
 
 不止如此，我们还可以引用`amsmath`宏包[^1]中提供的 $\LaTeX$ 命令，对上下标的位置进行更精确的指定。例如使用`\sideset`命令，可以在一个符号的四个角上各指定一个上下标。除此之外，我们还可以通过`\overset`或`\underset`命令来指定一般符号的上下标位于其正上方或正下方，下面是这些命令的部分使用演示（见表 3）：
 
@@ -85,12 +83,12 @@ $$ c = \sqrt{a^{2} + b^{2}} $$
 
 我们在进行数学公式的推演和分析时，经常会需要在公式的上下方画上一些线或者花括号，以便标注一些信息，这也形成了一种独特的**标注结构**。在这一节中，我们就来介绍一下这种结构的公式编辑。先来看最简单的线条标注，在 $\LaTeX$ 语言中，线条标注是通过`\overline`和`\underline`这两个命令来完成的。请注意，这两个命令不止可以作用在一般结构的数学公式上，它们可以与任意结构的公式进行嵌套组合。下面，我们来演示一下它们的用法（见表 4）：
 
-| 公式编码                  | 渲染效果                                    |
-|---------------------------|---------------------------------------------|
-| `$\overline{ab}=\overline{a} \overline{b}$` | $\overline{ab}=\overline{a} \overline{b}$ |
-| `$\underline{c}=\underline{a^2+b^3}$`       | $\underline{c}=\underline{a^2+b^3}$      |
+| 公式编码                                      | 渲染效果                                    |
+|-----------------------------------------------|---------------------------------------------|
+| `$\overline{ab}=\overline{a} \overline{b}$`   | $\overline{ab}=\overline{a} \overline{b}$   |
+| `$\underline{c}=\underline{a^2+b^3}$`         | $\underline{c}=\underline{a^2+b^3}$         |
 | `$\underline{\overline{a^2}+\overline{b}^3}$` | $\underline{\overline{a^2}+\overline{b}^3}$ |
-| `$a^{\overline{2}} + b^{\underline{3}}$`  | $a^{\overline{2}} + b^{\underline{3}}$      |
+| `$a^{\overline{2}} + b^{\underline{3}}$`      | $a^{\overline{2}} + b^{\underline{3}}$      |
 
 **表 4**：线条标注的示例
 
@@ -109,12 +107,12 @@ $$ c = \sqrt{a^{2} + b^{2}} $$
 
 学习完线条标注的方法之后，接下来我们来看看如何用花括号来进行标注。在 $\LaTeX$ 中，公式上下方的花括号标注是用`\overbrace`和`\underbrace`这两个命令来完成的，它们与之前线条标注之间最大的区别，就是花括号可以通过上标和下标来对公式进行文字标注，这在我们描述数学公式的分析过程中是非常有用的。下面，让我们来演示一下这两个命令的用法（见表 6）：
 
-| 公式编码                | 渲染效果                                        |
-|------------------------|------------------------------------------------|
-| `$a+c-\overbrace{b \times d}$` | $a+c-\overbrace{b \times d}$           |
-| `$a+c-\underbrace{b \times d}$` | $a+c-\underbrace{b \times d}$          |
-| `$a+c-\overbrace{b \times d}^{\text{乘法优先}}$` | $a+c-\overbrace{b \times d }^{\text{乘法优先}}$  |
-| `$a+c-\underbrace{b \times d}_{\text{乘法优先}}$` | $a+c-\underbrace{b \times d}_{\text{乘法优先}}$ |
+| 公式编码                                          | 渲染效果                                         |
+|---------------------------------------------------|--------------------------------------------------|
+| `$a+c-\overbrace{b \times d}$`                    | $a+c-\overbrace{b \times d}$                     |
+| `$a+c-\underbrace{b \times d}$`                   | $a+c-\underbrace{b \times d}$                    |
+| `$a+c-\overbrace{b \times d}^{\text{乘法优先}}$`  | $a+c-\overbrace{b \times d }^{\text{乘法优先}}$  |
+| `$a+c-\underbrace{b \times d}_{\text{乘法优先}}$` | $a+c-\underbrace{b \times d}_{\text{乘法优先}}$  |
 
 **表 6**：花括号标注的示例
 
@@ -133,17 +131,15 @@ $$ c = \sqrt{a^{2} + b^{2}} $$
 
 请注意，我们在表格中使用的都是分式的行内公式形态，如果拿它们对比一下分式的行间公式形态（见图 3），就会发现其行内公式形态的分子和分母都使用了较小的字号，以配合普通文本的行高和行间距，以影响排版的整体质感。
 
-<!-- ![图3：分式的两种排版](img/fraction1.png) -->
-![图3：分式的两种排版](https://img2024.cnblogs.com/blog/691082/202511/691082-20251107124403781-1235478687.png)
+![图3：分式的两种排版](img/fraction1.png)
 
 当然，有时在行间公式中，我们也会想要让公式某一部分的字体小一点，采用行内公式形态，某一部分的字体大一点，采用行间公式形态。这时候，我们就可以使用`amsmath`宏包中提供的`\dfrac`（行间形态）和`\tfrac`（行内形态）来具体指定。譬如通过对比图 4 中的公式，我们可以看到使用这些命令之后的效果：
 
-<!-- ![图4：分式的两种排版命令](img/fraction2.png) -->
-![图4：分式的两种排版命令](https://img2024.cnblogs.com/blog/691082/202511/691082-20251107124422714-1257688381.png)
+![图4：分式的两种排版命令](img/fraction2.png)
 
 除此之外，我们还会看到一些类似的、分上下两层的公式结构，譬如二项式系数，它使用的是`\binom`命令，用法与分式命令完全一致，这里就不一一累述了。下面，我们来看看**根式**的结构，在 $\LaTeX$ 中，根式是通过`\sqrt`命令来完成，该命令命令除了用于表示被开方数的指定参数外，还可以通过一个可选参数来表示开方的次数。我们来演示一下根式命令的具体使用（见表 8）：
 
-| 公式编码                       | 渲染效果                           |
+| 公式编码                      | 渲染效果                          |
 |-------------------------------|-----------------------------------|
 | `$\sqrt{4}$`                  | $\sqrt{4}$                        |
 | `$\sqrt[3]{8}$`               | $\sqrt[3]{8}$                     |
@@ -154,13 +150,11 @@ $$ c = \sqrt{a^{2} + b^{2}} $$
 
 同样地。我们也可以使用`amsmath`宏包中提供的命令，对根式的排版样式做一些指定。例如在一般状况下，根式的高度是随着其内容变化的，但当我们需要将几个根式并列出现在同一个公式中时，就会希望这些根式的高度是一致的，这时候就会需要用到`\vphantom`命令。我们可以来比对一下该命令使用之后的效果（见图 5）：
 
-<!-- ![图5：vphantom命令的效果](img/vphantom.png) -->
-![图5：vphantom命令的效果](https://img2024.cnblogs.com/blog/691082/202511/691082-20251107124001519-1936713932.png)
+![图5：vphantom命令的效果](img/vphantom.png)
 
 再例如，我们还可以通过`\uproot`和`\leftroot`这两个命令来调整开方次数所显示的位置，这两个命令命令的参数允许我们输入基于标准位置的偏移单位（正数代表上移或左移，负数代表下移或右移），以调整位置（见图 6）：
 
-<!-- ![图6：调整开方次数的显示位置](img/root.png) -->
-![图6：调整开方次数的显示位置](https://img2024.cnblogs.com/blog/691082/202511/691082-20251107124038086-975815249.png)
+![图6：调整开方次数的显示位置](img/root.png)
 
 ### 矩阵结构
 
@@ -294,26 +288,26 @@ $$
 
 让我们先从字母开始，数学公式中使用的字母主要为拉丁字母和希腊字母。其中，拉丁字母就是英文所用的字母，这26个字母（包括其大小写形态）都可以直接从键盘输入，不需要特定的命令来表示。但希腊字母的情况就要复杂一些了，除了部分字母与拉丁字母一致，可以直接用键盘输入外，其他就必须要用特定 $\LaTeX$ 宏包（譬如`amssymb`）提供的命令来表示了，其常用字母如表 10 所示：
 
-| 字母命令 | 显示效果 | 字母命令 | 显示效果 | 字符命令 | 显示效果 | 字符命令 | 显示效果 |
-|:--------:|:-------:|:-------:|:-------:|:-------:|:--------:|:-------:|:-------:|
-| `\alpha` | $\alpha$ | `A`    | $A$     | `\beta` | $\beta$  | `B`     | $B$     |
-| `\gamma` | $\gamma$ | `\Gamma` | $\Gamma$ | `\delta` | $\delta$ | `\Delta` | $\Delta$ |
-|`\epsilon` | $\epsilon$ | `E`   | $E$      | `\zeta`  | $\zeta$  | `Z`      | $Z$      |
-| `\eta`    | $\eta$     | `H`   | $H$      | `\theta` | $\theta$ | `\Theta` | $\Theta$ |
-| `\iota`   | $\iota$    | `I`   | $I$      | `\kappa` | $\kappa$ | `K`      | $K$      |
-| `\lambda` | $\lambda$  | `\Lambda` | $\Lambda$ | `\mu` | $\mu$  | `M`      | $M$      |
-| `\nu`     | $\nu$      | `N`   | $N$      | `\xi`  | $\xi$      | `\Xi`    | $\Xi$    |
-| `o`       | $o$        | `O`   | $O$      | `\pi`  | $\pi$      | `\Pi`    | $\Pi$    |
-| `\rho`    | $\rho$     | `P` | $P$      | `\sigma` | $\sigma$   | `\Sigma` | $\Sigma$ |
-| `\tau`    | $\tau$     | `T` | $T$ | `\upsilon` | $\upsilon$ | `\Upsilon` | $\Upsilon$ |
-| `\phi`    | $\phi$     | `\Phi` | $\Phi$ | `\chi` | $\chi$   | `X`        | $X$        |
-| `\psi`    | $\psi$     | `\Psi` | $\Psi$ | `\omega` | $\omega$ | `\Omega` | $\Omega$   |
+| 字母命令  | 显示效果   | 字母命令  | 显示效果  | 字符命令   | 显示效果   | 字符命令   | 显示效果   |
+|:---------:|:----------:|:---------:|:---------:|:----------:|:----------:|:----------:|:----------:|
+| `\alpha`  | $\alpha$   | `A`       | $A$       | `\beta`    | $\beta$    | `B`        | $B$        |
+| `\gamma`  | $\gamma$   | `\Gamma`  | $\Gamma$  | `\delta`   | $\delta$   | `\Delta`   | $\Delta$   |
+|`\epsilon` | $\epsilon$ | `E`       | $E$       | `\zeta`    | $\zeta$    | `Z`        | $Z$        |
+| `\eta`    | $\eta$     | `H`       | $H$       | `\theta`   | $\theta$   | `\Theta`   | $\Theta$   |
+| `\iota`   | $\iota$    | `I`       | $I$       | `\kappa`   | $\kappa$   | `K`        | $K$        |
+| `\lambda` | $\lambda$  | `\Lambda` | $\Lambda$ | `\mu`      | $\mu$      | `M`        | $M$        |
+| `\nu`     | $\nu$      | `N`       | $N$       | `\xi`      | $\xi$      | `\Xi`      | $\Xi$      |
+| `o`       | $o$        | `O`       | $O$       | `\pi`      | $\pi$      | `\Pi`      | $\Pi$      |
+| `\rho`    | $\rho$     | `P`       | $P$       | `\sigma`   | $\sigma$   | `\Sigma`   | $\Sigma$   |
+| `\tau`    | $\tau$     | `T`       | $T$       | `\upsilon` | $\upsilon$ | `\Upsilon` | $\Upsilon$ |
+| `\phi`    | $\phi$     | `\Phi`    | $\Phi$    | `\chi`     | $\chi$     | `X`        | $X$        |
+| `\psi`    | $\psi$     | `\Psi`    | $\Psi$    | `\omega`   | $\omega$   | `\Omega`   | $\Omega$   |
 
 **表 10**：用于显示希腊字母的 $\LaTeX$ 命令
 
 这其中，部分希腊字母还有变量专用形态，它们的 $\LaTeX$ 命令通常以`\var-`开头，具体如表 11 所示：
 
-| 小写形态    | 大写形态   | 变量形态       | 显示效果                           |
+| 小写形态   | 大写形态 | 变量形态      | 显示效果                            |
 |:----------:|:--------:|:-------------:|:-----------------------------------:|
 | `\epsilon` | `E`      | `\varepsilon` | $\epsilon \mid E \mid \varepsilon$  |
 | `\theta`   | `\Theta` | `\vartheta`   | $\theta \mid \Theta \mid \vartheta$ |
@@ -325,32 +319,32 @@ $$
 
 下面，我们再来看看这些字母使用的字体。在通常情况下，数学公式中的变量采用的是斜体的意大利体，常数采用的是直体的罗马体。当然，在特定情况下，我们也可以用以下 $\LaTeX$ 命令来指定相关字母的字体（见表 12）：
 
-| 字体命令 | 字体名称   | 显示效果       |
-|:-------:|:---------:|:--------------:|
-| `\mathrm`| 罗马体    | $\mathrm{Sample}$  |
-| `\mathcal` | 花体     | $\mathcal{Sample}$ |
-| `\mathit`   | 意大利体  | $\mathit{Sample}$  |
-| `\mathbb` | 黑板粗体 | $\mathbb{Sample}$ |
-| `\mathbf`   | 粗体      | $\mathbf{Sample}$  |
-| `\mathsf`   | 等线体    | $\mathsf{Sample}$  |
-| `\mathscr` | 手写体  | $\mathscr{Sample}$ |
-| `\mathtt`   | 打字机体  | $\mathtt{Sample}$  |
+| 字体命令    | 字体名称   | 显示效果            |
+|:-----------:|:----------:|:-------------------:|
+| `\mathrm`   | 罗马体     | $\mathrm{Sample}$   |
+| `\mathcal`  | 花体       | $\mathcal{Sample}$  |
+| `\mathit`   | 意大利体   | $\mathit{Sample}$   |
+| `\mathbb`   | 黑板粗体   | $\mathbb{Sample}$   |
+| `\mathbf`   | 粗体       | $\mathbf{Sample}$   |
+| `\mathsf`   | 等线体     | $\mathsf{Sample}$   |
+| `\mathscr`  | 手写体     | $\mathscr{Sample}$  |
+| `\mathtt`   | 打字机体   | $\mathtt{Sample}$   |
 | `\mathfrak` | 旧德式字体 | $\mathfrak{Sample}$ |
 
 **表 12**：用于指定数学公式中字母字体的 $\LaTeX$ 命令
 
 指定字体的方式很简单，我们只需要在数学公式中以`{\字体{Sample}}`的形式使用上述字体命令，就可以将“Sample”这几个字符设置为指定字体了。除此之外，在必要情况下，我们还可以使用`\color`命令来指定这些字体的颜色，该命令的第一个参数为颜色的名称，第二个参数是被指定颜色的字符，譬如`$\color{black}{Sample}$`，就是将“Sample”这几个字符设置为`black`这个颜色（当然，这些颜色主要是面向 Web 浏览器的，对印刷品没有多大的意义）。在这里，可供我们选择的颜色如表 13 所示：
 
-| 颜色名称 | 显示效果              | 颜色名称 | 显示效果                    |
-|:------:|:------------------------:|:-------:|:-------------------------:|
-| black  | $\color{black}{Sample}$  | grey    | $\color{grey}{Sample}$    |
-| silver | $\color{silver}{Sample}$ | white   | $\color{white}{Sample}$   |
-| maroon | $\color{maroon}{Sample}$ | red     | $\color{red}{Sample}$     |
-| yellow | $\color{yellow}{Sample}$ | lime    | $\color{lime}{Sample}$    |
-| olive  | $\color{olive}{Sample}$  | green   | $\color{green}{Sample}$   |
-| teal   | $\color{teal}{Sample}$   | aqua    | $\color{aqua}{Sample}$    |
-| blue   | $\color{blue}{Sample}$   | navy    | $\color{navy}{Sample}$    |
-| purple | $\color{purple}{Sample}$ | fuchsia | $\color{fuchsia}{Sample}$ |
+| 颜色名称 | 显示效果                 | 颜色名称 | 显示效果                  |
+|:--------:|:------------------------:|:--------:|:-------------------------:|
+| black    | $\color{black}{Sample}$  | grey     | $\color{grey}{Sample}$    |
+| silver   | $\color{silver}{Sample}$ | white    | $\color{white}{Sample}$   |
+| maroon   | $\color{maroon}{Sample}$ | red      | $\color{red}{Sample}$     |
+| yellow   | $\color{yellow}{Sample}$ | lime     | $\color{lime}{Sample}$    |
+| olive    | $\color{olive}{Sample}$  | green    | $\color{green}{Sample}$   |
+| teal     | $\color{teal}{Sample}$   | aqua     | $\color{aqua}{Sample}$    |
+| blue     | $\color{blue}{Sample}$   | navy     | $\color{navy}{Sample}$    |
+| purple   | $\color{purple}{Sample}$ | fuchsia  | $\color{fuchsia}{Sample}$ |
 
 **表 13**：用于指定数学公式中字母颜色的 $\LaTeX$ 命令
 
@@ -363,26 +357,26 @@ $$
 - **对数运算**：在数学中，对数运算是指数运算（即乘方运算）的逆运算，为最常见的数学运算之一，下面我们来演示一下如何用 $\LaTeX$ 命令来描述该运算，首先是该运算的运算符：
 
     | 运算符命令 | 显示效果 | 运算符命令 | 显示效果 | 运算符命令 | 显示效果 |
-    |:---------:|:------:|:--------:|:-------:|:---------:|:------:|
-    | `\log`    | $\log$ | `\lg`    | $\lg$   | `\ln`     | $\ln$  |
+    |:----------:|:--------:|:----------:|:--------:|:----------:|:--------:|
+    | `\log`     | $\log$   | `\lg`      | $\lg$    | `\ln`      | $\ln$    |
 
     接下来，我们就可以试着来编写一些常见的对数运算公式：
 
-    | 公式名称 | 公式编码        | 显示效果                                  |
-    |:-------:|:--------------:|:----------------------------------------:|
-    | 自然对数 | `$\ln a$`      | $\ln a$                                  |
-    | 常用对数 | `$\lg a$`      | $\lg a$                                  |
-    | 和差公式 | `$\log_{a}{MN} = \log_{a}{M} + \log_{a}{N}$` | $\log_{a}{MN} = \log_{a}{M} + \log_{a}{N}$    |
-    | 互换公式 | `$M^{\log_{a} N}=N^{\log_{a} M}$` | $M^{\log_{a} N}=N^{\log_{a} M}$        |
-    | 换底公式 | `$\log_{a} N=\frac{\log_{b}N}{\log_{b} a}$` | $\log_{a} N=\frac{\log_{b}N}{\log_{b} a}$ |
+    | 公式名称 | 公式编码                                    | 显示效果                                    |
+    |:--------:|:-------------------------------------------:|:-------------------------------------------:|
+    | 自然对数 | `$\ln a$`                                   | $\ln a$                                     |
+    | 常用对数 | `$\lg a$`                                   | $\lg a$                                     |
+    | 和差公式 | `$\log_{a}{MN} = \log_{a}{M} + \log_{a}{N}$`| $\log_{a}{MN} = \log_{a}{M} + \log_{a}{N}$  |
+    | 互换公式 | `$M^{\log_{a} N}=N^{\log_{a} M}$`           | $M^{\log_{a} N}=N^{\log_{a} M}$             |
+    | 换底公式 | `$\log_{a} N=\frac{\log_{b}N}{\log_{b} a}$` | $\log_{a} N=\frac{\log_{b}N}{\log_{b} a}$   |
 
 - **三角运算**：三角形是平面几何的基础，它有着一套独特的数学表示方法。现在，我们要来看看如何用 $\LaTeX$ 命令来表述这套表示方法。同样的，首先是一些符号的命令：
 
-    | 运算符命令  | 显示效果    | 运算符命令 | 显示效果 | 运算符命令 | 显示效果    |
-    |:----------:|:----------:|:--------:|:-------:|:----------:|:----------:|
-    | `30^\circ` | $30^\circ$ | `\bot`   | $\bot$  | `\angle A` | $\angle A$ |
-    | `\sin`     | $\sin$     | `\cos`   | $\cos$  | `\tan`     | $\tan$     |
-    | `\csc`     | $\csc$     | `\sec`   | $\sec$  | `\cot`     | $\cot$     |
+    | 运算符命令 | 显示效果   | 运算符命令 | 显示效果 | 运算符命令 | 显示效果    |
+    |:----------:|:----------:|:----------:|:--------:|:----------:|:-----------:|
+    | `30^\circ` | $30^\circ$ | `\bot`     | $\bot$   | `\angle A` | $\angle A$  |
+    | `\sin`     | $\sin$     | `\cos`     | $\cos$   | `\tan`     | $\tan$      |
+    | `\csc`     | $\csc$     | `\sec`     | $\sec$   | `\cot`     | $\cot$      |
 
     接下来，我们用A、B、C来表示三角形的三条边，用 $\alpha$、$\beta$、$\gamma$ 来表示三角形的三个角，并以R为三角形外接圆的半径来示范一下三角形问题的描述：
 
@@ -394,66 +388,66 @@ $$
 
 - **比较运算**：比较运算也是数学的一个重要分支，它在计算机程序设计领域中都有着重要的作用。我们在描述算法等问题时也都会需要表述比较运算。该运算除了`>`、`<`、`=`这些可直接从键盘输入的运算符之外，也有一些运算符是需要用 $\LaTeX$ 命令来表示的：
 
-    | 运算符命令 | 显示效果 | 运算符命令 | 显示效果 | 运算符命令 | 显示效果    |
-    |:---------:|:-------:|:---------:|:--------:|:---------:|:----------:|
-    | `\not<`  | $\not<$  | `\not>`   | $\not>$  | `\not=`   | $\not=$    |
-    | `\le`    | $\le$    | `\ge`     | $\ge$    | `\approx` | $\approx$  |
-    | `\equiv` | $\equiv$ | `\sim`    | $\sim$   | `\propto` | $\propto$  |
+    | 运算符命令 | 显示效果 | 运算符命令 | 显示效果 | 运算符命令 | 显示效果   |
+    |:----------:|:--------:|:----------:|:--------:|:----------:|:----------:|
+    | `\not<`    | $\not<$  | `\not>`    | $\not>$  | `\not=`    | $\not=$    |
+    | `\le`      | $\le$    | `\ge`      | $\ge$    | `\approx`  | $\approx$  |
+    | `\equiv`   | $\equiv$ | `\sim`     | $\sim$   | `\propto`  | $\propto$  |
 
     下面照例来做几个演示：
 
-    | 运算编码                    | 显示效果                              |
-    |----------------------------|--------------------------------------|
-    | `if $a \not< b$, then $a \ge b$.` | if $a \not< b$, then $a \ge b$. |
-    | `if $a \not> b$, then $a \le b$.` | if $a \not> b$, then $a \le b$. |
+    | 运算编码                              | 显示效果                             |
+    |---------------------------------------|--------------------------------------|
+    | `if $a \not< b$, then $a \ge b$.`     | if $a \not< b$, then $a \ge b$.      |
+    | `if $a \not> b$, then $a \le b$.`     | if $a \not> b$, then $a \le b$.      |
     | `if $a \approx b$, then $a \not= b$.` | if $a \approx b$, then $a \not= b$.  |
 
 - **集合运算**：集合运算是离散数学的基础，在计算机科学领域有着非常重要的作用，我们在写计算机论文时少不了要描述这类运算，下面是一些集合运算符的 $\LaTeX$ 命令：
 
-    | 运算符命令 | 显示效果 | 运算符命令 | 显示效果 | 运算符命令 | 显示效果       |
-    |:---------:|:--------:|:---------:|:-------:|:---------:|:-------------:|
-    | `\emptyset` | $\emptyset$ | `\in` | $\in$        | `\notin` | $\notin$         |
-    | `\subset` | $\subset$   | `\supset`| $\supset$ | `\subseteq`   | $\subseteq$   |
-    | `\supseteq` | $\supseteq$ | `\cap` | $\cap$    | `\cup`        | $\cup$        |
-    | `\bigvee` | $\bigvee$ | `\bigwedge` | $\bigwedge$ | `\biguplus` | $\biguplus$  |
-    | `\forall` | $\forall$ | `\exists`   | $\exists$   | `\not\subset` | $\not\subset$ |
+    | 运算符命令  | 显示效果    | 运算符命令  | 显示效果    | 运算符命令    | 显示效果       |
+    |:-----------:|:-----------:|:-----------:|:-----------:|:-------------:|:--------------:|
+    | `\emptyset` | $\emptyset$ | `\in`       | $\in$       | `\notin`      | $\notin$       |
+    | `\subset`   | $\subset$   | `\supset`   | $\supset$   | `\subseteq`   | $\subseteq$    |
+    | `\supseteq` | $\supseteq$ | `\cap`      | $\cap$      | `\cup`        | $\cup$         |
+    | `\bigvee`   | $\bigvee$   | `\bigwedge` | $\bigwedge$ | `\biguplus`   | $\biguplus$    |
+    | `\forall`   | $\forall$   | `\exists`   | $\exists$   | `\not\subset` | $\not\subset$  |
 
     在这里，我们可以用上述命令来编写几条集合运算的基本法则，以作演示：
 
-    | 公式名称 | 公式编码            | 显示效果                                  |
-    |:-------:|:------------------:|:----------------------------------------:|
-    | 同一律 | `$A \cup \emptyset =A$` | $A \cup \emptyset =A$                 |
-    | 交换律 | `$A \cap B=B \cap A$`   | $A \cap B=B \cap A$                   |
-    | 结合律 | `$(A \cup B) \cup C=A \cup (B \cup C)$` | $(A \cup B) \cup C=A \cup (B \cup C)$ |
-    | 分配律 | `$(A \cap B) \cup C=(A \cup C ) \cap (B \cup C)$` | $(A \cap B) \cup C=(A \cup C ) \cap (B \cup C)$ |
+    | 公式名称 | 公式编码                                       | 显示效果                                 |
+    |:--------:|:----------------------------------------------:|:----------------------------------------:|
+    | 同一律   | `$A \cup \emptyset =A$`                        | $A \cup \emptyset =A$                    |
+    | 交换律   | `$A \cap B=B \cap A$`                          | $A \cap B=B \cap A$                      |
+    | 结合律   | `$(A \cup B) \cup C=A \cup (B \cup C)$`        | $(A \cup B) \cup C=A \cup (B \cup C)$    |
+    | 分配律   | `$(A \cap B) \cup C=(A \cup C ) \cap (B \cup C)$` | $(A \cap B) \cup C=(A \cup C ) \cap (B \cup C)$   |
 
 - **微积分运算**：微积分是高等数学的入门学科，内容主要包括极限、微分学、积分学及其应用。下面是我们在描述微积分运算时会用到的一些 $\LaTeX$ 命令：
 
-    | 运算符命令 | 显示效果  | 运算符命令 | 显示效果 | 运算符命令 | 显示效果    |
-    |:---------:|:---------:|:--------:|:-------:|:----------:|:----------:|
-    | `\int`    | $\int$    | `\iint`  | $\iint$ | `\iiint`   | $\iiint$   |
-    | `\iiiint` | $\iiiint$ | `\oint`  | $\oint$ | `\prime`   | $\prime$   |
-    | `\lim`    | $\lim$    | `\infty` | $\infty$ | `\nabla`  | $\nabla$   |
+    | 运算符命令 | 显示效果  | 运算符命令 | 显示效果 | 运算符命令 | 显示效果   |
+    |:----------:|:---------:|:----------:|:--------:|:----------:|:----------:|
+    | `\int`     | $\int$    | `\iint`    | $\iint$  | `\iiint`   | $\iiint$   |
+    | `\iiiint`  | $\iiiint$ | `\oint`    | $\oint$  | `\prime`   | $\prime$   |
+    | `\lim`     | $\lim$    | `\infty`   | $\infty$ | `\nabla`   | $\nabla$   |
 
     我们不妨在这里复习一下当年在大学一年级时写过的那些公式，只不过当时应该是手写为主，现在我们要用的是 $\LaTeX$ 命令：
 
-    | 公式名称 | 公式编码     | 显示效果                                      |
-    |:-------:|:-----------:|:--------------------------------------------:|
-    | 不定积分 | `$\int f(x)\, \mathrm{d} x$`  | $\int f(x)\, \mathrm{d} x$  |
-    | 定积分   | `$\int^b_a f(x)\, \mathrm{d} x$` | $\int^b_a f(x)\, \mathrm{d} x$    |
+    | 公式名称 | 公式编码                                 | 显示效果                                      |
+    |:--------:|:----------------------------------------:|:---------------------------------------------:|
+    | 不定积分 | `$\int f(x)\, \mathrm{d} x$`             | $\int f(x)\, \mathrm{d} x$                    |
+    | 定积分   | `$\int^b_a f(x)\, \mathrm{d} x$`         | $\int^b_a f(x)\, \mathrm{d} x$                |
+    | 极限运算 | `$\lim_{n \to \infty} \frac{1}{n(n-1)}$` | $\lim_{n \to \infty} \frac{1}{n(n-1)}$        |
     | 微分方程 | `$\frac{\mathrm{d}x(t)}{\mathrm{d}t} = f\bigl(x(t)\bigr)$` | $\frac{\mathrm{d}x(t)}{\mathrm{d}t} = f\bigl(x(t)\bigr)$ |
-    | 极限运算 | `$\lim_{n \to \infty} \frac{1}{n(n-1)}$` | $\lim_{n \to \infty} \frac{1}{n(n-1)}$ |
 
     当然，除上述运算外，我们在描述数学问题过程中还可能会用到如下这些运算符：
 
-    | 运算符命令 | 显示效果 | 运算符命令 | 显示效果 | 运算符命令 | 显示效果       |
-    |:---------:|:--------:|:--------:|:--------:|:---------:|:-------------:|
-    | `\pm`     | $\pm$    | `\times` | $\times$ | `\div`    | $\div$        |
-    | `\mid`    | $\mid$   | `\nmid`  | $\nmid$  | `\cdot`   | $\cdot$       |
-    | `\circ`   | $\circ$ | `\ast`   | $\ast$ | `\bigodot` | $\bigodot$   |
-    | `\bigotimes` | $\bigotimes$ | `\bigoplus` | $\bigoplus$ | `\sum` | $\sum$ |
-    | `\prod` | $\prod$ | `\coprod` | $\coprod$ | `\backslash` | $\backslash$  |
-    | `\because` | $\because$ | `\therefore` | $\therefore$ |           |               |
+    | 运算符命令   | 显示效果     | 运算符命令   | 显示效果     | 运算符命令   | 显示效果       |
+    |:------------:|:------------:|:------------:|:------------:|:------------:|:--------------:|
+    | `\pm`        | $\pm$        | `\times`     | $\times$     | `\div`       | $\div$         |
+    | `\mid`       | $\mid$       | `\nmid`      | $\nmid$      | `\cdot`      | $\cdot$        |
+    | `\circ`      | $\circ$      | `\ast`       | $\ast$       | `\bigodot`   | $\bigodot$     |
+    | `\bigotimes` | $\bigotimes$ | `\bigoplus`  | $\bigoplus$  | `\sum`       | $\sum$         |
+    | `\prod`      | $\prod$      | `\coprod`    | $\coprod$    | `\backslash` | $\backslash$   |
+    | `\because`   | $\because$   | `\therefore` | $\therefore$ |              |                |
 
     这些 $\LaTeX$ 命令的使用与上述运算大同小异，这里就不一一示范了，读者可自行查阅相关文档。
 
@@ -461,10 +455,10 @@ $$
 
 在数学公式中，除了参与运算的字母变量、数字以及表明运算类型的运算符之外，以括号为代表的定界符也是一类非常重要的符号。众所周知，数学公式的编辑是离不开各种各样的括号的，我们需要用它们来凸显公式中的重点、对公式进行分组、甚至改变公式的运算顺序。在 $\LaTeX$ 中，括号是由开符号和闭符号组成的，所以我们要分两个命令来表列 $\LaTeX$ 所提供的括号种类，具体如表 14 所示：
 
-| 括号类型 | 开符号   | 闭符号    | 示例编码                  | 显示效果      |
-|---------|----------|----------|---------------------------|---------------|
-| 圆括号   | `(`     | `)`       | `$a+(b-c)$`               | $a+(b-c)$     |
-| 方括号   | `[`     | `]`       | `$a+[b-c]$`               | $a+[b-c]$     |
+| 括号类型 | 开符号    | 闭符号    | 示例编码                  | 显示效果                |
+|----------|-----------|-----------|---------------------------|-------------------------|
+| 圆括号   | `(`       | `)`       | `$a+(b-c)$`               | $a+(b-c)$               |
+| 方括号   | `[`       | `]`       | `$a+[b-c]$`               | $a+[b-c]$               |
 | 花括号   | `\lbrace` | `\rbrace` | `$a+\lbrace b-c \rbrace$` | $a+\lbrace b-c \rbrace$ |
 | 尖括号   | `\langle` | `\rangle` | `$a+\langle b-c \rangle$` | $a+\langle b-c \rangle$ |
 | 向上取整 | `\lceil`  | `\rceil`  | `$a+\lceil b-c \rceil$`   | $a+\lceil b-c \rceil$   |
