@@ -24,6 +24,12 @@ add_executable(calc
 
 target_include_directories(calc PRIVATE calc)
 
+# 把构建产物（可执行文件）输出到 out/
+# cmake 的配置（CMakeFiles/、CMakeCache.txt、build.ninja）留在源码目录
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out)
+
 # ---- 测试 ----
 # 集成 test/run_calc.py 作为 ctest 用例
 find_package(Python3 COMPONENTS Interpreter QUIET)
