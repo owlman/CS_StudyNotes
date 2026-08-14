@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <!-- 背景 -->
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <!-- 顶部标题 -->
+  <text x="800" y="70" font-size="44" font-weight="700" text-anchor="middle" fill="#6B4423">机器智能真正风险 —— 三个角度</text>
+  <line x1="560" y1="92" x2="1040" y2="92" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 底部衔接语 -->
+  <text x="800" y="850" font-size="24" text-anchor="middle" fill="#6B4423" font-style="italic">无论从哪个角度,我都会安心归去。</text>
+  <line x1="200" y1="870" x2="1400" y2="870" stroke="#D97A47" stroke-width="2" stroke-linecap="round" stroke-dasharray="6,4"/>
+
+  <!-- ============ 模块 1: 科学发展 ============ -->
+  <g transform="translate(60,150)">
+    <!-- 模块框 -->
+    <rect x="0" y="0" width="460" height="640" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3" rx="14"/>
+    <!-- 顶部圆点(科学发展 - 浅蓝) -->
+    <circle cx="230" cy="22" r="10" fill="#5A8AAA"/>
+
+    <!-- 标题 -->
+    <text x="230" y="80" font-size="34" font-weight="700" text-anchor="middle" fill="#3D5A75">科学发展</text>
+
+    <!-- 图标:火箭 -->
+    <g transform="translate(180,110)">
+      <path d="M 50 0 Q 60 30 60 60 L 60 110 L 40 110 L 40 60 Q 40 30 50 0 Z" fill="#5A8AAA"/>
+      <circle cx="50" cy="35" r="8" fill="#F5E6C8"/>
+      <path d="M 40 110 L 30 130 L 50 120 L 50 110 Z" fill="#B85450"/>
+      <path d="M 60 110 L 70 130 L 50 120 L 50 110 Z" fill="#D97A47"/>
+      <path d="M 45 110 L 35 145 L 50 130 L 50 110 Z" fill="#E89968" opacity="0.7"/>
+      <path d="M 55 110 L 65 145 L 50 130 L 50 110 Z" fill="#E89968" opacity="0.7"/>
+    </g>
+
+    <!-- 核心观点 -->
+    <rect x="40" y="290" width="380" height="70" fill="#E0EBF2" rx="8"/>
+    <text x="230" y="335" font-size="28" font-weight="700" text-anchor="middle" fill="#3D5A75">生产力跃升 ≫ 文明末日</text>
+
+    <!-- 子点 -->
+    <g transform="translate(40,400)">
+      <circle cx="12" cy="12" r="6" fill="#5A8AAA"/>
+      <text x="32" y="20" font-size="22" fill="#3D5A75">物质丰富是大概率</text>
+    </g>
+    <g transform="translate(40,450)">
+      <circle cx="12" cy="12" r="6" fill="#5A8AAA"/>
+      <text x="32" y="20" font-size="22" fill="#3D5A75">核能如此 · 机器智能亦如此</text>
+    </g>
+    <g transform="translate(40,500)">
+      <circle cx="12" cy="12" r="6" fill="#5A8AAA"/>
+      <text x="32" y="20" font-size="22" fill="#3D5A75">文明发展的原动力</text>
+    </g>
+  </g>
+
+  <!-- ============ 模块 2: 文明延续 ============ -->
+  <g transform="translate(570,150)">
+    <rect x="0" y="0" width="460" height="640" fill="#FFF8E8" stroke="#D97A47" stroke-width="3" rx="14"/>
+    <circle cx="230" cy="22" r="10" fill="#D97A47"/>
+
+    <text x="230" y="80" font-size="34" font-weight="700" text-anchor="middle" fill="#8B4513">文明延续</text>
+
+    <!-- 图标:奥林匹斯山众神剪影 -->
+    <g transform="translate(150,120)">
+      <!-- 山形 -->
+      <path d="M 0 130 L 60 50 L 100 80 L 160 30 L 220 90 L 280 60 L 320 130 Z" fill="#D97A47" opacity="0.4"/>
+      <!-- 众神剪影 -->
+      <g fill="#8B4513">
+        <ellipse cx="80" cy="80" rx="10" ry="14"/>
+        <rect x="74" y="90" width="12" height="30"/>
+        <ellipse cx="130" cy="60" rx="12" ry="16"/>
+        <rect x="123" y="72" width="14" height="35"/>
+        <ellipse cx="180" cy="70" rx="11" ry="15"/>
+        <rect x="174" y="82" width="13" height="32"/>
+        <ellipse cx="230" cy="80" rx="10" ry="14"/>
+        <rect x="224" y="92" width="12" height="30"/>
+      </g>
+      <!-- 山尖 -->
+      <path d="M 60 50 L 65 35 L 70 50 Z" fill="#D97A47"/>
+      <path d="M 160 30 L 168 10 L 176 30 Z" fill="#D97A47"/>
+    </g>
+
+    <!-- 核心观点 -->
+    <rect x="40" y="290" width="380" height="70" fill="#F5E0D0" rx="8"/>
+    <text x="230" y="335" font-size="28" font-weight="700" text-anchor="middle" fill="#8B4513">大地一直在换主人</text>
+
+    <!-- 子点 -->
+    <g transform="translate(40,400)">
+      <circle cx="12" cy="12" r="6" fill="#D97A47"/>
+      <text x="32" y="20" font-size="22" fill="#8B4513">希腊诸神归隐奥林匹斯</text>
+    </g>
+    <g transform="translate(40,450)">
+      <circle cx="12" cy="12" r="6" fill="#D97A47"/>
+      <text x="32" y="20" font-size="22" fill="#8B4513">中国诸神绝地天通</text>
+    </g>
+    <g transform="translate(40,500)">
+      <circle cx="12" cy="12" r="6" fill="#D97A47"/>
+      <text x="32" y="20" font-size="22" fill="#8B4513">尼采宣告"上帝已死"</text>
+    </g>
+  </g>
+
+  <!-- ============ 模块 3: 技术现实 ============ -->
+  <g transform="translate(1080,150)">
+    <rect x="0" y="0" width="460" height="640" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3" rx="14"/>
+    <circle cx="230" cy="22" r="10" fill="#7A8C6F"/>
+
+    <text x="230" y="80" font-size="34" font-weight="700" text-anchor="middle" fill="#4A5D40">技术现实</text>
+
+    <!-- 图标:矩阵网格 -->
+    <g transform="translate(170,110)">
+      <g stroke="#7A8C6F" stroke-width="2" fill="none">
+        <rect x="0" y="0" width="120" height="120"/>
+        <line x1="0" y1="30" x2="120" y2="30"/>
+        <line x1="0" y1="60" x2="120" y2="60"/>
+        <line x1="0" y1="90" x2="120" y2="90"/>
+        <line x1="30" y1="0" x2="30" y2="120"/>
+        <line x1="60" y1="0" x2="60" y2="120"/>
+        <line x1="90" y1="0" x2="90" y2="120"/>
+      </g>
+      <circle cx="30" cy="30" r="5" fill="#7A8C6F"/>
+      <circle cx="90" cy="60" r="5" fill="#7A8C6F"/>
+      <circle cx="60" cy="90" r="5" fill="#7A8C6F"/>
+      <circle cx="90" cy="30" r="5" fill="#D97A47"/>
+    </g>
+
+    <!-- 核心观点 -->
+    <rect x="40" y="290" width="380" height="70" fill="#E5EBDD" rx="8"/>
+    <text x="230" y="335" font-size="28" font-weight="700" text-anchor="middle" fill="#4A5D40">统计学习 + 矩阵计算</text>
+
+    <!-- 子点 -->
+    <g transform="translate(40,400)">
+      <circle cx="12" cy="12" r="6" fill="#7A8C6F"/>
+      <text x="32" y="20" font-size="22" fill="#4A5D40">输了该认就认</text>
+    </g>
+    <g transform="translate(40,450)">
+      <circle cx="12" cy="12" r="6" fill="#7A8C6F"/>
+      <text x="32" y="20" font-size="22" fill="#4A5D40">坦然承认人的局限</text>
+    </g>
+    <g transform="translate(40,500)">
+      <circle cx="12" cy="12" r="6" fill="#7A8C6F"/>
+      <text x="32" y="20" font-size="22" fill="#4A5D40">不必过分恐惧</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <!-- 背景 -->
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <!-- 顶部大标题 -->
+  <text x="800" y="70" font-size="44" font-weight="700" text-anchor="middle" fill="#6B4423">如何分辨炒作 vs 科普</text>
+  <line x1="600" y1="92" x2="1000" y2="92" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 中间虚线分隔 -->
+  <line x1="800" y1="130" x2="800" y2="820" stroke="#8B6F47" stroke-width="3" stroke-dasharray="10,8"/>
+  <circle cx="800" cy="450" r="36" fill="#F5E6C8" stroke="#D97A47" stroke-width="2"/>
+  <text x="800" y="460" font-size="28" font-weight="700" text-anchor="middle" fill="#D97A47">vs.</text>
+
+  <!-- ============ 左栏: 营销炒作 (高饱和橙红) ============ -->
+  <rect x="40" y="130" width="720" height="690" fill="#FCEAD8" stroke="#D9534F" stroke-width="3" rx="14"/>
+  <rect x="40" y="130" width="720" height="70" fill="#D9534F" rx="14"/>
+  <rect x="40" y="170" width="720" height="30" fill="#D9534F"/>
+  <text x="400" y="180" font-size="32" font-weight="700" text-anchor="middle" fill="#FFF8E8">营销炒作</text>
+
+  <!-- 图标:喇叭 + 感叹号 -->
+  <g transform="translate(140,230)">
+    <path d="M 10 30 L 30 10 L 60 10 L 60 70 L 30 70 L 10 50 Z" fill="#D9534F"/>
+    <line x1="65" y1="15" x2="80" y2="5" stroke="#D9534F" stroke-width="3"/>
+    <line x1="65" y1="40" x2="85" y2="40" stroke="#D9534F" stroke-width="3"/>
+    <line x1="65" y1="65" x2="80" y2="75" stroke="#D9534F" stroke-width="3"/>
+    <text x="100" y="35" font-size="36" font-weight="900" fill="#D9534F">!!!</text>
+  </g>
+
+  <!-- 话术气泡 -->
+  <g transform="translate(60,340)">
+    <path d="M 0 0 L 280 0 L 280 50 L 250 50 L 240 65 L 230 50 L 0 50 Z" fill="#FFF" stroke="#D9534F" stroke-width="2"/>
+    <text x="140" y="33" font-size="22" text-anchor="middle" fill="#8B2A2A">"AI 时代来了!"</text>
+  </g>
+  <g transform="translate(60,420)">
+    <path d="M 0 0 L 280 0 L 280 50 L 250 50 L 240 65 L 230 50 L 0 50 Z" fill="#FFF" stroke="#D9534F" stroke-width="2"/>
+    <text x="140" y="33" font-size="22" text-anchor="middle" fill="#8B2A2A">"程序员要被淘汰了!"</text>
+  </g>
+  <g transform="translate(60,500)">
+    <path d="M 0 0 L 320 0 L 320 50 L 290 50 L 280 65 L 270 50 L 0 50 Z" fill="#FFF" stroke="#D9534F" stroke-width="2"/>
+    <text x="160" y="33" font-size="22" text-anchor="middle" fill="#8B2A2A">"不想创业就是想放弃!"</text>
+  </g>
+
+  <!-- 听者反应 -->
+  <g transform="translate(420,340)">
+    <!-- 小人 -->
+    <circle cx="60" cy="50" r="22" fill="#FBD0A8" stroke="#8B2A2A" stroke-width="2"/>
+    <!-- 痛苦表情 -->
+    <circle cx="52" cy="46" r="2" fill="#8B2A2A"/>
+    <circle cx="68" cy="46" r="2" fill="#8B2A2A"/>
+    <path d="M 50 58 Q 60 50 70 58" fill="none" stroke="#8B2A2A" stroke-width="2"/>
+    <!-- 捂住耳朵的手 -->
+    <ellipse cx="36" cy="50" rx="10" ry="14" fill="#FBD0A8" stroke="#8B2A2A" stroke-width="2"/>
+    <ellipse cx="84" cy="50" rx="10" ry="14" fill="#FBD0A8" stroke="#8B2A2A" stroke-width="2"/>
+    <!-- 身体 -->
+    <path d="M 40 75 L 40 130 L 80 130 L 80 75 Z" fill="#D9534F"/>
+  </g>
+
+  <!-- 判别关键词 -->
+  <rect x="60" y="700" width="680" height="50" fill="#D9534F" rx="8"/>
+  <text x="400" y="733" font-size="22" font-weight="700" text-anchor="middle" fill="#FFF8E8">热血沸腾 · 焦虑 · 感叹号密集</text>
+  <text x="400" y="790" font-size="20" text-anchor="middle" fill="#8B2A2A" font-style="italic">让人想行动 · 不让人想思考</text>
+
+  <!-- ============ 右栏: 技术科普 (柔和浅蓝) ============ -->
+  <rect x="840" y="130" width="720" height="690" fill="#E8F0F5" stroke="#5A8AAA" stroke-width="3" rx="14"/>
+  <rect x="840" y="130" width="720" height="70" fill="#5A8AAA" rx="14"/>
+  <rect x="840" y="170" width="720" height="30" fill="#5A8AAA"/>
+  <text x="1200" y="180" font-size="32" font-weight="700" text-anchor="middle" fill="#F5F8FA">技术科普</text>
+
+  <!-- 图标:书 + 铅笔 -->
+  <g transform="translate(940,220)">
+    <!-- 打开的书 -->
+    <path d="M 5 30 L 5 80 L 50 75 L 50 25 Z" fill="#FFF" stroke="#5A8AAA" stroke-width="2"/>
+    <path d="M 50 25 L 50 75 L 95 80 L 95 30 Z" fill="#FFF" stroke="#5A8AAA" stroke-width="2"/>
+    <line x1="15" y1="40" x2="40" y2="38" stroke="#5A8AAA" stroke-width="1"/>
+    <line x1="15" y1="50" x2="40" y2="48" stroke="#5A8AAA" stroke-width="1"/>
+    <line x1="60" y1="38" x2="85" y2="40" stroke="#5A8AAA" stroke-width="1"/>
+    <line x1="60" y1="48" x2="85" y2="50" stroke="#5A8AAA" stroke-width="1"/>
+    <!-- 铅笔 -->
+    <g transform="translate(110,15) rotate(20)">
+      <rect x="0" y="0" width="60" height="10" fill="#D97A47"/>
+      <polygon points="60,0 75,5 60,10" fill="#FBD0A8"/>
+      <polygon points="75,5 80,5 75,5" fill="#2C2C2C"/>
+      <rect x="-10" y="0" width="10" height="10" fill="#5A8AAA"/>
+    </g>
+  </g>
+
+  <!-- 话术气泡 -->
+  <g transform="translate(860,340)">
+    <path d="M 0 0 L 240 0 L 240 50 L 210 50 L 200 65 L 190 50 L 0 50 Z" fill="#FFF" stroke="#5A8AAA" stroke-width="2"/>
+    <text x="120" y="33" font-size="22" text-anchor="middle" fill="#3D5A75">"这个词指代……"</text>
+  </g>
+  <g transform="translate(860,420)">
+    <path d="M 0 0 L 240 0 L 240 50 L 210 50 L 200 65 L 190 50 L 0 50 Z" fill="#FFF" stroke="#5A8AAA" stroke-width="2"/>
+    <text x="120" y="33" font-size="22" text-anchor="middle" fill="#3D5A75">"可以查证于……"</text>
+  </g>
+  <g transform="translate(860,500)">
+    <path d="M 0 0 L 240 0 L 240 50 L 210 50 L 200 65 L 190 50 L 0 50 Z" fill="#FFF" stroke="#5A8AAA" stroke-width="2"/>
+    <text x="120" y="33" font-size="22" text-anchor="middle" fill="#3D5A75">"背后的原理是……"</text>
+  </g>
+
+  <!-- 听者反应 -->
+  <g transform="translate(1200,330)">
+    <!-- 小人 -->
+    <circle cx="60" cy="50" r="22" fill="#FBD0A8" stroke="#3D5A75" stroke-width="2"/>
+    <circle cx="52" cy="48" r="2" fill="#3D5A75"/>
+    <circle cx="68" cy="48" r="2" fill="#3D5A75"/>
+    <path d="M 50 56 Q 60 62 70 56" fill="none" stroke="#3D5A75" stroke-width="2"/>
+    <!-- 头顶问号 -->
+    <text x="60" y="20" font-size="32" font-weight="700" text-anchor="middle" fill="#D97A47">?</text>
+    <!-- 笔记本 -->
+    <rect x="40" y="75" width="40" height="55" fill="#FFF" stroke="#3D5A75" stroke-width="2"/>
+    <line x1="48" y1="90" x2="72" y2="90" stroke="#3D5A75" stroke-width="1"/>
+    <line x1="48" y1="100" x2="72" y2="100" stroke="#3D5A75" stroke-width="1"/>
+    <line x1="48" y1="110" x2="72" y2="110" stroke="#3D5A75" stroke-width="1"/>
+    <line x1="48" y1="120" x2="65" y2="120" stroke="#3D5A75" stroke-width="1"/>
+    <!-- 身体 -->
+    <path d="M 35 75 L 35 130 L 85 130 L 85 75 Z" fill="#5A8AAA"/>
+  </g>
+
+  <!-- 判别关键词 -->
+  <rect x="860" y="700" width="680" height="50" fill="#5A8AAA" rx="8"/>
+  <text x="1200" y="733" font-size="22" font-weight="700" text-anchor="middle" fill="#F5F8FA">可查证 · 可追问 · 引文出处</text>
+  <text x="1200" y="790" font-size="20" text-anchor="middle" fill="#3D5A75" font-style="italic">让人越查越想学</text>
+
+  <!-- 底部脚注 -->
+  <text x="800" y="850" font-size="22" font-weight="600" text-anchor="middle" fill="#6B4423">两条判别标准:一,让你热血沸腾?二,让你越查越知道要学啥?</text>
+</svg>
