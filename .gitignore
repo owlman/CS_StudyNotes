@@ -91,3 +91,6 @@ SoftwareTool/Git/code/demo_repo/
 # Local Obsidian settings
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
+
+# Qoder IDE local config
+.qoder/
