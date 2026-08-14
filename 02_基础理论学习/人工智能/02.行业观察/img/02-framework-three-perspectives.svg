@@ -57,8 +57,8 @@
 
     <text x="230" y="80" font-size="34" font-weight="700" text-anchor="middle" fill="#8B4513">文明延续</text>
 
-    <!-- 图标:奥林匹斯山众神剪影 -->
-    <g transform="translate(150,120)">
+    <!-- 图标:奥林匹斯山众神剪影(translate.x=70 让山水平居中:模块宽 460,山宽 320,(460-320)/2=70) -->
+    <g transform="translate(70,120)">
       <!-- 山形 -->
       <path d="M 0 130 L 60 50 L 100 80 L 160 30 L 220 90 L 280 60 L 320 130 Z" fill="#D97A47" opacity="0.4"/>
       <!-- 众神剪影 -->
