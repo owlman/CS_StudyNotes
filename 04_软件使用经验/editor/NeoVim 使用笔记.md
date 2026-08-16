@@ -171,14 +171,14 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
 
    ```vim
-   " 令编辑器显示行号
-   set nu
+    " 令编辑器显示行号
+    set nu
 
-   " 要安装的插件列表
-   call plug#begin()
-   " tab键补全功能插件
-   Plug 'ervandew/supertab'
-   call plug#end()
+    " 要安装的插件列表
+    call plug#begin()
+    " tab键补全功能插件
+    Plug 'ervandew/supertab'
+    call plug#end()
    ```
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述配置文件中列出的插件，待安装完成之后，我们再次重启 NeoVim 编辑器，并在编辑模式中按下 tab 键就会看到该插件提供的补全提示了。
@@ -211,7 +211,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 4. 由于 Coc 本身并不提供具体语言的补全功能，所以在安装完成后，我们需要安装具体的语言服务以支持对应的补全功能。例如想要配置 C++ 环境，我们就需要在 NeoVim 的命令模式下执行以下命令来安装相关的插件：
 
   ```vim
-  :CocInstall coc-clangd          # C++ 环境插件
+  :CocInstall coc-clangd          # C/C++ 支持
   :CocInstall coc-cmake           # Cmake 支持
   ```
   
@@ -226,13 +226,16 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
   ```vim
   :CocInstall coc-git             # git 支持
   :CocInstall coc-highlight       # 高亮支持
-  :CocInstall coc-jedi            # jedi
-  :CocInstall coc-json            # json 文件支持
-  :CocInstall coc-python          # python 环境支持
-  :CocInstall coc-sh              # bash 环境支持
+  :CocInstall coc-pyls            # Python 支持
+  :CocInstall coc-json            # json 支持 
+  :CocInstall coc-html            # html 支持
+  :CocInstall coc-css             # css 支持
+  :CocInstall coc-jedi            # jedi 支持
+  :CocInstall coc-json            # json 支持
+  :CocInstall coc-sh              # bash 支持
   :CocInstall coc-snippets        # python 提供 snippets
-  :CocInstall coc-vimlsp          # lsp
-  :CocInstall coc-yaml            # yaml
+  :CocInstall coc-vimlsp          # lsp 支持
+  :CocInstall coc-yaml            # yaml 
   ```
 
 #### vim-airline 插件
