@@ -7,7 +7,7 @@
 [![LaTeX](https://img.shields.io/badge/LaTeX-008080?logo=latex)](https://www.latex-project.org/)
 [![Obsidian](https://img.shields.io/badge/Obsidian-8284FF?logo=obsidian)](https://obsidian.md/)
 [![VSCode](https://img.shields.io/badge/VSCode-007ACC?logo=vscodium&logoColor=white)](https://code.visualstudio.com/)
-[![License](https://img.shields.io/badge/GPLv2-green?logo=gnu&logoColor=white)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > 这是一个面向 **CS 学习者与工程实践者** 的长期维护型计算机知识笔记库，整体风格倾向于 **概念理解、知识结构与可复用判断**。
 
@@ -80,15 +80,16 @@
 
 ## 许可证
 
-本项目以 **GNU GPL v2（或更高版本）** 发布。
+本项目以 **MIT License** 发布。
 
 你可以自由地：
 
 - 阅读
 - 引用
 - 修改
-- 再分发  
+- 再分发
+- 用于商业用途
 
-前提是遵守 GPL 许可证的相关条款。
+前提是在所有副本或实质部分中保留版权声明与许可声明。
 
-详见：[GNU GPL v2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+详见：[MIT License](https://opensource.org/licenses/MIT)
