@@ -1,0 +1,55 @@
+# ============================================================
+# CS_StudyNotes 仓库级行尾规范化
+# ============================================================
+# 统一 Markdown / 纯文本文件使用 LF 行尾，与 Obsidian 在所有
+# 平台上的默认行为一致，避免在 Windows 上 git autocrlf=true
+# 触发的 "LF will be replaced by CRLF" 警告。
+#
+# 建议本地仓库配置配合 core.autocrlf=input 使用（仅本机生效，不入库）：
+#     git config core.autocrlf input
+# 该配置下：commit 时 CRLF 自动转 LF，checkout 时保持原 LF，
+# 与 Obsidian 的写入习惯完全一致，不再产生行尾警告。
+
+*.md       text eol=lf
+*.markdown text eol=lf
+*.mdx      text eol=lf
+
+*.txt      text eol=lf
+
+*.json     text eol=lf
+
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.toml     text eol=lf
+
+*.sh       text eol=lf
+*.bash     text eol=lf
+*.zsh      text eol=lf
+
+*.py       text eol=lf
+*.js       text eol=lf
+*.mjs      text eol=lf
+*.cjs      text eol=lf
+*.ts       text eol=lf
+*.tsx      text eol=lf
+*.jsx      text eol=lf
+
+*.css      text eol=lf
+*.scss     text eol=lf
+*.sass     text eol=lf
+*.less     text eol=lf
+
+*.html     text eol=lf
+*.htm      text eol=lf
+*.xml      text eol=lf
+*.svg      text eol=lf
+
+*.csv      text eol=lf
+*.tsv      text eol=lf
+
+*.gitignore      text eol=lf
+*.gitattributes   text eol=lf
+*.editorconfig    text eol=lf
+
+LICENSE   text eol=lf
+README*   text eol=lf
