@@ -6,6 +6,8 @@ tags: 自动化构建
 categories: 软件使用经验
 ---
 
+# Ninja     
+
 > [!NOTE] 笔记说明
 >
 > 这篇笔记用于系统性地介绍 Ninja 这款轻量级的项目构建工具。它最初参考自知乎专栏文章[《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，我在对文章的内容进行二次整理和内容补充之后，将其纳入到了本人的[计算机专业笔记库](https://github.com/owlman/CS_StudyNotes)，并打算予以长期维护。

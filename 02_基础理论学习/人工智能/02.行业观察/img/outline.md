@@ -8,6 +8,8 @@ image_count: 3
 language: zh
 ---
 
+# Outline
+
 ## Illustration 1
 **Position**: 段 1(机器智能目前还没那么可怕)末尾
 **Purpose**: 把"专用 AI 与通用 AI"的差异可视化,直观说明作者对 AI 进展的克制态度

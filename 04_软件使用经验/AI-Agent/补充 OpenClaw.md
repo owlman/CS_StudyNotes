@@ -6,6 +6,8 @@ tags: OpenClaw
 categories: 软件使用经验
 ---
 
+#    OpenClaw
+
 > [!NOTE] 笔记说明
 >
 > 尽管，我已经在之前的 Agent 系列笔记中介绍过了 OpenClaw 中的一些通用于所有 Agent 的使用方法，但为了让[这个笔记库](https://github.com/owlman/CS_StudyNotes)中记录的知识更为系统，我决定再写一篇补充性的笔记，用于记录那些独属于 OpenClaw 的使用经验，并予以长期维护。
