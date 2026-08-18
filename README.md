@@ -54,7 +54,7 @@
 
    - 编码 & 编译：[NeoVim](./04_软件使用经验/editor/NeoVim%20使用笔记.md) / [VS Code](./04_软件使用经验/IDE/VS%20Code%20配置笔记.md) / [Clang](./04_软件使用经验/Compilers/Clang%20使用笔记.md) / [LaTeX](./03_编程技术学习/计算机语言/02.标记语言/LaTeX/LaTeX学习笔记：快速上手指南.md)
 
-   - 构建 & 运维：[Git](./04_软件使用经验/Git/Git%20使用笔记.md) / [Zsh](./04_软件使用经验/Shell/Zsh%20配置笔记.md) / [Fish](./04_软件使用经验/Shell/Fish%20配置笔记.md) / [Make](./04_软件使用经验/Builder/Makefile%20使用笔记.md) / [Docker](./04_软件使用经验/Docker/Docker%20使用笔记.md) / [Kubernetes](./04_软件使用经验/k8s/Kubernetes%20使用笔记.md)
+   - 构建 & 运维：[Git](./04_软件使用经验/DevOps/Git/Git%20使用笔记.md) / [Zsh](./04_软件使用经验/Shell/Zsh%20配置笔记.md) / [Fish](./04_软件使用经验/Shell/Fish%20配置笔记.md) / [Make](./04_软件使用经验/Builder/Makefile%20使用笔记.md) / [Docker](./04_软件使用经验/DevOps/Docker/Docker%20使用笔记.md) / [Kubernetes](./04_软件使用经验/DevOps/k8s/Kubernetes%20使用笔记.md)
 
    - 辅助 & 查询：[AI Agent](./04_软件使用经验/AI-Agent/Agent%20的基础应用.md)
 
