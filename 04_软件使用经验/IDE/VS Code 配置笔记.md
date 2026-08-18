@@ -46,7 +46,7 @@ Visual Studio Code（以下简称 VSCode）是一款由微软公司开发并维�
   - **markdownlint**：该插件是个功能强大的 Markdown 语法检查器，可以帮助我们书写出规范的 Markdown 文档，避免因书写错误而导致的文档渲染问题。
   - **Paste Image**：可用于将复制到剪贴板中的图片直接通过在 Markdown 文档中粘贴的方式保存到本地计算机中。
   - **Markdown PDF**：一款基于 Pandoc 的文件格式转换器，支持将 Markdown 文件转换为 PDF、HTML、PNG 等格式的文件。
-  - **Foam**：用于构建卡片盒笔记系统的工具。（关联资料：[[在 VSCode 中实践双链笔记]]）
+  - **Foam**：用于构建卡片盒笔记系统的工具。（关联资料：[[在 VS Code 中实践双链笔记]]）
   - **Latex Workshop**：该插件可用于在 VSCode 编辑器中实现 LaTeX 文档的编译、预览与调试功能。（关联资料：[[LaTeX学习笔记：快速上手指南]]）
   - **Zhihu On VSCode**：可用于 Markdown 文件在知乎上的一键发布。
   - **博客园 cnblogs 客户端**：可用于 Markdown 文件在博客园上的一键发布。
