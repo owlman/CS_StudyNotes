@@ -5,6 +5,8 @@ tags: ${2|tag1,tag2,tag3|}
 categories: ${3|category1,category2,category3|}
 ---
 
+# New Note
+
 > [!NOTE] 笔记说明
 >
 
