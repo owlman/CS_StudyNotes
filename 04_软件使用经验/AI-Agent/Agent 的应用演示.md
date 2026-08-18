@@ -6,6 +6,8 @@ tags: [opencode, openclaw]
 categories: 软件配置与使用
 ---
 
+# Agent      
+
 > [!NOTE] 笔记说明
 >
 > 这篇文章是 Agent 系列笔记的最后一篇，其中记录了我在使用 Agent 过程中所累积的具有代表性的、可复现的应用场景（包括私人助理、职场办公、开发测试、代码分析等）及其具体解决方案。同样的，这些内容也将被收录在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。

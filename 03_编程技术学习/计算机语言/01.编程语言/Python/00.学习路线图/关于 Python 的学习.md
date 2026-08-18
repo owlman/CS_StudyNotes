@@ -6,6 +6,8 @@ tags: 学习路线图
 categories: 编程语言
 ---
 
+#    Python    
+
 > [!NOTE] 笔记说明
 >
 > 在这个系列笔记中，我将陆续整理自己在学习 Python 这门编程语言过程中所累积的心得与体会，它们将被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)，并予以长期维护。

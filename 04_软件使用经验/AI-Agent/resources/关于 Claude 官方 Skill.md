@@ -7,6 +7,8 @@ tags: Claude_Code, Skill
 categories: 软件配置与使用
 ---
 
+#    Claude    Skill
+
 今天就直接上手最权威的起点：**Anthropic 官方的 Skills 仓库** → [anthropics/skills](https://github.com/anthropics/skills)。这个库是 Claude Skills 的「官方示范包」，里面放了 50+ 个高质量、可直接用的技能示例。安装后，Claude 瞬间变身你的专属「文档专家」「代码测试员」「创意设计师」……再也不用每次狂塞长 prompt 了。
 
 读完这篇，你就能在 15 分钟内把官方 Skills 装进 Claude Code / Claude.ai，立马感受到「AI 记住你工作方式」的高效体验。
