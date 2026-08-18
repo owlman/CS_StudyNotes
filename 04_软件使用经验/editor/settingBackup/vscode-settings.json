@@ -157,14 +157,7 @@
     "trae.tab.enableRename": false,
     "trae.tab.enableAutoImport": false,
     "markdown-preview-enhanced.latexEngine": "pdflatex",
-    "editor.fontFamily": "'Ubuntu Mono derivative Powerline',  'Consolas', 'Courier New', 'monospace'",
+    "editor.fontFamily": "'Ubuntu Mono derivative Powerline',  'Consolas', 'Courier New', 'monospace'"
     
-    //---------LaTeX Workshop 配置结束-----------
-    //---------markdownlint 配置开始-----------
-    "markdownlint.config": {
-        "no-duplicate-heading": false,
-        "single-h1": false,
-        "first-line-heading": false
-    }
-    //----------markdownlint 配置结束-----------
+    //---------LaTeX Workshop 配置结束----------- 
 }
