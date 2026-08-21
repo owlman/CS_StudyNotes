@@ -1,5 +1,5 @@
 ---
-title: Andrej Karpathy的LLM知识库方法论
+title: Andrej Karpathy 的 LLM 知识库方法论
 author: 时光的沙盒
 from: https://zhuanlan.zhihu.com/p/2023803203725135995
 date: 2026-05-27
