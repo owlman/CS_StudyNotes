@@ -6,11 +6,9 @@ tags: 自动化构建
 categories: 软件使用经验
 ---
 
-# Ninja     
-
 > [!NOTE] 笔记说明
 >
-> 这篇笔记用于系统性地介绍 Ninja 这款轻量级的项目构建工具。它最初参考自知乎专栏文章[《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，我在对文章的内容进行二次整理和内容补充之后，将其纳入到了本人的[计算机专业笔记库](https://github.com/owlman/CS_StudyNotes)，并打算予以长期维护。
+> 这篇笔记是《[[Makefile 使用笔记]]》的姊妹篇，将用于记录本人在使用 Ninja 这款项目构建工具过程中所记录的心得体会，它侧重于 Ninja 在现代 C/C++ 工程中的实际使用方式。具体包括以 CMake 作为元构建系统时所生成的 `build.ninja` 文件的逐段解析思路，以及日常排错时常用的 `ninja` 命令与参数，便于在阅读和维护 PyTorch 等采用 CMake + Ninja 范式的大型开源项目时能够快速上手。同样的，本笔记也将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。
 
 ## Ninja 简介
 
@@ -252,3 +250,4 @@ Ninja 的高级工具主要在`-t`参数下面，常用的子命令如下。
 
 - [Ninja 官方网站](https://ninja-build.org/)
 - [Ninja 在 GitHub 上的仓库](https://github.com/ninja-build/ninja)
+- [知乎专栏:《一文读懂 ninja 构建系统》（作者：游凯超）](https://zhuanlan.zhihu.com/p/676733751)，
