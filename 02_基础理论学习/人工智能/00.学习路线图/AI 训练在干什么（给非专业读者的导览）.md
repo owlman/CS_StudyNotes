@@ -6,7 +6,6 @@ tags: AI 入门, 深度学习, 科普
 categories: AI 入门
 ---
 
-# AI                  
 
 > [!NOTE] 关于本文
 >

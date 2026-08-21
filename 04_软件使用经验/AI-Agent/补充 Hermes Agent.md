@@ -6,8 +6,6 @@ tags: [Hermes-Agent, OpenClaw]
 categories: 软件配置与使用
 ---
 
-#    Hermes Agent
-
 > [!NOTE] 笔记说明
 >
 > 这篇文章是 Agent 系列笔记的后续补充，主要用于补充介绍 Hermes Agent 的使用方法以及相关的个人体验。同样的，这些内容也将被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。

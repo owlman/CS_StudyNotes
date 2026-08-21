@@ -6,8 +6,6 @@ tags: 代码编译器
 categories: 命令行工具
 ---
 
-# Clang     
-
 > [!NOTE] 笔记说明
 >
 > 这篇笔记主要记录了我个人在使用 Clang 编译器时所累积的一些心得体会。它将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。

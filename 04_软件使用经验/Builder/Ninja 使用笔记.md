@@ -8,7 +8,7 @@ categories: 软件使用经验
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记是《[[Makefile 使用笔记]]》的姊妹篇，将用于记录本人在使用 Ninja 这款项目构建工具过程中所记录的心得体会，它侧重于 Ninja 在现代 C/C++ 工程中的实际使用方式。具体包括以 CMake 作为元构建系统时所生成的 `build.ninja` 文件的逐段解析思路，以及日常排错时常用的 `ninja` 命令与参数，便于在阅读和维护 PyTorch 等采用 CMake + Ninja 范式的大型开源项目时能够快速上手。同样的，本笔记也将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。
+> 这篇笔记是《[[Makefile 使用笔记]]》的姊妹篇，将用于记录本人在使用 Ninja 这款项目构建工具过程中所记录的心得体会，它侧重于 Ninja 在现代 C/C++ 工程中的实际使用方式。具体内容包括以 CMake 为元构建系统时所生成的`build.ninja`文件的逐段解析思路，以及日常排错时常用的`ninja`命令与参数，便于在阅读和维护 PyTorch 等采用 CMake + Ninja 范式的大型开源项目时能够快速上手。同样的，本笔记也将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。
 
 ## Ninja 简介
 
