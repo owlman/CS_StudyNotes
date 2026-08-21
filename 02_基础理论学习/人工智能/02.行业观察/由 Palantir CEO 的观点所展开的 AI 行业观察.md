@@ -6,8 +6,6 @@ tags: [AI, 行业观察, 商业模式]
 categories: 人工智能
 ---
 
-#   Palantir CEO         AI     
-
 > [!NOTE] 笔记说明
 >
 > 这篇笔记记录了 Palantir 的 CEO，Alex Karp 对美国当前 AI 公司估值模式的批评，以及我基于他的观点所展开的个人行业观察。

@@ -5,8 +5,6 @@ tags: Linux
 categories: 操作系统
 ---
 
-# Ubuntu     
-
 > [!NOTE] 笔记说明
 >
 > 这篇笔记将用于记录本人在使用 Ubuntu 系统过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。

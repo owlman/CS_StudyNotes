@@ -6,8 +6,6 @@ tags: Fish
 categories: 软件使用经验
 ---
 
-# Fish     
-
 > [!NOTE] 笔记说明
 >
 > 在这篇笔记中，我会重点介绍个人配置与使用 Fish 的相关经验。以及如何利用 oh-my-fish 来将其美化。后者是一个简单易用的 Fish shell 框架，允许用户安装功能扩展或更改 Shell 外观的软件包。同样的，它将会被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes) 中，并予以长期维护。

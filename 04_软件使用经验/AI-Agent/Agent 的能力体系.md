@@ -6,8 +6,6 @@ tags: [Prompt, MCP, Skills]
 categories: 软件配置与使用
 ---
 
-# Agent      
-
 > [!NOTE] 笔记说明
 >
 > 这篇笔记是《[[Agent 的基础应用]]》一文的后续。其中记录了我学习 Agent 应用的能力体系（提示词、MCP、skills），并将其运用于实际工作场景的心得体会。同样的，这些内容也将作为我 Agent 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。

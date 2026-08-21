@@ -6,8 +6,6 @@ tags: LLM本地部署, llama-cpp
 categories: 人工智能
 ---
 
-#    Node Llama Cpp   LLM     
-
 node-llama-cpp是一个基于llama.cpp的Node.js绑定库，让你能够在本地机器上运行AI模型，并在生成级别强制模型输出符合JSON模式。本文将为你提供Windows、Linux和Mac全平台的安装与配置教程，帮助你快速上手这款强大的AI工具。
 
 ## 一、准备工作

@@ -6,8 +6,6 @@ tags: Vue.js
 categories: Web应用开发
 ---
 
-#        Vue Js 2 X
-
 ## 学习规划
 
 - 学习基础：
