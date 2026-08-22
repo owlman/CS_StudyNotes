@@ -142,8 +142,7 @@ categories: 软件配置与使用
     └── cache/           # SHA256 缓存：重复运行时只处理变更过的文件
     ```
 
-    <!-- ![查看graphify生成的知识图谱](./img/opencode_graphify_graph.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412114340097-1772247401.png)
+    ![查看graphify生成的知识图谱](./img/opencode_graphify_graph.png)
 
     **图 11**：查看 graphify 生成的知识图谱
 
