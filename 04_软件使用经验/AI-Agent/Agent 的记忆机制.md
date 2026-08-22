@@ -18,8 +18,7 @@ categories: 软件配置与使用
 
 和能力体系一样，Agent 的记忆机制也是一个基于分层结构来实现的**工程系统**，其目前最典型的实现方式是一个被称为 RAG 架构的三层结构设计，具体如图 1 所示。
 
-<!-- ![基于 RAG 架构的 Agent 记忆机制](./img/rag_architecture.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412113413424-906187191.png)
+![基于 RAG 架构的 Agent 记忆机制](./img/rag_architecture.png)
 
 **图 1** 基于 RAG 架构的 Agent 记忆机制
 
@@ -48,16 +47,16 @@ categories: 软件配置与使用
 
 **表 1** 2025–2026 年主要 LLM 的上下文窗口大小[^1]
 
-| 模型                   | 最大容量（token） | 备注说明              |
-| -------------------- | ----------- | ----------------- |
-| GPT-4o / GPT-4.1     | 128K – 1M   | 不同版本差异较大（API 可扩展） |
-| Claude 3 / 3.5 / 3.7 | 200K        | 长上下文能力稳定，擅长文档处理   |
-| Gemini 1.5 / 2.0     | 1M – 2M     | 当前上下文窗口最大的商业模型    |
-| Kimi（Moonshot）       | 200K – 2M   | 主打超长上下文           |
-| MiniMax（abab系列）      | 128K – 1M   | 支持长上下文，多模态能力逐步增强  |
-| Qwen（通义千问）           | 32K – 1M    | 新版本支持超长上下文        |
-| LLaMA 3（开源）          | 8K – 128K   | 依赖具体部署与扩展方案       |
-| Mistral / Mixtral    | 32K – 128K  | 轻量模型，适合本地或成本敏感场景  |
+| 模型                 | 最大容量（token） | 备注说明                         |
+| -------------------- | ----------------- | -------------------------------- |
+| GPT-4o / GPT-4.1     | 128K – 1M         | 不同版本差异较大（API 可扩展）   |
+| Claude 3 / 3.5 / 3.7 | 200K              | 长上下文能力稳定，擅长文档处理   |
+| Gemini 1.5 / 2.0     | 1M – 2M           | 当前上下文窗口最大的商业模型     |
+| Kimi（Moonshot）     | 200K – 2M         | 主打超长上下文                   |
+| MiniMax（abab系列）  | 128K – 1M         | 支持长上下文，多模态能力逐步增强 |
+| Qwen（通义千问）     | 32K – 1M          | 新版本支持超长上下文             |
+| LLaMA 3（开源）      | 8K – 128K         | 依赖具体部署与扩展方案           |
+| Mistral / Mixtral    | 32K – 128K        | 轻量模型，适合本地或成本敏感场景 |
 
 [^1]:相关数据截止于2026年4月。
 
@@ -65,8 +64,7 @@ categories: 软件配置与使用
 
 目前在关于长上下文窗口方面的实践，最为典型的就是由 Andrej Karpathy 于 2026 年 4 月 3 日在 X 平台分享的 LLM 知识库方法论了，这套方法论主张先让 LLM 将我们日常所收集到的博客、论文、代码、图片等资料“预编译”成结构化的 Wiki，让其成为可被 LLM 的长上下文窗口直接处理的语料，以便减少实时检索带来的不确定性（其工作流程如图 2 所示，更详细的介绍可阅读这篇笔记的“参考资料”部分列出的博客文章）。换言之，我们现在可以将某一特定领域的知识进行持续的增量编译并将结果保存在本地，然后让 Agent 应用在需要时加载这个预编译的结果，并利用长上下文窗口的特性来提升 LLM 的推理效果。
 
-<!-- ![Andrej Karpathy的LLM知识库工作流](./img/karpathy-workflow-diagram.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412113549665-1653848225.png)
+![Andrej Karpathy的LLM知识库工作流](./img/karpathy-workflow-diagram.png)
 
 **图 2**：Andrej Karpathy 的 LLM 知识库工作流
 
@@ -76,69 +74,61 @@ categories: 软件配置与使用
 
 在从系统概念的层面对 Agent 应用的记忆机制有了一个初步的了解之后，我们接下来将分别以可部署在服务端的 OpenClaw 和仅在本地运行的 OpenCode 这两种典型的 Agent 应用为例，从工程实践的角度来探讨如何为 Agent 应用构建相应的记忆机制。
 
-### 实践1：赋予服务型 Agent 长期记忆
+### 实践 1：赋予服务型 Agent 长期记忆
 
 对于 OpenClaw、Hermes Agent 这类需要以系统服务形式长期运行的 Agent 应用来说，增强跨会话的长期记忆能力可能比保证它在单一长会话的短期记忆更重要一些，因为这直接关系到它作为一款服务端应用，能否长期与用户保持协作关系的能力，这需要它能记住用户之前执行过操作，制定的解决方案，甚至在某程度上了解用户的使用习惯与偏好，形成某种意义上的任务协同经验，我会推荐读者直接借助 GitHub 上一款名为`memory-lancedb-pro`的开源项目来为其增强长期记忆能力，以便在实践中去体验 RAG 架构的实际效果，其具体步骤如下。
 
 1. 在 Github 上搜索`memory-lancedb-pro-skill`，找到该项目的作者为方便用户安装这个插件提供的 Skill，如图 3 所示。
 
-    <!-- ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_skill.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412113753679-1740687812.png)
+    ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_skill.png)
 
     **图 3**：memory-lancedb-pro-skill
 
 2. 使用`git clone`命令将这个 Skill 下载到本地，并复制到 OpenClaw 的用户自定义 Skills 目录中（`~/.openclaw/workspace/skills`），然后在飞书客户端中确认该 Skill 是否已经成功加载，如图 4 所示。
 
-    <!-- ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_skill_load.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412113633564-2049516179.png)
+    ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_skill_load.png)
 
     **图 4**：确认`memory-lancedb-pro-skill`加载成功
 
 3. 继续在飞书客户端中输入内容为“请通过这个 skill，替我自动从零安装 memory-lancedb-pro 插件”的提示词，让 OpenClaw 自动安装`memory-lancedb-pro`插件，如图 5 所示。
 
-    <!-- ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_install.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412113838429-2086692482.png)
+    ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_install.png)
 
     **图 5**：自动安装`memory-lancedb-pro`插件
 
 4. 接着输入内容为“请按照你的理解自动帮我配置”的提示词，让 OpenClaw 自动选择配置`memory-lancedb-pro`插件的最佳方案，如图 6 所示。
 
-    <!-- ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_config.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412113910348-1591720195.png)
+    ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_config.png)
 
     **图 6**：自动配置`memory-lancedb-pro`插件
 
 5. 待配置完成之后，我们就可以继续在飞书客户端中输入内容为“请为我测试写入与检索记忆”的提示词，让OpenClaw自动测试`memory-lancedb-pro`插件的效果。如果一切顺利，读者应该会看到类似于图 7 的回复效果。
 
-    <!-- ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_test.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412114025880-459640940.png)
+    ![memory-lancedb-pro-skill](./img/memory_lancedb_pro_test.png)
 
     **图 7**：测试`memory-lancedb-pro`插件的效果
 
 至此，我们就赋予了 OpenClaw 长期记忆能力。这意味着，OpenClaw 在执行任务时，可以借助记忆能力来增强其生成效果，从而解决幻觉现象、知识滞后、数据孤岛等问题。与此同时，读者也应该从上述过程中看到 Agent Skills 在工程化应用中的实际价值：通过封装 Skills，我们可以将复杂行为模块化，降低系统复杂度，提高复用效率。
 
-### 实践2：赋予本地型 Agent 专业知识
+### 实践 2：赋予本地型 Agent 专业知识
 
 对于 Claude Code、OpenCode 这类仅在本地运行的 Agent 应用来说，它所执行的任务通常都是以会话为单位来进行的，因此它们自带的记忆系统都是关于会话管理的，其中包括了历史会话列表、启动新会话时要载入的系统提示词、当前会话要跟踪的任务列表等，它们通常都是一些 Markdown 格式的线性记忆文件，在大多数情况下更侧重于上下文窗口的优化应用，很少需要用到基于 RAG 架构的长期记忆、相反，由于这类 Agent 应用更关注的是单一的特定任务，而不是与用户维持长期稳定的协作服务，任务所需的专业知识通常比了解用户的使用偏好更为重要一些。在这种情况下，Karpathy 的 LLM 知识库所具备的实用性就体现出来了。下面，我就以 Github 上一款名为`graphify`的开源项目为例，来演示一下如何为 OpenCode 增强编程领域的专业知识并将其运用到具体项目分析工作中，其具体步骤如下。
 
 1. 在 Github 上搜索`graphify`，找到该项目的说明文档（即`README.md`或`README_zh-CN.md`），如图 8 所示。
 
-    <!-- ![graphify项目的说明文档](./img/graphify_readme.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412114152819-539927049.png)
+    ![graphify项目的说明文档](./img/graphify_readme.png)
 
     **图 8**：graphify 项目的说明文档
 
 2. 现在，我们既可以按照说明文档进行手动安装和配置，也可以打开 OpenCode 并输入内容为“请为我安装这个项目并完成相应的配置，<这个项目的 URL>”的提示词，让 OpenCode 自动安装和配置`graphify`知识库，如图 9 所示。
 
-    <!-- ![graphify的安装与配置](./img/opencode_graphify_install.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412114241663-980732722.png)
+    ![graphify的安装与配置](./img/opencode_graphify_install.png)
 
     **图 9**：安装与配置`graphify`知识库
 
 3. 待安装与配置完成之后，我们就可以继续在 OpenCode 中打开我的一个现有项目（在这里，我以`pythonShell`这个项目为例），然后输入`/graphify .`命令，让 OpenCode 自动生成编程知识图谱，如图 10 所示。
 
-    <!-- ![为指定项目生成知识库及图谱](./img/opencode_graphify_generate.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412114310812-1583914389.png)
+    ![为指定项目生成知识库及图谱](./img/opencode_graphify_generate.png)
 
     **图 10**：为指定项目生成知识库及图谱
 
@@ -159,8 +149,7 @@ categories: 软件配置与使用
 
 现在，基于这个个知识库，我们可以在 OpenCode 中对项目进行详细分析。例如，通过输入`/graphify explain git_push_remote`命令来让 OpenCode 为我们解释`git-push-remote`这个工具，如图 12 所示。
 
-<!-- ![让OpenCode解释项目中的工具](./img/opencode_graphify_explain.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202604/691082-20260412114409473-814356338.png)
+![让OpenCode解释项目中的工具](./img/opencode_graphify_explain.png)
 
 **图 12**：让 OpenCode 解释项目中的工具
 
