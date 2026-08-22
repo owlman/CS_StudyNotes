@@ -57,23 +57,23 @@ vue create 04_vueclidemo
 
 ```bash
 04_vuecliDemo
-├─── dist                      # 存放项目输出文件的目录
-├─── node_modules              # 存放项目依赖项的目录
-├─── public                    # 存放不参与编译的资源文件的目录
+├─── dist                         # 存放项目输出文件的目录
+├─── node_modules                 # 存放项目依赖项的目录
+├─── public                       # 存放不参与编译的资源文件的目录
 │       ├─── favicon.icon         # 项目使用的图标文件
 │       └─── index.html           # 项目的入口页面文件
-├─── src                       # 存放项目源代码的目录
+├─── src                          # 存放项目源代码的目录
 │       ├─── assets               # 存放将参与编译的资源文件的目录
-│       │       └─── logo.png        # 示例图片类型的资源文件
+│       │       └─── logo.png     # 示例图片类型的资源文件
 │       ├─── components           # 存放自定义组件的目录
 │       │       └─── HelloWorld.vue  # 自定义组件示例文件
 │       ├─── App.vue              # 应用程序的根组件定义文件
 │       └─── main.js              # 应用程序的入口文件
-├─── babel.config.js           # babel 转译器的配置文件
-├─── .gitignore                # 需要被 git 版本控制系统忽略的文件列表
-├─── README.md                 # 项目的自述文件
-├─── package-lock.json         # NPM 包管理器的锁定配置文件
-└─── package.json              # NPM 包管理器的配置文件
+├─── babel.config.js              # babel 转译器的配置文件
+├─── .gitignore                   # 需要被 git 版本控制系统忽略的文件列表
+├─── README.md                    # 项目的自述文件
+├─── package-lock.json            # NPM 包管理器的锁定配置文件
+└─── package.json                 # NPM 包管理器的配置文件
 ```
 
 虽然我们在上述结构示意图中用注释的形式详细说明了项目中每个目录和文件的作用，但在多数正常情况下，项目中的绝大部分文件是不需要程序员进行过多干预的，即使要解决一些配置问题，也只需要依据我们之前所学习的知识在相应的配置文件中做一些**谨慎的微调**即可，例如通过`package.json`调整项目中的组件依赖关系，通过自行创建一个名为`vue.config.js`文件来添加自定义的 Webpack 配置等。除了这些维护性工作之外，前端开发的主要工作都会在`src`目录中进行。下面就让我们重点来讨论一下该目录下的内容。首先要关注的是`main.js`文件，其中所编写的代码如下所示：
@@ -203,22 +203,22 @@ VITE v5.2.13  ready in 1716 ms
 
 ```bash
 05_vitejsDemo
-├─── dist                      # 存放项目输出文件的目录
-├─── node_modules              # 存放项目依赖项的目录
-├─── public                    # 存放不参与编译的资源文件的目录
+├─── dist                         # 存放项目输出文件的目录
+├─── node_modules                 # 存放项目依赖项的目录
+├─── public                       # 存放不参与编译的资源文件的目录
 │       └─── favicon.icon         # 项目使用的图标文件
-├─── src                       # 存放项目源代码的目录
+├─── src                          # 存放项目源代码的目录
 │       ├─── assets               # 存放将参与编译的资源文件的目录
-│       │       └─── logo.png        # 示例图片类型的资源文件
+│       │       └─── logo.png     # 示例图片类型的资源文件
 │       ├─── components           # 存放自定义组件的目录
 │       │       └─── HelloWorld.vue  # 自定义组件示例文件
 │       ├─── App.vue              # 应用程序的根组件定义文件
 │       └─── main.js              # 应用程序的入口文件
-├─── vite.config.js            # Vite 的配置文件
-├─── .gitignore                # 需要被 git 版本控制系统忽略的文件列表
-├─── index.html                # 项目的入口页面文件
-├─── package-lock.json         # NPM 包管理器的锁定配置文件
-└─── package.json              # NPM 包管理器的配置文件
+├─── vite.config.js               # Vite 的配置文件
+├─── .gitignore                   # 需要被 git 版本控制系统忽略的文件列表
+├─── index.html                   # 项目的入口页面文件
+├─── package-lock.json            # NPM 包管理器的锁定配置文件
+└─── package.json                 # NPM 包管理器的配置文件
 ```
 
 正如读者所见，Vite 所生成项目的目录结构与我们之前用 vue-cli 所生成的项目基本是相同的，只有配置文件变成了`vite.config.js`文件。需要说明的是，由于 Vite 使用的是 Rollup 这个打包工具及其插件体系，因此在具体的配置方法上会与 Webpack 存在着许多的不同之处，Rollup 更为强大的插件体系也赋予了 Vite 更灵活的扩展能力。我会另外专门写一篇文章来具体介绍 vite 的配置，这里考虑到篇幅的因素，就先暂且按下不表了，如果读者对此有兴趣，也可以先自行查阅 Vite 的官方文档。
