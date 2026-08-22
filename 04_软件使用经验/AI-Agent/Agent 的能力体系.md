@@ -74,8 +74,7 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 
 2. **选择要接入 MCP 服务并查阅其说明文档**：目前主要的 MCP 服务都会提供详尽的说明文档，其中会包含它们的各种接入参数，以及面向各种 Agent 应用的配置方法。例如，`playwright`这个 MCP 服务的说明文档如图 1 所示。
 
-    <!-- ![图1：playwright的说明文档](./img/mcp_document.png) -->
-    ![img](https://img2024.cnblogs.com/blog/691082/202603/691082-20260304200939794-767175159.png)
+    ![图1：playwright的说明文档](./img/mcp_document.png)
 
     **图 1**：playwright 的说明文档
 
@@ -140,15 +139,13 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 
 在完成了上述配置之后，我们只需在 OpenCode TUI 中执行`/mcps`命令，就可以看到所有已配置的 MCP 服务，并管理它们的接入状态了，如图 2 所示。
 
-<!-- ![图2：在OpenCode TUI中确认MCP服务的接入状态](./img/mcp_status.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202603/691082-20260304201034396-2131088657.png)
+![图2：在OpenCode TUI中确认MCP服务的接入状态](./img/mcp_status.png)
 
 **图 2**：在 OpenCode TUI 中确认 MCP 服务的接入状态
 
 在确认`playwright`这个 MCP 服务已成功接入之后，我们就可以试着在 OpenCode TUI 中使用提示词让它去调用网页浏览器打开 Twitter/X，并发一个测试推文来检查这个 MCP 服务的功能是否可用了，如图 3 所示。
 
-<!-- ![图3：试用playwright服务](./img/opencode_twitter.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202603/691082-20260304201111203-643829693.png)
+![图3：试用playwright服务](./img/opencode_twitter.png)
 
 **图 3**：试用 playwright 服务
 
@@ -211,26 +208,23 @@ MCP（即 Model Context Protocol，中文可翻译为“模型上下文协议”
 
 在完成了上述操作之后，我们只需在 OpenCode TUI 中执行`/skills`命令，就可以看到该 Agent 应用在当前作用域下可用的所有 Skill 了，如图 4 所示。
 
-<!-- ![图4：在OpenCode TUI中确认当前可用的 Skill ](img/opencode_skills.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202603/691082-20260304201236771-1238341814.png)
+![图4：在OpenCode TUI中确认当前可用的 Skill ](img/opencode_skills.png)
 
 **图 4**：在 OpenCode TUI 中确认当前可用的 Skill
 
 在确认`twitter`这个 Skill 可用之后，我们就可以试着在 OpenCode TUI 中使用提示词来调用这个 Skill。例如在这里，我让 OpenCode 将[一篇约 1000 字的书评](https://book.douban.com/review/10277456/)发布为一则推文，如图 5 所示。
 
-<!-- ![图5：试用twitter Skill](./img/twitter_skill.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202603/691082-20260304201256441-1788473979.png)
+![图5：试用twitter Skill](./img/twitter_skill.png)
 
 **图 5**：试用自定义的 twitter Skill
 
 当然了，考虑到人们在工作中遇到的任务场景是大同小异的，本着“不重复发明轮子”的原则，我在这里会建议读者在亲手开始封装某个 Skill 之前，先去 Github 这样的地方搜索一下，看看是否有人已经封装好了类似的功能。如果有的话，例如 [Anthropic 官方提供的 Skills](https://github.com/anthropics/skills)，我们就只需直接将其`git clone`下来，并将它`skills`目录下的所有内容复制到相应的 Agent 应用配置目录中即可，如图 6 所示。
 
-<!-- ![图6：Anthropic官方提供的Skills](./img/anthropic_skills.png) -->
-![img](https://img2024.cnblogs.com/blog/691082/202603/691082-20260304201327459-558499294.png)
+![图6：Anthropic官方提供的Skills](./img/anthropic_skills.png)
 
 **图 6**：Anthropic 官方提供的 Skills
 
-> 如果读者想基于 Anthropic 的官方产品 Claude Code 进一步研究 Skills 机制的构建与使用方法，也可以参考本文在“参考资料”一节中列出的官方文档：《Agent Skills 构建指南》，或[[关于 Claude 官方 Skill]] 这篇参考文献
+> 如果读者想基于 Anthropic 的官方产品 Claude Code 进一步研究 Skills 机制的构建与使用方法，也可以参考本文在“参考资料”一节中列出的官方文档：《Agent Skills 构建指南》，或[[关于 Claude 官方 Skill]] 这篇参考文献。
 
 ### Skills 机制 VS 提示词模板
 
