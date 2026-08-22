@@ -48,15 +48,13 @@ sudo pacman -S zsh
 
 如果您使用的是上述操作系统之一，在执行完相应的安装命令之后，就可以使用`cat /etc/shells`命令查看当前系统可以用的 Shell 了。然后，只要在该命令返回的结果中看到`/bin/zsh`，就说明 Zsh 已经安装好了，如图 1 所示。
 
-<!-- ![图 1：当前可用的 Shell](./img/show_shell.png) -->
-![图 1：当前可用的 Shell](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195509700-1475784110.png)
+![图 1：当前可用的 Shell](./img/show_shell.png)
 
 **图 1**：当前可用的 Shell
 
 接下来，我们可以使用`chsh -s /bin/zsh`命令将 Zsh 设置为系统默认 Shell 了。如果到目前为止的操作一切顺利，现在只需要重新启动一个 Shell 会话（通常是一个命令行终端窗口），就会看到 Zsh 的初始配置了，如图 2 所示。
 
-<!-- ![图 2：Zsh 的配置引导界面](./img/initial.png) -->
-![图 2：Zsh 的配置引导界面](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195545492-898979643.png)
+![图 2：Zsh 的配置引导界面](./img/initial.png)
 
 **图 2**：Zsh 的配置引导界面
 
@@ -98,8 +96,7 @@ Oh-My-Zsh 是一款 Zsh 的配置管理工具，它提供了丰富的主题和�
 
 - 在执行上述命令过程中，我们需要同意 Oh-My-Zsh 使用自身的配置模板覆盖已有的`.zshrc`文件，如图 3 所示（由于我已完成配置，不便截图，此处引用来自[网络的截图](https://www.haoyep.com/posts/zsh-config-oh-my-zsh/)）：
 
-    <!-- ![图 3：Oh-My-Zsh 的安装界面](./img/install_OMZ.png) -->
-    ![图 3：Oh-My-Zsh 的安装界面](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195313417-1869352098.png)
+    ![图 3：Oh-My-Zsh 的安装界面](./img/install_OMZ.png)
 
     **图 3**：Oh-My-Zsh 的安装过程
 
@@ -146,8 +143,7 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
 
 3. 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`或`omz reload`命令使配置生效。例如，图 4 所示的是启用`extract`插件之后，使用`x`命令解压文件的效果：
 
-    <!-- ![图 4：extract 插件的效果](./img/extract.png) -->
-    ![图 4：extract 插件的效果](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195637290-2033293748.png)
+    ![图 4：extract 插件的效果](./img/extract.png)
 
     **图 4**：extract 插件的效果
 
@@ -155,8 +151,7 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
 
 在 Oh-My-Zsh 中，我们可以通过一种被称之为“主题”的特殊插件来配置 Zsh 界面所呈现的外观，目的是通过各种特定的颜色和提示信息让命令行界面的易用性和美观性达到一个平衡。Oh-My-Zsh 内置了大量的主题，它们都被存放在 Oh-My-Zsh 安装目录下的`themes`目录中（也可以前往 [Oh-My-Zsh 官方文档](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)查看），如图 5 所示：
 
-<!-- ![图 5：Oh-My-Zsh 内置的主题](./img/themes.png) -->
-![图 5：Oh-My-Zsh 内置的主题](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195719176-616308269.png)
+![图 5：Oh-My-Zsh 内置的主题](./img/themes.png)
 
 **图 5**：Oh-My-Zsh 内置的主题
 
@@ -172,8 +167,7 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
 
 - 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`命令使配置生效，其效果如图 6 所示：
   
-    <!-- ![图 6：agnoster 主题的效果](./img/agnoster.png) -->
-    ![图 6：agnoster 主题的效果](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195816172-926042684.png)
+    ![图 6：agnoster 主题的效果](./img/agnoster.png)
 
     **图 6**：agnoster 主题的效果
 
@@ -193,15 +187,13 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
 
 3. 保存并关闭`.zshrc`文件，然后执行`source ~/.zshrc`或`omz reload`命令使配置生效。在该主题配置首次生效时会启动一个配置向导（之后也可以通过执行`p10k configure`命令来启动该向导），引导我们完成主题的配置，如图 7 所示：
 
-    <!-- ![图 7：powerlevel10k 主题的配置向导](./img/powerlevel10k.png) -->
-    ![图 7：powerlevel10k 主题的配置向导](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195900044-666707535.png)
+    ![图 7：powerlevel10k 主题的配置向导](./img/powerlevel10k.png)
 
     **图 7**：powerlevel10k 主题的配置向导
 
 4. 接下来，我们只需要根据上述配置向导的提示，按照自己的喜欢一步一步地做出选择，就可以完成主题的配置，我个人的配置效果如图 8 所示：
 
-    <!-- ![图 8：powerlevel10k 主题的配置效果](./img/powerlevel10k2.png) -->
-    ![图 8：powerlevel10k 主题的配置效果](https://img2024.cnblogs.com/blog/691082/202601/691082-20260106195953413-92453986.png)
+    ![图 8：powerlevel10k 主题的配置效果](./img/powerlevel10k2.png)
 
     **图 8**：powerlevel10k 主题的配置效果
 
