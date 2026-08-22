@@ -266,7 +266,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到如下用户界面了。
 
-   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093239943-1706380553.png)
+   ![img](img/vim-airline.png)
 
 #### ranger 插件
 
@@ -311,7 +311,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 3. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器并按下快捷键 Alt+o，就可以看到如下用户界面了。
 
-   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093309706-1651556637.png)
+   ![img](img/ranger.png)
 
 #### vim-startify 插件
 
@@ -351,7 +351,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到最近编辑过的文件了，如下图所示。
 
-   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093338530-1260250621.png)
+   ![img](img/vim-startify.png)
 
 #### vim-snazzy 主题插件
 
@@ -396,7 +396,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到如下用户界面。
 
-   ![img](https://img2023.cnblogs.com/blog/691082/202305/691082-20230531093410417-1672216531.png)
+   ![img](img/vim-snazzy.png)
 
 #### markdown-preview 插件
 
