@@ -61,6 +61,20 @@
                 "-y",
                 "@upstash/context7-mcp"
             ]
+        },
+        "amap-maps": {
+            "command": "npx",
+            "args": ["-y", "@amap/amap-maps-mcp-server"],
+            "env": {
+                "AMAP_MAPS_API_KEY": "<您在高德开放平台上申请的key>"
+            }
+        },
+        "12306-mcp": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "12306-mcp"
+            ]
         }
     }
 }
