@@ -134,11 +134,14 @@ ollama serve
         "stream": False
     }
 
-    response = requests.post(url, json=payload)
+    response = requests.post(url, json=payload, timeout=120)
+    response.raise_for_status()
     result = response.json()
 
     print(result["response"])
     ```
+
+完整示例（含 timeout / 错误处理 / 双端点调用）见 [examples/ollama_python.py](../../../04_软件使用经验/AI-Agent/examples/ollama_python.py)。
 
 3. **运行 Python 脚本**：在命令行终端中输入 `python ollama_python.py` 命令，运行 Python 脚本，即可看到 LLM 的输出结果，如图 5 所示。
 
