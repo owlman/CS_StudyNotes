@@ -121,7 +121,7 @@ ollama serve
 
 1. **启动 LLM**：在命令行终端中输入`ollama run llama3.2:3b`命令，启动 LLM 的本地运行实例。
 
-2. **创建 Python 脚本**；创建一个名为 `ollama_python.py` 的 Python 脚本，并在其中输入以下代码：
+2. **创建 Python 脚本**；创建一个名为 `ollama_run_test.py` 的 Python 脚本，并在其中输入以下代码：
 
     ```python
     import requests
@@ -141,7 +141,7 @@ ollama serve
     print(result["response"])
     ```
 
-完整示例（含 timeout / 错误处理 / 双端点调用）见 [examples/ollama_python.py](../../../04_软件使用经验/AI-Agent/examples/ollama_python.py)。
+    如果读者需要一个包含在局域网部署选项的完整测试示例（含 timeout / 错误处理 / 双端点调用）见 [examples/ollama_run_test.py](./examples/ollama_run_test.py)。
 
 3. **运行 Python 脚本**：在命令行终端中输入 `python ollama_python.py` 命令，运行 Python 脚本，即可看到 LLM 的输出结果，如图 5 所示。
 
