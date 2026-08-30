@@ -10,7 +10,7 @@ categories: 人工智能
 >
 > 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第三个学习阶段。其中记录了我尝试在个人开发环境中对一款轻量型的 LLM 进行微调的实验过程，以及个人在该过程中所获得的心得体会。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
 
-在正式开始实验之前，我首先需要与读者建立一些约定，用于确保这篇笔记所记录的实验过程与相关内容能真正发挥它的作用。由于这个实验的目的是通过实际操作过程来观察 LLM 微调的实际作用，并进而观察这项技术在 AI 系统中所扮演的角色，所以我认为实验环境应该是面向普通的个人开发者的。换言之，这篇笔记应该要记录的是基于普通笔记本电脑或 Mini PC 这类设备环境所进行的实验，它们通常没有独立显卡，基本配置如图 1 所示。这意味着，我在实验中只能使用 CPU 版本的微调工具环境，针对`Qwen 2.5-0.5b`这种微小规模的 LLM，**进行力所能及的基础微调实践**。
+在正式开始实验之前，我首先需要与读者建立一些约定，用于确保这篇笔记所记录的实验过程与相关内容能真正发挥它的作用。由于这个实验的目的是通过实际操作过程来观察 LLM 微调的实际作用，并进而观察这项技术在 AI 系统中所扮演的角色，所以我认为实验环境应该是面向普通的个人开发者的。换言之，这篇笔记应该要记录的是基于普通笔记本电脑或 Mini PC 这类设备环境所进行的实验，它们通常没有独立显卡，基本配置如图 1 所示。这意味着，我在实验中只能使用 CPU 版本的微调工具环境，针对`Qwen 2.5-0.5B`这种微小规模的 LLM，**进行力所能及的基础微调实践**。
 
 ![图 1 这篇笔记所使用的硬件环境](./img/lab_hardware.png)
 
@@ -76,7 +76,7 @@ categories: 人工智能
 
 ### LoRA 简介
 
-LoRA 这个微调方法最早出自一篇名为 *[LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)* 的论文。其核心思想可以概括为一句话：**LLM 在适配下游任务时，权重矩阵的更新量 $\Delta W$ 具有较低的本征秩（intrinsic rank），因此无需更新完整的权重矩阵 $W$，只需要用两个低秩矩阵的乘积来近似 $\Delta W$ 即可**。如果换成更精确的数学语言来描述，就是：对于 Transformer 中任意一个需要适配的权重矩阵 $W$（维度为 $d \times k$），我们都可以用两个小矩阵 $B$（维度 $d \times r$）与 $A$（维度 $r \times k$）的乘积 $BA$ 来表达 $\Delta W$，即 $\Delta W = BA$，其中 $r$ 远小于 $d$ 与 $k$（实践中通常取 4、8、16、32 这样的值），具体公式如下：
+LoRA 这个微调方法最早出自一篇名为 *[LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)* 的论文。其核心思想可以概括为一句话：**LLM 在适配下游任务时，权重矩阵的更新量 $\Delta W$ 具有较低的本征秩（intrinsic rank），因此无需更新完整的权重矩阵 $W$，只需要用两个低秩矩阵的乘积来近似 $\Delta W$ 即可**。如果将这句话翻译成更精确的数学语言来描述，那就是：对于 Transformer 中任意一个需要适配的权重矩阵 $W$（维度为 $d \times k$），我们都可以用两个小矩阵 $B$（维度 $d \times r$）与 $A$（维度 $r \times k$）的乘积 $BA$ 来表达 $\Delta W$，即 $\Delta W = BA$，其中 $r$ 远小于 $d$ 与 $k$（实践中通常取 4、8、16、32 这样的值），具体公式如下：
 
 $$
 W' = W + \Delta W = W + \frac{\alpha}{r} B A
@@ -97,57 +97,90 @@ $$
 
 现在，让我们回到接下来要进行的实验设定上了。根据我们在笔记开篇时的硬件约定，实验使用的是普通笔记本电脑或 Mini PC 这类基本没有独立显卡的设备。这就意味着，设备的**显存与内存容量**是制约我们能跑多大参数的 LLM、能跑多久训练的主要瓶颈。在这种情况下，LoRA 在资源开销上所具备的以下这几项优势，让它几乎成为了我们进行这个实验的唯一选择。
 
-- **可训练参数大幅减少**：LoRA 方法需要训练的参数量通常都只有 LLM 全部参数的`1%`以下，这就直接降低了 Adam 等优化器所需要维护的状态（动量、方差等）的存储开销；
+- **可训练参数大幅减少**：LoRA 方法需要训练的参数量通常都只有 LLM 全部参数的 1% 以下，这就直接降低了 Adam 等优化器所需要维护的状态（动量、方差等）的存储开销；
 - **激活显存与梯度显存显著下降**：在 LoRA 方法中，被冻结的 $W$ 在反向传播中不需要保存梯度，反向传播也只在小矩阵 $A$、$B$ 上进行；
 - **训练产物小巧且易于管理**：一次训练只产出一个体积通常只有几十到几百 MB 的 adapter 文件，便于在不同数据集、不同超参配置下进行多轮实验，并按需切换、叠加；
 - **生态成熟**：Hugging Face PEFT、LLaMA-Factory 等主流的 LLM 微调框架都对 LoRA 方法提供了完善的支持，从命令行工具到 WebUI 都有现成的封装。
 
-具体到本实验的目标对象`Qwen 2.5-0.5b`，它的参数量虽然不大，但即使是 0.5B 这种轻量级模型，全量微调在 CPU 环境下仍然会占用相当可观的内存与计算资源，训练时长也往往会拉长到令人难以接受的水平；而改用 LoRA 之后，单次训练的内存峰值与时长都能降到本实验硬件可以承受的范围内，训练产物也便于我们在后续阶段对它进行二次评估与对比。
+具体到本实验的目标对象`Qwen 2.5-0.5B`，它的参数量虽然不大，但即使是 0.5B 这种轻量级模型，全量微调在 CPU 环境下仍然会占用相当可观的内存与计算资源，训练时长也往往会拉长到令人难以接受的水平；而改用 LoRA 之后，单次训练的内存峰值与时长都能降到本实验硬件可以承受的范围内，训练产物也便于我们在后续阶段对它进行二次评估与对比。
 
 最后，还需要说明的是，我在这次实验中之所以选择 LoRA 而不是 QLoRA、DoRA 等更新的改进方法，主要是因为 LoRA 是整个 LoRA 家族中最为经典、对 CPU 环境最友好、社区资料最丰富的那一种，对一名初学者来说，它是理解 "PEFT" 这条技术路线最合适的起点。
 
 ## 实验过程记录
 
-在正式开始之前，先对本实验的规模与时间预算做一次粗略估算。参考 [How to Train a Local LLM on CPU Only（2026）](https://meshworld.in/blog/ai/tooling/train-local-llm-cpu-only/) 这类外部报告的基准（benchmark）数据，消费级 CPU 在 1,000 步内训练 Qwen 2.5-0.5B 大致需要 10-15 分钟；考虑到本实验所用的 i5-9500T（6 核 6 线程、2.2GHz 基频、不支持 AVX-512）综合性能约为参考机型的 20% 左右，**1,000 步的实际耗时预计落在 50-75 分钟**。按 "300 条《论语》样本 × 3 epoch、有效 batch=16" 的常规配置，整次实验的总步数约在 60 步左右——**纯训练时间本身只需 1-2 分钟**。
+在完成了上述知识准备之后，现在让我们真实开始 LLM 的微调实验吧。首先，让我们先来对该实验的规模与时间预算做一次粗略估算。通过参考 [How to Train a Local LLM on CPU Only（2026）](https://meshworld.in/blog/ai/tooling/train-local-llm-cpu-only/) 这类第三方文献所给出的基准数据（benchmark），我们可以大致上知道消费级 CPU 在 1,000 步内训练`Qwen 2.5-0.5B`大致需要 10-15 分钟。但考虑到实验设备所用的 CPU 是 i5-9500T（6 核 6 线程、2.2GHz 基频、不支持 AVX-512），它的综合性能约为参考机型的 20% 左右，我们会预估它执行同一量级训练的实际耗时应该落在 50-75 分钟之间。那么，按 "300 条《论语》样本 × 3 epoch、有效 batch=16" 的常规配置，整次实验的总步数约在 60 步左右，换言之，纯训练时间本身只需 1-2 分钟，具体如表 2 所示。
 
-不过，整个实验流程的真正瓶颈并不在训练本身，而在数据准备、环境调参与结果整理这三件事上：
+| 实验步骤                      | 耗时       |
+| ----------------------------- | ---------- |
+| 环境安装（uv + LLaMA-Factory）| 5-10 分钟  |
+| 下载 Qwen 2.5-0.5B（≈1 GB）   | 5-15 分钟  |
+| 基于《论语》准备训练数据      | 30-60 分钟 |
+| Tokenizer 适配与格式校验      | 2-5 分钟   |
+| 训练主流程（60 步左右）       | 1-2 分钟   |
+| 推理测试 + 生成评估报告       | 30-60 分钟 |
 
-| 步骤 | 耗时 |
-| ------ | ------ |
-| 环境安装（uv + LLaMA-Factory）| 5-10 分钟 |
-| 下载 Qwen 2.5-0.5B（≈1 GB）| 5-15 分钟 |
-| 准备《论语》训练数据 | 30-60 分钟 |
-| Tokenizer 适配与格式校验 | 2-5 分钟 |
-| 训练主流程（60 步左右）| 1-2 分钟 |
-| 推理测试 + 生成评估报告 | 30-60 分钟 |
-| 撰写实验过程与结果笔记 | 2-3 小时 |
+**表 2** 实验各阶段的时间预估
 
-因此，可以预期一次完整的 "动手实验 + 写笔记" 周期在 **5-8 小时**左右；如果分多次推进，每次 1-2 小时的 session，连续 3-4 个工作日完成也是合理的节奏。
+下面，让我们正式开始实验吧，其具体步骤如下。
 
-操作步骤：
+1. 安装 uv 并创建一个基于 Python 3.12 的虚拟环境。关于这部分的操作方法，我已经在《[[编程环境配置|Python 学习笔记：编程环境配置]]》（[博客园链接](https://www.cnblogs.com/owlman/p/19501012)）这篇笔记中做过详细介绍，这里就不再赘述了。总而言之，在完成这些操作之后，我们会得到如图 2 所示的结果。
 
-- 用 uv 创建使用 Python 3.12 的虚拟环境
-- 安装 LLaMA-Factory 及其 CPU 版的依赖
-- 去 ModelScope 获取 Qwen 2.5-0.5b 模型
-- 准备一个极小规模的微调数据集（基于《论语》）
-- 配置并运行 CPU 版的 LoRA 微调
-- 验证微调结果并生成报告
+    ![图 2 虚拟环境创建成功](./img/python_venv_for_llama_factory.png)
+
+    **图 2** 创建基于 Python 3.12 的虚拟环境
+
+2. 基于《论语》这本书的文本准备一个极小规模的微调数据集，这可以使用 OpenCode 这样的 Agent 工具帮我们自动生成，具体如图 3 所示。
+
+   ![图 3 OpenCode 自动生成微调数据集](./img/opencode_generate_training_data.png) （待补图）
+
+   **图 3** OpenCode 自动生成微调数据集
+
+3. 安装 LLaMA-Factory 及其 CPU 版的依赖，这需要我们打开命令行终端，并依次执行以下命令：
+
+    ```bash
+    # 安装 LLaMA-Factory
+    pip install llamafactory
+
+    # 安装 CPU 版 PyTorch
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+    # 验证安装是否成功
+    llamafactory-cli help # 应输出帮助信息
+    ```
+
+4. 配置并运行 CPU 版的 LoRA 微调，这需要我们执行`llamafactory-cli webui`命令，打开 LLaMA-Factory 的 Web 操作界面，并按照图 4 所示的步骤，选择我们接下来要使用的 LLM 权重文件与微调数据集。
+
+    ![图 4 LLaMA Factory界面](./img/llama_factory_webui.png) （待补图）
+
+    **图 4** LLaMA-Factory 的 Web 操作界面
+
+5. 默认情况下，LLaMA-Factory 会自行从 Hugging Face 平台上获取到我们在上述界面中指定的 LLM 权重文件，但如果是国内无法直接访问 Hugging Face 的用户，那就得亲自去 ModelScope 网站上搜索到`Qwen 2.5-0.5B`，并按照图 5 中所示的步骤下载权重文件。
+
+    ![图 5 下载 Qwen 2.5-0.5B 权重文件](./img/download_qwen_2_5_0_5b_weights.png)
+
+    **图 5** 下载 Qwen 2.5-0.5B 权重文件
+
+6. 点击图 4 中的 "Train" 按钮开始训练，训练过程会自动在后台进行，训练完成后，我们可以在 "Models" 标签页中看到训练产物，如图 6 所示。
+
+    ![图 6 训练产物](./img/llama_factory_models.png) （待补图）
+
+    **图 6** 训练产物
 
 ## 实验结果与分析
 
 ## 参考资料
 
-- **论文资料**
+- 论文资料
   - *LoRA: Low-Rank Adaptation of Large Language Models*（Edward J. Hu 等人，2021）：[arXiv:2106.09685](https://arxiv.org/abs/2106.09685)
   - *QLoRA: Efficient Finetuning of Quantized LLMs*（Tim Dettmers 等人，2023）：[arXiv:2305.14314](https://arxiv.org/abs/2305.14314)
   - *DoRA: Weight-Decomposed Low-Rank Adaptation*（Shih-Yang Liu 等人，2024）：[arXiv:2402.09353](https://arxiv.org/abs/2402.09353)
 
-- 文档资料
-
 - 视频资料
-  - 什么是 LoRA？大模型微调是怎么回事：[YouTube 链接](https://www.youtube.com/watch?v=hZ6fSjPGQWM&t=2s) / [Bilibili 链接](https://www.bilibili.com/video/BV1PvwYzxE9D)
+  - 什么是 LoRA？大模型微调是怎么回事？：[YouTube 链接](https://www.youtube.com/watch?v=hZ6fSjPGQWM&t=2s) / [Bilibili 链接](https://www.bilibili.com/video/BV1PvwYzxE9D)
+  - 使用 LLaMA-Factory 微调 Qwen3-1.7B 模型：[YouTube 链接](https://www.youtube.com/watch?v=jmZb90Yen0A) / [Bilibili 链接](https://www.bilibili.com/video/BV1cE1KBeEVn)
 
 - 博客文章
-  - [How to Train a Local LLM on CPU Only（2026 Fact Check & Guide）](https://meshworld.in/blog/ai/tooling/train-local-llm-cpu-only/)：Qwen 2.5-0.5B 在消费级 CPU 上 LoRA 微调的耗时基准（1,000 步约 10-15 分钟），本文第“实验过程记录”节的时间预估算以该文给出的数据为参考。
+  - [How to Train a Local LLM on CPU Only（2026 Fact Check & Guide）](https://meshworld.in/blog/ai/tooling/train-local-llm-cpu-only/)：Qwen 2.5-0.5B 在消费级 CPU 上 LoRA 微调的耗时基准（1,000 步约 10-15 分钟），本文 “实验过程记录” 一节中所做的时间预估算以这篇博客给出的数据为参考。
+  - [LLama Factory使用LoRA微调Qwen](https://www.cnblogs.com/clnchanpin/p/19279121)：LLaMA-Factory 的安装与使用教程，本文 “实验过程记录” 一节中的安装与配置步骤以这篇博客为参考。
 
 （待完成）
