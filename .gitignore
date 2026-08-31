@@ -119,3 +119,4 @@ playwright-cli/
 # Agent / 实验工作区临时残留（不入库）
 temp/
 examples/llama_factory/
+examples/llama_factory/**
