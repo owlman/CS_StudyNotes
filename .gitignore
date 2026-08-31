@@ -94,3 +94,24 @@ SoftwareTool/Git/code/demo_repo/
 
 # Qoder IDE local config
 .qoder/
+
+# LLM / LLaMA-Factory 运行时产物（不应入库）
+# 虚拟环境
+.venv/
+venv/
+.llama_factory/
+
+# LLM 模型权重与训练产物
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+*.onnx
+models/
+saves/
+output/
+runs/
+checkpoint-*/
+llamaboard_cache/
+playwright-cli/
