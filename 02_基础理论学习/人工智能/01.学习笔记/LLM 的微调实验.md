@@ -187,19 +187,19 @@ $$
 
     ![图 10 LoRA 微调训练进度](./img/lora_finetuning_progress.png)
 
-    **图 1** LoRA 微调训练进度
+    **图 10** LoRA 微调训练进度
 
-10. 待训练完成之后，我们可以在 LLaMA-Factory 的 Web 界面底部看到 "100%" 的进度条，并且 "Models" 标签页会出现一个新生成的 adapter 目录（默认位于 `output/lunyu/`），如图 10 所示。
+10. 一旦训练完成，我们就会在 LLaMA-Factory 的 Web 界面底部看到训练进度条走到了 100%。同时，其 Web 界面中 ”中断“ 按钮的下方会出现一张完整的 loss 曲线图，如图 11 所示。
 
-    ![图 10 训练产物（adapter 目录）](./img/training_output.png)    （待补图）
+    ![图 11 loss 曲线图](./img/training_loss.png)
 
-    **图 10** 训练产物
+    **图 11**  ”中断“ 按钮下方出现的 loss 曲线图
 
-    至于训练过程是否成功，可以从以下几个关键信号来判断：
+    至于训练的具体成果究竟如何，我们可以从以下几个关键信号来判断：
 
-    - **loss 曲线持续下降并最终趋于平稳**：`train_loss` 在前几个 epoch 会出现明显下降（从 2.x 降到 0.x 量级），后期趋于平稳；`eval_loss` 与 train_loss 趋势一致（若 train_loss 下降而 eval_loss 上升，则出现过拟合）。
+    - **loss 曲线持续下降并最终趋于平稳**：`train_loss`在前几个 epoch 会出现明显下降（从 2.x 降到 0.x 量级），后期趋于平稳；`eval_loss`与 train_loss 趋势一致（若 train_loss 下降而 eval_loss 上升，则出现过拟合）。
     - **grad_norm 稳定在 0.1-10 之间**：如果突然飙升到 100+ 或者出现 NaN，说明训练崩溃，需要回退学习率或检查数据。
-    - **没有 OOM / RuntimeError**：CPU 训练里常见的报错包括 "DataLoader worker (pid X) is killed by signal: Out of memory"（需减小 `batch_size`）以及 "expected scalar type Float but found Half"（PyTorch CPU 版本与 bf16 不兼容，需切回 fp32）。
+    - **没有 OOM / RuntimeError**：CPU 训练里常见的报错包括 "DataLoader worker (pid X) is killed by signal: Out of memory"（需减小`batch_size`）以及 "expected scalar type Float but found Half"（PyTorch CPU 版本与 bf16 不兼容，     需切回 fp32）。
 
     当以上信号都出现时，就基本可以确认 LoRA 微调已经成功完成。下一步，我们就可以进入实验结果的分析环节了。
 
@@ -248,8 +248,3 @@ $$
 - 视频资料
   - 什么是 LoRA？大模型微调是怎么回事？：[YouTube 链接](https://www.youtube.com/watch?v=hZ6fSjPGQWM&t=2s) / [Bilibili 链接](https://www.bilibili.com/video/BV1PvwYzxE9D)
   - 使用 LLaMA-Factory 微调 Qwen3-1.7B 模型：[YouTube 链接](https://www.youtube.com/watch?v=jmZb90Yen0A) / [Bilibili 链接](https://www.bilibili.com/video/BV1cE1KBeEVn)
-
-- 博客文章
-  - [LLama Factory使用LoRA微调Qwen](https://www.cnblogs.com/clnchanpin/p/19279121)：LLaMA-Factory 的安装与使用教程，本文 “实验过程记录” 一节中的安装与配置步骤以这篇博客为参考。
-
-（待完成）
