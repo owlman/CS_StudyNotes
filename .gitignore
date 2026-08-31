@@ -115,3 +115,7 @@ runs/
 checkpoint-*/
 llamaboard_cache/
 playwright-cli/
+
+# Agent / 实验工作区临时残留（不入库）
+temp/
+examples/llama_factory/
