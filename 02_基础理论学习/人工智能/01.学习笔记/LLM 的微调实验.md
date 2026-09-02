@@ -266,7 +266,7 @@ $$
 
 ### 实际观察到的结果
 
-这一节把步骤 10 的 4 个成功信号与 loss 曲线一并展开，结合训练目录里的真实产物，逐项用数据说话。
+首先，让我们先把之前在步骤 10 中所列的实验成功信号及其生成的 loss 曲线一并展开，结合训练输出目录里的真实产物，逐项用数据来说话。
 
 #### 训练日志维度：4 个成功信号逐条核对
 
@@ -302,9 +302,9 @@ $$
 
 #### 训练产物：output_dir 里到底有什么
 
-```
+```bash
 saves/Qwen2.5-0.5B/lora/train_2026-09-02-10-24-13/
-├── adapter_model.safetensors (17.6 MB)        # LoRA 适配器权重（核心产物）
+├── adapter_model.safetensors (17.6 MB)       # LoRA 适配器权重（核心产物）
 ├── adapter_config.json (1.1 KB)              # LoRA 适配器配置
 ├── chat_template.jinja (2.4 KB)              # Qwen2.5 对话模板
 ├── tokenizer.json (10.9 MB)                  # tokenizer 配置（推理用）
@@ -319,7 +319,7 @@ saves/Qwen2.5-0.5B/lora/train_2026-09-02-10-24-13/
 ├── README.md (1.6 KB)                        # PEFT 自动生成的 model card
 ├── llamaboard_config.yaml (2.4 KB)           # LLaMA-Factory WebUI 配置快照
 ├── running_log.txt (15.1 KB)                 # 完整运行日志
-└── checkpoint-9/                              # 第 9 步中间检查点（含 optimizer.pt / rng_state.pth / scheduler.pt）
+└── checkpoint-9/                             # 第 9 步中间检查点（含 optimizer.pt / rng_state.pth / scheduler.pt）
 ```
 
 最关键的产物是 `adapter_model.safetensors` —— 17.6 MB 的 LoRA 适配器权重，可以独立于基座模型加载，与原始的 `Qwen 2.5-0.5B` 模型叠加使用实现微调效果。
