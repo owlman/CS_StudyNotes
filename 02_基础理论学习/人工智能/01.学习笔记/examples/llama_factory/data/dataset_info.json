@@ -1,0 +1,11 @@
+{
+  "lunyu_sample": {
+    "file_name": "lunyu_10_sample.jsonl",
+    "formatting": "alpaca",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  }
+}
