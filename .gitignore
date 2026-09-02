@@ -102,21 +102,34 @@ venv/
 .llama_factory/
 
 # LLM 模型权重与训练产物
-*.safetensors
-*.bin
-*.pt
-*.pth
-*.gguf
-*.onnx
+#   仅作用于基座模型目录与 saves/ 下的中间检查点
+#   saves/ 下的最终训练产物允许入库（如 examples/llama_factory/saves/.../adapter_model.safetensors）
+**/models/*.safetensors
+**/models/*.bin
+**/models/*.pt
+**/models/*.pth
+**/models/*.gguf
+**/models/*.onnx
 models/
-saves/
 output/
 runs/
-checkpoint-*/
 llamaboard_cache/
 playwright-cli/
 
 # Agent / 实验工作区临时残留（不入库）
 temp/
-examples/llama_factory/
-examples/llama_factory/**
+
+# examples/llama_factory/ 实验工作区：
+#   训练配置（YAML / 脚本 / 数据集）与训练产物（adapter + tokenizer + 训练指标 + loss 曲线）允许入库
+#   运行时残留、基座模型与中间检查点仍不入库
+#   注意：规则用 /**/ 前缀以匹配仓库内任意层级下的 examples/llama_factory/
+**/examples/llama_factory/.llama_factory/
+**/examples/llama_factory/.llama_factory/**
+**/examples/llama_factory/.playwright-cli/
+**/examples/llama_factory/.playwright-cli/**
+**/examples/llama_factory/llamaboard_cache/
+**/examples/llama_factory/llamaboard_cache/**
+**/examples/llama_factory/models/
+**/examples/llama_factory/models/**
+**/examples/llama_factory/saves/Qwen2.5-0.5B/lora/train_2026-09-02-10-24-13/checkpoint-9/
+**/examples/llama_factory/saves/Qwen2.5-0.5B/lora/train_2026-09-02-10-24-13/checkpoint-9/**
