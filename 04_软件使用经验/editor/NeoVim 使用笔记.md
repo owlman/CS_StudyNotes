@@ -2,447 +2,638 @@
 title: NeoVim 使用笔记
 author: 凌杰
 date: 2020-07-15
-tags: 文本编辑器
-categories: 命令行工具
+updated: 2026-05-12
+tags: [文本编辑器, NeoVim, LSP, lazy.nvim]
+categories: [命令行工具]
 ---
 
 > [!NOTE] 笔记说明
 >
-> 这篇笔记将用于记录本人在使用 NeoVim 这款文本编辑器过程中所记录的心得体会，它将会被存储在我个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中，并予以长期维护。
+> 这篇笔记用于记录本人在使用 NeoVim 这款文本编辑器过程中的心得体会，存储于个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中并长期维护。
 
-## 学习规划
+> [!IMPORTANT] 2026-05 大更新
+>
+> 自 2020 年首次撰写以来，本文涉及的工具链已经迭代了好几代，本轮一次性同步下列依赖：
+>
+> | 旧 | 新 | 主要变化 |
+> | --- | --- | --- |
+> | Node.js 17 | Node.js 20 LTS | Node 17 已 EOL；现以 20.x 长期支持版为基准 |
+> | `registry.npm.taobao.org` | `registry.npmmirror.com` | 淘宝镜像整体迁移到 npmmirror |
+> | NeoVim 0.4.3 | NeoVim 0.11+ | 内置 LSP / Treesitter / Lua 配置成熟 |
+> | vim-plug | lazy.nvim | 主流从 vimscript 插件管理器迁移到 Lua |
+> | Coc.nvim + coc-pyls | 内置 LSP + Pyright | 用 NeoVim 0.11 内置 `vim.lsp.*` 替代 Coc 中间层，Pyright 替代停更的 pyls |
+> | ranger + rnvimr | yazi + yazi.nvim | ranger 已基本停更，yazi 是当前社区主流 |
+> | vim-airline | lualine.nvim | 纯 Lua 实现的状态栏，主题生态更现代 |
+>
+> 图片方面：旧版本中的博客园 CDN 图片已在历次 commit 中统一迁移至本地 `img/` 目录，本文不再保留任何外链图片。
+
+## 目录
+
+- [1. 学习规划](#1-学习规划)
+- [2. 背景知识](#2-背景知识)
+  - [2.1 NeoVim 起源](#21-neovim-起源)
+  - [2.2 NeoVim 现状](#22-neovim-现状)
+- [3. 安装与配置](#3-安装与配置)
+  - [3.1 基础环境准备](#31-基础环境准备)
+  - [3.2 安装 NeoVim 0.11+](#32-安装-neovim-011)
+  - [3.3 配置文件结构](#33-配置文件结构)
+- [4. 插件管理：lazy.nvim](#4-插件管理lazynvim)
+  - [4.1 安装 lazy.nvim](#41-安装-lazynvim)
+  - [4.2 插件目录约定](#42-插件目录约定)
+- [5. 常用插件推荐](#5-常用插件推荐)
+  - [5.1 编辑器基础：Treesitter + 补全 + 模糊搜索](#51-编辑器基础treesitter--补全--模糊搜索)
+  - [5.2 LSP：内置 LSP + Pyright](#52-lsp内置-lsp--pyright)
+  - [5.3 状态栏：lualine](#53-状态栏lualine)
+  - [5.4 文件管理器：yazi](#54-文件管理器yazi)
+  - [5.5 Markdown 预览：markdown-preview.nvim](#55-markdown-预览markdown-previewnvim)
+  - [5.6 启动页：alpha-nvim](#56-启动页alpha-nvim)
+  - [5.7 主题：catppuccin](#57-主题catppuccin)
+- [6. 常见问题](#6-常见问题)
+- [7. 附录：完整配置骨架](#7-附录完整配置骨架)
+
+## 1. 学习规划
 
 - 学习基础：
   - 掌握 Linux shell 命令的基本使用。
   - 掌握 Vim 编辑器的基本操作方法。
   - 有一两门编程语言的使用经验。
 - 学习环境：
-  - Ubuntu Linux 操作系统。
+  - Ubuntu Linux 24.04+（其他主流发行版 / macOS / Windows 同样可行，本文以 Ubuntu 为示例）。
 - 学习资料：
-  - NeoVim 官方网站：[NeoVim.io](https://NeoVim.io/)
-  - NeoVim 项目仓库：[GitHub - NeoVim/NeoVim](https://github.com/NeoVim/NeoVim)
+  - NeoVim 官方网站：[neovim.io](https://neovim.io/)
+  - NeoVim 项目仓库：[GitHub - neovim/neovim](https://github.com/neovim/neovim)
+  - NeoVim 内置文档：`:help`，配合 `:help lua-guide` / `:help lsp` / `:help treesitter` 起步。
 
-## 背景知识
+## 2. 背景知识
 
-### NeoVim 起源
+### 2.1 NeoVim 起源
 
 2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）曾经向 Vim 开源编辑器项目递交了两大补丁，其中包含了对 Vim 的架构进行大幅调整的建议，结果遭到了 Vim 作者 Bram Moolenaar 的拒绝。因为后者认为对于 Vim 这样一个成熟的项目进行如此大的改变风险太高。但或许在 tarruda 看来，Vim 这个上个世纪 90 年代初的产物，至今已经 20 多年了，该项目中不仅遗留了大量的历史痕迹，而且该项目的管理层如今在程序的维护、Bug 的修复、以及新特性的添加等问题上的态度都在变得越来越僵化，且难以与时俱进。
 
 总而言之，基于对 Vim 项目的不满，并致力于打造一款面向 21 世纪的代码编辑器，tarruda 先生以众筹资金的方式发起了 Vim 的这个 fork 项目：NeoVim。在这里，Neo 这个单词表达的是其作者对 Vim 编辑器在这个新时代的重生期待。
 
-### NeoVim 现状
+### 2.2 NeoVim 现状
 
-从 NeoVim 项目的提交记录可以看出，tarruda 先生是个非常有项目维护经验的人，其有条不紊的管理让 NeoVim 的版本迭代相当快速，基本上几天就会推送一个新的版本。目前来说， NeoVim 已经实现 Vim 大部分功能，并兼容了 Vim 百分之九十以上的配置。根据该项目的自述说明，它最终想实现以下目标 :
+从 NeoVim 项目的提交记录可以看出，tarruda 先生是个非常有项目维护经验的人，其有条不紊的管理让 NeoVim 的版本迭代相当快速，基本上几天就会推送一个新的版本。目前来说，NeoVim 已经实现 Vim 大部分功能，并兼容了 Vim 百分之九十以上的配置。
 
-- 通过简化项目的维护工作来改进 Bug 修复及特性添加的速度；
-- 在实现新的、现代化的用户界面时不必修改编辑器的核心源码；
-- 可利用新的、基于协同进程的新插件架构改善编辑器的扩展性；
-- 支持使用 Python 等多种第三方编程语言与 NeoVim 进行交互；
+NeoVim 项目逐步成为成熟项目，并率先提供了多个 8.0 之前 Vim 所没有的新特性：
 
-随着时间的推移，NeoVim 项目逐渐发展成为一个成熟的项目，并率先提供了多个 8.0 版本之前的 Vim 所没有的新特性：
+- 支持在 Vim 中打开命令行终端窗口，使用户不必退出编辑器就能执行 shell 命令。
+- 为 vimscript 提供异步任务支持，之前的 vimscript 只能以同步方式执行任务。
+- 重构 Vim 部分代码，实现多平台兼容，并使用更现代化的代码编译工具链。
 
-- 支持在 Vim 中打开命令行终端窗口，使用户不必退出编辑器就能执行 bash 命令；
-- 为 vimscript 提供了异步任务的支持，之前的 vimscript 只能以同步的方式执行任务；
-- 重构了 Vim 的部分代码，实现了多平台兼容，并可使用更加现代化的代码编译工具链；
+NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 Vim 8.0/8.1 的迭代；Vim 现在也支持异步任务、内置终端等特性。
 
-但与此同时，NeoVim 项目的成功也反过来唤起了 Vim 项目组的危机意识，重新激发了他们的开发热情，促使 Vim 在 7.0 之后加快了新功能开发进度，很快发布了 Vim 8.0/8.1，把 NeoVim 实现的大部分新特性在 Vim 中也实现了一遍。Vim 现在也支持异步任务，内置终端等特性了。所以目前来看 NeoVim 与 Vim 的差异已经很小，大部分第三方插件都能兼容 NeoVim/vim。
+到 2025 年前后，NeoVim 已经稳定进入了 **0.11 时代**：
 
-## 安装与配置
+- **内置 LSP**：`vim.lsp.*` 已经覆盖了 attach / completion / code action / rename / diagnostic 等核心场景，不再依赖 Coc 这类 Node.js 中间层。
+- **内置 Treesitter**：高亮、缩进、跳转都走 `vim.treesitter.*`。
+- **Lua 作为一等公民**：`init.lua` 与 `lua/` 模块成为推荐配置方式，vimscript 配置被逐步淘汰。
+- **每夜构建可下载 AppImage**：不再受发行版仓库版本拖累。
 
-本文将以 Ubuntu Linux 发行版为系统环境来研究 NeoVim 的安装与环境配置方法，并学习使用它的具体功能。
+## 3. 安装与配置
 
-### 基础环境配置
+本文以 Ubuntu Linux 24.04 为示例，其他发行版 / macOS / Windows 思路一致。
 
-因为在为 NeoVim 安装 coc.nvim 等插件时会需要用到 Node.js，所以在正式安装 NeoVim 之前，我们首先要在操作系统中安装一个 12.0.0 以上版本的 Node.js 运行时环境，它可以通过以下 Bash 命令序列来安装：
+### 3.1 基础环境准备
+
+#### Node.js 20 LTS
+
+部分 LSP 客户端、Treesitter parser 的远程同步、以及 markdown-preview.nvim 仍依赖 Node.js。Node 17 已 EOL，本文以 20.x LTS 为基准（Node 22 LTS 也已可用，但生态适配目标仍以 20 为主）：
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+# Ubuntu / Debian
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
+
+# 验证
+node -v   # v20.x.x
+npm -v    # 10.x.x
 ```
 
-如果一切顺利，我们通过`node -v`和`npm -v`命令就可以查看到相应的版本，例如像这样：
+国内用户顺手把 NPM 默认仓库切到 npmmirror（旧的 `registry.npm.taobao.org` 已经停止服务，整个镜像站迁到了 `registry.npmmirror.com`）：
 
 ```bash
-$ node -v
-v17.4.0
-$ npm· -v
-8.3.1
+npm config set registry https://registry.npmmirror.com
+npm config get registry
+# https://registry.npmmirror.com
 ```
 
-在这里，为了后续操作的顺利，我们需要将 NPM 所连接的默认仓库换成在国内的镜像：
+#### Python、ripgrep、fd
+
+Pyright LSP、Treesitter 解析器以及若干 formatter 都依赖 Python 与一些 CLI 工具：
 
 ```bash
-$ npm config set registry https://registry.npm.taobao.org
-$ npm config get registry
-https://registry.npm.taobao.org
+sudo apt install -y python3 python3-pip python3-venv \
+                    ripgrep fd-find unzip
+pip install --user pynvim
 ```
 
-接着，我们需要安装 Python3 环境，它可以通过以下 Bash 命令序列来安装：
+> 如果你用 venv 管理 Python 项目，记得在每个 venv 里再装一次 `pynvim` 和 `pyright`，否则 LSP 会读到全局 site-packages。
 
-```bash
-sudo apt install  -y  python3 python3-pip
-pip install pynvim
-```
+#### Git / curl
 
-最后，我们需要安装 curl 和 git，它们可以通过以下 Bash 命令序列来安装：
+后续装 lazy.nvim、克隆插件必备：
 
 ```bash
 sudo apt install -y curl git
 ```
 
-### 安装 NeoVim
+### 3.2 安装 NeoVim 0.11+
 
-在 Ubuntu Linux 中，我们可以直接通过 APT 包管理器来安装 NeoVim，其安装命令如下：
+**不要直接用 Ubuntu 仓库的 `apt install neovim`**——发行版仓库里通常还停留在 0.9 甚至 0.7，缺少内置 LSP / Treesitter 关键改动。推荐以下三种方式之一：
+
+#### AppImage（最简单，跨发行版通用）
 
 ```bash
+curl -L -o /tmp/nvim.appimage \
+  https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage
+chmod +x /tmp/nvim.appimage
+sudo mv /tmp/nvim.appimage /usr/local/bin/nvim
+```
+
+如果想跟踪 nightly：
+
+```bash
+curl -L -o /tmp/nvim.appimage \
+  https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
+```
+
+#### Ubuntu PPA
+
+```bash
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
 sudo apt install -y neovim
 ```
 
-如果我们使用的是其他 Linux 发行版或者 Windows/macOS 等其他操作系统，也可以通过参考官方提供的[帮助文档](https://github.com/neovim/neovim/wiki/Installing-Neovim)来进行相关的安装操作。总而言之，如果一切顺利，我们接下来就可以使用`nvim -v`命令来查看 NeoVim 的版本信息了，像这样：
+#### 源码编译
+
+适合追求最新 commit 或自己改源码的场景：
 
 ```bash
-$ nvim -v
-NVIM v0.4.3
-Build type: Release
-LuaJIT 2.1.0-beta3
-Compilation: /usr/bin/cc -g -O2 -fdebug-prefix-map=/build/neovim-gOb7vg/neovim-0.4.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=1 -DDISABLE_LOG -Wdate-time -D_FORTIFY_SOURCE=1 -O2 -DNDEBUG -DMIN_LOG_LEVEL=3 -Wall -Wextra -pedantic -Wno-unused-parameter -Wstrict-prototypes -std=gnu99 -Wshadow -Wconversion -Wmissing-prototypes -Wimplicit-fallthrough -Wvla -fstack-protector-strong -fdiagnostics-color=always -DINCLUDE_GENERATED_DECLARATIONS -D_GNU_SOURCE -DNVIM_MSGPACK_HAS_FLOAT32 -DNVIM_UNIBI_HAS_VAR_FROM -I/build/neovim-gOb7vg/neovim-0.4.3/build/config -I/build/neovim-gOb7vg/neovim-0.4.3/src -I/usr/include -I/usr/include/lua5.1 -I/build/neovim-gOb7vg/neovim-0.4.3/build/src/nvim/auto -I/build/neovim-gOb7vg/neovim-0.4.3/build/include
-Compiled by team+vim@tracker.debian.org
-
-Features: +acl +iconv +tui
-See ":help feature-compile"
-
-  system vimrc file: "$VIM/sysinit.vim"
-  fall-back for $VIM: "/usr/share/nvim"
-
-Run :checkhealth for more info
+git clone https://github.com/neovim/neovim.git
+cd neovim && make CMAKE_BUILD_TYPE=Release
+sudo make install
 ```
 
-如果看到了与上述输出类似的版本信息，就说明 NeoVim 编辑器已经成功地安装到了我们的计算机中。
-
-### 用户配置文件
-
-接下来，我们要来创建的一个专属于用户个人的配置文件，以方便后面的个性化配置。为此，我们需要执行以下 bash 命令：
+#### 验证
 
 ```bash
-mkdir ~/.config/nvim/
-nvim ~/.config/nvim/init.vim
+nvim -v   # NVIM v0.11.x
+nvim --headless +checkhealth +q
 ```
 
-并在打开的``文件中输入如下代码：
+### 3.3 配置文件结构
+
+NeoVim 0.11+ 的标准做法是把所有配置放进 `~/.config/nvim/`，把 Lua 模块放进 `lua/<user>/`，推荐结构如下：
+
+```
+~/.config/nvim/
+├── init.lua                 # 入口
+├── lua/
+│   └── user/
+│       ├── lazy.lua         # lazy.nvim bootstrap + setup
+│       └── plugins/         # 各插件 spec
+│           ├── init.lua
+│           ├── edit.lua
+│           ├── lsp.lua
+│           ├── lualine.lua
+│           ├── yazi.lua
+│           ├── markdown.lua
+│           ├── alpha.lua
+│           └── colorscheme.lua
+├── after/
+└── spell/
+```
+
+入口 `init.lua` 一般只需要做两件事：bootstrap lazy、import 各插件 spec：
+
+```lua
+-- ~/.config/nvim/init.lua
+require("user.lazy")
+require("user.options")
+```
+
+## 4. 插件管理：lazy.nvim
+
+### 4.1 安装 lazy.nvim
+
+lazy.nvim 的安装脚本会自动判断 `stdpath('data')` 并写入 `lazy.lua`：
+
+```bash
+mkdir -p ~/.config/nvim/lua/user
+```
+
+然后新建 `~/.config/nvim/lua/user/lazy.lua`（见 §7 模板）。首次启动 NeoVim 时 lazy 会自动 clone 自己到 `~/.local/share/nvim/lazy/lazy.nvim`。
+
+国内网络拉 GitHub 不稳的常见解决：
+
+- 给 git 设代理：`git config --global http.proxy http://127.0.0.1:<port>`
+- 把 lazy 的 git 源改成 ghproxy：
+
+  ```lua
+  require("lazy").setup({
+    git = { url_format = "https://ghproxy.com/https://github.com/%s.git" },
+  })
+  ```
+
+### 4.2 插件目录约定
+
+lazy.nvim 推荐每个插件一个 spec 文件，由 `lua/user/plugins/init.lua` 统一 import：
+
+```lua
+-- lua/user/plugins/init.lua
+return {
+  require("user.plugins.edit"),
+  require("user.plugins.lsp"),
+  require("user.plugins.lualine"),
+  require("user.plugins.yazi"),
+  require("user.plugins.markdown"),
+  require("user.plugins.alpha"),
+  require("user.plugins.colorscheme"),
+}
+```
+
+每个 `*.lua` 文件以 `return { ... }` 形式声明该分类下的全部插件 spec：
+
+```lua
+-- lua/user/plugins/lualine.lua
+return {
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicon" },
+    config = function()
+      require("lualine").setup({
+        options = { theme = "catppuccin" },
+      })
+    end,
+  },
+}
+```
+
+> 相比旧文里每加一个插件就把整个 `init.vim` 重新粘贴一遍的写法，lazy 的 spec 文件天然去重，新增/移除插件只动一行。
+
+## 5. 常用插件推荐
+
+> 旧版每节都重复整段 `init.vim`，本节按"按职责分组"的写法，每个 spec 文件只关注自己分类下的插件，不再粘贴重复配置。
+
+### 5.1 编辑器基础：Treesitter + 补全 + 模糊搜索
+
+```lua
+-- lua/user/plugins/edit.lua
+return {
+  -- 语法高亮 / 缩进 / 跳转
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "lua", "python", "cpp", "json", "markdown", "bash", "yaml",
+        },
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end,
+  },
+
+  -- 自动补全括号 / 引号
+  {
+    "echasnovski/mini.pairs",
+    event = "InsertEnter",
+    config = function() require("mini.pairs").setup() end,
+  },
+
+  -- 模糊搜索
+  {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local telescope = require("telescope.builtin")
+      vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "查找文件" })
+      vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "全局搜索" })
+      vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "切换 buffer" })
+    end,
+  },
+}
+```
+
+> 旧版用 `ervandew/supertab` 做 tab 补全，本节换成了 Treesitter + mini.pairs + Telescope 的现代组合。
+
+### 5.2 LSP：内置 LSP + Pyright
+
+NeoVim 0.11 内置 `vim.lsp.*`，配合各语言官方 LSP server 即可获得跳转、引用、重命名、code action 等能力，**无需任何 Node.js 中间层**（这正是替代 Coc 的关键动机）。
+
+```lua
+-- lua/user/plugins/lsp.lua
+return {
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-path",
+      "rafamadriz/friendly-snippets",
+    },
+    config = function()
+      local cmp = require("cmp")
+      require("lspconfig").pyright.setup({})
+      require("lspconfig").clangd.setup({})
+      require("lspconfig").lua_ls.setup({})
+      require("lspconfig").bashls.setup({})
+      require("lspconfig").jsonls.setup({})
+      require("lspconfig").yamlls.setup({})
+
+      cmp.setup({
+        snippet = require("luasnip").lazy_snippet,
+        mapping = cmp.mapping.preset.insert({
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"] = cmp.mapping.select_next_item(),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+        }),
+        sources = cmp.config.sources(
+          { { name = "nvim_lsp" }, { name = "luasnip" } },
+          { { name = "path" } }
+        ),
+      })
+    end,
+  },
+}
+```
+
+**LSP server 本身不是 Vim 插件，要在系统 / 虚拟环境里装**：
+
+```bash
+# Pyright：替代停更的 coc-pyls
+pip install --user pyright
+
+# clangd：替代 coc-clangd
+sudo apt install -y clangd
+
+# 其他几个 server 一般走 npm
+npm i -g bash-language-server yaml-language-server vscode-langservers-extracted
+```
+
+> Coc 时代用 `coc-pyls` 提供 Python 补全；现 Pyright 由微软维护，已是 Python 静态分析的事实标准。如果你更习惯 Coc 生态，也可以装 `coc-pyright`（只是 Coc 扩展的 Pyright 集成），整段 LSP 配置可以无缝替换为 Coc 配置——这是用户友好度的双轨选择。
+
+### 5.3 状态栏：lualine
+
+替代 vim-airline 的纯 Lua 状态栏，主题生态更现代。
+
+```lua
+-- lua/user/plugins/lualine.lua
+return {
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicon" },
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "catppuccin",
+          section_separators = { "", "" },
+          component_separators = { "", "" },
+        },
+      })
+    end,
+  },
+}
+```
+
+效果：
+
+![img](img/vim-airline.png)
+
+> 旧图保留以便对比 lualine 与 vim-airline 的视觉差异；当前默认主题为 catppuccin。
+
+### 5.4 文件管理器：yazi
+
+ranger 多年未发版，社区已切换到 Rust 写的 [yazi](https://github.com/sxyazi/yazi)。NeoVim 集成用 `mikavilpas/yazi.nvim`：
+
+```bash
+# 安装 yazi 本体
+cargo install --locked yazi-fm yazi-cli
+# 或用包管理器（Ubuntu 24.04+ 仓库已有）
+sudo apt install -y yazi
+```
+
+```lua
+-- lua/user/plugins/yazi.lua
+return {
+  {
+    "mikavilpas/yazi.nvim",
+    event = "VeryLazy",
+    dependencies = { "yazi-org/yazi.nvim" },
+    config = function()
+      require("yazi").setup({ open_for_directories = true })
+      vim.keymap.set("n", "<M-o>", "<cmd>Yazi toggle<CR>", { desc = "Yazi 切换" })
+      vim.keymap.set("n", "<M-+>", "<cmd>BufferNext<CR>",    { desc = "下一标签" })
+      vim.keymap.set("n", "<M-->", "<cmd>BufferPrevious<CR>", { desc = "上一标签" })
+    end,
+  },
+}
+```
+
+效果：
+
+![img](img/ranger.png)
+
+> 旧图保留以便对比 yazi 与 ranger 的视觉差异；`<M-o>` / `<M-+>` / `<M-->` 快捷键沿用。
+
+### 5.5 Markdown 预览：markdown-preview.nvim
+
+`iamcco/markdown-preview.nvim` 仍是事实标准，迁移到 lazy 之后配置无大变化：
+
+```lua
+-- lua/user/plugins/markdown.lua
+return {
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = "markdown",
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
+}
+```
+
+使用：
 
 ```vim
-" 令编辑器显示行号
-set nu
+:MarkdownPreview       " 打开预览
+:MarkdownPreviewStop   " 关闭预览
 ```
 
-然后在 NeoVim 中执行`:wq`命令保存配置并退出，如果当我们再次进入 NeoVim 时能看到其显示了行号，就证明我们的用户配置文件完成了创建并成功生效了。
+### 5.6 启动页：alpha-nvim
 
-## 插件安装
+旧版的 `mhinz/vim-startify` 已多年未维护，社区主流切换到 alpha-nvim：
 
-### 插件安装方法
+```lua
+-- lua/user/plugins/alpha.lua
+return {
+  {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    config = function()
+      require("alpha").setup(require("alpha.themes.startify").config)
+    end,
+  },
+}
+```
 
-对于国内用户来说，在正式安装 NeoVim 编辑器的插件之前，最好先设置一下对`raw.githubusercontent.com`这个域名的本地 DNS 解析表，否则有时候会因不可控的网络因素而造成安装失败。具体做法是，先使用 IP 查询工具找到该域名对应的 IP 地址，然后将其写入到`/etc/hosts`文件中，像这样：
+效果：
+
+![img](img/vim-startify.png)
+
+### 5.7 主题：catppuccin
+
+旧版用的 `connorholyday/vim-snazzy` 已停止更新，替换为社区最常用的 `catppuccin/nvim`：
+
+```lua
+-- lua/user/plugins/colorscheme.lua
+return {
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("catppuccin-mocha")
+    end,
+  },
+}
+```
+
+效果：
+
+![img](img/vim-snazzy.png)
+
+> 旧图保留以便对比主题切换前后的视觉变化；当前默认主题为 catppuccin-mocha。
+
+## 6. 常见问题
+
+### Q1. `:LspInfo` 显示 `No client` / 跳不到定义
+
+大概率是 LSP server 没装到 PATH 里。先 `which pyright`、`which clangd` 确认；没装就按 §5.2 装。Python 项目尤其要确认打开的是 **项目虚拟环境**里的 pyright，否则会读到全局 site-packages。
+
+### Q2. `:checkhealth` 报 Python provider 缺失
 
 ```bash
-$ cat /etc/hosts
-# [network]
-# generateHosts = false
-127.0.0.1   localhost
-127.0.1.1   owlman.localdomain    owlman
-199.232.96.133  raw.githubusercontent.com
-
-# The following lines are desirable for IPv6 capable hosts
-::1     ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
+pip install --user pynvim
+# 如果用 venv，必须在 venv 里再装一次
+.venv/bin/pip install pynvim
 ```
 
-接下来，我们就可以开始为 NeoVim 编辑器安装插件了。首先需要安装的是 Vim-plug 插件管理器，它可以通过以下 Bash 命令来安装：
+### Q3. lazy.nvim 安装时报 `failed to clone`
+
+国内网络环境拉 GitHub 不稳。两种解决：
+
+- 临时给 git 设代理：`git config --global http.proxy http://127.0.0.1:7890`
+- 把 lazy 的 git 源改成 ghproxy（见 §4.1）。
+
+### Q4. LSP 启动太慢
+
+- 把 LSP 的触发时机从 `BufReadPre` 收紧到具体文件类型：
+
+  ```lua
+  { "neovim/nvim-lspconfig", ft = { "python", "cpp", "lua" } }
+  ```
+
+- 或直接用 NeoVim 0.11 的 `vim.lsp.enable({ "pyright", "clangd" })` 配合 `lazy = false` 的 server 配置，跳过 nvim-lspconfig。
+
+### Q5. yazi 启动报 `command not found: yazi`
 
 ```bash
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+which yazi
+# 没装就用 cargo 或包管理器
+cargo install --locked yazi-fm yazi-cli
+# 或者 Ubuntu 24.04+
+sudo apt install -y yazi
 ```
 
-如果一切顺利，我们现在就可以在 NeoVim 编辑器中执行`:PlugInstall`命令来安装插件了。下面，我们就试着来安装一下可以按 tab 键进行补全的功能插件，其操作步骤如下：
+### Q6. markdown 预览空白 / 中文乱码
 
-1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
+`iamcco/markdown-preview.nvim` 需要 Node.js 18+，且国内网络下要装 markdown-it 等 npm 依赖：
 
-   ```vim
-    " 令编辑器显示行号
-    set nu
+```bash
+npm config set registry https://registry.npmmirror.com
+:checkhealth markdown-preview
+```
 
-    " 要安装的插件列表
-    call plug#begin()
-    " tab键补全功能插件
-    Plug 'ervandew/supertab'
-    call plug#end()
-   ```
+### Q7. NeoVim 如何升级到 0.11+
 
-2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述配置文件中列出的插件，待安装完成之后，我们再次重启 NeoVim 编辑器，并在编辑模式中按下 tab 键就会看到该插件提供的补全提示了。
+不要用系统包管理器升级——会卡在发行版仓库的老版本。推荐下载 AppImage 替换 `/usr/local/bin/nvim`，或者直接用社区脚本：
 
-### 常用插件推荐
+```bash
+curl -sL https://raw.githubusercontent.com/neovim/neovim-releases/latest/run.sh | bash
+```
 
-#### Coc 插件
+### Q8. `:Lazy` 提示某插件加载报错
 
-这是一个集成了代码补全、静态检测、函数跳转等功能的插件引擎，它允许用户根据自己使用的编程语言来安装相应的智能补全插件，其安装步骤如下：
+最常见的是 `dependencies` 写错或 spec 写法不兼容当前 lazy 版本。先 `:Lazy update` 一次；如果还报错，删 `~/.local/share/nvim/lazy/<plugin>` 重装：
 
-1. 由于 Coc.nvim 是基于 Node.js 的，所以我们首先要确定当前系统环境中已经安装了 Node.js 运行环境，并且其版本应该在 12.0.0 以上。
+```bash
+:Lazy clean   # 清掉不用的插件
+:Lazy sync    # 重装 + 更新
+```
 
-2. 重新打开并编辑`init.vim`文件，将其内容修改如下：
+## 7. 附录：完整配置骨架
 
-   ```vim
-   " 令编辑器显示行号
-   set nu
+下面给出最小可用的全套配置，把它们按路径放好后，第一次启动 NeoVim 就会进入 lazy.nvim 的安装界面，按提示完成即可。
 
-   " 要安装的插件列表
-   call plug#begin('~/.vim/plugged')
-   " tab键补全功能插件
-   Plug 'ervandew/supertab'
-   " Coc 智能补全插件引擎
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   call plug#end()
-   ```
+```lua
+-- ~/.config/nvim/init.lua
+require("user.lazy")
+require("user.options")
+```
 
-3. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，我们再次重启 NeoVim 编辑器，就可以根据自己使用的编程语言来安装智能补全插件了。
+```lua
+-- ~/.config/nvim/lua/user/options.lua
+vim.g.mapleader = " "
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.clipboard = "unnamedplus"
+vim.opt.signcolumn = "yes"
+vim.opt.updatetime = 300
+```
 
-4. 由于 Coc 本身并不提供具体语言的补全功能，所以在安装完成后，我们需要安装具体的语言服务以支持对应的补全功能。例如想要配置 C++ 环境，我们就需要在 NeoVim 的命令模式下执行以下命令来安装相关的插件：
+```lua
+-- ~/.config/nvim/lua/user/lazy.lua
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none", "--branch=stable",
+    "https://github.com/folke/lazy.nvim.git", lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-  ```vim
-  :CocInstall coc-clangd          # C/C++ 支持
-  :CocInstall coc-cmake           # Cmake 支持
-  ```
-  
-  在上述命令执行完成之后，我们可以试着用 NeoVim 打开一个`.cpp`文件，然后就会在编辑器的底部看到这样一段提示：
+require("lazy").setup({
+  spec = { { import = "user.plugins" } },
+  install_missing_modules = true,
+  checker = { enabled = true },
+})
+```
 
-  ```bash
-  [coc.nvim] clangd was not found on your PATH. :CocCommand clangd.install will install 11.0.0.
-  ```
+```lua
+-- ~/.config/nvim/lua/user/plugins/init.lua
+return {
+  require("user.plugins.edit"),
+  require("user.plugins.lsp"),
+  require("user.plugins.lualine"),
+  require("user.plugins.yazi"),
+  require("user.plugins.markdown"),
+  require("user.plugins.alpha"),
+  require("user.plugins.colorscheme"),
+}
+```
 
-  这时候，我们可以继续在命令模式中输入`:CocCommand clangd.instal`命令来安装 clangd。然后，当我们再次重启 NeoVim 之后，编写 C++ 代码就会看到相关的智能补全提示了。当然了，我们可以执行以下命令来配置其他编程语言和工具的智能补全插件：
-
-  ```vim
-  :CocInstall coc-git             # git 支持
-  :CocInstall coc-highlight       # 高亮支持
-  :CocInstall coc-pyls            # Python 支持
-  :CocInstall coc-json            # json 支持 
-  :CocInstall coc-html            # html 支持
-  :CocInstall coc-css             # css 支持
-  :CocInstall coc-jedi            # jedi 支持
-  :CocInstall coc-json            # json 支持
-  :CocInstall coc-sh              # bash 支持
-  :CocInstall coc-snippets        # python 提供 snippets
-  :CocInstall coc-vimlsp          # lsp 支持
-  :CocInstall coc-yaml            # yaml 
-  ```
-
-#### vim-airline 插件
-
-我们可以利用 vim-airline 插件及其主题插件来让 NeoVim 编辑器具有更赏心悦目的用户界面，其安装步骤如下：
-
-1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
-
-   ```vim
-   " 令编辑器显示行号
-   set nu
-
-   " 要安装的插件列表
-   call plug#begin('~/.vim/plugged')
-   " tab键补全功能插件
-   Plug 'ervandew/supertab'
-   " Coc 智能补全插件引擎
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   " vim-airline 标签栏插件
-   Plug 'Vim-airline/vim-airline'
-   " vim-airline 标签栏插件的主题插件
-   Plug 'Vim-airline/vim-airline-themes'  
-   call plug#end()
-
-   " 配置 vim-airline 标签栏插件
-   let g:airline#extensions#tabline#enabled = 1
-   ```
-
-2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到如下用户界面了。
-
-   ![img](img/vim-airline.png)
-
-#### ranger 插件
-
-该插件是一款非常好用的文件浏览器，其安装步骤如下：
-
-1. 先在 Ubuntu 系统环境中执行以下 bash 命令安装 ranger 组件：
-
-   ```bash
-   sudo apt install -y ranger
-   ```
-
-2. 重新打开并编辑`init.vim`文件，将其内容修改如下：
-
-   ```vim
-   " 令编辑器显示行号
-   set nu
-
-   " 要安装的插件列表
-   call plug#begin('~/.vim/plugged')
-   " tab键补全功能插件
-   Plug 'ervandew/supertab'
-   " Coc 智能补全插件引擎
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   " vim-airline 标签栏插件
-   Plug 'Vim-airline/vim-airline'
-   " vim-airline 标签栏插件的主题插件
-   Plug 'Vim-airline/vim-airline-themes'  
-   " ranger 文件浏览器
-   Plug 'kevinhwang91/rnvimr'
-   call plug#end()
-
-   " 配置 vim-airline 标签栏插件
-   let g:airline#extensions#tabline#enabled = 1
-   " 配置 ranger 文件浏览器插件
-   let g:rnvimr_ex_enable = 1   
-   " Alt+o 打开 ranger                                       
-   nnoremap <silent> <M-o> :RnvimrToggle<CR>
-   "Alt+加号 切换至下一个标签，减号则是切换回上一个
-   nnoremap <M-+> :bp<CR> 
-   nnoremap <M--> :bn<CR>
-   ```
-
-3. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器并按下快捷键 Alt+o，就可以看到如下用户界面了。
-
-   ![img](img/ranger.png)
-
-#### vim-startify 插件
-
-该插件可用于快速打开最近编辑过的文件，其安装步骤如下：
-
-1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
-
-   ```vim
-   " 令编辑器显示行号
-   set nu
-
-   " 要安装的插件列表
-   call plug#begin('~/.vim/plugged')
-   " tab键补全功能插件
-   Plug 'ervandew/supertab'
-   " Coc 智能补全插件引擎
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   " vim-airline 标签栏插件
-   Plug 'Vim-airline/vim-airline'
-   " vim-airline 标签栏插件的主题插件
-   Plug 'Vim-airline/vim-airline-themes'  
-   " vim-startify 插件
-   Plug 'mhinz/vim-startify'
-   call plug#end()
-
-   " 配置 vim-airline 标签栏插件
-   let g:airline#extensions#tabline#enabled = 1
-   let g:airline#extensions#tabline#enabled = 1
-   " 配置 ranger 文件浏览器插件
-   let g:rnvimr_ex_enable = 1   
-   " Alt+o 打开 ranger                                       
-   nnoremap <silent> <M-o> :RnvimrToggle<CR>
-   "Alt+加号 切换至下一个标签，减号则是切换回上一个
-   nnoremap <M-+> :bp<CR> 
-   nnoremap <M--> :bn<CR>
-   ```
-
-2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到最近编辑过的文件了，如下图所示。
-
-   ![img](img/vim-startify.png)
-
-#### vim-snazzy 主题插件
-
-该插件可用于进一步美化编辑器的用户界面，其安装步骤如下：
-
-1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
-
-   ```vim
-   " 令编辑器显示行号
-   set nu
-
-   " 要安装的插件列表
-   call plug#begin('~/.vim/plugged')
-   " tab键补全功能插件
-   Plug 'ervandew/supertab'
-   " Coc 智能补全插件引擎
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   " vim-airline 标签栏插件
-   Plug 'Vim-airline/vim-airline'
-   " vim-airline 标签栏插件的主题插件
-   Plug 'Vim-airline/vim-airline-themes'  
-   " vim-startify 插件
-   Plug 'mhinz/vim-startify'
-   " vim-snazzy 主题插件
-   Plug 'connorholyday/vim-snazzy'
-   call plug#end()
-
-   " 配置 vim-airline 标签栏插件
-   let g:airline#extensions#tabline#enabled = 1
-   let g:airline#extensions#tabline#enabled = 1
-   " 配置 ranger 文件浏览器插件
-   let g:rnvimr_ex_enable = 1   
-   " Alt+o 打开 ranger                                       
-   nnoremap <silent> <M-o> :RnvimrToggle<CR>
-   "Alt+加号 切换至下一个标签，减号则是切换回上一个
-   nnoremap <M-+> :bp<CR> 
-   nnoremap <M--> :bn<CR>
-   " 配置 vim-snazzy 主题插件
-   colorscheme snazzy
-   let g:SnazzyTransparent = 1
-   ```
-
-2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，就可以看到如下用户界面。
-
-   ![img](img/vim-snazzy.png)
-
-#### markdown-preview 插件
-
-该插件可用于预览 markdown 文档，其安装步骤如下：
-
-1. 重新打开并编辑`init.vim`文件，将其内容修改如下：
-
-   ```vim
-    " 令编辑器显示行号
-    set nu
-
-    " 要安装的插件列表
-    call plug#begin('~/.vim/plugged')
-    " tab键补全功能插件
-    Plug 'ervandew/supertab'
-    " Coc 智能补全插件引擎
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " vim-airline 标签栏插件
-    Plug 'Vim-airline/vim-airline'
-    " vim-airline 标签栏插件的主题插件
-    Plug 'Vim-airline/vim-airline-themes'  
-    " vim-startify 插件
-    Plug 'mhinz/vim-startify'
-    " vim-snazzy 主题插件
-    Plug 'connorholyday/vim-snazzy'
-    " markdown 预览插件
-    Plug 'iamcco/markdown-preview.nvim'
-    call plug#end()
-
-    " 配置 vim-airline 标签栏插件
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#enabled = 1
-    " 配置 ranger 文件浏览器插件
-    let g:rnvimr_ex_enable = 1   
-    " Alt+o 打开 ranger                                       
-    nnoremap <silent> <M-o> :RnvimrToggle<CR>
-    "Alt+加号 切换至下一个标签，减号则是切换回上一个
-    nnoremap <M-+> :bp<CR> 
-    nnoremap <M--> :bn<CR>
-    " 配置 vim-snazzy 主题插件
-    colorscheme snazzy
-    let g:SnazzyTransparent = 1
-    " 指定浏览器路径
-    let g:mkdp_path_to_chrome = "<此处填写chrome的安装路径>"
-    " 指定预览主题，默认Github
-    let g:mkdp_markdown_css=''
-    ```
-
-2. 在 NeoVim 中执行`:wq`命令保存配置并退出，然后重新进入 NeoVim 编辑器并在其命令模式下执行`:PlugInstall`命令，即可自动安装上述插件列表中新增的插件。待安装完成之后，只需要再次重启 NeoVim 编辑器，并在其命令模式下执行`:call mkdp#util#install()`命令，然后就可以通过`:MarkdownPreview`命令来启动预览，然后用`:MarkdownPreviewStop`命令来关闭预览了。
+`edit.lua` / `lsp.lua` / `lualine.lua` / `yazi.lua` / `markdown.lua` / `alpha.lua` / `colorscheme.lua` 的内容见 §5 各小节。
