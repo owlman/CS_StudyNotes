@@ -382,25 +382,24 @@ return {
 
   -- nvim-lspconfig 现在退化为"提供 server 默认配置 + capabilities"的角色，
   -- 真正的启用/挂载走 NeoVim 0.11+ 内置 vim.lsp.config / vim.lsp.enable
+  -- 注意：必须用 lspconfig.<name>.setup({})，它内部会把 default config (含 cmd) 合并后
+  -- 再调 vim.lsp.config。直接 vim.lsp.config("pyright", {}) 会因 cmd 为空报 E5113。
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local servers = { "pyright", "clangd", "lua_ls", "bashls", "jsonls", "yamlls" }
-
+      local lspconfig = require("lspconfig")
+      lspconfig.pyright.setup({})
+      lspconfig.clangd.setup({})
+      lspconfig.lua_ls.setup({})
+      lspconfig.bashls.setup({})
       -- jsonls 的 lspconfig 默认 cmd 写的是复数 `vscode-json-languageserver`，
       -- 但 `vscode-langservers-extracted` npm 包实际 shim 是单数 `vscode-json-language-server`。
       -- 这里显式覆盖，否则 :LspInfo 会报 `spawn: not found`。
-      vim.lsp.config("jsonls", {
+      lspconfig.jsonls.setup({
         cmd = { "vscode-json-language-server", "--stdio" },
       })
-
-      for _, name in ipairs(servers) do
-        if name ~= "jsonls" then
-          vim.lsp.config(name, {})
-        end
-      end
-      vim.lsp.enable(servers)
+      lspconfig.yamlls.setup({})
     end,
   },
 
@@ -750,12 +749,28 @@ vim.cmd([[
 `vscode-langservers-extracted` 这个 npm 包实际可执行文件是单数 `vscode-json-language-server.cmd`，但 `nvim-lspconfig` 内置的 jsonls 默认 cmd 写的是复数 `vscode-json-languageserver`（已过时）。在 spec 里显式覆盖 cmd：
 
 ```lua
-vim.lsp.config("jsonls", {
+lspconfig.jsonls.setup({
   cmd = { "vscode-json-language-server", "--stdio" },
 })
 ```
 
 同理 `vscode-html-language-server` / `vscode-css-language-server` / `vscode-eslint-language-server` 都是单数。
+
+### Q13b. `:LspStart` 报 `cmd: expected function or table with executable command, got nil`
+
+直接在 spec 里写 `vim.lsp.config("pyright", {})` 会失败——NeoVim 0.12 严格校验 `cmd` 不能为空，它**不会**自动从 lspconfig 拿 default。
+
+正确做法是用 `lspconfig.<name>.setup({})`：lspconfig 内部负责把 default config（含 cmd/filetypes/root_dir）合并后再调 `vim.lsp.config`。
+
+```lua
+require("lspconfig").pyright.setup({})
+```
+
+> [!NOTE] 0.12 的 lspconfig 状态
+>
+> nvim-lspconfig 在 NeoVim 0.11+ 已被标记 **deprecated**（`require('lspconfig')` 会打印 `Feature will be removed in nvim-lspconfig v3.0.0`），并直接告诉你"用 `vim.lsp.config`"。但 `lspconfig.<name>.setup({})` 仍是目前最省事的写法——它内部就是合并 default + 调 `vim.lsp.config + vim.lsp.enable`。
+>
+> 另一个坑：0.12 的 lspconfig 已经**移除了 `require("lspconfig.server_configurations")` 模块**，所以"手动 merge default config"那个备选方案在 0.12 下不可用，必须走 `lspconfig.<name>.setup({})`。
 
 ### Q14. `mkdp#util#install` 不存在 / `Vim:E117`
 
@@ -788,6 +803,30 @@ vim.lsp.config("jsonls", {
 | `~/.config/nvim/` 路径 | `%LOCALAPPDATA%\nvim\`（即 `C:\Users\<u>\AppData\Local\nvim`），**不用建 `~/.config/nvim` 软链** |
 
 > 笔记里 §5 的 spec 文件**跨平台通用**，仅上述几条命令需要换写法；配置文件结构（`init.lua` / `lua/user/*.lua`）在 Windows 上由 NeoVim 的 `stdpath('config')` 自动解析到 `%LOCALAPPDATA%\nvim\`，所以你只要把文件放对地方即可。
+
+### Q16. `nvim --headless` 验证时 LSP clients 一直为 0，但 GUI 终端 nvim 里能正常 attach
+
+这是 `headless` 模式的特性，不是配置错。`nvim --headless -u <script> <file>` 启动时：
+- buffer 1 在命令行参数处理时**已经创建**但没 `loaded`（`vim.api.nvim_buf_is_loaded(1) == false`）
+- filetype 自动检测需要 BufReadPost 真正触发，但 buffer 没 loaded → 没触发 → ft 留空 → LSP 不 attach
+
+正确做法是在脚本里**用 `:e` 命令显式打开文件**，模拟用户交互：
+
+```lua
+-- 错的:命令行参数打开,headless 下 buffer 不 loaded
+-- nvim --headless -u full-check.lua test.py
+
+-- 对的:在脚本里 schedule 后 :e 打开
+require("user.lazy")
+vim.schedule(function()
+  vim.cmd("e test.py")  -- 手动触发 BufReadPre → filetype → LSP attach
+  vim.wait(5000, function() return #vim.lsp.get_clients() > 0 end)
+  print("clients:", #vim.lsp.get_clients())
+end)
+vim.wait(10000, function() return false end)
+```
+
+> 真实 GUI/终端 nvim 里没有这个问题：用户 `:e file` 或 vim 启动时 UI 已经 ready，buffer 正常 loaded 并跑 filetype 检测。本节专门给做 headless 自动化测试的人看。
 
 ## 7. 附录：完整配置骨架
 
