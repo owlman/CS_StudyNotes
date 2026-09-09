@@ -28,6 +28,8 @@ categories: [命令行工具]
 > 版本基线：本文以 **NeoVim 0.11 / 0.12+**（撰写时最新稳定版 v0.12.5，2026-08 发布）为基准；Node.js 20 LTS；lazy.nvim v11+；yazi v26+。
 >
 > 图片方面：旧版本中的博客园 CDN 图片已在历次 commit 中统一迁移至本地 `img/` 目录，本文不再保留任何外链图片。
+>
+> 2026-09 实战微调：按本文 §3-§7 实际在 Windows 11 + Scoop 环境配置一轮后回写，修正了 7 处与现行社区规范不符的写法（详见 §6 常见问题 Q9-Q15）。
 
 ## 目录
 
@@ -264,7 +266,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicon" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
         options = { theme = "catppuccin" },
@@ -286,18 +288,23 @@ return {
 -- lua/user/plugins/edit.lua
 return {
   -- 语法高亮 / 缩进 / 跳转
+  -- 注意：0.12+ 必须切 main 分支（master 冻结不兼容 0.12）、且不能 lazy-load
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,           -- nvim-treesitter main 分支明确说"This plugin does not support lazy-loading"
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "lua", "python", "cpp", "json", "markdown", "bash", "yaml",
-        },
-        highlight = { enable = true },
-        indent = { enable = true },
+      require("nvim-treesitter").setup({
+        install_dir = vim.fn.stdpath("data") .. "/site",
       })
+      -- 装常用 parser（新 API 是 nvim-treesitter.install，不是 ensure_installed）
+      pcall(function()
+        require("nvim-treesitter").install({
+          "lua", "python", "cpp", "c", "json", "markdown",
+          "bash", "yaml", "toml", "vim", "vimdoc",
+        })
+      end)
     end,
   },
 
@@ -324,6 +331,10 @@ return {
 ```
 
 > 旧版用 `ervandew/supertab` 做 tab 补全，本节换成了 Treesitter + mini.pairs + Telescope 的现代组合。
+>
+> [!NOTE] Treesitter 的两条路
+>
+> NeoVim 0.11+ **已经内置** `vim.treesitter.*` + `:checkhealth vim.treesitter`，外部 `nvim-treesitter` 插件的角色被弱化为"提供大量 parser 与 query 模板"。如果你只用 lua/python/json 等几个语言，可以**完全不装** nvim-treesitter，跳过本节第一个 spec，只保留 mini.pairs + Telescope，启动更快。
 
 ### 5.2 LSP：内置 LSP + Pyright
 
@@ -332,11 +343,11 @@ NeoVim 0.11 内置 `vim.lsp.*`，配合各语言官方 LSP server 即可获得�
 ```lua
 -- lua/user/plugins/lsp.lua
 return {
-  -- nvim-lspconfig 现在退化为"提供 server 默认配置 + capabilities"的角色，
-  -- 真正的启用/挂载走 NeoVim 0.11+ 内置 vim.lsp.config / vim.lsp.enable
+  -- nvim-cmp 必须是顶层 spec：所有 cmp-* 的 after/plugin/*.lua 会第一时间 require("cmp")，
+  -- 所以 cmp 要先于它们装好；cmp-* 全列在 cmp 的 dependencies 里。
   {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "L3MON4D3/LuaSnip",
@@ -346,22 +357,11 @@ return {
     },
     config = function()
       local cmp = require("cmp")
-
-      -- 一份要启用的 server 列表，文件类型会自动按 lspconfig 的 default_config 关联
-      local servers = { "pyright", "clangd", "lua_ls", "bashls", "jsonls", "yamlls" }
-
-      -- 0.11+ 内置 LSP：用 vim.lsp.config 设置每个 server 的默认参数
-      for _, name in ipairs(servers) do
-        vim.lsp.config(name, {})
-      end
-      -- 再用 vim.lsp.enable 真正启用（取代 lspconfig.<name>.setup({})）
-      vim.lsp.enable(servers)
-
       cmp.setup({
         snippet = require("luasnip").lazy_snippet,
         mapping = cmp.mapping.preset.insert({
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"] = cmp.mapping.select_next_item(),
+          ["<CR>"]   = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"]  = cmp.mapping.select_next_item(),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
         }),
         sources = cmp.config.sources(
@@ -369,7 +369,47 @@ return {
           { { name = "path" } }
         ),
       })
+
+      -- 诊断显示
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs        = true,
+        underline    = true,
+        update_in_insert = false,
+      })
     end,
+  },
+
+  -- nvim-lspconfig 现在退化为"提供 server 默认配置 + capabilities"的角色，
+  -- 真正的启用/挂载走 NeoVim 0.11+ 内置 vim.lsp.config / vim.lsp.enable
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local servers = { "pyright", "clangd", "lua_ls", "bashls", "jsonls", "yamlls" }
+
+      -- jsonls 的 lspconfig 默认 cmd 写的是复数 `vscode-json-languageserver`，
+      -- 但 `vscode-langservers-extracted` npm 包实际 shim 是单数 `vscode-json-language-server`。
+      -- 这里显式覆盖，否则 :LspInfo 会报 `spawn: not found`。
+      vim.lsp.config("jsonls", {
+        cmd = { "vscode-json-language-server", "--stdio" },
+      })
+
+      for _, name in ipairs(servers) do
+        if name ~= "jsonls" then
+          vim.lsp.config(name, {})
+        end
+      end
+      vim.lsp.enable(servers)
+    end,
+  },
+
+  -- 诊断列表 / LSP 动作面板
+  -- 旧名 nvim-web-devicon（单数）仓库已删，要写复数 nvim-web-devicons
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble", "TroubleToggle" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 }
 ```
@@ -399,13 +439,15 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicon" },
+    -- 旧名 nvim-web-devicon（单数）仓库已删；改用复数 nvim-web-devicons
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
         options = {
           theme = "catppuccin",
           section_separators = { "", "" },
           component_separators = { "", "" },
+          icons_enabled = true,
         },
       })
     end,
@@ -432,16 +474,34 @@ sudo apt install -y yazi
 
 ```lua
 -- lua/user/plugins/yazi.lua
+-- 严格按 mikavilpas/yazi.nvim 官方 README 的 spec 写法
 return {
   {
     "mikavilpas/yazi.nvim",
+    version = "*", -- 锁定到最新稳定 tag
     event = "VeryLazy",
-    dependencies = { "yazi-org/yazi.nvim" },
-    config = function()
-      require("yazi").setup({ open_for_directories = true })
-      vim.keymap.set("n", "<M-o>", "<cmd>Yazi toggle<CR>", { desc = "Yazi 切换" })
-      vim.keymap.set("n", "<M-+>", "<cmd>BufferNext<CR>",    { desc = "下一标签" })
-      vim.keymap.set("n", "<M-->", "<cmd>BufferPrevious<CR>", { desc = "上一标签" })
+    enabled = function()
+      -- 没装 yazi 二进制就整个 spec 跳过，不影响其它插件
+      return vim.fn.executable("yazi") == 1
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim", lazy = true },
+      -- 注意：之前有人写过 "yazi-org/yazi.nvim"，那个仓库根本不存在（404），
+      -- yazi.nvim 真正的依赖只有 plenary.nvim。
+    },
+    keys = {
+      -- 把 keymap 放进去：lazy 看到对应键被按下才加载，更省启动时间
+      { "<M-o>",  "<cmd>Yazi toggle<CR>",       desc = "Yazi 切换",   mode = "n" },
+      { "<M-+>",  "<cmd>BufferNext<CR>",        desc = "下一标签",   mode = "n" },
+      { "<M-->",  "<cmd>BufferPrevious<CR>",    desc = "上一标签",   mode = "n" },
+    },
+    opts = {
+      open_for_directories = true,
+      keymaps = { show_help = "<f1>" },
+    },
+    init = function()
+      -- 关掉 netrw，让 yazi.nvim 接管目录浏览
+      vim.g.loaded_netrwPlugin = 1
     end,
   },
 }
@@ -464,8 +524,14 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreview", "MarkdownPreviewStop" },
     ft = "markdown",
-    build = function()
-      vim.fn["mkdp#util#install"]()
+    -- 注意：原来用 `build = function() vim.fn["mkdp#util#install"]() end`
+    -- 会在 lazy 还在 clone 阶段（runtimepath 还没设置）就调用，必报
+    -- `Vim:E117: Unknown function: mkdp#util#install`。
+    -- 改用 `init` + `vim.schedule` 推迟到插件 source 完成后再装。
+    init = function()
+      vim.schedule(function()
+        pcall(vim.fn["mkdp#util#install"])
+      end)
     end,
   },
 }
@@ -593,6 +659,135 @@ curl -sL https://raw.githubusercontent.com/neovim/neovim-releases/latest/run.sh 
 :Lazy clean   # 清掉不用的插件
 :Lazy sync    # 重装 + 更新
 ```
+
+### Q9. `lazy.nvim` clone 报 `Repository not found: .../nvim-web-devicon.git`
+
+仓库 `nvim-tree/nvim-web-devicon`（单数）已删除 / 重命名为 `nvim-tree/nvim-web-devicons`（复数）。把所有依赖里的旧名换成新名：
+
+```diff
+- dependencies = { "nvim-tree/nvim-web-devicon" }
++ dependencies = { "nvim-tree/nvim-web-devicons" }
+```
+
+同样的坑在 `yazi-org/yazi.nvim` 上也踩过——那个仓库**根本不存在**，`mikavilpas/yazi.nvim` 的真正依赖只有 `nvim-lua/plenary.nvim`。
+
+### Q10. `require('nvim-treesitter.configs') not found`
+
+装了 NeoVim 0.12+ 才会遇到。`nvim-treesitter` 的 `master` 分支已经被冻结只做向后兼容，**不支持 0.12**；所有新功能在 `main` 分支，且 main 是**重大不兼容重写**：
+
+```diff
+  {
+    "nvim-treesitter/nvim-treesitter",
++   branch = "main",
++   lazy = false,  -- main 分支明确说"This plugin does not support lazy-loading"
+    build = ":TSUpdate",
+-   event = { "BufReadPost", "BufNewFile" },
+    config = function()
+-     require("nvim-treesitter.configs").setup({ ... })
++     require("nvim-treesitter").setup({
++       install_dir = vim.fn.stdpath("data") .. "/site",
++     })
++     pcall(function()
++       require("nvim-treesitter").install({ "lua", "python", "json", ... })
++     end)
+    end,
+  }
+```
+
+另外 main 分支要求 `tree-sitter-cli` 0.26.1+，**且不能通过 npm 装**：
+
+```bash
+# macOS
+brew install tree-sitter
+# Ubuntu（scoop / cargo 也行）
+cargo install tree-sitter-cli --locked
+```
+
+Windows 上 Scoop main bucket 有 `tree-sitter`：
+
+```powershell
+scoop install tree-sitter
+```
+
+### Q11. `options.lua:35: '=' expected near 'plugin'`
+
+`filetype plugin indent on` 是 vimscript 命令，不能直接写在 `.lua` 文件里。要么用 `vim.cmd(...)` 包装，要么换成 Lua 等价写法：
+
+```lua
+-- 错误：vimscript 命令混进 Lua 文件
+filetype plugin indent on
+
+-- 正确做法 1
+vim.cmd("filetype plugin indent on")
+
+-- 正确做法 2（更显式）
+vim.cmd([[
+  filetype plugin indent on
+]])
+```
+
+### Q12. `:LspStart` 报 `module 'cmp' not found` / `cmp_luasnip` after/plugin 失败
+
+`hrsh7th/cmp-nvim-lsp`、`saadparwaiz1/cmp_luasnip`、`hrsh7th/cmp-path` 这类 cmp-* 的 `after/plugin/*.lua` 会在 lazy 加载它们时**第一时间** `require("cmp")`，但 `nvim-cmp` 本身没在 dependencies 顶层。
+
+修法是把 `nvim-cmp` 拆成独立 spec，cmp-* 全列在它的 dependencies 里（参见 §5.2 改写后的代码）：
+
+```lua
+{
+  "hrsh7th/nvim-cmp",  -- 先
+  event = "InsertEnter",
+  dependencies = {
+    "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-path",
+    "rafamadriz/friendly-snippets",
+  },
+  config = function() require("cmp").setup({ ... }) end,
+},
+```
+
+### Q13. `:LspInfo` 报 `jsonls: spawn: not found`
+
+`vscode-langservers-extracted` 这个 npm 包实际可执行文件是单数 `vscode-json-language-server.cmd`，但 `nvim-lspconfig` 内置的 jsonls 默认 cmd 写的是复数 `vscode-json-languageserver`（已过时）。在 spec 里显式覆盖 cmd：
+
+```lua
+vim.lsp.config("jsonls", {
+  cmd = { "vscode-json-language-server", "--stdio" },
+})
+```
+
+同理 `vscode-html-language-server` / `vscode-css-language-server` / `vscode-eslint-language-server` 都是单数。
+
+### Q14. `mkdp#util#install` 不存在 / `Vim:E117`
+
+`markdown-preview.nvim` 的 `mkdp#util#install` 函数只在插件 source 之后才存在，lazy 的 `build` 字段在 clone 完成**立即**执行（runtimepath 还没 prepend），必报 `Unknown function`。
+
+改用 `init` + `vim.schedule` 推迟：
+
+```lua
+{
+  "iamcco/markdown-preview.nvim",
+  cmd = { "MarkdownPreview", "MarkdownPreviewStop" },
+  ft = "markdown",
+- build = function() vim.fn["mkdp#util#install"]() end,
++ init = function()
++   vim.schedule(function() pcall(vim.fn["mkdp#util#install"]) end)
++ end,
+}
+```
+
+### Q15. Windows / Scoop 上跑本笔记配置要做的额外步骤
+
+| 笔记里的命令 | Windows / Scoop 等价 |
+| --- | --- |
+| `sudo apt install -y ripgrep fd-find unzip` | `scoop install ripgrep fd unzip` |
+| `pip install --user pyright` | `pip install pyright`（全局 venv 用） |
+| `npm i -g bash-language-server yaml-language-server vscode-langservers-extracted` | 同左（scoop nvm 下的 npm） |
+| `sudo apt install -y clangd` | `scoop install llvm`（自带 clangd） |
+| `lua-language-server` 没有 npm 包 | `scoop install lua-language-server`（main bucket 里有 v3.19+） |
+| `cargo install --locked yazi-fm yazi-cli` | `scoop bucket add extras && scoop install yazi` |
+| `~/.config/nvim/` 路径 | `%LOCALAPPDATA%\nvim\`（即 `C:\Users\<u>\AppData\Local\nvim`），**不用建 `~/.config/nvim` 软链** |
+
+> 笔记里 §5 的 spec 文件**跨平台通用**，仅上述几条命令需要换写法；配置文件结构（`init.lua` / `lua/user/*.lua`）在 Windows 上由 NeoVim 的 `stdpath('config')` 自动解析到 `%LOCALAPPDATA%\nvim\`，所以你只要把文件放对地方即可。
 
 ## 7. 附录：完整配置骨架
 
