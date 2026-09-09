@@ -480,7 +480,7 @@ return {
 
 > [!WARNING] 维护停滞风险
 >
-> `iamcco/markdown-preview.nvim` 自 2024-07 之后未再发布新版本（撰写时已 2 年），目前仍可正常使用但已缺乏新功能与适配。如果你需要 inlay hint / diagram / 同步滚动等现代能力，可以关注社区 fork `MeanderingProgrammer/markdown.nvim` 或 `nfrid/markdown-toggle`；否则继续用 iamcco 的版本问题不大。
+> `iamcco/markdown-preview.nvim` 自 2024-07 之后未再发布新版本（撰写时已 2 年），目前仍可正常使用但已缺乏新功能与适配。如果你不想开浏览器、想在 NeoVim buffer 里直接渲染 Markdown（带加粗、斜体、代码块等格式高亮），可以用 `MeanderingProgrammer/render-markdown.nvim`（与 markdown-preview 是不同范式，二选一即可）；否则继续用 iamcco 的版本问题不大。
 
 ### 5.6 启动页：alpha-nvim
 
