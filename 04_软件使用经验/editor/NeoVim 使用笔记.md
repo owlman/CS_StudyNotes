@@ -2,7 +2,7 @@
 title: NeoVim 使用笔记
 author: 凌杰
 date: 2020-07-15
-updated: 2026-05-12
+updated: 2026-09-10
 tags: [文本编辑器, NeoVim, LSP, lazy.nvim]
 categories: [命令行工具]
 ---
@@ -25,6 +25,8 @@ categories: [命令行工具]
 > | ranger + rnvimr | yazi + yazi.nvim | ranger 已基本停更，yazi 是当前社区主流 |
 > | vim-airline | lualine.nvim | 纯 Lua 实现的状态栏，主题生态更现代 |
 >
+> 版本基线：本文以 **NeoVim 0.11 / 0.12+**（撰写时最新稳定版 v0.12.5，2026-08 发布）为基准；Node.js 20 LTS；lazy.nvim v11+；yazi v26+。
+>
 > 图片方面：旧版本中的博客园 CDN 图片已在历次 commit 中统一迁移至本地 `img/` 目录，本文不再保留任何外链图片。
 
 ## 目录
@@ -35,7 +37,7 @@ categories: [命令行工具]
   - [2.2 NeoVim 现状](#22-neovim-现状)
 - [3. 安装与配置](#3-安装与配置)
   - [3.1 基础环境准备](#31-基础环境准备)
-  - [3.2 安装 NeoVim 0.11+](#32-安装-neovim-011)
+  - [3.2 安装 NeoVim](#32-安装-neovim)
   - [3.3 配置文件结构](#33-配置文件结构)
 - [4. 插件管理：lazy.nvim](#4-插件管理lazynvim)
   - [4.1 安装 lazy.nvim](#41-安装-lazynvim)
@@ -84,12 +86,12 @@ NeoVim 项目逐步成为成熟项目，并率先提供了多个 8.0 之前 Vim 
 
 NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 Vim 8.0/8.1 的迭代；Vim 现在也支持异步任务、内置终端等特性。
 
-到 2025 年前后，NeoVim 已经稳定进入了 **0.11 时代**：
+到 2026 年前后，NeoVim 已经稳定进入了 **0.11 / 0.12 时代**：
 
-- **内置 LSP**：`vim.lsp.*` 已经覆盖了 attach / completion / code action / rename / diagnostic 等核心场景，不再依赖 Coc 这类 Node.js 中间层。
-- **内置 Treesitter**：高亮、缩进、跳转都走 `vim.treesitter.*`。
-- **Lua 作为一等公民**：`init.lua` 与 `lua/` 模块成为推荐配置方式，vimscript 配置被逐步淘汰。
-- **每夜构建可下载 AppImage**：不再受发行版仓库版本拖累。
+- **内置 LSP**：`vim.lsp.config / vim.lsp.enable` 已经覆盖了 server 注册、filetype 关联、capabilities 等核心场景；Coc 这种 Node.js 中间层已不再是必需品。
+- **内置 Treesitter**：高亮、缩进、跳转都走 `vim.treesitter.*`，从 0.11 开始官方也提供了内建 parser 安装机制（`:checkhealth vim.treesitter`）。
+- **Lua 作为一等公民**：`init.lua` 与 `lua/` 模块成为推荐配置方式，vimscript 配置被逐步淘汰；lazy.nvim 这类 Lua 插件管理器随之成为主流。
+- **稳定与 nightly 双轨发布**：每夜构建与稳定版均可通过 GitHub Releases 直接下载 AppImage，不再受发行版仓库拖累。
 
 ## 3. 安装与配置
 
@@ -115,8 +117,7 @@ npm -v    # 10.x.x
 
 ```bash
 npm config set registry https://registry.npmmirror.com
-npm config get registry
-# https://registry.npmmirror.com
+npm config get registry # 应输出：https://registry.npmmirror.com
 ```
 
 #### Python、ripgrep、fd
@@ -139,9 +140,9 @@ pip install --user pynvim
 sudo apt install -y curl git
 ```
 
-### 3.2 安装 NeoVim 0.11+
+### 3.2 安装 NeoVim
 
-**不要直接用 Ubuntu 仓库的 `apt install neovim`**——发行版仓库里通常还停留在 0.9 甚至 0.7，缺少内置 LSP / Treesitter 关键改动。推荐以下三种方式之一：
+在这里，我会建议读者**不要直接用 Ubuntu 仓库的 `apt install neovim`**，发行版仓库里通常还停留在 0.9 甚至 0.7，缺少内置 LSP / Treesitter 关键改动。推荐以下三种方式之一：
 
 #### AppImage（最简单，跨发行版通用）
 
@@ -180,7 +181,7 @@ sudo make install
 #### 验证
 
 ```bash
-nvim -v   # NVIM v0.11.x
+nvim -v   # NVIM v0.12.x（撰写时最新稳定版 v0.12.5）
 nvim --headless +checkhealth +q
 ```
 
@@ -188,7 +189,7 @@ nvim --headless +checkhealth +q
 
 NeoVim 0.11+ 的标准做法是把所有配置放进 `~/.config/nvim/`，把 Lua 模块放进 `lua/<user>/`，推荐结构如下：
 
-```
+```Bash
 ~/.config/nvim/
 ├── init.lua                 # 入口
 ├── lua/
@@ -331,6 +332,8 @@ NeoVim 0.11 内置 `vim.lsp.*`，配合各语言官方 LSP server 即可获得�
 ```lua
 -- lua/user/plugins/lsp.lua
 return {
+  -- nvim-lspconfig 现在退化为"提供 server 默认配置 + capabilities"的角色，
+  -- 真正的启用/挂载走 NeoVim 0.11+ 内置 vim.lsp.config / vim.lsp.enable
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -343,12 +346,16 @@ return {
     },
     config = function()
       local cmp = require("cmp")
-      require("lspconfig").pyright.setup({})
-      require("lspconfig").clangd.setup({})
-      require("lspconfig").lua_ls.setup({})
-      require("lspconfig").bashls.setup({})
-      require("lspconfig").jsonls.setup({})
-      require("lspconfig").yamlls.setup({})
+
+      -- 一份要启用的 server 列表，文件类型会自动按 lspconfig 的 default_config 关联
+      local servers = { "pyright", "clangd", "lua_ls", "bashls", "jsonls", "yamlls" }
+
+      -- 0.11+ 内置 LSP：用 vim.lsp.config 设置每个 server 的默认参数
+      for _, name in ipairs(servers) do
+        vim.lsp.config(name, {})
+      end
+      -- 再用 vim.lsp.enable 真正启用（取代 lspconfig.<name>.setup({})）
+      vim.lsp.enable(servers)
 
       cmp.setup({
         snippet = require("luasnip").lazy_snippet,
@@ -448,7 +455,7 @@ return {
 
 ### 5.5 Markdown 预览：markdown-preview.nvim
 
-`iamcco/markdown-preview.nvim` 仍是事实标准，迁移到 lazy 之后配置无大变化：
+`iamcco/markdown-preview.nvim` 在社区里仍是事实标准，迁移到 lazy 之后配置无大变化：
 
 ```lua
 -- lua/user/plugins/markdown.lua
@@ -470,6 +477,10 @@ return {
 :MarkdownPreview       " 打开预览
 :MarkdownPreviewStop   " 关闭预览
 ```
+
+> [!WARNING] 维护停滞风险
+>
+> `iamcco/markdown-preview.nvim` 自 2024-07 之后未再发布新版本（撰写时已 2 年），目前仍可正常使用但已缺乏新功能与适配。如果你需要 inlay hint / diagram / 同步滚动等现代能力，可以关注社区 fork `MeanderingProgrammer/markdown.nvim` 或 `nfrid/markdown-toggle`；否则继续用 iamcco 的版本问题不大。
 
 ### 5.6 启动页：alpha-nvim
 
@@ -566,7 +577,7 @@ npm config set registry https://registry.npmmirror.com
 :checkhealth markdown-preview
 ```
 
-### Q7. NeoVim 如何升级到 0.11+
+### Q7. NeoVim 如何升级到 0.11/0.12+
 
 不要用系统包管理器升级——会卡在发行版仓库的老版本。推荐下载 AppImage 替换 `/usr/local/bin/nvim`，或者直接用社区脚本：
 
