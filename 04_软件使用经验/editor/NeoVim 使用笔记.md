@@ -674,24 +674,24 @@ sudo pacman -S yazi
 cargo install --locked yazi-fm yazi-cli
 ```
 
-**Windows / Scoop** 有两条路，实测 `extras` bucket 在国内网络下 clone 经常卡在 broken 状态（`git: fatal: your current branch appears to be broken`），所以最稳是直接从 GitHub release 装：
+**Windows / Scoop**（一条命令即可，无需 extras）：
 
 ```powershell
-# 路 A：scoop extras（国内不一定能成功，但试一下）
-scoop bucket add extras
-scoop install yazi
-
-# 路 B（推荐）：从 GitHub release 直接下载 msvc zip
-$url = 'https://github.com/sxyazi/yazi/releases/latest'
-$zip = (Invoke-WebRequest "$url" -UseBasicParsing |
-        Select-String 'yazi-x86_64-pc-windows-msvc.zip' |
-        Select-Object -First 1).ToString()
-Invoke-WebRequest "https://github.com$zip" -OutFile "$env:TEMP\yazi.zip"
-Expand-Archive "$env:TEMP\yazi.zip" -DestinationPath "$env:USERPROFILE\scoop\apps\yazi\v26.9.1"
-Copy-Item "$env:USERPROFILE\scoop\apps\yazi\v26.9.1\yazi-x86_64-pc-windows-msvc\*.exe" `
-          -Destination "$env:USERPROFILE\scoop\shims\" -Force
-yazi --version    # 验证
+scoop install yazi    # yazi 在 main bucket 里！实测 16 MB，秒级完成
 ```
+
+> [!IMPORTANT] 不要想当然去加 extras bucket
+>
+> `yazi` 一直就在 **main** bucket（`scoop search yazi` → `yazi 26.9.1 main`），不需要 `scoop bucket add extras`。这里记下我踩过的坑：
+>
+> - 我一开始以为 yazi 在 extras，跑了 `scoop bucket add extras`，国内网络 clone 中断 → extras bucket 卡在 broken 状态（`Manifests = 0`）
+> - 于是改成手动从 GitHub release 下载 zip + 把**真实 exe**（33 MB）直接拷到 `~/scoop/shims/`
+> - 结果 yazi 能用，但 scoop 记不住它（`install.json` 缺失）→ `scoop status` 一直报 `yazi  Install failed`
+> - 而且那个 33 MB 的 exe 不是 scoop shim（正常 shim 只有 136 KB），以后 scoop 升级/卸载都会乱
+>
+> 正规做法就是 `scoop install yazi`。**只有当某个包确实只在 extras 里时**才需要加 extras bucket；那时若 clone 卡住，参考 Q15 的 bucket 修复方法。
+
+若确实需要从 GitHub release 手装（如包不在任何 bucket 里），流程是：下载 zip → 解压到 `~/scoop/apps/<app>/<version>/` → 建 `current` junction → **用 `scoop shim` 或手动写 `.shim` 文件**（别直接拷 exe）。
 
 > [!NOTE] yazi.nvim 首次 clone 比较慢
 >
@@ -922,6 +922,51 @@ scoop update neovim
 ```
 
 > 另外：scoop 下载中断时会在 `~/scoop/cache/` 留一个 `neovim#0.12.5#.zip.download` 不完整文件（hash 段为空）。重跑前删掉它；若已经下载完整了，可以手动放到 `~/scoop/cache/neovim#<version>#<hash前7位>.zip`（hash 取 manifest 里的值）让 scoop 直接命中缓存。
+
+#### 进阶：bucket clone 中断导致 broken，如何就地修复
+
+`scoop bucket add extras` 被中断后，`scoop bucket list` 报：
+
+```
+fatal: your current branch appears to be broken
+
+Name   Source                                     Manifests
+extras https://github.com/ScoopInstaller/Extras             0
+```
+
+**诊断**（关键：看 `bucket/` 目录和 `refs` 是否还在）：
+
+```powershell
+$d = "$env:USERPROFILE\scoop\buckets\extras"
+git -C $d rev-parse HEAD          # → fatal: ambiguous argument 'HEAD'
+git -C $d branch -a               # → failed to resolve HEAD
+ls "$d\bucket"                    # → 目录不存在（checkout 从未完成）
+ls "$d\.git\refs\remotes\origin"  # → master 还在！
+ls "$d\.git\objects\pack"         # → pack 文件在 + 残留 tmp_pack_xxx
+```
+
+**关键判断**：只要 `refs/remotes/origin/master` 和 `objects/pack/*.pack` 还在，**数据其实已经下载了**，只是 checkout 阶段被打断、HEAD 没写成功 → **可以就地恢复，不用重下来**：
+
+```powershell
+$d = "$env:USERPROFILE\scoop\buckets\extras"
+
+# 1. 清掉中断残留的临时 pack
+Remove-Item "$d\.git\objects\pack\tmp_pack_*" -Force
+
+# 2. 从远程引用恢复本地分支（一条命令搞定）
+git -C $d checkout -f master
+# → Switched to a new branch 'master'
+# → branch 'master' set up to track 'origin/master'
+
+# 3. 验证：本地 HEAD 应等于远程 master
+$local  = (git -C $d rev-parse HEAD).Trim()
+$remote = (git -C $d ls-remote https://github.com/ScoopInstaller/Extras.git master) -split '\s+' | Select-Object -First 1
+if ($local -eq $remote) { Write-Host 'OK: 恢复完整，数据一致' }
+```
+
+恢复后 `scoop bucket list` 会正常显示 manifest 数（Extras 当前是 2383 个）。
+
+> 如果 `refs/remotes/origin/master` 也丢了（极端情况），就只能 `scoop bucket rm <name>` 后重新 add。重新 add 时若又卡，可先手动 `git clone --depth=1 https://github.com/ScoopInstaller/Extras.git ~/scoop/buckets/extras`（浅克隆快很多），scoop 会自动识别这个目录。
 
 ### Q16. `nvim --headless` 验证时 LSP clients 一直为 0，但 GUI 终端 nvim 里能正常 attach
 
