@@ -29,7 +29,14 @@ categories: [命令行工具]
 >
 > 图片方面：旧版本中的博客园 CDN 图片已在历次 commit 中统一迁移至本地 `img/` 目录，本文不再保留任何外链图片。
 >
-> 2026-09 实战微调：按本文 §3-§7 实际在 Windows 11 + Scoop 环境配置一轮后回写，修正了 7 处与现行社区规范不符的写法（详见 §6 常见问题 Q9-Q15）。
+> 2026-09-09 实战微调（首轮）：按本文 §3-§7 实际在 Windows 11 + Scoop 环境配置一轮后回写，修正了 7 处与现行社区规范不符的写法（详见 §6 常见问题 Q9-Q15）。
+>
+> 2026-09-10 实战微调（二轮）：完整跑通配置 + LSP attach 验证后再补：
+> - Q5 增加「GitHub release 直装 yazi」备选（实测 scoop extras bucket clone 卡在 broken 状态）
+> - Q14 补充「build 时机报错的 stack trace 详解」
+> - 新增 Q17：lspconfig deprecation warning 在 headless 输出里刷屏
+> - §5.1 加 nvim-treesitter「master vs main」对比表
+> - §7 附录的 `options.lua` 补全为实战最终版
 
 ## 目录
 
@@ -335,6 +342,21 @@ return {
 > [!NOTE] Treesitter 的两条路
 >
 > NeoVim 0.11+ **已经内置** `vim.treesitter.*` + `:checkhealth vim.treesitter`，外部 `nvim-treesitter` 插件的角色被弱化为"提供大量 parser 与 query 模板"。如果你只用 lua/python/json 等几个语言，可以**完全不装** nvim-treesitter，跳过本节第一个 spec，只保留 mini.pairs + Telescope，启动更快。
+>
+> [!NOTE] nvim-treesitter `master` vs `main` 分支对比
+>
+> `nvim-treesitter` 在 2025 年有过一次大重写，仓库 README 上明确写了 **"The `master` branch is frozen"**。必须按 NeoVim 版本选择分支：
+>
+> | NeoVim 版本 | 分支 | 关键差异 |
+> | --- | --- | --- |
+> | 0.10 / 0.11 | `master`（默认） | 旧 API：`require("nvim-treesitter.configs").setup({ ensure_installed = {...} })` |
+> | 0.12+ | `main`（必须显式指定） | 新 API：`require("nvim-treesitter").setup({ install_dir = ... })` + `require("nvim-treesitter").install({...})` |
+>
+> 加上 `lazy = false` 因为 main 分支 README 写明 "**This plugin does not support lazy-loading**"。漏写任何一个都会失败：
+>
+> - 漏 `branch = "main"` → 装上 0.10/0.11 兼容版，启动时报 `require('nvim-treesitter.configs') not found`
+> - 漏 `lazy = false` → 启动时报 "module 'nvim-treesitter' not found"（lazy 还在 clone 阶段就调用了 require）
+> - 用旧 `require("nvim-treesitter.configs").setup({...})` → `module 'nvim-treesitter.configs' not found`
 
 ### 5.2 LSP：内置 LSP + Pyright
 
@@ -469,6 +491,8 @@ ranger 多年未发版，社区已切换到 Rust 写的 [yazi](https://github.co
 cargo install --locked yazi-fm yazi-cli
 # 或用包管理器（Ubuntu 24.04+ 仓库已有）
 sudo apt install -y yazi
+# Windows / Scoop 实测走 release zip 最稳（extras bucket 国内网络容易 broken）：
+# 见 Q5 「GitHub release 直装 yazi」详细脚本。
 ```
 
 ```lua
@@ -625,13 +649,51 @@ pip install --user pynvim
 
 ### Q5. yazi 启动报 `command not found: yazi`
 
+先确认是否真没装：
+
 ```bash
-which yazi
-# 没装就用 cargo 或包管理器
-cargo install --locked yazi-fm yazi-cli
-# 或者 Ubuntu 24.04+
-sudo apt install -y yazi
+which yazi    # Linux/macOS
+where yazi    # Windows (PowerShell)
 ```
+
+按平台装：
+
+```bash
+# macOS
+brew install yazi
+
+# Ubuntu 24.04+
+sudo apt install -y yazi
+
+# Arch
+sudo pacman -S yazi
+
+# 从源码（Rust 工具链）
+cargo install --locked yazi-fm yazi-cli
+```
+
+**Windows / Scoop** 有两条路，实测 `extras` bucket 在国内网络下 clone 经常卡在 broken 状态（`git: fatal: your current branch appears to be broken`），所以最稳是直接从 GitHub release 装：
+
+```powershell
+# 路 A：scoop extras（国内不一定能成功，但试一下）
+scoop bucket add extras
+scoop install yazi
+
+# 路 B（推荐）：从 GitHub release 直接下载 msvc zip
+$url = 'https://github.com/sxyazi/yazi/releases/latest'
+$zip = (Invoke-WebRequest "$url" -UseBasicParsing |
+        Select-String 'yazi-x86_64-pc-windows-msvc.zip' |
+        Select-Object -First 1).ToString()
+Invoke-WebRequest "https://github.com$zip" -OutFile "$env:TEMP\yazi.zip"
+Expand-Archive "$env:TEMP\yazi.zip" -DestinationPath "$env:USERPROFILE\scoop\apps\yazi\v26.9.1"
+Copy-Item "$env:USERPROFILE\scoop\apps\yazi\v26.9.1\yazi-x86_64-pc-windows-msvc\*.exe" `
+          -Destination "$env:USERPROFILE\scoop\shims\" -Force
+yazi --version    # 验证
+```
+
+> [!NOTE] yazi.nvim 首次 clone 比较慢
+>
+> `mikavilpas/yazi.nvim` 仓库自带子模块 `yazi-plugin/yazi-plugins`（约 1752 个对象），国内网络下 `git clone --recursive` 阶段可能要 20-30s，耐心等。后续 `:Lazy sync` 是 incremental 增量更新会快很多。
 
 ### Q6. markdown 预览空白 / 中文乱码
 
@@ -776,7 +838,16 @@ require("lspconfig").pyright.setup({})
 
 `markdown-preview.nvim` 的 `mkdp#util#install` 函数只在插件 source 之后才存在，lazy 的 `build` 字段在 clone 完成**立即**执行（runtimepath 还没 prepend），必报 `Unknown function`。
 
-改用 `init` + `vim.schedule` 推迟：
+实际报错 stack：
+
+```
+[markdown-preview.nvim] build  | Running task build
+[markdown-preview.nvim] build  | Vim:E117: Unknown function: mkdp#util#install
+Error in .../lua/user/plugins/markdown.lua:
+  Failed to run `config` for markdown-preview.nvim
+```
+
+修法：用 `init` + `vim.schedule` 把 install 推迟到 main loop 下一个 tick，那时 runtimepath 已经 setup：
 
 ```lua
 {
@@ -789,6 +860,8 @@ require("lspconfig").pyright.setup({})
 + end,
 }
 ```
+
+> `vim.schedule` 的作用是把 callback 排到 main loop 下一次 event tick，那时 lazy 的整个 setup 已经完成，runtimepath 里已经有 markdown-preview.nvim，`mkdp#util#install` 可用。
 
 ### Q15. Windows / Scoop 上跑本笔记配置要做的额外步骤
 
@@ -828,6 +901,36 @@ vim.wait(10000, function() return false end)
 
 > 真实 GUI/终端 nvim 里没有这个问题：用户 `:e file` 或 vim 启动时 UI 已经 ready，buffer 正常 loaded 并跑 filetype 检测。本节专门给做 headless 自动化测试的人看。
 
+### Q17. nvim 启动日志被 lspconfig deprecation warning 刷屏
+
+每次打开 .py / .lua 等文件，headless 输出里都会看到：
+
+```
+The `require('lspconfig')` "framework" is deprecated, use vim.lsp.config (see :help lspconfig-nvim-0.11) instead.
+Feature will be removed in nvim-lspconfig v3.0.0
+stack traceback:
+  .../nvim-lspconfig/lua/lspconfig.lua:81: in function '__index'
+  .../lua/user/plugins/lsp.lua:49: in function 'config'
+  ...
+```
+
+这是 nvim-lspconfig 0.12 的 deprecation **警告**而非错误，**功能仍正常**（LSP 仍会 attach）。来源是 `lspconfig.<name>.setup({})` 在 setup 路径里访问了 metatable `__index` 触发了 deprecation 提示。
+
+短期应对（写到 `lua/user/lsp.lua` 顶部，让 deprecation 不刷屏）：
+
+```lua
+-- 在 lazy setup 之前静默 lspconfig deprecation warning
+vim.deprecate = function() end
+```
+
+长期：等 nvim-lspconfig v3 出来后改用纯 `vim.lsp.config / vim.lsp.enable` 路径，**绕过 lspconfig 框架**。届时 spec 可写成：
+
+```lua
+{
+  "neovim/nvim-lspconfig",  -- 此时可彻底去掉
+}
+```
+
 ## 7. 附录：完整配置骨架
 
 下面给出最小可用的全套配置，把它们按路径放好后，第一次启动 NeoVim 就会进入 lazy.nvim 的安装界面，按提示完成即可。
@@ -840,15 +943,48 @@ require("user.options")
 
 ```lua
 -- ~/.config/nvim/lua/user/options.lua
+-- 全局选项
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.smartindent = true
+
+-- 鼠标在终端模式下不干扰复制
+vim.opt.mouse = "a"
+
+-- 剪贴板走 Windows 系统剪贴板（Linux 改 "unnamed" 即可）
 vim.opt.clipboard = "unnamedplus"
+
+-- 搜索高亮 / 增量搜索 / 智能大小写
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- 状态栏行号列 / 更短的 updatetime 让光标移动更快刷新 statusline
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 300
+vim.opt.timeoutlen = 400
+
+-- 不创建 swap / undo 文件，跨机器同步更友好
+vim.opt.swapfile = false
+vim.opt.undofile = false
+
+-- 文件类型检测 + 缩进：vimscript 命令必须 vim.cmd 包裹（见 Q11）
+vim.cmd("filetype plugin indent on")
+
+-- 编码
+vim.opt.encoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
 ```
+
+> 上面的 `options.lua` 是实战最终版（2026-09），涵盖 vim.cmd 修复（Q11）、Windows 剪贴板、不写 swap/undo、leader/localleader 同时设置等。
 
 ```lua
 -- ~/.config/nvim/lua/user/lazy.lua
