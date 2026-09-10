@@ -31,6 +31,8 @@ categories: [命令行工具]
 >
 > 2026-09-09 实战微调（首轮）：按本文 §3-§7 实际在 Windows 11 + Scoop 环境配置一轮后回写，修正了 7 处与现行社区规范不符的写法（详见 §6 常见问题 Q9-Q15）。
 >
+> 2026-09-10 实机升级：NeoVim `0.12.4 → 0.12.5`（scoop）实测完成，全套插件 / LSP / Treesitter / yazi 仍全正常。升级过程中的 scoop hash 校验坑已记到 §6 Q15。
+>
 > 2026-09-10 实战微调（二轮）：完整跑通配置 + LSP attach 验证后再补：
 > - Q5 增加「GitHub release 直装 yazi」备选（实测 scoop extras bucket clone 卡在 broken 状态）
 > - Q14 补充「build 时机报错的 stack trace 详解」
@@ -876,6 +878,50 @@ Error in .../lua/user/plugins/markdown.lua:
 | `~/.config/nvim/` 路径 | `%LOCALAPPDATA%\nvim\`（即 `C:\Users\<u>\AppData\Local\nvim`），**不用建 `~/.config/nvim` 软链** |
 
 > 笔记里 §5 的 spec 文件**跨平台通用**，仅上述几条命令需要换写法；配置文件结构（`init.lua` / `lua/user/*.lua`）在 Windows 上由 NeoVim 的 `stdpath('config')` 自动解析到 `%LOCALAPPDATA%\nvim\`，所以你只要把文件放对地方即可。
+
+#### 升 NeoVim 时踩到的坑：`scoop update` 报 hash 校验失败
+
+Windows 上把 NeoVim 从 0.12.4 升到 0.12.5 时，`scoop update neovim` 报：
+
+```
+Checking hash of nvim-win64.zip ... ERROR Hash check failed!
+Expected:    de8625ba8cf65ebf40eb80a388ba1ec8e9c15b30218821e2c639119b05920de1
+Actual:
+Get-FileHash : 无法将"Get-FileHash"项识别为 cmdlet
+  + CategoryInfo : ObjectNotFound: (Get-FileHash:String) []
+```
+
+**看着像网络/镜像问题，实际是 `Get-FileHash` 这个 cmdlet 不见了**，scoop 算不出实际 hash，校验必然失败。
+
+根因：**PowerShell 5.1 从 PowerShell 7 的模块目录加载了 `Microsoft.PowerShell.Utility 7.0.0.0`**。PS7 版模块在 PS 5.1（Desktop 版）下不导出 `Get-FileHash`，于是命令凭空消失。触发条件是 `PSModulePath` 里 **PS7 路径排在 Windows PowerShell 原生目录之前**：
+
+```
+# 有害顺序（PS7 在前）
+D:\Working\PowerShell\Modules;C:\Program Files\PowerShell\Modules;c:\program files\powershell\7\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+
+# 系统级环境变量本身是干净的，是某些 shell（如已加载 PS7 路径的会话）注入的
+[Environment]::GetEnvironmentVariable('PSModulePath','Machine')
+# → C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+```
+
+验证与修法：
+
+```powershell
+# 1. 确认症状
+Get-Command Get-FileHash              # MISSING
+Get-Module Microsoft.PowerShell.Utility | Select Name, Version
+# → 7.0.0.0（C:\Program Files\PowerShell\7\...)  ← 被 PS7 版覆盖
+
+# 2. 修法 A（推荐）：直接用 pwsh（PS7）跑 scoop，版本天然匹配
+pwsh -NoProfile -Command "scoop update neovim"
+
+# 3. 修法 B：在当前 PS 5.1 会话里强制导入 5.1 原版模块
+Import-Module Microsoft.PowerShell.Utility -RequiredVersion 3.1.0.0 -Force
+Get-Command Get-FileHash              # 现已可见
+scoop update neovim
+```
+
+> 另外：scoop 下载中断时会在 `~/scoop/cache/` 留一个 `neovim#0.12.5#.zip.download` 不完整文件（hash 段为空）。重跑前删掉它；若已经下载完整了，可以手动放到 `~/scoop/cache/neovim#<version>#<hash前7位>.zip`（hash 取 manifest 里的值）让 scoop 直接命中缓存。
 
 ### Q16. `nvim --headless` 验证时 LSP clients 一直为 0，但 GUI 终端 nvim 里能正常 attach
 
