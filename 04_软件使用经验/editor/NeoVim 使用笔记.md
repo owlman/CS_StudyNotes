@@ -901,9 +901,11 @@ vim.wait(10000, function() return false end)
 
 > 真实 GUI/终端 nvim 里没有这个问题：用户 `:e file` 或 vim 启动时 UI 已经 ready，buffer 正常 loaded 并跑 filetype 检测。本节专门给做 headless 自动化测试的人看。
 
-### Q17. nvim 启动日志被 lspconfig deprecation warning 刷屏
+### Q17. nvim 启动日志被 lspconfig deprecation warning + LSP stderr 误报刷屏
 
-每次打开 .py / .lua 等文件，headless 输出里都会看到：
+每次打开 .py / .c 等文件，stderr / lsp.log 都会看到两类"看着像报错"的输出，**但都不是真错误**。
+
+#### 问题 1：lspconfig 0.12 deprecation warning + stack traceback
 
 ```
 The `require('lspconfig')` "framework" is deprecated, use vim.lsp.config (see :help lspconfig-nvim-0.11) instead.
@@ -914,22 +916,49 @@ stack traceback:
   ...
 ```
 
-这是 nvim-lspconfig 0.12 的 deprecation **警告**而非错误，**功能仍正常**（LSP 仍会 attach）。来源是 `lspconfig.<name>.setup({})` 在 setup 路径里访问了 metatable `__index` 触发了 deprecation 提示。
+来源是 `lspconfig.<name>.setup({})` 访问 metatable `__index` 触发的 deprecation 提示，**功能仍正常**（LSP 仍会 attach）。
 
-短期应对（写到 `lua/user/lsp.lua` 顶部，让 deprecation 不刷屏）：
+#### 问题 2：`~/.local/share/nvim-data/lsp.log` 把所有 LSP server stderr 标 `[ERROR]`
+
+```
+[ERROR] "rpc" "...\clangd.exe" "stderr" "I[11:55:07.341] clangd version 22.1.8 ..."
+[ERROR] "rpc" "...\clangd.exe" "stderr" "I[11:55:07.350] Starting LSP over stdin/stdout"
+[ERROR] "rpc" "...\clangd.exe" "stderr" "I[11:55:07.681] Built preamble ..."
+```
+
+但这些内容**全是 clangd 的 INFO 日志**（"Initialized" / "Built preamble" / "Indexed c17 standard library" 等），LSP stdio 协议把它们发到 stderr 只是约定，不代表真错误。原因：nvim 0.12 在 `vim/lsp/_transport.lua:36` 把 LSP server stderr **强制以 ERROR 级别写日志**，绕过了 `vim.lsp.log.set_level()`。
+
+#### 终极修法（写到 `lua/user/plugins/lsp.lua` 顶部）
 
 ```lua
--- 在 lazy setup 之前静默 lspconfig deprecation warning
+-- 静音 lspconfig 0.12 deprecation warning
 vim.deprecate = function() end
+
+-- 过滤 LSP server stderr 的 [I/D/T/W] 误报（保留 [E/F] 真错误）
+do
+  local orig_log_error = vim.lsp.log.error
+  vim.lsp.log.error = function(...)
+    local args = { ... }
+    -- _transport.lua:36 调 log.error('rpc', cmd[1], 'stderr', chunk)
+    if args[1] == 'rpc' and args[3] == 'stderr' and type(args[4]) == 'string' then
+      local level = args[4]:match('^%[([%a])%]')
+      -- I/D/T/W 静默；E/F 才放行
+      if level ~= 'E' and level ~= 'F' then
+        return
+      end
+    end
+    return orig_log_error(...)
+  end
+end
 ```
 
-长期：等 nvim-lspconfig v3 出来后改用纯 `vim.lsp.config / vim.lsp.enable` 路径，**绕过 lspconfig 框架**。届时 spec 可写成：
+修后实测（打开 `test.c`，清空 lsp.log 重新跑）：
 
-```lua
-{
-  "neovim/nvim-lspconfig",  -- 此时可彻底去掉
-}
-```
+- **stderr**：仅 `LSP clients attached: { "clangd" }`，无 deprecation warning，无 stack trace
+- **lsp.log**：只留 `[START] LSP logging initiated` 一行
+- **LSP**：clangd 仍 attach、semanticTokens、publishDiagnostics 全流程 status 0 完成
+
+> 长期：等 nvim-lspconfig v3 出来后改用纯 `vim.lsp.config / vim.lsp.enable` 路径，**绕过 lspconfig 框架**。届时 `vim.deprecate` 静音和 monkey-patch 都可以撤掉。
 
 ## 7. 附录：完整配置骨架
 
