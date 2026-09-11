@@ -10,10 +10,10 @@ categories: [命令行工具]
 > [!NOTE] 笔记说明
 >
 > 这篇笔记用于记录本人在使用 NeoVim 这款文本编辑器过程中的心得体会，存储于个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中并长期维护。
-
+>
 > [!IMPORTANT] 2026-05 大更新
 >
-> 自 2020 年首次撰写以来，本文涉及的工具链已经迭代了好几代，本轮一次性同步下列依赖：
+> 自 2020 年首次撰写这篇笔记以来，它所涉及的工具链已经迭代了好几代，本轮修改将针对这些变化进行一次技术同步，主要内容如下：
 >
 > | 旧 | 新 | 主要变化 |
 > | --- | --- | --- |
@@ -24,21 +24,6 @@ categories: [命令行工具]
 > | Coc.nvim + coc-pyls | 内置 LSP + Pyright | 用 NeoVim 0.11 内置 `vim.lsp.*` 替代 Coc 中间层，Pyright 替代停更的 pyls |
 > | ranger + rnvimr | yazi + yazi.nvim | ranger 已基本停更，yazi 是当前社区主流 |
 > | vim-airline | lualine.nvim | 纯 Lua 实现的状态栏，主题生态更现代 |
->
-> 版本基线：本文以 **NeoVim 0.11 / 0.12+**（撰写时最新稳定版 v0.12.5，2026-08 发布）为基准；Node.js 20 LTS；lazy.nvim v11+；yazi v26+。
->
-> 图片方面：旧版本中的博客园 CDN 图片已在历次 commit 中统一迁移至本地 `img/` 目录，本文不再保留任何外链图片。
->
-> 2026-09-09 实战微调（首轮）：按本文 §3-§7 实际在 Windows 11 + Scoop 环境配置一轮后回写，修正了 7 处与现行社区规范不符的写法（详见 §6 常见问题 Q9-Q15）。
->
-> 2026-09-10 实机升级：NeoVim `0.12.4 → 0.12.5`（scoop）实测完成，全套插件 / LSP / Treesitter / yazi 仍全正常。升级过程中的 scoop hash 校验坑已记到 §6 Q15。
->
-> 2026-09-10 实战微调（二轮）：完整跑通配置 + LSP attach 验证后再补：
-> - Q5 增加「GitHub release 直装 yazi」备选（实测 scoop extras bucket clone 卡在 broken 状态）
-> - Q14 补充「build 时机报错的 stack trace 详解」
-> - 新增 Q17：lspconfig deprecation warning 在 headless 输出里刷屏
-> - §5.1 加 nvim-treesitter「master vs main」对比表
-> - §7 附录的 `options.lua` 补全为实战最终版
 
 ## 目录
 
@@ -95,13 +80,11 @@ NeoVim 项目逐步成为成熟项目，并率先提供了多个 8.0 之前 Vim 
 - 为 vimscript 提供异步任务支持，之前的 vimscript 只能以同步方式执行任务。
 - 重构 Vim 部分代码，实现多平台兼容，并使用更现代化的代码编译工具链。
 
-NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 Vim 8.0/8.1 的迭代；Vim 现在也支持异步任务、内置终端等特性。
+NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 Vim 8.0/8.1 的迭代；Vim 现在也支持异步任务、内置终端等特性。到 2026 年前后，NeoVim 已经稳定进入了 0.11 / 0.12 时代：
 
-到 2026 年前后，NeoVim 已经稳定进入了 **0.11 / 0.12 时代**：
-
-- **内置 LSP**：`vim.lsp.config / vim.lsp.enable` 已经覆盖了 server 注册、filetype 关联、capabilities 等核心场景；Coc 这种 Node.js 中间层已不再是必需品。
-- **内置 Treesitter**：高亮、缩进、跳转都走 `vim.treesitter.*`，从 0.11 开始官方也提供了内建 parser 安装机制（`:checkhealth vim.treesitter`）。
-- **Lua 作为一等公民**：`init.lua` 与 `lua/` 模块成为推荐配置方式，vimscript 配置被逐步淘汰；lazy.nvim 这类 Lua 插件管理器随之成为主流。
+- **内置 LSP**：`vim.lsp.config / vim.lsp.enable`已经覆盖了 server 注册、filetype 关联、capabilities 等核心场景。换言之，我在之前版本中介绍的 Coc 这种 Node.js 中间层已不再是必需品。
+- **内置 Treesitter**：高亮、缩进、跳转都走`vim.treesitter.*`，从 0.11 开始官方也提供了内建 parser 安装机制（`:checkhealth vim.treesitter`）。
+- **Lua 作为一等公民**：`init.lua`与`lua/`模块成为推荐配置方式，之前版本中介绍的 vimscript 配置方式被逐步淘汰，lazy.nvim 这类 Lua 插件管理器随之成为主流。
 - **稳定与 nightly 双轨发布**：每夜构建与稳定版均可通过 GitHub Releases 直接下载 AppImage，不再受发行版仓库拖累。
 
 ## 3. 安装与配置
@@ -112,7 +95,7 @@ NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 V
 
 #### Node.js 20 LTS
 
-部分 LSP 客户端、Treesitter parser 的远程同步、以及 markdown-preview.nvim 仍依赖 Node.js。Node 17 已 EOL，本文以 20.x LTS 为基准（Node 22 LTS 也已可用，但生态适配目标仍以 20 为主）：
+截止到目前为止，由于 NeoVim 的部分 LSP 客户端、Treesitter parser 的远程同步、以及 markdown-preview.nvim 仍依赖于 Node.js。所以我们接下来的首要任务还是先安装并配置这一运行时环境。请注意，这篇笔记中的所有演示都将以 Node.js 20.x LTS 为基准来展开（22 LTS 也已可用，但生态适配目标仍以 20 为主）：
 
 ```bash
 # Ubuntu / Debian
@@ -141,7 +124,7 @@ sudo apt install -y python3 python3-pip python3-venv \
 pip install --user pynvim
 ```
 
-> 如果你用 venv 管理 Python 项目，记得在每个 venv 里再装一次 `pynvim` 和 `pyright`，否则 LSP 会读到全局 site-packages。
+> 如果读者用 venv 管理 Python 项目，记得在每个 venv 里再装一次 `pynvim` 和 `pyright`，否则 LSP 会读到全局 site-packages。
 
 #### Git / curl
 
@@ -198,25 +181,25 @@ nvim --headless +checkhealth +q
 
 ### 3.3 配置文件结构
 
-NeoVim 0.11+ 的标准做法是把所有配置放进 `~/.config/nvim/`，把 Lua 模块放进 `lua/<user>/`，推荐结构如下：
+按照 NeoVim 0.11+ 的标准做法，我们通常会把所有配置放进`~/.config/nvim/`目录中，而其中的 Lua 模块则通常会被放在该目录下的`lua/user/`这个子目录下，具体如下所示。
 
-```Bash
-~/.config/nvim/
-├── init.lua                 # 入口
-├── lua/
-│   └── user/
-│       ├── lazy.lua         # lazy.nvim bootstrap + setup
-│       └── plugins/         # 各插件 spec
-│           ├── init.lua
-│           ├── edit.lua
-│           ├── lsp.lua
-│           ├── lualine.lua
-│           ├── yazi.lua
-│           ├── markdown.lua
-│           ├── alpha.lua
-│           └── colorscheme.lua
-├── after/
-└── spell/
+```bash
+~/.config/nvim/                 # 配置文件根目录
+├── init.lua                    # 配置入口
+├── lua/                        # Lua 模块
+│   └── user/                   # 用户自定义模块
+│       ├── lazy.lua            # lazy.nvim bootstrap + setup
+│       └── plugins/            # 各插件 spec
+│           ├── init.lua        # 插件配置入口
+│           ├── edit.lua        # 编辑器配置
+│           ├── lsp.lua         # LSP 配置
+│           ├── lualine.lua     # 状态栏配置
+│           ├── yazi.lua        # 代码注释配置
+│           ├── markdown.lua    # Markdown 预览配置
+│           ├── alpha.lua       # 启动屏配置
+│           └── colorscheme.lua # 主题配置
+├── after/                      # 插件后置配置
+└── spell/                      # 词典
 ```
 
 入口 `init.lua` 一般只需要做两件事：bootstrap lazy、import 各插件 spec：
@@ -278,7 +261,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
-        options = { theme = "catppuccin" },
+        options = { theme = "auto" },   -- 主题配置见 §5.3（勿直接写 "catppuccin"，见 Q18）
       })
     end,
   },
@@ -465,9 +448,41 @@ return {
     -- 旧名 nvim-web-devicon（单数）仓库已删；改用复数 nvim-web-devicons
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      -- 注意：lualine 内置主题表里没有 catppuccin，新版 catppuccin 插件也不再提供
+      -- integrations.lualine，所以写 theme = "catppuccin" 必然走 fallback，并在
+      -- 每次启动时弹 "There are some issues with your config"（详见 §6 Q18）。
+      -- 正确做法：用 catppuccin.palettes 取 mocha 色板，手工拼出 lualine 要的
+      -- theme table（每 mode 一个 a/b/c 三元组）。
+      local theme
+      local ok_pal, palettes = pcall(require, "catppuccin.palettes")
+      if ok_pal then
+        local p = palettes.get_palette("mocha")
+        local accent = {
+          normal   = p.mauve,
+          insert   = p.green,
+          visual   = p.peach,
+          replace  = p.red,
+          command  = p.blue,
+          terminal = p.teal,
+        }
+        theme = {}
+        for mode, col in pairs(accent) do
+          theme[mode] = {
+            a = { fg = p.base, bg = col, gui = "bold" },
+            b = { fg = p.text, bg = p.surface0 },
+            c = { fg = p.subtext0, bg = p.mantle },
+          }
+        end
+        theme.inactive = {
+          a = { fg = p.overlay1, bg = p.mantle },
+          b = { fg = p.overlay1, bg = p.mantle },
+          c = { fg = p.overlay1, bg = p.mantle },
+        }
+      end
+
       require("lualine").setup({
         options = {
-          theme = "catppuccin",
+          theme = theme or "auto",   -- palettes 取不到时退回 auto，也不会报错
           section_separators = { "", "" },
           component_separators = { "", "" },
           icons_enabled = true,
@@ -482,7 +497,10 @@ return {
 
 ![img](img/vim-airline.png)
 
-> 旧图保留以便对比 lualine 与 vim-airline 的视觉差异；当前默认主题为 catppuccin。
+> 旧图保留以便对比 lualine 与 vim-airline 的视觉差异。
+>
+> `theme` 传的是从 catppuccin mocha 色板拼出来的 table（不是字符串 `"catppuccin"`），
+> 配合 `lualine` 的 `a/b/c` 三段式着色，和 catppuccin-mocha 主色一致。
 
 ### 5.4 文件管理器：yazi
 
@@ -1050,6 +1068,77 @@ end
 - **LSP**：clangd 仍 attach、semanticTokens、publishDiagnostics 全流程 status 0 完成
 
 > 长期：等 nvim-lspconfig v3 出来后改用纯 `vim.lsp.config / vim.lsp.enable` 路径，**绕过 lspconfig 框架**。届时 `vim.deprecate` 静音和 monkey-patch 都可以撤掉。
+
+### Q18. 启动弹 `lualine: There are some issues with your config`
+
+`lualine` 在启动时登记了一条 config issue，并提示：
+
+```
+lualine: There are some issues with your config. Run :LualineNotices for details
+```
+
+触发写法（§5.3 的旧版）：
+
+```lua
+require("lualine").setup({
+  options = { theme = "catppuccin" },   -- 问题就在这一行
+})
+```
+
+**根因**：`lualine` 的内置主题表里**没有 `catppuccin`**（它自带的是 `auto` / `nord` / `dracula` / `gruvbox` 等一批），而新版的 `catppuccin/nvim` 插件也**不再提供 `integrations.lualine`**（旧版本曾自动注册过）。于是传字符串 `"catppuccin"` 时 lualine 找不到该主题 → 走 fallback，并在启动时登记一条 issue。
+
+状态栏最终仍能显示（fallback 生效），但每次启动都有提示，`:messages` / `:checkhealth` 里也会留下噪音。
+
+**修法 A（推荐）：用 catppuccin 的色板手工拼 theme table**
+
+`lualine` 的 `theme` 参数除了字符串，也接受 table：
+
+```lua
+local theme
+local ok_pal, palettes = pcall(require, "catppuccin.palettes")
+if ok_pal then
+  local p = palettes.get_palette("mocha")
+  local accent = {
+    normal = p.mauve, insert = p.green, visual = p.peach,
+    replace = p.red, command = p.blue, terminal = p.teal,
+  }
+  theme = {}
+  for mode, col in pairs(accent) do
+    theme[mode] = {
+      a = { fg = p.base,     bg = col,        gui = "bold" },
+      b = { fg = p.text,     bg = p.surface0 },
+      c = { fg = p.subtext0, bg = p.mantle   },
+    }
+  end
+  theme.inactive = {
+    a = { fg = p.overlay1, bg = p.mantle },
+    b = { fg = p.overlay1, bg = p.mantle },
+    c = { fg = p.overlay1, bg = p.mantle },
+  }
+end
+
+require("lualine").setup({
+  options = { theme = theme or "auto" },   -- 色板取不到时退回 auto，同样不会报错
+})
+```
+
+完整 spec 见 §5.3。
+
+**修法 B：改用 lualine 内置主题**
+
+```lua
+options = { theme = "auto" }   -- 从当前 colorscheme 推断，最省事
+options = { theme = "nord" }   -- 或挑一个内置主题名
+```
+
+**验证**
+
+```vim
+:LualineNotices    " 应为空
+:messages          " 确认启动时不再出现该提示
+```
+
+> 排查 lualine 配置类问题，第一步永远是 `:LualineNotices` —— 它会直接列出 lualine 收集到的 config 问题。
 
 ## 7. 附录：完整配置骨架
 
