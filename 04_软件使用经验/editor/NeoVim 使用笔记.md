@@ -17,7 +17,7 @@ categories: [命令行工具]
 >
 > | 旧 | 新 | 主要变化 |
 > | --- | --- | --- |
-> | Node.js 17 | Node.js 20 LTS | Node 17 已 EOL；现以 20.x 长期支持版为基准 |
+> | Node.js 17 | Node.js 22 LTS | Node 17 已 EOL；现以 22.x 长期支持版为基准（24.x 也已 LTS，生态以 22 为主） |
 > | `registry.npm.taobao.org` | `registry.npmmirror.com` | 淘宝镜像整体迁移到 npmmirror |
 > | NeoVim 0.4.3 | NeoVim 0.11+ | 内置 LSP / Treesitter / Lua 配置成熟 |
 > | vim-plug | lazy.nvim | 主流从 vimscript 插件管理器迁移到 Lua |
@@ -66,7 +66,7 @@ categories: [命令行工具]
 
 ### 2.1 NeoVim 起源
 
-2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）曾经向 Vim 开源编辑器项目递交了两大补丁，其中包含了对 Vim 的架构进行大幅调整的建议，结果遭到了 Vim 作者 Bram Moolenaar 的拒绝。因为后者认为对于 Vim 这样一个成熟的项目进行如此大的改变风险太高。但或许在 tarruda 看来，Vim 这个上个世纪 90 年代初的产物，至今已经 20 多年了，该项目中不仅遗留了大量的历史痕迹，而且该项目的管理层如今在程序的维护、Bug 的修复、以及新特性的添加等问题上的态度都在变得越来越僵化，且难以与时俱进。
+2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）曾经向 Vim 开源编辑器项目递交了两大补丁，其中包含了对 Vim 的架构进行大幅调整的建议，结果遭到了 Vim 作者 Bram Moolenaar 的拒绝。后者认为对于 Vim 这样一个成熟的项目进行如此大的改变风险太高。但或许在 tarruda 看来，Vim 这个上个世纪 90 年代初的产物，至今已经 20 多年了，该项目中不仅遗留了大量的历史痕迹，而且该项目的管理层如今在程序的维护、Bug 的修复、以及新特性的添加等问题上的态度都在变得越来越僵化，且难以与时俱进。
 
 总而言之，基于对 Vim 项目的不满，并致力于打造一款面向 21 世纪的代码编辑器，tarruda 先生以众筹资金的方式发起了 Vim 的这个 fork 项目：NeoVim。在这里，Neo 这个单词表达的是其作者对 Vim 编辑器在这个新时代的重生期待。
 
@@ -89,99 +89,90 @@ NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 V
 
 ## 3. 安装与配置
 
-本文以 Ubuntu Linux 24.04 为示例，其他发行版 / macOS / Windows 思路一致。
+在正式开始之前，有一件事需要先和读者做个说明：虽然这篇笔记是以 Ubuntu 24.04 为演示环境来展开的，但它在 Linux 的其他发行版 / macOS / Windows 中的安装与配置的方式基本一致，读者可自行根据官方文档对这些内容进行调整。
 
 ### 3.1 基础环境准备
 
-#### Node.js 20 LTS
+- **Node.js 运行时环境**：截止到目前为止，由于 NeoVim 的部分 LSP 客户端、Treesitter parser 的远程同步、以及 markdown-preview.nvim 仍依赖于 Node.js。本笔记以 **Node.js 22 LTS** 为基准（22 "Jod" 已是较新且稳定的 LTS；20 "Iron" 与 24 "Krypton" 也都还在维护期，生态主要适配 22）。如果你想用别的 LTS，把下面的 `setup_22.x` 换成对应主版本即可。
 
-截止到目前为止，由于 NeoVim 的部分 LSP 客户端、Treesitter parser 的远程同步、以及 markdown-preview.nvim 仍依赖于 Node.js。所以我们接下来的首要任务还是先安装并配置这一运行时环境。请注意，这篇笔记中的所有演示都将以 Node.js 20.x LTS 为基准来展开（22 LTS 也已可用，但生态适配目标仍以 20 为主）：
+    ```bash
+    # Ubuntu / Debian
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+    sudo apt install -y nodejs
 
-```bash
-# Ubuntu / Debian
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs
+    # 验证
+    node -v   # v22.x.x
+    npm -v    # 10.x.x
+    ```
 
-# 验证
-node -v   # v20.x.x
-npm -v    # 10.x.x
-```
+    在这里，我会建议国内的用户顺手把 NPM 默认仓库切到`registry.npmmirror.com`，这可以提高后续安装插件的下载速度。
 
-国内用户顺手把 NPM 默认仓库切到 npmmirror（旧的 `registry.npm.taobao.org` 已经停止服务，整个镜像站迁到了 `registry.npmmirror.com`）：
+    ```bash
+    npm config set registry https://registry.npmmirror.com
+    npm config get registry # 应输出：https://registry.npmmirror.com
+    ```
 
-```bash
-npm config set registry https://registry.npmmirror.com
-npm config get registry # 应输出：https://registry.npmmirror.com
-```
+- **Python、ripgrep、fd**：Pyright LSP、Treesitter 解析器以及若干 formatter 都依赖 Python 与一些 CLI 工具：
 
-#### Python、ripgrep、fd
+    ```bash
+    sudo apt install -y python3 python3-pip python3-venv ripgrep fd-find unzip
+    pip install --user pynvim
+    ```
 
-Pyright LSP、Treesitter 解析器以及若干 formatter 都依赖 Python 与一些 CLI 工具：
+    在这里，如果读者用 venv 管理 Python 项目，记得在每个 venv 里再装一次 `pynvim` 和 `pyright`，否则 LSP 会读到全局 site-packages。
 
-```bash
-sudo apt install -y python3 python3-pip python3-venv \
-                    ripgrep fd-find unzip
-pip install --user pynvim
-```
+- **Git / curl**：后续装 lazy.nvim、克隆插件必备：
 
-> 如果读者用 venv 管理 Python 项目，记得在每个 venv 里再装一次 `pynvim` 和 `pyright`，否则 LSP 会读到全局 site-packages。
-
-#### Git / curl
-
-后续装 lazy.nvim、克隆插件必备：
-
-```bash
-sudo apt install -y curl git
-```
+    ```bash
+    sudo apt install -y curl git
+    ```
 
 ### 3.2 安装 NeoVim
 
-在这里，我会建议读者**不要直接用 Ubuntu 仓库的 `apt install neovim`**，发行版仓库里通常还停留在 0.9 甚至 0.7，缺少内置 LSP / Treesitter 关键改动。推荐以下三种方式之一：
+在这里，我会建议读者**不要直接基于 Ubuntu 的默认仓库来执行`apt install neovim`命令**，发行版仓库里通常还停留在 0.9 甚至 0.7，缺少内置 LSP / Treesitter 关键改动。推荐以下三种方式之一：
 
-#### AppImage（最简单，跨发行版通用）
+- **AppImage**：这种方式最简单，也适用于所有的 Linux 发行版，但缺点是每次更新都需要重新下载。
 
-```bash
-curl -L -o /tmp/nvim.appimage \
-  https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage
-chmod +x /tmp/nvim.appimage
-sudo mv /tmp/nvim.appimage /usr/local/bin/nvim
-```
+    ```bash
+    curl -L -o /tmp/nvim.appimage \
+    https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage
+    chmod +x /tmp/nvim.appimage
+    sudo mv /tmp/nvim.appimage /usr/local/bin/nvim
+    ```
 
-如果想跟踪 nightly：
+    如果想跟踪 nightly：
 
-```bash
-curl -L -o /tmp/nvim.appimage \
-  https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
-```
+    ```bash
+    curl -L -o /tmp/nvim.appimage \
+    https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
+    ```
 
-#### Ubuntu PPA
+- **PPA（Ubuntu / Debian）**：这种方式适合 Ubuntu / Debian 用户，缺点是更新不及时。
 
-```bash
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt update
-sudo apt install -y neovim
-```
+    ```bash
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt update
+    sudo apt install -y neovim
+    ```
 
-#### 源码编译
+- **源码编译**：适合追求最新 commit 或自己改源码的场景，缺点是编译时间较长，且需要手动处理依赖。
 
-适合追求最新 commit 或自己改源码的场景：
+    ```bash
+    git clone https://github.com/neovim/neovim.git
+    cd neovim && make CMAKE_BUILD_TYPE=Release
+    sudo make install
+    ```
 
-```bash
-git clone https://github.com/neovim/neovim.git
-cd neovim && make CMAKE_BUILD_TYPE=Release
-sudo make install
-```
-
-#### 验证
+待安装完成之后，我们可以通过执行以下命令来验证 NeoVim 是否安装成功：
 
 ```bash
-nvim -v   # NVIM v0.12.x（撰写时最新稳定版 v0.12.5）
-nvim --headless +checkhealth +q
+nvim -v   # 如果输出 NeoVim 的版本信息，则说明安装成功
+nvim --headless +checkhealth +q # 如果输出：Healthcheck passed，则说明 NeoVim 配置正常
 ```
 
 ### 3.3 配置文件结构
 
-按照 NeoVim 0.11+ 的标准做法，我们通常会把所有配置放进`~/.config/nvim/`目录中，而其中的 Lua 模块则通常会被放在该目录下的`lua/user/`这个子目录下，具体如下所示。
+按照 NeoVim 0.11+ 的标准做法，我们通常会把所有配置放进`~/.config/nvim/`目录中，而其中的 Lua 模块则通常会被放在该目录下的`lua/user/`这个子目录下，其常见目录结构如下所示。
 
 ```bash
 ~/.config/nvim/                 # 配置文件根目录
@@ -199,10 +190,10 @@ nvim --headless +checkhealth +q
 │           ├── alpha.lua       # 启动屏配置
 │           └── colorscheme.lua # 主题配置
 ├── after/                      # 插件后置配置
-└── spell/                      # 词典
+└── spell/                      # 词典配置
 ```
 
-入口 `init.lua` 一般只需要做两件事：bootstrap lazy、import 各插件 spec：
+其中，配置入口文件`init.lua` 一般只需要做两件事：bootstrap lazy、import 各插件 spec：
 
 ```lua
 -- ~/.config/nvim/init.lua
@@ -775,7 +766,7 @@ curl -sL https://raw.githubusercontent.com/neovim/neovim-releases/latest/run.sh 
   }
 ```
 
-另外 main 分支要求 `tree-sitter-cli` 0.26.1+，**且不能通过 npm 装**：
+另外 main 分支要求 `tree-sitter-cli` 0.26.1+，**且不能通过 npm 装**（npm 上确实有 `tree-sitter` 这个包，但只是 Node.js bindings，不是 CLI；`@tree-sitter/cli`、`@tree-sitter/install`、`@anthropic-ai/tree-sitter-cli` 等都 404 不存在）：
 
 ```bash
 # macOS
@@ -912,6 +903,10 @@ Get-FileHash : 无法将"Get-FileHash"项识别为 cmdlet
 **看着像网络/镜像问题，实际是 `Get-FileHash` 这个 cmdlet 不见了**，scoop 算不出实际 hash，校验必然失败。
 
 根因：**PowerShell 5.1 从 PowerShell 7 的模块目录加载了 `Microsoft.PowerShell.Utility 7.0.0.0`**。PS7 版模块在 PS 5.1（Desktop 版）下不导出 `Get-FileHash`，于是命令凭空消失。触发条件是 `PSModulePath` 里 **PS7 路径排在 Windows PowerShell 原生目录之前**：
+
+> [!NOTE] 这是会话级污染，不是系统设置
+>
+> 注意：系统级 `PSModulePath` 环境变量本身干净（`[Environment]::GetEnvironmentVariable('PSModulePath','Machine')` 返回的是正确的 `C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules`）。污染来自**当前 shell 进程**——某些从 PS7 派生的 bash / pwsh 工具会在 `PSModulePath` 里追加 PS7 路径，**用户在本地直接打开 PowerShell 跑 scoop 完全没问题**。所以这条只影响从某些执行环境（如集成 bash 工具）调用 PS 5.1 跑 scoop 的场景。
 
 ```
 # 有害顺序（PS7 在前）
