@@ -91,9 +91,21 @@ NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 V
 
 在正式开始之前，有一件事需要先和读者做个说明：虽然这篇笔记是以 Ubuntu 24.04 为演示环境来展开的，但它在 Linux 的其他发行版 / macOS / Windows 中的安装与配置的方式基本一致，读者可自行根据官方文档对这些内容进行调整。
 
+> [!TIP] 想先跑起来？三步走（约 10 分钟）
+>
+> 1. **装 NeoVim 0.11+** — 别用发行版仓库里的旧版（Ubuntu 仓库常停在 0.9）。见 [§3.2](#32-安装-neovim)
+> 2. **抄配置骨架** — 建 4 个文件：`init.lua` + `lua/user/lazy.lua` + `lua/user/options.lua` + `lua/user/plugins/init.lua`，内容可直接抄 [§7 附录](#7-附录完整配置骨架)
+> 3. **装 LSP server** — `pip install pyright`、`npm i -g bash-language-server yaml-language-server vscode-langservers-extracted`；C/C++ 再装 clangd。见 [§5.2](#52-lsp内置-lsp--pyright)
+>
+> 之后直接敲 `nvim`：首次启动 lazy.nvim 会自动 clone 全部插件（约 3–5 分钟，视网速），退出重进即生效。
+>
+> 出问题先翻 [§6 常见问题](#6-常见问题)，19 条基本覆盖了新手会踩的坑，不用自己硬抗。
+>
+> **Windows 用户请先看这张表**：下文装包命令以 Ubuntu 为例（`sudo apt` / `cargo` / `brew`），Windows 上要换成 `scoop`，等价对照见 [§6 Q15](#q15-windows--scoop-上跑本笔记配置要做的额外步骤)。
+
 ### 3.1 基础环境准备
 
-- **Node.js 运行时环境**：截止到目前为止，由于 NeoVim 的部分 LSP 客户端、Treesitter parser 的远程同步、以及 markdown-preview.nvim 仍依赖于 Node.js。本笔记以 **Node.js 22 LTS** 为基准（22 "Jod" 已是较新且稳定的 LTS；20 "Iron" 与 24 "Krypton" 也都还在维护期，生态主要适配 22）。如果你想用别的 LTS，把下面的 `setup_22.x` 换成对应主版本即可。
+- **Node.js 运行时环境**：截止到目前为止，由于 NeoVim 的部分 LSP 客户端、Treesitter parser 的远程同步、以及 markdown-preview.nvim 仍依赖于 Node.js。需要特别的说明的是，我在这篇笔记中会以 **Node.js 22 LTS** 为基准来展开演示（22 "Jod" 已是较新且稳定的 LTS；20 "Iron" 与 24 "Krypton" 也都还在维护期，生态主要适配 22）。如果你想用别的 LTS，把下面的 `setup_22.x` 换成对应主版本即可。
 
     ```bash
     # Ubuntu / Debian
@@ -101,8 +113,8 @@ NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 V
     sudo apt install -y nodejs
 
     # 验证
-    node -v   # v22.x.x
-    npm -v    # 10.x.x
+    node -v   # 如果输出 v22.x.x，则说明 Node.js 安装成功
+    npm -v    # 如果输出 8.x.x，则说明 Node.js 的 npm 包管理器安装成功
     ```
 
     在这里，我会建议国内的用户顺手把 NPM 默认仓库切到`registry.npmmirror.com`，这可以提高后续安装插件的下载速度。
@@ -163,12 +175,11 @@ NeoVim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 V
     sudo make install
     ```
 
-待安装完成之后，我们可以通过执行以下命令来验证 NeoVim 是否安装成功：
+待安装完成之后，我们可以通过执行`nvim -v`命令来验证 NeoVim 是否安装成功，如图 1 所示。
 
-```bash
-nvim -v   # 如果输出 NeoVim 的版本信息，则说明安装成功
-nvim --headless +checkhealth +q # 如果输出：Healthcheck passed，则说明 NeoVim 配置正常
-```
+![验证 NeoVim 是否安装成功](./img/check_nvim_install.png)
+
+**图 1** 验证 NeoVim 是否安装成功
 
 ### 3.3 配置文件结构
 
@@ -205,43 +216,45 @@ require("user.options")
 
 ### 4.1 安装 lazy.nvim
 
-lazy.nvim 的安装脚本会自动判断 `stdpath('data')` 并写入 `lazy.lua`：
+lazy.nvim 的安装脚本会自动判断`stdpath('data')`并写入 `lazy.lua`：
 
 ```bash
 mkdir -p ~/.config/nvim/lua/user
 ```
 
-然后新建 `~/.config/nvim/lua/user/lazy.lua`（见 §7 模板）。首次启动 NeoVim 时 lazy 会自动 clone 自己到 `~/.local/share/nvim/lazy/lazy.nvim`。
+然后新建 `~/.config/nvim/lua/user/lazy.lua`（见 §7 模板）。首次启动 NeoVim 时 lazy 会自动 clone 自己到 `~/.local/share/nvim/lazy/lazy.nvim`。请注意：
 
-国内网络拉 GitHub 不稳的常见解决：
-
-- 给 git 设代理：`git config --global http.proxy http://127.0.0.1:<port>`
-- 把 lazy 的 git 源改成 ghproxy：
-
-  ```lua
-  require("lazy").setup({
-    git = { url_format = "https://ghproxy.com/https://github.com/%s.git" },
-  })
-  ```
+> [!TIP] 关于 GitHub 拉取慢的问题
+>
+> 如果想解决国内网络拉取 GitHub 不稳的的问题，可以先执行以下步骤再继续后面的配置：
+>
+> - 给 git 设代理：`git config --global url."https://gh-proxy.com/github.com/".insteadof "https://github.com/"`
+> - 把 lazy 的 git 源改成 ghproxy：
+>
+>   ```lua
+>   require("lazy").setup({
+>     git = { url_format = "https://ghproxy.com/https://github.com/%s.git" },
+>   })
+>   ```
 
 ### 4.2 插件目录约定
 
-lazy.nvim 推荐每个插件一个 spec 文件，由 `lua/user/plugins/init.lua` 统一 import：
+lazy.nvim 推荐每个插件一个 spec 文件，并由 `lua/user/plugins/init.lua`这个文件统一负责加载：
 
 ```lua
 -- lua/user/plugins/init.lua
 return {
-  require("user.plugins.edit"),
-  require("user.plugins.lsp"),
-  require("user.plugins.lualine"),
-  require("user.plugins.yazi"),
-  require("user.plugins.markdown"),
-  require("user.plugins.alpha"),
-  require("user.plugins.colorscheme"),
+  require("user.plugins.edit"),        -- 编辑器基础
+  require("user.plugins.lsp"),         -- LSP
+  require("user.plugins.lualine"),     -- 状态栏
+  require("user.plugins.yazi"),        -- 代码注释
+  require("user.plugins.markdown"),    -- Markdown 预览
+  require("user.plugins.alpha"),       -- 启动屏
+  require("user.plugins.colorscheme"), -- 主题
 }
 ```
 
-每个 `*.lua` 文件以 `return { ... }` 形式声明该分类下的全部插件 spec：
+其余，每个具体插件所对应的`.lua`文件都以 `return { ... }`形式声明该分类下的全部插件 spec：
 
 ```lua
 -- lua/user/plugins/lualine.lua
@@ -424,11 +437,13 @@ sudo apt install -y clangd
 npm i -g bash-language-server yaml-language-server vscode-langservers-extracted
 ```
 
-> Coc 时代用 `coc-pyls` 提供 Python 补全；现 Pyright 由微软维护，已是 Python 静态分析的事实标准。如果你更习惯 Coc 生态，也可以装 `coc-pyright`（只是 Coc 扩展的 Pyright 集成），整段 LSP 配置可以无缝替换为 Coc 配置——这是用户友好度的双轨选择。
+> Coc 时代用 `coc-pyls` 提供 Python 补全；现 Pyright 已是 Python 静态分析的事实标准——它由 **Microsoft 开发**（团队负责人 Eric Traut），而 PyPI 上那个 `pip install pyright` 装到的包由社区维护者 Robert Craigie 打包分发（上游源码仍在 Microsoft）。如果你更习惯 Coc 生态，也可以装 `coc-pyright`（只是 Coc 扩展的 Pyright 集成），整段 LSP 配置可以无缝替换为 Coc 配置——这是用户友好度的双轨选择。
 
 ### 5.3 状态栏：lualine
 
-替代 vim-airline 的纯 Lua 状态栏，主题生态更现代。
+替代 vim-airline 的纯 Lua 状态栏，主题生态更现代。分两步上手：先用最小配置把状态栏跑出来，确认没问题后再上 catppuccin 配色。
+
+#### 第一步：最小可用配置
 
 ```lua
 -- lua/user/plugins/lualine.lua
@@ -439,15 +454,35 @@ return {
     -- 旧名 nvim-web-devicon（单数）仓库已删；改用复数 nvim-web-devicons
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      -- 注意：lualine 内置主题表里没有 catppuccin，新版 catppuccin 插件也不再提供
-      -- integrations.lualine，所以写 theme = "catppuccin" 必然走 fallback，并在
-      -- 每次启动时弹 "There are some issues with your config"（详见 §6 Q18）。
-      -- 正确做法：用 catppuccin.palettes 取 mocha 色板，手工拼出 lualine 要的
-      -- theme table（每 mode 一个 a/b/c 三元组）。
+      require("lualine").setup({
+        options = { theme = "auto" },   -- "auto" = 自动跟随当前 colorscheme
+      })
+    end,
+  },
+}
+```
+
+`theme = "auto"` 是默认值，会跟着你当前用的主题走。先这样跑起来，状态栏就能正常显示了。
+
+#### 第二步（可选）：用上 catppuccin 配色
+
+这里有个坑要先说清楚：**不能写 `theme = "catppuccin"`**。lualine 内置主题表里没有这个名字，新版 catppuccin 插件也不再提供 `integrations.lualine`，写了必然 fallback，并且每次启动都弹 `There are some issues with your config`（详见 [§6 Q18](#q18-启动弹-lualine-there-are-some-issues-with-your-config)）。
+
+正确做法：用 `catppuccin.palettes` 取 mocha 色板，手工拼出 lualine 要的 theme table（每个 mode 一个 `a/b/c` 三元组）：
+
+```lua
+-- lua/user/plugins/lualine.lua
+return {
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
       local theme
       local ok_pal, palettes = pcall(require, "catppuccin.palettes")
       if ok_pal then
         local p = palettes.get_palette("mocha")
+        -- 每个模式的强调色
         local accent = {
           normal   = p.mauve,
           insert   = p.green,
@@ -459,11 +494,12 @@ return {
         theme = {}
         for mode, col in pairs(accent) do
           theme[mode] = {
-            a = { fg = p.base, bg = col, gui = "bold" },
-            b = { fg = p.text, bg = p.surface0 },
-            c = { fg = p.subtext0, bg = p.mantle },
+            a = { fg = p.base,     bg = col,        gui = "bold" },
+            b = { fg = p.text,     bg = p.surface0 },
+            c = { fg = p.subtext0, bg = p.mantle   },
           }
         end
+        -- 失焦窗口的状态栏配色
         theme.inactive = {
           a = { fg = p.overlay1, bg = p.mantle },
           b = { fg = p.overlay1, bg = p.mantle },
@@ -473,7 +509,7 @@ return {
 
       require("lualine").setup({
         options = {
-          theme = theme or "auto",   -- palettes 取不到时退回 auto，也不会报错
+          theme = theme or "auto",   -- 色板取不到时退回 auto，也不会报错
           section_separators = { "", "" },
           component_separators = { "", "" },
           icons_enabled = true,
@@ -484,14 +520,12 @@ return {
 }
 ```
 
-效果：
+效果（下图是升级前的 vim-airline 截图，留作对比）：
 
-![img](img/vim-airline.png)
+![vim-airline 旧截图（对比用）](img/vim-airline.png)
 
-> 旧图保留以便对比 lualine 与 vim-airline 的视觉差异。
->
-> `theme` 传的是从 catppuccin mocha 色板拼出来的 table（不是字符串 `"catppuccin"`），
-> 配合 `lualine` 的 `a/b/c` 三段式着色，和 catppuccin-mocha 主色一致。
+> `theme` 拿到的是一张从 catppuccin mocha 色板拼出来的 table，不是字符串。
+> 想换其他 flavor（latte / frappe / macchiato），把 `get_palette("mocha")` 里的名字换掉即可。
 
 ### 5.4 文件管理器：yazi
 
@@ -543,7 +577,7 @@ return {
 
 效果：
 
-![img](img/ranger.png)
+![ranger 旧截图（对比用）](img/ranger.png)
 
 > 旧图保留以便对比 yazi 与 ranger 的视觉差异；`<M-o>` / `<M-+>` / `<M-->` 快捷键沿用。
 
@@ -601,7 +635,7 @@ return {
 
 效果：
 
-![img](img/vim-startify.png)
+![vim-startify 旧截图（对比用）](img/vim-startify.png)
 
 ### 5.7 主题：catppuccin
 
@@ -623,7 +657,7 @@ return {
 
 效果：
 
-![img](img/vim-snazzy.png)
+![vim-snazzy 旧截图（对比用）](img/vim-snazzy.png)
 
 > 旧图保留以便对比主题切换前后的视觉变化；当前默认主题为 catppuccin-mocha。
 
@@ -657,6 +691,7 @@ pip install --user pynvim
   ```
 
 - 或直接用 NeoVim 0.11 的 `vim.lsp.enable({ "pyright", "clangd" })` 配合 `lazy = false` 的 server 配置，跳过 nvim-lspconfig。
+- 检查 server 是否活着用 **`:lsp info`**（0.12+）/ `:LspInfo`（0.11）。
 
 ### Q5. yazi 启动报 `command not found: yazi`
 
@@ -798,7 +833,7 @@ vim.cmd([[
 ]])
 ```
 
-### Q12. `:LspStart` 报 `module 'cmp' not found` / `cmp_luasnip` after/plugin 失败
+### Q12. `module 'cmp' not found` / `cmp_luasnip` after/plugin 失败
 
 `hrsh7th/cmp-nvim-lsp`、`saadparwaiz1/cmp_luasnip`、`hrsh7th/cmp-path` 这类 cmp-* 的 `after/plugin/*.lua` 会在 lazy 加载它们时**第一时间** `require("cmp")`，但 `nvim-cmp` 本身没在 dependencies 顶层。
 
@@ -829,7 +864,7 @@ lspconfig.jsonls.setup({
 
 同理 `vscode-html-language-server` / `vscode-css-language-server` / `vscode-eslint-language-server` 都是单数。
 
-### Q13b. `:LspStart` 报 `cmd: expected function or table with executable command, got nil`
+### Q13b. 报 `cmd: expected function or table with executable command, got nil`
 
 直接在 spec 里写 `vim.lsp.config("pyright", {})` 会失败——NeoVim 0.12 严格校验 `cmd` 不能为空，它**不会**自动从 lspconfig 拿 default。
 
@@ -841,7 +876,9 @@ require("lspconfig").pyright.setup({})
 
 > [!NOTE] 0.12 的 lspconfig 状态
 >
-> nvim-lspconfig 在 NeoVim 0.11+ 已被标记 **deprecated**（`require('lspconfig')` 会打印 `Feature will be removed in nvim-lspconfig v3.0.0`），并直接告诉你"用 `vim.lsp.config`"。但 `lspconfig.<name>.setup({})` 仍是目前最省事的写法——它内部就是合并 default + 调 `vim.lsp.config + vim.lsp.enable`。
+> **先说清楚谁 deprecated 了**：被 deprecated 的是 `require('lspconfig')` 这个**旧 framework 层**（会打印 `Feature will be removed in nvim-lspconfig v3.0.0`），**nvim-lspconfig 插件本身没有 deprecated**——各语言的 server 配置仍由它提供，`lspconfig.<name>.setup({})` 也正是它内部的推荐入口（合并 default config 后再调 `vim.lsp.config + vim.lsp.enable`）。所以别急着把 nvim-lspconfig 从 spec 里删掉。
+>
+> 版本要求：nvim-lspconfig 需 **NeoVim ≥ 0.11.3**（0.10 支持即将移除）。
 >
 > 另一个坑：0.12 的 lspconfig 已经**移除了 `require("lspconfig.server_configurations")` 模块**，所以"手动 merge default config"那个备选方案在 0.12 下不可用，必须走 `lspconfig.<name>.setup({})`。
 
@@ -1137,7 +1174,13 @@ options = { theme = "nord" }   -- 或挑一个内置主题名
 
 ## 7. 附录：完整配置骨架
 
-下面给出最小可用的全套配置，把它们按路径放好后，第一次启动 NeoVim 就会进入 lazy.nvim 的安装界面，按提示完成即可。
+下面给出最小可用的全套配置。按顺序做三件事即可：
+
+1. 建目录：`mkdir -p ~/.config/nvim/lua/user/plugins`（Windows 是 `%LOCALAPPDATA%\nvim\lua\user\plugins`）
+2. 依次创建下面 4 个文件，内容照抄
+3. 敲 `nvim`：首次启动会自动进入 lazy.nvim 的安装界面，等它 clone 完（3–5 分钟），退出重进就生效了
+
+> 只想先跑个最小集？那 4 个文件照抄，但把 `plugins/init.lua` 里的 `require` 精简成三行（见文末）。
 
 ```lua
 -- ~/.config/nvim/init.lua
@@ -1221,4 +1264,17 @@ return {
 }
 ```
 
-`edit.lua` / `lsp.lua` / `lualine.lua` / `yazi.lua` / `markdown.lua` / `alpha.lua` / `colorscheme.lua` 的内容见 §5 各小节。
+`edit.lua` / `lsp.lua` / `lualine.lua` / `yazi.lua` / `markdown.lua` / `alpha.lua` / `colorscheme.lua` 这 7 个文件同样放在 `lua/user/plugins/` 下，内容见 §5 各小节。
+
+如果想先跑一个最小集、少装几个插件，把上面那份 `plugins/init.lua` 换成这三行即可（其余按需再加）：
+
+```lua
+-- ~/.config/nvim/lua/user/plugins/init.lua（最小集）
+return {
+  require("user.plugins.colorscheme"),  -- 主题，§5.7
+  require("user.plugins.lsp"),          -- LSP + 补全，§5.2（记得先装好 LSP server）
+  require("user.plugins.lualine"),      -- 状态栏，§5.3
+}
+```
+
+对应的三个文件内容也只需抄 §5.7 / §5.2 / §5.3 那三段。跑通之后再逐个补 Treesitter（§5.1）、yazi（§5.4）、markdown-preview（§5.5）、alpha（§5.6）都不迟——每加一个，lazy 会自动补装它，不用重装整个配置。
