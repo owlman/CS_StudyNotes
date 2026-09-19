@@ -522,7 +522,7 @@ return {
 
 效果（下图是升级前的 vim-airline 截图，留作对比）：
 
-![vim-airline 旧截图（对比用）](img/vim-airline.png)
+![vim-airline 旧截图（对比用）](./img/vim-airline.png)
 
 > `theme` 拿到的是一张从 catppuccin mocha 色板拼出来的 table，不是字符串。
 > 想换其他 flavor（latte / frappe / macchiato），把 `get_palette("mocha")` 里的名字换掉即可。
@@ -577,7 +577,7 @@ return {
 
 效果：
 
-![ranger 旧截图（对比用）](img/ranger.png)
+![ranger 旧截图（对比用）](./img/ranger.png)
 
 > 旧图保留以便对比 yazi 与 ranger 的视觉差异；`<M-o>` / `<M-+>` / `<M-->` 快捷键沿用。
 
@@ -635,7 +635,7 @@ return {
 
 效果：
 
-![vim-startify 旧截图（对比用）](img/vim-startify.png)
+![vim-startify 旧截图（对比用）](./img/vim-startify.png)
 
 ### 5.7 主题：catppuccin
 
@@ -657,7 +657,7 @@ return {
 
 效果：
 
-![vim-snazzy 旧截图（对比用）](img/vim-snazzy.png)
+![vim-snazzy 旧截图（对比用）](./img/vim-snazzy.png)
 
 > 旧图保留以便对比主题切换前后的视觉变化；当前默认主题为 catppuccin-mocha。
 
