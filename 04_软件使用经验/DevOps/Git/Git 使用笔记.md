@@ -928,3 +928,54 @@ Fast-forward
 ```
 
 最后需要说明的是，在将远程分支上的数据何必到本地分支的过程中，也有可能会遇到报告合并冲突的情况。其处理方法与解决本地分支的合并冲突是一样的，只需要在引发冲突文件中去除合并冲突产生的标记，然后将其修改成我们想要的内容，并重新提交即可。
+
+## 常见问题
+
+### 在 Windows 上重命名文件时误删了文件
+
+**现象**：想把 `NeoVim 使用笔记.md` 改成 `Neovim 使用笔记.md`（只改了大小写），于是执行：
+
+```bash
+git add "Neovim 使用笔记.md"      # 以为新建了一个副本
+git rm -f "NeoVim 使用笔记.md"     # 想把旧的删掉
+```
+
+结果 `git status` 里只剩一行 `D  NeoVim 使用笔记.md`（删除），新文件没进索引，而且**文件系统里的文件也没了**。
+
+**根因**：Windows 的 NTFS 默认**不区分大小写**，Git 检测到这一点的会把 `core.ignorecase` 自动设为 `true`：
+
+```bash
+git config core.ignorecase
+# true
+```
+
+也就是说，`NeoVim 使用笔记.md` 和 `Neovim 使用笔记.md` 在文件系统里**是同一个文件**。你以为"另存了一份"，实际只是同一文件改名；接着 `git rm -f` 就把这唯一的文件删掉了。
+
+**正确做法**：改名（尤其是只改大小写）直接用 `git mv`：
+
+```bash
+git mv -f "NeoVim 使用笔记.md" "Neovim 使用笔记.md"
+```
+
+`-f` 是强制，能正确处理大小写重命名。Git 会把它记成一次 `rename`（相似度 99% 之类），工作区、索引、历史都是对的。
+
+如果 `git mv` 在大小写不敏感的文件系统上仍然报错（提示目标已存在），用两步法绕开：
+
+```bash
+git mv "NeoVim 使用笔记.md" temp_name.md
+git mv temp_name.md "Neovim 使用笔记.md"
+```
+
+**误删之后怎么救**：只要内容曾经提交过（哪怕上一个 commit 恰好就是这次删除），都能从历史里取回来：
+
+```bash
+# 1. 先看是哪个 commit 删的
+git log --oneline --diff-filter=D -- "04_软件使用经验/editor/NeoVim 使用笔记.md"
+
+# 2. 从删除之前的那个 commit 取出文件（HEAD~1 就是删除前的版本）
+git checkout HEAD~1 -- "04_软件使用经验/editor/NeoVim 使用笔记.md"
+```
+
+`git checkout <rev> -- <path>` 会把指定版本的文件**同时写回工作区和索引**，之后再正常 `git mv` + commit 即可。
+
+> **一句话记忆**：Windows 上改文件名的大小写，用 `git mv -f`；**不要**用 `git add` + `git rm` 组合——那在大小写不敏感的平台上等于自杀。
