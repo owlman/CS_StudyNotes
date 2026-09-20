@@ -51,7 +51,7 @@
   - [[Clang 使用笔记]]
   - [[Git 使用笔记]]
   - [[Makefile 使用笔记]]
-  - [[NeoVim 使用笔记]]
+  - [[Neovim 使用笔记]]
   - [[Docker 使用笔记]]
   - [[Kubernetes 使用笔记]]
   - [[Vagrant 使用笔记]]
