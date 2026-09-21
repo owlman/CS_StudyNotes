@@ -39,8 +39,8 @@ categories: [命令行工具]
   - [4.1 安装 lazy.nvim](#41-安装-lazynvim)
   - [4.2 插件目录约定](#42-插件目录约定)
 - [5. 常用插件推荐](#5-常用插件推荐)
-  - [5.1 编辑器基础：Treesitter + 补全 + 模糊搜索](#51-编辑器基础treesitter--补全--模糊搜索)
-  - [5.2 LSP：内置 LSP + Pyright](#52-lsp内置-lsp--pyright)
+  - [5.1 编辑器增强：edit](#51-编辑器增强edit)
+  - [5.2 编程语言支持：LSP](#52-编程语言支持lsp)
   - [5.3 状态栏：lualine](#53-状态栏lualine)
   - [5.4 文件管理器：yazi](#54-文件管理器yazi)
   - [5.5 Markdown 预览：markdown-preview.nvim](#55-markdown-预览markdown-previewnvim)
@@ -258,9 +258,9 @@ return {
 ```lua
 -- lua/user/plugins/init.lua
 return {
+    require("user.plugins.edit"),        -- 编辑器增强
+    require("user.plugins.lsp"),         -- LSP 服务
     require("user.plugins.lualine"),     -- 状态栏
-    require("user.plugins.edit"),        -- 编辑器基础
-    require("user.plugins.lsp"),         -- LSP
     require("user.plugins.yazi"),        -- 文件管理器
     require("user.plugins.markdown"),    -- Markdown 预览
     require("user.plugins.alpha"),       -- 启动屏
@@ -272,78 +272,168 @@ return {
 
 ## 5. 常用插件推荐
 
-> 旧版每节都重复整段 `init.vim`，本节按"按职责分组"的写法，每个 spec 文件只关注自己分类下的插件，不再粘贴重复配置。
+在这一节中，我将会以自己常用的七款插件为例，具体介绍一下如何基于 lazy.nvim 插件管理器来扩展 Neovim 的功能，以便让它符合自己的使用需求。
 
-### 5.1 编辑器基础：Treesitter + 补全 + 模糊搜索
+### 5.1 编辑器增强：edit
 
-```lua
--- lua/user/plugins/edit.lua
-return {
-  -- 语法高亮 / 缩进 / 跳转
-  -- 注意：0.12+ 必须切 main 分支（master 冻结不兼容 0.12）、且不能 lazy-load
-  {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    lazy = false,           -- nvim-treesitter main 分支明确说"This plugin does not support lazy-loading"
-    build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter").setup({
-        install_dir = vim.fn.stdpath("data") .. "/site",
-      })
-      -- 装常用 parser（新 API 是 nvim-treesitter.install，不是 ensure_installed）
-      pcall(function()
-        require("nvim-treesitter").install({
-          "lua", "python", "cpp", "c", "json", "markdown",
-          "bash", "yaml", "toml", "vim", "vimdoc",
-        })
-      end)
-    end,
-  },
+这款插件主要用于增强 Neovim 的编辑体验，功能包括语法高亮、语法解析、代码的缩进与折叠等，其具体配置与使用方式如下。
 
-  -- 自动补全括号 / 引号
-  {
-    "echasnovski/mini.pairs",
-    event = "InsertEnter",
-    config = function() require("mini.pairs").setup() end,
-  },
+1. 在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`edit.lua`的文件，并在其中输入如下代码：
 
-  -- 模糊搜索
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      local telescope = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "查找文件" })
-      vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "全局搜索" })
-      vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "切换 buffer" })
-    end,
-  },
-}
-```
+    ```lua
+    -- lua/user/plugins/edit.lua
 
-> 旧版用 `ervandew/supertab` 做 tab 补全，本节换成了 Treesitter + mini.pairs + Telescope 的现代组合。
->
-> [!NOTE] Treesitter 的两条路
->
-> Neovim 0.11+ **已经内置** `vim.treesitter.*` + `:checkhealth vim.treesitter`，外部 `nvim-treesitter` 插件的角色被弱化为"提供大量 parser 与 query 模板"。如果你只用 lua/python/json 等几个语言，可以**完全不装** nvim-treesitter，跳过本节第一个 spec，只保留 mini.pairs + Telescope，启动更快。
->
-> [!NOTE] nvim-treesitter `master` vs `main` 分支对比
->
-> `nvim-treesitter` 在 2025 年有过一次大重写，仓库 README 上明确写了 **"The `master` branch is frozen"**。必须按 Neovim 版本选择分支：
->
-> | Neovim 版本 | 分支 | 关键差异 |
-> | --- | --- | --- |
-> | 0.10 / 0.11 | `master`（默认） | 旧 API：`require("nvim-treesitter.configs").setup({ ensure_installed = {...} })` |
-> | 0.12+ | `main`（必须显式指定） | 新 API：`require("nvim-treesitter").setup({ install_dir = ... })` + `require("nvim-treesitter").install({...})` |
->
-> 加上 `lazy = false` 因为 main 分支 README 写明 "**This plugin does not support lazy-loading**"。漏写任何一个都会失败：
->
-> - 漏 `branch = "main"` → 装上 0.10/0.11 兼容版，启动时报 `require('nvim-treesitter.configs') not found`
-> - 漏 `lazy = false` → 启动时报 "module 'nvim-treesitter' not found"（lazy 还在 clone 阶段就调用了 require）
-> - 用旧 `require("nvim-treesitter.configs").setup({...})` → `module 'nvim-treesitter.configs' not found`
+    return {
 
-### 5.2 LSP：内置 LSP + Pyright
+        -- Tree-sitter：语法解析、语法高亮、折叠、缩进等
+        {
+            "nvim-treesitter/nvim-treesitter",
+            branch = "main",       -- main 是面向 Neovim 0.12+ 的新版实现
+            lazy = false,          -- main 分支不支持 lazy-loading
+            build = ":TSUpdate",
+
+            config = function()
+                require("nvim-treesitter").setup({
+                    install_dir = vim.fn.stdpath("data") .. "/site",
+                })
+
+                -- 安装常用 parser
+                require("nvim-treesitter").install({
+                    "lua",
+                    "python",
+                    "cpp",
+                    "c",
+                    "json",
+                    "markdown",
+                    "bash",
+                    "yaml",
+                    "toml",
+                    "vim",
+                    "vimdoc",
+                })
+
+                -- 启用 Tree-sitter 功能
+                vim.api.nvim_create_autocmd("FileType", {
+                    pattern = {
+                        "lua",
+                        "python",
+                        "cpp",
+                        "c",
+                        "json",
+                        "markdown",
+                        "bash",
+                        "yaml",
+                        "toml",
+                        "vim",
+                        "help",
+                    },
+
+                    callback = function()
+                        -- 语法高亮
+                        vim.treesitter.start()
+
+                        -- Tree-sitter 折叠
+                        vim.wo.foldexpr =
+                            "v:lua.vim.treesitter.foldexpr()"
+                        vim.wo.foldmethod = "expr"
+
+                        -- Tree-sitter 缩进
+                        vim.bo.indentexpr =
+                            "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end,
+                })
+            end,
+        },
+
+        -- 自动补全括号 / 引号
+        {
+            "echasnovski/mini.pairs",
+            event = "InsertEnter",
+
+            config = function()
+                require("mini.pairs").setup()
+            end,
+        },
+
+        -- 模糊搜索
+        {
+            "nvim-telescope/telescope.nvim",
+            cmd = "Telescope",
+
+            dependencies = {
+                "nvim-lua/plenary.nvim",
+            },
+
+            config = function()
+                local telescope = require("telescope.builtin")
+
+                vim.keymap.set(
+                    "n",
+                    "<leader>ff",
+                    telescope.find_files,
+                    { desc = "查找文件" }
+                )
+
+                vim.keymap.set(
+                    "n",
+                    "<leader>fg",
+                    telescope.live_grep,
+                    { desc = "全局搜索" }
+                )
+
+                vim.keymap.set(
+                    "n",
+                    "<leader>fb",
+                    telescope.buffers,
+                    { desc = "切换 buffer" }
+                )
+            end,
+        },
+    }
+    ```
+
+2. 在保存上述文件之后，重启 Neovim，并执行`:Lazy update`命令，即可完成插件的安装和配置。这时候，如果我们再次用 Neovim 打开一个 Python 文件，就会看到该插件的语法高亮效果了，如图 2 所示。
+
+    ![语法高亮效果](./img/highlight.png)
+
+    **图 2** 语法高亮效果
+
+3. 如果我们在打开上上述文件的状态下执行`:InspectTree`命令，还能看到该插件对 Python 文件进行了语法解析，如图 3 所示。
+
+    ![语法解析效果](./img/parse.png)
+
+    **图 3** 语法解析效果
+
+4. 如果我们将光标移动到上述代码的某个关键字、函数名或变量上，并执行`:Inspect`命令，就能了解到该插件对 Python 语法的具体理解，如图 4 所示。
+
+    ![插件对 Python 的语法理解](./img/understand.png)
+
+    **图 4** 插件对 Python 的语法理解
+
+5. 除语法解析方面的功能之外，我们还可以利用该插件提供的折叠功能，将代码折叠成更小的段落，以便更好地阅读和理解代码，这方面的相关命令如表 1 所示。
+
+    | 操作                     | 命令 |
+    | ------------------------ | ---- |
+    | 当前折叠展开/关闭        | `za` |
+    | 当前折叠关闭             | `zc` |
+    | 当前折叠展开             | `zo` |
+    | 当前折叠及其内部全部关闭 | `zC` |
+    | 当前折叠及其内部全部展开 | `zO` |
+    | 全部打开                 | `zR` |
+    | 全部关闭                 | `zM` |
+    | 切换是否启用折叠         | `zi` |
+
+    **表 1** 折叠相关命令
+
+    例如在上述代码中，如果我们在普通模式下将光标移动到`hello()`函数上，并依次在键盘上按下`z`、`c`两个键，就会看到该函数被折叠起来，如图 5 所示。
+
+    ![代码的折叠效果](./img/fold.png)
+
+    **图 5** 代码的折叠效果
+
+### 5.2 编程语言支持：LSP
+
+这款插件主要用于提供代码补全、跳转、引用、重命名、code action 等功能，具体配置与使用方法如下：
 
 Neovim 0.11 内置 `vim.lsp.*`，配合各语言官方 LSP server 即可获得跳转、引用、重命名、code action 等能力，**无需任何 Node.js 中间层**（这正是替代 Coc 的关键动机）。
 
@@ -884,7 +974,7 @@ require("lspconfig").pyright.setup({})
 
 实际报错 stack：
 
-```
+```bash
 [markdown-preview.nvim] build  | Running task build
 [markdown-preview.nvim] build  | Vim:E117: Unknown function: mkdp#util#install
 Error in .../lua/user/plugins/markdown.lua:
@@ -925,7 +1015,7 @@ Error in .../lua/user/plugins/markdown.lua:
 
 Windows 上把 Neovim 从 0.12.4 升到 0.12.5 时，`scoop update neovim` 报：
 
-```
+```bash
 Checking hash of nvim-win64.zip ... ERROR Hash check failed!
 Expected:    de8625ba8cf65ebf40eb80a388ba1ec8e9c15b30218821e2c639119b05920de1
 Actual:
@@ -941,7 +1031,7 @@ Get-FileHash : 无法将"Get-FileHash"项识别为 cmdlet
 >
 > 注意：系统级 `PSModulePath` 环境变量本身干净（`[Environment]::GetEnvironmentVariable('PSModulePath','Machine')` 返回的是正确的 `C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules`）。污染来自**当前 shell 进程**——某些从 PS7 派生的 bash / pwsh 工具会在 `PSModulePath` 里追加 PS7 路径，**用户在本地直接打开 PowerShell 跑 scoop 完全没问题**。所以这条只影响从某些执行环境（如集成 bash 工具）调用 PS 5.1 跑 scoop 的场景。
 
-```
+```powershell
 # 有害顺序（PS7 在前）
 D:\Working\PowerShell\Modules;C:\Program Files\PowerShell\Modules;c:\program files\powershell\7\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
 
@@ -973,7 +1063,7 @@ scoop update neovim
 
 `scoop bucket add extras` 被中断后，`scoop bucket list` 报：
 
-```
+```bash
 fatal: your current branch appears to be broken
 
 Name   Source                                     Manifests
@@ -1017,6 +1107,7 @@ if ($local -eq $remote) { Write-Host 'OK: 恢复完整，数据一致' }
 ### Q16. `nvim --headless` 验证时 LSP clients 一直为 0，但 GUI 终端 nvim 里能正常 attach
 
 这是 `headless` 模式的特性，不是配置错。`nvim --headless -u <script> <file>` 启动时：
+
 - buffer 1 在命令行参数处理时**已经创建**但没 `loaded`（`vim.api.nvim_buf_is_loaded(1) == false`）
 - filetype 自动检测需要 BufReadPost 真正触发，但 buffer 没 loaded → 没触发 → ft 留空 → LSP 不 attach
 
@@ -1044,7 +1135,7 @@ vim.wait(10000, function() return false end)
 
 #### 问题 1：lspconfig 0.12 deprecation warning + stack traceback
 
-```
+```bash
 The `require('lspconfig')` "framework" is deprecated, use vim.lsp.config (see :help lspconfig-nvim-0.11) instead.
 Feature will be removed in nvim-lspconfig v3.0.0
 stack traceback:
@@ -1057,7 +1148,7 @@ stack traceback:
 
 #### 问题 2：`~/.local/share/nvim-data/lsp.log` 把所有 LSP server stderr 标 `[ERROR]`
 
-```
+```bash
 [ERROR] "rpc" "...\clangd.exe" "stderr" "I[11:55:07.341] clangd version 22.1.8 ..."
 [ERROR] "rpc" "...\clangd.exe" "stderr" "I[11:55:07.350] Starting LSP over stdin/stdout"
 [ERROR] "rpc" "...\clangd.exe" "stderr" "I[11:55:07.681] Built preamble ..."
@@ -1101,7 +1192,7 @@ end
 
 `lualine` 在启动时登记了一条 config issue，并提示：
 
-```
+```bash
 lualine: There are some issues with your config. Run :LualineNotices for details
 ```
 
