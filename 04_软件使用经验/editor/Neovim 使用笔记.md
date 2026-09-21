@@ -41,11 +41,10 @@ categories: [命令行工具]
 - [5. 常用插件推荐](#5-常用插件推荐)
   - [5.1 编辑器增强：edit](#51-编辑器增强edit)
   - [5.2 编程语言支持：LSP](#52-编程语言支持lsp)
-  - [5.3 状态栏：lualine](#53-状态栏lualine)
+  - [5.3 主题设置：lualine + catppuccin](#53-主题设置lualine--catppuccin)
   - [5.4 文件管理器：yazi](#54-文件管理器yazi)
-  - [5.5 Markdown 预览：markdown-preview.nvim](#55-markdown-预览markdown-previewnvim)
+  - [5.5 Markdown 预览：markdown-preview](#55-markdown-预览markdown-previewnvim)
   - [5.6 启动页：alpha-nvim](#56-启动页alpha-nvim)
-  - [5.7 主题：catppuccin](#57-主题catppuccin)
 - [6. 常见问题](#6-常见问题)
 - [7. 附录：完整配置骨架](#7-附录完整配置骨架)
 
@@ -163,11 +162,11 @@ Neovim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 V
     sudo make install
     ```
 
-待安装完成之后，我们可以通过执行`nvim -v`命令来验证 Neovim 是否安装成功，如图 1 所示。
+    待安装完成之后，我们可以通过执行`nvim -v`命令来验证 Neovim 是否安装成功，如图 1 所示。
 
-![验证 Neovim 是否安装成功](./img/check_nvim_install.png)
+    ![验证 Neovim 是否安装成功](./img/check_nvim_install.png)
 
-**图 1** 验证 Neovim 是否安装成功
+    **图 1** 验证 Neovim 是否安装成功
 
 ### 3.3 配置文件的目录结构
 
@@ -239,6 +238,7 @@ lazy.nvim 支持将插件配置拆分到多个 Lua 文件中。通常可以按�
 
 ```lua
 -- lua/user/plugins/lualine.lua
+
 return {
     {
         "nvim-lualine/lualine.nvim",                           -- 插件名
@@ -503,10 +503,10 @@ return {
                 -- nvim-lspconfig 提供 server 的默认配置，
                 -- Neovim 0.11+ 使用 vim.lsp.config / vim.lsp.enable。
                 
-                vim.lsp.config("pyright", {})
-                vim.lsp.config("clangd", {})
-                vim.lsp.config("lua_ls", {})
-                vim.lsp.config("bashls", {})
+                require("lspconfig").pyright.setup({})
+                require("lspconfig").clangd.setup({})
+                require("lspconfig").lua_ls.setup({})
+                require("lspconfig").bashls.setup({})
 
                 vim.lsp.config("jsonls", {
                     cmd = {
@@ -515,7 +515,7 @@ return {
                     },
                 })
 
-                vim.lsp.config("yamlls", {})
+                require("lspconfig").yamlls.setup({})
 
                 vim.lsp.enable({
                     "pyright",
@@ -571,93 +571,74 @@ return {
 
     **图 6** 代码补全效果
 
-### 5.3 状态栏插件：lualine
+### 5.3 主题设置：lualine + catppuccin
 
-替代 vim-airline 的纯 Lua 状态栏，主题生态更现代。分两步上手：先用最小配置把状态栏跑出来，确认没问题后再上 catppuccin 配色。
+该插件主要用于设置 NeoVim 的状态栏外观，相较于早期的`vim-airline`插件，其主题生态更现代，配置也更简单且灵活。具体配置方法如下：
 
-#### 第一步：最小可用配置
+1. 在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`lualine.lua`的文件，并在其中输入如下代码：
 
-```lua
--- lua/user/plugins/lualine.lua 
-return {
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    -- 旧名 nvim-web-devicon（单数）仓库已删；改用复数 nvim-web-devicons
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("lualine").setup({
-        options = { theme = "auto" },   -- "auto" = 自动跟随当前 colorscheme
-      })
-    end,
-  },
-}
-```
+    ```lua
+    -- lua/user/plugins/lualine.lua
 
-`theme = "auto"` 是默认值，会跟着你当前用的主题走。先这样跑起来，状态栏就能正常显示了。
-
-#### 第二步（可选）：用上 catppuccin 配色
-
-这里有个坑要先说清楚：**不能写 `theme = "catppuccin"`**。lualine 内置主题表里没有这个名字，新版 catppuccin 插件也不再提供 `integrations.lualine`，写了必然 fallback，并且每次启动都弹 `There are some issues with your config`（详见 [§6 Q18](#q18-启动弹-lualine-there-are-some-issues-with-your-config)）。
-
-正确做法：用 `catppuccin.palettes` 取 mocha 色板，手工拼出 lualine 要的 theme table（每个 mode 一个 `a/b/c` 三元组）：
-
-```lua
--- lua/user/plugins/lualine.lua
-return {
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      local theme
-      local ok_pal, palettes = pcall(require, "catppuccin.palettes")
-      if ok_pal then
-        local p = palettes.get_palette("mocha")
-        -- 每个模式的强调色
-        local accent = {
-          normal   = p.mauve,
-          insert   = p.green,
-          visual   = p.peach,
-          replace  = p.red,
-          command  = p.blue,
-          terminal = p.teal,
-        }
-        theme = {}
-        for mode, col in pairs(accent) do
-          theme[mode] = {
-            a = { fg = p.base,     bg = col,        gui = "bold" },
-            b = { fg = p.text,     bg = p.surface0 },
-            c = { fg = p.subtext0, bg = p.mantle   },
-          }
-        end
-        -- 失焦窗口的状态栏配色
-        theme.inactive = {
-          a = { fg = p.overlay1, bg = p.mantle },
-          b = { fg = p.overlay1, bg = p.mantle },
-          c = { fg = p.overlay1, bg = p.mantle },
-        }
-      end
-
-      require("lualine").setup({
-        options = {
-          theme = theme or "auto",   -- 色板取不到时退回 auto，也不会报错
-          section_separators = { "", "" },
-          component_separators = { "", "" },
-          icons_enabled = true,
+    return {
+        {
+            "nvim-lualine/lualine.nvim",                           -- 插件名
+            event = "VeryLazy",                                    -- 绑定的事件
+            dependencies = { "nvim-tree/nvim-web-devicons" },      -- 依赖项
+            opts = {
+                options = {                                        -- 配置项列表
+                    theme = "auto",                                -- 使用默认主题
+                },
+            },
         },
-      })
-    end,
-  },
-}
-```
+    }
+    ```
 
-效果（下图是升级前的 vim-airline 截图，留作对比）：
+    `theme = "auto"`是默认值，效果是沿用我们当前使用用的主题。其具体效果，读者其实在之前的截图中已经看到了，这里就不重复再单独展示了。
 
-![vim-airline 旧截图（对比用）](./img/vim-airline.png)
+2. 如果我们对 NeoVim 当前的外观不满意，那就需要再安装一个名为`catppuccin`的插件，该插件提供了多种主题，包括我们之前提到的`mocha`主题。具体做法是继续在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`catppuccin.lua`的文件，并在其中输入如下代码：
 
-> `theme` 拿到的是一张从 catppuccin mocha 色板拼出来的 table，不是字符串。
-> 想换其他 flavor（latte / frappe / macchiato），把 `get_palette("mocha")` 里的名字换掉即可。
+    ```lua
+    -- lua/user/plugins/colorscheme.lua
+
+    return {
+        {
+            "catppuccin/nvim",
+            priority = 1000,
+
+            config = function()
+                vim.cmd.colorscheme("catppuccin-mocha")
+            end,
+        },
+    }
+    ```
+
+    在这里，我们可以通过`vim.cmd.colorscheme()`这个 API 来设置 NeoVim 的主题。到目前为止，该插件支持的主题如表 2 所示。
+
+    | 主题              | 风格                  | 典型配置               |
+    | --------------- | ------------------- | ------------------ |
+    | **Catppuccin**  | 柔和、现代、色彩丰富          | `catppuccin-mocha` |
+    | **Tokyo Night** | 深色、蓝紫、现代 IDE 感      | `tokyonight-night` |
+    | **Gruvbox**     | 暖色、复古、经典 Vim 风格     | `gruvbox`          |
+    | **Kanagawa**    | 日式水墨、低饱和            | `kanagawa-wave`    |
+    | **Rose Pine**   | 深色、低饱和、简洁           | `rose-pine`        |
+    | **Everforest**  | 绿色、柔和、长时间阅读         | `everforest`       |
+    | **Nord**        | 冷色、蓝灰、克制            | `nord`             |
+    | **Dracula**     | 紫色系、高对比             | `dracula`          |
+    | **Solarized**   | 经典、低对比度             | `solarized`        |
+    | **OneDark**     | 类 VS Code / Atom 风格 | `onedark`          |
+
+    **表 2** NeoVim 支持的主题
+
+    例如，我们将主题设置为`tokyonight-night`的话，重启 NeoVim 后的效果如图 7 所示（同样的，前提是之前在`init.lua`文件中已经注册好了上面这两款插件）。
+
+    ![tokyonight-night 主题效果](./img/tokyonight-night.png)
+
+    **图 7** `tokyonight-night`主题效果
+
+    > [!NOTE] 我在这里保留了基于`vim-snazzy`设置的旧图，以便对比主题切换前后的视觉变化。
+    >
+    > ![vim-snazzy 旧截图（对比用）](./img/vim-snazzy.png)
 
 ### 5.4 文件管理器：yazi
 
@@ -768,30 +749,6 @@ return {
 效果：
 
 ![vim-startify 旧截图（对比用）](./img/vim-startify.png)
-
-### 5.7 主题：catppuccin
-
-旧版用的 `connorholyday/vim-snazzy` 已停止更新，替换为社区最常用的 `catppuccin/nvim`：
-
-```lua
--- lua/user/plugins/colorscheme.lua
-return {
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("catppuccin-mocha")
-    end,
-  },
-}
-```
-
-效果：
-
-![vim-snazzy 旧截图（对比用）](./img/vim-snazzy.png)
-
-> 旧图保留以便对比主题切换前后的视觉变化；当前默认主题为 catppuccin-mocha。
 
 ## 6. 常见问题
 
