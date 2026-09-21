@@ -615,18 +615,18 @@ return {
 
     在这里，我们可以通过`vim.cmd.colorscheme()`这个 API 来设置 NeoVim 的主题。到目前为止，该插件支持的主题如表 2 所示。
 
-    | 主题              | 风格                  | 典型配置               |
-    | --------------- | ------------------- | ------------------ |
-    | **Catppuccin**  | 柔和、现代、色彩丰富          | `catppuccin-mocha` |
-    | **Tokyo Night** | 深色、蓝紫、现代 IDE 感      | `tokyonight-night` |
-    | **Gruvbox**     | 暖色、复古、经典 Vim 风格     | `gruvbox`          |
-    | **Kanagawa**    | 日式水墨、低饱和            | `kanagawa-wave`    |
-    | **Rose Pine**   | 深色、低饱和、简洁           | `rose-pine`        |
-    | **Everforest**  | 绿色、柔和、长时间阅读         | `everforest`       |
-    | **Nord**        | 冷色、蓝灰、克制            | `nord`             |
+    | 主题            | 风格                       | 配置值             |
+    | --------------- | -------------------------- | ------------------ |
+    | **Catppuccin**  | 柔和、现代、色彩丰富       | `catppuccin-mocha` |
+    | **Tokyo Night** | 深色、蓝紫、现代 IDE 感    | `tokyonight-night` |
+    | **Gruvbox**     | 暖色、复古、经典 Vim 风格  | `gruvbox`          |
+    | **Kanagawa**    | 日式水墨、低饱和           | `kanagawa-wave`    |
+    | **Rose Pine**   | 深色、低饱和、简洁         | `rose-pine`        |
+    | **Everforest**  | 绿色、柔和、长时间阅读     | `everforest`       |
+    | **Nord**        | 冷色、蓝灰、克制           | `nord`             |
     | **Dracula**     | 紫色系、高对比             | `dracula`          |
     | **Solarized**   | 经典、低对比度             | `solarized`        |
-    | **OneDark**     | 类 VS Code / Atom 风格 | `onedark`          |
+    | **OneDark**     | 类 VS Code / Atom 风格     | `onedark`          |
 
     **表 2** NeoVim 支持的主题
 
