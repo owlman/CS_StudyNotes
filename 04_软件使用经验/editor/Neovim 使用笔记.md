@@ -1361,10 +1361,10 @@ return {
 ```lua
 -- ~/.config/nvim/lua/user/plugins/init.lua（最小集）
 return {
-  require("user.plugins.colorscheme"),  -- 主题，§5.7
+  require("user.plugins.colorscheme"),  -- 主题，§5.3
   require("user.plugins.lsp"),          -- LSP + 补全，§5.2（记得先装好 LSP server）
   require("user.plugins.lualine"),      -- 状态栏，§5.3
 }
 ```
 
-对应的三个文件内容也只需抄 §5.7 / §5.2 / §5.3 那三段。跑通之后再逐个补 Treesitter（§5.1）、yazi（§5.4）、markdown-preview（§5.5）、alpha（§5.6）都不迟——每加一个，lazy 会自动补装它，不用重装整个配置。
+对应的三个文件内容也只需抄 §5.3 / §5.2 / §5.3 那三段。跑通之后再逐个补 Treesitter（§5.1）、yazi（§5.4）、markdown-preview（§5.5）、alpha（§5.6）都不迟——每加一个，lazy 会自动补装它，不用重装整个配置。
