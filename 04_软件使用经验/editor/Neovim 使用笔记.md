@@ -541,7 +541,7 @@ return {
         },
     }```
 
-2. 同样的，在保存上述文档之后，重启 NeoVim，并执行`:Lazy update`命令，即可使该插件的安装与配置生效。当然了，这里需要说明的是，**LSP server 本身不是 Vim 插件，要在系统 / 虚拟环境里装**，其相关的安装命令如下。
+2. 同样的，在保存上述文档之后，重启 Neovim，并执行`:Lazy update`命令，即可使该插件的安装与配置生效。当然了，这里需要说明的是，**LSP server 本身不是 Vim 插件，要在系统 / 虚拟环境里装**，其相关的安装命令如下。
 
     ```bash
     # Pyright：Python LSP
@@ -563,7 +563,7 @@ return {
     npm i -g vscode-langservers-extracted
     ```
 
-    在安装完 LSP server 之后，需要重启 NeoVim，并执行`:Lazy update`命令，才能使 LSP server 生效。
+    在安装完 LSP server 之后，需要重启 Neovim，并执行`:Lazy update`命令，才能使 LSP server 生效。
 
 3. 如果上述操作一切顺利，我们现在如果打开一个 Python 文件，并在其中输入一些代码，就看到该插件提供的代码补全功能了，如图 6 所示。
 
@@ -573,7 +573,7 @@ return {
 
 ### 5.3 主题设置：lualine + catppuccin
 
-该插件主要用于设置 NeoVim 的状态栏外观，相较于早期的`vim-airline`插件，其主题生态更现代，配置也更简单且灵活。具体配置方法如下：
+该插件主要用于设置 Neovim 的状态栏外观，相较于早期的`vim-airline`插件，其主题生态更现代，配置也更简单且灵活。具体配置方法如下：
 
 1. 在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`lualine.lua`的文件，并在其中输入如下代码：
 
@@ -596,7 +596,7 @@ return {
 
     `theme = "auto"`是默认值，效果是沿用我们当前使用用的主题。其具体效果，读者其实在之前的截图中已经看到了，这里就不重复再单独展示了。
 
-2. 如果我们对 NeoVim 当前的外观不满意，那就需要再安装一个名为`catppuccin`的插件，该插件提供了多种主题，包括我们之前提到的`mocha`主题。具体做法是继续在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`catppuccin.lua`的文件，并在其中输入如下代码：
+2. 如果我们对 Neovim 当前的外观不满意，那就需要再安装一个名为`catppuccin`的插件，该插件提供了多种主题，包括我们之前提到的`mocha`主题。具体做法是继续在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`catppuccin.lua`的文件，并在其中输入如下代码：
 
     ```lua
     -- lua/user/plugins/colorscheme.lua
@@ -613,7 +613,7 @@ return {
     }
     ```
 
-    在这里，我们可以通过`vim.cmd.colorscheme()`这个 API 来设置 NeoVim 的主题。到目前为止，该插件支持的主题如表 2 所示。
+    在这里，我们可以通过`vim.cmd.colorscheme()`这个 API 来设置 Neovim 的主题。到目前为止，该插件支持的主题如表 2 所示。
 
     | 主题            | 风格                       | 配置值             |
     | --------------- | -------------------------- | ------------------ |
@@ -628,9 +628,9 @@ return {
     | **Solarized**   | 经典、低对比度             | `solarized`        |
     | **OneDark**     | 类 VS Code / Atom 风格     | `onedark`          |
 
-    **表 2** NeoVim 支持的主题
+    **表 2** Neovim 支持的主题
 
-    例如，我们将主题设置为`tokyonight-night`的话，重启 NeoVim 后的效果如图 7 所示（同样的，前提是之前在`init.lua`文件中已经注册好了上面这两款插件）。
+    例如，我们将主题设置为`tokyonight-night`的话，重启 Neovim 后的效果如图 7 所示（同样的，前提是之前在`init.lua`文件中已经注册好了上面这两款插件）。
 
     ![tokyonight-night 主题效果](./img/tokyonight-night.png)
 
