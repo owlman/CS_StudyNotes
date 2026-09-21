@@ -43,7 +43,7 @@ categories: [命令行工具]
   - [5.2 编程语言支持：LSP](#52-编程语言支持lsp)
   - [5.3 主题设置：lualine + catppuccin](#53-主题设置lualine--catppuccin)
   - [5.4 文件管理器：yazi](#54-文件管理器yazi)
-  - [5.5 Markdown 预览：markdown-preview](#55-markdown-预览markdown-previewnvim)
+  - [5.5 Markdown 预览：markdown-preview.nvim](#55-markdown-预览markdown-previewnvim)
   - [5.6 启动页：alpha-nvim](#56-启动页alpha-nvim)
 - [6. 常见问题](#6-常见问题)
 - [7. 附录：完整配置骨架](#7-附录完整配置骨架)
