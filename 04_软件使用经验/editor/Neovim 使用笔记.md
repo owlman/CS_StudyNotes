@@ -392,7 +392,7 @@ return {
     }
     ```
 
-2. 在保存上述文件之后，重启 Neovim，并执行`:Lazy update`命令，即可完成插件的安装和配置。这时候，如果我们再次用 Neovim 打开一个 Python 文件，就会看到该插件的语法高亮效果了，如图 2 所示。
+2. 由于我们之前已经将该插件注册到了`init.lua`这个全局配置中，如今只需在保存上述文件之后，重启 Neovim，并执行`:Lazy update`命令，即可完成插件的安装和配置。这时候，如果我们再次用 Neovim 打开一个 Python 文件，就会看到该插件的语法高亮效果了，如图 2 所示。
 
     ![语法高亮效果](./img/highlight.png)
 
@@ -435,104 +435,150 @@ return {
 
 这款插件主要用于提供代码补全、跳转、引用、重命名、code action 等功能，具体配置与使用方法如下：
 
-Neovim 0.11 内置 `vim.lsp.*`，配合各语言官方 LSP server 即可获得跳转、引用、重命名、code action 等能力，**无需任何 Node.js 中间层**（这正是替代 Coc 的关键动机）。
+1. 在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`lsp.lua`的文件，并在其中输入如下代码：
 
-```lua
--- lua/user/plugins/lsp.lua
-return {
-  -- nvim-cmp 必须是顶层 spec：所有 cmp-* 的 after/plugin/*.lua 会第一时间 require("cmp")，
-  -- 所以 cmp 要先于它们装好；cmp-* 全列在 cmp 的 dependencies 里。
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-path",
-      "rafamadriz/friendly-snippets",
-    },
-    config = function()
-      local cmp = require("cmp")
-      cmp.setup({
-        snippet = require("luasnip").lazy_snippet,
-        mapping = cmp.mapping.preset.insert({
-          ["<CR>"]   = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"]  = cmp.mapping.select_next_item(),
-          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        }),
-        sources = cmp.config.sources(
-          { { name = "nvim_lsp" }, { name = "luasnip" } },
-          { { name = "path" } }
-        ),
-      })
+    ```lua
+    -- lua/user/plugins/lsp.lua
 
-      -- 诊断显示
-      vim.diagnostic.config({
-        virtual_text = true,
-        signs        = true,
-        underline    = true,
-        update_in_insert = false,
-      })
-    end,
-  },
+    return {
+        -- 自动补全
+        {
+            "hrsh7th/nvim-cmp",
+            event = "InsertEnter",
+            dependencies = {
+                "hrsh7th/cmp-nvim-lsp",
+                "L3MON4D3/LuaSnip",
+                "saadparwaiz1/cmp_luasnip",
+                "hrsh7th/cmp-path",
+                "rafamadriz/friendly-snippets",
+            },
 
-  -- nvim-lspconfig 现在退化为"提供 server 默认配置 + capabilities"的角色，
-  -- 真正的启用/挂载走 Neovim 0.11+ 内置 vim.lsp.config / vim.lsp.enable
-  -- 注意：必须用 lspconfig.<name>.setup({})，它内部会把 default config (含 cmd) 合并后
-  -- 再调 vim.lsp.config。直接 vim.lsp.config("pyright", {}) 会因 cmd 为空报 E5113。
-  {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local lspconfig = require("lspconfig")
-      lspconfig.pyright.setup({})
-      lspconfig.clangd.setup({})
-      lspconfig.lua_ls.setup({})
-      lspconfig.bashls.setup({})
-      -- jsonls 的 lspconfig 默认 cmd 写的是复数 `vscode-json-languageserver`，
-      -- 但 `vscode-langservers-extracted` npm 包实际 shim 是单数 `vscode-json-language-server`。
-      -- 这里显式覆盖，否则 :LspInfo 会报 `spawn: not found`。
-      lspconfig.jsonls.setup({
-        cmd = { "vscode-json-language-server", "--stdio" },
-      })
-      lspconfig.yamlls.setup({})
-    end,
-  },
+            config = function()
+                local cmp = require("cmp")
+                local luasnip = require("luasnip")
 
-  -- 诊断列表 / LSP 动作面板
-  -- 旧名 nvim-web-devicon（单数）仓库已删，要写复数 nvim-web-devicons
-  {
-    "folke/trouble.nvim",
-    cmd = { "Trouble", "TroubleToggle" },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-}
-```
+                cmp.setup({
+                    snippet = {
+                        expand = function(args)
+                            luasnip.lsp_expand(args.body)
+                        end,
+                    },
 
-**LSP server 本身不是 Vim 插件，要在系统 / 虚拟环境里装**：
+                    mapping = cmp.mapping.preset.insert({
+                        ["<CR>"] = cmp.mapping.confirm({
+                            select = true,
+                        }),
 
-```bash
-# Pyright：替代停更的 coc-pyls
-pip install --user pyright
+                        ["<Tab>"] = cmp.mapping.select_next_item(),
+                        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+                    }),
 
-# clangd：替代 coc-clangd
-sudo apt install -y clangd
+                    sources = cmp.config.sources({
+                        { name = "nvim_lsp" },
+                        { name = "luasnip" },
+                    }, {
+                        { name = "path" },
+                    }),
+                })
 
-# 其他几个 server 一般走 npm
-npm i -g bash-language-server yaml-language-server vscode-langservers-extracted
-```
+                -- 诊断显示
+                vim.diagnostic.config({
+                    virtual_text = true,
+                    signs = true,
+                    underline = true,
+                    update_in_insert = false,
+                })
+            end,
+        },
 
-> Coc 时代用 `coc-pyls` 提供 Python 补全；现 Pyright 已是 Python 静态分析的事实标准——它由 **Microsoft 开发**（团队负责人 Eric Traut），而 PyPI 上那个 `pip install pyright` 装到的包由社区维护者 Robert Craigie 打包分发（上游源码仍在 Microsoft）。如果你更习惯 Coc 生态，也可以装 `coc-pyright`（只是 Coc 扩展的 Pyright 集成），整段 LSP 配置可以无缝替换为 Coc 配置——这是用户友好度的双轨选择。
+        -- LSP server 配置
+        {
+            "neovim/nvim-lspconfig",
+            event = {
+                "BufReadPre",
+                "BufNewFile",
+            },
 
-### 5.3 状态栏：lualine
+            config = function()
+                -- nvim-lspconfig 提供 server 的默认配置，
+                -- Neovim 0.11+ 使用 vim.lsp.config / vim.lsp.enable。
+                
+                vim.lsp.config("pyright", {})
+                vim.lsp.config("clangd", {})
+                vim.lsp.config("lua_ls", {})
+                vim.lsp.config("bashls", {})
+
+                vim.lsp.config("jsonls", {
+                    cmd = {
+                        "vscode-json-language-server",
+                        "--stdio",
+                    },
+                })
+
+                vim.lsp.config("yamlls", {})
+
+                vim.lsp.enable({
+                    "pyright",
+                    "clangd",
+                    "lua_ls",
+                    "bashls",
+                    "jsonls",
+                    "yamlls",
+                })
+            end,
+        },
+
+        -- LSP 诊断 / 操作面板
+        {
+            "folke/trouble.nvim",
+            cmd = {
+                "Trouble",
+                "TroubleToggle",
+            },
+            dependencies = {
+                "nvim-tree/nvim-web-devicons",
+            },
+        },
+    }```
+
+2. 同样的，在保存上述文档之后，重启 NeoVim，并执行`:Lazy update`命令，即可使该插件的安装与配置生效。当然了，这里需要说明的是，**LSP server 本身不是 Vim 插件，要在系统 / 虚拟环境里装**，其相关的安装命令如下。
+
+    ```bash
+    # Pyright：Python LSP
+    pip install --user pyright
+
+    # clangd：C/C++ LSP
+    sudo apt install -y clangd
+
+    # lua-language-server：Lua LSP
+    sudo apt install -y lua-language-server
+
+    # bash-language-server：Bash LSP
+    npm i -g bash-language-server
+
+    # yaml-language-server：YAML LSP
+    npm i -g yaml-language-server
+
+    # vscode-langservers-extracted：VS Code LSP 扩展包
+    npm i -g vscode-langservers-extracted
+    ```
+
+    在安装完 LSP server 之后，需要重启 NeoVim，并执行`:Lazy update`命令，才能使 LSP server 生效。
+
+3. 如果上述操作一切顺利，我们现在如果打开一个 Python 文件，并在其中输入一些代码，就看到该插件提供的代码补全功能了，如图 6 所示。
+
+    ![代码补全效果](./img/completion.png)
+
+    **图 6** 代码补全效果
+
+### 5.3 状态栏插件：lualine
 
 替代 vim-airline 的纯 Lua 状态栏，主题生态更现代。分两步上手：先用最小配置把状态栏跑出来，确认没问题后再上 catppuccin 配色。
 
 #### 第一步：最小可用配置
 
 ```lua
--- lua/user/plugins/lualine.lua
+-- lua/user/plugins/lualine.lua 
 return {
   {
     "nvim-lualine/lualine.nvim",
