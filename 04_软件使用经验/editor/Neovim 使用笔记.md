@@ -194,7 +194,8 @@ Neovim 的成功也反过来唤起了 Vim 项目组的危机意识，加快了 V
 在上述结构中，Neovim 的配置入口文件是`init.lua`，它一般只做两件事：启动 Lazy.nvim 插件管理器，并使用该管理器加载我们为 Neovim 配置的各种插件，内容如下所示：
 
 ```lua
--- ~/.config/nvim/init.lua  
+-- ~/.config/nvim/init.lua
+
 require("user.lazy")      -- 启动 lazy.nvim
 require("user.options")   -- 配置全局选项
 ```
@@ -642,88 +643,118 @@ return {
 
 ### 5.4 文件管理器：yazi
 
-ranger 多年未发版，社区已切换到 Rust 写的 [yazi](https://github.com/sxyazi/yazi)。Neovim 集成用 `mikavilpas/yazi.nvim`：
+该插件主要用于在 Neovim 中集成文件管理器，其效果类似于`ranger`，但比`ranger`更现代。具体配置方法如下：
 
-```bash
-# 安装 yazi 本体
-cargo install --locked yazi-fm yazi-cli
-# 或用包管理器（Ubuntu 24.04+ 仓库已有）
-sudo apt install -y yazi
-# Windows / Scoop 实测走 release zip 最稳（extras bucket 国内网络容易 broken）：
-# 见 Q5 「GitHub release 直装 yazi」详细脚本。
-```
+1. 根据自己所在的操作系统安装`yazi`二进制，具体命令如下：
 
-```lua
--- lua/user/plugins/yazi.lua
--- 严格按 mikavilpas/yazi.nvim 官方 README 的 spec 写法
-return {
-  {
-    "mikavilpas/yazi.nvim",
-    version = "*", -- 锁定到最新稳定 tag
-    event = "VeryLazy",
-    enabled = function()
-      -- 没装 yazi 二进制就整个 spec 跳过，不影响其它插件
-      return vim.fn.executable("yazi") == 1
-    end,
-    dependencies = {
-      { "nvim-lua/plenary.nvim", lazy = true },
-      -- 注意：之前有人写过 "yazi-org/yazi.nvim"，那个仓库根本不存在（404），
-      -- yazi.nvim 真正的依赖只有 plenary.nvim。
-    },
-    keys = {
-      -- 把 keymap 放进去：lazy 看到对应键被按下才加载，更省启动时间
-      { "<M-o>",  "<cmd>Yazi toggle<CR>",       desc = "Yazi 切换",   mode = "n" },
-      { "<M-+>",  "<cmd>BufferNext<CR>",        desc = "下一标签",   mode = "n" },
-      { "<M-->",  "<cmd>BufferPrevious<CR>",    desc = "上一标签",   mode = "n" },
-    },
-    opts = {
-      open_for_directories = true,
-      keymaps = { show_help = "<f1>" },
-    },
-    init = function()
-      -- 关掉 netrw，让 yazi.nvim 接管目录浏览
-      vim.g.loaded_netrwPlugin = 1
-    end,
-  },
-}
-```
+    ```bash
+    # 使用 Cargo 安装
+    cargo install --locked yazi-fm yazi-cli
+    # 或用 APT 包管理器
+    sudo apt install -y yazi
+    # Windows / Scoop 实测走 release zip 最稳（extras bucket 国内网络容易 broken）：
+    scoop install yazi
+    ```
 
-效果：
+2. 在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`yazi.lua`的文件，并在其中输入如下代码：
 
-![ranger 旧截图（对比用）](./img/ranger.png)
+    ```lua
+    -- lua/user/plugins/yazi.lua
 
-> 旧图保留以便对比 yazi 与 ranger 的视觉差异；`<M-o>` / `<M-+>` / `<M-->` 快捷键沿用。
+    return {
+        {
+            "mikavilpas/yazi.nvim",
+            version = "*",
+            event = "VeryLazy",
+
+            -- 没有安装 Yazi 二进制时不加载插件
+            enabled = function()
+                return vim.fn.executable("yazi") == 1
+            end,
+
+            dependencies = {
+                { "nvim-lua/plenary.nvim", lazy = true },
+            },
+
+            keys = {
+                {
+                    "<leader>e",
+                    "<cmd>Yazi<cr>",
+                    desc = "打开 Yazi",
+                },
+                {
+                    "<leader>E",
+                    "<cmd>Yazi cwd<cr>",
+                    desc = "打开工作目录",
+                },
+                {
+                    "<c-up>",
+                    "<cmd>Yazi toggle<cr>",
+                    desc = "恢复 Yazi",
+                },
+            },
+
+            opts = {
+                open_for_directories = true,
+
+                keymaps = {
+                    show_help = "<f1>",
+                },
+            },
+
+            init = function()
+                -- 禁用 netrw，让 Yazi 接管目录浏览
+                vim.g.loaded_netrwPlugin = 1
+            end,
+        },
+    }
+    ```
+
+3. 同样的，考虑到我们之前已经在`init.lua`文件中注册好了`yazi.nvim`插件，所以这里只需要在保存上述文件后重启 Neovim，并执行`:Yazi`命令即可打开文件管理器，效果如图 8 所示。
+
+    ![Yazi 文件管理器效果](./img/yazi.png)
+
+    **图 8** Yazi 文件管理器效果
+
+    > [!NOTE] 我在这里保留了基于`ranger`设置的旧图，以便对比 yazi 与 ranger 的视觉差异。
+    >
+    > ![ranger 旧截图（对比用）](./img/ranger.png)
 
 ### 5.5 Markdown 预览：markdown-preview.nvim
 
-`iamcco/markdown-preview.nvim` 在社区里仍是事实标准，迁移到 lazy 之后配置无大变化：
+插件`iamcco/markdown-preview.nvim`在 Vim/Neovim 社区里仍是事实标准，迁移到 lazy 之后的配置方式无太大变化，具体步骤如下。
 
-```lua
--- lua/user/plugins/markdown.lua
-return {
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = "markdown",
-    -- 注意：原来用 `build = function() vim.fn["mkdp#util#install"]() end`
-    -- 会在 lazy 还在 clone 阶段（runtimepath 还没设置）就调用，必报
-    -- `Vim:E117: Unknown function: mkdp#util#install`。
-    -- 改用 `init` + `vim.schedule` 推迟到插件 source 完成后再装。
-    init = function()
-      vim.schedule(function()
-        pcall(vim.fn["mkdp#util#install"])
-      end)
-    end,
-  },
-}
-```
+1. 在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`markdown.lua`的文件，并在其中输入如下代码：
 
-使用：
+    ```lua
+    -- lua/user/plugins/markdown.lua
 
-```vim
-:MarkdownPreview       " 打开预览
-:MarkdownPreviewStop   " 关闭预览
-```
+    return {
+        {
+            "iamcco/markdown-preview.nvim",
+
+            cmd = {
+                "MarkdownPreview",
+                "MarkdownPreviewStop",
+                "MarkdownPreviewToggle",
+            },
+
+            ft = "markdown",
+
+            build = function()
+                vim.fn["mkdp#util#install"]()
+            end,
+        },
+    }
+    ```
+
+2. 同样的，考虑到我们之前已经在`init.lua`文件中注册好了`markdown-preview.nvim`插件，所以这里只需要在保存上述文件后重启 Neovim，然后通过执行如下命令即可使用该插件了 。
+
+    ```vim
+    :MarkdownPreview       " 打开预览
+    :MarkdownPreviewStop   " 关闭预览
+    :MarkdownPreviewToggle " 切换预览
+    ```
 
 > [!WARNING] 维护停滞风险
 >
@@ -1211,7 +1242,7 @@ require("lualine").setup({
 
 状态栏最终仍能显示（fallback 生效），但每次启动都有提示，`:messages` / `:checkhealth` 里也会留下噪音。
 
-**修法 A（推荐）：用 catppuccin 的色板手工拼 theme table**
+**修法 A（推荐）：用 catppuccin 的色板手工拼 theme table**：
 
 `lualine` 的 `theme` 参数除了字符串，也接受 table：
 
@@ -1246,14 +1277,14 @@ require("lualine").setup({
 
 完整 spec 见 §5.3。
 
-**修法 B：改用 lualine 内置主题**
+**修法 B：改用 lualine 内置主题**：
 
 ```lua
 options = { theme = "auto" }   -- 从当前 colorscheme 推断，最省事
 options = { theme = "nord" }   -- 或挑一个内置主题名
 ```
 
-**验证**
+**验证**：
 
 ```vim
 :LualineNotices    " 应为空
@@ -1274,6 +1305,7 @@ options = { theme = "nord" }   -- 或挑一个内置主题名
 
 ```lua
 -- ~/.config/nvim/init.lua
+
 require("user.lazy")
 require("user.options")
 ```
@@ -1281,6 +1313,7 @@ require("user.options")
 ```lua
 -- ~/.config/nvim/lua/user/options.lua
 -- 全局选项
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
