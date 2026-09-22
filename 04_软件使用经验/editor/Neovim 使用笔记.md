@@ -496,29 +496,39 @@ return {
 
         -- LSP server 配置
         {
-            "neovim/nvim-lspconfig",
+            -- LSP server 配置（Neovim 0.12 原生 API，零外部 plugin 依赖）
+            -- 详见上方"架构关系"段：vim.lsp.config + vim.lsp.enable 是当前推荐做法。
+            -- cmd 路径依赖系统 PATH，安装方式见本节步骤 2 的 bash 块。
             event = {
                 "BufReadPre",
                 "BufNewFile",
             },
 
             config = function()
-                -- nvim-lspconfig 提供 server 的默认配置，
-                -- Neovim 0.11+ 使用 vim.lsp.config / vim.lsp.enable。
-                
-                require("lspconfig").pyright.setup({})
-                require("lspconfig").clangd.setup({})
-                require("lspconfig").lua_ls.setup({})
-                require("lspconfig").bashls.setup({})
-
-                vim.lsp.config("jsonls", {
-                    cmd = {
-                        "vscode-json-language-server",
-                        "--stdio",
-                    },
+                vim.lsp.config("pyright", {
+                    cmd = { "pyright-langserver", "--stdio" },
+                    filetypes = { "python" },
                 })
-
-                require("lspconfig").yamlls.setup({})
+                vim.lsp.config("clangd", {
+                    cmd = { "clangd" },
+                    filetypes = { "c", "cpp" },
+                })
+                vim.lsp.config("lua_ls", {
+                    cmd = { "lua-language-server" },
+                    filetypes = { "lua" },
+                })
+                vim.lsp.config("bashls", {
+                    cmd = { "bash-language-server", "start" },
+                    filetypes = { "sh", "bash" },
+                })
+                vim.lsp.config("jsonls", {
+                    cmd = { "vscode-json-language-server", "--stdio" },
+                    filetypes = { "json", "jsonc" },
+                })
+                vim.lsp.config("yamlls", {
+                    cmd = { "yaml-language-server", "--stdio" },
+                    filetypes = { "yaml", "yaml.dockerfile" },
+                })
 
                 vim.lsp.enable({
                     "pyright",
@@ -567,6 +577,14 @@ return {
     ```
 
     在安装完 LSP server 之后，需要重启 Neovim，并执行`:Lazy update`命令，才能使 LSP server 生效。
+
+    > [!WARNING] cmd 路径必须在系统 PATH 中
+    >
+    > 上面 `vim.lsp.config(...)` 中的 cmd 字符串（如 `"pyright-langserver"`、`"clangd"`）依赖 PATH 找得到：
+    > - Windows 上 `pip install --user pyright` 默认装到 `%APPDATA%\Python\Python3x\Scripts`（不会自动加 PATH），可在 PowerShell 中 `Get-Command pyright-langserver` 验证；找不到就把上述路径手动加到用户 PATH（设置 → 系统 → 环境变量）。
+    > - Linux / macOS 上 `pip install --user` 会装到 `~/.local/bin`，需确保 `~/.local/bin` 在 PATH（多数发行版默认在）。
+    > - `scoop install llvm` / `scoop install lua-language-server` 等会自动把 `~/scoop/shims` 加到 PATH（见 §3）。
+    > - `npm i -g ...` 默认装到 npm 全局 bin（Node 22 LTS 默认 `%APPDATA%\npm` 或 `~/.npm-global`，已在 PATH）。
 
 3. 如果上述操作一切顺利，我们现在如果打开一个 Python 文件，并在其中输入一些代码，就看到该插件提供的代码补全功能了，如图 6 所示。
 
@@ -1029,26 +1047,34 @@ lspconfig.jsonls.setup({
 
 ### Q13b. 报 `cmd: expected function or table with executable command, got nil`
 
-`vim.lsp.config + vim.lsp.enable` 才是当前推荐做法（详见 §5.2 开头"架构关系"）。但如果直接在 spec 里写 `vim.lsp.config("pyright", {})` 会失败——Neovim 0.12 严格校验 `cmd` 不能为空，且**不会**自动从 lspconfig 拿 default。
-
-0.12 下两种走法等价：
+`vim.lsp.config + vim.lsp.enable` 是当前推荐做法（详见 §5.2 开头"架构关系"）。但如果直接写 `vim.lsp.config("pyright", {})`，0.12 会严格校验 `cmd` 不能为空——它**不会**自动从 lspconfig 拿 default。
 
 ```lua
--- 走法 A：直接用内置 API（cmd 必须显式填）
-vim.lsp.config("pyright", { cmd = { "pyright-langserver", "--stdio" } })
-vim.lsp.enable({ "pyright" })
-
--- 走法 B：通过 lspconfig.<name>.setup({}) 拿 default config
---（v3.0 之前的过渡兼容入口，等价于走法 A 但更省 cmd 字段）
-require("lspconfig").pyright.setup({})
+-- 错误示例：cmd 字段为空
+vim.lsp.config("pyright", {})  -- 启动时报 E5113
 ```
 
-> [!NOTE] 0.12 的 lspconfig 状态
+修复方法：显式填 `cmd`：
+
+```lua
+vim.lsp.config("pyright", { cmd = { "pyright-langserver", "--stdio" } })
+vim.lsp.enable({ "pyright" })
+```
+
+> [!NOTE] 从旧写法迁移
 >
-> - 被 deprecated 的是 `require('lspconfig')` 这个**旧 framework 层**（会打印 `Feature will be removed in nvim-lspconfig v3.0.0` 警告），**nvim-lspconfig 插件本身没有 deprecated**。
-> - `lspconfig.<name>.setup({})` 是 v3.0 之前的**过渡期兼容入口**，**新代码应当直接用 `vim.lsp.config + vim.lsp.enable`**。
-> - 0.12 已经移除了 `require("lspconfig.server_configurations")` 模块——别再想"手 merge default config"那条退路。
-> - 版本要求：**Neovim ≥ 0.11.3**（0.10 支持即将移除）。
+> 旧写法 `require("lspconfig").<name>.setup({})` 会自动取 cmd default（v2.x 仍可用，但 v3.0 之后将被移除）：
+>
+> ```lua
+> -- 旧写法（v2.x 兼容入口，等价于上面的新写法但自动补全 cmd）
+> require("lspconfig").pyright.setup({})
+> ```
+>
+> `lspconfig.<name>.setup({})` 是 v2.x 兼容入口。**v3.0 之后这个写法会被移除**——届时所有写法都必须显式填 cmd。
+>
+> - 被 deprecated 的是 `require('lspconfig')` 这个**旧 framework 层**（会打印 `Feature will be removed in v3.0.0` 警告），**nvim-lspconfig 插件本身没有 deprecated**
+> - 0.12 已经移除了 `require("lspconfig.server_configurations")` 模块——别再想"手 merge default config"那条退路
+> - 版本要求：**Neovim ≥ 0.11.3**（0.10 支持即将移除）
 
 ### Q14. `mkdp#util#install` 不存在 / `Vim:E117`
 
