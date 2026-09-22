@@ -242,17 +242,19 @@ lazy.nvim 支持将插件配置拆分到多个 Lua 文件中。通常可以按�
 
 return {
     {
-        "nvim-lualine/lualine.nvim",                           -- 插件名
-        event = "VeryLazy",                                    -- 绑定的事件
-        dependencies = { "nvim-tree/nvim-web-devicons" },      -- 依赖项
-        opts = {
-            options = {                                        -- 配置项列表
-                theme = "auto",                                -- 主题
-            },
-        },
+        "nvim-lualine/lualine.nvim", -- 插件名
+        event = "VeryLazy", -- 绑定的事件
+        dependencies = { "nvim-tree/nvim-web-devicons" }, -- 依赖项
+
+        config = function()
+            require("lualine").setup({
+                options = {
+                    theme = "auto", -- 主题
+                },
+            })
+        end,
     },
-}
-```
+}```
 
 在配置好所有的插件之后，我们就可以将这些配置文件交给`lua/user/plugins/init.lua`这个文件统一负责加载。例如下面是我目前所使用的插件，关于这些插件的具体作用和配置方式，稍后会在第 5 节中做详细介绍：
 
@@ -609,17 +611,20 @@ return {
 
     ```lua
     -- lua/user/plugins/lualine.lua
-
+    
     return {
         {
-            "nvim-lualine/lualine.nvim",                           -- 插件名
-            event = "VeryLazy",                                    -- 绑定的事件
-            dependencies = { "nvim-tree/nvim-web-devicons" },      -- 依赖项
-            opts = {
-                options = {                                        -- 配置项列表
-                    theme = "auto",                                -- 使用默认主题
-                },
-            },
+            "nvim-lualine/lualine.nvim",
+            event = "VeryLazy",
+            dependencies = { "nvim-tree/nvim-web-devicons" },
+
+            config = function()
+                require("lualine").setup({
+                    options = {
+                        theme = "auto",
+                    },
+                })
+            end,
         },
     }
     ```
@@ -791,24 +796,33 @@ return {
 
 ### 5.6 启动页：alpha-nvim
 
-旧版的 `mhinz/vim-startify` 已多年未维护，社区主流切换到 alpha-nvim：
+该插件主要用于在 Neovim 启动时显示一个启动页，类似于 VS Code 的欢迎页。具体配置方法如下：
 
-```lua
--- lua/user/plugins/alpha.lua
-return {
-  {
-    "goolord/alpha-nvim",
-    event = "VimEnter",
-    config = function()
-      require("alpha").setup(require("alpha.themes.startify").config)
-    end,
-  },
-}
-```
+1. 在`~/.config/nvim/lua/user/plugins/`目录下创建一个名为`alpha.lua`的文件，并在其中输入如下代码：
 
-效果：
+    ```lua
+    -- lua/user/plugins/alpha.lua
 
-![vim-startify 旧截图（对比用）](./img/vim-startify.png)
+    return {
+        {
+            "goolord/alpha-nvim",
+            event = "VimEnter",
+            config = function()
+                require("alpha").setup(require("alpha.themes.startify").config)
+            end,
+        },
+    }
+    ```
+
+2. 同样的，考虑到我们之前已经在`init.lua`文件中注册好了`alpha-nvim`插件，所以这里只需要在保存上述文件后重启 Neovim，即可看到启动页，效果如图 9 所示。
+
+    ![alpha-nvim 启动页效果](./img/alpha-nvim.png)
+
+    **图 9** alpha-nvim 启动页效果
+
+    > [!NOTE] 我在这里保留了基于`startify`设置的旧图，以便对比 alpha-nvim 与 startify 的视觉差异。
+    >
+    > ![startify 旧截图（对比用）](./img/vim-startify.png)
 
 ## 6. 常见问题
 
