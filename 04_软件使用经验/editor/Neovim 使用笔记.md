@@ -46,6 +46,25 @@ categories: [命令行工具]
   - [5.5 Markdown 预览：markdown-preview.nvim](#55-markdown-预览markdown-previewnvim)
   - [5.6 启动页：alpha-nvim](#56-启动页alpha-nvim)
 - [6. 常见问题](#6-常见问题)
+  - [Q1. `:LspInfo` 显示 `No client` / 跳不到定义](#q1-lspinfo-显示-no-client--跳不到定义)
+  - [Q2. `:checkhealth` 报 Python provider 缺失](#q2-checkhealth-报-python-provider-缺失)
+  - [Q3. lazy.nvim 安装时报 `failed to clone`](#q3-lazynvim-安装时报-failed-to-clone)
+  - [Q4. LSP 启动太慢](#q4-lsp-启动太慢)
+  - [Q5. yazi 启动报 `command not found: yazi`](#q5-yazi-启动报-command-not-found-yazi)
+  - [Q6. markdown 预览空白 / 中文乱码](#q6-markdown-预览空白--中文乱码)
+  - [Q7. Neovim 如何升级到 0.11/0.12+](#q7-neovim-如何升级到-011012)
+  - [Q8. `:Lazy` 提示某插件加载报错](#q8-lazy-提示某插件加载报错)
+  - [Q9. `lazy.nvim` clone 报 `Repository not found: .../nvim-web-devicon.git`](#q9-lazynvim-clone-报-repository-not-found--nvim-web-devicongit)
+  - [Q10. `require('nvim-treesitter.configs') not found`](#q10-requirenvim-treesitterconfigs-not-found)
+  - [Q11. `options.lua:35: '=' expected near 'plugin'`](#q11-optionslua35--expected-near-plugin)
+  - [Q12. `module 'cmp' not found` / `cmp_luasnip` after/plugin 失败](#q12-module-cmp-not-found--cmp_luasnip-afterplugin-失败)
+  - [Q13. `:LspInfo` 报 `jsonls: spawn: not found`](#q13-lspinfo-报-jsonls-spawn-not-found)
+  - [Q13b. 自定义 LSP 配置 vs 使用 nvim-lspconfig 内置 defaults](#q13b-自定义-lsp-配置-vs-使用-nvim-lspconfig-内置-defaults)
+  - [Q14. `mkdp#util#install` 不存在 / `Vim:E117`](#q14-mkdputilinstall-不存在--vime117)
+  - [Q15. Windows / Scoop 上跑本笔记配置要做的额外步骤](#q15-windows--scoop-上跑本笔记配置要做的额外步骤)
+  - [Q16. `nvim --headless` 验证时 LSP clients 一直为 0，但 GUI 终端 nvim 里能正常 attach](#q16-nvim--headless-验证时-lsp-clients-一直为-0但-gui-终端-nvim-里能正常-attach)
+  - [Q17. nvim 启动日志被 lspconfig deprecation warning + LSP stderr 误报刷屏](#q17-nvim-启动日志被-lspconfig-deprecation-warning--lsp-stderr-误报刷屏)
+  - [Q18. 启动弹 `lualine: There are some issues with your config`](#q18-启动弹-lualine-there-are-some-issues-with-your-config)
 - [7. 附录：完整配置骨架](#7-附录完整配置骨架)
 
 ## 1. 学习规划
@@ -434,6 +453,8 @@ return {
 
     **图 5** 代码的折叠效果
 
+> 参考：[nvim-treesitter 官方 README](https://github.com/nvim-treesitter/nvim-treesitter)、[nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+
 ### 5.2 编程语言支持：LSP
 
 这款插件主要用于提供代码补全、跳转、引用、重命名、code action 等功能，具体配置与使用方法如下：
@@ -498,7 +519,7 @@ return {
         {
             -- LSP server 配置（Neovim 0.11+ 原生 API）
             -- nvim-lspconfig 在这里仅作为"server defaults 提供者"（lsp/*.lua），不用 setup()。
-            -- 详见上方"架构关系"段：vim.lsp.enable 是入口，vim.lsp.config 用于自定义 settings。
+            -- 详见下方 Q13b 节"架构关系（必读）"段：vim.lsp.enable 是入口，vim.lsp.config 用于自定义 settings。
             "neovim/nvim-lspconfig",
             event = {
                 "BufReadPre",
@@ -580,54 +601,7 @@ return {
 
     **图 6** 代码补全效果
 
-> [!NOTE] 架构关系（必读）
->
-> **当前官方架构**：Neovim 0.11 起 LSP 已内置到核心。`nvim-lspconfig` 提供的是"**LSP server configurations 集合**"——每个 server 的 default 配置写在 `lsp/<server>.lua`（含 cmd / filetypes / root_dir / settings）。**`vim.lsp.config()` 会自动从 runtimepath 上的 `lsp/` 目录发现并合并这些 defaults**。
->
-> **三个原语**：
->
-> - `vim.lsp.enable(name)` —— 启动某个 server（用 lspconfig defaults + 你自己的 settings）
-> - `vim.lsp.config(name, opts)` —— 自定义某个 server 的 settings（与 defaults **合并**，不是"取代"）
-> - `require('lspconfig').<name>.setup({})` —— 旧 framework 写法，**已 deprecated**，v3.0 将移除
->
-> **Quickstart**（官方 README）：
->
-> ```lua
-> vim.lsp.enable('pyright')
-> ```
->
-> 不需要 `vim.lsp.config`，因为 lspconfig 自动提供所有 defaults（cmd、filetypes、root_dir）。
->
-> **自定义示例**：
->
-> ```lua
-> vim.lsp.config('pyright', {
->   settings = {
->     python = { analysis = { typeCheckingMode = "basic" } },
->   },
-> })
-> vim.lsp.enable('pyright')
-> ```
->
-> **Config 优先级**（从低到高）：
->
-> 1. `lsp/` 在 runtimepath 上（nvim-lspconfig 等 plugin 提供）
-> 2. `after/lsp/` 在 runtimepath 上（用户扩展）
-> 3. `vim.lsp.config()` 调用（最高优先级）
->
-> **关于 cmd**：绝大多数 lspconfig 提供 default cmd，不必显式填。只有 PATH 找不到的 server（如 `jdtls` / `elixirls`）才需要手动设：
->
-> ```lua
-> vim.lsp.config('jdtls', { cmd = { '/path/to/jdtls' } })
-> vim.lsp.enable('jdtls')
-> ```
->
-> **lspconfig 状态**：
->
-> - 被 deprecated 的是 `require('lspconfig')` 这个**旧 framework 层**（会打 `Feature will be removed in v3.0.0` 警告），**nvim-lspconfig 插件本身没有 deprecated**。
-> - v3 的主要变化是**删除旧 framework**，**新 API 在 v2.x 上已经是当前推荐**（不是 v3 才引入）。
-> - 0.12 已经移除了 `require("lspconfig.server_configurations")` 模块——别再想"手 merge default config"那条退路。
-> - 版本要求：**Neovim ≥ 0.11.3**（0.10 支持即将移除）。
+> 参考：[nvim-lspconfig 官方 README](https://github.com/neovim/nvim-lspconfig)、[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)、[trouble.nvim](https://github.com/folke/trouble.nvim)
 
 ### 5.3 主题设置：lualine + catppuccin
 
@@ -700,6 +674,8 @@ return {
     > [!NOTE] 我在这里保留了基于`vim-snazzy`设置的旧图，以便对比主题切换前后的视觉变化。
     >
     > ![vim-snazzy 旧截图（对比用）](./img/vim-snazzy.png)
+
+> 参考：[lualine.nvim 官方 README](https://github.com/nvim-lualine/lualine.nvim)、[catppuccin/nvim](https://github.com/catppuccin/nvim)
 
 ### 5.4 文件管理器：yazi
 
@@ -780,6 +756,8 @@ return {
     >
     > ![ranger 旧截图（对比用）](./img/ranger.png)
 
+> 参考：[yazi 官方仓库](https://github.com/sxyazi/yazi)、[yazi.nvim](https://github.com/mikavilpas/yazi.nvim)
+
 ### 5.5 Markdown 预览：markdown-preview.nvim
 
 插件`iamcco/markdown-preview.nvim`在 Vim/Neovim 社区里仍是事实标准，迁移到 lazy 之后的配置方式无太大变化，具体步骤如下。
@@ -820,6 +798,8 @@ return {
 >
 > `iamcco/markdown-preview.nvim` 自 2024-07 之后未再发布新版本（撰写时已 2 年），目前仍可正常使用但已缺乏新功能与适配。如果你不想开浏览器、想在 Neovim buffer 里直接渲染 Markdown（带加粗、斜体、代码块等格式高亮），可以用 `MeanderingProgrammer/render-markdown.nvim`（与 markdown-preview 是不同范式，二选一即可）；否则继续用 iamcco 的版本问题不大。
 
+> 参考：[markdown-preview.nvim 官方 README](https://github.com/iamcco/markdown-preview.nvim)
+
 ### 5.6 启动页：alpha-nvim
 
 该插件主要用于在 Neovim 启动时显示一个启动页，类似于 VS Code 的欢迎页。具体配置方法如下：
@@ -849,6 +829,8 @@ return {
     > [!NOTE] 我在这里保留了基于`startify`设置的旧图，以便对比 alpha-nvim 与 startify 的视觉差异。
     >
     > ![startify 旧截图（对比用）](./img/vim-startify.png)
+
+> 参考：[alpha-nvim 官方仓库](https://github.com/goolord/alpha-nvim)
 
 ## 6. 常见问题
 
@@ -1101,6 +1083,55 @@ vim.lsp.config("myserver", {})
 ```lua
 vim.print(vim.lsp.config["pyright"])   -- 看 nvim-lspconfig 给 pyright 合并的最终 config
 ```
+
+> [!NOTE] 架构关系（必读）
+>
+> **当前官方架构**：Neovim 0.11 起 LSP 已内置到核心。`nvim-lspconfig` 提供的是"**LSP server configurations 集合**"——每个 server 的 default 配置写在 `lsp/<server>.lua`（含 cmd / filetypes / root_dir / settings）。**`vim.lsp.config()` 会自动从 runtimepath 上的 `lsp/` 目录发现并合并这些 defaults**。
+>
+> **三个原语**：
+>
+> - `vim.lsp.enable(name)` —— 启动某个 server（用 lspconfig defaults + 你自己的 settings）
+> - `vim.lsp.config(name, opts)` —— 自定义某个 server 的 settings（与 defaults **合并**，不是"取代"）
+> - `require('lspconfig').<name>.setup({})` —— 旧 framework 写法，**已 deprecated**，v3.0 将移除
+>
+> **Quickstart**（官方 README）：
+>
+> ```lua
+> vim.lsp.enable('pyright')
+> ```
+>
+> 不需要 `vim.lsp.config`，因为 lspconfig 自动提供所有 defaults（cmd、filetypes、root_dir）。
+>
+> **自定义示例**：
+>
+> ```lua
+> vim.lsp.config('pyright', {
+>   settings = {
+>     python = { analysis = { typeCheckingMode = "basic" } },
+>   },
+> })
+> vim.lsp.enable('pyright')
+> ```
+>
+> **Config 优先级**（从低到高）：
+>
+> 1. `lsp/` 在 runtimepath 上（nvim-lspconfig 等 plugin 提供）
+> 2. `after/lsp/` 在 runtimepath 上（用户扩展）
+> 3. `vim.lsp.config()` 调用（最高优先级）
+>
+> **关于 cmd**：绝大多数 lspconfig 提供 default cmd，不必显式填。只有 PATH 找不到的 server（如 `jdtls` / `elixirls`）才需要手动设：
+>
+> ```lua
+> vim.lsp.config('jdtls', { cmd = { '/path/to/jdtls' } })
+> vim.lsp.enable('jdtls')
+> ```
+>
+> **lspconfig 状态**：
+>
+> - 被 deprecated 的是 `require('lspconfig')` 这个**旧 framework 层**（会打 `Feature will be removed in v3.0.0` 警告），**nvim-lspconfig 插件本身没有 deprecated**。
+> - v3 的主要变化是**删除旧 framework**，**新 API 在 v2.x 上已经是当前推荐**（不是 v3 才引入）。
+> - 0.12 已经移除了 `require("lspconfig.server_configurations")` 模块——别再想"手 merge default config"那条退路。
+> - 版本要求：**Neovim ≥ 0.11.3**（0.10 支持即将移除）。
 
 > [!NOTE] 从旧写法迁移
 >
