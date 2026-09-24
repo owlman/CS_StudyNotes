@@ -11,7 +11,7 @@ categories: [命令行工具]
 >
 > 这篇笔记用于记录本人在使用 Neovim 这款文本编辑器过程中的心得体会，存储于个人的[计算机专业笔记库](https://github.com/owlman/CS_Studynotes) 中并长期维护。
 >
-> [!IMPORTANT] 2026-05 大更新
+> [!IMPORTANT] 2026-09 大更新
 >
 > 自 2020 年首次撰写这篇笔记以来，它所涉及的工具链已经迭代了好几代，本轮修改将针对这些变化进行一次技术同步，主要内容如下：
 >
@@ -1351,7 +1351,7 @@ end
 - **LSP**：clangd 仍 attach、semanticTokens、publishDiagnostics 全流程 status 0 完成
 
 > 长期：等 nvim-lspconfig v3 出来后改用纯 `vim.lsp.config / vim.lsp.enable` 路径，**绕过 lspconfig 框架**。届时 `vim.deprecate` 静音和 monkey-patch 都可以撤掉。
-
+>
 > [!WARNING] 仅用于临时排查/个人环境，不建议作为长期配置
 >
 > 这段 monkey-patch 实际上是在**全局关闭 Neovim 的 deprecation notification**（`vim.deprecate`）+ 改写 `vim.lsp.log.error` 的行为。它**不会破坏功能**，但会：
