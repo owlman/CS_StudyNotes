@@ -27,6 +27,7 @@ categories: [命令行工具]
 
 ## 目录
 
+- [目录](#目录)
 - [1. 学习规划](#1-学习规划)
 - [2. 背景知识](#2-背景知识)
   - [2.1 Neovim 起源](#21-neovim-起源)
@@ -54,7 +55,7 @@ categories: [命令行工具]
   - [Q6. markdown 预览空白 / 中文乱码](#q6-markdown-预览空白--中文乱码)
   - [Q7. Neovim 如何升级到 0.11/0.12+](#q7-neovim-如何升级到-011012)
   - [Q8. `:Lazy` 提示某插件加载报错](#q8-lazy-提示某插件加载报错)
-  - [Q9. `lazy.nvim` clone 报 `Repository not found: .../nvim-web-devicon.git`](#q9-lazynvim-clone-报-repository-not-found--nvim-web-devicongit)
+  - [Q9. `lazy.nvim` clone 报 `Repository not found: .../nvim-web-devicon.git`](#q9-lazynvim-clone-报-repository-not-found-nvim-web-devicongit)
   - [Q10. `require('nvim-treesitter.configs') not found`](#q10-requirenvim-treesitterconfigs-not-found)
   - [Q11. `options.lua:35: '=' expected near 'plugin'`](#q11-optionslua35--expected-near-plugin)
   - [Q12. `module 'cmp' not found` / `cmp_luasnip` after/plugin 失败](#q12-module-cmp-not-found--cmp_luasnip-afterplugin-失败)
@@ -62,8 +63,13 @@ categories: [命令行工具]
   - [Q13b. 自定义 LSP 配置 vs 使用 nvim-lspconfig 内置 defaults](#q13b-自定义-lsp-配置-vs-使用-nvim-lspconfig-内置-defaults)
   - [Q14. `mkdp#util#install` 不存在 / `Vim:E117`](#q14-mkdputilinstall-不存在--vime117)
   - [Q15. Windows / Scoop 上跑本笔记配置要做的额外步骤](#q15-windows--scoop-上跑本笔记配置要做的额外步骤)
-  - [Q16. `nvim --headless` 验证时 LSP clients 一直为 0，但 GUI 终端 nvim 里能正常 attach](#q16-nvim--headless-验证时-lsp-clients-一直为-0但-gui-终端-nvim-里能正常-attach)
+    - [升 Neovim 时踩到的坑：`scoop update` 报 hash 校验失败](#升-neovim-时踩到的坑scoop-update-报-hash-校验失败)
+    - [进阶：bucket clone 中断导致 broken，如何就地修复](#进阶bucket-clone-中断导致-broken如何就地修复)
+  - [Q16. `nvim --headless` 验证时 LSP clients 一直为 0，但 GUI 终端 nvim 里能正常 attach](#q16-nvim---headless-验证时-lsp-clients-一直为-0但-gui-终端-nvim-里能正常-attach)
   - [Q17. nvim 启动日志被 lspconfig deprecation warning + LSP stderr 误报刷屏](#q17-nvim-启动日志被-lspconfig-deprecation-warning--lsp-stderr-误报刷屏)
+    - [问题 1：lspconfig 0.12 deprecation warning + stack traceback](#问题-1lspconfig-012-deprecation-warning--stack-traceback)
+    - [问题 2：`~/.local/share/nvim-data/lsp.log` 把所有 LSP server stderr 标 `[ERROR]`](#问题-2localsharenvim-datalsplog-把所有-lsp-server-stderr-标-error)
+    - [终极修法（写到 `lua/user/plugins/lsp.lua` 顶部）](#终极修法写到-luauserpluginslsplua-顶部)
   - [Q18. 启动弹 `lualine: There are some issues with your config`](#q18-启动弹-lualine-there-are-some-issues-with-your-config)
 - [7. 附录：完整配置骨架](#7-附录完整配置骨架)
 
@@ -87,6 +93,8 @@ categories: [命令行工具]
 2014 年，巴西程序员 Thiago de Arruda Padilha（aka tarruda）曾经向 Vim 开源编辑器项目递交了两大补丁，其中包含了对 Vim 的架构进行大幅调整的建议，结果遭到了 Vim 作者 Bram Moolenaar 的拒绝。后者认为对于 Vim 这样一个成熟的项目进行如此大的改变风险太高。但或许在 tarruda 看来，Vim 这个上个世纪 90 年代初的产物，至今已经 20 多年了，该项目中不仅遗留了大量的历史痕迹，而且该项目的管理层如今在程序的维护、Bug 的修复、以及新特性的添加等问题上的态度都在变得越来越僵化，且难以与时俱进。
 
 总而言之，基于对 Vim 项目的不满，并致力于打造一款面向 21 世纪的代码编辑器，tarruda 先生以众筹资金的方式发起了 Vim 的这个 fork 项目：Neovim。在这里，Neo 这个单词表达的是其作者对 Vim 编辑器在这个新时代的重生期待。
+
+> 延伸阅读：[Wikipedia: Neovim](https://en.wikipedia.org/wiki/Neovim)（含项目起源、维护权交接等历史背景）
 
 ### 2.2 Neovim 现状
 
@@ -601,7 +609,11 @@ return {
 
     **图 6** 代码补全效果
 
-> 参考：[nvim-lspconfig 官方 README](https://github.com/neovim/nvim-lspconfig)、[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)、[trouble.nvim](https://github.com/folke/trouble.nvim)
+> 参考：[nvim-lspconfig 官方 README](https://github.com/neovim/nvim-lspconfig)、[trouble.nvim](https://github.com/folke/trouble.nvim)
+>
+> [!NOTE] 关于 nvim-cmp
+>
+> 本笔记还在用 [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)，它截至 2026-09 仍在维护（最近 push 2026-07-09，详见 README 第 1 条订阅的 [breaking changes issue #231](https://github.com/hrsh7th/nvim-cmp/issues/231)）。如果想用更新一些的方案，社区流行的另一选项是 [Saghen/blink.cmp](https://github.com/Saghen/blink.cmp)（6.5k+ stars，范式与 nvim-cmp 略有差异），两者按自己需求选。
 
 ### 5.3 主题设置：lualine + catppuccin
 
@@ -797,7 +809,7 @@ return {
 > [!WARNING] 维护停滞风险
 >
 > `iamcco/markdown-preview.nvim` 自 2024-07 之后未再发布新版本（撰写时已 2 年），目前仍可正常使用但已缺乏新功能与适配。如果你不想开浏览器、想在 Neovim buffer 里直接渲染 Markdown（带加粗、斜体、代码块等格式高亮），可以用 `MeanderingProgrammer/render-markdown.nvim`（与 markdown-preview 是不同范式，二选一即可）；否则继续用 iamcco 的版本问题不大。
-
+>
 > 参考：[markdown-preview.nvim 官方 README](https://github.com/iamcco/markdown-preview.nvim)
 
 ### 5.6 启动页：alpha-nvim
@@ -1085,6 +1097,8 @@ vim.print(vim.lsp.config["pyright"])   -- 看 nvim-lspconfig 给 pyright 合并�
 ```
 
 > [!NOTE] 架构关系（必读）
+>
+> **本节出处**：以下概念解释整理自 [nvim-lspconfig README](https://github.com/neovim/nvim-lspconfig) 与 [Neovim 0.11 内置 LSP 帮助文档](https://neovim.io/doc/user/lsp.html)；标注"实测"处为个人环境验证。
 >
 > **当前官方架构**：Neovim 0.11 起 LSP 已内置到核心。`nvim-lspconfig` 提供的是"**LSP server configurations 集合**"——每个 server 的 default 配置写在 `lsp/<server>.lua`（含 cmd / filetypes / root_dir / settings）。**`vim.lsp.config()` 会自动从 runtimepath 上的 `lsp/` 目录发现并合并这些 defaults**。
 >
