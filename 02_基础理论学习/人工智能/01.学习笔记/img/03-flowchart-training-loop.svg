@@ -37,7 +37,7 @@
 
   <g transform="translate(-55, 0)">
     <!-- Title -->
-    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 6. 训练循环流程图：前向 → 损失 → 反向 → 更新 → 评估</text>
+    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 3. 训练循环流程图：前向 → 损失 → 反向 → 更新 → 评估</text>
     <text x="95" y="98" fill="#64748b" font-size="22">神经网络的训练是「前向传播 → 损失计算 → 反向传播 → 参数更新」四步的循环迭代，直至达到停止条件后进入评估与诊断</text>
 
     <!-- ===== Row 1: ① → ⑤ (y center = 260) ===== -->

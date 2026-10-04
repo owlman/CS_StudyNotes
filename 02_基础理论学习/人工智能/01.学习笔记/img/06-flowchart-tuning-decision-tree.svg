@@ -40,7 +40,7 @@
 
   <g transform="translate(-55, 0)">
     <!-- Title -->
-    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 7. 调优决策树：从"效果不理想"到具体调优方向</text>
+    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 6. 调优决策树：从"效果不理想"到具体调优方向</text>
     <text x="95" y="98" fill="#64748b" font-size="22">先按训练集 / 验证集 / 测试集表现把问题分到四类，再统一回到数据、模型、训练三个层面选取具体调优手段</text>
 
     <!-- ===== Row 1: Start + 4 Decisions (y center = 260) ===== -->
