@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1980 920">
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#eef0f2" stroke-width="0.5"/>
+    </pattern>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+    <marker id="arrow-blue" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#0284c7"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#ea580c"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#059669"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="22" markerHeight="8" refX="20" refY="4" orient="auto">
+      <polygon points="0 0, 22 4, 0 8" fill="#64748b"/>
+    </marker>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Kalam:wght@300;400;700&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap');
+      text { font-family: 'JetBrains Mono', 'Noto Sans SC', 'PingFang SC', monospace; }
+      .hw { font-family: 'Kalam', 'Caveat', 'Comic Sans MS', cursive; font-weight: 400; }
+      .hw-bold { font-family: 'Kalam', 'Caveat', 'Comic Sans MS', cursive; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#fafbfc"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
+  <g transform="translate(-55, 0)">
+    <!-- Title -->
+    <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 6. 训练循环流程图：前向 → 损失 → 反向 → 更新 → 评估</text>
+    <text x="95" y="98" fill="#64748b" font-size="22">神经网络的训练是「前向传播 → 损失计算 → 反向传播 → 参数更新」四步的循环迭代，直至达到停止条件后进入评估与诊断</text>
+
+    <!-- ===== Row 1: ① → ⑤ (y center = 260) ===== -->
+    <!-- ① 初始化 -->
+    <g filter="url(#shadow)">
+      <rect x="80" y="180" width="280" height="160" rx="14" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+      <rect x="80" y="180" width="280" height="32" rx="14" fill="#e0f2fe"/>
+      <rect x="80" y="200" width="280" height="12" fill="#e0f2fe"/>
+      <line x1="80" y1="212" x2="360" y2="212" stroke="#0284c7" stroke-width="2.5"/>
+      <text x="220" y="202" fill="#0284c7" font-size="18" font-weight="600" text-anchor="middle">① 初始化</text>
+    </g>
+    <text x="220" y="275" fill="#0f172a" font-size="36" font-weight="700" text-anchor="middle" class="hw-bold">θ₀</text>
+    <text x="220" y="318" fill="#64748b" font-size="16" text-anchor="middle">随机初始化参数</text>
+
+    <!-- ② 前向传播 -->
+    <g filter="url(#shadow)">
+      <rect x="400" y="180" width="280" height="160" rx="14" fill="#ffffff" stroke="#ea580c" stroke-width="2"/>
+      <rect x="400" y="180" width="280" height="32" rx="14" fill="#ffedd5"/>
+      <rect x="400" y="200" width="280" height="12" fill="#ffedd5"/>
+      <line x1="400" y1="212" x2="680" y2="212" stroke="#ea580c" stroke-width="2.5"/>
+      <text x="540" y="202" fill="#ea580c" font-size="18" font-weight="600" text-anchor="middle">② 前向传播</text>
+    </g>
+    <text x="540" y="265" fill="#0f172a" font-size="28" font-weight="700" text-anchor="middle" class="hw-bold">x → f_θ(x)</text>
+    <text x="540" y="298" fill="#0f172a" font-size="16" text-anchor="middle">数据从输入流向输出</text>
+    <text x="540" y="318" fill="#64748b" font-size="14" text-anchor="middle">计算每层隐藏表示</text>
+
+    <!-- ③ 计算损失 -->
+    <g filter="url(#shadow)">
+      <rect x="720" y="180" width="280" height="160" rx="14" fill="#ffffff" stroke="#ea580c" stroke-width="2"/>
+      <rect x="720" y="180" width="280" height="32" rx="14" fill="#ffedd5"/>
+      <rect x="720" y="200" width="280" height="12" fill="#ffedd5"/>
+      <line x1="720" y1="212" x2="1000" y2="212" stroke="#ea580c" stroke-width="2.5"/>
+      <text x="860" y="202" fill="#ea580c" font-size="18" font-weight="600" text-anchor="middle">③ 计算损失</text>
+    </g>
+    <text x="860" y="265" fill="#0f172a" font-size="26" font-weight="700" text-anchor="middle" class="hw-bold">L(f_θ(x), y)</text>
+    <text x="860" y="298" fill="#0f172a" font-size="16" text-anchor="middle">预测与真值的偏差</text>
+    <text x="860" y="318" fill="#64748b" font-size="14" text-anchor="middle">标准化的训练目标</text>
+
+    <!-- ④ 反向传播 -->
+    <g filter="url(#shadow)">
+      <rect x="1040" y="180" width="280" height="160" rx="14" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+      <rect x="1040" y="180" width="280" height="32" rx="14" fill="#fee2e2"/>
+      <rect x="1040" y="200" width="280" height="12" fill="#fee2e2"/>
+      <line x1="1040" y1="212" x2="1320" y2="212" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="1180" y="202" fill="#dc2626" font-size="18" font-weight="600" text-anchor="middle">④ 反向传播</text>
+    </g>
+    <text x="1180" y="265" fill="#0f172a" font-size="28" font-weight="700" text-anchor="middle" class="hw-bold">∇_θ L</text>
+    <text x="1180" y="298" fill="#0f172a" font-size="16" text-anchor="middle">沿链式法则反向求梯度</text>
+    <text x="1180" y="318" fill="#64748b" font-size="14" text-anchor="middle">∂L / ∂θ</text>
+
+    <!-- ⑤ 更新参数 -->
+    <g filter="url(#shadow)">
+      <rect x="1360" y="180" width="280" height="160" rx="14" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+      <rect x="1360" y="180" width="280" height="32" rx="14" fill="#fee2e2"/>
+      <rect x="1360" y="200" width="280" height="12" fill="#fee2e2"/>
+      <line x1="1360" y1="212" x2="1640" y2="212" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="1500" y="202" fill="#dc2626" font-size="18" font-weight="600" text-anchor="middle">⑤ 更新参数</text>
+    </g>
+    <text x="1500" y="265" fill="#0f172a" font-size="26" font-weight="700" text-anchor="middle" class="hw-bold">θ ← θ − η·∇_θ L</text>
+    <text x="1500" y="298" fill="#0f172a" font-size="16" text-anchor="middle">SGD / AdamW 等</text>
+    <text x="1500" y="318" fill="#64748b" font-size="14" text-anchor="middle">沿负梯度方向调整</text>
+
+    <!-- 主流程水平箭头（y=260） -->
+    <line x1="360" y1="260" x2="400" y2="260" stroke="#ea580c" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-orange)"/>
+    <line x1="680" y1="260" x2="720" y2="260" stroke="#ea580c" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-orange)"/>
+    <line x1="1000" y1="260" x2="1040" y2="260" stroke="#dc2626" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-red)"/>
+    <line x1="1320" y1="260" x2="1360" y2="260" stroke="#dc2626" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-red)"/>
+    <!-- ①→② 起点蓝色箭头（强调"开始"） -->
+    <line x1="360" y1="260" x2="395" y2="260" stroke="#0284c7" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-blue)"/>
+
+    <!-- ===== Row 2: ⑥ 判断 (菱形) 在 ⑤ 下方 ===== -->
+    <g filter="url(#shadow)">
+      <polygon points="1500,420 1660,560 1500,700 1340,560" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+      <text x="1500" y="540" fill="#7c3aed" font-size="18" font-weight="700" text-anchor="middle">⑥ 达到停止条件？</text>
+      <text x="1500" y="565" fill="#475569" font-size="14" text-anchor="middle">epoch 上限</text>
+      <text x="1500" y="585" fill="#475569" font-size="14" text-anchor="middle">早停 / 收敛</text>
+    </g>
+
+    <!-- ⑤→⑥ 垂直紫色箭头 -->
+    <line x1="1500" y1="340" x2="1500" y2="420" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-violet)"/>
+
+    <!-- ⑥→② 反馈弧（"否"），从 ⑥ 左上绕过上方回到 ② 底部 -->
+    <path d="M 1380 460 Q 1100 410 800 410 Q 600 410 540 340" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="10,6" marker-end="url(#arrow-gray)"/>
+    <g transform="translate(960, 392)">
+      <rect x="0" y="-12" width="48" height="22" rx="4" fill="rgba(255,255,255,0.95)" stroke="#64748b" stroke-width="1.2"/>
+      <text x="24" y="4" fill="#64748b" font-size="14" font-weight="600" text-anchor="middle">否</text>
+    </g>
+
+    <!-- ===== Row 3: ⑦ 评估 + ⑧ 输出（y center = 750，从左到右） ===== -->
+    <!-- ⑦ 评估与诊断 -->
+    <g filter="url(#shadow)">
+      <rect x="1040" y="660" width="280" height="160" rx="14" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+      <rect x="1040" y="660" width="280" height="32" rx="14" fill="#d1fae5"/>
+      <rect x="1040" y="680" width="280" height="12" fill="#d1fae5"/>
+      <line x1="1040" y1="692" x2="1320" y2="692" stroke="#059669" stroke-width="2.5"/>
+      <text x="1180" y="682" fill="#059669" font-size="18" font-weight="600" text-anchor="middle">⑦ 评估与诊断</text>
+    </g>
+    <text x="1180" y="738" fill="#0f172a" font-size="20" font-weight="700" text-anchor="middle">训练曲线 / 验证指标</text>
+    <text x="1180" y="765" fill="#0f172a" font-size="14" text-anchor="middle">可解释性方法</text>
+    <text x="1180" y="798" fill="#64748b" font-size="14" text-anchor="middle">判断是否过拟合 / 收敛</text>
+
+    <!-- ⑥→⑦ 绿色 "是" 箭头（从 ⑥ 底部斜向下到 ⑦） -->
+    <path d="M 1410 660 Q 1290 690 1320 700" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+    <g transform="translate(1350, 720)">
+      <rect x="0" y="-12" width="48" height="22" rx="4" fill="rgba(255,255,255,0.95)" stroke="#059669" stroke-width="1.2"/>
+      <text x="24" y="4" fill="#059669" font-size="14" font-weight="600" text-anchor="middle">是</text>
+    </g>
+
+    <!-- ⑧ 输出训练好的参数 -->
+    <g filter="url(#shadow)">
+      <rect x="1360" y="660" width="280" height="160" rx="14" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+      <rect x="1360" y="660" width="280" height="32" rx="14" fill="#e0f2fe"/>
+      <rect x="1360" y="680" width="280" height="12" fill="#e0f2fe"/>
+      <line x1="1360" y1="692" x2="1640" y2="692" stroke="#0284c7" stroke-width="2.5"/>
+      <text x="1500" y="682" fill="#0284c7" font-size="18" font-weight="600" text-anchor="middle">⑧ 输出参数</text>
+    </g>
+    <text x="1500" y="745" fill="#0f172a" font-size="36" font-weight="700" text-anchor="middle" class="hw-bold">θ*</text>
+    <text x="1500" y="778" fill="#0f172a" font-size="16" text-anchor="middle">训练好的模型</text>
+    <text x="1500" y="798" fill="#64748b" font-size="14" text-anchor="middle">用于推理与部署</text>
+
+    <!-- ⑦→⑧ 水平绿色箭头 -->
+    <line x1="1320" y1="740" x2="1360" y2="740" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+
+    <!-- ===== Footer ===== -->
+    <g transform="translate(95, 850)">
+      <rect x="0" y="0" width="1770" height="60" rx="14" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="24" y="28" fill="#92400e" font-size="18" font-weight="700">为什么这张图是后续两节的"骨架"？</text>
+      <text x="24" y="50" fill="#0f172a" font-size="16" class="hw">"数学基础 → 演化谱系" 逐个击破骨架中的具体节点；最后回过头来讨论骨架本身的能力边界（优化 ≠ 泛化 / 大模型不收敛 ≠ 效果差）</text>
+    </g>
+  </g>
+</svg>
