@@ -73,15 +73,11 @@
     <line x1="570" y1="366" x2="640" y2="366" class="ppo-neg" />
 
     <!-- 标注 -->
-    <text x="430" y="-25" class="formula" text-anchor="middle" fill="#e74c3c">A_t &gt; 0（偏好当前动作）</text>
+    <text x="430" y="10" class="formula" text-anchor="middle" fill="#e74c3c">A_t &gt; 0（偏好当前动作）</text>
     <text x="430" y="270" class="formula" text-anchor="middle" fill="#2980b9">A_t &lt; 0（不偏好当前动作）</text>
 
     <!-- 关键区域标注 -->
-    <text x="640" y="-130" class="note" fill="#e74c3c">clip 截断：</text>
-    <text x="640" y="-115" class="note" fill="#e74c3c">r 过大不再增加目标</text>
-
-    <text x="640" y="540" class="note" fill="#2980b9">clip 截断：</text>
-    <text x="640" y="555" class="note" fill="#2980b9">r 过小不再降低目标</text>
+    
   </g>
 
   <!-- ===== 底部：公式与 takeaway ===== -->
