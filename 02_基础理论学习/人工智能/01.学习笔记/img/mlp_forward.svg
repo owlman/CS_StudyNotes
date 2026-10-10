@@ -29,7 +29,7 @@
 <g transform="translate(40, 0)">
 
   <!-- Title area -->
-  <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">图 1. 多层感知机的前向传播</text>
+  <text x="95" y="60" fill="#0f172a" font-size="42" font-weight="700">多层感知机的前向传播</text>
   <text x="95" y="98" fill="#64748b" font-size="24">以手写数字识别为例：输入一张 28×28 的灰度图 → 输出"这张图是数字几"</text>
 
   <!-- Layer labels -->

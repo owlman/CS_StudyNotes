@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1980 1080" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <style>
+    .title { font-size: 48px; font-weight: bold; fill: #0f172a; }
+    .subtitle { font-size: 22px; fill: #64748b; }
+    .box-title { font-size: 24px; font-weight: bold; fill: #0f172a; }
+    .box-desc { font-size: 18px; fill: #475569; }
+    .box-emph { font-size: 18px; fill: #475569; font-style: italic; }
+    .q-label { font-size: 21px; font-weight: bold; fill: #7c3aed; }
+    .q-detail { font-size: 18px; fill: #475569; }
+    .a-name { font-size: 21px; font-weight: bold; }
+    .a-emph { font-size: 17px; fill: #475569; font-style: italic; }
+    .legend { font-size: 22px; font-weight: bold; }
+  </style>
+
+  <!-- 标题 -->
+  <text x="60" y="70" class="title">调优决策树：从"效果不理想"到具体调优方向</text>
+  <text x="60" y="110" class="subtitle">先按训练集 / 验证集 / 测试集表现把问题分成四类，再统一回到数据、模型、训练三个层面选取具体调优手段</text>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#334155" />
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#ef4444" />
+    </marker>
+    <marker id="arrow-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#f97316" />
+    </marker>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#3b82f6" />
+    </marker>
+    <marker id="arrow-gray" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <!-- ========== 起点 ========== -->
+  <g transform="translate(60, 180)">
+    <rect width="220" height="140" rx="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="3" />
+    <text x="110" y="50" text-anchor="middle" class="box-title">起点</text>
+    <text x="110" y="100" text-anchor="middle" class="box-title">模型效果</text>
+    <text x="110" y="128" text-anchor="middle" class="box-title">不理想</text>
+  </g>
+
+  <!-- 起点 → Q1 箭头 -->
+  <line x1="280" y1="250" x2="340" y2="250" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrowhead)" />
+
+  <!-- ========== 第一行：4 个 Q 判断框 (紫菱形) ========== -->
+  <!-- Q1 -->
+  <g transform="translate(340, 170)">
+    <polygon points="160,0 320,80 160,160 0,80" fill="#e9d5ff" stroke="#a855f7" stroke-width="2" />
+    <text x="160" y="60" text-anchor="middle" class="q-label">Q1 训练集</text>
+    <text x="160" y="90" text-anchor="middle" class="q-label">表现差？</text>
+    <text x="160" y="120" text-anchor="middle" class="q-detail">欠拟合信号</text>
+  </g>
+
+  <!-- Q2 -->
+  <g transform="translate(720, 170)">
+    <polygon points="160,0 320,80 160,160 0,80" fill="#e9d5ff" stroke="#a855f7" stroke-width="2" />
+    <text x="160" y="60" text-anchor="middle" class="q-label">Q2 验证集</text>
+    <text x="160" y="90" text-anchor="middle" class="q-label">表现差？</text>
+    <text x="160" y="120" text-anchor="middle" class="q-detail">过拟合信号</text>
+  </g>
+
+  <!-- Q3 -->
+  <g transform="translate(1100, 170)">
+    <polygon points="160,0 320,80 160,160 0,80" fill="#e9d5ff" stroke="#a855f7" stroke-width="2" />
+    <text x="160" y="60" text-anchor="middle" class="q-label">Q3 测试集</text>
+    <text x="160" y="90" text-anchor="middle" class="q-label">表现差？</text>
+    <text x="160" y="120" text-anchor="middle" class="q-detail">泛化信号</text>
+  </g>
+
+  <!-- Q4 -->
+  <g transform="translate(1480, 170)">
+    <polygon points="160,0 320,80 160,160 0,80" fill="#e9d5ff" stroke="#a855f7" stroke-width="2" />
+    <text x="160" y="60" text-anchor="middle" class="q-label">Q4 指标定义</text>
+    <text x="160" y="90" text-anchor="middle" class="q-label">有偏差？</text>
+    <text x="160" y="120" text-anchor="middle" class="q-detail">目标偏差信号</text>
+  </g>
+
+  <!-- Q 之间"否"的灰色箭头 -->
+  <text x="660" y="240" class="q-detail">否</text>
+  <text x="1040" y="240" class="q-detail">否</text>
+  <text x="1420" y="240" class="q-detail">否</text>
+  <line x1="660" y1="250" x2="720" y2="250" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="1040" y1="250" x2="1100" y2="250" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="1420" y1="250" x2="1480" y2="250" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)" />
+
+  <!-- ========== 第二行：4 个 A 结果框 ========== -->
+  <!-- A1 偏差高（红） -->
+  <g transform="translate(340, 460)">
+    <rect width="320" height="200" rx="14" fill="#fecaca" stroke="#ef4444" stroke-width="2" />
+    <text x="160" y="38" text-anchor="middle" class="a-name" fill="#dc2626">A1 · 偏差高（欠拟合）</text>
+    <text x="50" y="90" class="a-emph">→ 模型容量不足</text>
+    <text x="50" y="125" class="a-emph">→ 特征不足</text>
+    <text x="50" y="160" class="a-emph">→ 训练不充分</text>
+    <text x="160" y="185" text-anchor="middle" class="a-emph">训练损失与验证损失同步高</text>
+  </g>
+
+  <!-- A2 方差高（橙） -->
+  <g transform="translate(720, 460)">
+    <rect width="320" height="200" rx="14" fill="#fed7aa" stroke="#f97316" stroke-width="2" />
+    <text x="160" y="38" text-anchor="middle" class="a-name" fill="#ea580c">A2 · 方差高（过拟合）</text>
+    <text x="50" y="95" class="a-emph">→ 数据增广</text>
+    <text x="50" y="130" class="a-emph">→ 正则化 / Dropout</text>
+    <text x="50" y="165" class="a-emph">→ 早停</text>
+    <text x="160" y="190" text-anchor="middle" class="a-emph">训练低 / 验证高的剪刀差</text>
+  </g>
+
+  <!-- A3 分布偏移（蓝） -->
+  <g transform="translate(1100, 460)">
+    <rect width="320" height="200" rx="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" />
+    <text x="160" y="38" text-anchor="middle" class="a-name" fill="#2563eb">A3 · 分布偏移</text>
+    <text x="50" y="95" class="a-emph">→ 数据分布对齐</text>
+    <text x="50" y="130" class="a-emph">→ 域适应</text>
+    <text x="50" y="165" class="a-emph">→ 重新采样</text>
+    <text x="160" y="190" text-anchor="middle" class="a-emph">训练验证好 / 测试差</text>
+  </g>
+
+  <!-- A4 指标定义偏差（灰） -->
+  <g transform="translate(1480, 460)">
+    <rect width="320" height="200" rx="14" fill="#e2e8f0" stroke="#64748b" stroke-width="2" />
+    <text x="160" y="38" text-anchor="middle" class="a-name" fill="#475569">A4 · 指标定义偏差</text>
+    <text x="50" y="95" class="a-emph">→ 复核评估指标</text>
+    <text x="50" y="130" class="a-emph">→ 复核真实目标</text>
+    <text x="50" y="165" class="a-emph">→ 复核样本范围</text>
+    <text x="160" y="190" text-anchor="middle" class="a-emph">三集都好但用户仍不满意</text>
+  </g>
+
+  <!-- Q → A 箭头（是） -->
+  <text x="450" y="430" fill="#dc2626" font-weight="bold">是</text>
+  <text x="830" y="430" fill="#ea580c" font-weight="bold">是</text>
+  <text x="1210" y="430" fill="#2563eb" font-weight="bold">是</text>
+  <text x="1590" y="430" fill="#475569" font-weight="bold">是</text>
+  <line x1="500" y1="330" x2="500" y2="455" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red)" />
+  <line x1="880" y1="330" x2="880" y2="455" stroke="#f97316" stroke-width="3" marker-end="url(#arrow-orange)" />
+  <line x1="1260" y1="330" x2="1260" y2="455" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)" />
+  <line x1="1640" y1="330" x2="1640" y2="455" stroke="#64748b" stroke-width="3" marker-end="url(#arrow-gray)" />
+
+  <!-- ========== 第三行：3 个汇合点（绿） ========== -->
+  <g transform="translate(200, 780)">
+    <rect width="420" height="200" rx="14" fill="#bbf7d0" stroke="#22c55e" stroke-width="2" />
+    <text x="210" y="40" text-anchor="middle" class="legend" fill="#15803d">📊 数据</text>
+    <text x="210" y="80" text-anchor="middle" class="box-desc">更多 / 更高质量 / 重新标注</text>
+    <text x="210" y="110" text-anchor="middle" class="box-desc">数据增广 / 分布对齐</text>
+    <text x="210" y="170" text-anchor="middle" class="box-emph">覆盖度与质量优先</text>
+  </g>
+
+  <g transform="translate(780, 780)">
+    <rect width="420" height="200" rx="14" fill="#bbf7d0" stroke="#22c55e" stroke-width="2" />
+    <text x="210" y="40" text-anchor="middle" class="legend" fill="#15803d">🧠 模型</text>
+    <text x="210" y="80" text-anchor="middle" class="box-desc">更大容量 / 更好的归纳偏置</text>
+    <text x="210" y="110" text-anchor="middle" class="box-desc">激活函数 / 归一化 / 残差</text>
+    <text x="210" y="170" text-anchor="middle" class="box-emph">结构匹配任务</text>
+  </g>
+
+  <g transform="translate(1360, 780)">
+    <rect width="420" height="200" rx="14" fill="#bbf7d0" stroke="#22c55e" stroke-width="2" />
+    <text x="210" y="40" text-anchor="middle" class="legend" fill="#15803d">⚙️ 训练</text>
+    <text x="210" y="80" text-anchor="middle" class="box-desc">调整学习率 / 训练时长</text>
+    <text x="210" y="110" text-anchor="middle" class="box-desc">优化器选择 / 正则化强度</text>
+    <text x="210" y="170" text-anchor="middle" class="box-emph">调度策略与早停</text>
+  </g>
+
+  <!-- 标题 -->
+  <text x="990" y="745" text-anchor="middle" class="legend" fill="#15803d">汇合点：三层面调优方向（无论哪类问题都从这三个层面找具体手段）</text>
+
+  <!-- 4 个 A → 3 个汇合点（箭头汇聚） -->
+  <path d="M 500 660 Q 500 720 410 775" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 880 660 L 990 775" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 1260 660 L 990 775" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M 1640 660 Q 1640 720 1570 775" stroke="#22c55e" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+</svg>

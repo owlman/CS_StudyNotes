@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1980 1100" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <style>
+    .title { font-size: 48px; font-weight: bold; fill: #0f172a; }
+    .subtitle { font-size: 22px; fill: #64748b; }
+    .box-num { font-size: 20px; font-weight: bold; }
+    .box-title { font-size: 24px; font-weight: bold; fill: #0f172a; }
+    .box-formula { font-size: 26px; font-weight: bold; }
+    .box-desc { font-size: 17px; fill: #475569; }
+    .legend { font-size: 18px; fill: #475569; }
+    .label { font-size: 19px; fill: #64748b; }
+  </style>
+
+  <!-- 标题 -->
+  <text x="60" y="70" class="title">训练循环流程图：前向 → 损失 → 反向 → 更新 → 评估</text>
+  <text x="60" y="110" class="subtitle">神经网络的训练是「前向传播 → 损失计算 → 反向传播 → 参数更新」四步的循环迭代，直至达到停止条件后进入评估与诊断</text>
+
+  <!-- ========== 第一行：5 个步骤方框 ========== -->
+  <!-- 1. 初始化 (蓝) -->
+  <g transform="translate(60, 170)">
+    <rect width="320" height="160" rx="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" />
+    <circle cx="22" cy="22" r="14" fill="#3b82f6" />
+    <text x="22" y="28" text-anchor="middle" fill="white" class="box-num">①</text>
+    <text x="160" y="36" text-anchor="middle" class="box-title">初始化</text>
+    <text x="160" y="100" text-anchor="middle" class="box-formula">θ₀</text>
+    <text x="160" y="135" text-anchor="middle" class="box-desc">随机初始化参数</text>
+  </g>
+
+  <!-- 2. 前向传播 (橙) -->
+  <g transform="translate(450, 170)">
+    <rect width="320" height="160" rx="14" fill="#fed7aa" stroke="#f97316" stroke-width="2" />
+    <circle cx="22" cy="22" r="14" fill="#f97316" />
+    <text x="22" y="28" text-anchor="middle" fill="white" class="box-num">②</text>
+    <text x="160" y="36" text-anchor="middle" class="box-title">前向传播</text>
+    <text x="160" y="100" text-anchor="middle" class="box-formula">x → f_θ(x)</text>
+    <text x="160" y="135" text-anchor="middle" class="box-desc">数据从输入流向输出，<tspan x="160" dy="20">计算每层隐藏表示</tspan></text>
+  </g>
+
+  <!-- 3. 计算损失 (橙) -->
+  <g transform="translate(840, 170)">
+    <rect width="320" height="160" rx="14" fill="#fed7aa" stroke="#f97316" stroke-width="2" />
+    <circle cx="22" cy="22" r="14" fill="#f97316" />
+    <text x="22" y="28" text-anchor="middle" fill="white" class="box-num">③</text>
+    <text x="160" y="36" text-anchor="middle" class="box-title">计算损失</text>
+    <text x="160" y="100" text-anchor="middle" class="box-formula">L(f_θ(x), y)</text>
+    <text x="160" y="135" text-anchor="middle" class="box-desc">预测与真值的偏差，<tspan x="160" dy="20">标准化的训练目标</tspan></text>
+  </g>
+
+  <!-- 4. 反向传播 (红) -->
+  <g transform="translate(1230, 170)">
+    <rect width="320" height="160" rx="14" fill="#fecaca" stroke="#ef4444" stroke-width="2" />
+    <circle cx="22" cy="22" r="14" fill="#ef4444" />
+    <text x="22" y="28" text-anchor="middle" fill="white" class="box-num">④</text>
+    <text x="160" y="36" text-anchor="middle" class="box-title">反向传播</text>
+    <text x="160" y="100" text-anchor="middle" class="box-formula">∇_θ L</text>
+    <text x="160" y="135" text-anchor="middle" class="box-desc">沿链式法则反向求梯度，<tspan x="160" dy="20">∂L / ∂θ</tspan></text>
+  </g>
+
+  <!-- 5. 更新参数 (红) -->
+  <g transform="translate(1620, 170)">
+    <rect width="300" height="160" rx="14" fill="#fecaca" stroke="#ef4444" stroke-width="2" />
+    <circle cx="22" cy="22" r="14" fill="#ef4444" />
+    <text x="22" y="28" text-anchor="middle" fill="white" class="box-num">⑤</text>
+    <text x="150" y="36" text-anchor="middle" class="box-title">更新参数</text>
+    <text x="150" y="100" text-anchor="middle" class="box-formula">θ ← θ − η·∇_θ L</text>
+    <text x="150" y="135" text-anchor="middle" class="box-desc">SGD / AdamW 等，<tspan x="150" dy="20">沿负梯度方向调整</tspan></text>
+  </g>
+
+  <!-- 箭头：1→2→3→4→5 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#334155" />
+    </marker>
+  </defs>
+  <line x1="380" y1="250" x2="450" y2="250" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrowhead)" />
+  <line x1="770" y1="250" x2="840" y2="250" stroke="#f97316" stroke-width="4" marker-end="url(#arrowhead)" />
+  <line x1="1160" y1="250" x2="1230" y2="250" stroke="#f97316" stroke-width="4" marker-end="url(#arrowhead)" />
+  <line x1="1550" y1="250" x2="1620" y2="250" stroke="#ef4444" stroke-width="4" marker-end="url(#arrowhead)" />
+
+  <!-- ========== 判断框：达到停止条件？ (紫菱形) ========== -->
+  <g transform="translate(1640, 480)">
+    <polygon points="150,0 300,90 150,180 0,90" fill="#e9d5ff" stroke="#a855f7" stroke-width="2" />
+    <circle cx="150" cy="40" r="13" fill="#a855f7" />
+    <text x="150" y="46" text-anchor="middle" fill="white" class="box-num">⑥</text>
+    <text x="150" y="80" text-anchor="middle" class="box-title">达到停止条件？</text>
+    <text x="150" y="115" text-anchor="middle" class="box-desc">epoch 上限</text>
+    <text x="150" y="140" text-anchor="middle" class="box-desc">早停 / 收敛</text>
+  </g>
+
+  <!-- 5→6 箭头（从步骤 5 底部到判断框顶部） -->
+  <path d="M 1770 330 L 1770 480" stroke="#a855f7" stroke-width="4" marker-end="url(#arrowhead)" fill="none" />
+
+  <!-- 6 否 → 循环回步骤 2 (灰色虚线) -->
+  <path d="M 1640 570 Q 800 570 800 570 Q 700 570 610 330" stroke="#94a3b8" stroke-width="3" stroke-dasharray="8,4" fill="none" />
+  <text x="1180" y="555" class="label">否</text>
+  <text x="1180" y="555" class="label" fill="white" stroke="white" stroke-width="6" paint-order="stroke" opacity="0">否</text>
+  <!-- 简化：在虚线中点放标签 -->
+  <rect x="900" y="540" width="60" height="34" rx="6" fill="white" />
+  <text x="930" y="565" text-anchor="middle" class="label">否</text>
+
+  <!-- ========== 7. 评估与诊断 (绿) ========== -->
+  <g transform="translate(950, 770)">
+    <rect width="320" height="160" rx="14" fill="#bbf7d0" stroke="#22c55e" stroke-width="2" />
+    <circle cx="22" cy="22" r="14" fill="#22c55e" />
+    <text x="22" y="28" text-anchor="middle" fill="white" class="box-num">⑦</text>
+    <text x="160" y="36" text-anchor="middle" class="box-title">评估与诊断</text>
+    <text x="160" y="95" text-anchor="middle" class="box-desc" font-weight="bold">训练曲线 / 验证指标</text>
+    <text x="160" y="125" text-anchor="middle" class="box-desc">可解释性方法</text>
+    <text x="160" y="148" text-anchor="middle" class="box-desc">判断是否过拟合 / 收敛</text>
+  </g>
+
+  <!-- 6 是 → 7 (绿色箭头) -->
+  <path d="M 1640 570 Q 1500 700 1280 770" stroke="#22c55e" stroke-width="4" marker-end="url(#arrowhead)" fill="none" />
+  <rect x="1430" y="700" width="50" height="32" rx="6" fill="white" />
+  <text x="1455" y="722" text-anchor="middle" class="label">是</text>
+
+  <!-- ========== 8. 输出参数 (蓝) ========== -->
+  <g transform="translate(1400, 770)">
+    <rect width="280" height="160" rx="14" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" />
+    <circle cx="22" cy="22" r="14" fill="#3b82f6" />
+    <text x="22" y="28" text-anchor="middle" fill="white" class="box-num">⑧</text>
+    <text x="140" y="36" text-anchor="middle" class="box-title">输出参数</text>
+    <text x="140" y="100" text-anchor="middle" class="box-formula">θ*</text>
+    <text x="140" y="135" text-anchor="middle" class="box-desc">训练好的模型，<tspan x="140" dy="20">用于推理与部署</tspan></text>
+  </g>
+
+  <!-- 7→8 箭头 -->
+  <line x1="1270" y1="850" x2="1400" y2="850" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrowhead)" />
+
+  <!-- ========== 底部图例 ========== -->
+  <g transform="translate(60, 1000)">
+    <rect x="0" y="0" width="20" height="20" fill="#dbeafe" stroke="#3b82f6" />
+    <text x="32" y="17" class="legend">输入/输出</text>
+    <rect x="160" y="0" width="20" height="20" fill="#fed7aa" stroke="#f97316" />
+    <text x="192" y="17" class="legend">前向</text>
+    <rect x="290" y="0" width="20" height="20" fill="#fecaca" stroke="#ef4444" />
+    <text x="322" y="17" class="legend">反向</text>
+    <rect x="420" y="0" width="20" height="20" fill="#e9d5ff" stroke="#a855f7" />
+    <text x="452" y="17" class="legend">判断</text>
+    <rect x="550" y="0" width="20" height="20" fill="#bbf7d0" stroke="#22c55e" />
+    <text x="582" y="17" class="legend">评估</text>
+  </g>
+</svg>
