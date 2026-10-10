@@ -78,7 +78,7 @@
 
   <!-- 关键 takeaway -->
   <g transform="translate(50, 450)">
-    <text x="0" y="0" class="note" font-weight="bold">定理 1.1：</text>
+    <text x="0" y="0" class="note" font-weight="bold"></text>
     <text x="60" y="0" class="note">对任意连续目标函数 f* ∈ C(𝒳, ℝ) 和任意 ε &gt; 0，都存在某个神经网络函数 f_θ，使得 sup|f_θ(x) − f*(x)| &lt; ε。</text>
     <text x="0" y="22" class="note">当隐层单元数 N → ∞ 时，max_x|f_θ(x) − f*(x)| 单调下降并趋近于 0。**通用逼近 ≠ 可学习**：本图展示的是"存在性"，找到这组 θ 是 §3 优化器要解决的问题。</text>
   </g>
