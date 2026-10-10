@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <style>
+    .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+    .subtitle { font-size: 14px; font-weight: bold; fill: #1a1a1a; }
+    .axis { stroke: #555; stroke-width: 1; }
+    .grid { stroke: #ddd; stroke-width: 0.5; stroke-dasharray: 2 2; }
+    .grad { stroke: #3498db; stroke-width: 1.2; fill: none; opacity: 0.6; }
+    .m1 { stroke: #e74c3c; stroke-width: 2.5; fill: none; }
+    .v1 { stroke: #27ae60; stroke-width: 2.5; fill: none; }
+    .update { stroke: #8e44ad; stroke-width: 2.5; fill: none; }
+    .label { font-size: 12px; fill: #333; }
+    .note { font-size: 12px; fill: #555; font-style: italic; }
+    .formula { font-size: 13px; fill: #1a1a1a; }
+  </style>
+
+  <text x="450" y="32" text-anchor="middle" class="title">Adam 优化器：一阶矩平滑 + 二阶矩自适应</text>
+
+  <!-- ========== 上子图：原始梯度 g_t vs 一阶矩 m_t ========== -->
+  <g transform="translate(80, 80)">
+    <text x="0" y="-10" class="subtitle">一阶矩 m_t 平滑原始梯度 g_t</text>
+
+    <!-- 坐标轴 -->
+    <line x1="0" y1="20" x2="0" y2="200" class="axis" />
+    <line x1="0" y1="200" x2="800" y2="200" class="axis" />
+    <text x="-8" y="25" class="label" text-anchor="end">+</text>
+    <text x="-8" y="200" class="label" text-anchor="end">0</text>
+    <text x="-8" y="105" class="label" text-anchor="end">m, g</text>
+    <text x="800" y="218" class="label" text-anchor="end">t →</text>
+
+    <!-- 0 线 -->
+    <line x1="0" y1="100" x2="800" y2="100" class="grid" />
+
+    <!-- 原始梯度 g_t：带噪声 -->
+    <path d="M 0 100 L 10 75 L 20 130 L 30 80 L 40 120 L 50 70 L 60 135 L 70 85 L 80 125 L 90 75 L 100 130 L 110 80 L 120 120 L 130 70 L 140 130 L 150 90 L 160 115 L 170 75 L 180 125 L 190 85 L 200 110 L 210 90 L 220 100 L 230 95 L 240 105 L 250 100 L 260 95 L 270 100 L 280 100 L 290 100 L 300 100 L 310 100 L 320 100 L 330 100 L 340 100 L 350 100 L 360 100 L 370 100 L 380 100 L 390 100 L 400 100 L 410 100 L 420 100 L 430 100 L 440 100 L 450 100 L 460 100 L 470 100 L 480 100 L 490 100 L 500 100 L 510 100 L 520 100 L 530 100 L 540 100 L 550 100 L 560 100 L 570 100 L 580 100 L 590 100 L 600 100 L 610 100 L 620 100 L 630 100 L 640 100 L 650 100 L 660 100 L 670 100 L 680 100 L 690 100 L 700 100 L 710 100 L 720 100 L 730 100 L 740 100 L 750 100 L 760 100 L 770 100 L 780 100 L 790 100 L 800 100" class="grad" />
+
+    <!-- 一阶矩 m_t：平滑 -->
+    <path d="M 0 100 Q 30 95 60 105 Q 90 95 120 90 Q 150 92 180 96 Q 210 99 240 100 Q 270 100 300 100 Q 330 100 360 100 Q 390 100 420 100 Q 450 100 480 100 Q 510 100 540 100 Q 570 100 600 100 Q 630 100 660 100 Q 690 100 720 100 Q 750 100 780 100 L 800 100" class="m1" />
+
+    <!-- 公式标签 -->
+    <text x="820" y="50" class="formula">m_t = β₁ m_{t-1} + (1-β₁) g_t</text>
+    <text x="820" y="68" class="formula" fill="#e74c3c">m_{t+1} = 0.9 m_t + 0.1 g_t</text>
+
+    <!-- 图例 -->
+    <rect x="600" y="160" width="200" height="34" fill="white" stroke="#ccc" />
+    <line x1="610" y1="172" x2="640" y2="172" class="grad" />
+    <text x="650" y="176" class="label">原始梯度 g_t（带噪声）</text>
+    <line x1="610" y1="188" x2="640" y2="188" class="m1" />
+    <text x="650" y="192" class="label">一阶矩 m_t（EMA 平滑）</text>
+  </g>
+
+  <!-- ========== 中子图：|g_t| vs sqrt(v_t) ========== -->
+  <g transform="translate(80, 330)">
+    <text x="0" y="-10" class="subtitle">二阶矩 √v_t 估计梯度大小（自适应学习率）</text>
+
+    <!-- 坐标轴 -->
+    <line x1="0" y1="20" x2="0" y2="200" class="axis" />
+    <line x1="0" y1="200" x2="800" y2="200" class="axis" />
+    <text x="-8" y="200" class="label" text-anchor="end">0</text>
+    <text x="-8" y="105" class="label" text-anchor="end">|g|, √v</text>
+    <text x="800" y="218" class="label" text-anchor="end">t →</text>
+
+    <!-- 原始梯度绝对值 |g_t|：先大后小（损失下降） -->
+    <path d="M 0 30 L 10 35 L 20 25 L 30 40 L 40 30 L 50 45 L 60 35 L 70 50 L 80 45 L 90 60 L 100 55 L 110 70 L 120 65 L 130 80 L 140 75 L 150 90 L 160 85 L 170 100 L 180 95 L 190 110 L 200 105 L 210 120 L 220 115 L 230 125 L 240 130 L 250 135 L 260 140 L 270 145 L 280 148 L 290 152 L 300 155 L 310 158 L 320 160 L 330 162 L 340 164 L 350 166 L 360 167 L 370 168 L 380 170 L 390 171 L 400 172 L 410 173 L 420 174 L 430 175 L 440 175 L 450 176 L 460 177 L 470 177 L 480 178 L 490 178 L 500 179 L 510 179 L 520 180 L 530 180 L 540 181 L 550 181 L 560 181 L 570 182 L 580 182 L 590 182 L 600 183 L 610 183 L 620 183 L 630 184 L 640 184 L 650 184 L 660 185 L 670 185 L 680 185 L 690 185 L 700 186 L 710 186 L 720 186 L 730 186 L 740 187 L 750 187 L 760 187 L 770 187 L 780 187 L 790 188 L 800 188" class="grad" />
+
+    <!-- sqrt(v_t)：平滑估计，平滑下降 -->
+    <path d="M 0 30 Q 50 32 100 45 Q 150 60 200 80 Q 250 100 300 120 Q 350 135 400 150 Q 450 160 500 170 Q 550 175 600 180 Q 650 184 700 186 Q 750 187 800 188" class="v1" />
+
+    <!-- 公式 -->
+    <text x="820" y="50" class="formula">v_t = β₂ v_{t-1} + (1-β₂) g_t²</text>
+    <text x="820" y="68" class="formula" fill="#27ae60">v_{t+1} = 0.999 v_t + 0.001 g_t²</text>
+
+    <!-- 关键 takeaway 注释 -->
+    <text x="400" y="195" class="note" text-anchor="middle">自适应步长：θ ← θ − η · m̂ / (√v̂ + ε)，梯度大处步长小，梯度小处步长大</text>
+  </g>
+
+  <!-- ========== 底部：关键 takeaway ========== -->
+  <g transform="translate(80, 580)">
+    <text x="0" y="0" class="formula" font-weight="bold">Adam 更新规则：</text>
+    <text x="100" y="0" class="formula">θ_{t+1} = θ_t − η · m̂_{t+1} / (√v̂_{t+1} + ε) − ηλθ_t</text>
+    <text x="0" y="22" class="note">一阶矩 m̂ 用 EMA（β₁=0.9）平滑方向，二阶矩 √v̂ 用 EMA（β₂=0.999）估计步长——比纯 SGD 用同一学习率遍历所有方向更鲁棒。</text>
+  </g>
+</svg>
