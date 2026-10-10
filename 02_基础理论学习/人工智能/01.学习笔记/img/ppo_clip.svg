@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <style>
+    .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+    .subtitle { font-size: 14px; font-weight: bold; fill: #1a1a1a; }
+    .axis { stroke: #555; stroke-width: 1; }
+    .grid { stroke: #ddd; stroke-width: 0.5; stroke-dasharray: 2 2; }
+    .ppo-pos { stroke: #e74c3c; stroke-width: 3; fill: none; }
+    .ppo-neg { stroke: #2980b9; stroke-width: 3; fill: none; }
+    .clip-line { stroke: #888; stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .ratio-line { stroke: #555; stroke-width: 1; }
+    .label { font-size: 12px; fill: #333; }
+    .note { font-size: 12px; fill: #555; font-style: italic; }
+    .formula { font-size: 13px; fill: #1a1a1a; }
+  </style>
+
+  <text x="450" y="32" text-anchor="middle" class="title">PPO clip 目标：限制单步策略更新幅度</text>
+
+  <!-- 坐标轴 -->
+  <g transform="translate(80, 70)">
+    <!-- y 轴 -->
+    <line x1="200" y1="20" x2="200" y2="380" class="axis" />
+    <text x="195" y="25" class="label" text-anchor="end">1.3</text>
+    <text x="195" y="105" class="label" text-anchor="end">0.65</text>
+    <text x="195" y="200" class="label" text-anchor="end">0</text>
+    <text x="195" y="295" class="label" text-anchor="end">−0.65</text>
+    <text x="195" y="375" class="label" text-anchor="end">−1.3</text>
+    <text x="40" y="200" class="label" text-anchor="end">J_PPO</text>
+
+    <!-- x 轴 -->
+    <line x1="200" y1="200" x2="780" y2="200" class="axis" />
+    <text x="220" y="395" class="label" text-anchor="middle">0.7</text>
+    <text x="290" y="395" class="label" text-anchor="middle">0.8</text>
+    <text x="360" y="395" class="label" text-anchor="middle">0.9</text>
+    <text x="430" y="395" class="label" text-anchor="middle">1.0</text>
+    <text x="500" y="395" class="label" text-anchor="middle">1.1</text>
+    <text x="570" y="395" class="label" text-anchor="middle">1.2</text>
+    <text x="640" y="395" class="label" text-anchor="middle">1.3</text>
+    <text x="780" y="395" class="label" text-anchor="end">r_t(θ)</text>
+
+    <!-- r = 1.0 竖线 -->
+    <line x1="430" y1="20" x2="430" y2="380" class="ratio-line" />
+    <text x="430" y="15" class="label" text-anchor="middle">r = 1</text>
+
+    <!-- clip 区间 [0.8, 1.2] 阴影 -->
+    <rect x="290" y="20" width="280" height="360" fill="#fff8e1" opacity="0.5" />
+    <text x="430" y="380" class="label" text-anchor="middle" fill="#666" font-style="italic">clip 区间 [1−ε, 1+ε] = [0.8, 1.2]</text>
+
+    <!-- clip 边界虚线 -->
+    <line x1="290" y1="20" x2="290" y2="380" class="clip-line" />
+    <line x1="570" y1="20" x2="570" y2="380" class="clip-line" />
+
+    <!-- ===== Â_t > 0 的曲线（红色）===== -->
+    <!-- r ∈ [0.7, 0.8]: y = 0.8 (水平) -->
+    <line x1="220" y1="123" x2="290" y2="123" class="ppo-pos" />
+    <!-- r ∈ [0.8, 1.2]: y = r·1 (斜率 1) -->
+    <line x1="290" y1="123" x2="570" y2="123" class="ppo-pos" stroke="none" />
+    <line x1="290" y1="123" x2="570" y2="123" class="ppo-pos" />
+    <!-- 实际上 y = r，0.8 → 123, 1.0 → 0(归零处), 1.2 → -77 -->
+    <!-- 重新画：从 (290, 123) 到 (430, 0) 到 (570, -123) -->
+    <line x1="220" y1="123" x2="290" y2="123" class="ppo-pos" />
+    <line x1="290" y1="123" x2="570" y2="-123" class="ppo-pos" />
+    <line x1="570" y1="-123" x2="640" y2="-123" class="ppo-pos" />
+
+    <!-- ===== Â_t < 0 的曲线（蓝色）===== -->
+    <!-- r ∈ [0.7, 0.8]: y = -0.8 -->
+    <line x1="220" y1="277" x2="290" y2="277" class="ppo-neg" />
+    <!-- r ∈ [0.8, 1.2]: y = -r -->
+    <line x1="290" y1="277" x2="570" y2="523" class="ppo-neg" />
+    <!-- r ∈ [1.2, 1.3]: y = -1.2 -->
+    <line x1="570" y1="523" x2="640" y2="523" class="ppo-neg" />
+
+    <!-- 标注 -->
+    <text x="430" y="-25" class="formula" text-anchor="middle" fill="#e74c3c">A_t &gt; 0（偏好当前动作）</text>
+    <text x="430" y="270" class="formula" text-anchor="middle" fill="#2980b9">A_t &lt; 0（不偏好当前动作）</text>
+
+    <!-- 关键区域标注 -->
+    <text x="640" y="-130" class="note" fill="#e74c3c">clip 截断：</text>
+    <text x="640" y="-115" class="note" fill="#e74c3c">r 过大不再增加目标</text>
+
+    <text x="640" y="540" class="note" fill="#2980b9">clip 截断：</text>
+    <text x="640" y="555" class="note" fill="#2980b9">r 过小不再降低目标</text>
+  </g>
+
+  <!-- ===== 底部：公式与 takeaway ===== -->
+  <g transform="translate(80, 480)">
+    <text x="0" y="0" class="formula" font-weight="bold">PPO 目标：</text>
+    <text x="80" y="0" class="formula">J_PPO(θ) = 𝔼[min(r_t(θ) Â_t, clip(r_t(θ), 1−ε, 1+ε) · Â_t)]</text>
+    <text x="0" y="22" class="note">clip 机制：</text>
+    <text x="50" y="22" class="note">当策略变化过大（r 越界）时，目标被"截平"，梯度消失，阻止进一步更新——这正是 PPO 名字中"Proximal"的含义。</text>
+    <text x="0" y="42" class="note">工程意义：</text>
+    <text x="60" y="42" class="note">在 LLM 的 RLHF 中，ε 通常取 0.2，clip 防止奖励模型（RM）的过拟合导致策略剧烈漂移（reward hacking）。</text>
+  </g>
+</svg>

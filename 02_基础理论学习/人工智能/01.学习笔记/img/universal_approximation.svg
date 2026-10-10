@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <style>
+    .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+    .subtitle { font-size: 14px; font-weight: bold; fill: #1a1a1a; }
+    .axis { stroke: #555; stroke-width: 1; }
+    .target { stroke: #1a1a1a; stroke-width: 2.5; fill: none; }
+    .approx-bad { stroke: #c0392b; stroke-width: 1.8; fill: none; stroke-dasharray: 5 3; }
+    .approx-ok { stroke: #e67e22; stroke-width: 1.8; fill: none; }
+    .approx-good { stroke: #2980b9; stroke-width: 1.8; fill: none; }
+    .approx-best { stroke: #27ae60; stroke-width: 2.5; fill: none; }
+    .label { font-size: 12px; fill: #333; }
+    .note { font-size: 12px; fill: #555; font-style: italic; }
+  </style>
+
+  <text x="450" y="32" text-anchor="middle" class="title">通用逼近定理：增加隐层单元数量提升逼近精度</text>
+
+  <!-- 子图 1: 1 hidden unit -->
+  <g transform="translate(50, 80)">
+    <text x="100" y="0" text-anchor="middle" class="subtitle">1 个隐层单元</text>
+    <line x1="0" y1="40" x2="0" y2="240" class="axis" />
+    <line x1="0" y1="240" x2="200" y2="240" class="axis" />
+    <!-- 目标函数：sin(x) + 0.3sin(3x) -->
+    <path d="M 0 180 Q 25 130 50 160 Q 75 190 100 120 Q 125 50 150 130 Q 175 210 200 160" class="target" />
+    <!-- 逼近：一条水平线 -->
+    <line x1="0" y1="160" x2="200" y2="160" class="approx-bad" />
+    <text x="-6" y="245" class="label" text-anchor="end">x</text>
+    <text x="195" y="36" class="label" text-anchor="end">y</text>
+    <text x="100" y="270" text-anchor="middle" class="note">误差 ≈ 0.85</text>
+  </g>
+
+  <!-- 子图 2: 5 hidden units -->
+  <g transform="translate(280, 80)">
+    <text x="100" y="0" text-anchor="middle" class="subtitle">5 个隐层单元</text>
+    <line x1="0" y1="40" x2="0" y2="240" class="axis" />
+    <line x1="0" y1="240" x2="200" y2="240" class="axis" />
+    <path d="M 0 180 Q 25 130 50 160 Q 75 190 100 120 Q 125 50 150 130 Q 175 210 200 160" class="target" />
+    <!-- 阶梯状逼近 -->
+    <path d="M 0 165 L 20 145 L 40 175 L 60 155 L 80 185 L 100 130 L 120 75 L 140 130 L 160 175 L 180 195 L 200 170" class="approx-ok" />
+    <text x="-6" y="245" class="label" text-anchor="end">x</text>
+    <text x="195" y="36" class="label" text-anchor="end">y</text>
+    <text x="100" y="270" text-anchor="middle" class="note">误差 ≈ 0.32</text>
+  </g>
+
+  <!-- 子图 3: 20 hidden units -->
+  <g transform="translate(510, 80)">
+    <text x="100" y="0" text-anchor="middle" class="subtitle">20 个隐层单元</text>
+    <line x1="0" y1="40" x2="0" y2="240" class="axis" />
+    <line x1="0" y1="240" x2="200" y2="240" class="axis" />
+    <path d="M 0 180 Q 25 130 50 160 Q 75 190 100 120 Q 125 50 150 130 Q 175 210 200 160" class="target" />
+    <!-- 较精细的逼近 -->
+    <path d="M 0 180 Q 15 150 30 165 Q 45 180 60 155 Q 75 175 90 185 Q 100 165 105 130 Q 115 80 125 60 Q 135 90 145 130 Q 155 165 165 195 Q 175 215 185 195 Q 195 175 200 160" class="approx-good" />
+    <text x="-6" y="245" class="label" text-anchor="end">x</text>
+    <text x="195" y="36" class="label" text-anchor="end">y</text>
+    <text x="100" y="270" text-anchor="middle" class="note">误差 ≈ 0.08</text>
+  </g>
+
+  <!-- 子图 4: 100 hidden units -->
+  <g transform="translate(740, 80)">
+    <text x="100" y="0" text-anchor="middle" class="subtitle">100 个隐层单元</text>
+    <line x1="0" y1="40" x2="0" y2="240" class="axis" />
+    <line x1="0" y1="240" x2="200" y2="240" class="axis" />
+    <path d="M 0 180 Q 25 130 50 160 Q 75 190 100 120 Q 125 50 150 130 Q 175 210 200 160" class="target" />
+    <!-- 实际：与目标函数几乎重合（轻微抖动） -->
+    <path d="M 0 180 Q 10 165 20 145 Q 30 130 40 160 Q 50 175 60 165 Q 70 155 80 175 Q 90 185 100 130 Q 110 95 120 70 Q 130 55 140 95 Q 150 125 160 155 Q 170 180 180 200 Q 190 215 200 160" class="approx-best" />
+    <text x="-6" y="245" class="label" text-anchor="end">x</text>
+    <text x="195" y="36" class="label" text-anchor="end">y</text>
+    <text x="100" y="270" text-anchor="middle" class="note">误差 ≈ 0.01</text>
+  </g>
+
+  <!-- 图例 -->
+  <g transform="translate(50, 410)">
+    <line x1="0" y1="0" x2="50" y2="0" class="target" />
+    <text x="60" y="4" class="label">目标函数 f*(x)（黑实线）</text>
+    <line x1="280" y1="0" x2="330" y2="0" class="approx-bad" />
+    <text x="340" y="4" class="label">网络逼近 f_θ(x)（按隐层单元数上色）</text>
+  </g>
+
+  <!-- 关键 takeaway -->
+  <g transform="translate(50, 450)">
+    <text x="0" y="0" class="note" font-weight="bold">定理 1.1：</text>
+    <text x="60" y="0" class="note">对任意连续目标函数 f* ∈ C(𝒳, ℝ) 和任意 ε &gt; 0，都存在某个神经网络函数 f_θ，使得 sup|f_θ(x) − f*(x)| &lt; ε。</text>
+    <text x="0" y="22" class="note">当隐层单元数 N → ∞ 时，max_x|f_θ(x) − f*(x)| 单调下降并趋近于 0。**通用逼近 ≠ 可学习**：本图展示的是"存在性"，找到这组 θ 是 §3 优化器要解决的问题。</text>
+  </g>
+</svg>
