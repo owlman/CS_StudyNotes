@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <!-- 标题 -->
+  <text x="800" y="82" text-anchor="middle" font-size="44" font-weight="700" fill="#6B4423">Double Descent：越过插值阈值后的第二次下降</text>
+  <line x1="480" y1="108" x2="1120" y2="108" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 绘图区底色 -->
+  <rect x="220" y="170" width="1260" height="530" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+
+  <!-- 过参数化区高亮 -->
+  <rect x="900" y="170" width="580" height="530" rx="10" fill="#7A8C6F" opacity="0.10"/>
+  <line x1="900" y1="170" x2="900" y2="700" stroke="#A2542A" stroke-width="3" stroke-dasharray="12,9"/>
+
+  <!-- 坐标轴 -->
+  <line x1="220" y1="700" x2="1480" y2="700" stroke="#6B4423" stroke-width="3" stroke-linecap="round"/>
+  <line x1="220" y1="170" x2="220" y2="700" stroke="#6B4423" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="1480,700 1456,690 1456,710" fill="#6B4423"/>
+  <polygon points="220,170 210,194 230,194" fill="#6B4423"/>
+
+  <!-- 风险曲线 -->
+  <path d="M 220 250 L 330 330 L 460 385 L 620 402 L 760 372 L 840 300 L 900 248 L 980 320 L 1120 405 L 1300 452 L 1480 468"
+        fill="none" stroke="#7A8C6F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 轴标注 -->
+  <text x="850" y="742" text-anchor="middle" font-size="24" fill="#6B4423">模型容量（参数量 / 样本量之比）</text>
+  <text x="120" y="450" text-anchor="middle" font-size="24" fill="#6B4423" transform="rotate(-90 120 450)">测试误差</text>
+  <text x="200" y="690" text-anchor="end" font-size="22" fill="#8A6A4A">低</text>
+  <text x="200" y="192" text-anchor="end" font-size="22" fill="#8A6A4A">高</text>
+
+  <!-- 插值阈值 -->
+  <text x="900" y="152" text-anchor="middle" font-size="24" font-weight="700" fill="#A2542A">插值阈值（模型恰好拟合训练集）</text>
+
+  <!-- 区域标注 -->
+  <text x="470" y="230" text-anchor="middle" font-size="25" fill="#5F6E4D">经典 U 型区</text>
+  <text x="470" y="262" text-anchor="middle" font-size="21" fill="#7A8C6F">欠拟合 → 过拟合</text>
+  <text x="1190" y="230" text-anchor="middle" font-size="25" fill="#5F6E4D">过参数化区</text>
+  <text x="1190" y="262" text-anchor="middle" font-size="21" fill="#7A8C6F">误差第二次下降并趋稳</text>
+
+  <!-- 谷底与峰值标注 -->
+  <circle cx="620" cy="402" r="9" fill="#7A8C6F"/>
+  <text x="640" y="440" font-size="22" fill="#5F6E4D">经典谷底</text>
+  <circle cx="900" cy="248" r="9" fill="#A2542A"/>
+  <text x="930" y="228" font-size="22" fill="#A2542A">风险峰值</text>
+
+  <!-- 底部说明 -->
+  <text x="800" y="810" text-anchor="middle" font-size="23" fill="#6B4423">容量越过插值阈值后，测试误差不升反降：过参数化并非“过拟合”，而是另一种更优的泛化状态</text>
+  <text x="800" y="848" text-anchor="middle" font-size="20" fill="#8A6A4A">资料来源：Belkin et al. 2019（PNAS）；横轴为示意，非实测数据</text>
+</svg>
