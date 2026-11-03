@@ -1,5 +1,4 @@
 {
-  "theme": "moonstone",
   "lightStyle": "minimal-light-contrast",
   "darkStyle": "minimal-dark",
   "lightScheme": "minimal-everforest-light",
@@ -28,9 +27,10 @@
   "focusMode": false,
   "underlineInternal": true,
   "underlineExternal": true,
-  "useSystemTheme": false,
   "folding": true,
   "lineNumbers": true,
   "readableLineLength": false,
+  "theme": "moonstone",
+  "useSystemTheme": false,
   "devBlockWidth": false
 }
