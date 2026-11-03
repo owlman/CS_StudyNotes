@@ -1,0 +1,80 @@
+/* ============================================================
+   中英文对齐统一字体
+   ============================================================
+   问题：Obsidian 正文字体走主题默认的西文 sans（Minimal / Typewriter），
+   中文 fallback 到系统 CJK 字体（微软雅黑），两者宽度规则不同，
+   导致中文与英文的字符网格对不齐（代码块、表格尤其明显）。
+
+   方案：把 --font-text / --font-monospace / --font-interface 全部指向
+   同一款「中英同体」等宽字体 Sarasa（等距更纱黑体 SC），
+   它自带中文字形且中/英 advance 宽度严格 2:1，混排时网格完全对齐。
+
+   字体栈说明：
+     '等距更纱黑体 SC'  Sarasa 的 zh-CN family name（Windows 注册名）
+     'Sarasa Nerd'      Sarasa 的 en-US family name（DirectWrite 可见名）
+                        两者指向同一款字体，互为兜底
+     'JetBrainsMono NF' 无中文字形，仅作英文回退
+     Consolas           无中文字形，仅作末位回退
+
+   注意：等宽字体会让正文也变等宽。若只想去掉代码块/表格的错位，
+   把 --font-text 一行注释掉即可（保留 --font-monospace）。
+   ============================================================ */
+
+:root {
+  --font-text:
+    '等距更纱黑体 SC',
+    'Sarasa Nerd',
+    'JetBrainsMono NF',
+    Consolas,
+    monospace;
+
+  --font-monospace:
+    '等距更纱黑体 SC',
+    'Sarasa Nerd',
+    'JetBrainsMono NF',
+    Consolas,
+    monospace;
+
+  --font-interface:
+    '等距更纱黑体 SC',
+    'Sarasa Nerd',
+    'JetBrainsMono NF',
+    Consolas,
+    monospace;
+}
+
+/* 明确指定正文使用上面的 --font-text，避免主题覆盖 */
+body,
+.markdown-preview-view,
+.markdown-source-view,
+.cm-editor,
+.cm-s-obsidian span.cm-formatting {
+  font-family: var(--font-text);
+}
+
+/* 代码块 / 行内代码 / Markdown 表格，统一等宽并禁止连字，
+   保证中英文严格按 2:1 网格对齐 */
+code,
+pre,
+kbd,
+samp,
+.markdown-preview-view pre,
+.markdown-preview-view code,
+.markdown-rendered .cm-s-obsidian span.cm-inline-code,
+.markdown-source-view.mod-cm6 .cm-inline-code,
+.cm-s-obsidian .cm-formatting-code {
+  font-family: var(--font-monospace);
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
+}
+
+/* 表格：单元格内容用等宽，列宽按字符网格对齐 */
+.markdown-rendered table,
+.markdown-rendered td,
+.markdown-rendered th,
+.markdown-source-view.mod-cm6 table,
+.markdown-source-view.mod-cm6 td,
+.markdown-source-view.mod-cm6 th {
+  font-family: var(--font-monospace);
+  font-variant-ligatures: none;
+}
