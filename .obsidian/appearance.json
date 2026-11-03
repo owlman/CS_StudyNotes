@@ -5,5 +5,8 @@
   "showViewHeader": false,
   "nativeMenus": false,
   "translucency": false,
-  "cssTheme": "Minimal"
+  "cssTheme": "Minimal",
+  "enabledCssSnippets": [
+    "zh-en-mono-align"
+  ]
 }
