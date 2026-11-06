@@ -682,141 +682,141 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 - `w-*`样式类：以`w-`为前缀的这组样式类主要用于设置元素的宽度尺寸，其可设定的值包括`25`、`50`、`75`、`100`和`auto`五种，其对应的CSS样式值如下表所示：
 
-    | Bootstrap样式类  | CSS样式值                  |
-    | :--------------- | :------------------------- |
-    | `w-25`           | `{width:25% !important}`   |
-    | `w-50`           | `{width:50% !important}`   |
-    | `w-75`           | `{width:75% !important}`   |
-    | `w-100`          | `{width:100% !important}`  |
-    | `w-auto`         | `{width:auto !important}`  |
+| Bootstrap样式类 | CSS样式值                 |
+| --------------- | ------------------------- |
+| `w-25`          | `{width:25% !important}`  |
+| `w-50`          | `{width:50% !important}`  |
+| `w-75`          | `{width:75% !important}`  |
+| `w-100`         | `{width:100% !important}` |
+| `w-auto`        | `{width:auto !important}` |
 
 - `h-*`样式类：以`h-`为前缀的这组样式类主要用于设置元素的高度尺寸，其可设定的值同样也包括`25`、`50`、`75`、`100`和`auto`这五种，其对应的CSS样式值如下表所示：
 
-    | Bootstrap样式类 | CSS样式值 |
-    | :--------------- | :--------- |
-    | `h-25`           | `{height:25% !important}` |
-    | `h-50`           | `{height:50% !important}` |
-    | `h-75`           | `{height:75% !important}` |
-    | `h-100`          | `{height:100% !important}` |
-    | `h-auto`         | `{height:auto !important}` |
+| Bootstrap样式类 | CSS样式值                  |
+| --------------- | -------------------------- |
+| `h-25`          | `{height:25% !important}`  |
+| `h-50`          | `{height:50% !important}`  |
+| `h-75`          | `{height:75% !important}`  |
+| `h-100`         | `{height:100% !important}` |
+| `h-auto`        | `{height:auto !important}` |
 
 - `m-*`样式类：以`m-`为前缀的这组样式类主要用于设置元素的外边距，其可设置的值主要有`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种，其对应的CSS样式值如下表所示：
 
-    | Bootstrap样式类 | CSS样式值 |
-    | :--------------- | :--------- |
-    | `m-0`             | `{margin:0 !important}` |
-    | `m-1`             | `{margin:0.25rem !important}` |
-    | `m-2`             | `{margin:0.5rem !important}` |
-    | `m-3`             | `{margin:1rem !important}` |
-    | `m-4`             | `{margin:1.5rem !important}` |
-    | `m-5`             | `{margin:3rem !important}` |
-    | `m-auto`          | `{margin:auto !important}` |
+| Bootstrap样式类 | CSS样式值                     |
+| --------------- | ----------------------------- |
+| `m-0`           | `{margin:0 !important}`       |
+| `m-1`           | `{margin:0.25rem !important}` |
+| `m-2`           | `{margin:0.5rem !important}`  |
+| `m-3`           | `{margin:1rem !important}`    |
+| `m-4`           | `{margin:1.5rem !important}`  |
+| `m-5`           | `{margin:3rem !important}`    |
+| `m-auto`        | `{margin:auto !important}`    |
 
     当然了，我们也可以在`m`之后加上`l`、`r`、`t`、`b`、`x`、`y`和`a`这七个字母中的任意一个，来分别单独设置元素的外左边距、外右边距、外上边距、外下边距、外左右边距和外上下边距，它们同样可以设置`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种值，其对应的CSS样式值如下表所示：
 
-    | Bootstrap样式类 | CSS样式值 |
-    | :--------------- | :--------- |
-    | `ml-0`          | `{margin-left:0 !important}` |
-    | `ml-1`          | `{margin-right:0.25 !important}` |
-    | `ml-2`          | `{margin-right:0.5 !important}` |
-    | `ml-3`          | `{margin-right:1 !important}` |
-    | `ml-4`          | `{margin-right:1.5 !important}` |
-    | `ml-5`          | `{margin-right:3 !important}` |
-    | `ml-auto`       | `{margin-right:auto !important}` |
-    | `mr-0`          | `{margin-right:0 !important}` |
-    | `mr-1`          | `{margin-right:0.25 !important}` |
-    | `mr-2`          | `{margin-right:0.5 !important}` |
-    | `mr-3`          | `{margin-right:1 !important}` |
-    | `mr-4`          | `{margin-right:1.5 !important}` |
-    | `mr-5`          | `{margin-right:3 !important}` |
-    | `mr-auto`       | `{margin-right:auto !important}` |
-    | `mt-0`          | `{margin-top:0 !important}` |
-    | `mt-1`          | `{margin-top:0.25 !important}` |
-    | `mt-2`          | `{margin-top:0.5 !important}` |
-    | `mt-3`          | `{margin-top:1 !important}` |
-    | `mt-4`          | `{margin-top:1.5 !important}` |
-    | `mt-5`          | `{margin-top:3 !important}` |
-    | `mt-auto`       | `{margin-top:auto !important}` |
-    | `mb-0`          | `{margin-bottom:0 !important}` |
-    | `mb-1`          | `{margin-bottom:0.25 !important}` |
-    | `mb-2`          | `{margin-bottom:0.5 !important}` |
-    | `mb-3`          | `{margin-bottom:1 !important}` |
-    | `mb-4`          | `{margin-bottom:1.5 !important}` |
-    | `mb-5`          | `{margin-bottom:3 !important}` |
-    | `mb-auto`       | `{margin-bottom:auto !important}` |
-    | `mx-0`          | `{margin-left:0 !important;margin-right:0 !important}` |
-    | `mx-1`   | `{margin-left:0.25 !important;margin-right:0.25 !important}` |
-    | `mx-2`   | `{margin-left:0.5 !important;margin-right:0.5 !important}` |
-    | `mx-3`   | `{margin-left:1 !important;margin-right:1 !important}` |
-    | `mx-4`   | `{margin-left:1.5 !important;margin-right:1.5 !important}` |
-    | `mx-5`   | `{margin-left:3 !important;margin-right:3 !important}` |
-    | `mx-auto`  | `{margin-left:auto !important;margin-right:auto !important}` |
-    | `my-0`   | `{margin-top:0 !important;margin-bottom:0 !important}` |
-    | `my-1`   | `{margin-top:0.25 !important;margin-bottom:0.25 !important}` |
-    | `my-2`   | `{margin-top:0.5 !important;margin-bottom:0.5 !important}` |
-    | `my-3`   | `{margin-top:1 !important;margin-bottom:1 !important}` |
-    | `my-4`   | `{margin-top:1.5 !important;margin-bottom:1.5 !important}` |
-    | `my-5`   | `{margin-top:3 !important;margin-bottom:3 !important}` |
-    | `my-auto` | `{margin-top:auto !important;margin-bottom:auto !important}` |
+| Bootstrap样式类 | CSS样式值                                                    |
+| --------------- | ------------------------------------------------------------ |
+| `ml-0`          | `{margin-left:0 !important}`                                 |
+| `ml-1`          | `{margin-right:0.25 !important}`                             |
+| `ml-2`          | `{margin-right:0.5 !important}`                              |
+| `ml-3`          | `{margin-right:1 !important}`                                |
+| `ml-4`          | `{margin-right:1.5 !important}`                              |
+| `ml-5`          | `{margin-right:3 !important}`                                |
+| `ml-auto`       | `{margin-right:auto !important}`                             |
+| `mr-0`          | `{margin-right:0 !important}`                                |
+| `mr-1`          | `{margin-right:0.25 !important}`                             |
+| `mr-2`          | `{margin-right:0.5 !important}`                              |
+| `mr-3`          | `{margin-right:1 !important}`                                |
+| `mr-4`          | `{margin-right:1.5 !important}`                              |
+| `mr-5`          | `{margin-right:3 !important}`                                |
+| `mr-auto`       | `{margin-right:auto !important}`                             |
+| `mt-0`          | `{margin-top:0 !important}`                                  |
+| `mt-1`          | `{margin-top:0.25 !important}`                               |
+| `mt-2`          | `{margin-top:0.5 !important}`                                |
+| `mt-3`          | `{margin-top:1 !important}`                                  |
+| `mt-4`          | `{margin-top:1.5 !important}`                                |
+| `mt-5`          | `{margin-top:3 !important}`                                  |
+| `mt-auto`       | `{margin-top:auto !important}`                               |
+| `mb-0`          | `{margin-bottom:0 !important}`                               |
+| `mb-1`          | `{margin-bottom:0.25 !important}`                            |
+| `mb-2`          | `{margin-bottom:0.5 !important}`                             |
+| `mb-3`          | `{margin-bottom:1 !important}`                               |
+| `mb-4`          | `{margin-bottom:1.5 !important}`                             |
+| `mb-5`          | `{margin-bottom:3 !important}`                               |
+| `mb-auto`       | `{margin-bottom:auto !important}`                            |
+| `mx-0`          | `{margin-left:0 !important;margin-right:0 !important}`       |
+| `mx-1`          | `{margin-left:0.25 !important;margin-right:0.25 !important}` |
+| `mx-2`          | `{margin-left:0.5 !important;margin-right:0.5 !important}`   |
+| `mx-3`          | `{margin-left:1 !important;margin-right:1 !important}`       |
+| `mx-4`          | `{margin-left:1.5 !important;margin-right:1.5 !important}`   |
+| `mx-5`          | `{margin-left:3 !important;margin-right:3 !important}`       |
+| `mx-auto`       | `{margin-left:auto !important;margin-right:auto !important}` |
+| `my-0`          | `{margin-top:0 !important;margin-bottom:0 !important}`       |
+| `my-1`          | `{margin-top:0.25 !important;margin-bottom:0.25 !important}` |
+| `my-2`          | `{margin-top:0.5 !important;margin-bottom:0.5 !important}`   |
+| `my-3`          | `{margin-top:1 !important;margin-bottom:1 !important}`       |
+| `my-4`          | `{margin-top:1.5 !important;margin-bottom:1.5 !important}`   |
+| `my-5`          | `{margin-top:3 !important;margin-bottom:3 !important}`       |
+| `my-auto`       | `{margin-top:auto !important;margin-bottom:auto !important}` |
 
 - `p-*`样式类：以`p-`为前缀的这组样式类主要用于设置元素的内边距，其可设置的值也主要有`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种，其对应的CSS样式值如下表所示：
 
-    | Bootstrap样式类 | CSS样式值 |
-    | :--------------- | :--------- |
-    | `p-0`             | `{padding:0 !important}` |
-    | `p-1`             | `{padding:0.25rem !important}` |
-    | `p-2`             | `{padding:0.5rem !important}` |
-    | `p-3`             | `{padding:1rem !important}` |
-    | `p-4`             | `{padding:1.5rem !important}` |
-    | `p-5`             | `{padding:3rem !important}` |
-    | `p-auto`          | `{padding:auto !important}` |
+| Bootstrap样式类 | CSS样式值                      |
+| --------------- | ------------------------------ |
+| `p-0`           | `{padding:0 !important}`       |
+| `p-1`           | `{padding:0.25rem !important}` |
+| `p-2`           | `{padding:0.5rem !important}`  |
+| `p-3`           | `{padding:1rem !important}`    |
+| `p-4`           | `{padding:1.5rem !important}`  |
+| `p-5`           | `{padding:3rem !important}`    |
+| `p-auto`        | `{padding:auto !important}`    |
 
     同样的，我们也可以在`p`之后加上`l`、`r`、`t`、`b`、`x`、`y`和`a`这七个字母中的任意一个，来分别单独设置元素的内左边距、内右边距、内上边距、内下边距、内左右边距和内上下边距，它们同样可以设置`0`、`1`、`2`、`3`、`4`、`5`和`auto`这七种值，其对应的CSS样式值如下表所示：
 
-    | Bootstrap样式类 | CSS样式值 |
-    | :--------------- | :--------- |
-    | `pl-0`   | `{padding-left:0 !important}` |
-    | `pl-1`   | `{padding-left:0.25rem !important}` |
-    | `pl-2`   | `{padding-left:0.5rem !important}` |
-    | `pl-3`   | `{padding-left:1rem !important}` |
-    | `pl-4`   | `{padding-left:1.5rem !important}` |
-    | `pl-5`   | `{padding-left:3rem !important}` |
-    | `pl-auto` | `{padding-left:auto !important}` |
-    | `pr-0`      | `{padding-right:0 !important}` |
-    | `pr-1`     | `{padding-right:0.25rem !important}` |
-    | `pr-2`     | `{padding-right:0.5rem !important}` |
-    | `pr-3`     | `{padding-right:1rem !important}` |
-    | `pr-4`     | `{padding-right:1.5rem !important}` |
-    | `pr-5`     | `{padding-right:3rem !important}` |
-    | `pr-auto` | `{padding-right:auto !important}` |
-    | `pt-0`       | `{padding-top:0 !important}` |
-    | `pt-1`       | `{padding-top:0.25rem !important}` |
-    | `pt-2`       | `{padding-top:0.5rem !important}` |
-    | `pt-3`       | `{padding-top:1rem !important}` |
-    | `pt-4`       | `{padding-top:1.5rem !important}` |
-    | `pt-5`       | `{padding-top:3rem !important}` |
-    | `pt-auto`  | `{padding-top:auto !important}` |
-    | `pb-0`      | `{padding-bottom:0 !important}` |
-    | `pb-1`      | `{padding-bottom:0.25rem !important}` |
-    | `pb-2`      | `{padding-bottom:0.5rem !important}` |
-    | `pb-3`      | `{padding-bottom:1rem !important}` |
-    | `pb-4`      | `{padding-bottom:1.5rem !important}` |
-    | `pb-5`      | `{padding-bottom:3rem !important}` |
-    | `pb-auto` | `{padding-bottom:auto !important}` |
-    | `px-0`      | `{padding-left:0 !important; padding-right:0 !important}` |
-    |`px-1`|`{padding-left:0.25rem !important; padding-right:0.25rem !important}` |
-    |`px-2`| `{padding-left:0.5rem !important; padding-right:0.5rem !important}` |
-    |`px-3` |`{padding-left:1rem !important; padding-right:1rem !important}` |
-    |`px-4`|`{padding-left:1.5rem !important; padding-right:1.5rem !important}` |
-    |`px-5`|`{padding-left:3rem !important; padding-right:3rem !important}` |
-    |`px-auto` | `{padding-left:auto !important; padding-right:auto !important}` |
-    | `py-0`     | `{padding-top:0 !important; padding-bottom:0 !important}` |
-    |`py-1`|`{padding-top:0.25rem !important; padding-bottom:0.25rem !important}` |
-    |`py-2`| `{padding-top:0.5rem !important; padding-bottom:0.5rem !important}` |
-    | `py-3`| `{padding-top:1rem !important; padding-bottom:1rem !important}` |
-    |`py-4`|`{padding-top:1.5rem !important; padding-bottom:1.5rem !important}` |
-    |`py-5`| `{padding-top:3rem !important; padding-bottom:3rem !important}` |
-    |`py-auto` | `{padding-top:auto !important; padding-bottom:auto !important}` |
+| Bootstrap样式类 | CSS样式值                                                             |
+| --------------- | --------------------------------------------------------------------- |
+| `pl-0`          | `{padding-left:0 !important}`                                         |
+| `pl-1`          | `{padding-left:0.25rem !important}`                                   |
+| `pl-2`          | `{padding-left:0.5rem !important}`                                    |
+| `pl-3`          | `{padding-left:1rem !important}`                                      |
+| `pl-4`          | `{padding-left:1.5rem !important}`                                    |
+| `pl-5`          | `{padding-left:3rem !important}`                                      |
+| `pl-auto`       | `{padding-left:auto !important}`                                      |
+| `pr-0`          | `{padding-right:0 !important}`                                        |
+| `pr-1`          | `{padding-right:0.25rem !important}`                                  |
+| `pr-2`          | `{padding-right:0.5rem !important}`                                   |
+| `pr-3`          | `{padding-right:1rem !important}`                                     |
+| `pr-4`          | `{padding-right:1.5rem !important}`                                   |
+| `pr-5`          | `{padding-right:3rem !important}`                                     |
+| `pr-auto`       | `{padding-right:auto !important}`                                     |
+| `pt-0`          | `{padding-top:0 !important}`                                          |
+| `pt-1`          | `{padding-top:0.25rem !important}`                                    |
+| `pt-2`          | `{padding-top:0.5rem !important}`                                     |
+| `pt-3`          | `{padding-top:1rem !important}`                                       |
+| `pt-4`          | `{padding-top:1.5rem !important}`                                     |
+| `pt-5`          | `{padding-top:3rem !important}`                                       |
+| `pt-auto`       | `{padding-top:auto !important}`                                       |
+| `pb-0`          | `{padding-bottom:0 !important}`                                       |
+| `pb-1`          | `{padding-bottom:0.25rem !important}`                                 |
+| `pb-2`          | `{padding-bottom:0.5rem !important}`                                  |
+| `pb-3`          | `{padding-bottom:1rem !important}`                                    |
+| `pb-4`          | `{padding-bottom:1.5rem !important}`                                  |
+| `pb-5`          | `{padding-bottom:3rem !important}`                                    |
+| `pb-auto`       | `{padding-bottom:auto !important}`                                    |
+| `px-0`          | `{padding-left:0 !important; padding-right:0 !important}`             |
+| `px-1`          | `{padding-left:0.25rem !important; padding-right:0.25rem !important}` |
+| `px-2`          | `{padding-left:0.5rem !important; padding-right:0.5rem !important}`   |
+| `px-3`          | `{padding-left:1rem !important; padding-right:1rem !important}`       |
+| `px-4`          | `{padding-left:1.5rem !important; padding-right:1.5rem !important}`   |
+| `px-5`          | `{padding-left:3rem !important; padding-right:3rem !important}`       |
+| `px-auto`       | `{padding-left:auto !important; padding-right:auto !important}`       |
+| `py-0`          | `{padding-top:0 !important; padding-bottom:0 !important}`             |
+| `py-1`          | `{padding-top:0.25rem !important; padding-bottom:0.25rem !important}` |
+| `py-2`          | `{padding-top:0.5rem !important; padding-bottom:0.5rem !important}`   |
+| `py-3`          | `{padding-top:1rem !important; padding-bottom:1rem !important}`       |
+| `py-4`          | `{padding-top:1.5rem !important; padding-bottom:1.5rem !important}`   |
+| `py-5`          | `{padding-top:3rem !important; padding-bottom:3rem !important}`       |
+| `py-auto`       | `{padding-top:auto !important; padding-bottom:auto !important}`       |
 
 正如读者在之前的图文排版示例中所看到的，我们利用Bootstrap框架提供的这些样式类对页面中的很多元素都设置了相应的宽度和内外边距，以便它们可以更合适的形态出现在页面中，这些操作都是对网页进行图文信息排版时首先要完成的任务。
 
@@ -832,20 +832,20 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 - **标题文本样式**：对于页面中`<h1>`到`<h6>`六个标题元素，Bootstrap框架中预定义了从`h1`到`h6`六个对应的样式类，以便为它们设置更粗的字体属性（即`font-weight`）以及更具有响应能力的字体大小（即`font-size`）。除此之外，该框架还提供了从`display-1`到`display-6`六个样式类，以便设置更大的字体尺寸（即`font-size`）以及更大的行高（即`line-height`）。这些样式类与相应的样式值的对应关系如下表所示：
 
-    | Bootstrap样式类 | CSS样式值 |
-    | :--------------- | :--------- |
-    | `h1` | `font-size: 3.5rem; line-height: 4rem;` |
-    | `h2` | `font-size: 2.5rem; line-height: 3rem;` |
-    | `h3` | `font-size: 2rem; line-height: 2.5rem;` |
-    | `h4` | `font-size: 1.5rem; line-height: 2rem;` |
-    | `h5` | `font-size: 1.25rem; line-height: 1.75rem;` |
-    | `h6` | `font-size: 1rem; line-height: 1.5rem;` |
-    | `display-1` | `font-size: 6rem; line-height: 1.2;` |
-    | `display-2` | `font-size: 5.5rem; line-height: 1.2;` |
-    | `display-3` | `font-size: 4.5rem; line-height: 1.2;` |
-    | `display-4` | `font-size: 3.5rem; line-height: 1.2;` |
-    | `display-5` | `font-size: 2.75rem; line-height: 1.2;` |
-    | `display-6` | `font-size: 2rem; line-height: 1.2;` |
+| Bootstrap样式类 | CSS样式值                                   |
+| --------------- | ------------------------------------------- |
+| `h1`            | `font-size: 3.5rem; line-height: 4rem;`     |
+| `h2`            | `font-size: 2.5rem; line-height: 3rem;`     |
+| `h3`            | `font-size: 2rem; line-height: 2.5rem;`     |
+| `h4`            | `font-size: 1.5rem; line-height: 2rem;`     |
+| `h5`            | `font-size: 1.25rem; line-height: 1.75rem;` |
+| `h6`            | `font-size: 1rem; line-height: 1.5rem;`     |
+| `display-1`     | `font-size: 6rem; line-height: 1.2;`        |
+| `display-2`     | `font-size: 5.5rem; line-height: 1.2;`      |
+| `display-3`     | `font-size: 4.5rem; line-height: 1.2;`      |
+| `display-4`     | `font-size: 3.5rem; line-height: 1.2;`      |
+| `display-5`     | `font-size: 2.75rem; line-height: 1.2;`     |
+| `display-6`     | `font-size: 2rem; line-height: 1.2;`        |
 
     当然了，以上是我根据Bootstrap框架的官方文档所进行的说明，必须要注意的是，这些样式值可能会因为Bootstrap版本的不同而有所变化。建议读者在使用时自行参考该框架的官方文档，以确保信息的准确性。
 
