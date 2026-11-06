@@ -132,30 +132,30 @@ categories: Web应用开发
 
 - **`nodeType`属性**：该属性值是一个从 1 到 12 的整数常量，每个常量都代表着一种类型的 DOM 节点对象，具体如下：
 
-    | 常量标识符                  | 常量值 | 相关说明                                                         |
-    | --------------------------- | ------ | ---------------------------------------------------------------- |
-    | Node.ELEMENT_NODE           | 1      | 代表 XML 或 HTML 文档中的页面元素，通常对应着一个具体的页面标记。   |
-    | Node.ATTRIBUTE_NODE         | 2      | 代表页面元素的某一个属性，譬如div元素的id属性。                    |
-    | Node.TEXT_NODE              | 3      | 代表页面元素或其属性中的文本内容，譬如p元素中的文本。               |
-    | Node.CDATASECTIONNODE       | 4      | 代表文档中用<![CDATA[]]>表示声明的不需要解析的文本。               |
-    | Node.ENTITYREFERENCENODE    | 5      | 代表实体引用，常见于 XML 文档中。                                 |
-    | Node.ENTITY_NODE            | 6      | 代表实体，常见于 XML 文档中。                                     |
-    | Node.PROCESSINGINSTRUCTIONNODE | 7      | 代表ProcessingInstruction对象，常见于 XML 文档。                  |
-    | Node.COMMENT_NODE           | 8      | 代表文档中的注释节点，即<!--注释内容--->标签的内容。               |
-    | Node.DOCUMENT_NODE          | 9      | 代表整个文档，即DOM 树的根节点：document对象。                     |
-    | Node.DOCUMENTTYPENODE       | 10     | 代表文档采用的接口版本，譬如<!DOCTYPE html>代表的是 HTML5。        |
-    | Node.DOCUMENTFRAGMENTNODE   | 11     | 代表 HTML 文档的某个部分，但它没有对应的元素标签，也不直接显示在浏览器中。 |
-    | Node.NOTATION_NODE          | 12     | 代表 DTD 中声明的符号。                                           |
+| 常量标识符                     | 常量值 | 相关说明                                                                   |
+| ------------------------------ | ------ | -------------------------------------------------------------------------- |
+| Node.ELEMENT_NODE              | 1      | 代表 XML 或 HTML 文档中的页面元素，通常对应着一个具体的页面标记。          |
+| Node.ATTRIBUTE_NODE            | 2      | 代表页面元素的某一个属性，譬如div元素的id属性。                            |
+| Node.TEXT_NODE                 | 3      | 代表页面元素或其属性中的文本内容，譬如p元素中的文本。                      |
+| Node.CDATASECTIONNODE          | 4      | 代表文档中用<![CDATA[]]>表示声明的不需要解析的文本。                       |
+| Node.ENTITYREFERENCENODE       | 5      | 代表实体引用，常见于 XML 文档中。                                          |
+| Node.ENTITY_NODE               | 6      | 代表实体，常见于 XML 文档中。                                              |
+| Node.PROCESSINGINSTRUCTIONNODE | 7      | 代表ProcessingInstruction对象，常见于 XML 文档。                           |
+| Node.COMMENT_NODE              | 8      | 代表文档中的注释节点，即<!--注释内容--->标签的内容。                       |
+| Node.DOCUMENT_NODE             | 9      | 代表整个文档，即DOM 树的根节点：document对象。                             |
+| Node.DOCUMENTTYPENODE          | 10     | 代表文档采用的接口版本，譬如<!DOCTYPE html>代表的是 HTML5。                |
+| Node.DOCUMENTFRAGMENTNODE      | 11     | 代表 HTML 文档的某个部分，但它没有对应的元素标签，也不直接显示在浏览器中。 |
+| Node.NOTATION_NODE             | 12     | 代表 DTD 中声明的符号。                                                    |
 
     但在通常情况下，我们只需要记住以下几种常用的节点类型即可：
 
-    | nodeType值 | 对应的节点类型 |
-    | ---------- | -------------- |
-    | 1          | 元素节点       |
-    | 2          | 属性节点       |
-    | 3          | 文本节点       |
-    | 8          | 注释节点       |
-    | 9          | 文档节点       |
+| nodeType值 | 对应的节点类型 |
+| ---------- | -------------- |
+| 1          | 元素节点       |
+| 2          | 属性节点       |
+| 3          | 文本节点       |
+| 8          | 注释节点       |
+| 9          | 文档节点       |
 
     当然了，我们在之前的那一张表中也看到了，DOM 标准事实上是为这些常量定义了相应的常量标识符的，譬如元素节点是`node.ELEMENT_NODE`、属性节点是`node.ATTRIBUTE_NODE`、文本节点是`node.TEXT_NODE`、注释节点是`node.COMMENT_NODE`、文档节点是`node.DOCUMENT_NODE`等。奈何并不是所有的浏览器都支持了这些标识符（譬如微软的 IE8 及其更早的版本就不支持它们），所以我们通常还是直接使用数字来判断节点类型。
 

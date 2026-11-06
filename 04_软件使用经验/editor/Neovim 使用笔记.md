@@ -442,16 +442,16 @@ return {
 
 5. 除语法解析方面的功能之外，我们还可以利用该插件提供的折叠功能，将代码折叠成更小的段落，以便更好地阅读和理解代码，这方面的相关命令如表 1 所示。
 
-    | 操作                     | 命令 |
-    | ------------------------ | ---- |
-    | 当前折叠展开/关闭        | `za` |
-    | 当前折叠关闭             | `zc` |
-    | 当前折叠展开             | `zo` |
-    | 当前折叠及其内部全部关闭 | `zC` |
-    | 当前折叠及其内部全部展开 | `zO` |
-    | 全部打开                 | `zR` |
-    | 全部关闭                 | `zM` |
-    | 切换是否启用折叠         | `zi` |
+| 操作                     | 命令 |
+| ------------------------ | ---- |
+| 当前折叠展开/关闭        | `za` |
+| 当前折叠关闭             | `zc` |
+| 当前折叠展开             | `zo` |
+| 当前折叠及其内部全部关闭 | `zC` |
+| 当前折叠及其内部全部展开 | `zO` |
+| 全部打开                 | `zR` |
+| 全部关闭                 | `zM` |
+| 切换是否启用折叠         | `zi` |
 
     **表 1** 折叠相关命令
 
@@ -662,18 +662,18 @@ return {
 
     在这里，我们可以通过`vim.cmd.colorscheme()`这个 API 来设置 Neovim 的主题。Neovim 社区中常见的主题插件如表 2 所示。
 
-    | 主题            | 风格                       | 配置值             |
-    | --------------- | -------------------------- | ------------------ |
-    | **Catppuccin**  | 柔和、现代、色彩丰富       | `catppuccin-mocha` |
-    | **Tokyo Night** | 深色、蓝紫、现代 IDE 感    | `tokyonight-night` |
-    | **Gruvbox**     | 暖色、复古、经典 Vim 风格  | `gruvbox`          |
-    | **Kanagawa**    | 日式水墨、低饱和           | `kanagawa-wave`    |
-    | **Rose Pine**   | 深色、低饱和、简洁         | `rose-pine`        |
-    | **Everforest**  | 绿色、柔和、长时间阅读     | `everforest`       |
-    | **Nord**        | 冷色、蓝灰、克制           | `nord`             |
-    | **Dracula**     | 紫色系、高对比             | `dracula`          |
-    | **Solarized**   | 经典、低对比度             | `solarized`        |
-    | **OneDark**     | 类 VS Code / Atom 风格     | `onedark`          |
+| 主题            | 风格                      | 配置值             |
+| --------------- | ------------------------- | ------------------ |
+| **Catppuccin**  | 柔和、现代、色彩丰富      | `catppuccin-mocha` |
+| **Tokyo Night** | 深色、蓝紫、现代 IDE 感   | `tokyonight-night` |
+| **Gruvbox**     | 暖色、复古、经典 Vim 风格 | `gruvbox`          |
+| **Kanagawa**    | 日式水墨、低饱和          | `kanagawa-wave`    |
+| **Rose Pine**   | 深色、低饱和、简洁        | `rose-pine`        |
+| **Everforest**  | 绿色、柔和、长时间阅读    | `everforest`       |
+| **Nord**        | 冷色、蓝灰、克制          | `nord`             |
+| **Dracula**     | 紫色系、高对比            | `dracula`          |
+| **Solarized**   | 经典、低对比度            | `solarized`        |
+| **OneDark**     | 类 VS Code / Atom 风格    | `onedark`          |
 
     **表 2** Neovim 社区中常见的主题插件
 
@@ -1208,15 +1208,15 @@ Error in .../lua/user/plugins/markdown.lua:
 
 ### Q15. Windows / Scoop 上跑本笔记配置要做的额外步骤
 
-| 笔记里的命令 | Windows / Scoop 等价 |
-| --- | --- |
-| `sudo apt install -y ripgrep fd-find unzip` | `scoop install ripgrep fd unzip` |
-| `pip install --user pyright` | `pip install pyright`（全局 venv 用） |
-| `npm i -g bash-language-server yaml-language-server vscode-langservers-extracted` | 同左（scoop nvm 下的 npm） |
-| `sudo apt install -y clangd` | `scoop install llvm`（自带 clangd） |
-| `lua-language-server` 没有 npm 包 | `scoop install lua-language-server`（main bucket 里有 v3.19+） |
-| `cargo install --locked yazi-fm yazi-cli` | `scoop bucket add extras && scoop install yazi` |
-| `~/.config/nvim/` 路径 | `%LOCALAPPDATA%\nvim\`（即 `C:\Users\<u>\AppData\Local\nvim`），**不用建 `~/.config/nvim` 软链** |
+| 笔记里的命令                                                                      | Windows / Scoop 等价                                                                             |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `sudo apt install -y ripgrep fd-find unzip`                                       | `scoop install ripgrep fd unzip`                                                                 |
+| `pip install --user pyright`                                                      | `pip install pyright`（全局 venv 用）                                                            |
+| `npm i -g bash-language-server yaml-language-server vscode-langservers-extracted` | 同左（scoop nvm 下的 npm）                                                                       |
+| `sudo apt install -y clangd`                                                      | `scoop install llvm`（自带 clangd）                                                              |
+| `lua-language-server` 没有 npm 包                                                 | `scoop install lua-language-server`（main bucket 里有 v3.19+）                                   |
+| `cargo install --locked yazi-fm yazi-cli`                                         | `scoop bucket add extras && scoop install yazi`                                                  |
+| `~/.config/nvim/` 路径                                                            | `%LOCALAPPDATA%\nvim\`（即 `C:\Users\<u>\AppData\Local\nvim`），**不用建 `~/.config/nvim` 软链** |
 
 > 笔记里 §5 的 spec 文件**跨平台通用**，仅上述几条命令需要换写法；配置文件结构（`init.lua` / `lua/user/*.lua`）在 Windows 上由 Neovim 的 `stdpath('config')` 自动解析到 `%LOCALAPPDATA%\nvim\`，所以你只要把文件放对地方即可。
 

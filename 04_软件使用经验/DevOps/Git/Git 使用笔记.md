@@ -574,7 +574,7 @@ $ git branch
 
   ```bash
   * | 7b0f717 Merge branch 'test'
-  |\| 
+| \| |
   | * 03e7e0e tester commit
   * | 8aab52b master commit
   |/  
