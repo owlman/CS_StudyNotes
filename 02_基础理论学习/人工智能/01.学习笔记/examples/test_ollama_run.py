@@ -38,6 +38,14 @@ ENDPOINTS: dict[str, OllamaEndpoint] = {
 # 共享 HTTP Session：复用 TCP 连接，避免同一进程内多次请求反复握手。
 SESSION = requests.Session()
 
+# 局域网 Ollama 必须直连，不能走系统代理。
+# 本机装有 HTTP 代理（HTTP_PROXY/ALL_PROXY），而 requests 的代理绕过规则
+# 只按"主机名"字符串匹配 NO_PROXY，既不解析主机名对应的 IP 去套 CIDR 网段
+# （如 NO_PROXY 里的 192.168.0.0/16），也不读 Windows 注册表的 ProxyOverride。
+# 于是主机名 my-openclaw 被代理接管，代理机解析不到该名字，返回 502 Bad Gateway。
+# trust_env=False 让 requests 完全忽略环境里的 *_PROXY 变量。
+SESSION.trust_env = False
+
 
 def query_ollama(endpoint: OllamaEndpoint, prompt: str) -> dict:
     """向 Ollama /api/generate 端点发送 prompt，返回 Ollama 的完整 JSON 响应。
