@@ -109,6 +109,37 @@ ollama serve
 
 这些步骤虽然不是”核心知识”，但忽略了它们会让后面的测试结果充满噪声。因此，我在 conftest.py 中设置的 `timeout=120` 和 `raise_for_status()` 就是为了应对这些现实问题。
 
+#### 局域网部署的一个坑：requests 会走系统代理
+
+如果读者把端点从 `localhost` 换成局域网主机名（例如把 Ollama 装在另一台机器上，用 `http://my-openclaw:11434/api/generate` 访问），很可能会遇到一个和 LLM 毫无关系、但从错误信息里完全看不出来的失败：
+
+```text
+requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url:
+http://my-openclaw:11434/api/generate
+```
+
+这个 `502` **不是 Ollama 返回的，而是代理服务器返回的**。原因在于 `requests` 的代理绕过逻辑存在三个盲区（我的实测环境：Windows 11 + Python 3.13 + requests 2.32）：
+
+1. 它只读 `NO_PROXY` **环境变量**，不读 Windows 注册表里的 `ProxyOverride`。所以浏览器里明明把 `my-openclaw` 加进了代理例外，Python 脚本照样走代理；
+2. `NO_PROXY` 里的**主机名字符串**才是匹配依据。写 `192.168.0.0/16` 这种 CIDR 网段**不会**生效，因为 `requests` 不会先把 `my-openclaw` 解析成 `192.168.31.62` 再套网段；
+3. 于是主机名 `my-openclaw` 既不等于 `localhost`、也不在 `NO_PROXY` 的字符串列表里 → 请求被交给本机代理 → 代理在另一台机器上解析不到这个局域网主机名 → 回 `502 Bad Gateway`。
+
+用 `curl` 一对比就能确认问题出在代理而不是服务：
+
+```bash
+curl -s --noproxy '*' http://my-openclaw:11434/api/tags   # 直连，正常返回模型列表
+curl -s -x http://127.0.0.1:12450 http://my-openclaw:11434/api/tags   # 走代理，空响应
+```
+
+最省事的修法是在脚本里直接关掉代理继承，而不是去改系统环境变量：
+
+```python
+SESSION = requests.Session()
+SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直连
+```
+
+> **教训**：局域网服务（Ollama、vLLM、内部 API）一律不该走公网代理。做这类连通性排查时，先确认错误是“服务返回的”还是“代理返回的”——`curl --noproxy '*'` 与默认行为各跑一次，就能把责任方分开。
+
 ## 针对 LLM 的测试与观察
 
 现在，让我们来具体测试一下这个基于 Ollama 完成本地部署的 LLM。需要明确的是，我们这里的测试任务并不是在评估模型的”聪明程度”，而是设法通过一组尽可能简单、可复现的测试来观察 LLM 与用户交互时的行为模式。换句话说，我们希望通过测试来了解 **LLM 作为系统组件时的响应方式、失败模式以及可控性边界。**
@@ -141,7 +172,7 @@ ollama serve
     print(result["response"])
     ```
 
-    如果读者需要一个包含在局域网部署选项的完整测试示例（含 timeout / 错误处理 / 双端点调用）见 [examples/ollama_run_test.py](./examples/ollama_run_test.py)。
+    如果读者需要一个包含局域网部署选项的完整测试示例（含 timeout / 错误处理 / 双端点调用 / 代理绕过）见 [examples/test_ollama_run.py](./examples/test_ollama_run.py)。
 
 3. **运行 Python 脚本**：在命令行终端中输入 `python ollama_python.py` 命令，运行 Python 脚本，即可看到 LLM 的输出结果，如图 5 所示。
 
