@@ -12,12 +12,11 @@
 区别于传统 API 的标志性交互范式。
 '''
 import json
-import requests
 
 
 class TestStreaming:
 
-    def test_stream_output_completeness(self, ollama_client, stream_collector):
+    def test_stream_output_completeness(self, ollama_client, stream_collector, ollama_url, model_name):
         '''
         验证流式模式能完整收集到所有 token，
         不会提前截断或丢失尾部内容。
@@ -28,9 +27,9 @@ class TestStreaming:
         full_text = non_stream["response"]
 
         # 流式收集
-        url = "http://localhost:11434/api/generate"
+        url = ollama_url
         payload = {
-            "model": "llama3.2:3b",
+            "model": model_name,
             "prompt": prompt,
             "stream": True,
         }
@@ -46,20 +45,22 @@ class TestStreaming:
             "流式结果与非流式结果字符重叠过少，可能存在传输问题"
         )
 
-    def test_stream_token_by_token(self, ollama_client, stream_collector):
+    def test_stream_token_by_token(
+        self, ollama_client, stream_collector, http_session, ollama_url, model_name, request_timeout
+    ):
         '''
         观察逐 token 的粒度。
         Ollama 的流式接口按 token 粒度输出（非字符），
         因此单次 chunk 可能包含空格或标点，但不应为空。
         '''
-        url = "http://localhost:11434/api/generate"
+        url = ollama_url
         payload = {
-            "model": "llama3.2:3b",
+            "model": model_name,
             "prompt": "Hello!",
             "stream": True,
         }
 
-        response = requests.post(url, json=payload, stream=True, timeout=180)
+        response = http_session.post(url, json=payload, stream=True, timeout=request_timeout)
         response.raise_for_status()
 
         token_count = 0

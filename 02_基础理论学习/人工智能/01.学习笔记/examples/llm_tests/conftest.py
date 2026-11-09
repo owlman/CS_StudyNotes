@@ -5,11 +5,60 @@ PyTest 公共配置，提供调用 LLM 的基础 fixture。
 测试的可靠性与可复现性，从根本上取决于底层调用的可控程度。
 '''
 import json
+import os
 import pytest
 import requests
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "llama3.2:3b"
+# 端点与模型可通过环境变量覆盖，方便在局域网机器上跑同一套测试：
+#   set OLLAMA_URL=http://my-openclaw:11434/api/generate
+#   set OLLAMA_MODEL=qwen3:4b-8k
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/generate")
+MODEL_NAME = os.environ.get("OLLAMA_MODEL", "llama3.2:3b")
+# 局域网上的较大模型（如 qwen3:4b-8k）首次加载 + 推理可能超过 120s，
+# 超时可用 OLLAMA_TIMEOUT 覆盖。
+REQUEST_TIMEOUT = float(os.environ.get("OLLAMA_TIMEOUT", "120"))
+
+# 共享 Session，且强制忽略环境里的代理变量。
+# 本机装有 HTTP 代理（HTTP_PROXY/ALL_PROXY），而 requests 的代理绕过规则
+# 只按"主机名"字符串匹配 NO_PROXY，既不解析主机名对应的 IP 去套 CIDR 网段
+# （如 NO_PROXY 里的 192.168.0.0/16），也不读 Windows 注册表的 ProxyOverride。
+# 一旦把 URL 改成局域网主机名（如 my-openclaw），请求就会被代理接管，
+# 代理机解析不到该名字，返回 502 Bad Gateway。
+SESSION = requests.Session()
+SESSION.trust_env = False
+
+
+@pytest.fixture
+def ollama_url():
+    '''
+    实际使用的 Ollama 端点（可由环境变量 OLLAMA_URL 覆盖）。
+    '''
+    return OLLAMA_URL
+
+
+@pytest.fixture
+def model_name():
+    '''
+    实际使用的模型名（可由环境变量 OLLAMA_MODEL 覆盖）。
+    '''
+    return MODEL_NAME
+
+
+@pytest.fixture
+def request_timeout():
+    '''
+    单次请求的超时秒数（可由环境变量 OLLAMA_TIMEOUT 覆盖）。
+    '''
+    return REQUEST_TIMEOUT
+
+
+@pytest.fixture
+def http_session():
+    '''
+    共享的直连 HTTP Session。
+    测试中所有对 Ollama 的请求都应经由它发起，避免走系统代理。
+    '''
+    return SESSION
 
 
 @pytest.fixture
@@ -26,10 +75,10 @@ def ollama_client():
         }
         if options:
             payload["options"] = options
-        response = requests.post(
+        response = SESSION.post(
             OLLAMA_URL,
             json=payload,
-            timeout=120,
+            timeout=REQUEST_TIMEOUT,
         )
         response.raise_for_status()
         return response.json()
@@ -59,7 +108,7 @@ def stream_collector():
     Ollama 流式 API 每行返回一个 JSON 对象，最后一行 {"done": true}。
     '''
     def collect(url, payload):
-        response = requests.post(url, json=payload, stream=True, timeout=180)
+        response = SESSION.post(url, json=payload, stream=True, timeout=REQUEST_TIMEOUT)
         response.raise_for_status()
         tokens = []
         for line in response.iter_lines(decode_unicode=True):
