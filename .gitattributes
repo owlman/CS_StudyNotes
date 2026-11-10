@@ -42,6 +42,11 @@
 *.editorconfig    text eol=lf
 LICENSE   text eol=lf
 README*   text eol=lf
+# GitHub 语言统计（linguist）
+# .obsidian/plugins/ 下是第三方社区插件的构建产物（各插件 main.js 合计
+# 约 3.6 万行），它不属于本仓库的源码，不应计入语言构成——否则 GitHub
+# 会把本仓标注为 JavaScript，掩盖它作为 Markdown 知识库的实际性质。
+.obsidian/** linguist-vendored
 02_基础理论学习/人工智能/01.学习笔记/examples/llama_factory/saves/Qwen2.5-0.5B/lora/train_2026-09-02-10-24-13/tokenizer.json filter=lfs diff=lfs merge=lfs -text
 *.pdf filter=lfs diff=lfs merge=lfs -text
 02_基础理论学习/人工智能/01.学习笔记/examples/llama_factory/saves/Qwen2.5-0.5B/lora/train_2026-09-02-10-24-13/adapter_model.safetensors filter=lfs diff=lfs merge=lfs -text
