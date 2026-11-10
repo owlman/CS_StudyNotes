@@ -53,3 +53,11 @@
 
 LICENSE   text eol=lf
 README*   text eol=lf
+
+# ============================================================
+# GitHub 语言统计（linguist）
+# ============================================================
+# .obsidian/plugins/ 下是第三方社区插件的构建产物（各插件 main.js 合计
+# 约 3.6 万行），它不属于本仓库的源码，不应计入语言构成——否则 GitHub
+# 会把本仓标注为 JavaScript，掩盖它作为 Markdown 知识库的实际性质。
+.obsidian/** linguist-vendored
