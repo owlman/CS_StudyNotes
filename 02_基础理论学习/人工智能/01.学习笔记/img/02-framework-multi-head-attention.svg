@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+  <text x="800" y="66" font-size="42" font-weight="700" text-anchor="middle" fill="#6B4423">多头注意力：把表示空间切成 h 份并行观察</text>
+  <line x1="600" y1="88" x2="1000" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="122" font-size="22" text-anchor="middle" fill="#8B6F47">每个头拥有独立的 W^Q、W^K、W^V，输出拼接后再做一次投影</text>
+  <rect x="60" y="300" width="180" height="200" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="150" y="380" font-size="28" font-weight="700" text-anchor="middle" fill="#6B4423">输入 X</text>
+  <text x="150" y="422" font-size="21" text-anchor="middle" fill="#8B6F47">n × d</text>
+  <rect x="320" y="170" width="430" height="150" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="352" y="215" font-size="26" font-weight="700" fill="#5A8AAA">Head 1</text>
+  <text x="352" y="255" font-size="22" fill="#6B4423">关注句法依赖</text>
+  <text x="352" y="290" font-size="19" fill="#8B6F47">主谓、修饰关系</text>
+  <circle cx="672" cy="245" r="12" fill="#5A8AAA"/>
+  <circle cx="712" cy="218" r="12" fill="#5A8AAA"/>
+  <circle cx="712" cy="272" r="12" fill="#5A8AAA"/>
+  <line x1="684" y1="240" x2="700" y2="222" stroke="#5A8AAA" stroke-width="2"/>
+  <line x1="684" y1="250" x2="700" y2="268" stroke="#5A8AAA" stroke-width="2"/>
+  <line x1="245" y1="400" x2="315" y2="245" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="755" y1="245" x2="795" y2="400" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="320" y="350" width="430" height="150" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="352" y="395" font-size="26" font-weight="700" fill="#D97A47">Head 2</text>
+  <text x="352" y="435" font-size="22" fill="#6B4423">关注共指关系</text>
+  <text x="352" y="470" font-size="19" fill="#8B6F47">代词指向哪个名词</text>
+  <circle cx="672" cy="425" r="12" fill="#D97A47"/>
+  <circle cx="712" cy="398" r="12" fill="#D97A47"/>
+  <circle cx="712" cy="452" r="12" fill="#D97A47"/>
+  <line x1="684" y1="420" x2="700" y2="402" stroke="#D97A47" stroke-width="2"/>
+  <line x1="684" y1="430" x2="700" y2="448" stroke="#D97A47" stroke-width="2"/>
+  <line x1="245" y1="400" x2="315" y2="425" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="755" y1="425" x2="795" y2="400" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="320" y="530" width="430" height="150" rx="14" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="352" y="575" font-size="26" font-weight="700" fill="#7A8C6F">Head 3</text>
+  <text x="352" y="615" font-size="22" fill="#6B4423">关注局部搭配</text>
+  <text x="352" y="650" font-size="19" fill="#8B6F47">相邻词的组合</text>
+  <circle cx="672" cy="605" r="12" fill="#7A8C6F"/>
+  <circle cx="712" cy="578" r="12" fill="#7A8C6F"/>
+  <circle cx="712" cy="632" r="12" fill="#7A8C6F"/>
+  <line x1="684" y1="600" x2="700" y2="582" stroke="#7A8C6F" stroke-width="2"/>
+  <line x1="684" y1="610" x2="700" y2="628" stroke="#7A8C6F" stroke-width="2"/>
+  <line x1="245" y1="400" x2="315" y2="605" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="755" y1="605" x2="795" y2="400" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="800" y="300" width="180" height="200" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="890" y="375" font-size="26" font-weight="700" text-anchor="middle" fill="#6B4423">Concat</text>
+  <text x="890" y="418" font-size="20" text-anchor="middle" fill="#8B6F47">拼接 h 个头</text>
+  <rect x="1030" y="320" width="180" height="160" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1120" y="385" font-size="30" font-weight="700" text-anchor="middle" fill="#6B4423">W^O</text>
+  <text x="1120" y="425" font-size="20" text-anchor="middle" fill="#8B6F47">输出投影</text>
+  <rect x="1260" y="320" width="200" height="160" rx="14" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="1360" y="385" font-size="28" font-weight="700" text-anchor="middle" fill="#6B4423">输出</text>
+  <text x="1360" y="425" font-size="20" text-anchor="middle" fill="#8B6F47">多头表示</text>
+  <line x1="982" y1="400" x2="1025" y2="400" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="1212" y1="400" x2="1255" y2="400" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="200" y1="760" x2="1400" y2="760" stroke="#D97A47" stroke-width="2" stroke-dasharray="6,4" stroke-linecap="round"/>
+  <text x="800" y="812" font-size="24" text-anchor="middle" fill="#6B4423">计算量守恒：h 个头 × d/h 维 ≈ 单个 d 维注意力</text>
+  <text x="800" y="855" font-size="20" text-anchor="middle" fill="#8B6F47" font-style="italic">原文 h = 8，单头维度 d/h</text>
+</svg>

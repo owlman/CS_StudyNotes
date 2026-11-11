@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+  <text x="800" y="66" font-size="42" font-weight="700" text-anchor="middle" fill="#6B4423">原始 Transformer 的整体结构</text>
+  <line x1="600" y1="88" x2="1000" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="122" font-size="22" text-anchor="middle" fill="#8B6F47">Encoder-Decoder 双塔 + 残差与层归一化</text>
+  <text x="350" y="152" font-size="28" font-weight="700" text-anchor="middle" fill="#5A8AAA">Encoder × 6</text>
+  <rect x="120" y="180" width="460" height="110" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="350" y="218" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
+  <text x="350" y="242" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
+  <text x="350" y="270" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward</text>
+  <line x1="350" y1="292" x2="350" y2="318" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="120" y="320" width="460" height="110" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="350" y="358" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
+  <text x="350" y="382" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
+  <text x="350" y="410" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward</text>
+  <line x1="350" y1="432" x2="350" y2="458" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="120" y="460" width="460" height="110" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="350" y="498" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
+  <text x="350" y="522" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
+  <text x="350" y="550" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward</text>
+  <rect x="120" y="620" width="460" height="70" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="350" y="663" font-size="24" text-anchor="middle" fill="#6B4423">Embedding + 位置编码</text>
+  <line x1="350" y1="600" x2="350" y2="616" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="120" y="720" width="460" height="60" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="350" y="758" font-size="23" text-anchor="middle" fill="#6B4423">源句子</text>
+  <line x1="350" y1="690" x2="350" y2="716" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <text x="1200" y="152" font-size="28" font-weight="700" text-anchor="middle" fill="#D97A47">Decoder × 6</text>
+  <rect x="920" y="180" width="560" height="110" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="216" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
+  <text x="1200" y="240" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
+  <text x="1200" y="268" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（K、V 来自 Encoder）</text>
+  <line x1="1200" y1="292" x2="1200" y2="318" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="920" y="320" width="560" height="110" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="356" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
+  <text x="1200" y="380" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
+  <text x="1200" y="408" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（K、V 来自 Encoder）</text>
+  <line x1="1200" y1="432" x2="1200" y2="458" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="920" y="460" width="560" height="110" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="496" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
+  <text x="1200" y="520" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
+  <text x="1200" y="548" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（K、V 来自 Encoder）</text>
+  <rect x="920" y="620" width="560" height="70" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="1200" y="663" font-size="24" text-anchor="middle" fill="#6B4423">Embedding + 位置编码</text>
+  <line x1="1200" y1="600" x2="1200" y2="616" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="920" y="720" width="560" height="60" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="1200" y="758" font-size="23" text-anchor="middle" fill="#6B4423">目标句子（自回归，右移一位）</text>
+  <line x1="1200" y1="690" x2="1200" y2="716" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="920" y="805" width="560" height="65" rx="14" fill="#FBE7D8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="847" font-size="23" text-anchor="middle" fill="#6B4423">Linear + Softmax → 词表概率分布</text>
+  <path d="M 585 235 C 700 190 820 205 912 240" fill="none" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <text x="748" y="180" font-size="20" text-anchor="middle" fill="#7A8C6F">Encoder 输出作为 K、V</text>
+  <text x="800" y="895" font-size="20" text-anchor="middle" fill="#8B6F47" font-style="italic">每个 Block 均含残差连接与层归一化</text>
+</svg>

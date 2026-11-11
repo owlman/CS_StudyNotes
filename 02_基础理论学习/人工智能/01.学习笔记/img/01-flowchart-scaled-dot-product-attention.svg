@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+  <text x="800" y="66" font-size="42" font-weight="700" text-anchor="middle" fill="#6B4423">Scaled Dot-Product Attention 的四个步骤</text>
+  <line x1="600" y1="88" x2="1000" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="122" font-size="22" text-anchor="middle" fill="#8B6F47">从 Q、K、V 出发，逐步完成「相似度 → 缩放 → 归一化 → 加权求和」</text>
+  <rect x="60" y="150" width="300" height="560" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="210" y="205" font-size="28" font-weight="700" text-anchor="middle" fill="#5A8AAA">输入</text>
+  <text x="210" y="270" font-size="26" text-anchor="middle" fill="#6B4423">Q = X · W^Q</text>
+  <text x="210" y="330" font-size="26" text-anchor="middle" fill="#6B4423">K = X · W^K</text>
+  <text x="210" y="390" font-size="26" text-anchor="middle" fill="#6B4423">V = X · W^V</text>
+  <line x1="100" y1="425" x2="320" y2="425" stroke="#8B6F47" stroke-width="2" stroke-dasharray="6,5"/>
+  <text x="210" y="470" font-size="21" text-anchor="middle" fill="#8B6F47">同一组输入 X</text>
+  <text x="210" y="505" font-size="21" text-anchor="middle" fill="#8B6F47">三个可学习投影</text>
+  <text x="210" y="560" font-size="21" text-anchor="middle" fill="#8B6F47">键向量维度 d_k</text>
+  <text x="210" y="645" font-size="20" text-anchor="middle" fill="#8B6F47" font-style="italic">n 个位置同时计算</text>
+  <rect x="430" y="150" width="1110" height="125" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <circle cx="490" cy="212" r="26" fill="#D97A47"/>
+  <text x="490" y="222" font-size="28" font-weight="700" text-anchor="middle" fill="#FFF8E8">1</text>
+  <text x="540" y="198" font-size="28" font-weight="700" fill="#6B4423">相似度计算</text>
+  <text x="540" y="238" font-size="20" fill="#8B6F47">每个位置向所有位置发出查询，接收相关性分数</text>
+  <text x="1505" y="222" font-size="26" text-anchor="end" fill="#D97A47">Q K^T</text>
+  <line x1="490" y1="279" x2="490" y2="301" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="430" y="305" width="1110" height="125" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <circle cx="490" cy="367" r="26" fill="#5A8AAA"/>
+  <text x="490" y="377" font-size="28" font-weight="700" text-anchor="middle" fill="#FFF8E8">2</text>
+  <text x="540" y="353" font-size="28" font-weight="700" fill="#6B4423">缩放</text>
+  <text x="540" y="393" font-size="20" fill="#8B6F47">除以 sqrt(d_k)，把点积方差拉回稳定区间</text>
+  <text x="1505" y="377" font-size="26" text-anchor="end" fill="#5A8AAA">÷ sqrt(d_k)</text>
+  <line x1="490" y1="434" x2="490" y2="456" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="430" y="460" width="1110" height="125" rx="14" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <circle cx="490" cy="522" r="26" fill="#7A8C6F"/>
+  <text x="490" y="532" font-size="28" font-weight="700" text-anchor="middle" fill="#FFF8E8">3</text>
+  <text x="540" y="508" font-size="28" font-weight="700" fill="#6B4423">归一化</text>
+  <text x="540" y="548" font-size="20" fill="#8B6F47">逐行 softmax，得到和为 1 的注意力权重</text>
+  <text x="1505" y="532" font-size="26" text-anchor="end" fill="#7A8C6F">softmax( · )</text>
+  <line x1="490" y1="589" x2="490" y2="611" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="430" y="615" width="1110" height="125" rx="14" fill="#FFF8E8" stroke="#8E6C8A" stroke-width="3"/>
+  <circle cx="490" cy="677" r="26" fill="#8E6C8A"/>
+  <text x="490" y="687" font-size="28" font-weight="700" text-anchor="middle" fill="#FFF8E8">4</text>
+  <text x="540" y="663" font-size="28" font-weight="700" fill="#6B4423">加权求和</text>
+  <text x="540" y="703" font-size="20" fill="#8B6F47">用权重对 V 加权，得到新的上下文表示</text>
+  <text x="1505" y="687" font-size="26" text-anchor="end" fill="#8E6C8A">Σ α_ij · v_j</text>
+  <line x1="362" y1="300" x2="425" y2="300" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="430" y="760" width="1110" height="80" rx="14" fill="#E8F0F5" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="985" y="810" font-size="26" text-anchor="middle" fill="#6B4423">输出：每个位置得到融合了全序列信息的上下文表示</text>
+  <text x="800" y="880" font-size="20" text-anchor="middle" fill="#8B6F47" font-style="italic">Vaswani et al., Attention Is All You Need (2017)</text>
+</svg>
