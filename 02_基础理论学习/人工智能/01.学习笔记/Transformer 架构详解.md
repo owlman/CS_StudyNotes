@@ -49,7 +49,7 @@ RNN 的循环结构要求**第 $t$ 步必须等第 $t-1$ 步计算完成**。这
 
 ### 注意力机制的早期尝试
 
-在 Transformer 之前，已经有工作尝试将"注意力"引入 RNN。例如 [Bahdanau Attention（2014）](https://arxiv.org/abs/1409.0473)允许解码器在生成每个词时回看编码器的所有隐藏状态，从而**绕过固定长度向量**的瓶颈。但这种"注意力 + RNN"的混合结构仍然受制于 RNN 本身，无法彻底摆脱串行约束。
+在 Transformer 之前，已经有工作尝试将"注意力"引入 RNN。例如 Bahdanau 等人 2014 年提出的 [注意力机制（arXiv 2014 / ICLR 2015）](https://arxiv.org/abs/1409.0473)，允许解码器在生成每个词时回看编码器的所有隐藏状态，从而**绕过固定长度向量**的瓶颈。但这种"注意力 + RNN"的混合结构仍然受制于 RNN 本身，无法彻底摆脱串行约束。
 
 Transformer 的革命性在于：**它把循环结构彻底删掉了**，转而用一种名为"自注意力（Self-Attention）"的机制直接建立序列中任意两个位置之间的连接。下面，我们就要来理解这一替换的数学直觉。
 
@@ -113,6 +113,8 @@ $QK^\top$ 的第 $i$ 行第 $j$ 列元素 $\langle q_i, k_j \rangle$ 表示"位�
 
 至此，我们就完成了自注意力的完整计算。值得强调的是，自注意力的所有计算步骤都是**对序列内所有位置同时进行的**——这就是它能够高效利用 GPU 并行性的原因。
 
+![图 1 Scaled Dot-Product Attention 的四个计算步骤](./img/01-flowchart-scaled-dot-product-attention.svg)
+
 ## Multi-Head Attention
 
 单个 Scaled Dot-Product Attention 输出的表示空间是单一的——所有位置都共享同一组 $W^Q$、$W^K$、$W^V$。这会带来一个限制：模型被迫在同一个表示空间里表达所有类型的"相关性"。
@@ -128,6 +130,10 @@ $$
 $$
 
 其中 $h$ 是头数（原始论文中 $h = 8$），$W_i^Q$、$W_i^K$、$W_i^V$ 是每个头**独立**的参数矩阵，$W^O$ 是最终的输出投影矩阵。
+
+![图 2 多头注意力：把表示空间切成 h 份并行观察](./img/02-framework-multi-head-attention.svg)
+
+从维度上看，每个头的投影矩阵满足 $W_i^Q, W_i^K, W_i^V \in \mathbb{R}^{d \times d/h}$，因此单个头的输出维度只有 $d/h$；$h$ 个头拼接（Concat）之后总维度重新变回 $d$，再经 $W^O$ 映射到模型维度。
 
 ### 多头的语义
 
@@ -161,18 +167,35 @@ $$
 PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d}}\right)
 $$
 
-其中 $pos$ 是位置索引，$i$ 是维度索引，$d$ 是嵌入维度。这种设计的两个核心优势是：
+其中 $pos$ 是位置索引，$i$ 是维度索引，$d$ 是嵌入维度。分母中的 $10000^{2i/d}$ 使得**不同维度承载不同频率的波形**：低维频率高、波长短，负责区分邻近位置；高维频率低、波长长，负责编码较远处的绝对位置。
+
+![图 3 正弦位置编码：不同维度承载不同频率](./img/03-infographic-positional-encoding.svg)
+
+这种设计的两个核心优势是：
 
 1. **从原理上可外推到训练时未见过更长的序列**（论文原文表述为 *we hypothesized that this would allow the model to extrapolate*）：因为正弦函数是连续的，模型在理论上可以平滑地处理比训练序列更长的位置；但学界普遍观察到，这种外推能力在实际训练中相当有限。
 2. **不同位置之间有可学习的相对关系**：通过三角恒等式，$PE_{pos+k}$ 可以表示为 $PE_{pos}$ 的线性函数。
 
 ### 可学习位置编码
 
-另一种主流方案是直接把位置编码视为可学习的参数矩阵，每个位置对应一个可训练的向量（如 BERT 至今仍在使用的可学习绝对位置编码）。这种方案简单直接，但**无法外推到训练时未见过更长的序列**。后来的 RoPE、ALiBi 等旋转式 / 线性偏置位置编码则尝试兼顾两种方案的优点——它们已经成为现代 LLM（LLaMA、Qwen 等）的事实标准。这一演进留待后续笔记讨论。
+另一种主流方案是直接把位置编码视为可学习的参数矩阵，每个位置对应一个可训练的向量（如 BERT 至今仍在使用的可学习绝对位置编码）。这种方案简单直接，但**无法外推到训练时未见过更长的序列**。后来的 [RoPE（旋转式位置编码）](https://arxiv.org/abs/2104.09864)、[ALiBi（线性偏置位置编码）](https://arxiv.org/abs/2108.12409) 则尝试兼顾两种方案的优点——它们已经成为现代 LLM（LLaMA、Qwen 等）的事实标准。这一演进留待后续笔记讨论。
 
 ## 整体架构
 
 把前面讨论的所有组件拼起来，我们就得到了原始 Transformer 的完整架构。它由 **Encoder** 和 **Decoder** 两部分组成，每部分各包含若干个相同的"块（Block）"。
+
+![图 4 原始 Transformer 的整体结构](./img/04-framework-transformer-architecture.svg)
+
+| 配置项 | 取值 | 说明 |
+| ------------------------------- | ------------ | ---------------------------------------- |
+| $N$ | 6 | Encoder / Decoder 各堆叠 6 层 |
+| $d_{\text{model}}$ | 512 | 模型维度（隐藏层宽度） |
+| $h$ | 8 | 注意力头数 |
+| $d_k = d_v$ | 64 | 单头键 / 值向量维度（$d_{\text{model}} / h$） |
+| $d_{\text{ff}}$ | 2048 | 前馈网络隐藏维度（$4 \times d_{\text{model}}$） |
+| 训练数据 | WMT 2014 英德 | 约 450 万句对，批大小约 25000 token |
+
+**表 2** 原始 Transformer 论文中的关键配置（以 base 模型为例）
 
 ### Encoder Block
 
@@ -197,6 +220,44 @@ $$
 2. **Cross-Attention（Encoder-Decoder Attention）**：Query 来自 Decoder 上一层的输出，而 Key 和 Value 来自 Encoder 的最终输出。这一步让 Decoder 在生成每个词时能够"参考"输入序列的完整表示。
 3. **Feed-Forward Network**：与 Encoder Block 中的 FFN 结构相同。
 
+掩码在公式上的体现，是让注意力分数矩阵在进入 softmax 之前额外加上一项掩码矩阵 $M$：
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}} + M\right)V
+$$
+
+其中 $M$ 的元素满足 $M_{ij} = 0$（允许关注）或 $M_{ij} = -\infty$（屏蔽），从而使被屏蔽位置的 softmax 权重严格为 $0$。
+
+### 输入嵌入与输出层
+
+前面讨论的都是"网络内部"的结构，但一个完整的 Transformer 还需要最外层的输入与输出。
+
+**输入端**先把离散的 token 变成向量：每个 token 通过查表得到词嵌入，再与位置编码相加，最终得到序列矩阵 $X \in \mathbb{R}^{n \times d}$：
+
+$$
+X = \text{Embedding}(x_1, \dots, x_n) + PE
+$$
+
+**输出端**（以现代 LLM 普遍采用的 Decoder-only 架构为例）把最后一层的隐状态投影回词表空间，再经 softmax 得到下一个 token 的概率分布：
+
+$$
+P(x_{t+1}) = \text{softmax}(ZW^E + b)
+$$
+
+其中 $Z \in \mathbb{R}^{n \times d}$ 是最后一层的输出，$W^E$ 的形状是 $d \times \lvert V \rvert$（$\lvert V \rvert$ 为词表大小），实践中常与输入嵌入矩阵共享权重（weight tying），以节省参数量。
+
+| 组件 | 作用 | 输出形状（序列长度 $n$、模型维度 $d$） |
+| ----------------------------------- | ------------------------ | ------------------------------ |
+| 词嵌入层 | token id → 向量，查表操作 | $n \times d$ |
+| 位置编码 | 注入顺序信息，与词嵌入相加 | $n \times d$ |
+| 多头自注意力 | 序列内信息聚合 | $n \times d$ |
+| 前馈网络 | 逐位置的非线性变换 | $n \times d$ |
+| 输出投影 + Softmax | 隐状态 → 词表概率分布 | $n \times \lvert V \rvert$ |
+
+**表 3** 以 Decoder-only 架构为例，各层的数据形状
+
+可以看到，Transformer 内部**从头到尾都保持了 $n \times d$ 的形状**——位置维度 $n$ 只在注意力矩阵 $n \times n$ 的中间步骤里才发生膨胀，这也是后面讨论复杂度瓶颈时的关键。
+
 ### 残差连接与层归一化的意义
 
 残差连接（$X + \text{Sublayer}(X)$）与层归一化（LayerNorm）的组合并非 Transformer 的发明，但 Transformer 是第一个把它们作为"标配"应用到如此深网络结构上的架构之一。它们的作用是：
@@ -205,6 +266,8 @@ $$
 - **稳定训练过程**：层归一化对每个样本的特征维度做归一化，使各层的输入分布保持稳定，从而允许更大的学习率。
 
 没有这两个机制，今天动辄几十层、上百层的 Transformer 根本无法稳定训练。
+
+这里还有一个容易被忽略的细节：原论文采用的是 **post-LN**（先做残差相加、再做归一化，即上面写出的 $X' = \text{LayerNorm}(X + \text{MultiHead}(X))$），而现代 LLM（如 LLaMA、Qwen 系列）普遍改用 **pre-LN**（先归一化、再做残差相加），并把 LayerNorm 换成计算更省的 **RMSNorm**。pre-LN 的好处在于训练早期更稳定，对学习率预热（warmup）的依赖也小得多，这是深层堆叠能够成立的重要工程前提。
 
 ## 典型变体
 
@@ -216,7 +279,7 @@ $$
 
 ### GPT：Decoder-only
 
-2018 年 OpenAI 提出的 GPT 只使用了 Transformer 的 Decoder 部分，并通过**自回归语言模型**作为预训练目标——即给定前文预测下一个词。这种架构天然适合文本生成，且通过规模化（参数量、数据量、计算量）展现了强大的"涌现能力"。从 GPT-2 到 GPT-3 再到 GPT-4，从 LLaMA 到 Claude 再到 Gemini，几乎所有现代 LLM 都基于 Decoder-only 架构。
+2018 年 OpenAI 提出的 GPT 只使用了 Transformer 的 Decoder 部分，并通过**自回归语言模型**作为预训练目标——即给定前文预测下一个词。这种架构天然适合文本生成，且通过规模化（参数量、数据量、计算量）展现了强大的"涌现能力"。从 GPT-2 到 GPT-3 再到 GPT-4，从 LLaMA 到 Qwen 再到 DeepSeek，**公开发布**的现代 LLM 几乎都基于 Decoder-only 架构。需要说明的是，Claude、Gemini 等闭源模型的完整架构从未官方公开，业界普遍认为它们同属 Decoder-only 家族，但严格来说这属于合理推断而非已证实的事实。
 
 ### T5：Encoder-Decoder
 
@@ -232,7 +295,9 @@ $$
 
 ## 与现代 LLM 的关系
 
-理解了原始 Transformer 之后，我们就可以看清现代 LLM 的本质：**它们基本上都是 Decoder-only Transformer 的规模化与工程优化版本**。规模化体现在参数量从亿级跃升到千亿乃至万亿级，训练数据从 GB 级跃升到 TB 级。工程优化体现在引入了 RoPE、SwiGLU、GQA、Flash Attention 等一系列改进，使得大模型在长上下文推理、低显存训练、高吞吐推理等场景下变得可行。
+不过，原始 Transformer 还留下了一个著名的结构性瓶颈：**自注意力的计算量与显存占用都随序列长度 $n$ 呈平方增长**（注意力矩阵的规模是 $O(n^2)$）。当上下文从 2K 扩展到 128K 时，注意力矩阵的规模会膨胀约 4000 倍，这正是后来 Flash Attention、稀疏注意力、线性注意力等一系列工程与算法改进要解决的问题。
+
+理解了原始 Transformer 之后，我们就可以看清现代 LLM 的本质：**它们基本上都是 Decoder-only Transformer 的规模化与工程优化版本**。规模化体现在参数量从亿级跃升到千亿乃至万亿级，训练数据从 GB 级跃升到 TB 级。工程优化体现在引入了 [RoPE](https://arxiv.org/abs/2104.09864)、[SwiGLU](https://arxiv.org/abs/2002.05202)、[GQA](https://arxiv.org/abs/2305.13245)、[Flash Attention](https://arxiv.org/abs/2205.14135) 等一系列改进，使得大模型在长上下文推理、低显存训练、高吞吐推理等场景下变得可行。
 
 但**所有这些演进都没有改变 Decoder-only Transformer 的核心骨架**——自注意力 + 前馈网络 + 残差归一化 + 自回归语言模型。这意味着，掌握了原始 Transformer 的工作原理，就具备了阅读后续所有 LLM 相关文献的"地基"。
 
@@ -249,3 +314,8 @@ $$
 - Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. NAACL 2019 / arXiv:1810.04805. <https://arxiv.org/abs/1810.04805>
 - Radford, A., Narasimhan, K., Salimans, T., & Sutskever, I. (2018). *Improving Language Understanding by Generative Pre-Training*. OpenAI Technical Report. <https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf>
 - Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). *Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer*. JMLR 21(140). <https://jmlr.org/papers/v21/20-074.html>
+- Su, J., Lu, Y., Pan, S., Bozeněc, A., et al. (2021). *RoFormer: Enhanced Transformer with Rotary Position Embedding*. arXiv:2104.09864. <https://arxiv.org/abs/2104.09864>
+- Press, O., Smith, N. A., & Lewis, M. (2022). *Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation* (ALiBi). ICLR 2022 / arXiv:2108.12409. <https://arxiv.org/abs/2108.12409>
+- Shazeer, N. (2020). *GLU Variants Improve Transformer* (SwiGLU). arXiv:2002.05202. <https://arxiv.org/abs/2002.05202>
+- Ainslie, J., Zhao, T., Onural, S., et al. (2023). *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*. EMNLP 2023 / arXiv:2305.13245. <https://arxiv.org/abs/2305.13245>
+- Dao, T., Fu, S., Fung, W. W., et al. (2022). *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135. <https://arxiv.org/abs/2205.14135>
