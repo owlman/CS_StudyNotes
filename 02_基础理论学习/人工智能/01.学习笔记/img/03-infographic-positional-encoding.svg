@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <title>图 3　正弦位置编码：不同维度承载不同频率</title>
+  <desc>正弦位置编码：不同维度承载不同频率</desc>
   <defs>
     <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
@@ -28,18 +30,18 @@
   <circle cx="1060" cy="185" r="9" fill="#B07C3E"/>
   <text x="1080" y="192" font-size="21" fill="#8B6F47">最低频</text>
   <text x="145" y="192" font-size="21" fill="#8B6F47">不同维度 i 的频率：</text>
-  <rect x="1220" y="150" width="330" height="560" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
-  <text x="1385" y="205" font-size="26" font-weight="700" text-anchor="middle" fill="#D97A47">正弦位置编码</text>
-  <text x="1250" y="265" font-size="20" fill="#6B4423">PE(pos, 2i) =</text>
-  <text x="1250" y="295" font-size="20" fill="#6B4423">  sin(pos / 10000^(2i/d))</text>
-  <text x="1250" y="340" font-size="20" fill="#6B4423">PE(pos, 2i+1) =</text>
-  <text x="1250" y="370" font-size="20" fill="#6B4423">  cos(pos / 10000^(2i/d))</text>
-  <line x1="1250" y1="400" x2="1520" y2="400" stroke="#8B6F47" stroke-width="2" stroke-dasharray="6,5"/>
-  <text x="1250" y="440" font-size="20" fill="#8B6F47">偶数维用 sin，奇数维用 cos</text>
-  <text x="1250" y="475" font-size="20" fill="#8B6F47">分母 10000^(2i/d) 让不同维度</text>
-  <text x="1250" y="505" font-size="20" fill="#8B6F47">呈现不同波长</text>
-  <text x="1250" y="550" font-size="20" fill="#8B6F47">位置向量可线性表示为</text>
-  <text x="1250" y="580" font-size="20" fill="#8B6F47">PE(pos+k) 与 PE(pos) 的线性组合</text>
-  <text x="1250" y="630" font-size="20" fill="#8B6F47" font-style="italic">不含可学习参数</text>
+  <rect x="1200" y="150" width="360" height="560" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1380" y="202" font-size="24" font-weight="700" text-anchor="middle" fill="#D97A47">正弦位置编码</text>
+  <text x="1232" y="256" font-size="19" fill="#6B4423">PE(pos, 2i) =</text>
+  <text x="1232" y="286" font-size="19" fill="#6B4423">sin(pos / 10000^(2i/d))</text>
+  <text x="1232" y="331" font-size="19" fill="#6B4423">PE(pos, 2i+1) =</text>
+  <text x="1232" y="361" font-size="19" fill="#6B4423">cos(pos / 10000^(2i/d))</text>
+  <line x1="1232" y1="393" x2="1528" y2="393" stroke="#8B6F47" stroke-width="2" stroke-dasharray="6,5"/>
+  <text x="1232" y="433" font-size="18" fill="#8B6F47">偶数维用 sin，奇数维用 cos</text>
+  <text x="1232" y="468" font-size="18" fill="#8B6F47">分母 10000^(2i/d) 让不同维度</text>
+  <text x="1232" y="498" font-size="18" fill="#8B6F47">呈现不同波长</text>
+  <text x="1232" y="543" font-size="18" fill="#8B6F47">位置向量可线性表示为</text>
+  <text x="1232" y="573" font-size="18" fill="#8B6F47">PE(pos+k) 与 PE(pos) 的线性组合</text>
+  <text x="1232" y="618" font-size="18" fill="#8B6F47" font-style="italic">不含可学习参数</text>
   <text x="800" y="855" font-size="20" text-anchor="middle" fill="#8B6F47" font-style="italic">Vaswani et al. (2017)：原论文采用的固定位置编码</text>
 </svg>
