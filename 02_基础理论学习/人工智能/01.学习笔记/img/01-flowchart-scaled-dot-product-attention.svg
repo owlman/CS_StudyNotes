@@ -19,6 +19,7 @@
   <text x="210" y="470" font-size="21" text-anchor="middle" fill="#8B6F47">同一组输入 X</text>
   <text x="210" y="505" font-size="21" text-anchor="middle" fill="#8B6F47">三个可学习投影</text>
   <text x="210" y="560" font-size="21" text-anchor="middle" fill="#8B6F47">键向量维度 d_k</text>
+  <text x="210" y="602" font-size="21" text-anchor="middle" fill="#8B6F47">值向量维度 d_v</text>
   <text x="210" y="645" font-size="20" text-anchor="middle" fill="#8B6F47" font-style="italic">n 个位置同时计算</text>
   <rect x="430" y="150" width="1110" height="125" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
   <circle cx="490" cy="212" r="26" fill="#D97A47"/>
