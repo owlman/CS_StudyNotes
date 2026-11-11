@@ -75,9 +75,9 @@ $$
 
 当然，自注意力也带来一个问题：**序列的顺序信息消失了**。因为上面的公式对所有 $j$ 是一视同仁的，$x_1$ 和 $x_n$ 在公式里没有区别。我们稍后会用"位置编码"解决这一问题。
 
-## Scaled Dot-Product Attention
+## 缩放点积注意力（Scaled Dot-Product Attention）
 
-在理解了自注意力的直觉之后，我们来看它在 Transformer 中的精确数学形式。这就是论文《Attention Is All You Need》中提出的 **Scaled Dot-Product Attention**：
+在理解了自注意力的直觉之后，我们来看它在 Transformer 中的精确数学形式。这就是论文《Attention Is All You Need》中提出的 **缩放点积注意力（Scaled Dot-Product Attention）**：
 
 $$
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right) V
@@ -113,11 +113,11 @@ $QK^\top$ 的第 $i$ 行第 $j$ 列元素 $\langle q_i, k_j \rangle$ 表示"位�
 
 至此，我们就完成了自注意力的完整计算。值得强调的是，自注意力的所有计算步骤都是**对序列内所有位置同时进行的**——这就是它能够高效利用 GPU 并行性的原因。
 
-![图 1 Scaled Dot-Product Attention 的四个计算步骤](./img/01-flowchart-scaled-dot-product-attention.svg)
+![图 1 缩放点积注意力的四个计算步骤](./img/01-flowchart-scaled-dot-product-attention.svg)
 
-## Multi-Head Attention
+## 多头注意力（Multi-Head Attention）
 
-单个 Scaled Dot-Product Attention 输出的表示空间是单一的——所有位置都共享同一组 $W^Q$、$W^K$、$W^V$。这会带来一个限制：模型被迫在同一个表示空间里表达所有类型的"相关性"。
+单个缩放点积注意力输出的表示空间是单一的——所有位置都共享同一组 $W^Q$、$W^K$、$W^V$。这会带来一个限制：模型被迫在同一个表示空间里表达所有类型的"相关性"。
 
 为了突破这一限制，Transformer 引入了**多头注意力（Multi-Head Attention）**：
 
@@ -197,9 +197,9 @@ $$
 
 **表 2** 原始 Transformer 论文中的关键配置（以 base 模型为例）
 
-### Encoder Block
+### 编码器块（Encoder Block）
 
-每个 Encoder Block 由两个子层组成：
+每个编码器块由两个子层组成：
 
 1. **Multi-Head Self-Attention 子层**：输入是上一层输出 $X$，经过多头自注意力后再经过残差连接与层归一化，得到 $X' = \text{LayerNorm}(X + \text{MultiHead}(X))$。
 2. **Feed-Forward Network（FFN）子层**：对每个位置独立地施加一个两层的全连接网络，再经过残差连接与层归一化，得到 $X'' = \text{LayerNorm}(X' + \text{FFN}(X'))$。
@@ -212,13 +212,13 @@ $$
 
 即一个"扩展-压缩"的两层感知机，隐藏维度通常是模型维度的 4 倍。
 
-### Decoder Block
+### 解码器块（Decoder Block）
 
-每个 Decoder Block 由三个子层组成，比 Encoder 多一个：
+每个解码器块由三个子层组成，比编码器多一个：
 
 1. **Masked Multi-Head Self-Attention**：在自注意力的相似度矩阵上施加一个**下三角掩码**，使位置 $i$ 只能看到 $\leq i$ 的位置。这是为了让 Decoder 在生成任务中保持"自回归"特性——生成第 $t$ 个词时不能偷看第 $t+1$ 个之后的词。
 2. **Cross-Attention（Encoder-Decoder Attention）**：Query 来自 Decoder 上一层的输出，而 Key 和 Value 来自 Encoder 的最终输出。这一步让 Decoder 在生成每个词时能够"参考"输入序列的完整表示。
-3. **Feed-Forward Network**：与 Encoder Block 中的 FFN 结构相同。
+3. **Feed-Forward Network**：与编码器块中的 FFN 结构相同。
 
 掩码在公式上的体现，是让注意力分数矩阵在进入 softmax 之前额外加上一项掩码矩阵 $M$：
 
@@ -273,15 +273,15 @@ $$
 
 原始 Transformer 是一个 Encoder-Decoder 的对称结构，主要面向机器翻译这类"输入-输出"任务。但实际工程中，更常见的做法是根据任务需求**只取 Encoder 或 Decoder 的一部分**。这种分化催生了现代 NLP 的三大主流架构。
 
-### BERT：Encoder-only
+### BERT：仅编码器（Encoder-only）
 
 2018 年 Google 提出的 BERT 只使用了 Transformer 的 Encoder 部分，并在预训练阶段引入了两个自监督任务——**掩码语言模型（Masked Language Modeling, MLM）**和**下一句预测（Next Sentence Prediction, NSP）**。MLM 让模型学会"双向"理解上下文（既能看上文也能看下文），但代价是无法直接用于文本生成。BERT 架构特别适合需要"理解"的场景——文本分类、问答、命名实体识别、检索排序等。
 
-### GPT：Decoder-only
+### GPT：仅解码器（Decoder-only）
 
 2018 年 OpenAI 提出的 GPT 只使用了 Transformer 的 Decoder 部分，并通过**自回归语言模型**作为预训练目标——即给定前文预测下一个词。这种架构天然适合文本生成，且通过规模化（参数量、数据量、计算量）展现了强大的"涌现能力"。从 GPT-2 到 GPT-3 再到 GPT-4，从 LLaMA 到 Qwen 再到 DeepSeek，**公开发布**的现代 LLM 几乎都基于 Decoder-only 架构。需要说明的是，Claude、Gemini 等闭源模型的完整架构从未官方公开，业界普遍认为它们同属 Decoder-only 家族，但严格来说这属于合理推断而非已证实的事实。
 
-### T5：Encoder-Decoder
+### T5：编码器-解码器（Encoder-Decoder）
 
 2019 年 Google 提出的 T5 保留了完整的 Encoder-Decoder 结构，并把所有 NLP 任务统一为"文本到文本"的转换问题（即使分类任务也输出"类别名"作为文本）。这种架构在翻译、摘要等"输入-输出"对齐任务上仍有竞争力，但在通用对话场景下不如 Decoder-only 流行。
 
