@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <title>图 1　循环结构与自注意力：长距离信息的两条路径</title>
+  <desc>左侧为 RNN 沿时间步接力的串行结构，右侧为自注意力两两相连的全连接结构</desc>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5A8AAA"/>
+    </marker>
+    <marker id="arwW" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="68" font-size="42" font-weight="700" text-anchor="middle" fill="#6B4423">循环结构 vs 自注意力：信息如何跨位置传递</text>
+  <line x1="580" y1="90" x2="1020" y2="90" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="126" font-size="22" text-anchor="middle" fill="#8B6F47">两者都要跨越长距离，差别在于「这段路要走几步」</text>
+
+  <!-- 左：RNN -->
+  <rect x="70" y="160" width="700" height="540" rx="14" fill="#E8F0F5" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="420" y="212" font-size="30" font-weight="700" text-anchor="middle" fill="#5A8AAA">RNN / LSTM：沿时间步接力</text>
+  <text x="420" y="246" font-size="20" text-anchor="middle" fill="#8B6F47">信息靠隐藏状态 h 一步步往下传</text>
+
+  <!-- 左：长距离路径（虚线弧） -->
+  <path d="M 175 430 C 175 250, 630 250, 630 430" fill="none" stroke="#D97A47" stroke-width="3" stroke-dasharray="10,8" stroke-linecap="round" marker-end="url(#arwW)" opacity="0.85"/>
+  <!-- 左：相邻步接力弧 -->
+  <path d="M 175 430 C 175 402, 338 402, 338 430" fill="none" stroke="#5A8AAA" stroke-width="2.5" marker-end="url(#arwC)" stroke-linecap="round"/>
+  <path d="M 338 430 C 338 402, 501 402, 501 430" fill="none" stroke="#5A8AAA" stroke-width="2.5" marker-end="url(#arwC)" stroke-linecap="round"/>
+  <path d="M 501 430 C 501 402, 664 402, 664 430" fill="none" stroke="#5A8AAA" stroke-width="2.5" marker-end="url(#arwC)" stroke-linecap="round"/>
+
+  <!-- 左：位置盒 -->
+  <rect x="110" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <rect x="273" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <rect x="436" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <rect x="599" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="175" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₁</text>
+  <text x="338" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₂</text>
+  <text x="501" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₃</text>
+  <text x="664" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₄</text>
+  <text x="175" y="490" font-size="20" text-anchor="middle" fill="#8B6F47">h₁</text>
+  <text x="338" y="490" font-size="20" text-anchor="middle" fill="#8B6F47">h₂</text>
+  <text x="501" y="490" font-size="20" text-anchor="middle" fill="#8B6F47">h₃</text>
+  <text x="664" y="490" font-size="20" text-anchor="middle" fill="#8B6F47">h₄</text>
+
+  <!-- 左：要点 -->
+  <circle cx="118" cy="542" r="6" fill="#5A8AAA"/>
+  <text x="140" y="550" font-size="24" fill="#6B4423">串行：第 t 步必须等第 t−1 步算完</text>
+  <circle cx="118" cy="586" r="6" fill="#5A8AAA"/>
+  <text x="140" y="594" font-size="24" fill="#6B4423">位置 1 到位置 4，信息要经 3 次传递</text>
+  <circle cx="118" cy="630" r="6" fill="#5A8AAA"/>
+  <text x="140" y="638" font-size="24" fill="#6B4423">同一序列内的位置无法并行计算</text>
+  <line x1="112" y1="672" x2="172" y2="672" stroke="#D97A47" stroke-width="3" stroke-dasharray="10,8" stroke-linecap="round"/>
+  <text x="188" y="680" font-size="21" fill="#8B6F47">长距离依赖的传递路径</text>
+
+  <!-- 中缝 -->
+  <line x1="800" y1="150" x2="800" y2="710" stroke="#D97A47" stroke-width="3" stroke-dasharray="10,8" opacity="0.45" stroke-linecap="round"/>
+
+  <!-- 右：自注意力 -->
+  <rect x="830" y="160" width="700" height="540" rx="14" fill="#F5E0D0" stroke="#D97A47" stroke-width="3"/>
+  <text x="1180" y="212" font-size="30" font-weight="700" text-anchor="middle" fill="#D97A47">自注意力：任意位置一步直达</text>
+  <text x="1180" y="246" font-size="20" text-anchor="middle" fill="#8B6F47">每个位置直接连到所有其他位置</text>
+
+  <!-- 右：全连接弧（细线，含交叉） -->
+  <path d="M 935 430 C 935 370, 1098 370, 1098 430" fill="none" stroke="#D97A47" stroke-width="1.8" opacity="0.5"/>
+  <path d="M 935 430 C 935 310, 1261 310, 1261 430" fill="none" stroke="#D97A47" stroke-width="1.8" opacity="0.5"/>
+  <path d="M 935 430 C 935 250, 1424 250, 1424 430" fill="none" stroke="#D97A47" stroke-width="3" stroke-dasharray="10,8" opacity="0.9" marker-end="url(#arwW)"/>
+  <path d="M 1098 430 C 1098 370, 1261 370, 1261 430" fill="none" stroke="#D97A47" stroke-width="1.8" opacity="0.5"/>
+  <path d="M 1098 430 C 1098 310, 1424 310, 1424 430" fill="none" stroke="#D97A47" stroke-width="1.8" opacity="0.5"/>
+  <path d="M 1261 430 C 1261 370, 1424 370, 1424 430" fill="none" stroke="#D97A47" stroke-width="1.8" opacity="0.5"/>
+
+  <!-- 右：位置盒 -->
+  <rect x="870" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <rect x="1033" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <rect x="1196" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <rect x="1359" y="430" width="130" height="70" rx="8" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="935" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₁</text>
+  <text x="1098" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₂</text>
+  <text x="1261" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₃</text>
+  <text x="1424" y="463" font-size="26" text-anchor="middle" fill="#6B4423">x₄</text>
+
+  <!-- 右：要点 -->
+  <circle cx="878" cy="542" r="6" fill="#D97A47"/>
+  <text x="900" y="550" font-size="24" fill="#6B4423">一步直达：任意两个位置直接交互</text>
+  <circle cx="878" cy="586" r="6" fill="#D97A47"/>
+  <text x="900" y="594" font-size="24" fill="#6B4423">所有位置可同时计算，GPU 吃得饱</text>
+  <circle cx="878" cy="630" r="6" fill="#D97A47"/>
+  <text x="900" y="638" font-size="24" fill="#6B4423">代价：注意力矩阵规模为 O(n²)</text>
+  <line x1="872" y1="672" x2="932" y2="672" stroke="#D97A47" stroke-width="3" stroke-dasharray="10,8" stroke-linecap="round"/>
+  <text x="948" y="680" font-size="21" fill="#8B6F47">跨位置的信息通路</text>
+
+  <text x="800" y="762" font-size="24" text-anchor="middle" fill="#6B4423">RNN 把「信息要走多远」当成结构问题，自注意力把它降成了一个权重问题</text>
+  <text x="800" y="800" font-size="21" text-anchor="middle" fill="#8B6F47">代价从「路径长度」换成了「注意力矩阵的平方规模」</text>
+</svg>
