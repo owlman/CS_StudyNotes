@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <title>图 6　从原始 Transformer 到现代 LLM</title>
+  <desc>原始 Transformer 的 Encoder-Decoder 双塔分化为 BERT、GPT、T5 三种变体，其中 Decoder-only 一路演化为现代大语言模型</desc>
+  <defs>
+    <marker id="arw6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
+    </marker>
+    <marker id="arw6b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5A8AAA"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="66" font-size="42" font-weight="700" text-anchor="middle" fill="#6B4423">从原始 Transformer 到现代 LLM</text>
+  <line x1="600" y1="88" x2="1000" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="122" font-size="22" text-anchor="middle" fill="#8B6F47">骨架没有变，变的是「留哪一半」以及「把它做多大、做多快」</text>
+
+  <!-- A 原始 Transformer -->
+  <rect x="60" y="160" width="440" height="560" rx="14" fill="#E8F0F5" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="280" y="212" font-size="28" font-weight="700" text-anchor="middle" fill="#5A8AAA">原始 Transformer（2017）</text>
+  <rect x="100" y="260" width="360" height="140" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="280" y="302" font-size="26" font-weight="700" text-anchor="middle" fill="#6B4423">Encoder 塔</text>
+  <text x="280" y="338" font-size="21" text-anchor="middle" fill="#6B4423">N 层：自注意力 + FFN</text>
+  <text x="280" y="370" font-size="20" text-anchor="middle" fill="#8B6F47">双向可见，负责理解输入</text>
+  <path d="M 280 405 L 280 448" fill="none" stroke="#5A8AAA" stroke-width="3" marker-end="url(#arw6b)" stroke-linecap="round"/>
+  <rect x="100" y="455" width="360" height="140" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="280" y="497" font-size="26" font-weight="700" text-anchor="middle" fill="#6B4423">Decoder 塔</text>
+  <text x="280" y="533" font-size="21" text-anchor="middle" fill="#6B4423">N 层：因果自注意力 + FFN</text>
+  <text x="280" y="565" font-size="20" text-anchor="middle" fill="#8B6F47">逐 token 自回归生成</text>
+  <text x="280" y="655" font-size="21" text-anchor="middle" fill="#5A8AAA">为机器翻译而设计：双塔分工</text>
+
+  <!-- 分化箭头 -->
+  <path d="M 505 250 C 550 250, 550 320, 592 320" fill="none" stroke="#D97A47" stroke-width="3" marker-end="url(#arw6)" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 505 330 C 550 330, 550 450, 592 450" fill="none" stroke="#D97A47" stroke-width="3" marker-end="url(#arw6)" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 505 410 C 550 410, 550 580, 592 580" fill="none" stroke="#D97A47" stroke-width="3" marker-end="url(#arw6)" stroke-linecap="round" opacity="0.8"/>
+  <text x="548" y="236" font-size="18" text-anchor="middle" fill="#8B6F47">分化为</text>
+
+  <!-- B 变体（不加大面板底框，让分化箭头自然进入卡片） -->
+  <text x="800" y="212" font-size="28" font-weight="700" text-anchor="middle" fill="#7A8C6F">同一架构的三种取舍</text>
+  <line x1="660" y1="232" x2="940" y2="232" stroke="#7A8C6F" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <rect x="600" y="265" width="400" height="100" rx="10" fill="#E8F0F5" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="800" y="305" font-size="25" font-weight="700" text-anchor="middle" fill="#5A8AAA">BERT · 仅保留 Encoder</text>
+  <text x="800" y="340" font-size="20" text-anchor="middle" fill="#8B6F47">理解与检索，不能自回归生成</text>
+  <rect x="600" y="395" width="400" height="100" rx="10" fill="#F5E0D0" stroke="#D97A47" stroke-width="3"/>
+  <text x="800" y="435" font-size="25" font-weight="700" text-anchor="middle" fill="#D97A47">GPT · 仅保留 Decoder</text>
+  <text x="800" y="470" font-size="20" text-anchor="middle" fill="#8B6F47">自回归生成，走的是这条路</text>
+  <rect x="600" y="525" width="400" height="100" rx="10" fill="#E8F0F5" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="800" y="565" font-size="25" font-weight="700" text-anchor="middle" fill="#5A8AAA">T5 · 保留双塔</text>
+  <text x="800" y="600" font-size="20" text-anchor="middle" fill="#8B6F47">文本到文本，仍需编码输入</text>
+  <text x="800" y="680" font-size="21" text-anchor="middle" fill="#7A8C6F">选哪一半，取决于任务是否需要生成</text>
+
+  <!-- GPT -> 现代 LLM -->
+  <path d="M 1005 445 L 1090 445" fill="none" stroke="#D97A47" stroke-width="4" marker-end="url(#arw6)" stroke-linecap="round"/>
+  <text x="1047" y="425" font-size="19" text-anchor="middle" fill="#8B6F47">规模化</text>
+
+  <!-- C 现代 LLM -->
+  <rect x="1100" y="160" width="440" height="560" rx="14" fill="#F5E0D0" stroke="#D97A47" stroke-width="3"/>
+  <text x="1320" y="212" font-size="28" font-weight="700" text-anchor="middle" fill="#D97A47">现代 LLM 的骨架</text>
+  <rect x="1140" y="265" width="360" height="76" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1320" y="312" font-size="23" text-anchor="middle" fill="#6B4423">词嵌入 + 位置编码</text>
+  <path d="M 1320 345 L 1320 380" fill="none" stroke="#D97A47" stroke-width="3" marker-end="url(#arw6)" stroke-linecap="round"/>
+  <rect x="1140" y="388" width="360" height="76" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1320" y="435" font-size="23" text-anchor="middle" fill="#6B4423">N × [ 因果自注意力 → FFN ]</text>
+  <path d="M 1320 468 L 1320 503" fill="none" stroke="#D97A47" stroke-width="3" marker-end="url(#arw6)" stroke-linecap="round"/>
+  <rect x="1140" y="511" width="360" height="76" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1320" y="558" font-size="23" text-anchor="middle" fill="#6B4423">输出投影 + 采样</text>
+  <text x="1320" y="640" font-size="21" text-anchor="middle" fill="#D97A47">与原始 Decoder 几乎同构</text>
+  <text x="1320" y="676" font-size="21" text-anchor="middle" fill="#8B6F47">差别在规模与工程实现</text>
+
+  <!-- 底部：两条演进线 -->
+  <rect x="60" y="740" width="1480" height="120" rx="12" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <line x1="820" y1="762" x2="820" y2="838" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="8,6" stroke-linecap="round"/>
+  <text x="440" y="792" font-size="26" font-weight="700" text-anchor="middle" fill="#5A8AAA">规模化</text>
+  <text x="440" y="826" font-size="21" text-anchor="middle" fill="#8B6F47">参数量 · 训练数据量 · 算力规模</text>
+  <text x="1200" y="792" font-size="26" font-weight="700" text-anchor="middle" fill="#D97A47">工程优化</text>
+  <text x="1200" y="826" font-size="21" text-anchor="middle" fill="#8B6F47">RoPE · SwiGLU · GQA · FlashAttention</text>
+</svg>
