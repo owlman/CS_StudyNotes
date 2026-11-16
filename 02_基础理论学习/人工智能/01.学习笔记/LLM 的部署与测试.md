@@ -856,7 +856,7 @@ Ollama 把这件事处理得很好，它屏蔽了底层差异，用户只需要 
 | 推理框架 | OpenVINO 2026.4.1（覆盖 NPU/GPU/CPU）、Ollama 0.40.16（覆盖 CPU/iGPU） |
 | Python | 3.14.10（项目内 `.venv` 隔离） |
 
-> 关于 Python 版本的选择：OpenVINO 2026.4.1 的 wheel 只发布到 `cp314`，而本机默认的 `python` 已经是 3.15，因此项目固定使用 3.14 并把解释器锁在项目自己的 `.venv` 里，避免“换个终端就装不上依赖”。
+> 关于 Python 版本的选择：OpenVINO 2026.4.1 的 wheel 只发布到 `cp314`（可在 PyPI 页面核对），而本机默认的 `python` 已经是 3.15，因此项目固定使用 3.14 并把解释器锁在项目自己的 `.venv` 里，避免“换个终端就装不上依赖”。
 
 项目结构大致如下：
 
@@ -873,7 +873,7 @@ ollama_test_NPU
 
 ### 为什么测 NPU 只能用 OpenVINO
 
-Ollama 官方文档在硬件支持一节中列出的加速路径有四条：NVIDIA 走 CUDA、AMD 走 ROCm、Apple 走 Metal，以及 Windows 与 Linux 上的额外 GPU 支持走 Vulkan。**其中并没有 NPU。**
+Ollama 官方文档在硬件支持一节中列出的加速路径有四条：NVIDIA 走 CUDA、AMD 走 ROCm、Apple 走 Metal，以及 Windows 与 Linux 上的额外 GPU 支持走 Vulkan。**其中并没有 NPU。**（详见参考资料中的《Ollama 硬件支持文档》）
 
 这一点我在本机也做了交叉验证：当前安装的 Ollama 0.40.16，其 `lib\ollama\` 目录下只有 `ggml-cpu-*.dll`（覆盖 14 种微架构）、`cuda_v12\`、`cuda_v13\`、`rocm_v7_1\` 与 `vulkan\`（内含 `ggml-vulkan.dll`）五类产物，没有任何 NPU / OpenVINO / SYCL 相关后端。
 
@@ -997,10 +997,33 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
   - [Ollama 硬件支持文档](https://docs.ollama.com/gpu)
   - [Ollama 官方 FAQ](https://docs.ollama.com/faq)
   - [OpenVINO NPU Device 官方文档](https://docs.openvino.ai/2026/openvino-workflow/running-inference/inference-devices-and-modes/npu-device.html)
+  - [OpenVINO GenAI 推理指南](https://docs.openvino.ai/2026/openvino-workflow-generative/inference-with-genai.html)
+  - [OpenVINO GenAI 在 NPU 上的推理](https://docs.openvino.ai/2026/openvino-workflow-generative/inference-with-genai/inference-with-genai-on-npu.html)
+  - [OpenVINO Python API：`LLMPipeline`](https://docs.openvino.ai/2026/api/genai_api/_autosummary/openvino_genai.LLMPipeline.html)
+  - [OpenVINO 动态 shape 支持](https://docs.openvino.ai/2026/openvino-workflow/running-inference/model-input-output/dynamic-shapes.html)
+  - [OpenVINO 精度控制](https://docs.openvino.ai/2026/openvino-workflow/running-inference/optimize-inference/precision-control.html)
+  - [OpenVINO 4-bit 权重量化](https://docs.openvino.ai/2026/openvino-workflow/model-optimization-guide/weight-compression/4-bit-weight-quantization.html)
+  - [OpenVINO Intel NPU 配置指南](https://docs.openvino.ai/2026/get-started/install-openvino/configurations/configurations-intel-npu.html)
+  - [OpenVINO pip 安装指南](https://docs.openvino.ai/2026/get-started/install-openvino/install-openvino-pip.html)
+  - [OpenVINO GenAI 依赖安装](https://docs.openvino.ai/2026/get-started/install-openvino/configurations/genai-dependencies.html)
+  - [OpenVINO 系统要求（支持矩阵）](https://docs.openvino.ai/2026/about-openvino/release-notes-openvino/system-requirements.html)
+  - [OpenVINO 性能基准](https://docs.openvino.ai/2026/about-openvino/performance-benchmarks.html)
+  - [PyPI：openvino 包（可查各 Python 版本的 wheel）](https://pypi.org/project/openvino/)
+  - [PyPI：openvino-genai 包](https://pypi.org/project/openvino-genai/)
   - [PyTest 官方文档](https://docs.pytest.org/en/stable/)
+
+- 代码仓库与模型：
+  - [OpenVINO GenAI GitHub 仓库](https://github.com/openvinotoolkit/openvino.genai)
+  - [Ollama GitHub 仓库](https://github.com/ollama/ollama)
+  - [Hugging Face：OpenVINO/Qwen2.5-1.5B-instruct-int4-ov（延伸实验所用的 IR 模型）](https://huggingface.co/OpenVINO/Qwen2.5-1.5B-instruct-int4-ov)
+  - [Hugging Face：Qwen/Qwen3-8B（Ollama 侧的对比模型）](https://huggingface.co/Qwen/Qwen3-8B)
+
+- 问题追踪：
+  - [GitHub Issue #34617：NPU 上 `compile_model` 因动态 shape 报错](https://github.com/openvinotoolkit/openvino/issues/34617)
 
 - 视频资料：
   - 基于 Transformer 库的 LLM 部署演示：[YouTube 链接](https://www.youtube.com/watch?v=aHAmg_1q41M) / [Bilibili 链接](https://www.bilibili.com/video/BV1xNAiziEhP)
 
 - 博客文章：
   - [[基于 node-llama-cpp 的 LLM 部署演示]]
+  - [Qwen3 官方博客：思考模式与 `/no_think`](https://qwenlm.github.io/blog/qwen3/)
