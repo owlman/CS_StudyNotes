@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-11-15T13:36:12",
+  "engine": "openvino-genai",
+  "model": "OpenVINO/Qwen3-1.7B-int4-ov",
+  "max_tokens": 128,
+  "prompt": "用一句话解释什么是 NPU（神经网络处理单元）。",
+  "think": false,
+  "env": {
+    "hostname": "asus-pc",
+    "os": "Windows 11 (10.0.26300)",
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "python": "3.12.10",
+    "openvino": "2026.4.1-22982-e213a147257-releases/2026/4",
+    "devices": {
+      "CPU": "Intel(R) Core(TM) Ultra 7 258V",
+      "GPU": "Intel(R) Arc(TM) 140V GPU (16GB) (iGPU)",
+      "NPU": "Intel(R) AI Boost"
+    }
+  },
+  "results": [
+    {
+      "device": "CPU",
+      "compile_seconds": 1.496,
+      "runs": [
+        {
+          "run": 1,
+          "seconds": 1.027,
+          "tokens": 39,
+          "tok_per_s": 37.98,
+          "ms_per_tok": 26.3
+        },
+        {
+          "run": 2,
+          "seconds": 1.003,
+          "tokens": 39,
+          "tok_per_s": 38.89,
+          "ms_per_tok": 25.7
+        },
+        {
+          "run": 3,
+          "seconds": 0.975,
+          "tokens": 39,
+          "tok_per_s": 39.99,
+          "ms_per_tok": 25.0
+        }
+      ],
+      "avg_tok_per_s": 38.953,
+      "stddev_tok_per_s": 0.822,
+      "best_tok_per_s": 39.99,
+      "worst_tok_per_s": 37.98,
+      "sample_output": "<think>  </think>  NPU 是神经网络处理单元，是一种专门用于执行神经网络计算的硬件模块，通常集成在芯片中，用于加速深度学习和人工智能模型的运行。"
+    },
+    {
+      "device": "GPU",
+      "compile_seconds": 6.816,
+      "runs": [
+        {
+          "run": 1,
+          "seconds": 0.715,
+          "tokens": 37,
+          "tok_per_s": 51.71,
+          "ms_per_tok": 19.3
+        },
+        {
+          "run": 2,
+          "seconds": 0.655,
+          "tokens": 37,
+          "tok_per_s": 56.49,
+          "ms_per_tok": 17.7
+        },
+        {
+          "run": 3,
+          "seconds": 0.657,
+          "tokens": 37,
+          "tok_per_s": 56.28,
+          "ms_per_tok": 17.8
+        }
+      ],
+      "avg_tok_per_s": 54.827,
+      "stddev_tok_per_s": 2.205,
+      "best_tok_per_s": 56.49,
+      "worst_tok_per_s": 51.71,
+      "sample_output": "<think>  </think>  NPU 是神经网络处理单元，是一种专门用于执行神经网络计算的硬件模块，能够高效处理深度学习中的矩阵运算和神经网络推理任务。"
+    }
+  ],
+  "failures": []
+}

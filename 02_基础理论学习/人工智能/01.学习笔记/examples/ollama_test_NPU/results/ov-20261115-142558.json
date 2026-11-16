@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-11-15T14:25:58",
+  "engine": "openvino-genai",
+  "model": "OpenVINO/Qwen2.5-1.5B-instruct-int4-ov",
+  "max_tokens": 16,
+  "prompt": "用一句话解释什么是 NPU（神经网络处理单元）。",
+  "think": false,
+  "env": {
+    "hostname": "asus-pc",
+    "os": "Windows 11 (10.0.26300)",
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "python": "3.12.10",
+    "openvino": "2026.4.1-22982-e213a147257-releases/2026/4",
+    "devices": {
+      "CPU": "Intel(R) Core(TM) Ultra 7 258V",
+      "GPU": "Intel(R) Arc(TM) 140V GPU (16GB) (iGPU)",
+      "NPU": "Intel(R) AI Boost"
+    }
+  },
+  "results": [
+    {
+      "device": "GPU",
+      "compile_seconds": 2.87,
+      "runs": [
+        {
+          "run": 1,
+          "seconds": 0.597,
+          "tokens": 16,
+          "tok_per_s": 26.81,
+          "ms_per_tok": 37.3
+        }
+      ],
+      "avg_tok_per_s": 26.81,
+      "stddev_tok_per_s": 0.0,
+      "best_tok_per_s": 26.81,
+      "worst_tok_per_s": 26.81,
+      "sample_output": "NPU是神经网络处理单元的简称，是专门用于执行深度学习"
+    },
+    {
+      "device": "CPU",
+      "compile_seconds": 2.293,
+      "runs": [
+        {
+          "run": 1,
+          "seconds": 0.55,
+          "tokens": 16,
+          "tok_per_s": 29.11,
+          "ms_per_tok": 34.4
+        }
+      ],
+      "avg_tok_per_s": 29.11,
+      "stddev_tok_per_s": 0.0,
+      "best_tok_per_s": 29.11,
+      "worst_tok_per_s": 29.11,
+      "sample_output": "NPU是神经网络处理单元的缩写，是专门用于加速深度"
+    }
+  ],
+  "failures": []
+}

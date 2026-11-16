@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-11-15T14:25:58",
+  "engine": "ollama",
+  "model": "qwen3:8b",
+  "max_tokens": 16,
+  "prompt": "用一句话解释什么是 NPU（神经网络处理单元）。",
+  "env": {
+    "hostname": "asus-pc",
+    "os": "Windows 11",
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "models_dir": "E:\\ollama"
+  },
+  "results": [
+    {
+      "mode": "cpu",
+      "label": "CPU（纯 CPU 后端）",
+      "on_gpu": false,
+      "size_gib": 5.53,
+      "size_vram_gib": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "wall_seconds": 1.92,
+          "load_seconds": 0.199,
+          "ttft_seconds": 0.312,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 194.25,
+          "output_tokens": 16,
+          "gen_tok_per_s": 10.11
+        }
+      ],
+      "avg_gen_tok_per_s": 10.11,
+      "best_gen_tok_per_s": 10.11,
+      "worst_gen_tok_per_s": 10.11,
+      "stddev_gen_tok_per_s": 0.0,
+      "sample_output": ""
+    },
+    {
+      "mode": "igpu",
+      "label": "iGPU（Vulkan 后端）",
+      "on_gpu": true,
+      "size_gib": 5.19,
+      "size_vram_gib": 5.19,
+      "runs": [
+        {
+          "run": 1,
+          "wall_seconds": 1.336,
+          "load_seconds": 0.33,
+          "ttft_seconds": 0.391,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 360.57,
+          "output_tokens": 16,
+          "gen_tok_per_s": 17.14
+        }
+      ],
+      "avg_gen_tok_per_s": 17.14,
+      "best_gen_tok_per_s": 17.14,
+      "worst_gen_tok_per_s": 17.14,
+      "stddev_gen_tok_per_s": 0.0,
+      "sample_output": ""
+    }
+  ],
+  "failures": []
+}

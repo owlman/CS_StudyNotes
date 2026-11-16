@@ -1,0 +1,5 @@
+openvino>=2026.4.1
+openvino-genai>=2026.4.1
+openvino-tokenizers>=2026.4.1
+huggingface_hub>=0.24
+numpy
