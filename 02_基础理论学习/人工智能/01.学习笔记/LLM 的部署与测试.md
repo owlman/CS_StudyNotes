@@ -197,7 +197,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 测试项目的骨架
 
-1. **新建测试项目**：在计算机的任意位置上创建一个名为`llm_tests`的目录（在这里，我将它建在这篇笔记所在目录下的`examples`目录中），并在其中创建下列 Python 脚本文件：
+- **步驟 1：新建测试项目**：在计算机的任意位置上创建一个名为`llm_tests`的目录（在这里，我将它建在这篇笔记所在目录下的`examples`目录中），并在其中创建下列 Python 脚本文件：
 
     ```bash
     llm_tests
@@ -214,7 +214,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 公共配置：把调用细节藏进 fixture
 
-2. **编写项目公共配置**：使用代码编辑器打开`conftest.py`文件，并其中输入以下代码：
+- **步驟 2：编写项目公共配置**：使用代码编辑器打开`conftest.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/conftest.py
@@ -294,7 +294,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 六个测试文件：从连通性到行为边界
 
-3. **编写基础连通性测试**：使用代码编辑器打开`test_basic_call.py`文件，并其中输入以下代码：
+- **步驟 3：编写基础连通性测试**：使用代码编辑器打开`test_basic_call.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_basic_call.py
@@ -359,7 +359,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             assert result["done"] is True
     ```
 
-4. **编写响应延迟测试**：使用代码编辑器打开`test_latency.py`文件，并其中输入以下代码：
+- **步驟 4：编写响应延迟测试**：使用代码编辑器打开`test_latency.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_latency.py
@@ -449,7 +449,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             )
     ```
 
-5. **编写非确定性输出测试**：使用代码编辑器打开`test_nondeterminism.py`文件，并其中输入以下代码：
+- **步驟 5：编写非确定性输出测试**：使用代码编辑器打开`test_nondeterminism.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_nondeterminism.py
@@ -534,7 +534,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
                 )
     ```
 
-6. **编写模糊指令测试**：使用代码编辑器打开`test_ambiguous_prompt.py`文件，并其中输入以下代码：
+- **步驟 6：编写模糊指令测试**：使用代码编辑器打开`test_ambiguous_prompt.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_ambiguous_prompt.py
@@ -628,7 +628,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
                 )
     ```
 
-7. **编写流式响应测试**：使用代码编辑器打开`test_streaming.py`文件，并其中输入以下代码：
+- **步驟 7：编写流式响应测试**：使用代码编辑器打开`test_streaming.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_streaming.py
@@ -713,7 +713,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             )
     ```
 
-8. **编写知识边界测试**：使用代码编辑器打开`test_knowledge_boundary.py`文件，并其中输入以下代码：
+- **步驟 8：编写知识边界测试**：使用代码编辑器打开`test_knowledge_boundary.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_knowledge_boundary.py
@@ -801,7 +801,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 安装依赖并跑通整套测试
 
-9. **安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录并安装 PyTest，然后执行`pytest -vs`命令运行测试，其输出效果如图 6 所示：
+- **步驟 9：安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录并安装 PyTest，然后执行`pytest -vs`命令运行测试，其输出效果如图 6 所示：
 
     ![图6：安装 PyTest 并运行测试](./img/pytest_ollama.png)
 
