@@ -13,7 +13,7 @@ Intel Lunar Lake（Core Ultra 7 258V）本地大模型推理基准 —— **NPU 
 ## 能测什么 / 不能测什么
 
 | 脚本 | 后端 | 覆盖设备 | 备注 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `ov_bench.py` | OpenVINO GenAI | **NPU / GPU / CPU** | 唯一能跑 Intel NPU 的路径 |
 | `ollama_bench.py` | Ollama（llama.cpp） | **CPU / iGPU(Vulkan)** | Ollama **没有 NPU 后端** |
 
@@ -100,7 +100,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 ## 三、按目的找配方
 
 | 我想…… | 用这条命令 |
-|---|---|
+| --- | --- |
 | 三设备横向对比 | `python ov_bench.py --device all` |
 | 只想知道 NPU 多快 | `python ov_bench.py --device NPU` |
 | 看看 8B 模型在集显上有没有用 | `python ollama_bench.py --model qwen3:8b` |
@@ -118,7 +118,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 ### 参数
 
 | 参数 | 默认 | 说明 |
-|---|---|---|
+| --- | --- | --- |
 | `--device` | `all` | `NPU` / `GPU` / `CPU` / `all`，也可逗号组合：`GPU,CPU` |
 | `--model` | `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov` | HF 上的 OpenVINO IR 仓库 ID |
 | `--model-dir` | `./models` | 本地缓存根目录（每个模型一个子目录） |
@@ -157,7 +157,7 @@ NPU                22.80     23.39     22.42       25.56
 当前环境（Python 3.14 venv，2026-11-16，两次独立复测）：
 
 | 设备 | 平均 tok/s | 最好 | 最差 | 编译 | 结论 |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **GPU** (Arc 140V) | **57.61 / 59.73** | 62.93 | 52.40 | 2.6 s | 首选 |
 | CPU (Ultra 7 258V) | **46.45 / 47.31** | 47.79 | 43.90 | 1.2 s | 次选 |
 | **NPU** (AI Boost) | **24.52 / 24.83** | 24.86 | 24.44 | 1.9 s（首次 29.0 s） | 能用但最慢 |
@@ -175,7 +175,7 @@ shape 越小编译越快，但单 token 吞吐基本封顶在 20–25 tok/s。
 **B. `OpenVINO/Qwen3-1.7B-int4-ov`**：
 
 | 设备 | 平均 tok/s | 编译 |
-|---|---|---|
+| --- | --- | --- |
 | CPU | 38.95 | 1.5 s |
 | GPU (Arc 140V) | **54.83** | 6.8 s |
 | NPU | **跑不出来** | 超 20 分钟未完成，见「故障排查」 |
@@ -189,7 +189,7 @@ shape 越小编译越快，但单 token 吞吐基本封顶在 20–25 tok/s。
 ### 参数
 
 | 参数 | 默认 | 说明 |
-|---|---|---|
+| --- | --- | --- |
 | `--model` | `qwen3:8b` | ollama 里的模型名（`ollama list` 可查） |
 | `--mode` | `both` | `cpu` / `igpu` / `both`（both = 各起一个实例依次测） |
 | `--runs` | `3` | 每模式计时轮数 |
@@ -234,14 +234,14 @@ shape 越小编译越快，但单 token 吞吐基本封顶在 20–25 tok/s。
 64 token × 2 轮（2026-11-15）：
 
 | 模式 | 平均 tok/s | 进显存 | 加载耗时 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | CPU | 9.66 | 否（`size_vram=0`） | 15.5 s |
 | iGPU (Vulkan) | **13.91** | 是（5.19 GiB） | 35.9 s |
 
 128 token × 3 轮（2026-11-16，两次独立复测）：
 
 | 模式 | 平均 tok/s | 最好 | 最差 | 进显存 |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | CPU | 9.74 / 10.30 | 10.33 | 9.11 | 否（`size_vram=0`） |
 | iGPU (Vulkan) | **18.61 / 18.71** | 18.84 | 18.46 | 是（7.81 GiB） |
 
@@ -264,7 +264,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 ```
 
 | 参数 | 默认 | 说明 |
-|---|---|---|
+| --- | --- | --- |
 | `-Python` | `.venv\Scripts\python.exe`（自动探测） | 指定解释器；不传就用项目虚拟环境 |
 | `-OvModel` | `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov` | OpenVINO 模型 |
 | `-OllamaModel` | `qwen3:8b` | Ollama 模型 |
@@ -332,7 +332,7 @@ python ollama_bench.py --model qwen2.5:14b --runs 3
 ## 九、故障排查
 
 | 症状 | 原因 | 解法 |
-|---|---|---|
+| --- | --- | --- |
 | `ImportError: Using SOCKS proxy, but the 'socksio' package is not installed` | 本机 `ALL_PROXY=socks5h://...`，httpx 优先它 | 两个脚本已在 import 前 pop 掉；自己写脚本也要 pop，或 `pip install "httpx[socks]"` |
 | `404 {"error":"model 'xxx' not found"}` 但 `ollama list` 有这个模型 | 新起的 serve 指错模型仓库（`total blobs: 0`） | `--models-dir E:\ollama`；或看脚本打印的 `[models]` 行 |
 | `bind: Only one usage of each socket address` | 端口被残留的 `ollama serve` 占用 | 换 `--port 12000`，或任务管理器结束残留 ollama 进程 |
