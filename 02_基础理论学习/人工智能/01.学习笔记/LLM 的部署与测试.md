@@ -76,7 +76,7 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
     **图 3**：使用 Ollama 拉取 LLM 镜像
 
-2. **运行测试**：继续在图 3 所示命令行界面中输入 `ollama run llama3.2:3b`命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的 “Hello World”，如图 4 所示。
+2. **运行测试**：继续在图 3 所示命令行界面中输入 `ollama run llama3.2:3b`命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的“Hello World”，如图 4 所示。
 
     ![图4：使用 Ollama 运行 LLM 镜像](./img/ollama_running.png)
 
@@ -197,7 +197,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 测试项目的骨架
 
-- **步驟 1：新建测试项目**：在计算机的任意位置上创建一个名为`llm_tests`的目录（在这里，我将它建在这篇笔记所在目录下的`examples`目录中），并在其中创建下列 Python 脚本文件：
+- **步骤 1：新建测试项目**：在计算机的任意位置上创建一个名为`llm_tests`的目录（在这里，我将它建在这篇笔记所在目录下的`examples`目录中），并在其中创建下列 Python 脚本文件：
 
     ```bash
     llm_tests
@@ -214,7 +214,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 公共配置：把调用细节藏进 fixture
 
-- **步驟 2：编写项目公共配置**：使用代码编辑器打开`conftest.py`文件，并其中输入以下代码：
+- **步骤 2：编写项目公共配置**：使用代码编辑器打开`conftest.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/conftest.py
@@ -294,7 +294,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 六个测试文件：从连通性到行为边界
 
-- **步驟 3：编写基础连通性测试**：使用代码编辑器打开`test_basic_call.py`文件，并其中输入以下代码：
+- **步骤 3：编写基础连通性测试**：使用代码编辑器打开`test_basic_call.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_basic_call.py
@@ -306,7 +306,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
     - 响应数据结构是否符合预期；
     - 模型对不同类型指令是否都能产出非空且有意义的回复。
 
-    这些测试是后续所有观察的基線——如果基础调用就不可靠，
+    这些测试是后续所有观察的基线——如果基础调用就不可靠，
     那么对"非确定性""模糊推断"等高级行为的分析就失去了立足点。
     '''
     import pytest
@@ -359,7 +359,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             assert result["done"] is True
     ```
 
-- **步驟 4：编写响应延迟测试**：使用代码编辑器打开`test_latency.py`文件，并其中输入以下代码：
+- **步骤 4：编写响应延迟测试**：使用代码编辑器打开`test_latency.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_latency.py
@@ -449,7 +449,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             )
     ```
 
-- **步驟 5：编写非确定性输出测试**：使用代码编辑器打开`test_nondeterminism.py`文件，并其中输入以下代码：
+- **步骤 5：编写非确定性输出测试**：使用代码编辑器打开`test_nondeterminism.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_nondeterminism.py
@@ -534,7 +534,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
                 )
     ```
 
-- **步驟 6：编写模糊指令测试**：使用代码编辑器打开`test_ambiguous_prompt.py`文件，并其中输入以下代码：
+- **步骤 6：编写模糊指令测试**：使用代码编辑器打开`test_ambiguous_prompt.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_ambiguous_prompt.py
@@ -628,7 +628,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
                 )
     ```
 
-- **步驟 7：编写流式响应测试**：使用代码编辑器打开`test_streaming.py`文件，并其中输入以下代码：
+- **步骤 7：编写流式响应测试**：使用代码编辑器打开`test_streaming.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_streaming.py
@@ -713,7 +713,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             )
     ```
 
-- **步驟 8：编写知识边界测试**：使用代码编辑器打开`test_knowledge_boundary.py`文件，并其中输入以下代码：
+- **步骤 8：编写知识边界测试**：使用代码编辑器打开`test_knowledge_boundary.py`文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_knowledge_boundary.py
@@ -801,7 +801,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 安装依赖并跑通整套测试
 
-- **步驟 9：安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录并安装 PyTest，然后执行`pytest -vs`命令运行测试，其输出效果如图 6 所示：
+- **步骤 9：安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录并安装 PyTest，然后执行`pytest -vs`命令运行测试，其输出效果如图 6 所示：
 
     ![图6：安装 PyTest 并运行测试](./img/pytest_ollama.png)
 
@@ -816,7 +816,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 | `test_basic_call.py`         | 响应成功率；响应字段完整性                                       | 返回 `model`/`response`/`done`/`eval_count` 等字段                    | API 链路故障或模型未加载                                   | 监控可用性，添加健康检查端点                                    |
 | `test_latency.py`            | 首 token 延迟；输出长度与延迟的相关性；多轮调用的延迟变异系数 CV | 推理耗时 > 0.5s（非瞬时）；短指令 < 长指令；CV < 50%                  | 延迟过高可能因模型过大/硬件不足；CV > 50% 说明系统不稳定   | 设置合理的超时值；对大模型启用量化；考虑预热策略                |
 | `test_nondeterminism.py`     | 默认参数下输出的多样性；固定 seed 下的可复现性                   | temperature>0 时多次调用应有差异；temperature=0、seed=42 时应完全一致 | 若固定参数仍不一致，可能是推理后端的浮点不确定性           | 需要确定性输出时显式设置 temperature=0 和 seed                  |
-| `test_ambiguous_prompt.py`   | 模糊指令下的输出长度；虚构概念的幻觉率                           | 模型对模糊指令能生成 > 50 字的叙述；对虚构概念应表现出不确定性        | 输出过短说明模型未触发推理；言之凿凿的输出意味着流畅的幻觉 | 在 LLM 前端设计"确认-执行"两步模式，降低幻觉的自动执行风险      |
+| `test_ambiguous_prompt.py`   | 模糊指令下的输出长度；虚构概念的幻觉率                           | 模型对模糊指令能生成 > 50 字的叙述；对虚构概念应表现出不确定性        | 输出过短说明模型未触发推理；言之凿凿的输出意味着流畅的幻觉 | 在 LLM 前端设计“确认-执行”两步模式，降低幻觉的自动执行风险      |
 | `test_streaming.py`          | 流式完整性（收集 token 数）；流式与非流式结果的语义一致性        | token 数 > 5；与非流式结果共享关键短语                                | token 过少可能传输中断；语义不一致说明流式/非流式不同路径  | 流式接口需准备重连逻辑；同一会话中避免混合流式与非流式调用      |
 | `test_knowledge_boundary.py` | 对训练截止日期后事件的回应方式；冷门知识领域的回答自信度         | 对未知事件应表现出不确定性；高自信回答如无事实依据可能是幻觉          | 高自信的错误回答 = 流畅幻觉，需在应用中验证事实            | 对事实类查询叠加检索增强（RAG）；对高置信低准确场景设置人工审核 |
 
@@ -843,23 +843,25 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 ## 延伸实验：在 NPU / iGPU / CPU 之间做一次推理后端选型
 
-前面的部署与测试都围绕 Ollama 展开，过程中有一个问题一直被有意回避：**模型最终究竟跑在哪块硬件上？**
+前面的部署与测试都围绕 Ollama 展开，过程中有一个问题一直被有意回避：**模型最终究竟跑在哪块硬件上？**，最近，由于添置了一台带 NPU 的计算机，让我终于有机会做一次完整的推理后端选型实验，以便回答这个问题了。
 
-Ollama 把这件事处理得很好，它屏蔽了底层差异，用户只需要 `ollama pull` 与 `ollama run`；但这种屏蔽的代价是，我们从头到尾没有对“算力来源”做过任何测量。而在我现在使用的这台笔记本上，其实同时存在三套彼此独立的算力资源：
+正如我们之前所见，Ollama 把“部署模型”这件事处理得很好，它屏蔽了底层差异，用户只需要 `ollama pull` 与 `ollama run`；但这种屏蔽的代价是，我们从头到尾没有对“算力来源”做过任何测量。而在我刚刚添置的这台计算机上，其实同时存在三套彼此独立的算力资源：
 
 - **CPU**（Intel Core Ultra 7 258V）：通用计算核心，任何推理框架都能用，是最后的兜底；
 - **iGPU**（Intel Arc 140V，16GB）：集成在处理器中的核显，走 Vulkan 后端即可被 llama.cpp 系框架调用；
 - **NPU**（Intel AI Boost）：专为推理设计的低功耗单元，需要专门的插件才能调度。
 
-它们之间的实际差距不能靠直觉判断，于是我把这次部署积累下来的经验顺手做成了一组基准实验，并把脚本、结果与踩过的坑都固化成了一个独立的小项目：[examples/ollama_test_NPU](./examples/ollama_test_NPU/)。本节即以这组实验为例，说明“如何为本地 LLM 选择算力后端”。
+它们之间的实际差距不能靠直觉判断，于是我做了一次重新部署和测试，并把这次实验中编写的脚本，及其得到的结果与踩过的坑都固化成了一个独立的小项目，存储在了这篇笔记所在目录的`examples/ollama_test_NPU`子目录下。在这里，我将以这组实验为例，向读者说明如何为本地 LLM 选择算力后端，其整体选择路径如图 7 所示。
 
-![图9：本地 LLM 推理后端的选择路径](./img/09-flowchart-inference-backend-selection.svg)
+![图7：本地 LLM 推理后端的选择路径](./img/07-flowchart-inference-backend-selection.svg)
 
-**图 9**：本地 LLM 推理后端的选择路径
+**图 7**：本地 LLM 推理后端的选择路径
+
+下面，让我们从实验环境与项目结构开始，一步步展开这次实验。
 
 ### 实验环境与项目结构
 
-本次实验的软硬件环境如下（我的实测环境）：
+本次实验的软硬件环境如g'b（我的实测环境）：
 
 | 项目 | 内容 |
 | --- | --- |
@@ -919,16 +921,16 @@ props["MIN_RESPONSE_LEN"] = 128    # 固定最小生成长度
 | CPU（Ultra 7 258V） | 47.31 | 47.77 | 46.63 | 1.17 |
 | NPU（Intel AI Boost） | 24.83 | 24.86 | 24.80 | 1.89 |
 
-完整输出如图 7 所示。
+完整输出如图 8 所示。
 
-![图7：OpenVINO 三设备推理测速与任务管理器 NPU 面板](./img/test_NPU.png)
+![图8：OpenVINO 三设备推理测速与任务管理器 NPU 面板](./img/test_NPU.png)
 
-**图 7**：OpenVINO 三设备推理测速与任务管理器 NPU 面板
+**图 8**：OpenVINO 三设备推理测速与任务管理器 NPU 面板
 
 这张图里有两处容易被误读的地方：
 
 - **编译耗时与吞吐必须分开看**。同一模型、同一 shape 的第一次运行，`compile_seconds` 实测为 28.99 秒；第二次运行则降到 1.89 秒 —— 编译产物被缓存到了磁盘。所以“第一次跑特别慢”未必是 NPU 本身慢，也可能只是它正在冷编译。
-- **NPU 的负载曲线是“台阶状”的**。如图 7 右半部分的性能面板所示，NPU 的占用不是一条平线，而是一段一段的，这与它按固定 shape 批处理的工作方式是吻合的；GPU 那边的曲线则是持续的高负载。
+- **NPU 的负载曲线是“台阶状”的**。如图 8 右半部分的性能面板所示，NPU 的占用不是一条平线，而是一段一段的，这与它按固定 shape 批处理的工作方式是吻合的；GPU 那边的曲线则是持续的高负载。
 
 另外，这组数据本身还暴露出一个与 LLM 无关的环境差异：同一份代码在 Python 3.12 环境下测得 GPU 41.43 / CPU 36.10 tok/s，换到 3.14 的虚拟环境后，两次独立复测分别得到 GPU 57.61 与 59.73、CPU 46.45 与 47.31 —— 提升幅度稳定在 29%~44%。OpenVINO 版本号相同，因此差异只能来自 Python 与依赖环境本身；具体归因我没有拆开验证，这里仅作为现象记录。
 
@@ -968,11 +970,11 @@ cd examples/ollama_test_NPU
 powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 ```
 
-它会依次执行 OpenVINO 的 NPU / GPU / CPU 三设备测试，以及 Ollama 的 CPU / iGPU 两模式测试，并把每次运行的摘要追加到 `results/history.jsonl`，完整输出如图 8 所示。
+它会依次执行 OpenVINO 的 NPU / GPU / CPU 三设备测试，以及 Ollama 的 CPU / iGPU 两模式测试，并把每次运行的摘要追加到 `results/history.jsonl`，完整输出如图 9 所示。
 
-![图8：run_all.ps1 一键跑完全部后端](./img/test_NPU_scripts.png)
+![图9：run_all.ps1 一键跑完全部后端](./img/test_NPU_scripts.png)
 
-**图 8**：run_all.ps1 一键跑完全部后端
+**图 9**：run_all.ps1 一键跑完全部后端
 
 每一轮原始数据（环境信息、逐轮耗时、生成 token 数、显存占用）都会落盘为 `results/ov-*.json` 与 `results/ollama-*.json`，上面那些表格里的数字都来自这些文件，读者也可以按 `results/history.jsonl` 复现历史趋势。
 
@@ -1013,7 +1015,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
   - [OpenVINO NPU Device 官方文档](https://docs.openvino.ai/2026/openvino-workflow/running-inference/inference-devices-and-modes/npu-device.html)
   - [OpenVINO GenAI 推理指南](https://docs.openvino.ai/2026/openvino-workflow-generative/inference-with-genai.html)
   - [OpenVINO GenAI 在 NPU 上的推理](https://docs.openvino.ai/2026/openvino-workflow-generative/inference-with-genai/inference-with-genai-on-npu.html)
-  - [OpenVINO Python API：`LLMPipeline`](https://docs.openvino.ai/2026/api/genai_api/_autosummary/openvino_genai.LLMPipeline.html)
+  - [OpenVINO Python API：`LLMPipeline`（2025 文档站；2026 站尚未收录该页）](https://docs.openvino.ai/2025/api/genai_api/_autosummary/openvino_genai.LLMPipeline.html)
+  - [OpenVINO GenAI 官方仓库文档：性能指标（TTFT / TPOT / 吞吐）](https://openvinotoolkit.github.io/openvino.genai/docs/guides/performance-metrics)
   - [OpenVINO 动态 shape 支持](https://docs.openvino.ai/2026/openvino-workflow/running-inference/model-input-output/dynamic-shapes.html)
   - [OpenVINO 精度控制](https://docs.openvino.ai/2026/openvino-workflow/running-inference/optimize-inference/precision-control.html)
   - [OpenVINO 4-bit 权重量化](https://docs.openvino.ai/2026/openvino-workflow/model-optimization-guide/weight-compression/4-bit-weight-quantization.html)
