@@ -12,8 +12,16 @@
 区别于传统 API 的标志性交互范式。
 '''
 import json
-
-
+import re
+# 按标点切分文本，用于提取"关键短语"
+CLAUSE_SPLIT = re.compile(r"[，。！？；、\n\r,.;!?]+")
+def extract_clauses(text, min_len=4):
+    """
+    把一段文本按标点切成短语片段，并过滤掉过短的片段。
+    比"字符集重叠"更贴近"是否丢了内容"这一本意。
+    """
+    parts = [p.strip() for p in CLAUSE_SPLIT.split(text)]
+    return [p for p in parts if len(p) >= min_len]
 class TestStreaming:
 
     def test_stream_output_completeness(self, ollama_client, stream_collector, ollama_url, model_name):
@@ -22,27 +30,32 @@ class TestStreaming:
         不会提前截断或丢失尾部内容。
         '''
         prompt = "请用 50 字以内说明递归函数的出口条件为什么重要。"
-        # 非流式结果作为参照
-        non_stream = ollama_client(prompt, stream=False)
+        # 非流式结果作为参照；固定 temperature=0 以尽量消除采样随机性，
+        # 否则两次调用的措辞差异会被误判成"传输丢内容"
+        non_stream = ollama_client(
+            prompt,
+            stream=False,
+            options={"temperature": 0}
+        )
         full_text = non_stream["response"]
-
         # 流式收集
         url = ollama_url
         payload = {
             "model": model_name,
             "prompt": prompt,
             "stream": True,
+            "options": {"temperature": 0},
         }
         streamed_text = stream_collector(url, payload)
-
         assert len(streamed_text) > 0, "流式模式未收集到任何 token"
-        # 语义一致性检验：基于字符集（排除标点）检查流式与非流式结果的公共部分
-        import string
-        chars_full = set(c for c in full_text if c not in string.whitespace)
-        chars_stream = set(c for c in streamed_text if c not in string.whitespace)
-        shared = chars_full & chars_stream
-        assert len(shared) > 5, (
-            "流式结果与非流式结果字符重叠过少，可能存在传输问题"
+        # 语义一致性检验：提取关键短语并统计命中率
+        clauses = extract_clauses(full_text)
+        assert clauses, "非流式结果未解析出任何关键短语"
+        matched = [c for c in clauses if c in streamed_text]
+        hit_rate = len(matched) / len(clauses)
+        assert hit_rate >= 0.5, (
+            f"流式结果的关键短语命中率仅 {hit_rate:.0%}"
+            f"（{len(matched)}/{len(clauses)}），可能存在丢 token 或截断"
         )
 
     def test_stream_token_by_token(

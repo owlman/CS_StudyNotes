@@ -1,0 +1,104 @@
+{
+  "timestamp": "2026-11-17T16:19:53",
+  "engine": "ollama",
+  "model": "qwen3:8b",
+  "max_tokens": 128,
+  "prompt": "用一句话解释什么是 NPU（神经网络处理单元）。",
+  "env": {
+    "hostname": "asus-pc",
+    "os": "Windows 11",
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "models_dir": "E:\\ollama"
+  },
+  "results": [
+    {
+      "mode": "cpu",
+      "label": "CPU（纯 CPU 后端）",
+      "on_gpu": false,
+      "size_gib": 8.45,
+      "size_vram_gib": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "wall_seconds": 14.072,
+          "load_seconds": 0.627,
+          "ttft_seconds": 0.731,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 211.5,
+          "output_tokens": 128,
+          "gen_tok_per_s": 9.6
+        },
+        {
+          "run": 2,
+          "wall_seconds": 14.048,
+          "load_seconds": 0.01,
+          "ttft_seconds": 0.121,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 198.05,
+          "output_tokens": 128,
+          "gen_tok_per_s": 9.2
+        },
+        {
+          "run": 3,
+          "wall_seconds": 13.806,
+          "load_seconds": 0.01,
+          "ttft_seconds": 0.113,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 213.39,
+          "output_tokens": 128,
+          "gen_tok_per_s": 9.36
+        }
+      ],
+      "avg_gen_tok_per_s": 9.39,
+      "best_gen_tok_per_s": 9.6,
+      "worst_gen_tok_per_s": 9.2,
+      "stddev_gen_tok_per_s": 0.16,
+      "sample_output": ""
+    },
+    {
+      "mode": "igpu",
+      "label": "iGPU（Vulkan 后端）",
+      "on_gpu": true,
+      "size_gib": 7.67,
+      "size_vram_gib": 7.67,
+      "runs": [
+        {
+          "run": 1,
+          "wall_seconds": 7.388,
+          "load_seconds": 0.009,
+          "ttft_seconds": 0.069,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 366.69,
+          "output_tokens": 128,
+          "gen_tok_per_s": 17.6
+        },
+        {
+          "run": 2,
+          "wall_seconds": 7.411,
+          "load_seconds": 0.005,
+          "ttft_seconds": 0.065,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 366.19,
+          "output_tokens": 128,
+          "gen_tok_per_s": 17.57
+        },
+        {
+          "run": 3,
+          "wall_seconds": 7.417,
+          "load_seconds": 0.004,
+          "ttft_seconds": 0.065,
+          "prompt_tokens": 22,
+          "prefill_tok_per_s": 365.08,
+          "output_tokens": 128,
+          "gen_tok_per_s": 17.52
+        }
+      ],
+      "avg_gen_tok_per_s": 17.56,
+      "best_gen_tok_per_s": 17.6,
+      "worst_gen_tok_per_s": 17.52,
+      "stddev_gen_tok_per_s": 0.03,
+      "sample_output": ""
+    }
+  ],
+  "failures": []
+}

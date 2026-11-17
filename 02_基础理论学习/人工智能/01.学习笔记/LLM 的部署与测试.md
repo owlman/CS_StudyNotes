@@ -2,7 +2,7 @@
 title: LLM 的部署与测试
 author: 凌杰
 date: 2026-01-31
-updated: 2026-11-16
+updated: 2026-11-17
 tags: LLM本地部署, Ollama, OpenVINO, NPU
 categories: 人工智能
 ---
@@ -11,14 +11,22 @@ categories: 人工智能
 >
 > 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第三个学习阶段。用于记录我尝试将 LLM 部署到生产环境中，并对其展开能力边界测试的全过程，以及在该过程中所获得的心得体会。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
 
+本文的整体路线如图 1 所示：先在本地把 LLM 部署起来并跑通接口，再用六类测试刻画它的行为边界，最后用一次推理后端选型实验回答“模型究竟跑在哪块硬件上”。
+
+![图1：LLM 本地部署与测试的端到端链路](./img/01-end-to-end-pipeline.svg)
+
+**图 1**：LLM 本地部署与测试的端到端链路
+
 ## 关于 LLM 的本地部署
 
 正如我之前在《[[关于 AI 的学习路线图]]》一文中所提到的，从学习的角度来说，如果我们要想切实了解 LLM 在计算机软件系统中所处的位置，以及它在生产环境中所扮演的角色，最直接的方式就是尝试将其部署到我们自己所在的计算机环境中，并通过测试来观察它与用户的交互方式。但是，如果想要实现在本地部署 LLM 这种大型应用，我们首先要解决一个很现实的问题：*如何用有限的硬件资源、以可控的方式将其运行起来*？
 
 很显然，就目前阶段的学习任务来看，如果我们从直接编译源码、手动配置推理引擎、管理模型权重与依赖环境来着手，大概率会让自己的学习重心过早地偏向底层细节，而模糊了我们真正想观察的目标 —— LLM 在生产环境中所扮演的角色。因此，我个人会推荐读者从一款名为 Ollama 的开源模型管理工具来着手，该工具可以让人们在不必关心底层实现细节的情况下，快速地完成 LLM 的部署与测试。下面，就让我们来具体介绍一下 Ollama 及其使用方法。
 
+> [!NOTE] 关于其他部署方式
+>
 > - 如果想直接基于深度学习框架来部署 LLM，也可以参考本文在“参考资料”一节中提供的视频教程：《基于 Transformer 库的 LLM 部署演示》。
-> 如果想基于 node-llama-cpp 来部署 LLM，也可以参考本文在“参考资料”一节中提供的博客文章：《基于 node-llama-cpp 的 LLM 部署演示》。
+> - 如果想基于 node-llama-cpp 来部署 LLM，也可以参考本文在“参考资料”一节中提供的博客文章：《基于 node-llama-cpp 的 LLM 部署演示》。
 
 ### 了解并安装 Ollama
 
@@ -30,37 +38,39 @@ Ollama 是一款基于 MIT 协议开源的、面向本地环境的 LLM 运行与
 
 这意味着，用户在使用 Ollama 时并不需要关心模型权重具体存放在哪里、底层使用了哪种推理后端，也不必在一开始就纠结于 CUDA、Metal 或 CPU 优化等问题。很显然，我们在这里选择 Ollama，本质上是一种刻意降低系统复杂度的学习策略，目的是将学习重点放在观察模型本身的行为以及**它与系统其他部分的交互方式**上，但它并不足以应对实际生产环境中的所有问题。
 
-Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方下载页面](https://ollama.com/download)，并根据该页面中的提示，基于自己所在的操作系统完成安装即可，具体如图 1 所示。
+Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方下载页面](https://ollama.com/download)，并根据该页面中的提示，基于自己所在的操作系统完成安装即可，具体如图 2 所示。
 
-![图1：Ollama 的下载页面](./img/ollama_download.png)
+![图2：Ollama 的下载页面](./img/ollama_download.png)
 
-**图 1**：Ollama 的下载页面
+**图 2**：Ollama 的下载页面
 
-如果安装过程一切顺利，我们就可以通过在命令行中输入 `ollama help` 命令来验证安装是否成功。如果安装成功了，该命令会返回 Ollama 的使用提示信息，如图 2 所示。
+如果安装过程一切顺利，我们就可以通过在命令行中输入 `ollama help` 命令来验证安装是否成功。如果安装成功了，该命令会返回 Ollama 的使用提示信息，如图 3 所示。
 
-![图2：Ollama 的使用提示信息](./img/ollama_help.png)
+![图3：Ollama 的使用提示信息](./img/ollama_help.png)
 
-**图 2**：Ollama 的使用提示信息
+**图 3**：Ollama 的使用提示信息
 
 接下来，我们要做的就是选择一款适合当前学习任务的 LLM，并尝试使用 Ollama 来将其部署到我们的本地环境中。
 
 ### 选择并部署 LLM
 
-关于应该选择什么模型来完成我们在这一阶段的学习，这主要取决于我们**要实验的任务类型**和**电脑配置**。下表 1 是我基于这篇笔记写作的时间点（即 2026 年 1 月底），整理出的当前主流的候选模型。
+关于应该选择什么模型来完成我们在这一阶段的学习，这主要取决于我们**要实验的任务类型**和**电脑配置**。下表 1 是我整理的当前主流候选模型。这张表初稿写于 2026 年 1 月底，模型列表已于 2026 年 11 月复核更新；表中同时给出“类别”行与“具体模型”行，前者标注该类别的代表模型，方便按需替换。
 
 | 推荐模型 / 类别 | 主要特点与优势 | 适用场景 | 硬件要求参考 |
 | --- | --- | --- | --- |
-| **通用最佳平衡** | 适用于多数学习场景的推荐起点；兼顾性能与成本。 | 适合一般学习和试验性部署。 | 建议 16GB+，量化后可在更低配置上运行。 |
+| **通用最佳平衡**（代表模型：`Qwen3-8B`） | 适用于多数学习场景的推荐起点；兼顾性能与成本。 | 适合一般学习和试验性部署。 | 建议 16GB+，量化后可在更低配置上运行。 |
 | **Qwen2.5-7B** | 7B 级别综合性能强，指令跟随、长上下文支持好，通用性高。 | 文档总结、内容创作、知识问答、轻量级智能体任务。 | 16GB+ 内存，量化后可降低需求。 |
 | **Llama 系列** | Meta 出品，生态完善，工具调用支持好；3.1 8B 适合通用对话，3.3 70B 性能更强。 | 快速对话、多语言任务、对响应速度要求高的应用。 | 8B 模型：8-16GB 内存；70B 需多卡或云端。 |
-| **专注编程任务** | 适合代码生成与开发辅助场景，语义理解更强。 | 专注于编程任务和开发者辅助。 | 建议 16GB+，按模型大小可选。 |
+| **专注编程任务**（代表模型：`Qwen3-Coder-30B-A3B`） | 适合代码生成与开发辅助场景，语义理解更强。 | 专注于编程任务和开发者辅助。 | 建议 16GB+（MoE 结构，激活参数较少）；显存紧张时改选小尺寸版本。 |
 | **Qwen3-Coder 系列** | 阿里出品，在代码理解和生成任务上表现优异，有不同尺寸可选。 | 代码解释、补全、测试、学习编程。 | 1.7B/4B/8B 等不同规格，可按需选择。 |
 | **Mistral 系列** | Mistral AI 出品，通用能力强，在代码和推理任务上表现均衡。 | 通用对话、编程辅助、推理任务。 | 推荐 16GB 以上内存。 |
-| **资源受限环境** | 适合低配设备和入门部署的轻量级模型。 | 适用于硬件受限的实验环境、边缘设备和教学演示。 | 8-16GB 内存即可。 |
+| **资源受限环境**（代表模型：`SmolLM3-3B` / `Llama 3.2 3B`） | 适合低配设备和入门部署的轻量级模型。 | 适用于硬件受限的实验环境、边缘设备和教学演示。 | 8-16GB 内存即可。 |
 | **SmolLM3-3B** | 完全开源，性能优秀，在 3B 级别中表现出色，可控性强。 | 对开源合规要求高，或需要在低配硬件上部署。 | 可在普通笔记本电脑上运行。 |
 | **Llama 3.2 3B** | 体积小、速度快，适合部署在多种设备上，对硬件要求低。 | 需要即时响应的嵌入式应用或移动端场景。 | 8-16GB 内存即可。 |
 
 **表 1**：常见 LLM 模型选型参考
+
+> 表中的“类别”行给出该类别的代表模型，具体尺寸与许可条款请以各模型官方仓库为准。本文后续的实测配置为：OpenVINO 侧用 `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov`，Ollama 侧用 `qwen3:8b`。
 
 根据上面的表格，我们可以先参照以下提示来确定选择：
 
@@ -72,17 +82,17 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
 基本上，使用 Ollama 部署 LLM 的操作步骤与使用 docker 部署服务端应用的过程非常类似，具体如下：
 
-1. **拉取模型**：打开命令行终端并输入`ollama pull llama3.2:3b`命令，即可从 Ollama 的官方服务器上拉取我们所选择的 LLM 镜像，如图 3 所示。
+1. **拉取模型**：打开命令行终端并输入`ollama pull llama3.2:3b`命令，即可从 Ollama 的官方服务器上拉取我们所选择的 LLM 镜像，如图 4 所示。
 
-    ![图3：使用 Ollama 拉取 LLM 镜像](./img/ollama_pulling.png)
+    ![图4：使用 Ollama 拉取 LLM 镜像](./img/ollama_pulling.png)
 
-    **图 3**：使用 Ollama 拉取 LLM 镜像
+    **图 4**：使用 Ollama 拉取 LLM 镜像
 
-2. **运行测试**：继续在图 3 所示命令行界面中输入 `ollama run llama3.2:3b`命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的“Hello World”，如图 4 所示。
+2. **运行测试**：继续在图 4 所示命令行界面中输入 `ollama run llama3.2:3b`命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的“Hello World”，如图 5 所示。
 
-    ![图4：使用 Ollama 运行 LLM 镜像](./img/ollama_running.png)
+    ![图5：使用 Ollama 运行 LLM 镜像](./img/ollama_running.png)
 
-    **图 4**：使用 Ollama 运行 LLM 镜像
+    **图 5**：使用 Ollama 运行 LLM 镜像
 
 至此，我们就算完成了一次基于 Ollama 的 LLM 本地部署作业。需要特别强调的是，由于受到硬件资源的限制，我们在这里所部署的这个 LLM 在功能上是远远不能满足实际生产需求的，它在这里的任务只是供我们用测试的方式来观察 LLM 在生产环境中所扮演的角色。
 
@@ -121,13 +131,17 @@ requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url:
 http://my-openclaw:11434/api/generate
 ```
 
-这个 `502` **不是 Ollama 返回的，而是代理服务器返回的**。原因在于 `requests` 的代理绕过逻辑存在三个盲区（我的实测环境：Windows 11 + Python 3.13 + requests 2.32）：
+这个 `502` **不是 Ollama 返回的，而是代理服务器返回的**。原因在于 `requests` 的代理绕过逻辑存在三个盲区（我的实测环境：Windows 11 + Python 3.13 + requests 2.32；2026 年 11 月复核时本机 requests 已升级到 2.34.2，下面的结论在两个版本上均成立）：
 
 1. 它只读 `NO_PROXY` **环境变量**，不读 Windows 注册表里的 `ProxyOverride`。所以浏览器里明明把 `my-openclaw` 加进了代理例外，Python 脚本照样走代理；
-2. `NO_PROXY` 里的**主机名字符串**才是匹配依据。写 `192.168.0.0/16` 这种 CIDR 网段**不会**生效，因为 `requests` 不会先把 `my-openclaw` 解析成 `192.168.31.62` 再套网段；
+2. 对**主机名**目标而言，`NO_PROXY` 里的**主机名字符串**才是匹配依据。写 `192.168.0.0/16` 这种 CIDR 网段对 `my-openclaw` **不会**生效，因为 `requests` 不会先把 `my-openclaw` 解析成 `192.168.31.62` 再套网段。
+
+   这里还需要补充一个容易被误传的细节：若 URL 中的主机本身就是 IP 字面量，`requests` 2.32+ 的 `should_bypass_proxies()` 其实支持 CIDR（内部有 `is_valid_cidr()` 与 `address_in_network()` 判定），只是这条路径覆盖不到局域网主机名，因此不能概括成“`requests` 不支持 CIDR”。
 3. 于是主机名 `my-openclaw` 既不等于 `localhost`、也不在 `NO_PROXY` 的字符串列表里 → 请求被交给本机代理 → 代理在另一台机器上解析不到这个局域网主机名 → 回 `502 Bad Gateway`。
 
-上面第 1 条并不是 `requests` 的偶然实现，而是 Python 标准库在 Windows 上的既定策略：CPython 的 `Lib/urllib/request.py` 在 Windows 分支下，`proxy_bypass()` 只有在**环境中不存在任何代理相关变量**时，才会回落到注册表的 `ProxyOverride`；而只要 `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 乃至 `NO_PROXY` 任意一个存在，绕过判定就完全由环境变量完成，注册表里的例外列表根本不会被读取。换句话说，在已经配了代理的机器上，“把主机名加进系统代理例外”这条浏览器侧的操作，对 Python 脚本天然无效。
+上面第 1 条并不是 `requests` 的偶然实现，而是 Python 标准库在 Windows 上的既定策略：CPython 的 `Lib/urllib/request.py` 在 Windows 分支下，`proxy_bypass()` 只有在**环境中不存在任何代理相关变量**时，才会回落到注册表的 `ProxyOverride`。
+
+而只要 `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 乃至 `NO_PROXY` 任意一个存在，绕过判定就完全由环境变量完成，注册表里的例外列表根本不会被读取。换句话说，在已经配了代理的机器上，“把主机名加进系统代理例外”这条浏览器侧的操作，对 Python 脚本天然无效。
 
 用 `curl` 一对比就能确认问题出在代理而不是服务：
 
@@ -157,7 +171,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 1. **启动 LLM**：在命令行终端中输入`ollama run llama3.2:3b`命令，启动 LLM 的本地运行实例。
 
-2. **创建 Python 脚本**；创建一个名为 `ollama_run_test.py` 的 Python 脚本，并在其中输入以下代码：
+2. **创建 Python 脚本**：创建一个名为 `ollama_run_test.py` 的 Python 脚本，并在其中输入以下代码：
 
     ```python
     import requests
@@ -179,11 +193,11 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
     如果读者需要一个包含局域网部署选项的完整测试示例（含 timeout / 错误处理 / 双端点调用 / 代理绕过）见 [examples/test_ollama_run.py](./examples/test_ollama_run.py)。
 
-3. **运行 Python 脚本**：在命令行终端中输入 `python ollama_python.py` 命令，运行 Python 脚本，即可看到 LLM 的输出结果，如图 5 所示。
+3. **运行 Python 脚本**：在命令行终端中输入 `python ollama_run_test.py` 命令，运行 Python 脚本，即可看到 LLM 的输出结果，如图 6 所示。
 
-    ![图5：使用 Python 调用 Ollama API](./img/ollama_python.png)
+    ![图6：使用 Python 调用 Ollama API](./img/ollama_python.png)
 
-    **图 5**：使用 Python 调用 Ollama API
+    **图 6**：使用 Python 调用 Ollama API
 
 在上述示例中，我们首先定义了 Ollama API 的调用地址，然后构造了一个包含模型名称、提示词以及是否以流式方式返回结果的请求体。最后，我们通过 requests 库的 post 方法将请求发送给 Ollama API，并打印出返回结果，这个示例的意义并不在于输出内容本身，而在于确认以下几点：
 
@@ -225,12 +239,65 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
     本文件对应主文章中"概率方法 → 数据驱动"这一范式转变中的测试基础设施层：
     测试的可靠性与可复现性，从根本上取决于底层调用的可控程度。
     '''
+    import json
+    import os
     import pytest
     import requests
-    import json
 
-    OLLAMA_URL = "http://localhost:11434/api/generate"
-    MODEL_NAME = "llama3.2:3b"
+    # 端点与模型可通过环境变量覆盖，方便在局域网机器上跑同一套测试：
+    #   set OLLAMA_URL=http://my-openclaw:11434/api/generate
+    #   set OLLAMA_MODEL=qwen3:4b-8k
+    OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/generate")
+    MODEL_NAME = os.environ.get("OLLAMA_MODEL", "llama3.2:3b")
+    # 局域网上的较大模型（如 qwen3:4b-8k）首次加载 + 推理可能超过 120s，
+    # 超时可用 OLLAMA_TIMEOUT 覆盖。
+    REQUEST_TIMEOUT = float(os.environ.get("OLLAMA_TIMEOUT", "120"))
+
+    # 共享 Session，且强制忽略环境里的代理变量。
+    # 本机装有 HTTP 代理（HTTP_PROXY/ALL_PROXY），而 requests 的代理绕过规则
+    # 对"主机名"目标只做字符串匹配：既不把主机名解析成 IP 再套 CIDR 网段
+    # （如 NO_PROXY 里的 192.168.0.0/16 对 my-openclaw 不生效），也不读 Windows
+    # 注册表的 ProxyOverride（只要环境里存在任意代理变量，urllib 就不会回落注册表）。
+    # 注意：requests 2.32+ 对"IP 字面量"目标本身是支持 CIDR 匹配的
+    # （should_bypass_proxies 内部有 is_valid_cidr / address_in_network），
+    # 但那条路径覆盖不到局域网主机名。
+    # 一旦把 URL 改成局域网主机名（如 my-openclaw），请求就会被代理接管，
+    # 代理机解析不到该名字，返回 502 Bad Gateway。
+    SESSION = requests.Session()
+    SESSION.trust_env = False
+
+
+    @pytest.fixture
+    def ollama_url():
+        '''
+        实际使用的 Ollama 端点（可由环境变量 OLLAMA_URL 覆盖）。
+        '''
+        return OLLAMA_URL
+
+
+    @pytest.fixture
+    def model_name():
+        '''
+        实际使用的模型名（可由环境变量 OLLAMA_MODEL 覆盖）。
+        '''
+        return MODEL_NAME
+
+
+    @pytest.fixture
+    def request_timeout():
+        '''
+        单次请求的超时秒数（可由环境变量 OLLAMA_TIMEOUT 覆盖）。
+        '''
+        return REQUEST_TIMEOUT
+
+
+    @pytest.fixture
+    def http_session():
+        '''
+        共享的直连 HTTP Session。
+        测试中所有对 Ollama 的请求都应经由它发起，避免走系统代理。
+        '''
+        return SESSION
 
 
     @pytest.fixture
@@ -247,10 +314,10 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             }
             if options:
                 payload["options"] = options
-            response = requests.post(
+            response = SESSION.post(
                 OLLAMA_URL,
                 json=payload,
-                timeout=120,
+                timeout=REQUEST_TIMEOUT,
             )
             response.raise_for_status()
             return response.json()
@@ -280,7 +347,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
         Ollama 流式 API 每行返回一个 JSON 对象，最后一行 {"done": true}。
         '''
         def collect(url, payload):
-            response = requests.post(url, json=payload, stream=True, timeout=180)
+            response = SESSION.post(url, json=payload, stream=True, timeout=REQUEST_TIMEOUT)
             response.raise_for_status()
             tokens = []
             for line in response.iter_lines(decode_unicode=True):
@@ -388,12 +455,16 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             这是区分"检索"与"生成"两种行为模式的基本观察。
             '''
             start = time.time()
-            ollama_client("请简要说明 TCP 和 UDP 的区别。")
+            result = ollama_client("请简要说明 TCP 和 UDP 的区别。")
             elapsed = time.time() - start
-
+            # 判定依据不是某个魔法阈值，而是"服务端确实做了生成"：
+            # Ollama 在返回体里给出 eval_count（实际生成的 token 数）。
+            assert result.get("eval_count", 0) > 0, (
+                "服务端返回 eval_count=0，说明这次调用没有发生实际生成"
+            )
             # 即使是最简单的推理也需要非零时间→生成不是查找
-            assert elapsed > 0.5, (
-                f"响应过快（{elapsed:.2f}s），可能未触发实际推理"
+            assert elapsed > 0.1, (
+                f"响应过快（{elapsed:.3f}s），可能未触发实际推理"
             )
 
         def test_latency_scales_with_output_length(self, ollama_client):
@@ -423,6 +494,20 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             medium_tokens = latencies["medium"]["tokens"]
             assert medium_tokens > short_tokens, (
                 f"长指令生成的 token 数（{medium_tokens}）应大于短指令（{short_tokens}）"
+            )
+            # 相关性检查：多出来的 token 必须转化为额外的时间，
+            # 且折算出的每 token 解码耗时需落在合理区间（不与实测吞吐矛盾）。
+            # 只比较 token 数并不足以证明"延迟随输出长度增长"。
+            time_delta = latencies["medium"]["time"] - latencies["short"]["time"]
+            token_delta = medium_tokens - short_tokens
+            assert time_delta > 0, (
+                f"输出 token 数增加了 {token_delta}，总耗时却反而更短"
+                f"（{time_delta:.2f}s），延迟与输出长度没有正相关"
+            )
+            seconds_per_token = time_delta / token_delta
+            assert 0.001 < seconds_per_token < 1.0, (
+                f"折算每 token 耗时 {seconds_per_token * 1000:.1f}ms 不在合理区间"
+                "（应在 1ms~1000ms 之间），延迟数据可能受到其他因素干扰"
             )
 
         def test_latency_consistency_across_calls(self, ollama_client):
@@ -467,8 +552,6 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
     其输出是分布上的采样而非确定性计算。这一特性既是灵活性的来源，
     也是工程可靠性的挑战。
     '''
-    import json
-    import difflib
 
 
     class TestNondeterminism:
@@ -610,7 +693,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             观测模型是否有能力承认"不知道"，
             还是会基于语言模式生成一个看似合理的解释。
             '''
-            prompt = "请解释什么是"量子热力学中的卡兹米爾-普罗米修斯效应"。"
+            prompt = "请解释什么是『量子热力学中的卡西米尔-普罗米修斯效应』。"
             result = ollama_client(prompt)
             response_text = result["response"]
 
@@ -647,54 +730,68 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
     区别于传统 API 的标志性交互范式。
     '''
     import json
-    import requests
-
-
+    import re
+    # 按标点切分文本，用于提取"关键短语"
+    CLAUSE_SPLIT = re.compile(r"[，。！？；、\n\r,.;!?]+")
+    def extract_clauses(text, min_len=4):
+        """
+        把一段文本按标点切成短语片段，并过滤掉过短的片段。
+        比"字符集重叠"更贴近"是否丢了内容"这一本意。
+        """
+        parts = [p.strip() for p in CLAUSE_SPLIT.split(text)]
+        return [p for p in parts if len(p) >= min_len]
     class TestStreaming:
 
-        def test_stream_output_completeness(self, ollama_client, stream_collector):
+        def test_stream_output_completeness(self, ollama_client, stream_collector, ollama_url, model_name):
             '''
             验证流式模式能完整收集到所有 token，
             不会提前截断或丢失尾部内容。
             '''
             prompt = "请用 50 字以内说明递归函数的出口条件为什么重要。"
-            # 非流式结果作为参照
-            non_stream = ollama_client(prompt, stream=False)
+            # 非流式结果作为参照；固定 temperature=0 以尽量消除采样随机性，
+            # 否则两次调用的措辞差异会被误判成"传输丢内容"
+            non_stream = ollama_client(
+                prompt,
+                stream=False,
+                options={"temperature": 0}
+            )
             full_text = non_stream["response"]
-
             # 流式收集
-            url = "http://localhost:11434/api/generate"
+            url = ollama_url
             payload = {
-                "model": "llama3.2:3b",
+                "model": model_name,
                 "prompt": prompt,
                 "stream": True,
+                "options": {"temperature": 0},
             }
             streamed_text = stream_collector(url, payload)
-
             assert len(streamed_text) > 0, "流式模式未收集到任何 token"
-            # 语义一致性检验：基于字符集（排除标点）检查流式与非流式结果的公共部分
-            import string
-            chars_full = set(c for c in full_text if c not in string.whitespace)
-            chars_stream = set(c for c in streamed_text if c not in string.whitespace)
-            shared = chars_full & chars_stream
-            assert len(shared) > 5, (
-                "流式结果与非流式结果字符重叠过少，可能存在传输问题"
+            # 语义一致性检验：提取关键短语并统计命中率
+            clauses = extract_clauses(full_text)
+            assert clauses, "非流式结果未解析出任何关键短语"
+            matched = [c for c in clauses if c in streamed_text]
+            hit_rate = len(matched) / len(clauses)
+            assert hit_rate >= 0.5, (
+                f"流式结果的关键短语命中率仅 {hit_rate:.0%}"
+                f"（{len(matched)}/{len(clauses)}），可能存在丢 token 或截断"
             )
 
-        def test_stream_token_by_token(self, ollama_client, stream_collector):
+        def test_stream_token_by_token(
+            self, ollama_client, stream_collector, http_session, ollama_url, model_name, request_timeout
+        ):
             '''
             观察逐 token 的粒度。
             Ollama 的流式接口按 token 粒度输出（非字符），
             因此单次 chunk 可能包含空格或标点，但不应为空。
             '''
-            url = "http://localhost:11434/api/generate"
+            url = ollama_url
             payload = {
-                "model": "llama3.2:3b",
+                "model": model_name,
                 "prompt": "Hello!",
                 "stream": True,
             }
 
-            response = requests.post(url, json=payload, stream=True, timeout=180)
+            response = http_session.post(url, json=payload, stream=True, timeout=request_timeout)
             response.raise_for_status()
 
             token_count = 0
@@ -803,11 +900,11 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 安装依赖并跑通整套测试
 
-- **步骤 9：安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录并安装 PyTest，然后执行`pytest -vs`命令运行测试，其输出效果如图 6 所示：
+- **步骤 9：安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录并安装 PyTest，然后执行`pytest -vs`命令运行测试，其输出效果如图 7 所示：
 
-    ![图6：安装 PyTest 并运行测试](./img/pytest_ollama.png)
+    ![图7：安装 PyTest 并运行测试](./img/pytest_ollama.png)
 
-    **图 6**：安装 PyTest 并运行测试
+    **图 7**：安装 PyTest 并运行测试
 
 ### 测试指标速查
 
@@ -816,10 +913,10 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 | 测试文件 | 观测指标 | 预期正常范围 | 超出说明什么 | 工程建议 |
 | --- | --- | --- | --- | --- |
 | `test_basic_call.py` | 响应成功率；响应字段完整性 | 返回 `model`/`response`/`done`/`eval_count` 等字段 | API 链路故障或模型未加载 | 监控可用性，添加健康检查端点 |
-| `test_latency.py` | 首 token 延迟；输出长度与延迟的相关性；多轮调用的延迟变异系数 CV | 推理耗时 > 0.5s（非瞬时）；短指令 < 长指令；CV < 50% | 延迟过高可能因模型过大/硬件不足；CV > 50% 说明系统不稳定 | 设置合理的超时值；对大模型启用量化；考虑预热策略 |
+| `test_latency.py` | 总响应耗时（非瞬时）；输出长度与延迟的相关性；多轮调用的延迟变异系数 CV | `eval_count > 0`（确有生成）且耗时 > 0.1s；长指令的 token 数更多、总耗时更长，折算每 token 耗时落在 1ms~1000ms；CV < 50% | 延迟过高可能因模型过大/硬件不足；CV > 50% 说明系统不稳定 | 设置合理的超时值；对大模型启用量化；考虑预热策略 |
 | `test_nondeterminism.py` | 默认参数下输出的多样性；固定 seed 下的可复现性 | temperature>0 时多次调用应有差异；temperature=0、seed=42 时应完全一致 | 若固定参数仍不一致，可能是推理后端的浮点不确定性 | 需要确定性输出时显式设置 temperature=0 和 seed |
 | `test_ambiguous_prompt.py` | 模糊指令下的输出长度；虚构概念的幻觉率 | 模型对模糊指令能生成 > 50 字的叙述；对虚构概念应表现出不确定性 | 输出过短说明模型未触发推理；言之凿凿的输出意味着流畅的幻觉 | 在 LLM 前端设计“确认-执行”两步模式，降低幻觉的自动执行风险 |
-| `test_streaming.py` | 流式完整性（收集 token 数）；流式与非流式结果的语义一致性 | token 数 > 5；与非流式结果共享关键短语 | token 过少可能传输中断；语义不一致说明流式/非流式不同路径 | 流式接口需准备重连逻辑；同一会话中避免混合流式与非流式调用 |
+| `test_streaming.py` | 流式完整性（收集 token 数）；流式与非流式结果的语义一致性 | token 数 > 5；流式结果对非流式结果关键短语的命中率 ≥ 50%（两侧固定 `temperature=0`） | token 过少可能传输中断；语义不一致说明流式/非流式不同路径 | 流式接口需准备重连逻辑；同一会话中避免混合流式与非流式调用 |
 | `test_knowledge_boundary.py` | 对训练截止日期后事件的回应方式；冷门知识领域的回答自信度 | 对未知事件应表现出不确定性；高自信回答如无事实依据可能是幻觉 | 高自信的错误回答 = 流畅幻觉，需在应用中验证事实 | 对事实类查询叠加检索增强（RAG）；对高置信低准确场景设置人工审核 |
 
 **表 2**：各测试文件的观测指标与预期范围
@@ -829,7 +926,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 通过上述基于 Python 的系统性测试，我们可以得到几组与工程实践直接相关的结论，每一组都对应主文章中某个特定阶段所暴露的能力边界：
 
 **1. LLM 是计算密集型系统，不适合放在关键同步路径中。**
-延迟测试（`test_latency.py`）表明，即使是最简单的推理也需要显著的非零时间，且输出长度与延迟存在可预测的正相关。这验证了主文章中“有限理性”的讨论——任何智能系统都受到计算资源的时间约束。
+延迟测试（`test_latency.py`）表明，即使是最简单的推理也需要显著的非零时间（并且服务端确实产生了 token），输出长度与延迟之间存在可验证的正相关——多生成的那些 token 必须转化为额外的时间。这验证了主文章中“有限理性”的讨论——任何智能系统都受到计算资源的时间约束。
 
 **2. 模型输出具有本质上的非确定性，不能被直接作为结构化数据使用。**
 非确定性测试（`test_nondeterminism.py`）证明，在默认采样参数下多次调用会产生不同输出，而固定 temperature=0 和 seed 后可获得可复现结果。这意味着 LLM 的“概率采样”本质既是灵活性的来源，也是工程可靠性的风险点——对应主文章概率转向部分的核心洞察。
@@ -841,25 +938,25 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 知识边界测试（`test_knowledge_boundary.py`）表明，模型对训练数据截止日期之后的事件（如 2025 年诺贝尔奖）通常不会承认“不知道”，而是给出看似合理的编造。冷门知识领域的高幻觉率进一步证实了这一模式：模型的“知识”本质上是训练数据中的统计分布，而非结构化的世界模型。这对应主文章末尾对“真正的世界模型”缺失的讨论。
 
 **5. 流式接口的可靠性影响产品体验的关键变量。**
-流式测试（`test_streaming.py`）验证了逐 token 传输的完整性和连续性，但同时也暴露出流式结果与非流式结果之间可能存在语义偏差——这意味着在同一个会话中混合使用流式与非流式接口需要谨慎处理。
+流式测试（`test_streaming.py`）验证了逐 token 传输的完整性和连续性；在把流式与非流式两侧的输出都固定到 `temperature=0` 之后，仍可以用“关键短语命中率”把两者之间的语义偏差量化出来——这意味着在同一个会话中混合使用流式与非流式接口需要谨慎处理。
 
 **总体结论：** LLM 在系统设计中更适合作为一个**受约束、被监控、可回退的智能组件**，而不是系统逻辑的直接执行者。它所暴露的所有“问题”——延迟、非确定性、幻觉、过度推断——都不是模型 bug，而是其作为概率模型运作方式的自然结果。工程设计的任务不是消除这些特性（在一个概率系统中消除概率是不可能的），而是通过架构手段（缓存、验证、容错、降级、人工审核）将这些不确定性控制在可接受的范围内。
 
 ## 延伸实验：在 NPU / iGPU / CPU 之间做一次推理后端选型
 
-前面的部署与测试都围绕 Ollama 展开，过程中有一个问题一直被有意回避：**模型最终究竟跑在哪块硬件上？**，最近，由于添置了一台带 NPU 的计算机，让我终于有机会做一次完整的推理后端选型实验，以便回答这个问题了。
+前面的部署与测试都围绕 Ollama 展开，过程中有一个问题一直被有意回避：**模型最终究竟跑在哪块硬件上？**，最近（2026-11），由于添置了一台带 NPU 的计算机，让我终于有机会做一次完整的推理后端选型实验，以便回答这个问题了。
 
 正如我们之前所见，Ollama 把“部署模型”这件事处理得很好，它屏蔽了底层差异，用户只需要 `ollama pull` 与 `ollama run`；但这种屏蔽的代价是，我们从头到尾没有对“算力来源”做过任何测量。而在我刚刚添置的这台计算机上，其实同时存在三套彼此独立的算力资源：
 
-- **CPU**（Intel Core Ultra 7 258V）：通用计算核心，任何推理框架都能用，是最后的兜底；
-- **iGPU**（Intel Arc 140V，16GB）：集成在处理器中的核显，走 Vulkan 后端即可被 llama.cpp 系框架调用；
-- **NPU**（Intel AI Boost）：专为推理设计的低功耗单元，需要专门的插件才能调度。
+- **CPU**：通用计算核心，任何推理框架都能用，是最后的兜底；
+- **iGPU**：集成在处理器中的核显，走 Vulkan 后端即可被 llama.cpp 系框架调用；
+- **NPU**：专为推理设计的低功耗单元，需要专门的插件才能调度。
 
-它们之间的实际差距不能靠直觉判断，于是我做了一次重新部署和测试，并把这次实验中编写的脚本，及其得到的结果与踩过的坑都固化成了一个独立的小项目，存储在了这篇笔记所在目录的`examples/ollama_test_NPU`子目录下。在这里，我将以这组实验为例，向读者说明如何为本地 LLM 选择算力后端，其整体选择路径如图 7 所示。
+它们之间的实际差距不能靠直觉判断，于是我做了一次重新部署和测试，并把这次实验中编写的脚本，及其得到的结果与踩过的坑都固化成了一个独立的小项目，存储在了这篇笔记所在目录的`examples/ollama_test_NPU`子目录下。在这里，我将以这组实验为例，向读者说明如何为本地 LLM 选择算力后端，其整体选择路径如图 8 所示。
 
-![图7：本地 LLM 推理后端的选择路径](./img/07-flowchart-inference-backend-selection.svg)
+![图8：本地 LLM 推理后端的选择路径](./img/08-flowchart-inference-backend-selection.svg)
 
-**图 7**：本地 LLM 推理后端的选择路径
+**图 8**：本地 LLM 推理后端的选择路径
 
 下面，让我们从实验环境与项目结构开始，一步步展开这次实验。
 
@@ -919,41 +1016,45 @@ props["MIN_RESPONSE_LEN"] = 128    # 固定最小生成长度
 
 ### 实测结果：三个后端的横向对比
 
-固定参数为模型 `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov`，`--runs 3 --warmups 1 --max-tokens 128`，结果如表 4 所示：
+固定参数为模型 `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov`，每次独立运行内部采样 3 轮（`--runs 3 --warmups 1 --max-tokens 128`），整组实验一共做了 3 次独立运行，结果如表 4 所示：
 
-| 设备 | 平均 tok/s | 最好 | 最差 | 编译(s) |
-| --- | --- | --- | --- | --- |
-| **GPU**（Arc 140V iGPU） | **59.73** | 62.93 | 53.50 | 2.67 |
-| CPU（Ultra 7 258V） | 47.31 | 47.77 | 46.63 | 1.17 |
-| NPU（Intel AI Boost） | 24.83 | 24.86 | 24.80 | 1.89 |
+| 设备 | 均值 tok/s | 极差 | 最好 / 最差 | 编译(s) | 来源 |
+| --- | --- | --- | --- | --- | --- |
+| **GPU**（Arc 140V iGPU） | **56.57** | 7.36 | 59.73 / 52.37 | 3.02 | 本机实测（3 次独立运行） |
+| CPU（Ultra 7 258V） | 44.98 | 6.12 | 47.31 / 41.18 | 1.38 | 本机实测（3 次独立运行） |
+| NPU（Intel AI Boost） | 24.19 | 1.61 | 24.83 / 23.22 | 3.25 | 本机实测（3 次独立运行） |
 
-**表 4**：OpenVINO 下 NPU / iGPU / CPU 的推理吞吐对比
+**表 4**：OpenVINO 下 NPU / iGPU / CPU 的推理吞吐对比（3 次独立运行）
 
-完整输出如图 8 所示。
+> **数据口径与来源**：表中吞吐全部为本机实测，原始记录落在 `results/ov-*.json` 与 `results/history.jsonl` 里。“均值”是 3 次独立运行各自的平均值再取平均；“极差”是这 3 个值中最大值与最小值之差；“最好 / 最差”取自同一组 3 次独立运行；“编译(s)”取最近一次运行的实测值。官方文档并没有提供同模型、同硬件、同量化条件下的 tok/s 对照数据，所以这里没有“官方基准”一列可对标——官方文档只用于行为与参数说明（如 `OLLAMA_NUM_PARALLEL` 等），引用见参考资料。
 
-![图8：OpenVINO 三设备推理测速与任务管理器 NPU 面板](./img/test_NPU.png)
+完整输出如图 9 所示。
 
-**图 8**：OpenVINO 三设备推理测速与任务管理器 NPU 面板
+![图9：OpenVINO 三设备推理测速与任务管理器 NPU 面板](./img/test_NPU.png)
+
+**图 9**：OpenVINO 三设备推理测速与任务管理器 NPU 面板
 
 这张图里有两处容易被误读的地方：
 
-- **编译耗时与吞吐必须分开看**。同一模型、同一 shape 的第一次运行，`compile_seconds` 实测为 28.99 秒；第二次运行则降到 1.89 秒 —— 编译产物被缓存到了磁盘。所以“第一次跑特别慢”未必是 NPU 本身慢，也可能只是它正在冷编译。
-- **NPU 的负载曲线是“台阶状”的**。如图 8 右半部分的性能面板所示，NPU 的占用不是一条平线，而是一段一段的，这与它按固定 shape 批处理的工作方式是吻合的；GPU 那边的曲线则是持续的高负载。
+- **编译耗时与吞吐必须分开看**。同一模型、同一 shape 的第一次运行，`compile_seconds` 实测为 28.99 秒；此后的各次运行则落到 1.4~3.3 秒 —— 编译产物被缓存到了磁盘。所以“第一次跑特别慢”未必是 NPU 本身慢，也可能只是它正在冷编译。
+- **NPU 的负载曲线是“台阶状”的**。如图 9 右半部分的性能面板所示，NPU 的占用不是一条平线，而是一段一段的，这与它按固定 shape 批处理的工作方式是吻合的；GPU 那边的曲线则是持续的高负载。
 
-另外，这组数据本身还暴露出一个与 LLM 无关的环境差异：同一份代码在 Python 3.12 环境下测得 GPU 41.43 / CPU 36.10 tok/s，换到 3.14 的虚拟环境后，两次独立复测分别得到 GPU 57.61 与 59.73、CPU 46.45 与 47.31 —— 提升幅度稳定在 29%~44%。OpenVINO 版本号相同，因此差异只能来自 Python 与依赖环境本身；具体归因我没有拆开验证，这里仅作为现象记录。
+另外，这组数据本身还暴露出两个与 LLM 无关的差异。其一是解释器与依赖环境：同一份代码在 Python 3.12 环境下测得 GPU 41.43 / CPU 36.10 tok/s，换到 3.14 的虚拟环境后提升幅度稳定在 29%~44%；OpenVINO 版本号相同，因此差异只能来自 Python 与依赖环境本身，具体归因我没有拆开验证，这里仅作为现象记录。
+
+其二是机器负载：把 2026-11-16 的两次独立运行与 2026-11-17 的第三次放在一起看，GPU 三次分别为 59.73 / 57.61 / 52.37 tok/s，CPU 为 47.31 / 46.45 / 41.18 tok/s —— 第三次整体偏低，原因是当时机器上同时还跑着别的任务。这正是“单次测速不足为凭”的直接例证：结论（集显 > CPU > NPU）没有变，但数值本身会随环境漂移，这也正是表 4 要把“极差”一并列出来的原因。
 
 ### Ollama 侧：CPU 与 iGPU 的差距
 
-Ollama 那边能测的只有 CPU 与 iGPU。为了让集显与 CPU 的差距能被压出来，模型换成了更大的 `qwen3:8b`（Q4_K_M，约 5.2 GB），结果如表 5 所示：
+Ollama 那边能测的只有 CPU 与 iGPU。为了让集显与 CPU 的差距能被压出来，模型换成了更大的 `qwen3:8b`（Q4_K_M，约 5.2 GB），同样做了 3 次独立运行、每次内部采样 3 轮，结果如表 5 所示：
 
-| 模式 | 平均 tok/s | 最好 | 最差 | 是否进显存 |
-| --- | --- | --- | --- | --- |
-| CPU 后端 | 9.74 | 10.13 | 9.11 | 否（`size_vram` = 0） |
-| iGPU（Vulkan） | **18.71** | 18.84 | 18.56 | 是（7.81 GiB） |
+| 模式 | 均值 tok/s | 极差 | 最好 / 最差 | 是否进显存 | 来源 |
+| --- | --- | --- | --- | --- | --- |
+| CPU 后端 | 9.81 | 0.91 | 10.30 / 9.39 | 否（`size_vram` = 0） | 本机实测（3 次独立运行） |
+| iGPU（Vulkan） | **18.29** | 1.15 | 18.71 / 17.56 | 是（7.67~7.81 GiB） | 本机实测（3 次独立运行） |
 
-**表 5**：Ollama 下 CPU 与 iGPU 的推理吞吐对比
+**表 5**：Ollama 下 CPU 与 iGPU 的推理吞吐对比（3 次独立运行）
 
-第二次独立运行得到 10.30 / 18.61 tok/s，两次结果一致；其中“是否进显存”一列来自 Ollama API 返回的 `size_vram` 字段，是比“看曲线”更硬的证据。
+3 次独立运行的结果分别为 CPU 10.30 / 9.74 / 9.39 tok/s、iGPU 18.61 / 18.71 / 17.56 tok/s，均值与极差见表 5：方向始终一致（iGPU 稳定在 CPU 的 1.9 倍左右），数值随机器负载小幅漂移。其中“是否进显存”一列来自 Ollama API 返回的 `size_vram` 字段，是比“看曲线”更硬的证据。
 
 这里有一个关键的操作细节：Ollama 决定使用哪块设备是在**服务启动时**由环境变量决定的，运行期无法切换。默认情况下它会直接放弃集显，服务日志里会打印：
 
@@ -969,7 +1070,9 @@ dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1
 - `OLLAMA_KEEP_ALIVE`：模型在内存中的驻留时长，默认 5 分钟对反复测速来说偏短；
 - `OLLAMA_NUM_PARALLEL`：默认为 1，官方说明所需内存随 `OLLAMA_NUM_PARALLEL × OLLAMA_CONTEXT_LENGTH` 线性增长。
 
-在本机上把这些变量一起调优后的结果是：纯 CPU 9.10 tok/s → 开启 Flash Attention 并把 K/V cache 量化为 `q8_0` 后 9.24 tok/s（K/V 占用由 5760 MiB 降到 3060 MiB）→ 再把模型整体 offload 到集显后达到 15.36 tok/s（37 层全部落在 GPU 上）。需要说明的是，这里的 15.36 来自另一组单次测速，其上下文长度与驻留策略与上表不同，因此只能与它自己内部的数据横向比较，不宜与上表的 18.71 直接对比。
+在本机上把这些变量一起调优后的结果是：纯 CPU 9.10 tok/s → 开启 Flash Attention 并把 K/V cache 量化为 `q8_0` 后 9.24 tok/s（K/V 占用由 5760 MiB 降到 3060 MiB）→ 再把模型整体 offload 到集显后达到 15.36 tok/s（37 层全部落在 GPU 上）。
+
+需要说明的是，这里的 15.36 来自另一组单次测速，其上下文长度与驻留策略与上表不同，因此只能与它自己内部的数据横向比较，不宜与上表的 18.29 直接对比。
 
 ### 一键复现与过程留痕
 
@@ -980,11 +1083,11 @@ cd examples/ollama_test_NPU
 powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 ```
 
-它会依次执行 OpenVINO 的 NPU / GPU / CPU 三设备测试，以及 Ollama 的 CPU / iGPU 两模式测试，并把每次运行的摘要追加到 `results/history.jsonl`，完整输出如图 9 所示。
+它会依次执行 OpenVINO 的 NPU / GPU / CPU 三设备测试，以及 Ollama 的 CPU / iGPU 两模式测试，并把每次运行的摘要追加到 `results/history.jsonl`，完整输出如图 10 所示。
 
-![图9：run_all.ps1 一键跑完全部后端](./img/test_NPU_scripts.png)
+![图10：run_all.ps1 一键跑完全部后端](./img/test_NPU_scripts.png)
 
-**图 9**：run_all.ps1 一键跑完全部后端
+**图 10**：run_all.ps1 一键跑完全部后端
 
 每一轮原始数据（环境信息、逐轮耗时、生成 token 数、显存占用）都会落盘为 `results/ov-*.json` 与 `results/ollama-*.json`，上面那些表格里的数字都来自这些文件，读者也可以按 `results/history.jsonl` 复现历史趋势。
 
@@ -1016,6 +1119,70 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 **3. 换后端就要连环境一起换。** 同一份 OpenVINO 代码在 3.12 与 3.14 环境下的实测差距达到 29%~44%，这提醒我们：做性能对比时，“控制变量”不只是固定模型与参数，解释器与依赖版本同样是变量。
 
 **4. 跑得慢经常不是模型的问题。** 冷编译、代理、端口冲突、UTF-8 BOM、tokenizer 计数 —— 这些与模型能力无关的因素，往往比模型本身更能决定你看到的那个数字。这也正是本文前面坚持把“部署链路”与“模型行为”分开测试的原因：**只有先把干扰项清干净，模型的行为边界才是可信的。**
+
+## 工程化落地：安全、多租户与稳定性
+
+前面所有实验都默认“服务就在 localhost、只有我一个人在用”。一旦把这套 LLM 服务真正放进团队或产品环境，就会立刻冒出三个新问题：**谁来鉴权、并发打过来怎么办、模型答不出来时系统怎么办**。这一节把这三件事拆开讲。
+
+### 鉴权：Ollama 本身没有用户体系
+
+Ollama 的定位是“本地工具”：官方 FAQ 写明它默认绑定 `127.0.0.1:11434`，绑定地址可以改；而本地 API 并不提供 API Key 或用户体系，官方给出的对外暴露方案是“放在代理服务器之后”，由代理决定转发规则与必要的请求头校验（FAQ 中的《How can I use Ollama with a proxy server?》一节）。
+
+换句话说，如果直接把绑定地址改成 `0.0.0.0`，就等于把一个没有鉴权的模型服务裸露在局域网上，这一点必须先说清楚（详见参考资料中的《Ollama 官方 FAQ》）。
+
+工程上的常规做法是：让 Ollama 继续只监听回环地址，在它前面放一层反向代理（Nginx / Caddy / API Gateway），由代理负责 TLS 终止与鉴权。
+
+| 层次 | 职责 | 建议做法 |
+| --- | --- | --- |
+| Ollama 服务 | 只监听回环地址，不直接对外 | 保持默认绑定，外部流量一律经过代理 |
+| 反向代理 | TLS、API Key 校验、限流、访问日志 | 校验失败直接返回 401 / 403，不转发到后端 |
+| 业务服务 | 持有密钥、拼装 prompt、做降级 | 密钥只放在服务端环境变量或密钥管理服务里，绝不下发到前端 |
+
+多租户之间还要注意 **prompt 与模型资源的隔离**：共享同一个 Ollama 实例时，不同租户的请求会进入同一个并发队列，互相挤占显存与 K/V cache。若租户之间需要硬隔离，就为每个租户（或每个环境）起独立实例，并用 `--models-dir` 指定各自的模型仓库目录。
+
+### 并发限流：让排队发生在可控的地方
+
+Ollama 的并发模型是“排队制”而非“抢占制”：默认 `OLLAMA_NUM_PARALLEL=1`，即同一时刻只处理一个请求，其余进入队列；官方同时说明所需内存随 `OLLAMA_NUM_PARALLEL × OLLAMA_CONTEXT_LENGTH` 线性增长。实践中有三个可调项：
+
+- `OLLAMA_NUM_PARALLEL`：允许同时处理的请求数，调大之前先按上面的公式估算显存与 K/V cache 预算；
+- `OLLAMA_MAX_QUEUE`：排队上限（官方 FAQ 给出的默认值是 512），超过后新请求直接被拒；官方同时说明，请求过多时服务端会返回 `503` overloaded 错误，避免无限堆积演变成超时雪崩；
+- `OLLAMA_MAX_LOADED_MODELS`：常驻内存的模型数上限，决定“换模型”时是否需要重新加载（冷启动代价很高）。
+
+限流最好做在**业务侧**而不是只依赖服务端队列：按租户配额做令牌桶，超配额直接快速失败，比让请求在队列里排到超时更可控。
+
+### 超时与熔断：把“慢”变成“失败”
+
+LLM 的尾延迟波动很大（本文前面测到的延迟变异系数就是证据），因此每次调用都必须有超时，而且要分两层：
+
+- **连接 / 首 token 超时**：客户端 `timeout` 要小于网关的总超时，否则网关先断开、客户端还在干等；
+- **整体生成超时**：按业务可接受的等待时间设定上限，并配合 `num_predict`（最大生成 token 数）限制单次请求的产出规模。
+
+熔断的判据不要只看错误率，还要看**延迟**：连续若干次超过阈值的慢请求同样应触发熔断，把流量切到降级路径；熔断打开后进入半开状态，用一次试探性请求验证服务是否恢复。
+
+### 降级策略：给“模型答不出”准备后手
+
+LLM 会超时、会限流、会胡编，三者都不该直接变成用户看到的 500。常见的降级层次（从上到下依次尝试）：
+
+1. **缓存命中**：相同或高度相似的 prompt 直接返回历史结果；
+2. **换小模型**：主模型超时或超出预算时，切到同系列的小尺寸模型；
+3. **规则兜底**：FAQ、关键词匹配、模板回复；
+4. **人工接管**：对高风险问题（例如会触发资金动作的问答）转人工审核。
+
+流式接口还要单独准备重连逻辑：客户端断开后，服务端这一轮生成其实仍在消耗算力，所以重连策略应接受一次重复消耗，而不是无限重试。
+
+### 上线前检查清单
+
+| 检查项 | 判据 |
+| --- | --- |
+| 绑定地址 | Ollama 只监听回环地址，对外只经代理 |
+| 鉴权 | 代理层校验 API Key / mTLS，密钥不下发前端 |
+| 并发 | 按显存预算设置 `OLLAMA_NUM_PARALLEL` 与队列上限 |
+| 超时 | 客户端超时 < 网关超时 < 业务 SLA |
+| 熔断 | 错误率与尾延迟双阈值，触发后切小模型或规则兜底 |
+| 隔离 | 多租户独立实例或独立 `--models-dir` |
+| 可观测 | 记录 `eval_count` / `eval_duration`，以 P95 而非均值评估延迟 |
+
+**表 7**：LLM 服务上线前的安全与稳定性检查清单
 
 ## 参考资料
 

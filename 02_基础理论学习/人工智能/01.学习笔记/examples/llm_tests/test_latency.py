@@ -22,12 +22,16 @@ class TestLatency:
         这是区分"检索"与"生成"两种行为模式的基本观察。
         '''
         start = time.time()
-        ollama_client("请简要说明 TCP 和 UDP 的区别。")
+        result = ollama_client("请简要说明 TCP 和 UDP 的区别。")
         elapsed = time.time() - start
-
+        # 判定依据不是某个魔法阈值，而是"服务端确实做了生成"：
+        # Ollama 在返回体里给出 eval_count（实际生成的 token 数）。
+        assert result.get("eval_count", 0) > 0, (
+            "服务端返回 eval_count=0，说明这次调用没有发生实际生成"
+        )
         # 即使是最简单的推理也需要非零时间→生成不是查找
-        assert elapsed > 0.5, (
-            f"响应过快（{elapsed:.2f}s），可能未触发实际推理"
+        assert elapsed > 0.1, (
+            f"响应过快（{elapsed:.3f}s），可能未触发实际推理"
         )
 
     def test_latency_scales_with_output_length(self, ollama_client):
@@ -57,6 +61,20 @@ class TestLatency:
         medium_tokens = latencies["medium"]["tokens"]
         assert medium_tokens > short_tokens, (
             f"长指令生成的 token 数（{medium_tokens}）应大于短指令（{short_tokens}）"
+        )
+        # 相关性检查：多出来的 token 必须转化为额外的时间，
+        # 且折算出的每 token 解码耗时需落在合理区间（不与实测吞吐矛盾）。
+        # 只比较 token 数并不足以证明"延迟随输出长度增长"。
+        time_delta = latencies["medium"]["time"] - latencies["short"]["time"]
+        token_delta = medium_tokens - short_tokens
+        assert time_delta > 0, (
+            f"输出 token 数增加了 {token_delta}，总耗时却反而更短"
+            f"（{time_delta:.2f}s），延迟与输出长度没有正相关"
+        )
+        seconds_per_token = time_delta / token_delta
+        assert 0.001 < seconds_per_token < 1.0, (
+            f"折算每 token 耗时 {seconds_per_token * 1000:.1f}ms 不在合理区间"
+            "（应在 1ms~1000ms 之间），延迟数据可能受到其他因素干扰"
         )
 
     def test_latency_consistency_across_calls(self, ollama_client):

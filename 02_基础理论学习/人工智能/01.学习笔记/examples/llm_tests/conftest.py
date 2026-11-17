@@ -20,8 +20,12 @@ REQUEST_TIMEOUT = float(os.environ.get("OLLAMA_TIMEOUT", "120"))
 
 # 共享 Session，且强制忽略环境里的代理变量。
 # 本机装有 HTTP 代理（HTTP_PROXY/ALL_PROXY），而 requests 的代理绕过规则
-# 只按"主机名"字符串匹配 NO_PROXY，既不解析主机名对应的 IP 去套 CIDR 网段
-# （如 NO_PROXY 里的 192.168.0.0/16），也不读 Windows 注册表的 ProxyOverride。
+# 对"主机名"目标只做字符串匹配：既不把主机名解析成 IP 再套 CIDR 网段
+# （如 NO_PROXY 里的 192.168.0.0/16 对 my-openclaw 不生效），也不读 Windows
+# 注册表的 ProxyOverride（只要环境里存在任意代理变量，urllib 就不会回落注册表）。
+# 注意：requests 2.32+ 对"IP 字面量"目标本身是支持 CIDR 匹配的
+# （should_bypass_proxies 内部有 is_valid_cidr / address_in_network），
+# 但那条路径覆盖不到局域网主机名。
 # 一旦把 URL 改成局域网主机名（如 my-openclaw），请求就会被代理接管，
 # 代理机解析不到该名字，返回 502 Bad Gateway。
 SESSION = requests.Session()

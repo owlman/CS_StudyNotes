@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-11-17T16:19:53",
+  "engine": "openvino-genai",
+  "model": "OpenVINO/Qwen2.5-1.5B-instruct-int4-ov",
+  "max_tokens": 128,
+  "prompt": "用一句话解释什么是 NPU（神经网络处理单元）。",
+  "think": false,
+  "env": {
+    "hostname": "asus-pc",
+    "os": "Windows 11 (10.0.26300)",
+    "cpu": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel",
+    "python": "3.14.10",
+    "openvino": "2026.4.1-22982-e213a147257-releases/2026/4",
+    "devices": {
+      "CPU": "Intel(R) Core(TM) Ultra 7 258V",
+      "GPU": "Intel(R) Arc(TM) 140V GPU (16GB) (iGPU)",
+      "NPU": "Intel(R) AI Boost"
+    }
+  },
+  "results": [
+    {
+      "device": "NPU",
+      "compile_seconds": 3.254,
+      "runs": [
+        {
+          "run": 1,
+          "seconds": 1.501,
+          "tokens": 35,
+          "tok_per_s": 23.31,
+          "ms_per_tok": 42.9
+        },
+        {
+          "run": 2,
+          "seconds": 1.519,
+          "tokens": 35,
+          "tok_per_s": 23.05,
+          "ms_per_tok": 43.4
+        },
+        {
+          "run": 3,
+          "seconds": 1.501,
+          "tokens": 35,
+          "tok_per_s": 23.31,
+          "ms_per_tok": 42.9
+        }
+      ],
+      "avg_tok_per_s": 23.223,
+      "stddev_tok_per_s": 0.123,
+      "best_tok_per_s": 23.31,
+      "worst_tok_per_s": 23.05,
+      "sample_output": "NPU是神经网络处理单元的缩写，是专门用于加速深度学习任务的硬件加速器，能够显著提升深度学习模型的训练和推理速度。"
+    },
+    {
+      "device": "GPU",
+      "compile_seconds": 3.02,
+      "runs": [
+        {
+          "run": 1,
+          "seconds": 0.634,
+          "tokens": 31,
+          "tok_per_s": 48.89,
+          "ms_per_tok": 20.5
+        },
+        {
+          "run": 2,
+          "seconds": 0.584,
+          "tokens": 31,
+          "tok_per_s": 53.1,
+          "ms_per_tok": 18.8
+        },
+        {
+          "run": 3,
+          "seconds": 0.562,
+          "tokens": 31,
+          "tok_per_s": 55.13,
+          "ms_per_tok": 18.1
+        }
+      ],
+      "avg_tok_per_s": 52.373,
+      "stddev_tok_per_s": 2.599,
+      "best_tok_per_s": 55.13,
+      "worst_tok_per_s": 48.89,
+      "sample_output": "NPU是神经网络处理单元的简称，是专门用于执行深度学习任务的硬件加速器，能够显著提升计算效率和处理速度。"
+    },
+    {
+      "device": "CPU",
+      "compile_seconds": 1.382,
+      "runs": [
+        {
+          "run": 1,
+          "seconds": 0.814,
+          "tokens": 34,
+          "tok_per_s": 41.75,
+          "ms_per_tok": 24.0
+        },
+        {
+          "run": 2,
+          "seconds": 0.859,
+          "tokens": 34,
+          "tok_per_s": 39.58,
+          "ms_per_tok": 25.3
+        },
+        {
+          "run": 3,
+          "seconds": 0.805,
+          "tokens": 34,
+          "tok_per_s": 42.22,
+          "ms_per_tok": 23.7
+        }
+      ],
+      "avg_tok_per_s": 41.183,
+      "stddev_tok_per_s": 1.15,
+      "best_tok_per_s": 42.22,
+      "worst_tok_per_s": 39.58,
+      "sample_output": "NPU是神经网络处理单元的缩写，是专门用于加速深度学习计算的硬件芯片，能够显著提升深度学习模型的训练和推理速度。"
+    }
+  ],
+  "failures": []
+}
