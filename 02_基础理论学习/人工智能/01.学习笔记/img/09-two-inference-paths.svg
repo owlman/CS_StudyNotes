@@ -24,9 +24,9 @@
   <text x="670" y="324" text-anchor="middle" font-size="21" fill="#8A6A4F">模型 qwen3:8b · Q4_K_M（约 5.2 GB）</text>
   <line x1="420" y1="344" x2="920" y2="344" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
   <circle cx="424" cy="372" r="4" fill="#5A8AAA"/>
-  <text x="444" y="380" font-size="21" fill="#6B4423">落 CPU：9.81 tok/s</text>
+  <text x="444" y="380" font-size="21" fill="#6B4423">落 CPU：9.90 tok/s</text>
   <circle cx="424" cy="404" r="4" fill="#5A8AAA"/>
-  <text x="444" y="412" font-size="21" fill="#6B4423">落 iGPU（Vulkan）：18.29 tok/s</text>
+  <text x="444" y="412" font-size="21" fill="#6B4423">落 iGPU（Vulkan）：18.30 tok/s</text>
   <circle cx="424" cy="436" r="4" fill="#B9A88A"/>
   <text x="444" y="444" font-size="21" fill="#8A6A4F">无 NPU 后端：运行时不支持 Intel NPU</text>
 
@@ -35,11 +35,11 @@
   <text x="670" y="594" text-anchor="middle" font-size="21" fill="#8A6A4F">模型 Qwen2.5-1.5B-instruct-int4-ov · int4 IR</text>
   <line x1="420" y1="614" x2="920" y2="614" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
   <circle cx="424" cy="642" r="4" fill="#D97A47"/>
-  <text x="444" y="650" font-size="21" fill="#6B4423">落 CPU：44.98 tok/s</text>
+  <text x="444" y="650" font-size="21" fill="#6B4423">落 CPU：45.65 tok/s</text>
   <circle cx="424" cy="674" r="4" fill="#D97A47"/>
-  <text x="444" y="682" font-size="21" fill="#6B4423">落 iGPU：56.57 tok/s</text>
+  <text x="444" y="682" font-size="21" fill="#6B4423">落 iGPU：57.21 tok/s</text>
   <circle cx="424" cy="706" r="4" fill="#D97A47"/>
-  <text x="444" y="714" font-size="21" fill="#6B4423">落 NPU：24.19 tok/s（须固定 MAX_PROMPT_LEN）</text>
+  <text x="444" y="714" font-size="21" fill="#6B4423">落 NPU：24.08 tok/s（须固定 MAX_PROMPT_LEN）</text>
 
   <path d="M950 350 L1116 350" stroke="#5A8AAA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   <path d="M1120 350 l-14 -7 v14 z" fill="#5A8AAA"/>
@@ -48,7 +48,7 @@
 
   <rect x="1150" y="250" width="390" height="150" rx="12" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
   <text x="1345" y="288" text-anchor="middle" font-size="26" font-weight="700" fill="#6B4423">CPU · Ultra 7 258V</text>
-  <text x="1345" y="316" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 44.98 · Ollama 9.81 tok/s</text>
+  <text x="1345" y="316" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 45.65 · Ollama 9.90 tok/s</text>
   <line x1="1180" y1="334" x2="1510" y2="334" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
   <circle cx="1190" cy="358" r="4" fill="#5A8AAA"/>
   <text x="1210" y="366" font-size="20" fill="#6B4423">Ollama：可用</text>
@@ -57,7 +57,7 @@
 
   <rect x="1150" y="425" width="390" height="150" rx="12" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
   <text x="1345" y="463" text-anchor="middle" font-size="26" font-weight="700" fill="#6B4423">iGPU · Arc 140V 16GB</text>
-  <text x="1345" y="491" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 56.57 · Ollama 18.29 tok/s</text>
+  <text x="1345" y="491" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 57.21 · Ollama 18.30 tok/s</text>
   <line x1="1180" y1="509" x2="1510" y2="509" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
   <circle cx="1190" cy="533" r="4" fill="#5A8AAA"/>
   <text x="1210" y="541" font-size="20" fill="#6B4423">Ollama：需 OLLAMA_IGPU_ENABLE=1</text>
@@ -66,7 +66,7 @@
 
   <rect x="1150" y="600" width="390" height="150" rx="12" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
   <text x="1345" y="638" text-anchor="middle" font-size="26" font-weight="700" fill="#6B4423">NPU · Intel AI Boost</text>
-  <text x="1345" y="666" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 24.19 tok/s</text>
+  <text x="1345" y="666" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 24.08 tok/s</text>
   <line x1="1180" y1="684" x2="1510" y2="684" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
   <circle cx="1190" cy="708" r="4" fill="#B9A88A"/>
   <text x="1210" y="716" font-size="20" fill="#8A6A4F">Ollama：不支持（无 NPU 后端）</text>
@@ -75,6 +75,6 @@
 
   <rect x="60" y="780" width="1480" height="95" rx="10" fill="#F5E0D0" stroke="#D97A47" stroke-width="2" stroke-dasharray="10,8"/>
   <text x="800" y="812" text-anchor="middle" font-size="24" font-weight="700" fill="#6B4423">结论：Ollama 覆盖不到 NPU —— 想测 NPU，只能换 OpenVINO GenAI</text>
-  <text x="800" y="844" text-anchor="middle" font-size="21" fill="#6B4423">同一个 qwen3:8b，Ollama 侧 CPU 9.81 → iGPU 18.29 tok/s（需 OLLAMA_IGPU_ENABLE=1）</text>
-  <text x="800" y="868" text-anchor="middle" font-size="19" fill="#8A6A4F">数值口径：OpenVINO 侧取表 5 的 3 次独立运行均值；Ollama 侧见表 6</text>
+  <text x="800" y="844" text-anchor="middle" font-size="21" fill="#6B4423">同一个 qwen3:8b，Ollama 侧 CPU 9.90 → iGPU 18.30 tok/s（需 OLLAMA_IGPU_ENABLE=1）</text>
+  <text x="800" y="868" text-anchor="middle" font-size="19" fill="#8A6A4F">数值口径：OpenVINO 侧取表 5 的 4 次独立运行均值；Ollama 侧见表 6</text>
 </svg>
