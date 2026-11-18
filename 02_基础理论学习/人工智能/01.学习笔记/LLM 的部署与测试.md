@@ -958,15 +958,15 @@ uv run pytest -v
 
 ## 延伸实验：在 NPU / iGPU / CPU 之间做一次推理后端选型
 
-在之前的实验中，模型的部署与测试都是围绕 Ollama 展开的，我们在该过程中一直有意地回避了一个问题：**模型更适合跑在哪种计算单元上？**，最近（2026-11），由于添置了一台带 NPU 的计算机，让我终于有机会补做一次完整的推理后端选型实验，以便回答这个问题了。
+在之前的实验中，模型的部署与测试都是围绕 Ollama 本身的应用来展开的，我们在该过程中一直有意地回避了一个问题：**模型更适合跑在哪种计算单元上？**，最近（2026-11），由于添置了一台带 NPU 的计算机，让我终于有机会补做一次完整的推理后端选型实验，以便回答这个问题了。
 
-正如读者之前所见，Ollama 把 “部署模型” 这件事处理得很好，它屏蔽了底层差异，用户在进行修改操作的时候只需要执行 `ollama pull` 与 `ollama run` 命令即可；但这种屏蔽的代价是，我们从头到尾没有对 “算力来源” 做过任何测量。而在我刚刚添置的这台计算机上，其实同时存在三套彼此独立的算力资源：
+会形成这个问题的原因之一，就是 Ollama 把 “部署模型” 这件事处理得太好了，它屏蔽了底层差异，让用户在进行部署操作的时候只需要执行 `ollama pull` 与 `ollama run` 命令即可；但这种做法的代价是，我们从头到尾都没有机会对 “算力来源” 做过任何测量。例如在我刚刚添置的这台计算机上，其实同时存在三套彼此独立的算力资源：
 
 - **CPU**：通用计算核心，任何推理框架都能用，是最后的兜底；
 - **iGPU**：集成在处理器中的核显，走 Vulkan 后端即可被 llama.cpp 系框架调用；
 - **NPU**：专为推理设计的低功耗单元，需要专门的插件才能调度。
 
-基于科学的态度，它们之间的实际差距不能靠直觉判断，于是我补做了一次模型的部署和测试实验，并把这次实验中编写的脚本，及其得到的结果与踩过的坑都固化成了一个独立的小项目，存储在了这篇笔记所在目录的 `examples/ollama_test_NPU` 子目录下。在这里，我将以这组实验为例，向读者说明如何为本地 LLM 选择算力后端，其整体选择路径如图 8 所示。
+本着科学的态度，我们不能靠直觉来判断它们在跑模型时实际存在着多少性能差距，于是就需要补做一次模型的部署和测试实验。我把这次实验中编写的脚本，及其得到的结果与踩过的坑都固化成了一个独立的小项目，存储在了这篇笔记所在目录的 `examples/ollama_test_NPU` 子目录下。在这里，我将以这组实验为例，向读者说明如何为本地 LLM 选择算力后端，其整体选择路径如图 8 所示。
 
 ![图8：本地 LLM 推理后端的选择路径](./img/08-flowchart-inference-backend-selection.svg)
 
@@ -991,7 +991,7 @@ uv run pytest -v
 
 **表 3**：推理后端对比实验的运行环境
 
-本文先后用到了三组不同的模型与框架组合，为免读者在后面的数据表里混淆口径，先汇总如下：
+在这次实验中，我先后用到了三组不同的模型与框架组合，为免读者在后面的数据表里混淆口径，先汇总如下：
 
 | 实验小节 | 推理框架 | 模型 | 量化 / 规格 | 目标设备 | 数据位置 |
 | --- | --- | --- | --- | --- | --- |
@@ -1002,7 +1002,7 @@ uv run pytest -v
 
 **表 4**：全文涉及的模型、推理框架与目标设备对照
 
-> 关于 Python 版本的选择：OpenVINO 2026.4.1 的 wheel 只发布到 `cp314`（可在 PyPI 页面核对），而本机默认的 `python` 已经是 3.15，因此项目固定使用 3.14 并把解释器锁在项目自己的 `.venv` 里，避免“换个终端就装不上依赖”。
+> 关于 Python 版本的选择：OpenVINO 2026.4.1 的 wheel 只发布到 `cp314`（可在 PyPI 页面核对），而本机默认的 `python` 已经是 3.15，因此项目固定使用 3.14 并把解释器锁在项目自己的 `.venv` 里，以免读者换个终端环境就装不上依赖。
 
 项目结构大致如下：
 
@@ -1019,24 +1019,22 @@ ollama_test_NPU
 
 ### 为什么测 NPU 只能用 OpenVINO
 
-Ollama 官方文档在硬件支持一节中列出的加速路径有四条：NVIDIA 走 CUDA、AMD 走 ROCm、Apple 走 Metal，以及 Windows 与 Linux 上的额外 GPU 支持走 Vulkan。**其中并没有 NPU。**（详见 [Ollama 硬件支持文档](https://docs.ollama.com/gpu)）
+Ollama 官方文档在硬件支持一节中列出的加速路径有四条：NVIDIA 走 CUDA、AMD 走 ROCm、Apple 走 Metal，以及 Windows 与 Linux 上的额外 GPU 支持走 Vulkan。**其中并没有 NPU。**（详见 [Ollama 硬件支持文档](https://docs.ollama.com/gpu)）关于这一点，我也在这台计算机上做了交叉验证：当前安装的 Ollama 0.40.16，其 `lib\ollama\` 目录下只有 `ggml-cpu-*.dll`（覆盖 14 种微架构）、`cuda_v12\`、`cuda_v13\`、`rocm_v7_1\` 与 `vulkan\`（内含 `ggml-vulkan.dll`）五类产物，没有任何 NPU / OpenVINO / SYCL 相关后端。
 
-这一点我在本机也做了交叉验证：当前安装的 Ollama 0.40.16，其 `lib\ollama\` 目录下只有 `ggml-cpu-*.dll`（覆盖 14 种微架构）、`cuda_v12\`、`cuda_v13\`、`rocm_v7_1\` 与 `vulkan\`（内含 `ggml-vulkan.dll`）五类产物，没有任何 NPU / OpenVINO / SYCL 相关后端。
-
-于是结论很直接：**想测 NPU，只能换 OpenVINO GenAI；想看 Ollama 自身的调优收益，就只能在 CPU 与 iGPU 之间比较。** 这也是我把实验拆成两个独立脚本、而不是写成一个“通用工具”的原因。
+总而言之，**想测 NPU，只能换 OpenVINO GenAI；想看 Ollama 自身的调优收益，就只能在 CPU 与 iGPU 之间比较。** 这也是我把实验拆成两个独立脚本、而不是写成一个 “通用工具” 的原因。
 
 ### OpenVINO 侧：NPU 的两条硬约束
 
-在动手之前，OpenVINO 官方文档里有两条关于 NPU 的说明（见 [OpenVINO NPU Device 文档](https://docs.openvino.ai/2026/openvino-workflow/running-inference/inference-devices-and-modes/npu-device.html)）：
+另外，在正式动手编写测试脚本 之前，我还仔细查阅了 OpenVINO 官方文档，发现其中有如下两条关于 NPU 的重要说明（见 [OpenVINO NPU Device 文档](https://docs.openvino.ai/2026/openvino-workflow/running-inference/inference-devices-and-modes/npu-device.html)），值得提醒读者留意。
 
-1. NPU 是随 Intel Core Ultra 一代引入的低功耗硬件单元，**执行模型需要系统已安装 NPU 驱动**；
-2. NPU 上的动态 shape 支持目前仍是 preview（实验性）特性，**只有 `Compiler-In-Plugin` 编译类型支持动态 shape**，`Compiler-In-Driver` 路径不支持；从 NPU40XX（Lunar Lake）平台起才提供该能力，并要求 Windows NPU 驱动 32.0.100.4621 以上。
+1. NPU 是随 Intel Core Ultra 一代引入的低功耗硬件单元，因此，**在执行实验之前需要系统已安装 NPU 驱动**；
+2. NPU 上的动态 shape 支持目前仍是 preview（实验性）特性，**只有 `Compiler-In-Plugin` 编译类型支持动态 shape**，`Compiler-In-Driver` 路径不支持；从 NPU40XX（Lunar Lake）平台起才提供该能力，并要求 Windows NPU 驱动的版本需在 32.0.100.4621 以上。
 
 第 2 条直接决定了脚本的写法。LLM 的提示词长度天然是动态的，如果放任 shape 变化，NPU 会为每种长度组合各编译一份模型，首次加载可能拖到分钟级，看起来就像卡死了。所以脚本在 NPU 下把 shape 固定下来：
 
 ```python
 props["MAX_PROMPT_LEN"] = 1024      # 固定 prompt 长度上限
-props["MIN_RESPONSE_LEN"] = 128    # 固定最小生成长度
+props["MIN_RESPONSE_LEN"] = 128     # 固定最小生成长度
 ```
 
 这里还有一个容易踩的坑：**不要绕过 genai 直接调用 `core.compile_model(model, "NPU")`**。
@@ -1129,7 +1127,7 @@ dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1
 
 ### 一键复现与过程留痕
 
-整套实验可以由项目中的 `run_all.ps1` 一键跑完：
+在 Windows 11 环境中，整套实验可以由项目中的 `run_all.ps1` 一键跑完，用户只需执行如下命令即可：
 
 ```powershell
 cd examples/ollama_test_NPU
@@ -1165,13 +1163,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 
 ### 小结：这次实验带来的几个判断
 
-**1. NPU 在今天的 LLM 工具链里还不是“默认选项”。** Ollama 没有 NPU 后端，OpenVINO 虽然能跑，但要求固定 shape、对模型有适配要求，且动态 shape 至今仍是 preview 特性。想用上它，代价是换框架、锁参数。
+1. **NPU 在今天的 LLM 工具链里还不是“默认选项”。**
+   Ollama 没有 NPU 后端，OpenVINO 虽然能跑，但要求固定 shape、对模型有适配要求，且动态 shape 至今仍是 preview 特性。想用上它，代价是换框架、锁参数。
 
-**2. 集显是最容易被忽略、性价比最高的一档算力。** 在同一台机器上，`qwen3:8b` 从 CPU 的 9.81 tok/s 提升到 iGPU 的 18.29 tok/s（表 6 的 3 次独立运行均值），接近翻倍，而付出的代价只是一个启动时环境变量。
+2. **集显是最容易被忽略、性价比最高的一档算力。**
+   在同一台机器上，`qwen3:8b` 从 CPU 的 9.81 tok/s 提升到 iGPU 的 18.29 tok/s（表 6 的 3 次独立运行均值），接近翻倍，而付出的代价只是一个启动时环境变量。
 
-**3. 换后端就要连环境一起换。** 同一份 OpenVINO 代码在 3.12 与 3.14 环境下的实测差距达到约 25%~37%，这提醒我们：做性能对比时，“控制变量”不只是固定模型与参数，解释器与依赖版本同样是变量。
+3. **换后端就要连环境一起换。**
+   同一份 OpenVINO 代码在 3.12 与 3.14 环境下的实测差距达到约 25%~37%，这提醒我们：做性能对比时，“控制变量”不只是固定模型与参数，解释器与依赖版本同样是变量。
 
-**4. 跑得慢经常不是模型的问题。** 冷编译、代理、端口冲突、UTF-8 BOM、tokenizer 计数 —— 这些与模型能力无关的因素，往往比模型本身更能决定你看到的那个数字。这也正是本文前面坚持把“部署链路”与“模型行为”分开测试的原因：**只有先把干扰项清干净，模型的行为边界才是可信的。**
+4. **跑得慢经常不是模型的问题。**
+   冷编译、代理、端口冲突、UTF-8 BOM、tokenizer 计数 —— 这些与模型能力无关的因素，往往比模型本身更能决定你看到的那个数字。这也正是本文前面坚持把“部署链路”与“模型行为”分开测试的原因：**只有先把干扰项清干净，模型的行为边界才是可信的。**
 
 ## 工程化落地：安全、多租户与稳定性
 
