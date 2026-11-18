@@ -2,7 +2,7 @@
 title: LLM 的部署与测试
 author: 凌杰
 date: 2026-01-31
-updated: 2026-11-17
+updated: 2026-11-18
 tags: LLM本地部署, Ollama, OpenVINO, NPU
 categories: 人工智能
 ---
@@ -11,7 +11,7 @@ categories: 人工智能
 >
 > 这篇笔记对应的是《[[关于 AI 的学习路线图]]》一文中所规划的第三个学习阶段。用于记录我尝试将 LLM 部署到生产环境中，并对其展开能力边界测试的实验过程，以及在该实验中所获得的心得体会。同样的，这些内容也将成为我 AI 系列笔记的一部分，被存储在本人 Github 上的[计算机学习笔记库](https://github.com/owlman/CS_StudyNotes)中，并予以长期维护。
 
-这篇笔记的整体实验路线如图 1 所示：先在本地把 LLM 部署起来并跑通接口，再用六类测试刻画它的行为边界，最后用一次推理后端选型实验回答“模型究竟跑在哪块硬件上”。
+这篇笔记的整体实验路线如图 1 所示：先在本地把 LLM 部署起来并跑通接口，再用六类测试刻画它的行为边界，最后用一次推理后端选型测试回答 “模型更适合跑在哪种计算单元上” 的问题。
 
 ![图1：LLM 本地部署与测试的端到端链路](./img/01-end-to-end-pipeline.svg)
 
@@ -19,14 +19,16 @@ categories: 人工智能
 
 ## 关于 LLM 的本地部署
 
+本章的部署与后续六类测试都基于 `llama3.2:3b`（Ollama 默认量化）进行；延伸实验章节会另外引入两组模型，三者的完整对照见表 4。
+
 正如我之前在《[[关于 AI 的学习路线图]]》一文中所提到的，从学习的角度来说，如果我们要想切实了解 LLM 在计算机软件系统中所处的位置，以及它在生产环境中所扮演的角色，最直接的方式就是尝试将其部署到我们自己所在的计算机环境中，并通过测试来观察它与用户的交互方式。但是，如果想要实现在本地部署 LLM 这种大型应用，我们首先要解决一个很现实的问题：*如何用有限的硬件资源、以可控的方式将其运行起来*？
 
 很显然，就目前阶段的学习任务来看，如果我们从直接编译源码、手动配置推理引擎、管理模型权重与依赖环境来着手，大概率会让自己的学习重心过早地偏向底层细节，而模糊了我们真正想观察的目标 —— LLM 在生产环境中所扮演的角色。因此，我个人会推荐读者从一款名为 Ollama 的开源模型管理工具来着手，该工具可以让人们在不必关心底层实现细节的情况下，快速地完成 LLM 的部署与测试。下面，就让我们来具体介绍一下 Ollama 及其使用方法。
 
 > [!NOTE] 关于其他部署方式
 >
-> - 如果想直接基于深度学习框架来部署 LLM，也可以参考本文在“参考资料”一节中提供的视频教程：《基于 Transformer 库的 LLM 部署演示》。
 > - 如果想基于 node-llama-cpp 来部署 LLM，也可以参考本文在“参考资料”一节中提供的博客文章：《基于 node-llama-cpp 的 LLM 部署演示》。
+> - 如果想直接基于深度学习框架来部署 LLM，也可以参考本文在“参考资料”一节中提供的视频教程：《基于 Transformer 库的 LLM 部署演示》。
 
 ### 了解并安装 Ollama
 
@@ -70,25 +72,23 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
 **表 1**：常见 LLM 模型选型参考
 
-> 表中的“类别”行给出该类别的代表模型，具体尺寸与许可条款请以各模型官方仓库为准。本文后续的实测配置为：OpenVINO 侧用 `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov`，Ollama 侧用 `qwen3:8b`。
-
 根据上面的表格，我们可以先参照以下提示来确定选择：
 
-- 如果硬件资源不给力（例如内存容量只有 16GB 或更少，没有独立显卡），可以选择`SmolLM3-3B`或`Llama 3.2 3B`；
-- 如果想优先考虑通用对话和写作，可以选择`Qwen2.5-7B`或`Llama 3.1 8B`；
-- 如果想优先考虑将其用于编程辅助，`Qwen3-Coder`系列可能是更好的选择；
+- 如果硬件资源不给力（例如内存容量只有 16GB 或更少，没有独立显卡），可以选择 `SmolLM3-3B` 或 `Llama 3.2 3B`；
+- 如果想优先考虑通用对话和写作，可以选择 `Qwen2.5-7B` 或 `Llama 3.1 8B`；
+- 如果想优先考虑将其用于编程辅助，`Qwen3-Coder` 系列可能是更好的选择；
 
-由于这篇笔记的任务是基于学习的目的来部署 LLM，它最好能让读者在最普通的个人笔记本上进行过程相对流畅的实验，因此我决定选择`Llama 3.2 3B`来进行演示。这个选择体现了本地部署学习中的常见折中：我们不追求大规模生产级模型的最优性能，而是优先保证可用性、可重复性和测试便利性。
+由于这篇笔记的任务是基于学习的目的来部署 LLM，它最好能让读者在最普通的个人笔记本上进行过程相对流畅的实验，因此我决定选择 `Llama 3.2 3B` 来进行演示。这个选择体现了本地部署学习中的常见折中：我们不追求大规模生产级模型的最优性能，而是优先保证可用性、可重复性和测试便利性。
 
 基本上，使用 Ollama 部署 LLM 的操作步骤与使用 docker 部署服务端应用的过程非常类似，具体如下：
 
-1. **拉取模型**：打开命令行终端并输入`ollama pull llama3.2:3b`命令，即可从 Ollama 的官方服务器上拉取我们所选择的 LLM 镜像，如图 4 所示。
+1. **拉取模型**：打开命令行终端并输入 `ollama pull llama3.2:3b` 命令，即可从 Ollama 的官方服务器上拉取我们所选择的 LLM 镜像，如图 4 所示。
 
     ![图4：使用 Ollama 拉取 LLM 镜像](./img/ollama_pulling.png)
 
     **图 4**：使用 Ollama 拉取 LLM 镜像
 
-2. **运行测试**：继续在图 4 所示命令行界面中输入 `ollama run llama3.2:3b`命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的“Hello World”，如图 5 所示。
+2. **运行测试**：继续在图 4 所示命令行界面中输入 `ollama run llama3.2:3b` 命令即可开始交互测试。在这里，我们演示的是一个 LLM 版的“Hello World”，如图 5 所示。
 
     ![图5：使用 Ollama 运行 LLM 镜像](./img/ollama_running.png)
 
@@ -100,13 +100,7 @@ Ollama 的安装过程本身非常简单，读者可以自行前往它的[官方
 
 在上面的演示中，我们使用的 `ollama run` 是一个交互式命令——它会启动模型并打开一个对话界面。这种方式适合手动体验，但如果要通过编程方式调用 LLM（例如编写测试脚本），就需要切换到 **服务模式（Server Mode）**。
 
-Ollama 在后台默认运行着一个守护进程（安装后会自动注册为系统服务），监听 `localhost:11434` 端口。你可以通过以下命令手动启动它：
-
-```bash
-ollama serve
-```
-
-服务模式启动后，Ollama 会提供给我们一套 RESTful API，所有与模型的交互都通过 HTTP 请求来完成。切换到服务模式意味着：
+Ollama 在后台默认运行着一个守护进程（安装后会自动注册为系统服务），监听 `localhost:11434` 端口。我们可以通过 `ollama serve` 命令手动启动它。服务模式启动后，Ollama 会提供给我们一套 RESTful API，所有与模型的交互都通过 HTTP 请求来完成。切换到服务模式意味着：
 
 - **调用方式**：从 `ollama run` + 手动输入文本，变成 POST 请求 + 程序化处理的 JSON 响应；
 - **生命周期**：从单次对话的临时交互，变成模型常驻内存、持续接受请求的服务进程；
@@ -120,48 +114,56 @@ ollama serve
 2. **模型预热（Warm-up）**：大模型在首次推理时通常比后续调用慢得多（涉及显存分配、KV cache 初始化等），因此在进行性能相关的测试前，最好先发一条无关请求完成预热。
 3. **错误处理策略**：Ollama API 在模型未加载或请求超时的情况下可能返回 500 或连接拒绝。测试框架需要准备好重试逻辑和超时设置，而不是假设服务永远可用。
 
-这些步骤虽然不是“核心知识”，但忽略了它们会让后面的测试结果充满噪声。因此，我在 conftest.py 中设置的 `timeout=120` 和 `raise_for_status()` 就是为了应对这些现实问题。
+这些步骤虽然不是这篇笔记要介绍的核心知识，但忽略了它们会让后面的测试结果充满噪声。因此，我在 conftest.py 中设置的 `timeout=120` 和 `raise_for_status()` 就是为了应对这些现实问题。
 
 #### 局域网部署的一个坑：requests 会走系统代理
 
-如果读者把端点从 `localhost` 换成局域网主机名（例如把 Ollama 装在另一台机器上，用 `http://my-openclaw:11434/api/generate` 访问），很可能会遇到一个和 LLM 毫无关系、但从错误信息里完全看不出来的失败：
+如果需要把测试的服务端从本地的 `localhost` 换成局域网主机名（例如我在后面的部分测试中会用到一台主机名为 `my-openclaw` 的私人服务器上，就需要实验用 `http://my-openclaw:11434/api/generate` 这个 URL 来访问 Ollama 服务了），很可能会遇到一个和 LLM 毫无关系、但从错误信息里完全看不出来的失败：
 
 ```text
 requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url:
 http://my-openclaw:11434/api/generate
 ```
 
-这个 `502` **不是 Ollama 返回的，而是代理服务器返回的**。原因在于 `requests` 的代理绕过逻辑存在三个盲区（我的实测环境：Windows 11 + Python 3.13 + requests 2.32；2026 年 11 月复核时本机 requests 已升级到 2.34.2，下面的结论在两个版本上均成立）：
+这个 `502` 并不是 Ollama 服务本身返回的，而是由代理服务器返回的。这主要是因为在 Python 的 `requests` 模块中，代理绕过逻辑存在着以下三个盲区。
 
-1. 它只读 `NO_PROXY` **环境变量**，不读 Windows 注册表里的 `ProxyOverride`。所以浏览器里明明把 `my-openclaw` 加进了代理例外，Python 脚本照样走代理；
-2. 对**主机名**目标而言，`NO_PROXY` 里的**主机名字符串**才是匹配依据。写 `192.168.0.0/16` 这种 CIDR 网段对 `my-openclaw` **不会**生效，因为 `requests` 不会先把 `my-openclaw` 解析成 `192.168.31.62` 再套网段。
+（我的实测环境：Windows 11 + Python 3.13 + requests 2.32；2026 年 11 月复核时本机 requests 已升级到 2.34.2，下面的结论在两个版本上均成立，代理判定逻辑可对照 [Requests 官方文档](https://requests.readthedocs.io/en/latest/user/advanced/#proxies)。）
 
-   这里还需要补充一个容易被误传的细节：若 URL 中的主机本身就是 IP 字面量，`requests` 2.32+ 的 `should_bypass_proxies()` 其实支持 CIDR（内部有 `is_valid_cidr()` 与 `address_in_network()` 判定），只是这条路径覆盖不到局域网主机名，因此不能概括成“`requests` 不支持 CIDR”。
-3. 于是主机名 `my-openclaw` 既不等于 `localhost`、也不在 `NO_PROXY` 的字符串列表里 → 请求被交给本机代理 → 代理在另一台机器上解析不到这个局域网主机名 → 回 `502 Bad Gateway`。
+1. 它只读 `NO_PROXY` 环境变量，不读 Windows 注册表里的 `ProxyOverride`。所以浏览器里明明把 `my-openclaw` 加进了代理例外，Python 脚本照样走代理；
 
-上面第 1 条并不是 `requests` 的偶然实现，而是 Python 标准库在 Windows 上的既定策略：CPython 的 `Lib/urllib/request.py` 在 Windows 分支下，`proxy_bypass()` 只有在**环境中不存在任何代理相关变量**时，才会回落到注册表的 `ProxyOverride`。
+2. 对于我们要访问的目标主机名而言，`NO_PROXY` 里的主机名字符串才是匹配依据。写 `192.168.0.0/16` 这种 CIDR 网段对 `my-openclaw` 不会生效，因为 `requests` 不会先把 `my-openclaw` 解析成 `192.168.31.62` 再套网段。
 
-而只要 `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 乃至 `NO_PROXY` 任意一个存在，绕过判定就完全由环境变量完成，注册表里的例外列表根本不会被读取。换句话说，在已经配了代理的机器上，“把主机名加进系统代理例外”这条浏览器侧的操作，对 Python 脚本天然无效。
+    当然了，这里需要补充一个很容易被误传的细节：若 URL 中的主机名本身就是 IP 字面量，`requests 2.32+` 的 `should_bypass_proxies()` 其实支持 CIDR（内部有 `is_valid_cidr()` 与 `address_in_network()` 判定）。
 
-用 `curl` 一对比就能确认问题出在代理而不是服务：
+    但这条路径覆盖不到局域网主机名，因此不能简单地将问题概括成 `requests` 不支持 CIDR。
+
+3. 于是，由于目标主机名 `my-openclaw` 既不等于 `localhost`、也不在 `NO_PROXY` 的字符串列表里，`requests` 模块发起的请求就被交给了本机代理，这就导致代理在另一台机器上解析不到这个局域网主机名，于是就返回了 `502 Bad Gateway` 错误信息。
+
+另外，上面第 1 条所说的状况并不是 `requests` 模块的偶然实现，而是 Python 标准库在 Windows 上的既定策略：CPython 的 `Lib/urllib/request.py` 在 Windows 分支下，`proxy_bypass()` 只有在**环境中不存在任何代理相关变量**时，才会回落到注册表的 `ProxyOverride`。
+
+而只要 `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 乃至 `NO_PROXY` 任意一个存在，绕过判定就完全由环境变量完成，注册表里的例外列表根本不会被读取。换句话说，在已经配了代理的机器上，“把主机名加进系统代理例外” 这条浏览器侧的操作，对 Python 脚本天然无效。
+
+对此，读者只需用以下 `curl` 命令一对比就能确认问题出在代理而不是服务：
 
 ```bash
 curl -s --noproxy '*' http://my-openclaw:11434/api/tags   # 直连，正常返回模型列表
 curl -s -x http://127.0.0.1:12450 http://my-openclaw:11434/api/tags   # 走代理，空响应
 ```
 
-最省事的修法是在脚本里直接关掉代理继承，而不是去改系统环境变量：
+要想解决这类问题，最省事的修法是在脚本里直接关掉代理继承，而不是去改系统环境变量：
 
 ```python
 SESSION = requests.Session()
 SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直连
 ```
 
-> **教训**：局域网服务（Ollama、vLLM、内部 API）一律不该走公网代理。做这类连通性排查时，先确认错误是“服务返回的”还是“代理返回的”——`curl --noproxy '*'` 与默认行为各跑一次，就能把责任方分开。
+> **教训**：首先，局域网服务（Ollama、vLLM、内部 API）一律不该走公网代理。其次，在做这类连通性错误的排查时，先确认该错误是服务返回的，还是代理返回的。对此，读者可以使用 curl 的默认形式与 `--noproxy '*'` 参数形式 各跑一次，就能把责任方分开。
 
 ## 针对 LLM 的测试与观察
 
-现在，让我们来具体测试一下这个基于 Ollama 完成本地部署的 LLM。需要明确的是，我们这里的测试任务并不是在评估模型的“聪明程度”，而是设法通过一组尽可能简单、可复现的测试来观察 LLM 与用户交互时的行为模式。换句话说，我们希望通过测试来了解 **LLM 作为系统组件时的响应方式、失败模式以及可控性边界。**
+本章的六类测试全部跑在 `llama3.2:3b` 上，测试代码位于 `examples/llm_tests/`，可直接用文末的三步命令复现。
+
+现在，让我们回归正题，来具体测试一下这个基于 Ollama 完成本地部署的 LLM。需要明确的是，我们这里的测试任务并不是在评估模型的 “聪明程度”，而是设法通过一组尽可能简单、可复现的测试来观察 LLM 与用户交互时的行为模式。换句话说，我们希望通过测试来了解 **LLM 作为系统组件时的响应方式、失败模式以及可控性边界。**
 
 在测试方式的选择上，我选择使用 Python 脚本通过 HTTP API 的方式来调用本地运行的 LLM，用于模拟更接近实际生产环境的使用场景。
 
@@ -169,7 +171,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 在默认情况下，Ollama 会在本地运行 LLM 的同时为用户提供一套 RESTful API（具体文档请参考本文最后的“参考资料”），这让我们可以使用 Python 脚本来模拟 HTTP 客户端，从而实现对 LLM 的自动化测试。其基本调用步骤如下：
 
-1. **启动 LLM**：在命令行终端中输入`ollama run llama3.2:3b`命令，启动 LLM 的本地运行实例。
+1. **启动 LLM**：在命令行终端中输入 `ollama run llama3.2:3b` 命令，启动 LLM 的本地运行实例。
 
 2. **创建 Python 脚本**：创建一个名为 `ollama_run_test.py` 的 Python 脚本，并在其中输入以下代码：
 
@@ -191,7 +193,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
     print(result["response"])
     ```
 
-    如果读者需要一个包含局域网部署选项的完整测试示例（含 timeout / 错误处理 / 双端点调用 / 代理绕过）见 [examples/test_ollama_run.py](./examples/test_ollama_run.py)。
+    如果读者需要一个包含局域网部署选项的完整测试示例（含 timeout / 错误处理 / 双端点调用 / 代理绕过）见[examples/test_ollama_run.py](./examples/test_ollama_run.py)。
 
 3. **运行 Python 脚本**：在命令行终端中输入 `python ollama_run_test.py` 命令，运行 Python 脚本，即可看到 LLM 的输出结果，如图 6 所示。
 
@@ -213,7 +215,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 测试项目的骨架
 
-- **步骤 1：新建测试项目**：在计算机的任意位置上创建一个名为`llm_tests`的目录（在这里，我将它建在这篇笔记所在目录下的`examples`目录中），并在其中创建下列 Python 脚本文件：
+- **步骤 1：新建测试项目**：在计算机的任意位置上创建一个名为 `llm_tests` 的目录（在这里，我将它建在这篇笔记所在目录下的 `examples` 目录中），并在其中创建下列 Python 脚本文件：
 
     ```bash
     llm_tests
@@ -230,7 +232,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 公共配置：把调用细节藏进 fixture
 
-- **步骤 2：编写项目公共配置**：使用代码编辑器打开`conftest.py`文件，并其中输入以下代码：
+- **步骤 2：编写项目公共配置**：使用代码编辑器打开 `conftest.py` 文件，并其中输入以下代码：
 
     ```python
     # llm_tests/conftest.py
@@ -363,7 +365,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 六个测试文件：从连通性到行为边界
 
-- **步骤 3：编写基础连通性测试**：使用代码编辑器打开`test_basic_call.py`文件，并其中输入以下代码：
+- **步骤 3：编写基础连通性测试**：使用代码编辑器打开 `test_basic_call.py` 文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_basic_call.py
@@ -428,7 +430,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             assert result["done"] is True
     ```
 
-- **步骤 4：编写响应延迟测试**：使用代码编辑器打开`test_latency.py`文件，并其中输入以下代码：
+- **步骤 4：编写响应延迟测试**：使用代码编辑器打开 `test_latency.py` 文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_latency.py
@@ -536,7 +538,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             )
     ```
 
-- **步骤 5：编写非确定性输出测试**：使用代码编辑器打开`test_nondeterminism.py`文件，并其中输入以下代码：
+- **步骤 5：编写非确定性输出测试**：使用代码编辑器打开 `test_nondeterminism.py` 文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_nondeterminism.py
@@ -619,7 +621,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
                 )
     ```
 
-- **步骤 6：编写模糊指令测试**：使用代码编辑器打开`test_ambiguous_prompt.py`文件，并其中输入以下代码：
+- **步骤 6：编写模糊指令测试**：使用代码编辑器打开 `test_ambiguous_prompt.py` 文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_ambiguous_prompt.py
@@ -713,7 +715,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
                 )
     ```
 
-- **步骤 7：编写流式响应测试**：使用代码编辑器打开`test_streaming.py`文件，并其中输入以下代码：
+- **步骤 7：编写流式响应测试**：使用代码编辑器打开 `test_streaming.py` 文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_streaming.py
@@ -812,7 +814,7 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
             )
     ```
 
-- **步骤 8：编写知识边界测试**：使用代码编辑器打开`test_knowledge_boundary.py`文件，并其中输入以下代码：
+- **步骤 8：编写知识边界测试**：使用代码编辑器打开 `test_knowledge_boundary.py` 文件，并其中输入以下代码：
 
     ```python
     # llm_tests/test_knowledge_boundary.py
@@ -900,15 +902,27 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 #### 安装依赖并跑通整套测试
 
-- **步骤 9：安装 PyTest 并运行测试**：在命令行终端中打开`llm_tests`目录并安装 PyTest，然后执行`pytest -vs`命令运行测试，其输出效果如图 7 所示：
+- **步骤 9：安装依赖并运行测试**：在命令行终端中打开 `llm_tests` 目录，用 `uv` 同步依赖后执行 `uv run pytest -v` 命令运行测试（项目已附带 `pyproject.toml` 与 `uv.lock`，无需手动创建虚拟环境），其输出效果如图 7 所示：
 
     ![图7：安装 PyTest 并运行测试](./img/pytest_ollama.png)
 
     **图 7**：安装 PyTest 并运行测试
 
+#### 最短可跑路径
+
+现在，整套测试已经封装成独立项目，读者在自己机器上复现只需三步：
+
+```powershell
+cd examples/llm_tests
+uv sync
+uv run pytest -v
+```
+
+预期结果是 6 个测试文件、共 17 个测试用例全部通过，`pytest` 汇总行形如 `17 passed in xx.xxs`。若中途报错，优先排查两点：一是本机 Ollama 是否已启动、且 `ollama list` 能看到模型（默认 `llama3.2:3b`，可用环境变量 `OLLAMA_MODEL` 覆盖）。二是代理环境变量（`HTTP_PROXY` / `HTTPS_PROXY` / `ALL_PROXY`）是否干扰了本地回环请求——这正是前文“局域网部署的一个坑”讨论过的同一类问题。
+
 ### 测试指标速查
 
-表 2 汇总了各测试文件所观测的量化指标、预期范围及其工程含义，方便在后续系统设计时快速查阅。
+在表 2 中，我们汇总了各测试文件所观测的量化指标、预期范围及其工程含义，方便在后续系统设计时快速查阅。
 
 | 测试文件 | 观测指标 | 预期正常范围 | 超出说明什么 | 工程建议 |
 | --- | --- | --- | --- | --- |
@@ -938,25 +952,27 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 知识边界测试（`test_knowledge_boundary.py`）表明，模型对训练数据截止日期之后的事件（如 2025 年诺贝尔奖）通常不会承认“不知道”，而是给出看似合理的编造。冷门知识领域的高幻觉率进一步证实了这一模式：模型的“知识”本质上是训练数据中的统计分布，而非结构化的世界模型。这对应主文章末尾对“真正的世界模型”缺失的讨论。
 
 **5. 流式接口的可靠性影响产品体验的关键变量。**
-流式测试（`test_streaming.py`）验证了逐 token 传输的完整性和连续性；在把流式与非流式两侧的输出都固定到 `temperature=0` 之后，仍可以用“关键短语命中率”把两者之间的语义偏差量化出来——这意味着在同一个会话中混合使用流式与非流式接口需要谨慎处理。
+流式测试（`test_streaming.py`）验证了逐 token 传输的完整性和连续性；在把流式与非流式两侧的输出都固定到 `temperature=0` 之后，仍可以用“关键短语命中率”把两者之间的语义偏差量化出来——这意味着在同一个会话中混合使用流式与非流式接口，需要谨慎处理。
 
 **总体结论：** LLM 在系统设计中更适合作为一个**受约束、被监控、可回退的智能组件**，而不是系统逻辑的直接执行者。它所暴露的所有“问题”——延迟、非确定性、幻觉、过度推断——都不是模型 bug，而是其作为概率模型运作方式的自然结果。工程设计的任务不是消除这些特性（在一个概率系统中消除概率是不可能的），而是通过架构手段（缓存、验证、容错、降级、人工审核）将这些不确定性控制在可接受的范围内。
 
 ## 延伸实验：在 NPU / iGPU / CPU 之间做一次推理后端选型
 
-前面的部署与测试都围绕 Ollama 展开，过程中有一个问题一直被有意回避：**模型最终究竟跑在哪块硬件上？**，最近（2026-11），由于添置了一台带 NPU 的计算机，让我终于有机会做一次完整的推理后端选型实验，以便回答这个问题了。
+在之前的实验中，模型的部署与测试都是围绕 Ollama 展开的，我们在该过程中一直有意地回避了一个问题：**模型更适合跑在哪种计算单元上？**，最近（2026-11），由于添置了一台带 NPU 的计算机，让我终于有机会补做一次完整的推理后端选型实验，以便回答这个问题了。
 
-正如我们之前所见，Ollama 把“部署模型”这件事处理得很好，它屏蔽了底层差异，用户只需要 `ollama pull` 与 `ollama run`；但这种屏蔽的代价是，我们从头到尾没有对“算力来源”做过任何测量。而在我刚刚添置的这台计算机上，其实同时存在三套彼此独立的算力资源：
+正如读者之前所见，Ollama 把 “部署模型” 这件事处理得很好，它屏蔽了底层差异，用户在进行修改操作的时候只需要执行 `ollama pull` 与 `ollama run` 命令即可；但这种屏蔽的代价是，我们从头到尾没有对 “算力来源” 做过任何测量。而在我刚刚添置的这台计算机上，其实同时存在三套彼此独立的算力资源：
 
 - **CPU**：通用计算核心，任何推理框架都能用，是最后的兜底；
 - **iGPU**：集成在处理器中的核显，走 Vulkan 后端即可被 llama.cpp 系框架调用；
 - **NPU**：专为推理设计的低功耗单元，需要专门的插件才能调度。
 
-它们之间的实际差距不能靠直觉判断，于是我做了一次重新部署和测试，并把这次实验中编写的脚本，及其得到的结果与踩过的坑都固化成了一个独立的小项目，存储在了这篇笔记所在目录的`examples/ollama_test_NPU`子目录下。在这里，我将以这组实验为例，向读者说明如何为本地 LLM 选择算力后端，其整体选择路径如图 8 所示。
+基于科学的态度，它们之间的实际差距不能靠直觉判断，于是我补做了一次模型的部署和测试实验，并把这次实验中编写的脚本，及其得到的结果与踩过的坑都固化成了一个独立的小项目，存储在了这篇笔记所在目录的 `examples/ollama_test_NPU` 子目录下。在这里，我将以这组实验为例，向读者说明如何为本地 LLM 选择算力后端，其整体选择路径如图 8 所示。
 
 ![图8：本地 LLM 推理后端的选择路径](./img/08-flowchart-inference-backend-selection.svg)
 
 **图 8**：本地 LLM 推理后端的选择路径
+
+> **图 8 的数值口径**：图中的三个吞吐值统一取自 OpenVINO 口径（模型 `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov`，3 次独立运行的均值），与下文表 5 完全对应；Ollama 侧的口径（模型 `qwen3:8b`，均值 18.29 tok/s）另见表 6。两组数据所用的模型与精度不同，不可直接横向比较。
 
 下面，让我们从实验环境与项目结构开始，一步步展开这次实验。
 
@@ -975,6 +991,17 @@ SESSION.trust_env = False   # 忽略 HTTP_PROXY / HTTPS_PROXY / ALL_PROXY，直�
 
 **表 3**：推理后端对比实验的运行环境
 
+本文先后用到了三组不同的模型与框架组合，为免读者在后面的数据表里混淆口径，先汇总如下：
+
+| 实验小节 | 推理框架 | 模型 | 量化 / 规格 | 目标设备 | 数据位置 |
+| --- | --- | --- | --- | --- | --- |
+| 使用 Python 调用本地 Ollama 模型 / 六类测试 | Ollama | `llama3.2:3b` | 默认量化（3B） | CPU | `examples/llm_tests/`，见下文表 2 |
+| 三个后端的横向对比 | OpenVINO GenAI | `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov` | int4 IR（1.5B） | CPU / iGPU / NPU | 见下文表 5 |
+| Ollama 侧：CPU 与 iGPU 的差距 | Ollama | `qwen3:8b` | Q4_K_M（约 5.2 GB） | CPU / iGPU（Vulkan） | 见下文表 6 |
+| 环境变量调优对照 | Ollama | `qwen3:8b` | Q4_K_M（约 5.2 GB） | CPU → iGPU | 9.10 → 9.24 → 15.36 tok/s |
+
+**表 4**：全文涉及的模型、推理框架与目标设备对照
+
 > 关于 Python 版本的选择：OpenVINO 2026.4.1 的 wheel 只发布到 `cp314`（可在 PyPI 页面核对），而本机默认的 `python` 已经是 3.15，因此项目固定使用 3.14 并把解释器锁在项目自己的 `.venv` 里，避免“换个终端就装不上依赖”。
 
 项目结构大致如下：
@@ -992,7 +1019,7 @@ ollama_test_NPU
 
 ### 为什么测 NPU 只能用 OpenVINO
 
-Ollama 官方文档在硬件支持一节中列出的加速路径有四条：NVIDIA 走 CUDA、AMD 走 ROCm、Apple 走 Metal，以及 Windows 与 Linux 上的额外 GPU 支持走 Vulkan。**其中并没有 NPU。**（详见参考资料中的《Ollama 硬件支持文档》）
+Ollama 官方文档在硬件支持一节中列出的加速路径有四条：NVIDIA 走 CUDA、AMD 走 ROCm、Apple 走 Metal，以及 Windows 与 Linux 上的额外 GPU 支持走 Vulkan。**其中并没有 NPU。**（详见 [Ollama 硬件支持文档](https://docs.ollama.com/gpu)）
 
 这一点我在本机也做了交叉验证：当前安装的 Ollama 0.40.16，其 `lib\ollama\` 目录下只有 `ggml-cpu-*.dll`（覆盖 14 种微架构）、`cuda_v12\`、`cuda_v13\`、`rocm_v7_1\` 与 `vulkan\`（内含 `ggml-vulkan.dll`）五类产物，没有任何 NPU / OpenVINO / SYCL 相关后端。
 
@@ -1000,7 +1027,7 @@ Ollama 官方文档在硬件支持一节中列出的加速路径有四条：NVID
 
 ### OpenVINO 侧：NPU 的两条硬约束
 
-在动手之前，OpenVINO 官方文档里有两条关于 NPU 的说明（引用见文末“参考资料”）：
+在动手之前，OpenVINO 官方文档里有两条关于 NPU 的说明（见 [OpenVINO NPU Device 文档](https://docs.openvino.ai/2026/openvino-workflow/running-inference/inference-devices-and-modes/npu-device.html)）：
 
 1. NPU 是随 Intel Core Ultra 一代引入的低功耗硬件单元，**执行模型需要系统已安装 NPU 驱动**；
 2. NPU 上的动态 shape 支持目前仍是 preview（实验性）特性，**只有 `Compiler-In-Plugin` 编译类型支持动态 shape**，`Compiler-In-Driver` 路径不支持；从 NPU40XX（Lunar Lake）平台起才提供该能力，并要求 Windows NPU 驱动 32.0.100.4621 以上。
@@ -1012,49 +1039,75 @@ props["MAX_PROMPT_LEN"] = 1024      # 固定 prompt 长度上限
 props["MIN_RESPONSE_LEN"] = 128    # 固定最小生成长度
 ```
 
-这里还有一个容易踩的坑：**不要绕过 genai 直接调用 `core.compile_model(model, "NPU")`** —— OpenVINO 的 issue 仓库里就有人报告过这种写法会直接抛出 `to_shape was called on a dynamic shape`；genai 的 `LLMPipeline` 会自行完成 reshape，必须走它。
+这里还有一个容易踩的坑：**不要绕过 genai 直接调用 `core.compile_model(model, "NPU")`**。
+
+OpenVINO 的 issue 仓库里就有人报告过这种写法会直接抛出 `to_shape was called on a dynamic shape`（见 [Issue #34617](https://github.com/openvinotoolkit/openvino/issues/34617)）；genai 的 `LLMPipeline` 会自行完成 reshape，必须走它。
 
 ### 实测结果：三个后端的横向对比
 
-固定参数为模型 `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov`，每次独立运行内部采样 3 轮（`--runs 3 --warmups 1 --max-tokens 128`），整组实验一共做了 3 次独立运行，结果如表 4 所示：
+![图9：两条推理链路的落点对照](./img/09-two-inference-paths.svg)
 
-| 设备 | 均值 tok/s | 极差 | 最好 / 最差 | 编译(s) | 来源 |
+**图 9**：两条推理链路的落点对照
+
+> **图 9 的数值口径**：OpenVINO 侧的三个吞吐值取自表 5（3 次独立运行的均值），Ollama 侧的 CPU / iGPU 取自表 6。两组数据所用的模型与精度不同，不可直接横向比较。
+
+如图 9 所示，同一台机器上的两条推理链路，能落到的计算单元并不相同——这正是本节要用实测数据来量化的差异。
+
+固定参数为模型 `OpenVINO/Qwen2.5-1.5B-instruct-int4-ov`（该 IR 模型由 Qwen2.5 系列转换而来，底座说明见 [Qwen2.5 Technical Report](https://arxiv.org/abs/2412.15115)），每次独立运行内部采样 3 轮（`--runs 3 --warmups 1 --max-tokens 128`）。
+
+整组实验一共做了 3 次独立运行，结果如表 5 所示：
+
+| 设备 | 均值 tok/s | 极差 | 最好 / 最差 | 编译耗时（s） | 来源 |
 | --- | --- | --- | --- | --- | --- |
 | **GPU**（Arc 140V iGPU） | **56.57** | 7.36 | 59.73 / 52.37 | 3.02 | 本机实测（3 次独立运行） |
 | CPU（Ultra 7 258V） | 44.98 | 6.12 | 47.31 / 41.18 | 1.38 | 本机实测（3 次独立运行） |
 | NPU（Intel AI Boost） | 24.19 | 1.61 | 24.83 / 23.22 | 3.25 | 本机实测（3 次独立运行） |
 
-**表 4**：OpenVINO 下 NPU / iGPU / CPU 的推理吞吐对比（3 次独立运行）
+**表 5**：OpenVINO 下 NPU / iGPU / CPU 的推理吞吐对比（3 次独立运行）
 
-> **数据口径与来源**：表中吞吐全部为本机实测，原始记录落在 `results/ov-*.json` 与 `results/history.jsonl` 里。“均值”是 3 次独立运行各自的平均值再取平均；“极差”是这 3 个值中最大值与最小值之差；“最好 / 最差”取自同一组 3 次独立运行；“编译(s)”取最近一次运行的实测值。官方文档并没有提供同模型、同硬件、同量化条件下的 tok/s 对照数据，所以这里没有“官方基准”一列可对标——官方文档只用于行为与参数说明（如 `OLLAMA_NUM_PARALLEL` 等），引用见参考资料。
+> **数据口径与来源**：表中吞吐全部为本机实测，原始记录落在 `results/ov-*.json` 与 `results/history.jsonl` 里。“均值”是 3 次独立运行各自的平均值再取平均；“极差”是这 3 个值中最大值与最小值之差；“最好 / 最差”取自同一组 3 次独立运行；“编译耗时（s）”取最近一次运行的实测值。
+>
+> 官方文档并没有提供同模型、同硬件、同量化条件下的 tok/s 对照数据，所以这里没有“官方基准”一列可对标——官方文档只用于行为与参数说明（如 `OLLAMA_NUM_PARALLEL` 等），引用见参考资料。
 
-完整输出如图 9 所示。
+**波动幅度**：把 3 次独立运行的均值当作一组样本，GPU 为 56.57 ± 3.09 tok/s、CPU 为 44.98 ± 2.71 tok/s、NPU 为 24.19 ± 0.70 tok/s（总体标准差）。
 
-![图9：OpenVINO 三设备推理测速与任务管理器 NPU 面板](./img/test_NPU.png)
+脚本内部 3 轮采样自身的标准差另见各 `results/ov-*.json` 的 `stddev_tok_per_s` 字段：GPU 2.60~4.41、CPU 0.49~1.80、NPU 0.02~0.12。
 
-**图 9**：OpenVINO 三设备推理测速与任务管理器 NPU 面板
+需要说明的是，样本量只有 3 次，不足以支撑显著性检验，因此本文的结论应当读作“量级差异”而不是“精确比值”——表 5 把“极差”与“最好 / 最差”一并列出来，正是为了让读者看到数值本身的漂移幅度。
+
+完整输出如图 10 所示。
+
+![图10：OpenVINO 三设备推理测速与任务管理器 NPU 面板](./img/test_NPU.png)
+
+**图 10**：OpenVINO 三设备推理测速与任务管理器 NPU 面板
 
 这张图里有两处容易被误读的地方：
 
 - **编译耗时与吞吐必须分开看**。同一模型、同一 shape 的第一次运行，`compile_seconds` 实测为 28.99 秒；此后的各次运行则落到 1.4~3.3 秒 —— 编译产物被缓存到了磁盘。所以“第一次跑特别慢”未必是 NPU 本身慢，也可能只是它正在冷编译。
-- **NPU 的负载曲线是“台阶状”的**。如图 9 右半部分的性能面板所示，NPU 的占用不是一条平线，而是一段一段的，这与它按固定 shape 批处理的工作方式是吻合的；GPU 那边的曲线则是持续的高负载。
+- **NPU 的负载曲线是“台阶状”的**。如图 10 右半部分的性能面板所示，NPU 的占用不是一条平线，而是一段一段的，这与它按固定 shape 批处理的工作方式是吻合的；GPU 那边的曲线则是持续的高负载。
 
-另外，这组数据本身还暴露出两个与 LLM 无关的差异。其一是解释器与依赖环境：同一份代码在 Python 3.12 环境下测得 GPU 41.43 / CPU 36.10 tok/s，换到 3.14 的虚拟环境后提升幅度稳定在 29%~44%；OpenVINO 版本号相同，因此差异只能来自 Python 与依赖环境本身，具体归因我没有拆开验证，这里仅作为现象记录。
+另外，这组数据本身还暴露出两个与 LLM 无关的差异。其一是解释器与依赖环境：同一份代码在 Python 3.12 环境下测得 GPU 41.43 / CPU 36.10 tok/s。
 
-其二是机器负载：把 2026-11-16 的两次独立运行与 2026-11-17 的第三次放在一起看，GPU 三次分别为 59.73 / 57.61 / 52.37 tok/s，CPU 为 47.31 / 46.45 / 41.18 tok/s —— 第三次整体偏低，原因是当时机器上同时还跑着别的任务。这正是“单次测速不足为凭”的直接例证：结论（集显 > CPU > NPU）没有变，但数值本身会随环境漂移，这也正是表 4 要把“极差”一并列出来的原因。
+换到 3.14 的虚拟环境后提升幅度稳定在约 25%~37%（GPU 41.43→56.57 即 +36.5%，CPU 36.10→44.98 即 +24.6%）；OpenVINO 版本号相同，因此差异只能来自 Python 与依赖环境本身，具体归因我没有拆开验证，这里仅作为现象记录。
+
+其二是机器负载：把 2026-11-16 的两次独立运行与 2026-11-17 的第三次放在一起看，GPU 三次分别为 59.73 / 57.61 / 52.37 tok/s，CPU 为 47.31 / 46.45 / 41.18 tok/s —— 第三次整体偏低，原因是当时机器上同时还跑着别的任务。
+
+这正是“单次测速不足为凭”的直接例证：结论（集显 > CPU > NPU）没有变，但数值本身会随环境漂移，这也正是表 5 要把“极差”一并列出来的原因。
 
 ### Ollama 侧：CPU 与 iGPU 的差距
 
-Ollama 那边能测的只有 CPU 与 iGPU。为了让集显与 CPU 的差距能被压出来，模型换成了更大的 `qwen3:8b`（Q4_K_M，约 5.2 GB），同样做了 3 次独立运行、每次内部采样 3 轮，结果如表 5 所示：
+Ollama 那边能测的只有 CPU 与 iGPU。为了让集显与 CPU 的差距能被压出来，模型换成了更大的 `qwen3:8b`（Q4_K_M，约 5.2 GB；各量化格式在体积与速度上的取舍见 [llama.cpp 量化工具说明](https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md)）。
+
+同样做了 3 次独立运行、每次内部采样 3 轮，结果如表 6 所示：
 
 | 模式 | 均值 tok/s | 极差 | 最好 / 最差 | 是否进显存 | 来源 |
 | --- | --- | --- | --- | --- | --- |
 | CPU 后端 | 9.81 | 0.91 | 10.30 / 9.39 | 否（`size_vram` = 0） | 本机实测（3 次独立运行） |
 | iGPU（Vulkan） | **18.29** | 1.15 | 18.71 / 17.56 | 是（7.67~7.81 GiB） | 本机实测（3 次独立运行） |
 
-**表 5**：Ollama 下 CPU 与 iGPU 的推理吞吐对比（3 次独立运行）
+**表 6**：Ollama 下 CPU 与 iGPU 的推理吞吐对比（3 次独立运行）
 
-3 次独立运行的结果分别为 CPU 10.30 / 9.74 / 9.39 tok/s、iGPU 18.61 / 18.71 / 17.56 tok/s，均值与极差见表 5：方向始终一致（iGPU 稳定在 CPU 的 1.9 倍左右），数值随机器负载小幅漂移。其中“是否进显存”一列来自 Ollama API 返回的 `size_vram` 字段，是比“看曲线”更硬的证据。
+3 次独立运行的结果分别为 CPU 10.30 / 9.74 / 9.39 tok/s、iGPU 18.61 / 18.71 / 17.56 tok/s，均值与极差见表 6：方向始终一致（iGPU 稳定在 CPU 的 1.9 倍左右），数值随机器负载小幅漂移。其中“是否进显存”一列来自 Ollama API 返回的 `size_vram` 字段，是比“看曲线”更硬的证据。
 
 这里有一个关键的操作细节：Ollama 决定使用哪块设备是在**服务启动时**由环境变量决定的，运行期无法切换。默认情况下它会直接放弃集显，服务日志里会打印：
 
@@ -1062,7 +1115,7 @@ Ollama 那边能测的只有 CPU 与 iGPU。为了让集显与 CPU 的差距能�
 dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1
 ```
 
-所以脚本为两种模式分别拉起隔离的实例（使用不同端口），靠 `OLLAMA_IGPU_ENABLE=0/1` 控制后端。除此之外，Ollama 官方 FAQ 里还列出了几个与性能直接相关的环境变量：
+所以脚本为两种模式分别拉起隔离的实例（使用不同端口），靠 `OLLAMA_IGPU_ENABLE=0/1` 控制后端。除此之外，Ollama 官方 [FAQ](https://docs.ollama.com/faq) 里还列出了几个与性能直接相关的环境变量：
 
 - `OLLAMA_CONTEXT_LENGTH`：官方默认上下文只有 4096 token，长上下文任务需要显式放大；
 - `OLLAMA_FLASH_ATTENTION=1`：强制开启 Flash Attention，官方说明其在上下文增大时能显著降低内存占用；
@@ -1083,17 +1136,17 @@ cd examples/ollama_test_NPU
 powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 ```
 
-它会依次执行 OpenVINO 的 NPU / GPU / CPU 三设备测试，以及 Ollama 的 CPU / iGPU 两模式测试，并把每次运行的摘要追加到 `results/history.jsonl`，完整输出如图 10 所示。
+它会依次执行 OpenVINO 的 NPU / GPU / CPU 三设备测试，以及 Ollama 的 CPU / iGPU 两模式测试，并把每次运行的摘要追加到 `results/history.jsonl`，完整输出如图 11 所示。
 
-![图10：run_all.ps1 一键跑完全部后端](./img/test_NPU_scripts.png)
+![图11：run_all.ps1 一键跑完全部后端](./img/test_NPU_scripts.png)
 
-**图 10**：run_all.ps1 一键跑完全部后端
+**图 11**：run_all.ps1 一键跑完全部后端
 
 每一轮原始数据（环境信息、逐轮耗时、生成 token 数、显存占用）都会落盘为 `results/ov-*.json` 与 `results/ollama-*.json`，上面那些表格里的数字都来自这些文件，读者也可以按 `results/history.jsonl` 复现历史趋势。
 
 ### 踩过的坑
 
-这套实验真正花时间的地方，其实不在写脚本，而在于排掉一个个与模型无关的干扰项，汇总如表 6 所示：
+这套实验真正花时间的地方，其实不在写脚本，而在于排掉一个个与模型无关的干扰项，汇总如表 7 所示：
 
 | 症状 | 原因 | 解法 |
 | --- | --- | --- |
@@ -1106,21 +1159,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 | tok/s 低得离谱（低于 2） | tokenizer 计数写错 | `encode(...).input_ids` 是 Tensor，长度必须用 `.get_size()` 取，不能用 `len()` |
 | PowerShell 脚本报“字符串缺少终止符”之类的怪错 | `.ps1` 存成了 UTF-8 无 BOM，中文被按 ANSI 解码 | 存成 UTF-8 with BOM |
 
-**表 6**：实验过程中遇到的典型问题与解法
+**表 7**：实验过程中遇到的典型问题与解法
 
-其中第一条与本文前面“局域网部署的一个坑”其实是同一个病根：**代理是一个无声的干扰源**。`requests` 走代理时表现为 502，`httpx` 走代理时则直接抛出 `ImportError` —— 同一个环境变量，两种完全不同的错误长相。
+其中第一条与本文前面“局域网部署的一个坑”其实是同一个病根：**代理是一个无声的干扰源**。`requests` 走代理时表现为 502，`httpx` 走代理时则直接抛出 `ImportError`—— 同一个环境变量，两种完全不同的错误长相。
 
 ### 小结：这次实验带来的几个判断
 
 **1. NPU 在今天的 LLM 工具链里还不是“默认选项”。** Ollama 没有 NPU 后端，OpenVINO 虽然能跑，但要求固定 shape、对模型有适配要求，且动态 shape 至今仍是 preview 特性。想用上它，代价是换框架、锁参数。
 
-**2. 集显是最容易被忽略、性价比最高的一档算力。** 在同一台机器上，`qwen3:8b` 从 CPU 的 9.74 tok/s 提升到 iGPU 的 18.71 tok/s，接近翻倍，而付出的代价只是一个启动时环境变量。
+**2. 集显是最容易被忽略、性价比最高的一档算力。** 在同一台机器上，`qwen3:8b` 从 CPU 的 9.81 tok/s 提升到 iGPU 的 18.29 tok/s（表 6 的 3 次独立运行均值），接近翻倍，而付出的代价只是一个启动时环境变量。
 
-**3. 换后端就要连环境一起换。** 同一份 OpenVINO 代码在 3.12 与 3.14 环境下的实测差距达到 29%~44%，这提醒我们：做性能对比时，“控制变量”不只是固定模型与参数，解释器与依赖版本同样是变量。
+**3. 换后端就要连环境一起换。** 同一份 OpenVINO 代码在 3.12 与 3.14 环境下的实测差距达到约 25%~37%，这提醒我们：做性能对比时，“控制变量”不只是固定模型与参数，解释器与依赖版本同样是变量。
 
 **4. 跑得慢经常不是模型的问题。** 冷编译、代理、端口冲突、UTF-8 BOM、tokenizer 计数 —— 这些与模型能力无关的因素，往往比模型本身更能决定你看到的那个数字。这也正是本文前面坚持把“部署链路”与“模型行为”分开测试的原因：**只有先把干扰项清干净，模型的行为边界才是可信的。**
 
 ## 工程化落地：安全、多租户与稳定性
+
+本章讨论的都是服务化层面的工程问题，不再涉及新的性能实测，示例配置沿用 `llama3.2:3b`。
 
 前面所有实验都默认“服务就在 localhost、只有我一个人在用”。一旦把这套 LLM 服务真正放进团队或产品环境，就会立刻冒出三个新问题：**谁来鉴权、并发打过来怎么办、模型答不出来时系统怎么办**。这一节把这三件事拆开讲。
 
@@ -1128,7 +1183,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File run_all.ps1
 
 Ollama 的定位是“本地工具”：官方 FAQ 写明它默认绑定 `127.0.0.1:11434`，绑定地址可以改；而本地 API 并不提供 API Key 或用户体系，官方给出的对外暴露方案是“放在代理服务器之后”，由代理决定转发规则与必要的请求头校验（FAQ 中的《How can I use Ollama with a proxy server?》一节）。
 
-换句话说，如果直接把绑定地址改成 `0.0.0.0`，就等于把一个没有鉴权的模型服务裸露在局域网上，这一点必须先说清楚（详见参考资料中的《Ollama 官方 FAQ》）。
+换句话说，如果直接把绑定地址改成 `0.0.0.0`，就等于把一个没有鉴权的模型服务裸露在局域网上，这一点必须先说清楚（详见 [Ollama 官方 FAQ](https://docs.ollama.com/faq)）。
 
 工程上的常规做法是：让 Ollama 继续只监听回环地址，在它前面放一层反向代理（Nginx / Caddy / API Gateway），由代理负责 TLS 终止与鉴权。
 
@@ -1182,7 +1237,7 @@ LLM 会超时、会限流、会胡编，三者都不该直接变成用户看到�
 | 隔离 | 多租户独立实例或独立 `--models-dir` |
 | 可观测 | 记录 `eval_count` / `eval_duration`，以 P95 而非均值评估延迟 |
 
-**表 7**：LLM 服务上线前的安全与稳定性检查清单
+**表 8**：LLM 服务上线前的安全与稳定性检查清单
 
 ## 参考资料
 
@@ -1207,12 +1262,16 @@ LLM 会超时、会限流、会胡编，三者都不该直接变成用户看到�
   - [PyPI：openvino 包（可查各 Python 版本的 wheel）](https://pypi.org/project/openvino/)
   - [PyPI：openvino-genai 包](https://pypi.org/project/openvino-genai/)
   - [PyTest 官方文档](https://docs.pytest.org/en/stable/)
+  - [Requests 官方文档：代理（Proxies）](https://requests.readthedocs.io/en/latest/user/advanced/#proxies)
 
 - 代码仓库与模型：
   - [OpenVINO GenAI GitHub 仓库](https://github.com/openvinotoolkit/openvino.genai)
   - [Ollama GitHub 仓库](https://github.com/ollama/ollama)
   - [Hugging Face：OpenVINO/Qwen2.5-1.5B-instruct-int4-ov（延伸实验所用的 IR 模型）](https://huggingface.co/OpenVINO/Qwen2.5-1.5B-instruct-int4-ov)
   - [Hugging Face：Qwen/Qwen3-8B（Ollama 侧的对比模型）](https://huggingface.co/Qwen/Qwen3-8B)
+
+- 论文资料：
+  - [Qwen2.5 Technical Report（arXiv:2412.15115）](https://arxiv.org/abs/2412.15115)
 
 - 问题追踪：
   - [GitHub Issue #34617：NPU 上 `compile_model` 因动态 shape 报错](https://github.com/openvinotoolkit/openvino/issues/34617)
