@@ -1,127 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 720">
-<style>
-  text { font-family: 'JetBrains Mono','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; }
-  .t-title { fill:#f8fafc; font-size:18px; font-weight:700; }
-  .t-sub   { fill:#94a3b8; font-size:10px; }
-  .t-band  { fill:#f8fafc; font-size:13px; font-weight:700; }
-  .t-bandsub { fill:#94a3b8; font-size:9px; }
-  .t-name  { fill:#f8fafc; font-size:11px; font-weight:600; }
-  .t-desc  { fill:#94a3b8; font-size:9px; }
-  .t-flow  { fill:#94a3b8; font-size:8px; }
-</style>
-<defs>
-  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
-  </pattern>
-  <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-    <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
-  </marker>
-  <marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-    <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24"/>
-  </marker>
-</defs>
-<rect width="100%" height="100%" fill="#0f172a"/>
-<rect width="100%" height="100%" fill="url(#grid)"/>
-<text x="40" y="38" class="t-title">LLM 本地部署与测试的端到端链路</text>
-<text x="40" y="58" class="t-sub">部署准备 → API 调用 → 六类测试 → 后端选型：一条链路串起本文的全部实验</text>
-<rect x="40" y="90" width="1320" height="94" rx="12" fill="none" stroke="#fbbf24" stroke-width="1" stroke-dasharray="8,4" stroke-opacity="0.55"/>
-<rect x="60" y="108" width="170" height="58" rx="6" fill="#0f172a"/>
-<rect x="60" y="108" width="170" height="58" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
-<text x="145.0" y="134" class="t-band" text-anchor="middle">① 部署准备</text>
-<text x="145.0" y="153" class="t-bandsub" text-anchor="middle">4 个步骤</text>
-<rect x="250" y="108" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="250" y="108" width="255" height="58" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
-<text x="377.5" y="133" class="t-name" text-anchor="middle">安装 Ollama</text>
-<text x="377.5" y="151" class="t-desc" text-anchor="middle">Windows 安装包 · 环境变量</text>
-<rect x="530" y="108" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="530" y="108" width="255" height="58" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
-<text x="657.5" y="133" class="t-name" text-anchor="middle">拉取模型</text>
-<text x="657.5" y="151" class="t-desc" text-anchor="middle">ollama pull qwen3:8b</text>
-<rect x="810" y="108" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="810" y="108" width="255" height="58" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
-<text x="937.5" y="133" class="t-name" text-anchor="middle">启动服务</text>
-<text x="937.5" y="151" class="t-desc" text-anchor="middle">ollama serve · 端口 11434</text>
-<rect x="1090" y="108" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="1090" y="108" width="255" height="58" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
-<text x="1217.5" y="133" class="t-name" text-anchor="middle">校验环境</text>
-<text x="1217.5" y="151" class="t-desc" text-anchor="middle">ollama list · ollama ps</text>
-<rect x="40" y="214" width="1320" height="94" rx="12" fill="none" stroke="#22d3ee" stroke-width="1" stroke-dasharray="8,4" stroke-opacity="0.55"/>
-<rect x="60" y="232" width="170" height="58" rx="6" fill="#0f172a"/>
-<rect x="60" y="232" width="170" height="58" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
-<text x="145.0" y="258" class="t-band" text-anchor="middle">② API 调用</text>
-<text x="145.0" y="277" class="t-bandsub" text-anchor="middle">HTTP / JSON</text>
-<rect x="250" y="232" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="250" y="232" width="255" height="58" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
-<text x="377.5" y="257" class="t-name" text-anchor="middle">非流式生成</text>
-<text x="377.5" y="275" class="t-desc" text-anchor="middle">POST /api/generate</text>
-<rect x="530" y="232" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="530" y="232" width="255" height="58" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
-<text x="657.5" y="257" class="t-name" text-anchor="middle">对话接口</text>
-<text x="657.5" y="275" class="t-desc" text-anchor="middle">POST /api/chat</text>
-<rect x="810" y="232" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="810" y="232" width="255" height="58" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
-<text x="937.5" y="257" class="t-name" text-anchor="middle">流式输出</text>
-<text x="937.5" y="275" class="t-desc" text-anchor="middle">stream=true 逐 token</text>
-<rect x="1090" y="232" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="1090" y="232" width="255" height="58" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
-<text x="1217.5" y="257" class="t-name" text-anchor="middle">响应字段</text>
-<text x="1217.5" y="275" class="t-desc" text-anchor="middle">eval_count · eval_duration</text>
-<rect x="40" y="338" width="1320" height="196" rx="12" fill="none" stroke="#34d399" stroke-width="1" stroke-dasharray="8,4" stroke-opacity="0.55"/>
-<rect x="60" y="356" width="170" height="58" rx="6" fill="#0f172a"/>
-<rect x="60" y="356" width="170" height="58" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
-<text x="145.0" y="382" class="t-band" text-anchor="middle">③ 六类测试</text>
-<text x="145.0" y="401" class="t-bandsub" text-anchor="middle">examples/llm_tests</text>
-<rect x="250" y="356" width="355" height="58" rx="6" fill="#0f172a"/>
-<rect x="250" y="356" width="355" height="58" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
-<text x="427.5" y="381" class="t-name" text-anchor="middle">基础调用</text>
-<text x="427.5" y="399" class="t-desc" text-anchor="middle">test_basic_call.py · 字段完整性</text>
-<rect x="630" y="356" width="355" height="58" rx="6" fill="#0f172a"/>
-<rect x="630" y="356" width="355" height="58" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
-<text x="807.5" y="381" class="t-name" text-anchor="middle">延迟与相关</text>
-<text x="807.5" y="399" class="t-desc" text-anchor="middle">test_latency.py · CV · 相关性</text>
-<rect x="1010" y="356" width="355" height="58" rx="6" fill="#0f172a"/>
-<rect x="1010" y="356" width="355" height="58" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
-<text x="1187.5" y="381" class="t-name" text-anchor="middle">非确定性</text>
-<text x="1187.5" y="399" class="t-desc" text-anchor="middle">test_nondeterminism.py · seed</text>
-<rect x="250" y="434" width="355" height="58" rx="6" fill="#0f172a"/>
-<rect x="250" y="434" width="355" height="58" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
-<text x="427.5" y="459" class="t-name" text-anchor="middle">模糊指令</text>
-<text x="427.5" y="477" class="t-desc" text-anchor="middle">test_ambiguous_prompt.py · 过度推断</text>
-<rect x="630" y="434" width="355" height="58" rx="6" fill="#0f172a"/>
-<rect x="630" y="434" width="355" height="58" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
-<text x="807.5" y="459" class="t-name" text-anchor="middle">流式完整性</text>
-<text x="807.5" y="477" class="t-desc" text-anchor="middle">test_streaming.py · 关键短语命中率</text>
-<rect x="1010" y="434" width="355" height="58" rx="6" fill="#0f172a"/>
-<rect x="1010" y="434" width="355" height="58" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
-<text x="1187.5" y="459" class="t-name" text-anchor="middle">知识边界</text>
-<text x="1187.5" y="477" class="t-desc" text-anchor="middle">test_knowledge_boundary.py · 幻觉</text>
-<rect x="40" y="564" width="1320" height="94" rx="12" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="8,4" stroke-opacity="0.55"/>
-<rect x="60" y="582" width="170" height="58" rx="6" fill="#0f172a"/>
-<rect x="60" y="582" width="170" height="58" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
-<text x="145.0" y="608" class="t-band" text-anchor="middle">④ 后端选型</text>
-<text x="145.0" y="627" class="t-bandsub" text-anchor="middle">examples/ollama_test_NPU</text>
-<rect x="250" y="582" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="250" y="582" width="255" height="58" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
-<text x="377.5" y="607" class="t-name" text-anchor="middle">OpenVINO 后端</text>
-<text x="377.5" y="625" class="t-desc" text-anchor="middle">NPU / iGPU / CPU</text>
-<rect x="530" y="582" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="530" y="582" width="255" height="58" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
-<text x="657.5" y="607" class="t-name" text-anchor="middle">Ollama 后端</text>
-<text x="657.5" y="625" class="t-desc" text-anchor="middle">CPU / iGPU (Vulkan)</text>
-<rect x="810" y="582" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="810" y="582" width="255" height="58" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
-<text x="937.5" y="607" class="t-name" text-anchor="middle">吞吐对比</text>
-<text x="937.5" y="625" class="t-desc" text-anchor="middle">均值 ± 极差 · 3 次独立运行</text>
-<rect x="1090" y="582" width="255" height="58" rx="6" fill="#0f172a"/>
-<rect x="1090" y="582" width="255" height="58" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
-<text x="1217.5" y="607" class="t-name" text-anchor="middle">干扰项排查</text>
-<text x="1217.5" y="625" class="t-desc" text-anchor="middle">冷编译 · 代理 · 端口占用</text>
-<line x1="145" y1="166" x2="145" y2="226" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="145" y1="290" x2="145" y2="350" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="145" y1="414" x2="145" y2="576" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="160" y="200" class="t-flow">部署就绪</text>
-<text x="160" y="324" class="t-flow">接口可用</text>
-<text x="160" y="500" class="t-flow">行为可测</text>
-<text x="40" y="692" class="t-sub">脚本位置：examples/llm_tests/（六类行为测试）· examples/ollama_test_NPU/（后端选型实测）</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="90" text-anchor="middle" font-size="44" font-weight="700" fill="#6B4423">LLM 本地部署与测试的端到端链路</text>
+  <line x1="600" y1="113" x2="1000" y2="113" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="150" text-anchor="middle" font-size="24" fill="#8A6A4F">部署准备 → API 调用 → 六类测试 → 后端选型：一条链路串起本文的全部实验</text>
+
+  <rect x="520" y="182" width="560" height="70" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="800" y="226" text-anchor="middle" font-size="27" fill="#6B4423">从零到可用：部署 → 调用 → 测试 → 选型</text>
+
+  <path d="M800 252 L800 288" stroke="#8A6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M230 288 L1310 288" stroke="#8A6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M230 288 L230 322" stroke="#8A6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M590 288 L590 322" stroke="#8A6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M950 288 L950 322" stroke="#8A6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M1310 288 L1310 322" stroke="#8A6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <rect x="60" y="326" width="340" height="430" rx="12" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="230" y="376" text-anchor="middle" font-size="28" font-weight="700" fill="#6B4423">① 部署准备</text>
+  <text x="230" y="406" text-anchor="middle" font-size="20" fill="#7A8C6F">Ollama 工具链</text>
+  <text x="230" y="470" text-anchor="middle" font-size="44" font-weight="700" fill="#7A8C6F">4 步</text>
+  <line x1="90" y1="496" x2="370" y2="496" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="94" cy="528" r="4" fill="#7A8C6F"/>
+  <text x="112" y="535" font-size="21" fill="#6B4423">安装 Ollama</text>
+  <text x="112" y="554" font-size="15" fill="#8A6A4F">Windows 安装包 · 环境变量</text>
+  <circle cx="94" cy="580" r="4" fill="#7A8C6F"/>
+  <text x="112" y="587" font-size="21" fill="#6B4423">拉取模型</text>
+  <text x="112" y="606" font-size="15" fill="#8A6A4F">ollama pull qwen3:8b</text>
+  <circle cx="94" cy="632" r="4" fill="#7A8C6F"/>
+  <text x="112" y="639" font-size="21" fill="#6B4423">启动服务</text>
+  <text x="112" y="658" font-size="15" fill="#8A6A4F">ollama serve · 端口 11434</text>
+  <circle cx="94" cy="684" r="4" fill="#7A8C6F"/>
+  <text x="112" y="691" font-size="21" fill="#6B4423">校验环境</text>
+  <text x="112" y="710" font-size="15" fill="#8A6A4F">ollama list · ollama ps</text>
+  <text x="230" y="742" text-anchor="middle" font-size="17" fill="#8A6A4F">后台常驻 · 端口固定</text>
+
+  <rect x="420" y="326" width="340" height="430" rx="12" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="590" y="376" text-anchor="middle" font-size="28" font-weight="700" fill="#6B4423">② API 调用</text>
+  <text x="590" y="406" text-anchor="middle" font-size="20" fill="#5A8AAA">HTTP / JSON</text>
+  <text x="590" y="470" text-anchor="middle" font-size="44" font-weight="700" fill="#5A8AAA">4 类接口</text>
+  <line x1="450" y1="496" x2="730" y2="496" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="454" cy="528" r="4" fill="#5A8AAA"/>
+  <text x="472" y="535" font-size="21" fill="#6B4423">非流式生成</text>
+  <text x="472" y="554" font-size="15" fill="#8A6A4F">POST /api/generate</text>
+  <circle cx="454" cy="580" r="4" fill="#5A8AAA"/>
+  <text x="472" y="587" font-size="21" fill="#6B4423">对话接口</text>
+  <text x="472" y="606" font-size="15" fill="#8A6A4F">POST /api/chat</text>
+  <circle cx="454" cy="632" r="4" fill="#5A8AAA"/>
+  <text x="472" y="639" font-size="21" fill="#6B4423">流式输出</text>
+  <text x="472" y="658" font-size="15" fill="#8A6A4F">stream=true 逐 token</text>
+  <circle cx="454" cy="684" r="4" fill="#5A8AAA"/>
+  <text x="472" y="691" font-size="21" fill="#6B4423">响应字段</text>
+  <text x="472" y="710" font-size="15" fill="#8A6A4F">eval_count · eval_duration</text>
+  <text x="590" y="742" text-anchor="middle" font-size="17" fill="#8A6A4F">程序化调用 · 链路可测</text>
+
+  <rect x="780" y="326" width="340" height="430" rx="12" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="950" y="376" text-anchor="middle" font-size="28" font-weight="700" fill="#6B4423">③ 六类测试</text>
+  <text x="950" y="406" text-anchor="middle" font-size="20" fill="#D97A47">examples/llm_tests</text>
+  <text x="950" y="470" text-anchor="middle" font-size="44" font-weight="700" fill="#D97A47">6 类行为</text>
+  <line x1="810" y1="492" x2="1090" y2="492" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="814" cy="510" r="4" fill="#D97A47"/>
+  <text x="832" y="517" font-size="20" fill="#6B4423">基础调用</text>
+  <text x="832" y="535" font-size="14" fill="#8A6A4F">test_basic_call.py</text>
+  <circle cx="814" cy="550" r="4" fill="#D97A47"/>
+  <text x="832" y="557" font-size="20" fill="#6B4423">延迟与相关</text>
+  <text x="832" y="575" font-size="14" fill="#8A6A4F">test_latency.py</text>
+  <circle cx="814" cy="590" r="4" fill="#D97A47"/>
+  <text x="832" y="597" font-size="20" fill="#6B4423">非确定性</text>
+  <text x="832" y="615" font-size="14" fill="#8A6A4F">test_nondeterminism.py</text>
+  <circle cx="814" cy="630" r="4" fill="#D97A47"/>
+  <text x="832" y="637" font-size="20" fill="#6B4423">模糊指令</text>
+  <text x="832" y="655" font-size="14" fill="#8A6A4F">test_ambiguous_prompt.py</text>
+  <circle cx="814" cy="670" r="4" fill="#D97A47"/>
+  <text x="832" y="677" font-size="20" fill="#6B4423">流式完整性</text>
+  <text x="832" y="695" font-size="14" fill="#8A6A4F">test_streaming.py</text>
+  <circle cx="814" cy="710" r="4" fill="#D97A47"/>
+  <text x="832" y="717" font-size="20" fill="#6B4423">知识边界</text>
+  <text x="832" y="735" font-size="14" fill="#8A6A4F">test_knowledge_boundary.py</text>
+
+  <rect x="1140" y="326" width="340" height="430" rx="12" fill="#FFF8E8" stroke="#9A6FB0" stroke-width="3"/>
+  <text x="1310" y="376" text-anchor="middle" font-size="28" font-weight="700" fill="#6B4423">④ 后端选型</text>
+  <text x="1310" y="406" text-anchor="middle" font-size="19" fill="#9A6FB0">examples/ollama_test_NPU</text>
+  <text x="1310" y="470" text-anchor="middle" font-size="44" font-weight="700" fill="#9A6FB0">2 套后端</text>
+  <line x1="1170" y1="496" x2="1450" y2="496" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="1174" cy="528" r="4" fill="#9A6FB0"/>
+  <text x="1192" y="535" font-size="20" fill="#6B4423">OpenVINO 后端</text>
+  <text x="1192" y="554" font-size="15" fill="#8A6A4F">NPU · iGPU · CPU</text>
+  <circle cx="1174" cy="580" r="4" fill="#9A6FB0"/>
+  <text x="1192" y="587" font-size="20" fill="#6B4423">Ollama 后端</text>
+  <text x="1192" y="606" font-size="15" fill="#8A6A4F">CPU · iGPU (Vulkan)</text>
+  <circle cx="1174" cy="632" r="4" fill="#9A6FB0"/>
+  <text x="1192" y="639" font-size="20" fill="#6B4423">吞吐对比</text>
+  <text x="1192" y="658" font-size="15" fill="#8A6A4F">均值 ± 极差 · 3 次独立运行</text>
+  <circle cx="1174" cy="684" r="4" fill="#9A6FB0"/>
+  <text x="1192" y="691" font-size="20" fill="#6B4423">干扰项排查</text>
+  <text x="1192" y="710" font-size="15" fill="#8A6A4F">冷编译 · 代理 · 端口占用</text>
+  <text x="1310" y="742" text-anchor="middle" font-size="17" fill="#8A6A4F">同一台机器 · 三种算力</text>
+
+  <rect x="60" y="784" width="1420" height="96" rx="10" fill="#F5E0D0" stroke="#D97A47" stroke-width="2" stroke-dasharray="10,8"/>
+  <text x="800" y="818" text-anchor="middle" font-size="24" font-weight="700" fill="#6B4423">结论：先让模型跑起来，再让它被程序调用，最后用数据决定它跑在哪块硬件上</text>
+  <text x="800" y="848" text-anchor="middle" font-size="20" fill="#6B4423">脚本位置：examples/llm_tests/（六类行为测试）· examples/ollama_test_NPU/（后端选型实测）</text>
 </svg>

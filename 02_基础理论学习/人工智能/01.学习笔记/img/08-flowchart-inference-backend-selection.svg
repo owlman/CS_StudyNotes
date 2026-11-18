@@ -17,44 +17,50 @@
   <rect x="90" y="340" width="420" height="380" rx="12" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
   <text x="300" y="392" text-anchor="middle" font-size="30" font-weight="700" fill="#6B4423">CPU · Ultra 7 258V</text>
   <text x="300" y="424" text-anchor="middle" font-size="22" fill="#7A8C6F">OpenVINO / Ollama 均可调度</text>
-  <text x="300" y="492" text-anchor="middle" font-size="46" font-weight="700" fill="#7A8C6F">47.31 tok/s</text>
-  <text x="300" y="522" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO · Qwen2.5-1.5B int4</text>
-  <line x1="120" y1="548" x2="480" y2="548" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="142" cy="580" r="4" fill="#7A8C6F"/>
-  <text x="160" y="588" font-size="22" fill="#6B4423">任何推理框架都能用</text>
-  <circle cx="142" cy="616" r="4" fill="#7A8C6F"/>
-  <text x="160" y="624" font-size="22" fill="#6B4423">兜底方案最稳妥</text>
-  <circle cx="142" cy="652" r="4" fill="#7A8C6F"/>
-  <text x="160" y="660" font-size="22" fill="#6B4423">同模型下短请求快于 NPU</text>
+  <text x="300" y="490" text-anchor="middle" font-size="46" font-weight="700" fill="#7A8C6F">44.98 tok/s</text>
+  <text x="300" y="520" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 口径 · Qwen2.5-1.5B int4</text>
+  <line x1="120" y1="542" x2="480" y2="542" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="142" cy="572" r="4" fill="#7A8C6F"/>
+  <text x="160" y="580" font-size="22" fill="#6B4423">任何推理框架都能用</text>
+  <circle cx="142" cy="604" r="4" fill="#7A8C6F"/>
+  <text x="160" y="612" font-size="22" fill="#6B4423">兜底方案最稳妥</text>
+  <circle cx="142" cy="636" r="4" fill="#7A8C6F"/>
+  <text x="160" y="644" font-size="22" fill="#6B4423">同模型下快于 NPU</text>
+  <circle cx="142" cy="668" r="4" fill="#7A8C6F"/>
+  <text x="160" y="676" font-size="22" fill="#6B4423">集显不可用时的唯一选择</text>
 
   <rect x="590" y="340" width="420" height="380" rx="12" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
   <text x="800" y="392" text-anchor="middle" font-size="30" font-weight="700" fill="#6B4423">iGPU · Arc 140V 16GB</text>
-  <text x="800" y="424" text-anchor="middle" font-size="22" fill="#5A8AAA">Ollama / llama.cpp 走 Vulkan</text>
-  <text x="800" y="492" text-anchor="middle" font-size="46" font-weight="700" fill="#5A8AAA">18.71 tok/s</text>
-  <text x="800" y="522" text-anchor="middle" font-size="20" fill="#8A6A4F">Ollama · qwen3:8b（整体进显存）</text>
-  <line x1="620" y1="548" x2="980" y2="548" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="642" cy="580" r="4" fill="#5A8AAA"/>
-  <text x="660" y="588" font-size="22" fill="#6B4423">Ollama 原生支持，生态友好</text>
-  <circle cx="642" cy="616" r="4" fill="#5A8AAA"/>
-  <text x="660" y="624" font-size="22" fill="#6B4423">需 OLLAMA_IGPU_ENABLE=1</text>
-  <circle cx="642" cy="652" r="4" fill="#5A8AAA"/>
-  <text x="660" y="660" font-size="22" fill="#6B4423">权重与 KV 全部驻留显存</text>
+  <text x="800" y="424" text-anchor="middle" font-size="22" fill="#5A8AAA">OpenVINO / Ollama 均可调度</text>
+  <text x="800" y="490" text-anchor="middle" font-size="46" font-weight="700" fill="#5A8AAA">56.57 tok/s</text>
+  <text x="800" y="520" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 口径 · Qwen2.5-1.5B int4</text>
+  <line x1="620" y1="542" x2="980" y2="542" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="642" cy="572" r="4" fill="#5A8AAA"/>
+  <text x="660" y="580" font-size="22" fill="#6B4423">同口径下吞吐最高</text>
+  <circle cx="642" cy="604" r="4" fill="#5A8AAA"/>
+  <text x="660" y="612" font-size="22" fill="#6B4423">权重与 KV 全部驻留显存</text>
+  <circle cx="642" cy="636" r="4" fill="#5A8AAA"/>
+  <text x="660" y="644" font-size="22" fill="#6B4423">Ollama 口径实测 18.29 tok/s</text>
+  <circle cx="642" cy="668" r="4" fill="#5A8AAA"/>
+  <text x="660" y="676" font-size="22" fill="#6B4423">需 OLLAMA_IGPU_ENABLE=1</text>
 
   <rect x="1090" y="340" width="420" height="380" rx="12" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
   <text x="1300" y="392" text-anchor="middle" font-size="30" font-weight="700" fill="#6B4423">NPU · Intel AI Boost</text>
   <text x="1300" y="424" text-anchor="middle" font-size="22" fill="#D97A47">仅 OpenVINO GenAI 可调度</text>
-  <text x="1300" y="492" text-anchor="middle" font-size="46" font-weight="700" fill="#D97A47">24.83 tok/s</text>
-  <text x="1300" y="522" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO · 静态 shape（1.5B int4）</text>
-  <line x1="1120" y1="548" x2="1480" y2="548" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="1142" cy="580" r="4" fill="#D97A47"/>
-  <text x="1160" y="588" font-size="22" fill="#6B4423">低功耗，适合常驻后台</text>
-  <circle cx="1142" cy="616" r="4" fill="#D97A47"/>
-  <text x="1160" y="624" font-size="22" fill="#6B4423">动态 shape 仍是预览特性</text>
-  <circle cx="1142" cy="652" r="4" fill="#D97A47"/>
-  <text x="1160" y="660" font-size="22" fill="#6B4423">须固定 MAX_PROMPT_LEN</text>
+  <text x="1300" y="490" text-anchor="middle" font-size="46" font-weight="700" fill="#D97A47">24.19 tok/s</text>
+  <text x="1300" y="520" text-anchor="middle" font-size="20" fill="#8A6A4F">OpenVINO 口径 · 静态 shape（1.5B int4）</text>
+  <line x1="1120" y1="542" x2="1480" y2="542" stroke="#D8C9A8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="1142" cy="572" r="4" fill="#D97A47"/>
+  <text x="1160" y="580" font-size="22" fill="#6B4423">低功耗，适合常驻后台</text>
+  <circle cx="1142" cy="604" r="4" fill="#D97A47"/>
+  <text x="1160" y="612" font-size="22" fill="#6B4423">动态 shape 仍是预览特性</text>
+  <circle cx="1142" cy="636" r="4" fill="#D97A47"/>
+  <text x="1160" y="644" font-size="22" fill="#6B4423">须固定 MAX_PROMPT_LEN</text>
+  <circle cx="1142" cy="668" r="4" fill="#D97A47"/>
+  <text x="1160" y="676" font-size="22" fill="#6B4423">同模型下吞吐最低</text>
 
   <rect x="90" y="748" width="1420" height="102" rx="10" fill="#F5E0D0" stroke="#D97A47" stroke-width="2" stroke-dasharray="10,8"/>
   <text x="800" y="784" text-anchor="middle" font-size="24" font-weight="700" fill="#6B4423">结论：没有“最强”后端，只有与场景匹配的后端</text>
-  <text x="800" y="816" text-anchor="middle" font-size="21" fill="#6B4423">低功耗常驻 → NPU；追求生态与吞吐 → iGPU；兼容与兜底 → CPU</text>
-  <text x="800" y="842" text-anchor="middle" font-size="20" fill="#8A6A4F">实测口径：单请求短输出（max_tokens 128），三组模型与精度不同，数值不可直接横向比较</text>
+  <text x="800" y="816" text-anchor="middle" font-size="21" fill="#6B4423">低功耗常驻 → NPU；追求吞吐 → iGPU；兼容与兜底 → CPU</text>
+  <text x="800" y="842" text-anchor="middle" font-size="20" fill="#8A6A4F">数值口径：OpenVINO 侧取表 5 的 3 次独立运行均值；Ollama 侧见表 6</text>
 </svg>
