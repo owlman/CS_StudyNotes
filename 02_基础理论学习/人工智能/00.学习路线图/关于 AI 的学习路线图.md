@@ -4,7 +4,7 @@ author: 凌杰
 date: 2026-01-29
 updated: 2026-09-28
 tags: [学习路线图]
-categories: 基础理论学习
+categories: [基础理论学习, 人工智能]
 ---
 
 > [!NOTE] 笔记说明

@@ -4,7 +4,7 @@ author: 凌杰
 date: 2026-01-31
 updated: 2026-11-20
 tags: [LLM本地部署, Ollama, OpenVINO, NPU]
-categories: 人工智能
+categories: [基础理论学习, 人工智能]
 ---
 
 > [!NOTE] 笔记说明

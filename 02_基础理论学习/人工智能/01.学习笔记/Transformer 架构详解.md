@@ -3,7 +3,7 @@ title: Transformer 架构详解
 author: 凌杰
 date: 2026-09-28
 tags: [深度神经网络, Transformer, 注意力机制]
-categories: 基础理论学习
+categories: [基础理论学习, 人工智能]
 ---
 
 > [!NOTE] 笔记说明

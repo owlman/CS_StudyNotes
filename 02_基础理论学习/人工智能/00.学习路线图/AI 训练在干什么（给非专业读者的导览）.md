@@ -3,7 +3,7 @@ title: AI 训练在干什么（给非专业读者的导览）
 author: 凌杰
 date: 2026-07-25
 tags: [AI 入门, 深度学习, 科普]
-categories: AI 入门
+categories: [基础理论学习, 人工智能]
 ---
 
 
