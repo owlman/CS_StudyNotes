@@ -44,3 +44,16 @@ Karp 认为：如果 OpenAI 和 Anthropic 的模型真能带来它们吹嘘的�
 
 - 与《[[关于 AI 的学习路线图]]》第三阶段 "LLM 在生产环境中的角色" 互为补充，前者是从技术角度讨论 LLM 在应用系统中的角色定位，这里讨论的是它在市场经济中的产品定位。
 - 与《[[AI 研究方法的演变]]》4.4 节 "价值对齐的根本困难" 形成呼应，前者是技术视角，后者是商业模式视角
+
+
+## 参考资料
+
+- **原始出处**
+  - Alex Karp 在 CNBC 的访谈片段（B 站转载）：[*视频链接*](https://www.bilibili.com/video/BV1PLT76rEwh) —— 本文讨论的观点来源。
+- **商业模式的一手证据**
+  - Anthropic. [*Plans & Pricing*](https://www.anthropic.com/pricing)：按 token 计费的公开定价。
+  - OpenAI. [*API Pricing*](https://openai.com/api/pricing/)：同类定价结构，可与上条对照。
+  - Palantir. [*Investor Relations*](https://investors.palantir.com/)：被批评方的官方口径，可与 Karp 的说法交叉验证。
+- **本系列关联笔记**
+  - [[AI 研究方法的演变]] —— “基础模型—预训练—后训练” 这条技术脉络的来龙去脉。
+  - [[LLM 的部署与测试]] —— token 计价如何对应到实际的推理成本与硬件开销。

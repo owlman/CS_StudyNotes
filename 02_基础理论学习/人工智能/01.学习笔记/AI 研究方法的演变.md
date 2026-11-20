@@ -474,51 +474,51 @@ RL 面临的根本困境是：解决即使是简单的任务也需要海量的�
 ## 参考资料
 
 - 图书教材：
-  - Stuart Russell & Peter Norvig. *Artificial Intelligence: A Modern Approach*（《人工智能：现代方法》）：AI 领域最经典的综合性教材，覆盖本文全部四个阶段。
-  - 李航. 《统计学习方法》（第 2 版）. 清华大学出版社：统计学习与浅层机器学习的权威中文教材，SVM、集成方法、HMM 等均有详细推导。
-  - Ian Goodfellow, Yoshua Bengio & Aaron Courville. *Deep Learning*（《深度学习》）：深度学习领域的奠基性教材，涵盖 CNN、RNN 以及表征学习的理论基础。
-  - 周志华. 《机器学习》（西瓜书）. 清华大学出版社：中文世界最受欢迎的机器学习入门教材，对三大范式和集成方法的讲解尤为清晰。
+  - Stuart Russell & Peter Norvig. *Artificial Intelligence: A Modern Approach*（《人工智能：现代方法》）：AI 领域最经典的综合性教材，覆盖本文全部四个阶段。 https://aima.cs.berkeley.edu/
+  - 李航. 《统计学习方法》（第 2 版）. 清华大学出版社：统计学习与浅层机器学习的权威中文教材，SVM、集成方法、HMM 等均有详细推导。 https://book.douban.com/subject/33437381/
+  - Ian Goodfellow, Yoshua Bengio & Aaron Courville. *Deep Learning*（《深度学习》）：深度学习领域的奠基性教材，涵盖 CNN、RNN 以及表征学习的理论基础。 https://www.deeplearningbook.org/
+  - 周志华. 《机器学习》（西瓜书）. 清华大学出版社：中文世界最受欢迎的机器学习入门教材，对三大范式和集成方法的讲解尤为清晰。 https://book.douban.com/subject/26708119/
 
 - 论文与原始文献：
   - **符号主义时期**：
-    - McCulloch, W. & Pitts, W. (1943). A Logical Calculus of Ideas Immanent in Nervous Activity. *Bulletin of Mathematical Biophysics*：人工神经元的数学建模原点。
-    - Turing, A. (1950). Computing Machinery and Intelligence. *Mind*：提出"机器能否思考"的经典问题与图灵测试。
-    - Newell, A. & Simon, H. (1976). Computer Science as Empirical Inquiry: Symbols and Search. *Communications of the ACM*：物理符号系统假设的正式定义。
+    - McCulloch, W. & Pitts, W. (1943). A Logical Calculus of Ideas Immanent in Nervous Activity. *Bulletin of Mathematical Biophysics*：人工神经元的数学建模原点。 https://doi.org/10.1007/BF02478259
+    - Turing, A. (1950). Computing Machinery and Intelligence. *Mind*：提出"机器能否思考"的经典问题与图灵测试。 https://doi.org/10.1093/mind/LIX.236.433
+    - Newell, A. & Simon, H. (1976). Computer Science as Empirical Inquiry: Symbols and Search. *Communications of the ACM*：物理符号系统假设的正式定义。 https://doi.org/10.1145/360018.360022
   - **联结主义与感知机**：
-    - Rosenblatt, F. (1958). The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain. *Psychological Review*：感知机的原始论文，包含收敛定理证明。
-    - Minsky, M. & Papert, S. (1969). *Perceptrons*. MIT Press：严格证明单层感知机对 XOR 等线性不可分问题的局限。
+    - Rosenblatt, F. (1958). The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain. *Psychological Review*：感知机的原始论文，包含收敛定理证明。 https://doi.org/10.1037/h0042519
+    - Minsky, M. & Papert, S. (1969). *Perceptrons*. MIT Press：严格证明单层感知机对 XOR 等线性不可分问题的局限。 https://mitpress.mit.edu/9780262691463/perceptrons/
   - **概率方法**：
-    - Jelinek, F. (1976). Continuous Speech Recognition by Statistical Methods. *Proceedings of the IEEE*：噪声信道模型在语音识别中的奠基性工作。
-    - Brown, P. et al. (1993). The Mathematics of Statistical Machine Translation: Parameter Estimation. *Computational Linguistics*：IBM Model 1–5 的完整数学推导。
-    - Brin, S. & Page, L. (1998). The Anatomy of a Large-Scale Hypertextual Web Search Engine. *WWW Conference*：PageRank 算法的原始论文。
+    - Jelinek, F. (1976). Continuous Speech Recognition by Statistical Methods. *Proceedings of the IEEE*：噪声信道模型在语音识别中的奠基性工作。 https://doi.org/10.1109/proc.1976.10159
+    - Brown, P. et al. (1993). The Mathematics of Statistical Machine Translation: Parameter Estimation. *Computational Linguistics*：IBM Model 1–5 的完整数学推导。 https://aclanthology.org/J93-2003/
+    - Brin, S. & Page, L. (1998). The Anatomy of a Large-Scale Hypertextual Web Search Engine. *WWW Conference*：PageRank 算法的原始论文。 https://doi.org/10.1016/S0169-7552(98)00110-X
   - **深度学习与表征学习**：
-    - Rumelhart, D., Hinton, G. & Williams, R. (1986). Learning Representations by Back-propagating Errors. *Nature*：反向传播算法的原点。
-    - Hochreiter, S. & Schmidhuber, J. (1997). Long Short-Term Memory. *Neural Computation*：LSTM 的原始论文，通过输入门与输出门解决长程梯度消失问题。
-    - Krizhevsky, A., Sutskever, I. & Hinton, G. (2012). ImageNet Classification with Deep Convolutional Neural Networks. *NeurIPS*：AlexNet 的原始论文，"ImageNet 时刻"的第一手文献。
-    - Mikolov, T. et al. (2013). Efficient Estimation of Word Representations in Vector Space. *arXiv*：Word2Vec 的原始论文，展示分布式表示的语义线性推理能力。
-    - Goodfellow, I. et al. (2014). Generative Adversarial Nets. *NeurIPS*：GAN 的原始论文。
-    - Bahdanau, D., Cho, K. & Bengio, Y. (2015). Neural Machine Translation by Jointly Learning to Align and Translate. *ICLR*：注意力机制的原始论文，首次在 seq2seq 中引入软对齐。
+    - Rumelhart, D., Hinton, G. & Williams, R. (1986). Learning Representations by Back-propagating Errors. *Nature*：反向传播算法的原点。 https://doi.org/10.1038/323533a0
+    - Hochreiter, S. & Schmidhuber, J. (1997). Long Short-Term Memory. *Neural Computation*：LSTM 的原始论文，通过输入门与输出门解决长程梯度消失问题。 https://doi.org/10.1162/neco.1997.9.8.1735
+    - Krizhevsky, A., Sutskever, I. & Hinton, G. (2012). ImageNet Classification with Deep Convolutional Neural Networks. *NeurIPS*：AlexNet 的原始论文，"ImageNet 时刻"的第一手文献。 https://arxiv.org/abs/1102.0183
+    - Mikolov, T. et al. (2013). Efficient Estimation of Word Representations in Vector Space. *arXiv*：Word2Vec 的原始论文，展示分布式表示的语义线性推理能力。 https://arxiv.org/abs/1301.3781
+    - Goodfellow, I. et al. (2014). Generative Adversarial Nets. *NeurIPS*：GAN 的原始论文。 https://arxiv.org/abs/1406.2661
+    - Bahdanau, D., Cho, K. & Bengio, Y. (2015). Neural Machine Translation by Jointly Learning to Align and Translate. *ICLR*：注意力机制的原始论文，首次在 seq2seq 中引入软对齐。 https://arxiv.org/abs/1409.0473
   - **强化学习**：
-    - Mnih, V. et al. (2015). Human-level Control through Deep Reinforcement Learning. *Nature*：DQN 的原始论文，提出经验回放与目标网络。
-    - Silver, D. et al. (2016). Mastering the Game of Go with Deep Neural Networks and Tree Search. *Nature*：AlphaGo 的原始论文。
-    - Schulman, J. et al. (2017). Proximal Policy Optimization Algorithms. *arXiv*：PPO 的原始论文，RL 领域的工业标准算法。
+    - Mnih, V. et al. (2015). Human-level Control through Deep Reinforcement Learning. *Nature*：DQN 的原始论文，提出经验回放与目标网络。 https://doi.org/10.1038/nature14236
+    - Silver, D. et al. (2016). Mastering the Game of Go with Deep Neural Networks and Tree Search. *Nature*：AlphaGo 的原始论文。 https://doi.org/10.1038/nature16961
+    - Schulman, J. et al. (2017). Proximal Policy Optimization Algorithms. *arXiv*：PPO 的原始论文，RL 领域的工业标准算法。 https://arxiv.org/abs/1707.06347
   - **基础模型与预训练**：
-    - Vaswani, A. et al. (2017). Attention Is All You Need. *NeurIPS*：Transformer 架构的原始论文。
-    - Devlin, J. et al. (2018). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. *NAACL*：BERT 的原始论文。
-    - Radford, A. et al. (2019). Language Models are Unsupervised Multitask Learners. *OpenAI*：GPT-2 论文。
-    - Brown, T. et al. (2020). Language Models are Few-Shot Learners. *NeurIPS*：GPT-3 的原始论文，首次大规模展示涌现能力。
-    - Kaplan, J. et al. (2020). Scaling Laws for Neural Language Models. *arXiv*：规模化定律的系统研究。
-    - Ouyang, L. et al. (2022). Training Language Models to Follow Instructions with Human Feedback. *NeurIPS*：InstructGPT / RLHF 的原始论文。
-    - Sutton, R. (2019). The Bitter Lesson. *Incomplete Ideas*：提出"利用算力 scaling 的通用方法长期获胜"的哲学洞见。
+    - Vaswani, A. et al. (2017). Attention Is All You Need. *NeurIPS*：Transformer 架构的原始论文。 https://arxiv.org/abs/1706.03762
+    - Devlin, J. et al. (2018). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. *NAACL*：BERT 的原始论文。 https://arxiv.org/abs/1810.04805
+    - Radford, A. et al. (2019). Language Models are Unsupervised Multitask Learners. *OpenAI*：GPT-2 论文。 https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
+    - Brown, T. et al. (2020). Language Models are Few-Shot Learners. *NeurIPS*：GPT-3 的原始论文，首次大规模展示涌现能力。 https://arxiv.org/abs/2005.14165
+    - Kaplan, J. et al. (2020). Scaling Laws for Neural Language Models. *arXiv*：规模化定律的系统研究。 https://arxiv.org/abs/2001.08361
+    - Ouyang, L. et al. (2022). Training Language Models to Follow Instructions with Human Feedback. *NeurIPS*：InstructGPT / RLHF 的原始论文。 https://arxiv.org/abs/2203.02155
+    - Sutton, R. (2019). The Bitter Lesson. *Incomplete Ideas*：提出"利用算力 scaling 的通用方法长期获胜"的哲学洞见。 http://www.incompleteideas.net/IncIdeas/BitterLesson.html
   - **理论基础**：
-    - Valiant, L. (1984). A Theory of the Learnable. *Communications of the ACM*：PAC 学习框架的原始论文。
-    - Wolpert, D. & Macready, W. (1997). No Free Lunch Theorems for Optimization. *IEEE Transactions on Evolutionary Computation*：NFL 定理的原始论文。
+    - Valiant, L. (1984). A Theory of the Learnable. *Communications of the ACM*：PAC 学习框架的原始论文。 https://doi.org/10.1145/1968.1972
+    - Wolpert, D. & Macready, W. (1997). No Free Lunch Theorems for Optimization. *IEEE Transactions on Evolutionary Computation*：NFL 定理的原始论文。 https://doi.org/10.1109/4235.585893
 
 - 网络文章与中文资料：
   - [雪球网：赫伯特·西蒙和艾伦·纽厄尔：人工智能符号主义学派的创始人](https://xueqiu.com/3993902801/83453267)；
-  - 李沐. 论文精讲系列（Bilibili/YouTube）： 对 AlexNet、Transformer、BERT、GPT 等经典论文的逐段讲解，适合中文读者配合原文阅读。
+  - 李沐. 论文精讲系列（Bilibili/YouTube）： 对 AlexNet、Transformer、BERT、GPT 等经典论文的逐段讲解，适合中文读者配合原文阅读。 https://space.bilibili.com/1567748478
 
 - 视频课程：
-  - Stanford CS231n: Convolutional Neural Networks for Visual Recognition：CNN 与计算机视觉的经典课程；
-  - Stanford CS224n: Natural Language Processing with Deep Learning：NLP 与 Transformer 的经典课程；
-  - 3Blue1Brown. Neural Networks（YouTube 系列）： 神经网络的直觉可视化讲解。
+  - Stanford CS231n: Convolutional Neural Networks for Visual Recognition：CNN 与计算机视觉的经典课程； https://cs231n.stanford.edu/
+  - Stanford CS224n: Natural Language Processing with Deep Learning：NLP 与 Transformer 的经典课程； https://web.stanford.edu/class/cs224n/
+  - 3Blue1Brown. Neural Networks（YouTube 系列）： 神经网络的直觉可视化讲解。 https://www.3blue1brown.com/topics/neural-networks

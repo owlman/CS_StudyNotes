@@ -113,3 +113,19 @@ AI 训练里的"评分标准"就是**损失函数（Loss Function）**。它的�
 > 如果你读完后想更深入，可以从任何一个对应章节开始。
 
 本文也作为《[[关于 AI 的学习路线图]]》系列的公开入门篇，与深度笔记一同发布在 [GitHub 公开仓库](https://github.com/owlman/CS_StudyNotes)。
+
+
+## 参考资料
+
+- **本系列理论篇**
+  - [[深度学习的训练与评估]] —— 本文每个 “为什么” 对应的完整数学推导与文献引用。
+- **教材与课程**
+  - Goodfellow, Bengio & Courville. [*Deep Learning*](https://www.deeplearningbook.org/)（深度学习）：损失函数、梯度下降与泛化的系统论述。
+  - Sutton & Barto. [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book.html)（强化学习，第 2 版）：为 RLHF / DPO 这类对齐技术提供理论背景。
+  - Stanford CS231n: Convolutional Neural Networks for Visual Recognition. [*课程主页*](https://cs231n.stanford.edu/)：以图像分类为例讲清训练流程的入门课。
+- **对齐与偏好学习**
+  - Ouyang, L. et al. (2022). [*Training Language Models to Follow Instructions with Human Feedback*](https://arxiv.org/abs/2203.02155)（*NeurIPS*）：RLHF 的原始论文。
+  - Rafailov, R. et al. (2023). [*Direct Preference Optimization: Your Language Model is Secretly a Reward Model*](https://arxiv.org/abs/2305.18290)：DPO 论文，说明为何对齐目标本身比优化手段更难定义。
+- **延伸阅读**
+  - Sutton, R. (2019). [*The Bitter Lesson*](http://www.incompleteideas.net/IncIdeas/BitterLesson.html)：算力 scaling 长期占优的经验性总结。
+  - Karpathy, A. [*个人主页*](https://karpathy.ai/)：神经网络与语言模型训练的一手教程与代码。

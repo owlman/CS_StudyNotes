@@ -131,3 +131,15 @@ npx node-llama-cpp source build
 ## 八、总结
 
 通过本教程，你已经了解了如何在Windows、Linux和Mac系统上安装和配置node-llama-cpp。现在你可以开始在本地运行AI模型，享受高效的AI推理体验了。如果需要更多帮助，可以查阅项目的官方文档或提交issue寻求支持。
+
+
+## 参考资料
+
+- **官方文档与源码**
+  - node-llama-cpp. [*官方文档*](https://node-llama-cpp.withcat.ai/)：安装、模型下载与 JSON 模式约束的完整说明。
+  - withcatai. [*node-llama-cpp 仓库*](https://github.com/withcatai/node-llama-cpp)：Node.js 绑定层的源码与版本发布记录。
+  - ggml-org. [*llama.cpp 仓库*](https://github.com/ggml-org/llama.cpp)：底层推理引擎，本库封装的实际计算内核。
+- **构建依赖**
+  - Microsoft. [*Visual Studio Build Tools*](https://visualstudio.microsoft.com/visual-cpp-build-tools/)：Windows 源码编译所需的 C++ 工具链。
+- **原始教程出处**
+  - [*node-llama-cpp 安装与配置：Windows、Linux 和 Mac 全平台教程*](https://blog.csdn.net/gitblog_00839/article/details/148577870)（CSDN）—— 本文整理自该教程。
