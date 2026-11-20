@@ -2,7 +2,7 @@
 title: Robot 框架学习笔记
 author: 凌杰
 date: 2023-08-25
-tags: Robot
+tags: [Robot]
 category: 自动化测试
 ---
 

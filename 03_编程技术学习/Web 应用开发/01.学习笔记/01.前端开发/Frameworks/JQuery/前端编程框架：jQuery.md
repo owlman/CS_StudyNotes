@@ -2,7 +2,7 @@
 title: 前端编程框架：jQuery
 author: 凌杰
 date: 2021-11-01
-tags: jQuery
+tags: [jQuery]
 categories: Web应用开发
 ---
 

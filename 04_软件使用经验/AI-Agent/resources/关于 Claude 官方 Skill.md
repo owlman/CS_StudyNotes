@@ -3,7 +3,7 @@ title: 关于 Claude 官方 Skill
 author: MoLa
 from: https://zhuanlan.zhihu.com/p/1998758838342547118
 date: 2026-05-27
-tags: Claude_Code, Skill
+tags: [Claude_Code, Skill]
 categories: 软件配置与使用
 ---
 

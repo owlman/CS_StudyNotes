@@ -2,7 +2,7 @@
 title: 自动化打包工具：Webpack
 author: 凌杰
 date: 2023-05-30
-tags: Webpack
+tags: [Webpack]
 categories: Web应用开发
 ---
 

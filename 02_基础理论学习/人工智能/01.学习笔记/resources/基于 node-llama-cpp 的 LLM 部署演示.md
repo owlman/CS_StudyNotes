@@ -2,7 +2,7 @@
 title: 基于 node-llama-cpp 的 LLM 部署演示
 from: https://blog.csdn.net/gitblog_00839/article/details/148577870
 date: 2026-05-27
-tags: LLM本地部署, llama-cpp
+tags: [LLM本地部署, llama-cpp]
 categories: 人工智能
 ---
 

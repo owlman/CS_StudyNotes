@@ -2,7 +2,7 @@
 title: 网页设计框架：Bootstrap
 author: 凌杰
 date: 2021-12-12
-tags: Bootstrap
+tags: [Bootstrap]
 categories: Web应用开发
 ---
 

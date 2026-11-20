@@ -1,7 +1,7 @@
 ---
 title: JavaScript 学习笔记：基础篇
 date: 2024-01-24
-tags: 程序设计
+tags: [程序设计]
 categories: 编程语言
 ---
 

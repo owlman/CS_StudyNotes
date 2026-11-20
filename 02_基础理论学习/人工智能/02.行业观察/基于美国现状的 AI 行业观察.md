@@ -2,7 +2,7 @@
 title: 基于美国现状的 AI 行业观察
 author: 凌杰
 date: 2026-07-07
-tags: 行业观察 商业模式
+tags: [行业观察, 商业模式]
 categories: 人工智能
 ---
 

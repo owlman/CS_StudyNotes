@@ -2,7 +2,7 @@
 title:Vagrant 使用笔记 
 author: 凌杰
 date: 2022-09-04
-tags: 虚拟机管理
+tags: [虚拟机管理]
 categories: 命令行工具
 ---
 

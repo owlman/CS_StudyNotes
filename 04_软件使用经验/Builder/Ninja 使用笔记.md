@@ -2,7 +2,7 @@
 title: Ninja 使用笔记
 author: 凌杰
 date: 2026-08-10
-tags: 自动化构建
+tags: [自动化构建]
 categories: 软件使用经验
 ---
 

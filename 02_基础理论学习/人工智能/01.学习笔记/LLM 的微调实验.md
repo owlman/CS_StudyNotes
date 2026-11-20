@@ -2,7 +2,7 @@
 title: LLM 的微调实验
 author: 凌杰
 date: 2026-08-21
-tags: LoRA, LLaMA-Factory, Qwen
+tags: [LoRA, LLaMA-Factory, Qwen]
 categories: 人工智能
 ---
 

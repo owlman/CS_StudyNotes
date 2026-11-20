@@ -2,7 +2,7 @@
 title: Fish 配置笔记
 author: 凌杰
 date: 2026-06-16
-tags: Fish
+tags: [Fish]
 categories: 软件使用经验
 ---
 

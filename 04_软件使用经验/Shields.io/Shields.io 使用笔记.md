@@ -2,7 +2,7 @@
 title: Shields.io 使用参考
 author: 凌杰
 date: 2026-05-22
-tags: shildes.io
+tags: [shildes.io]
 categories: 软件使用经验
 ---
 

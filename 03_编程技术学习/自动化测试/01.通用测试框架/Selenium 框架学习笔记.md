@@ -2,7 +2,7 @@
 title: Selenium 框架学习笔记
 author: 凌杰
 date: 2023-03-05
-tags: Selenium
+tags: [Selenium]
 category: 自动化测试
 ---
 

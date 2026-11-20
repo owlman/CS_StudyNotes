@@ -2,7 +2,7 @@
 title: 补充 OpenClaw
 author: 凌杰
 date: 2026-04-01
-tags: OpenClaw
+tags: [OpenClaw]
 categories: 软件使用经验
 ---
 

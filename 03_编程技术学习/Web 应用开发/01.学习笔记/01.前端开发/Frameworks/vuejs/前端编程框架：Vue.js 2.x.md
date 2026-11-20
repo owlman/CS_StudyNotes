@@ -2,7 +2,7 @@
 title: 前端编程框架：Vue.js 2.x
 author: 凌杰
 date: 2022-11-20
-tags: Vue.js
+tags: [Vue.js]
 categories: Web应用开发
 ---
 

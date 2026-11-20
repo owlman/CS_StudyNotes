@@ -2,7 +2,7 @@
 title: VSCode 配置笔记
 author: 凌杰
 date: 2024-10-04
-tags: 文本编辑器
+tags: [文本编辑器]
 categories: 图形化工具
 ---
 

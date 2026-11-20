@@ -2,7 +2,7 @@
 title: JSON 学习笔记
 author: 凌杰
 date: 2025-11-20
-tags: 数据存储
+tags: [数据存储]
 categories: 标记语言
 ---
 

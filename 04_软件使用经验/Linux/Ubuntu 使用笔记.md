@@ -1,7 +1,7 @@
 ---
 title: Ubuntu 使用笔记
 date: 2021-06-02
-tags: Linux
+tags: [Linux]
 categories: 操作系统
 ---
 

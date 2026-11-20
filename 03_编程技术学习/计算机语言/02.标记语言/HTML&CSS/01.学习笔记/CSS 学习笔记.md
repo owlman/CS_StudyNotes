@@ -2,7 +2,7 @@
 title: CSS 学习笔记
 author: 凌杰
 date: 2024-02-04
-tags: 网页设计
+tags: [网页设计]
 categories: 标记语言
 ---
 

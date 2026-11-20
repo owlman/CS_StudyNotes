@@ -3,7 +3,7 @@ title: Makefile 使用笔记
 author: 凌杰
 date: 2018-04-16
 updated: 2026-08-07
-tags: 自动化构建
+tags: [自动化构建]
 categories: 软件使用经验
 ---
 

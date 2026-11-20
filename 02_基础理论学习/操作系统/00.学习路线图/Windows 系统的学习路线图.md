@@ -2,7 +2,7 @@
 title: Windows 系统的学习路线图
 author: 凌杰
 date: 2022-09-05
-tags: 学习路线图
+tags: [学习路线图]
 category: 基础理论学习
 ---
 

@@ -2,7 +2,7 @@
 title: AI 研究方法的演变
 author: 凌杰
 date: 2026-06-29
-tags: 人工智能
+tags: [人工智能]
 categories: 基础理论学习
 ---
 
