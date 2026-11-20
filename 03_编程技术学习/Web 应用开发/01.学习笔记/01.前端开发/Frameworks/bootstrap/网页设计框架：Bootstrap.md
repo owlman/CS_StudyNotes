@@ -678,7 +678,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
 
 ### 元素基本设置
 
-正如笔者曾经在《[[CSS 学习笔记]]》一文所介绍的，HTML/XML文档中的元素在CSS视角下是以“盒模型”的形式出现在显示设备中的，因此设置元素的尺寸大小，以及它们之间的间距是网页设计工作中最基本，最重要的任务之一。为了完成这一任务，设计师们通常会需要亲自编写相应的在CSS代码，先使用选择器匹配要设置样式的元素，然后利用`width`和`height`属性设置该元素的尺寸大小，用`margin`属性来设置该元素与相邻外界元素之间的距离（即外边距），而`padding`属性则用来设置该元素与其内部子元素之间的距离（即内边距）。但如果在项目中引入了Bootstrap框架，我们通常只需要直接在HTML/XML文档中使用`w-*`、`h-*`、`m-*`和`p-*`这两组预定义的样式类就可以快速完成这一任务。下面，我们就来详细介绍一下这两组样式类。
+正如笔者曾经在《[[CSS 学习笔记]]》一文所介绍的，HTML/XML文档中的元素在CSS视角下是以 “盒模型” 的形式出现在显示设备中的，因此设置元素的尺寸大小，以及它们之间的间距是网页设计工作中最基本，最重要的任务之一。为了完成这一任务，设计师们通常会需要亲自编写相应的在CSS代码，先使用选择器匹配要设置样式的元素，然后利用`width`和`height`属性设置该元素的尺寸大小，用`margin`属性来设置该元素与相邻外界元素之间的距离（即外边距），而`padding`属性则用来设置该元素与其内部子元素之间的距离（即内边距）。但如果在项目中引入了Bootstrap框架，我们通常只需要直接在HTML/XML文档中使用`w-*`、`h-*`、`m-*`和`p-*`这两组预定义的样式类就可以快速完成这一任务。下面，我们就来详细介绍一下这两组样式类。
 
 - `w-*`样式类：以`w-`为前缀的这组样式类主要用于设置元素的宽度尺寸，其可设定的值包括`25`、`50`、`75`、`100`和`auto`五种，其对应的CSS样式值如下表所示：
 
@@ -891,7 +891,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `blockquote-footer`：该样式类通常会搭配`<blockquote>`+`<cite>`标签使用，为其作用的元素添加代表引用出处的样式；
 
 - **链接文本样式**：对于页面中用`<a>`标记的链接文本，Bootstrap框架提供了一系列的预定义样式类，以便设计师们赋予它们一些具有特定效果的样式。下面，我们就逐一来介绍这些样式类：
-  - 如果我们想设置链接文本样式中的文本颜色，可以使用`link-primary`、`link-secondary`、`link-success`、`link-danger`、`link-warning`、`link-info`、`link-light`、`link-dark`这八个样式类来进行设置。由于我们在“制定配色方案”一节已经讨论过这些颜色类的用法及其代表的含义，这里就不再赘述了；
+  - 如果我们想设置链接文本样式中的文本颜色，可以使用`link-primary`、`link-secondary`、`link-success`、`link-danger`、`link-warning`、`link-info`、`link-light`、`link-dark`这八个样式类来进行设置。由于我们在 “制定配色方案” 一节已经讨论过这些颜色类的用法及其代表的含义，这里就不再赘述了；
   - 如果我们想设置链接文本样式中的文本不透明度，可以使用`link·opacity-*`这组样式类，它们的具体名称及其效果如下：
     - `link-opacity-10`：该样式类会为其作用的链接文本元素设置`10%`的不透明度；
     - `link-opacity-25`：该样式类会为其作用的链接文本元素设置`25%`的不透明度；
@@ -899,7 +899,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
     - `link-opacity-75`：该样式类会为其作用的链接文本元素设置`75%`的不透明度；
     - `link-opacity-100`：该样式类会为其作用的链接文本元素设置`100%`的不透明度；
   - 如果我们还想设置鼠标悬停在链接之上时的文本透明度，可以使用`link-opacity-*-hover`样式类，这里`*`的取值与`link-opacity-*`相同，效果当然也是相同的，这里就不再复述了。
-  - 如果我们想设置的是链接文本样式中下划线的颜色，可以使用`link-underline-primary`、`link-underline-secondary`、`link-underline-success`、`link-underline-danger`、`link-underline-warning`、`link-underline-info`、`link-underline-light`、`link-underline-dark`这八个样式类来进行设置。同样的，由于我们之前在“制定配色方案”一节已经讨论过这些颜色类的用法及其代表的含义，这里就不赘述了；
+  - 如果我们想设置的是链接文本样式中下划线的颜色，可以使用`link-underline-primary`、`link-underline-secondary`、`link-underline-success`、`link-underline-danger`、`link-underline-warning`、`link-underline-info`、`link-underline-light`、`link-underline-dark`这八个样式类来进行设置。同样的，由于我们之前在 “制定配色方案” 一节已经讨论过这些颜色类的用法及其代表的含义，这里就不赘述了；
   - 如果我们还想设置鼠标悬停在链接之上时下划线的颜色，可以考虑使用`link-underline-primary-hover`、`link-underline-secondary-hover`、`link-underline-success-hover`、`link-underline-danger-hover`、`link-underline-warning-hover`、`link-underline-info-hover`、`link-underline-light-hover`、`link-underline-dark-hover`这八个样式类来进行设置。同样的，这里对于颜色类的语法及其代表的含义就不再复述了。
   - 如果我们想设置的是链接文本样式中下划线的不透明度，可以考虑使用`link-underline-opacity-*`这组样式类来进行设置，其中`*`的取值与`link-opacity-*`相同，效果当然也是相同的，这里就不再复述了。
   - 如果我们还想设置鼠标悬停在链接之上时下划线的透明度，可以考虑使用`link-underline-opacity-*-hover`这组样式类来进行设置，其中`*`的取值与`link-opacity-*`相同，效果当然也是相同的，这里就不再复述了。
@@ -917,7 +917,7 @@ Bootstrap框架是一款由Twitter公司推出、基于HTML+CSS+JavaScript技术
   - `list-unstyled`：该样式类会去除列表类元素中的默认样式，使得列表类元素中的列表项内容不再带有默认的`1.`、`a.`等样式前缀。需要注意的是，该样式类只对其作用的列表元素的直接列表项起作用，如果该列表元素中还嵌套了其他的列表类元素，则这些嵌套的列表类元素依然会带有它们的默认样式；
   - `list-inline`：该样式类会为列表类元素中的列表项内容设置为内联样式，这会使得列表元素中的列表项内容之间没有换行；
 
-- **列表群组样式**：如果我们想在页面中建立一个更为复杂的列表元素，也可以考虑使用由Bootstrap框架提供的、一个名为“列表群组”的专用组件来进行辅助设计。与该组件相关的样式类及其效果主要如下：
+- **列表群组样式**：如果我们想在页面中建立一个更为复杂的列表元素，也可以考虑使用由Bootstrap框架提供的、一个名为 “列表群组” 的专用组件来进行辅助设计。与该组件相关的样式类及其效果主要如下：
   - `list-group`：该样式类通常作用于由`<ul>`或`<ol>`标记定义的列表元素上，效果是将列表元素设置为一个列表群组，其基本样式是一个带有圆角边框的`<ul>`或`<ol>`列表元素，其中列表群组中的列表项内容会以垂直方向排列。
     - 如果想让列表项以水平方向排列，则需要在`list-group`类的后面再加上`list-group-horizontal`样式类；
     - 如果想去掉元素的圆角边框，则需要在`list-group`类的后面再加上`list-group-flush`样式类；

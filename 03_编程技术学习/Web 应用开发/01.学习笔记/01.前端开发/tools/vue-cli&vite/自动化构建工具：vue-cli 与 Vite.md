@@ -45,7 +45,7 @@ vue create 04_vueclidemo
  $ npm run serve
 ```
 
-上述信息提示了用户接下来要执行的操作命令，我们只需要根据提示进入到`04_vueclidemo`项目根目录中，并执行`npm run serve`命令来启动 vue-cli 为用户配置好的开发服务器，然后再根据其输出的信息用 Web 浏览器打开`http://localhost:8080/`这个 URL，届时就会看到一个依据项目模板构建的“Hello, World”示例程序，其效果如下图所示：
+上述信息提示了用户接下来要执行的操作命令，我们只需要根据提示进入到`04_vueclidemo`项目根目录中，并执行`npm run serve`命令来启动 vue-cli 为用户配置好的开发服务器，然后再根据其输出的信息用 Web 浏览器打开`http://localhost:8080/`这个 URL，届时就会看到一个依据项目模板构建的 “Hello, World” 示例程序，其效果如下图所示：
 
 ![vue-cli生成的示例程序](./img/vue-cli_hello.png)
 
@@ -195,7 +195,7 @@ VITE v5.2.13  ready in 1716 ms
 ➜  press h + enter to show help
 ```
 
-接下来，读者需要根据上述信息用网页浏览器打开`http://localhost:5173/`这个URL，届时就会看到一个依据项目模板构建的“Hello, World”示例程序，其效果如下图所示。
+接下来，读者需要根据上述信息用网页浏览器打开`http://localhost:5173/`这个URL，届时就会看到一个依据项目模板构建的 “Hello, World” 示例程序，其效果如下图所示。
 
 ![Vite生成的示例程序](./img/vite_hrllo.png)
 

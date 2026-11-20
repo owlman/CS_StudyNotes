@@ -149,7 +149,7 @@ Oh-My-Zsh 的核心竞争力主要来自于它所提供的那套极具开放性�
 
 ### 外观配置
 
-在 Oh-My-Zsh 中，我们可以通过一种被称之为“主题”的特殊插件来配置 Zsh 界面所呈现的外观，目的是通过各种特定的颜色和提示信息让命令行界面的易用性和美观性达到一个平衡。Oh-My-Zsh 内置了大量的主题，它们都被存放在 Oh-My-Zsh 安装目录下的`themes`目录中（也可以前往 [Oh-My-Zsh 官方文档](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)查看），如图 5 所示：
+在 Oh-My-Zsh 中，我们可以通过一种被称之为 “主题” 的特殊插件来配置 Zsh 界面所呈现的外观，目的是通过各种特定的颜色和提示信息让命令行界面的易用性和美观性达到一个平衡。Oh-My-Zsh 内置了大量的主题，它们都被存放在 Oh-My-Zsh 安装目录下的`themes`目录中（也可以前往 [Oh-My-Zsh 官方文档](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)查看），如图 5 所示：
 
 ![图 5：Oh-My-Zsh 内置的主题](./img/themes.png)
 
