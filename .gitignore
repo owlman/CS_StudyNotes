@@ -104,6 +104,8 @@ venv/
 # LLM 模型权重与训练产物
 #   仅作用于基座模型目录与 saves/ 下的中间检查点
 #   saves/ 下的最终训练产物允许入库（如 examples/llama_factory/saves/.../adapter_model.safetensors）
+#   注意：该 adapter 权重与 tokenizer 已改由 Git LFS 托管（见 .gitattributes），
+#   以指针形式入库，仓库不再重复打包 27 MB 二进制
 **/models/*.safetensors
 **/models/*.bin
 **/models/*.pt
@@ -118,6 +120,10 @@ playwright-cli/
 
 # Agent / 实验工作区临时残留（不入库）
 temp/
+
+# pytest 运行缓存
+.pytest_cache/
+**/.pytest_cache/
 
 # examples/llama_factory/ 实验工作区：
 #   训练配置（YAML / 脚本 / 数据集）与训练产物（adapter + tokenizer + 训练指标 + loss 曲线）允许入库
