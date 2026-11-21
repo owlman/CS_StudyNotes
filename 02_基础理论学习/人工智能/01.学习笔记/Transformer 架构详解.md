@@ -16,7 +16,7 @@ categories: [基础理论学习, 人工智能]
 
 当然，需要提前说明的是，我在这里并**不打算**从数学的角度详细讨论 Transformer 架构的训练细节，关于这部分内容，读者可参考我之前在《[[深度学习的训练与评估]]》那篇笔记中的介绍。
 
-这篇笔记的核心任务只有一个：把原始 Transformer 的工作原理讲清楚，并以此为基础理解现代 LLM 的架构演进。换言之，我们在这里也**不打算**逐一展开不同注意力变体（譬如 Flash Attention、Linear Attention、MoE 等）的内部实现，只在接近尾声时给出一张速查对照表，帮助读者看清它们各自解决了哪一层问题。我们真正要关心的只是 “为什么是这个结构”，而非 “如何高效实现它”。为此，本篇将按照由问题到原理、再到架构和演进的顺序，依次讨论下面这些主题（见表 1）。
+这篇笔记的核心任务只有一个：把原始 Transformer 的工作原理讲清楚，并以此为基础理解现代 LLM 的架构演进。换言之，我们在这里也**不打算**逐一展开不同注意力变体（譬如 Flash Attention、Linear Attention 等）的内部实现，MoE 这类稀疏化路线也不在本文的讨论范围内。我们只在接近尾声时给出一张速查对照表，帮助读者看清它们各自解决了哪一层问题。我们真正要关心的只是 “为什么是这个结构”，而非 “如何高效实现它”。为此，本篇将按照由问题到原理、再到架构和演进的顺序，依次讨论下面这些主题（见表 1）。
 
 | 主题 | 要讨论的内容 |
 |---|---|
@@ -79,7 +79,7 @@ $$
 
 ## 缩放点积注意力
 
-在理解了自注意力机制背后的数学直觉之后，让我们接着来完整展示一下之前那个计算式在 Transformer 架构中的精确形式，它来自于论文《Attention Is All You Need》中提出的 **缩放点积注意力（Scaled Dot-Product Attention）**，具体如下。
+在理解了自注意力机制背后的数学直觉之后，让我们接着来完整展示一下之前那个计算式在 Transformer 架构中的精确形式，它来自于论文《[Attention Is All You Need](https://arxiv.org/abs/1706.03762)》中提出的 **缩放点积注意力（Scaled Dot-Product Attention）**，具体如下。
 
 $$
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right) V
@@ -302,7 +302,7 @@ Transformer 面对的原始输入是文本，而模型内部的一切计算都�
 
 - **BPE（Byte Pair Encoding）**：从字节或字符出发，反复合并出现频率最高的相邻符号对。GPT-2 及其后的 OpenAI 系列都基于它。
 - **SentencePiece / Unigram**：把 “子词切分” 建模为一个概率模型，直接学出词表，而不是依赖固定的合并规则。Llama 2 采用 SentencePiece，T5 采用 Unigram。
-- **WordPiece**：合并规则与 BPE 类似，但以似然准则选择合并对象；BERT 使用它。
+- **WordPiece**：Google 为 BERT 开发的分词算法，合并规则与 BPE 类似，但以似然准则选择合并对象（算法细节见 BERT 官方仓库的 Tokenization 说明）。
 
 Llama 3 起改用 tiktoken 风格的 BPE，词表从 32000 扩到了 128256。
 
@@ -445,10 +445,13 @@ MLM 让模型学会 “双向” 理解上下文（既能看上文也能看下�
 | Flash Attention | 分块计算 + 块间重算 | 不物化 | $O(n^2 d)$ | $O(n)$ | 精确 |
 | 稀疏注意力（Longformer / BigBird / NSA） | 只连接部分位置或块 | 部分物化 | $O(nwd)$ | $O(nw)$ | 对选中的连接精确 |
 | 线性注意力（Performer / Linformer） | 用核技巧（Performer）或低秩投影（Linformer）替代 softmax | 无需显式矩阵 | $O(nd^2)$ 量级 | $O(nd)$ | 近似 |
+| GQA（分组查询注意力） | 查询头分组，组内共享同一套 $K$、$V$ | 完整物化 $n \times n$ | $O(n^2 d)$ | 注意力矩阵 $O(n^2)$；KV Cache 份数降至 MHA 的 $1/g$ | 精确 |
 
 **表 4** 注意力变体的速查对照表
 
-在这张表中，$w$ 为每个位置关注的窗口或块数；线性注意力的实际开销还取决于特征映射的维度或低秩投影的秩。读者从表中应该可以看到两条不同的路线：稀疏注意力与线性注意力改变的是 “算哪些位置”，用近似换来了对 $n^2$ 规模的摆脱，代价是可能损失精确性或表达能力；Flash Attention 改变的是 “怎么算”，它并不减少需要关注的连接，只是通过分块与重算把同样的精确计算做得更省显存、更快。两条路线并不互斥，现代模型常常同时采用。
+在这张表中，$w$ 为每个位置关注的窗口或块数，$g$ 为 GQA 中查询头的分组数；线性注意力的实际开销还取决于特征映射的维度或低秩投影的秩。读者从表中应该可以看到两条不同的路线：稀疏注意力与线性注意力改变的是 “算哪些位置”，用近似换来了对 $n^2$ 规模的摆脱，代价是可能损失精确性或表达能力；Flash Attention 改变的是 “怎么算”，它并不减少需要关注的连接，只是通过分块与重算把同样的精确计算做得更省显存、更快。两条路线并不互斥，现代模型常常同时采用。
+
+GQA 则属于另一个维度：它既不改变注意力矩阵本身，也不改变连接关系，只是通过组内共享 $K$、$V$ 减少 KV Cache 的份数（详见上文关于 GQA 的讨论）。
 
 但**所有这些演进都没有改变 Decoder-only Transformer 的核心骨架**——自注意力 + 前馈网络 + 残差归一化 + 自回归语言模型。这意味着，掌握了原始 Transformer 的工作原理，就具备了阅读后续所有 LLM 相关文献的 “地基”。
 
@@ -473,6 +476,7 @@ MLM 让模型学会 “双向” 理解上下文（既能看上文也能看下�
 - Ainslie, J., Zhao, T., Onural, S., et al. (2023). *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*. EMNLP 2023 / arXiv:2305.13245. <https://arxiv.org/abs/2305.13245>
 - Dao, T., Fu, S., Fung, W. W., et al. (2022). *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135. <https://arxiv.org/abs/2205.14135>
 - Sennrich, R., Haddow, B., & Birch, A. (2016). *Neural Machine Translation of Rare Words with Subword Units*. ACL 2016 / arXiv:1508.07909. <https://arxiv.org/abs/1508.07909>
+- Google Research. *BERT: Tokenization*. BERT 官方仓库文档（WordPiece 分词算法的权威说明）. <https://github.com/google-research/bert/blob/master/README.md#tokenization>
 - Kudo, T., & Richardson, J. (2018). *SentencePiece: A Simple and Language Independent Subword Tokenizer and Detokenizer for Neural Text Processing*. EMNLP 2018 System Demonstrations / <https://aclanthology.org/D18-2012/>
 - Radford, A., et al. (2019). *Language Models are Unsupervised Multitask Learners*. OpenAI Technical Report. <https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf>
 - Beltagy, I., Peters, M. E., & Cohan, A. (2020). *Longformer: The Long-Document Transformer*. arXiv:2004.05150. <https://arxiv.org/abs/2004.05150>
