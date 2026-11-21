@@ -48,7 +48,7 @@ WhatsApp 是一款在国际互联网上非常流行的 IM 工具，支持用户�
 
    **图 2** OpenClaw的客户端选择界面（WhatsApp）
 
-3. 在后续出现的配置向导界面中，我们需要依次选择“WhatsApp” → ”default” → ”yes”，如图 3 所示。
+3. 在后续出现的配置向导界面中，我们需要依次选择 “WhatsApp” → “default” → “yes”，如图 3 所示。
 
    ![WhatsApp的配置界面](./img/select_whatsapp.png)
 

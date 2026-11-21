@@ -72,7 +72,7 @@ categories: 标记语言
 
 在如今这个时代，当我们需要在本地计算机上对文件进行编辑时，往往就意味着要做一些较为复杂的事，这就需要编辑器具有完善的编辑功能，就 Markdown 来说，用来编辑本地文件的编辑器如果只支持基本语法，显然就不够用了。我们得根据自己的编辑需要来选择支持某部分扩展特性的 Markdown 编辑器，例如要支持编辑数学公式、流程图、UML图以及代码高亮显示，那么选择的编辑器就必须要能支持 $\LaTeX$ 、`Mermaid`等扩展以及文件预览功能。当然，符合这些要求的 Markdown 编辑器也不少，我在这里主要推荐如下这两款目前最具有代表性的。
 
-- **[Typora](https://typora.io/)**：​Typora 是一款轻便简洁的 Markdown 编辑器，它通过内置的 MathJax 渲染引擎实现了对 $\LaTeX$ 标记的即时预览。这种即时渲染技术让它可以和 Word、Pages 一样提供”所见即所得“的写作体验。这也是它与其他 Markdown 编辑器最显着的区别，不再需要分栏显示编写区和预览区了。另外，Typora 也是一款支持多平台的 Markdown 编辑器，我们在 Linux、MacOS 和 Windows 中都可以使用这款软件。
+- **[Typora](https://typora.io/)**：​Typora 是一款轻便简洁的 Markdown 编辑器，它通过内置的 MathJax 渲染引擎实现了对 $\LaTeX$ 标记的即时预览。这种即时渲染技术让它可以和 Word、Pages 一样提供 “所见即所得” 的写作体验。这也是它与其他 Markdown 编辑器最显着的区别，不再需要分栏显示编写区和预览区了。另外，Typora 也是一款支持多平台的 Markdown 编辑器，我们在 Linux、MacOS 和 Windows 中都可以使用这款软件。
 
 - **[VS Code](https://code.visualstudio.com/)**：VS Code 是 Visual Studio Code 的缩写，这是一款通用的代码编辑器，它同样在 Linux、MacOS 和 Windows 下都可以使用。正由于这是一款通用的代码编辑器，主要的作用是编写程序代码，因此其自身集成了强大的文件管理和版本控制模块，这些模块可以帮助我们轻松地实现工程级的项目管理。更为重要的是，VS Code 编辑器还具有非常强大的插件体系，以便它可以胜任几乎所有编程语言和标记语言的编辑。譬如对于 Markdown，我们只需要在 VS Code 编辑器的插件管理系统中搜索并安装一款名为 Markdown Extension Pack 的插件包装即可，该插件包通过对 Markdown Preview Enhanced 插件的依赖，或内置的 Markdown-it + KaTeX 机制实现了对 $\LaTeX$ 标记的渲染。
 
