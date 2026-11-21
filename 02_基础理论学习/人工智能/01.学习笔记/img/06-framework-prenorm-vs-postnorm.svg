@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <title>图 6　post-LN 与 pre-LN：归一化与残差相加的先后顺序</title>
+  <desc>左栏为 post-LN（原论文）：残差相加后做归一化；右栏为 pre-LN（现代 LLM）：先归一化再做残差相加</desc>
+  <defs>
+    <marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5A8AAA"/>
+    </marker>
+    <marker id="arwO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="66" font-size="42" font-weight="700" text-anchor="middle" fill="#6B4423">post-LN 与 pre-LN：归一化与残差相加的先后顺序</text>
+  <line x1="580" y1="88" x2="1020" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="124" font-size="22" text-anchor="middle" fill="#8A6A4F">同样的两个操作，换个顺序，梯度通路的干净程度就不同</text>
+
+  <!-- 左栏：post-LN -->
+  <text x="420" y="182" font-size="30" font-weight="700" text-anchor="middle" fill="#5A8AAA">post-LN（原论文）</text>
+  <text x="420" y="216" font-size="20" text-anchor="middle" fill="#8A6A4F">先残差相加，再归一化</text>
+
+  <rect x="320" y="246" width="200" height="60" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="420" y="284" font-size="24" text-anchor="middle" fill="#6B4423">输入 x</text>
+
+  <path d="M420 306 L420 340" stroke="#5A8AAA" stroke-width="2.5" fill="none" marker-end="url(#arwB)"/>
+  <path d="M420 340 L420 372" stroke="#5A8AAA" stroke-width="2.5" fill="none" marker-end="url(#arwB)"/>
+  <rect x="280" y="376" width="280" height="66" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="420" y="417" font-size="21" text-anchor="middle" fill="#6B4423">Multi-Head Attention</text>
+
+  <path d="M420 340 L180 340 L180 512 L386 512" stroke="#5A8AAA" stroke-width="2.5" fill="none" stroke-dasharray="9 7" marker-end="url(#arwB)"/>
+  <text x="196" y="330" font-size="19" fill="#5A8AAA">残差通路</text>
+
+  <path d="M420 442 L420 486" stroke="#5A8AAA" stroke-width="2.5" fill="none" marker-end="url(#arwB)"/>
+  <circle cx="420" cy="512" r="30" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="420" y="521" font-size="24" text-anchor="middle" fill="#6B4423">+</text>
+
+  <path d="M420 542 L420 578" stroke="#5A8AAA" stroke-width="2.5" fill="none" marker-end="url(#arwB)"/>
+  <rect x="310" y="582" width="220" height="66" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="420" y="623" font-size="23" text-anchor="middle" fill="#6B4423">LayerNorm</text>
+
+  <path d="M420 648 L420 686" stroke="#5A8AAA" stroke-width="2.5" fill="none" marker-end="url(#arwB)"/>
+  <rect x="320" y="690" width="200" height="60" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="420" y="728" font-size="24" text-anchor="middle" fill="#6B4423">输出</text>
+
+  <text x="420" y="790" font-size="19" text-anchor="middle" fill="#8A6A4F">归一化串在残差通路上，梯度要连续穿过它</text>
+
+  <!-- 分隔线 -->
+  <line x1="800" y1="200" x2="800" y2="760" stroke="#C9A227" stroke-width="2" stroke-dasharray="10 9" opacity="0.5"/>
+
+  <!-- 右栏：pre-LN -->
+  <text x="1180" y="182" font-size="30" font-weight="700" text-anchor="middle" fill="#D97A47">pre-LN（现代 LLM）</text>
+  <text x="1180" y="216" font-size="20" text-anchor="middle" fill="#8A6A4F">先归一化，再残差相加</text>
+
+  <rect x="1080" y="246" width="200" height="60" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1180" y="284" font-size="24" text-anchor="middle" fill="#6B4423">输入 x</text>
+
+  <path d="M1180 306 L1180 342" stroke="#D97A47" stroke-width="2.5" fill="none" marker-end="url(#arwO)"/>
+  <rect x="1070" y="346" width="220" height="66" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1180" y="387" font-size="23" text-anchor="middle" fill="#6B4423">LayerNorm</text>
+
+  <path d="M1180 412 L1180 444" stroke="#D97A47" stroke-width="2.5" fill="none" marker-end="url(#arwO)"/>
+  <rect x="1040" y="448" width="280" height="66" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1180" y="489" font-size="21" text-anchor="middle" fill="#6B4423">Multi-Head Attention</text>
+
+  <path d="M1180 306 L1440 306 L1440 588 L1214 588" stroke="#D97A47" stroke-width="2.5" fill="none" stroke-dasharray="9 7" marker-end="url(#arwO)"/>
+  <text x="1452" y="298" font-size="19" fill="#D97A47">残差通路</text>
+
+  <path d="M1180 514 L1180 554" stroke="#D97A47" stroke-width="2.5" fill="none" marker-end="url(#arwO)"/>
+  <circle cx="1180" cy="588" r="30" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1180" y="597" font-size="24" text-anchor="middle" fill="#6B4423">+</text>
+
+  <path d="M1180 618 L1180 656" stroke="#D97A47" stroke-width="2.5" fill="none" marker-end="url(#arwO)"/>
+  <rect x="1080" y="660" width="200" height="60" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1180" y="698" font-size="24" text-anchor="middle" fill="#6B4423">输出</text>
+
+  <text x="1180" y="790" font-size="19" text-anchor="middle" fill="#8A6A4F">残差通路不经过归一化，梯度更干净、训练更稳</text>
+</svg>
