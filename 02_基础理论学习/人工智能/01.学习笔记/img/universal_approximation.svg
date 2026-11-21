@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="68" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">通用逼近定理：增加隐层单元数量提升逼近精度</text>
+  <line x1="520" y1="92" x2="1080" y2="92" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="128" font-size="20" fill="#8A6A4A" text-anchor="middle">只有一个隐层时，神经元数量越多，逼近曲线越贴近目标函数</text>
+
+  <!-- 卡片 1 -->
+  <rect x="50" y="155" width="336" height="372" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="218" y="192" font-size="21" font-weight="700" fill="#6B4423" text-anchor="middle">1 个隐层单元</text>
+  <line x1="78" y1="470" x2="358" y2="470" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="78" y1="470" x2="78" y2="230" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="66" y="238" font-size="15" fill="#A89B84" text-anchor="middle">y</text>
+  <text x="352" y="492" font-size="15" fill="#A89B84" text-anchor="middle">x</text>
+  <path d="M 78 436 C 138 434 173 250 218 250 C 263 250 293 432 358 434" fill="none" stroke="#6B4423" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 78 402 C 148 394 198 388 258 398 C 298 405 328 403 358 400" fill="none" stroke="#5A8AAA" stroke-width="3" stroke-dasharray="10,7" stroke-linecap="round"/>
+  <text x="218" y="510" font-size="19" fill="#A2542A" text-anchor="middle">误差 ≈ 0.85</text>
+
+  <!-- 卡片 2 -->
+  <rect x="438" y="155" width="336" height="372" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="606" y="192" font-size="21" font-weight="700" fill="#6B4423" text-anchor="middle">5 个隐层单元</text>
+  <line x1="466" y1="470" x2="746" y2="470" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="466" y1="470" x2="466" y2="230" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="454" y="238" font-size="15" fill="#A89B84" text-anchor="middle">y</text>
+  <text x="740" y="492" font-size="15" fill="#A89B84" text-anchor="middle">x</text>
+  <path d="M 466 436 C 526 434 561 250 606 250 C 651 250 681 432 746 434" fill="none" stroke="#6B4423" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 466 428 C 506 396 536 316 576 296 C 616 278 636 330 676 316 C 710 306 726 400 746 428" fill="none" stroke="#D97A47" stroke-width="3" stroke-dasharray="10,7" stroke-linecap="round"/>
+  <text x="606" y="510" font-size="19" fill="#A2542A" text-anchor="middle">误差 ≈ 0.32</text>
+
+  <!-- 卡片 3 -->
+  <rect x="826" y="155" width="336" height="372" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="994" y="192" font-size="21" font-weight="700" fill="#6B4423" text-anchor="middle">20 个隐层单元</text>
+  <line x1="854" y1="470" x2="1134" y2="470" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="854" y1="470" x2="854" y2="230" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="842" y="238" font-size="15" fill="#A89B84" text-anchor="middle">y</text>
+  <text x="1128" y="492" font-size="15" fill="#A89B84" text-anchor="middle">x</text>
+  <path d="M 854 436 C 914 434 949 250 994 250 C 1039 250 1069 432 1134 434" fill="none" stroke="#6B4423" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 854 438 C 894 412 926 262 966 254 C 1000 248 1020 300 1044 286 C 1078 266 1104 396 1134 430" fill="none" stroke="#7A8C6F" stroke-width="3" stroke-dasharray="10,7" stroke-linecap="round"/>
+  <text x="994" y="510" font-size="19" fill="#A2542A" text-anchor="middle">误差 ≈ 0.08</text>
+
+  <!-- 卡片 4 -->
+  <rect x="1214" y="155" width="336" height="372" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="1382" y="192" font-size="21" font-weight="700" fill="#6B4423" text-anchor="middle">100 个隐层单元</text>
+  <line x1="1242" y1="470" x2="1522" y2="470" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="1242" y1="470" x2="1242" y2="230" stroke="#8A6A4A" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="1230" y="238" font-size="15" fill="#A89B84" text-anchor="middle">y</text>
+  <text x="1516" y="492" font-size="15" fill="#A89B84" text-anchor="middle">x</text>
+  <path d="M 1242 436 C 1302 434 1337 250 1382 250 C 1427 250 1457 432 1522 434" fill="none" stroke="#6B4423" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 1242 437 C 1282 430 1316 252 1360 251 C 1400 250 1420 300 1444 300 C 1478 300 1500 420 1522 432" fill="none" stroke="#7A8C6F" stroke-width="3" stroke-dasharray="10,7" stroke-linecap="round"/>
+  <text x="1382" y="510" font-size="19" fill="#A2542A" text-anchor="middle">误差 ≈ 0.01</text>
+
+  <!-- 图例 -->
+  <line x1="420" y1="576" x2="486" y2="576" stroke="#6B4423" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="500" y="584" font-size="19" fill="#6B4423">目标函数 f*(x)</text>
+  <line x1="760" y1="576" x2="826" y2="576" stroke="#5A8AAA" stroke-width="3" stroke-dasharray="10,7" stroke-linecap="round"/>
+  <text x="840" y="584" font-size="19" fill="#6B4423">网络逼近 f_θ(x)（按单元数换色）</text>
+
+  <!-- 定理说明 -->
+  <text x="800" y="644" font-size="20" fill="#6B4423" text-anchor="middle">对任意连续目标函数 f* ∈ C(X, ℝ) 和任意 ε &gt; 0，都存在某个神经网络 f_θ，使得 sup|f_θ(x) − f*(x)| &lt; ε</text>
+  <text x="800" y="684" font-size="20" fill="#6B4423" text-anchor="middle">当隐层单元数 N → ∞ 时，max|f_θ(x) − f*(x)| 单调下降并趋近于 0</text>
+
+  <text x="800" y="762" font-size="18" font-style="italic" fill="#8A6A4A" text-anchor="middle">定理说的是「存在性」：它保证解一定找得到，但没说梯度下降一定能找到 —— 那是优化问题，不是表示能力问题</text>
+  <text x="800" y="812" font-size="18" font-style="italic" fill="#8A6A4A" text-anchor="middle">“通用”不等于“好用”：逼近同样精度所需的宽度可能指数级膨胀，这才是深度网络存在的工程理由</text>
+</svg>

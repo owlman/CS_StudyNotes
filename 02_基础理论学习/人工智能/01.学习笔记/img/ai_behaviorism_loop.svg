@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#B4592A"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="72" font-size="40" font-weight="700" fill="#6B4423" text-anchor="middle">行为主义：智能 = 自主智能体 × 环境交互 × 奖惩信号</text>
+  <line x1="560" y1="96" x2="1040" y2="96" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 智能体 -->
+  <rect x="610" y="170" width="380" height="110" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="800" y="215" font-size="27" font-weight="700" fill="#3F6486" text-anchor="middle">智能体</text>
+  <text x="800" y="252" font-size="20" fill="#7A6A55" text-anchor="middle">策略 π(a | s) 与价值估计</text>
+
+  <!-- 动作 -->
+  <rect x="1180" y="400" width="300" height="110" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1330" y="445" font-size="26" font-weight="700" fill="#B4592A" text-anchor="middle">动作 a</text>
+  <text x="1330" y="482" font-size="19" fill="#7A6A55" text-anchor="middle">探索与利用的权衡</text>
+
+  <!-- 环境 -->
+  <rect x="610" y="630" width="380" height="110" rx="14" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="800" y="675" font-size="27" font-weight="700" fill="#556B4C" text-anchor="middle">环境</text>
+  <text x="800" y="712" font-size="20" fill="#7A6A55" text-anchor="middle">真实环境，或由数据构造的抽象环境</text>
+
+  <!-- 观测与奖励 -->
+  <rect x="120" y="400" width="300" height="110" rx="14" fill="#FFF8E8" stroke="#B9A88E" stroke-width="3"/>
+  <text x="270" y="445" font-size="26" font-weight="700" fill="#6B4423" text-anchor="middle">观测 o 与奖励 r</text>
+  <text x="270" y="482" font-size="19" fill="#7A6A55" text-anchor="middle">唯一的监督信号来源</text>
+
+  <!-- 闭环箭头 -->
+  <path d="M990,225 L1320,392" fill="none" stroke="#B4592A" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M1330,520 L1000,668" fill="none" stroke="#B4592A" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M610,668 L280,520" fill="none" stroke="#B4592A" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M270,392 L600,225" fill="none" stroke="#B4592A" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+  <!-- 中心说明 -->
+  <text x="800" y="452" font-size="23" font-weight="700" fill="#B4592A" text-anchor="middle">试错 → 奖励 → 更新策略</text>
+  <text x="800" y="484" font-size="19" fill="#8A7355" text-anchor="middle">无需人工标注，信号来自环境本身</text>
+
+  <!-- 三条路线对比 -->
+  <text x="220" y="820" font-size="21" fill="#6B4423" text-anchor="middle">符号主义：智能来自显式编码的规则</text>
+  <text x="800" y="820" font-size="21" fill="#6B4423" text-anchor="middle">联结主义：智能来自静态数据的统计模式</text>
+  <text x="1330" y="820" font-size="21" font-weight="700" fill="#B4592A" text-anchor="middle">行为主义：智能来自与环境的持续交互</text>
+
+  <text x="800" y="866" font-size="19" font-style="italic" fill="#8A7355" text-anchor="middle">DQN · AlphaGo · RLHF · Agent 框架，都是这一闭环理念在不同层面上的重现</text>
+</svg>

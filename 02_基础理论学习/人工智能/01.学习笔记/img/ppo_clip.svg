@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="pp" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#6B4423"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="60" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">PPO 的 clip 机制：限制单步策略更新幅度</text>
+  <line x1="530" y1="84" x2="1070" y2="84" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="118" font-size="18" fill="#8A6A4A" text-anchor="middle">新旧策略的概率比 r 偏离 1 太远时，目标函数被截平、梯度归零，从而抑制过大的单步更新</text>
+
+  <!-- clip 区间高亮 -->
+  <rect x="455" y="180" width="611" height="500" fill="#F6E7C4" opacity="0.55"/>
+  <line x1="455" y1="180" x2="455" y2="700" stroke="#C89B3C" stroke-width="2" stroke-dasharray="10,8"/>
+  <line x1="1066" y1="180" x2="1066" y2="700" stroke="#C89B3C" stroke-width="2" stroke-dasharray="10,8"/>
+
+  <!-- 坐标轴 -->
+  <line x1="240" y1="440" x2="1450" y2="440" stroke="#8A6A4A" stroke-width="2" stroke-dasharray="7,6"/>
+  <line x1="760" y1="200" x2="760" y2="700" stroke="#6B4423" stroke-width="3" stroke-linecap="round"/>
+  <line x1="240" y1="700" x2="1450" y2="700" stroke="#6B4423" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="1450,700 1426,690 1426,710" fill="#6B4423"/>
+  <text x="660" y="232" font-size="15" fill="#A89B84" text-anchor="middle">J_PPO</text>
+  <text x="1430" y="686" font-size="16" fill="#6B4423" text-anchor="end">r_t(θ)</text>
+
+  <!-- y 刻度 -->
+  <text x="744" y="210" font-size="15" fill="#8A6A4A" text-anchor="end">+1.3</text>
+  <text x="744" y="324" font-size="15" fill="#8A6A4A" text-anchor="end">+0.65</text>
+  <text x="744" y="446" font-size="15" fill="#8A6A4A" text-anchor="end">0</text>
+  <text x="744" y="568" font-size="15" fill="#8A6A4A" text-anchor="end">−0.65</text>
+  <text x="744" y="686" font-size="15" fill="#8A6A4A" text-anchor="end">−1.3</text>
+
+  <!-- x 刻度 -->
+  <text x="300" y="728" font-size="15" fill="#8A6A4A" text-anchor="middle">0.7</text>
+  <text x="455" y="728" font-size="15" font-weight="700" fill="#8A6A1E" text-anchor="middle">0.8</text>
+  <text x="609" y="728" font-size="15" fill="#8A6A4A" text-anchor="middle">0.9</text>
+  <text x="760" y="728" font-size="15" fill="#8A6A4A" text-anchor="middle">1.0</text>
+  <text x="914" y="728" font-size="15" fill="#8A6A4A" text-anchor="middle">1.1</text>
+  <text x="1066" y="728" font-size="15" font-weight="700" fill="#8A6A1E" text-anchor="middle">1.2</text>
+  <text x="1220" y="728" font-size="15" fill="#8A6A4A" text-anchor="middle">1.3</text>
+
+  <!-- A_t > 0 曲线 -->
+  <path d="M 300 320 L 455 320 L 1066 246 L 1220 246" fill="none" stroke="#C0553F" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="640" y="272" font-size="17" font-weight="700" fill="#A2542A">A_t &gt; 0（偏好当前动作）</text>
+  <text x="340" y="306" font-size="14" fill="#8A6A4A">左侧被截平</text>
+  <text x="1150" y="232" font-size="14" fill="#8A6A4A">上界截平 → 梯度为 0</text>
+
+  <!-- A_t < 0 曲线 -->
+  <path d="M 300 560 L 455 560 L 1066 680 L 1220 680" fill="none" stroke="#5A8AAA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="640" y="622" font-size="17" font-weight="700" fill="#3F6486">A_t &lt; 0（不偏好当前动作）</text>
+  <text x="340" y="546" font-size="14" fill="#8A6A4A">左侧被截平</text>
+  <text x="1150" y="666" font-size="14" fill="#8A6A4A">下界截平 → 梯度为 0</text>
+
+  <!-- clip 区间标注 -->
+  <text x="760" y="192" font-size="16" font-weight="700" fill="#8A6A1E" text-anchor="middle">clip 区间 [1 − ε, 1 + ε] = [0.8, 1.2]</text>
+
+  <!-- 底部公式 -->
+  <rect x="60" y="756" width="1480" height="58" rx="8" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="84" y="792" font-size="19" font-weight="700" fill="#3F6486">PPO 目标：</text>
+  <text x="215" y="792" font-size="19" fill="#6B4423">J_PPO(θ) = 𝔼[ min( r_t(θ)·Â_t , clip(r_t(θ), 1 − ε, 1 + ε)·Â_t ) ]</text>
+
+  <text x="800" y="846" font-size="17" fill="#6B4423" text-anchor="middle">clip 的作用：当策略改动过大（r 越界）时，目标被 “截平”、梯度消失 —— 这正是 PPO 名字里 “Proximal” 的含义</text>
+  <text x="800" y="876" font-size="16" font-style="italic" fill="#8A6A4A" text-anchor="middle">工程上 ε 常取 0.2；在 LLM 的 RLHF 中，clip 能防止奖励模型被过拟合，避免策略为刷分而剧烈漂移（reward hacking）</text>
+</svg>

@@ -1,99 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 460">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap');
-      text { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; }
-    </style>
-    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
-    </marker>
-    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
-    </filter>
-  </defs>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
 
-  <!-- Background -->
-  <rect width="100%" height="100%" fill="#f8fafc"/>
-  <!-- Subtle grid -->
-  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="0.5"/>
-  </pattern>
-  <rect width="100%" height="100%" fill="url(#grid)"/>
+  <text x="800" y="72" font-size="44" font-weight="700" fill="#6B4423" text-anchor="middle">AI 研究方法的演变路径</text>
+  <line x1="620" y1="96" x2="980" y2="96" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="126" font-size="20" fill="#8A7355" text-anchor="middle">四个阶段、三次转向，每一次转向都由上一阶段暴露的边界逼出来</text>
 
-  <!-- Title -->
-  <text x="500" y="38" fill="#0f172a" font-size="18" font-weight="700" text-anchor="middle">AI 研究方法的演变</text>
+  <!-- 阶段一 -->
+  <rect x="70" y="150" width="335" height="330" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="92" y="200" font-size="24" font-weight="700" fill="#3F6486">符号主义</text>
+  <text x="92" y="230" font-size="17" fill="#7A6A55">Symbolism · 1950s–1980s</text>
+  <line x1="92" y1="248" x2="192" y2="248" stroke="#5A8AAA" stroke-width="2" stroke-dasharray="9,7"/>
+  <text x="92" y="286" font-size="19" font-weight="700" fill="#6B4423">知识编码 + 逻辑推理</text>
+  <text x="92" y="316" font-size="19" fill="#6B4423">人工把知识写成规则</text>
+  <text x="92" y="358" font-size="18" fill="#7A6A55">专家系统 · 物理符号假设</text>
+  <text x="92" y="386" font-size="18" fill="#7A6A55">逻辑推理 · 搜索</text>
+  <line x1="92" y1="410" x2="383" y2="410" stroke="#D9CBB0" stroke-width="2" stroke-dasharray="8,6"/>
+  <text x="92" y="440" font-size="17" fill="#B4592A">边界：知识获取瓶颈、脆性</text>
+  <text x="92" y="466" font-size="17" fill="#B4592A">组合爆炸</text>
 
-  <!-- Central timeline axis -->
-  <line x1="100" y1="250" x2="920" y2="250" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
+  <!-- 阶段二 -->
+  <rect x="445" y="150" width="335" height="330" rx="14" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="467" y="200" font-size="24" font-weight="700" fill="#556B4C">概率转向</text>
+  <text x="467" y="230" font-size="17" fill="#7A6A55">Probabilistic · 1980s–2000s</text>
+  <line x1="467" y1="248" x2="567" y2="248" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="9,7"/>
+  <text x="467" y="286" font-size="19" font-weight="700" fill="#6B4423">不确定性下的推理</text>
+  <text x="467" y="316" font-size="19" fill="#6B4423">用概率分布建模世界</text>
+  <text x="467" y="358" font-size="18" fill="#7A6A55">贝叶斯网 · HMM · CRF</text>
+  <text x="467" y="386" font-size="18" fill="#7A6A55">EM 算法 · 噪声信道模型</text>
+  <line x1="467" y1="410" x2="758" y2="410" stroke="#D9CBB0" stroke-width="2" stroke-dasharray="8,6"/>
+  <text x="467" y="440" font-size="17" fill="#B4592A">边界：模型容量与手工设计</text>
+  <text x="467" y="466" font-size="17" fill="#B4592A">特征仍需人来定义</text>
 
-  <!-- ===== Stage 1: 符号主义 (blue) ===== -->
-  <g filter="url(#shadow)">
-    <rect x="70" y="120" width="185" height="105" rx="10" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
-    <rect x="70" y="120" width="185" height="35" rx="10" fill="#eff6ff"/>
-    <rect x="70" y="145" width="185" height="10" fill="#eff6ff"/>
-    <text x="162" y="143" fill="#1d4ed8" font-size="13" font-weight="600" text-anchor="middle">符号主义 Symbolism</text>
-    <text x="162" y="173" fill="#64748b" font-size="10" font-weight="500" text-anchor="middle">1950s – 1980s</text>
-    <text x="162" y="192" fill="#334155" font-size="10" text-anchor="middle">知识编码 + 逻辑推理</text>
-    <text x="162" y="207" fill="#94a3b8" font-size="9" text-anchor="middle">专家系统 · 物理符号假设</text>
-  </g>
-  <circle cx="162" cy="250" r="8" fill="#3b82f6" stroke="#ffffff" stroke-width="2"/>
-  <line x1="260" y1="250" x2="440" y2="250" stroke="#3b82f6" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
-  <rect x="315" y="298" width="95" height="22" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
-  <text x="362" y="313" fill="#3b82f6" font-size="9" font-weight="500" text-anchor="middle">暴露：知识获取瓶颈</text>
+  <!-- 阶段三 -->
+  <rect x="820" y="150" width="335" height="330" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="842" y="200" font-size="24" font-weight="700" fill="#B4592A">统计学习</text>
+  <text x="842" y="230" font-size="17" fill="#7A6A55">Machine Learning · 1990s–2010s</text>
+  <line x1="842" y1="248" x2="942" y2="248" stroke="#D97A47" stroke-width="2" stroke-dasharray="9,7"/>
+  <text x="842" y="286" font-size="19" font-weight="700" fill="#6B4423">从数据中归纳函数</text>
+  <text x="842" y="316" font-size="19" fill="#6B4423">手工特征 + 浅层模型</text>
+  <text x="842" y="358" font-size="18" fill="#7A6A55">SVM · 集成方法 · 核方法</text>
+  <text x="842" y="386" font-size="18" fill="#7A6A55">特征工程成为核心工作</text>
+  <line x1="842" y1="410" x2="1133" y2="410" stroke="#D9CBB0" stroke-width="2" stroke-dasharray="8,6"/>
+  <text x="842" y="440" font-size="17" fill="#B4592A">边界：特征工程天花板</text>
+  <text x="842" y="466" font-size="17" fill="#B4592A">任务专用、知识不迁移</text>
 
-  <!-- ===== Stage 2: 概率转向 (green) ===== -->
-  <g filter="url(#shadow)">
-    <rect x="270" y="120" width="185" height="105" rx="10" fill="#ffffff" stroke="#10b981" stroke-width="2"/>
-    <rect x="270" y="120" width="185" height="35" rx="10" fill="#ecfdf5"/>
-    <rect x="270" y="145" width="185" height="10" fill="#ecfdf5"/>
-    <text x="362" y="143" fill="#047857" font-size="13" font-weight="600" text-anchor="middle">概率转向 Probabilistic</text>
-    <text x="362" y="173" fill="#64748b" font-size="10" font-weight="500" text-anchor="middle">1980s – 2000s</text>
-    <text x="362" y="192" fill="#334155" font-size="10" text-anchor="middle">不确定性下的推理</text>
-    <text x="362" y="207" fill="#94a3b8" font-size="9" text-anchor="middle">贝叶斯网 · HMM · CRF</text>
-  </g>
-  <circle cx="362" cy="250" r="8" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
-  <text x="362" y="270" fill="#10b981" font-size="9" font-weight="500" text-anchor="middle">数据驱动</text>
+  <!-- 阶段四 -->
+  <rect x="1195" y="150" width="335" height="330" rx="14" fill="#FFF8E8" stroke="#B9A88E" stroke-width="3"/>
+  <text x="1217" y="200" font-size="24" font-weight="700" fill="#6B4423">基础模型</text>
+  <text x="1217" y="230" font-size="17" fill="#7A6A55">Foundation · 2017 至今</text>
+  <line x1="1217" y1="248" x2="1317" y2="248" stroke="#B9A88E" stroke-width="2" stroke-dasharray="9,7"/>
+  <text x="1217" y="286" font-size="19" font-weight="700" fill="#6B4423">预训练 + 涌现能力</text>
+  <text x="1217" y="316" font-size="19" fill="#6B4423">一个模型适配多任务</text>
+  <text x="1217" y="358" font-size="18" fill="#7A6A55">Transformer · RLHF · Agent</text>
+  <text x="1217" y="386" font-size="18" fill="#7A6A55">测试时计算 · 多模态</text>
+  <line x1="1217" y1="410" x2="1508" y2="410" stroke="#D9CBB0" stroke-width="2" stroke-dasharray="8,6"/>
+  <text x="1217" y="440" font-size="17" fill="#B4592A">边界：价值对齐、长程规划</text>
+  <text x="1217" y="466" font-size="17" fill="#B4592A">物理常识与幻觉</text>
 
-  <line x1="460" y1="250" x2="640" y2="250" stroke="#10b981" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
-  <rect x="505" y="298" width="95" height="22" rx="4" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
-  <text x="552" y="313" fill="#d97706" font-size="9" font-weight="500" text-anchor="middle">暴露：特征工程天花板</text>
+  <!-- 时间轴 -->
+  <line x1="90" y1="530" x2="1490" y2="530" stroke="#B9A88E" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="1510,530 1486,519 1486,541" fill="#B9A88E"/>
+  <circle cx="237" cy="530" r="13" fill="#5A8AAA"/>
+  <circle cx="612" cy="530" r="13" fill="#7A8C6F"/>
+  <circle cx="987" cy="530" r="13" fill="#D97A47"/>
+  <circle cx="1362" cy="530" r="13" fill="#6B4423"/>
 
-  <!-- ===== Stage 3: 统计学习 (orange) ===== -->
-  <g filter="url(#shadow)">
-    <rect x="470" y="120" width="185" height="105" rx="10" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
-    <rect x="470" y="120" width="185" height="35" rx="10" fill="#fffbeb"/>
-    <rect x="470" y="145" width="185" height="10" fill="#fffbeb"/>
-    <text x="562" y="143" fill="#b45309" font-size="13" font-weight="600" text-anchor="middle">统计学习 ML</text>
-    <text x="562" y="173" fill="#64748b" font-size="10" font-weight="500" text-anchor="middle">1990s – 2010s</text>
-    <text x="562" y="192" fill="#334155" font-size="10" text-anchor="middle">从数据中归纳函数</text>
-    <text x="562" y="207" fill="#94a3b8" font-size="9" text-anchor="middle">SVM · 集成方法 · 表征学习</text>
-  </g>
-  <circle cx="562" cy="250" r="8" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
-  <text x="562" y="270" fill="#f59e0b" font-size="9" font-weight="500" text-anchor="middle">表征学习</text>
+  <!-- 三次转向 -->
+  <rect x="262" y="570" width="330" height="96" rx="10" fill="#F0EFE6" stroke="#B9A88E" stroke-width="2"/>
+  <text x="427" y="606" font-size="20" font-weight="700" fill="#6B4423" text-anchor="middle">知识驱动 → 数据驱动</text>
+  <text x="427" y="638" font-size="17" fill="#7A6A55" text-anchor="middle">从人工写规则到从数据学</text>
 
-  <line x1="660" y1="250" x2="860" y2="250" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
-  <rect x="705" y="298" width="110" height="22" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
-  <text x="760" y="313" fill="#9333ea" font-size="9" font-weight="500" text-anchor="middle">暴露：任务专用模型</text>
+  <rect x="637" y="570" width="330" height="96" rx="10" fill="#F0EFE6" stroke="#B9A88E" stroke-width="2"/>
+  <text x="802" y="606" font-size="20" font-weight="700" fill="#6B4423" text-anchor="middle">专用系统 → 通用基础模型</text>
+  <text x="802" y="638" font-size="17" fill="#7A6A55" text-anchor="middle">一个任务一个模型到先预训练</text>
 
-  <!-- ===== Stage 4: 基础模型 (purple) ===== -->
-  <g filter="url(#shadow)">
-    <rect x="690" y="120" width="185" height="105" rx="10" fill="#ffffff" stroke="#8b5cf6" stroke-width="2"/>
-    <rect x="690" y="120" width="185" height="35" rx="10" fill="#faf5ff"/>
-    <rect x="690" y="145" width="185" height="10" fill="#faf5ff"/>
-    <text x="782" y="143" fill="#6d28d9" font-size="13" font-weight="600" text-anchor="middle">基础模型 Foundation</text>
-    <text x="782" y="173" fill="#64748b" font-size="10" font-weight="500" text-anchor="middle">2017 至今</text>
-    <text x="782" y="192" fill="#334155" font-size="10" text-anchor="middle">预训练 + 涌现能力</text>
-    <text x="782" y="207" fill="#94a3b8" font-size="9" text-anchor="middle">Transformer · RLHF · Agent</text>
-  </g>
-  <circle cx="782" cy="250" r="8" fill="#8b5cf6" stroke="#ffffff" stroke-width="2"/>
-  <text x="782" y="270" fill="#8b5cf6" font-size="9" font-weight="500" text-anchor="middle">大规模预训练</text>
+  <rect x="1012" y="570" width="330" height="96" rx="10" fill="#F0EFE6" stroke="#B9A88E" stroke-width="2"/>
+  <text x="1177" y="606" font-size="20" font-weight="700" fill="#6B4423" text-anchor="middle">独立组件 → 端到端学习</text>
+  <text x="1177" y="638" font-size="17" fill="#7A6A55" text-anchor="middle">多模块串联到原始输入直出</text>
 
-  <!-- ===== Bottom: Key paradigm shifts ===== -->
-  <g transform="translate(490, 340)">
-    <text x="0" y="0" fill="#334155" font-size="10" font-weight="600" text-anchor="middle">三次核心转向</text>
-    <line x1="-200" y1="12" x2="200" y2="12" stroke="#e2e8f0" stroke-width="1"/>
-    <text x="-130" y="35" fill="#3b82f6" font-size="9" text-anchor="middle">知识驱动 → 数据驱动</text>
-    <text x="0" y="35" fill="#10b981" font-size="9" text-anchor="middle">专用系统 → 通用基础模型</text>
-    <text x="130" y="35" fill="#f59e0b" font-size="9" text-anchor="middle">独立组件 → 端到端学习</text>
-  </g>
+  <text x="800" y="736" font-size="20" fill="#6B4423" text-anchor="middle">每一次转向，都是把上一阶段靠人工完成的那部分工作，交给数据与算力</text>
+  <text x="800" y="800" font-size="19" font-style="italic" fill="#8A7355" text-anchor="middle">而人工环节并没有消失，只是向上游迁移：规则工程师 → 标注者、架构师、对齐工程师</text>
 </svg>

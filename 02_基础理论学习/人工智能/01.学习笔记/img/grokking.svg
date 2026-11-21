@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <!-- 标题 -->
+  <text x="800" y="72" text-anchor="middle" font-size="44" font-weight="700" fill="#6B4423">Grokking：延迟泛化（delayed generalization）</text>
+  <line x1="500" y1="96" x2="1100" y2="96" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 图例（横排，置于绘图区上方） -->
+  <line x1="330" y1="138" x2="400" y2="138" stroke="#5A8AAA" stroke-width="6" stroke-linecap="round"/>
+  <text x="416" y="146" font-size="24" fill="#6B4423">训练损失：迅速归零</text>
+  <line x1="800" y1="138" x2="870" y2="138" stroke="#D97A47" stroke-width="6" stroke-linecap="round" stroke-dasharray="14,9"/>
+  <text x="886" y="146" font-size="24" fill="#6B4423">测试损失：平台期后骤降</text>
+
+  <!-- 绘图区底色 -->
+  <rect x="220" y="180" width="1260" height="510" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+
+  <!-- 延迟泛化区间高亮 -->
+  <rect x="880" y="180" width="480" height="510" rx="10" fill="#D97A47" opacity="0.10"/>
+  <line x1="880" y1="180" x2="880" y2="690" stroke="#D97A47" stroke-width="2" stroke-dasharray="10,8" opacity="0.75"/>
+
+  <!-- 坐标轴 -->
+  <line x1="220" y1="690" x2="1480" y2="690" stroke="#6B4423" stroke-width="3" stroke-linecap="round"/>
+  <line x1="220" y1="180" x2="220" y2="690" stroke="#6B4423" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="1480,690 1456,680 1456,700" fill="#6B4423"/>
+  <polygon points="220,180 210,204 230,204" fill="#6B4423"/>
+
+  <!-- 轴标注 -->
+  <text x="850" y="738" text-anchor="middle" font-size="24" fill="#6B4423">训练步数（step / epoch）</text>
+  <text x="120" y="440" text-anchor="middle" font-size="24" fill="#6B4423" transform="rotate(-90 120 440)">损失 / 错误率</text>
+  <text x="202" y="682" text-anchor="end" font-size="22" fill="#8A6A4A">低</text>
+  <text x="202" y="202" text-anchor="end" font-size="22" fill="#8A6A4A">高</text>
+
+  <!-- 训练损失曲线：自高快速降至接近零 -->
+  <path d="M 220 215 L 290 400 L 360 545 L 450 625 L 560 655 L 760 665 L 1100 670 L 1480 674"
+        fill="none" stroke="#5A8AAA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 测试损失曲线：缓降后长时间平台，最终骤降追上训练损失 -->
+  <path d="M 220 225 L 320 300 L 470 342 L 660 362 L 880 372 L 1080 376 L 1180 377 L 1240 470 L 1310 620 L 1400 664 L 1480 670"
+        fill="none" stroke="#D97A47" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="18,10"/>
+
+  <!-- 平台期标注 -->
+  <text x="1120" y="248" text-anchor="middle" font-size="25" fill="#A2542A">平台期：验证指标毫无进展</text>
+  <path d="M 1120 262 L 1120 362" fill="none" stroke="#A2542A" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="8,7"/>
+
+  <!-- 骤降标注 -->
+  <text x="1470" y="252" text-anchor="end" font-size="24" font-weight="700" fill="#A2542A">泛化突然发生</text>
+  <path d="M 1420 264 L 1340 596" fill="none" stroke="#A2542A" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="8,7"/>
+
+  <!-- 底部说明 -->
+  <text x="800" y="800" text-anchor="middle" font-size="23" fill="#6B4423">训练损失早已接近零，测试损失却长时间停滞，随后在毫无征兆的情况下突然下降</text>
+  <text x="800" y="840" text-anchor="middle" font-size="20" fill="#8A6A4A">资料来源：Power et al. 2022（小规模算法生成数据集）；曲线为示意，非实测数据</text>
+</svg>

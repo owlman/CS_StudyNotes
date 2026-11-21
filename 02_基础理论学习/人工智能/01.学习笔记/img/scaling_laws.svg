@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="axis" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#8A7355"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="72" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">规模化定律：更大的模型 = 更好的性能</text>
+  <line x1="595" y1="96" x2="1005" y2="96" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 坐标轴 -->
+  <line x1="220" y1="700" x2="1470" y2="700" stroke="#8A7355" stroke-width="3" marker-end="url(#axis)"/>
+  <line x1="220" y1="700" x2="220" y2="150" stroke="#8A7355" stroke-width="3" marker-end="url(#axis)"/>
+
+  <text x="150" y="425" font-size="21" fill="#6B4423" text-anchor="middle" transform="rotate(-90 150 425)">性能</text>
+  <text x="845" y="740" font-size="21" fill="#6B4423" text-anchor="middle">模型规模（参数量 / 数据量 / 计算量）</text>
+
+  <!-- 小模型段：虚线 -->
+  <path d="M270,660 L645,592" fill="none" stroke="#B9A88E" stroke-width="4" stroke-dasharray="12,9" stroke-linecap="round"/>
+  <!-- 幂律上升段：实线 -->
+  <path d="M645,592 C 930,532 1130,365 1425,195" fill="none" stroke="#5A8AAA" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="645" cy="592" r="9" fill="#D97A47" stroke="#B4592A" stroke-width="2"/>
+
+  <text x="292" y="548" font-size="18" fill="#8A7355">小模型：性能随规模增长缓慢</text>
+
+  <!-- 涌现能力标注 -->
+  <rect x="640" y="390" width="250" height="56" rx="8" fill="#F6E7C4" stroke="#C89B3C" stroke-width="2.5"/>
+  <text x="765" y="427" font-size="20" font-weight="700" fill="#8A6A1E" text-anchor="middle">涌现能力</text>
+  <line x1="830" y1="448" x2="880" y2="508" stroke="#C89B3C" stroke-width="2.5"/>
+  <circle cx="883" cy="512" r="7" fill="#C89B3C"/>
+
+  <!-- Scaling Laws 区域标注 -->
+  <rect x="1075" y="250" width="270" height="56" rx="8" fill="#E7E2F0" stroke="#7A6A9A" stroke-width="2.5"/>
+  <text x="1210" y="287" font-size="20" font-weight="700" fill="#5E4E7E" text-anchor="middle">Scaling Laws 区域</text>
+  <line x1="1150" y1="308" x2="1108" y2="386" stroke="#7A6A9A" stroke-width="2.5"/>
+  <circle cx="1105" cy="391" r="7" fill="#7A6A9A"/>
+
+  <!-- 三个可增大的维度 -->
+  <rect x="310" y="770" width="240" height="58" rx="29" fill="#E4EDF4" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="430" y="808" font-size="21" font-weight="700" fill="#3F6486" text-anchor="middle">参数量 ↑</text>
+
+  <rect x="670" y="770" width="240" height="58" rx="29" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="2.5"/>
+  <text x="790" y="808" font-size="21" font-weight="700" fill="#556B4C" text-anchor="middle">数据量 ↑</text>
+
+  <rect x="1030" y="770" width="240" height="58" rx="29" fill="#F6E2D4" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="1150" y="808" font-size="21" font-weight="700" fill="#B4592A" text-anchor="middle">计算量 ↑</text>
+
+  <text x="800" y="872" font-size="19" font-style="italic" fill="#8A7355" text-anchor="middle">三者同时增大比单独增大一个更有效 —— “更大 = 更好，而且好多少是可以算出来的”</text>
+</svg>

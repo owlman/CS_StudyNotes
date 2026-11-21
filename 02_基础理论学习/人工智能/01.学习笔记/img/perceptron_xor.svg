@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="72" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">感知机的局限：线性可分 vs XOR 问题</text>
+  <line x1="570" y1="96" x2="1030" y2="96" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 左：AND -->
+  <rect x="80" y="130" width="680" height="560" rx="14" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <rect x="80" y="130" width="680" height="56" rx="14" fill="#EFF3EA"/>
+  <text x="110" y="168" font-size="26" font-weight="700" fill="#556B4C">AND 问题 · 线性可分 √</text>
+  <text x="110" y="218" font-size="16" fill="#8A7355">横轴：输入 1　　纵轴：输入 2　　绿色 = 输出 1，橙色 = 输出 0</text>
+
+  <line x1="200" y1="545" x2="660" y2="545" stroke="#8A7355" stroke-width="3" stroke-linecap="round"/>
+  <line x1="200" y1="545" x2="200" y2="215" stroke="#8A7355" stroke-width="3" stroke-linecap="round"/>
+  <line x1="200" y1="500" x2="660" y2="500" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="200" y1="400" x2="660" y2="400" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="200" y1="300" x2="660" y2="300" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="300" y1="215" x2="300" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="400" y1="215" x2="400" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="500" y1="215" x2="500" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="590" y1="215" x2="590" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+  <text x="182" y="252" font-size="17" fill="#8A7355" text-anchor="end">1</text>
+  <text x="182" y="552" font-size="17" fill="#8A7355" text-anchor="end">0</text>
+  <text x="590" y="576" font-size="17" fill="#8A7355" text-anchor="middle">1</text>
+  <text x="200" y="576" font-size="17" fill="#8A7355" text-anchor="middle">0</text>
+
+  <line x1="330" y1="255" x2="650" y2="515" stroke="#7A8C6F" stroke-width="4" stroke-dasharray="12,8" stroke-linecap="round"/>
+
+  <circle cx="200" cy="545" r="15" fill="#D97A47" stroke="#B4592A" stroke-width="2"/>
+  <circle cx="590" cy="545" r="15" fill="#D97A47" stroke="#B4592A" stroke-width="2"/>
+  <circle cx="200" cy="245" r="15" fill="#D97A47" stroke="#B4592A" stroke-width="2"/>
+  <circle cx="590" cy="245" r="15" fill="#7A8C6F" stroke="#556B4C" stroke-width="2"/>
+
+  <text x="110" y="628" font-size="17" fill="#6B4423">感知机收敛定理保证：数据线性可分时，一定能学到分界线。</text>
+
+  <!-- 右：XOR -->
+  <rect x="840" y="130" width="680" height="560" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <rect x="840" y="130" width="680" height="56" rx="14" fill="#F6E2D4"/>
+  <text x="870" y="168" font-size="26" font-weight="700" fill="#B4592A">XOR 问题 · 线性不可分 ×</text>
+  <text x="870" y="218" font-size="16" fill="#8A7355">横轴：输入 1　　纵轴：输入 2　　绿色 = 输出 1，橙色 = 输出 0</text>
+
+  <line x1="960" y1="545" x2="1420" y2="545" stroke="#8A7355" stroke-width="3" stroke-linecap="round"/>
+  <line x1="960" y1="545" x2="960" y2="215" stroke="#8A7355" stroke-width="3" stroke-linecap="round"/>
+  <line x1="960" y1="500" x2="1420" y2="500" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="960" y1="400" x2="1420" y2="400" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="960" y1="300" x2="1420" y2="300" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="1060" y1="215" x2="1060" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="1160" y1="215" x2="1160" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="1260" y1="215" x2="1260" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+  <line x1="1350" y1="215" x2="1350" y2="545" stroke="#E8DCC2" stroke-width="1.5" stroke-dasharray="6,6"/>
+
+  <text x="942" y="252" font-size="17" fill="#8A7355" text-anchor="end">1</text>
+  <text x="942" y="552" font-size="17" fill="#8A7355" text-anchor="end">0</text>
+  <text x="1350" y="576" font-size="17" fill="#8A7355" text-anchor="middle">1</text>
+  <text x="960" y="576" font-size="17" fill="#8A7355" text-anchor="middle">0</text>
+
+  <circle cx="960" cy="545" r="15" fill="#D97A47" stroke="#B4592A" stroke-width="2"/>
+  <circle cx="1350" cy="545" r="15" fill="#7A8C6F" stroke="#556B4C" stroke-width="2"/>
+  <circle cx="960" cy="245" r="15" fill="#7A8C6F" stroke="#556B4C" stroke-width="2"/>
+  <circle cx="1350" cy="245" r="15" fill="#D97A47" stroke="#B4592A" stroke-width="2"/>
+
+  <text x="1180" y="352" font-size="19" font-weight="700" fill="#B4592A" text-anchor="middle">任何一条直线都会</text>
+  <text x="1180" y="382" font-size="19" font-weight="700" fill="#B4592A" text-anchor="middle">同时切到两类上的点</text>
+
+  <text x="870" y="628" font-size="17" fill="#6B4423">单层感知机只能表达线性边界，XOR 因而是它的盲区。</text>
+
+  <text x="800" y="760" font-size="21" fill="#6B4423" text-anchor="middle">多层感知机（MLP）用隐藏层 + 非线性激活函数解决了 XOR 问题</text>
+  <text x="800" y="808" font-size="19" font-style="italic" fill="#8A7355" text-anchor="middle">隐藏层把输入映射到新的特征空间，原本不可分的问题在新空间里变得可分</text>
+</svg>

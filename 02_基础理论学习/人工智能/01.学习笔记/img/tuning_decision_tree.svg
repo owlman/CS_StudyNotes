@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="q" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#8A6A4A"/>
+    </marker>
+    <marker id="qr" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#A2542A"/>
+    </marker>
+    <marker id="qg" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#7A8C6F"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="60" font-size="40" font-weight="700" fill="#6B4423" text-anchor="middle">调优决策树：从 “效果不理想” 到具体调优方向</text>
+  <line x1="480" y1="84" x2="1120" y2="84" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="118" font-size="18" fill="#8A6A4A" text-anchor="middle">先按训练集 / 验证集 / 测试集的表现把问题分成四类，再回到数据、模型、训练三个层面选手段</text>
+
+  <!-- 起点 -->
+  <rect x="18" y="140" width="172" height="80" rx="8" fill="#E4EDF4" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="104" y="176" font-size="18" font-weight="700" fill="#3F6486" text-anchor="middle">起点</text>
+  <text x="104" y="202" font-size="16" fill="#3F6486" text-anchor="middle">模型效果不理想</text>
+  <line x1="194" y1="180" x2="206" y2="180" stroke="#8A6A4A" stroke-width="2.5" marker-end="url(#q)"/>
+
+  <!-- Q1 -->
+  <polygon points="330,118 450,180 330,242 210,180" fill="#F0EAF4" stroke="#7A6A9A" stroke-width="2.5"/>
+  <text x="330" y="174" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">Q1 训练集</text>
+  <text x="330" y="196" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">表现差？</text>
+
+  <line x1="454" y1="180" x2="524" y2="180" stroke="#8A6A4A" stroke-width="2.5" marker-end="url(#q)"/>
+  <text x="489" y="168" font-size="15" fill="#8A6A4A" text-anchor="middle">否</text>
+
+  <!-- Q2 -->
+  <polygon points="650,118 770,180 650,242 530,180" fill="#F0EAF4" stroke="#7A6A9A" stroke-width="2.5"/>
+  <text x="650" y="174" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">Q2 验证集</text>
+  <text x="650" y="196" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">表现差？</text>
+
+  <line x1="774" y1="180" x2="844" y2="180" stroke="#8A6A4A" stroke-width="2.5" marker-end="url(#q)"/>
+  <text x="809" y="168" font-size="15" fill="#8A6A4A" text-anchor="middle">否</text>
+
+  <!-- Q3 -->
+  <polygon points="970,118 1090,180 970,242 850,180" fill="#F0EAF4" stroke="#7A6A9A" stroke-width="2.5"/>
+  <text x="970" y="174" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">Q3 测试集</text>
+  <text x="970" y="196" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">表现差？</text>
+
+  <line x1="1094" y1="180" x2="1164" y2="180" stroke="#8A6A4A" stroke-width="2.5" marker-end="url(#q)"/>
+  <text x="1129" y="168" font-size="15" fill="#8A6A4A" text-anchor="middle">否</text>
+
+  <!-- Q4 -->
+  <polygon points="1290,118 1410,180 1290,242 1170,180" fill="#F0EAF4" stroke="#7A6A9A" stroke-width="2.5"/>
+  <text x="1290" y="174" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">Q4 指标定义</text>
+  <text x="1290" y="196" font-size="17" font-weight="700" fill="#5E4E7E" text-anchor="middle">有偏差？</text>
+
+  <!-- 向下 是 -->
+  <line x1="330" y1="246" x2="330" y2="292" stroke="#A2542A" stroke-width="2.5" marker-end="url(#qr)"/>
+  <text x="344" y="272" font-size="15" font-weight="700" fill="#A2542A">是</text>
+  <line x1="650" y1="246" x2="650" y2="292" stroke="#A2542A" stroke-width="2.5" marker-end="url(#qr)"/>
+  <text x="664" y="272" font-size="15" font-weight="700" fill="#A2542A">是</text>
+  <line x1="970" y1="246" x2="970" y2="292" stroke="#A2542A" stroke-width="2.5" marker-end="url(#qr)"/>
+  <text x="984" y="272" font-size="15" font-weight="700" fill="#A2542A">是</text>
+  <line x1="1290" y1="246" x2="1290" y2="292" stroke="#A2542A" stroke-width="2.5" marker-end="url(#qr)"/>
+  <text x="1304" y="272" font-size="15" font-weight="700" fill="#A2542A">是</text>
+
+  <!-- A1 -->
+  <rect x="205" y="298" width="250" height="150" rx="8" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <text x="330" y="326" font-size="17" font-weight="700" fill="#A2542A" text-anchor="middle">A1 · 偏差高（欠拟合）</text>
+  <text x="222" y="352" font-size="14" fill="#6B4423">→ 模型容量不足</text>
+  <text x="222" y="376" font-size="14" fill="#6B4423">→ 特征不足或表达力不够</text>
+  <text x="222" y="400" font-size="14" fill="#6B4423">→ 训练不充分（轮数 / 学习率）</text>
+  <text x="222" y="428" font-size="13" font-style="italic" fill="#8A6A4A">信号：训练损失与验证损失同步偏高</text>
+
+  <!-- A2 -->
+  <rect x="525" y="298" width="250" height="150" rx="8" fill="#FDF0DD" stroke="#C89B3C" stroke-width="2.5"/>
+  <text x="650" y="326" font-size="17" font-weight="700" fill="#8A6A1E" text-anchor="middle">A2 · 方差高（过拟合）</text>
+  <text x="542" y="352" font-size="14" fill="#6B4423">→ 数据增广</text>
+  <text x="542" y="376" font-size="14" fill="#6B4423">→ 正则化 / Dropout / 权重衰减</text>
+  <text x="542" y="400" font-size="14" fill="#6B4423">→ 早停、缩小模型容量</text>
+  <text x="542" y="428" font-size="13" font-style="italic" fill="#8A6A4A">信号：训练低、验证高的剪刀差</text>
+
+  <!-- A3 -->
+  <rect x="845" y="298" width="250" height="150" rx="8" fill="#E4EDF4" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="970" y="326" font-size="17" font-weight="700" fill="#3F6486" text-anchor="middle">A3 · 分布偏移</text>
+  <text x="862" y="352" font-size="14" fill="#6B4423">→ 数据分布对齐</text>
+  <text x="862" y="376" font-size="14" fill="#6B4423">→ 域适应 / 重新采样</text>
+  <text x="862" y="400" font-size="14" fill="#6B4423">→ 检查数据泄漏</text>
+  <text x="862" y="428" font-size="13" font-style="italic" fill="#8A6A4A">信号：训练验证都好、测试差</text>
+
+  <!-- A4 -->
+  <rect x="1165" y="298" width="250" height="150" rx="8" fill="#EDEAE2" stroke="#8A7355" stroke-width="2.5"/>
+  <text x="1290" y="326" font-size="17" font-weight="700" fill="#6B4423" text-anchor="middle">A4 · 指标定义偏差</text>
+  <text x="1182" y="352" font-size="14" fill="#6B4423">→ 复核评估指标</text>
+  <text x="1182" y="376" font-size="14" fill="#6B4423">→ 复核真实业务目标</text>
+  <text x="1182" y="400" font-size="14" fill="#6B4423">→ 复核样本范围</text>
+  <text x="1182" y="428" font-size="13" font-style="italic" fill="#8A6A4A">信号：三集都好但用户仍不满意</text>
+
+  <!-- 汇合 -->
+  <line x1="330" y1="452" x2="330" y2="486" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="6,5"/>
+  <line x1="650" y1="452" x2="650" y2="486" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="6,5"/>
+  <line x1="970" y1="452" x2="970" y2="486" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="6,5"/>
+  <line x1="1290" y1="452" x2="1290" y2="486" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="6,5"/>
+  <line x1="330" y1="486" x2="1290" y2="486" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="6,5"/>
+  <rect x="560" y="470" width="490" height="32" rx="6" fill="#F5E6C8"/>
+  <text x="805" y="493" font-size="17" font-weight="700" fill="#556B4C" text-anchor="middle">汇合点：无论哪类问题，都回到这三个层面找手段</text>
+
+  <!-- 三层面 -->
+  <line x1="470" y1="502" x2="470" y2="546" stroke="#7A8C6F" stroke-width="2.5" marker-end="url(#qg)"/>
+  <line x1="800" y1="502" x2="800" y2="546" stroke="#7A8C6F" stroke-width="2.5" marker-end="url(#qg)"/>
+  <line x1="1130" y1="502" x2="1130" y2="546" stroke="#7A8C6F" stroke-width="2.5" marker-end="url(#qg)"/>
+
+  <rect x="280" y="552" width="380" height="164" rx="10" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="2.5"/>
+  <text x="470" y="586" font-size="20" font-weight="700" fill="#556B4C" text-anchor="middle">数据</text>
+  <text x="470" y="618" font-size="15" fill="#6B4423" text-anchor="middle">更多 / 更高质量 / 重新标注</text>
+  <text x="470" y="644" font-size="15" fill="#6B4423" text-anchor="middle">数据增广、分布对齐、去重去噪</text>
+  <text x="470" y="682" font-size="15" font-style="italic" fill="#8A6A4A" text-anchor="middle">优先级：覆盖度与质量先行</text>
+
+  <rect x="700" y="552" width="380" height="164" rx="10" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="2.5"/>
+  <text x="890" y="586" font-size="20" font-weight="700" fill="#556B4C" text-anchor="middle">模型</text>
+  <text x="890" y="618" font-size="15" fill="#6B4423" text-anchor="middle">更大容量 / 更好的归纳偏置</text>
+  <text x="890" y="644" font-size="15" fill="#6B4423" text-anchor="middle">激活函数、归一化、残差连接</text>
+  <text x="890" y="682" font-size="15" font-style="italic" fill="#8A6A4A" text-anchor="middle">结构匹配任务，而非越大越好</text>
+
+  <rect x="1120" y="552" width="380" height="164" rx="10" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="2.5"/>
+  <text x="1310" y="586" font-size="20" font-weight="700" fill="#556B4C" text-anchor="middle">训练</text>
+  <text x="1310" y="618" font-size="15" fill="#6B4423" text-anchor="middle">调整学习率 / 训练时长 / 批次</text>
+  <text x="1310" y="644" font-size="15" fill="#6B4423" text-anchor="middle">优化器选择、正则化强度</text>
+  <text x="1310" y="682" font-size="15" font-style="italic" fill="#8A6A4A" text-anchor="middle">调度策略与早停配套使用</text>
+
+  <text x="800" y="766" font-size="18" font-style="italic" fill="#8A6A4A" text-anchor="middle">先定位问题类型（Q1–Q4），再按成本从低到高选手段：调训练 → 调模型 → 动数据</text>
+  <text x="800" y="806" font-size="17" fill="#8A6A4A" text-anchor="middle">经验上，多数「效果不理想」最终落在数据层面 —— 但决策树的意义是先排除更便宜的可能</text>
+</svg>

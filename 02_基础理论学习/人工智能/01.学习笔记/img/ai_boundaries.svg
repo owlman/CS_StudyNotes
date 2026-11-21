@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="72" font-size="44" font-weight="700" fill="#6B4423" text-anchor="middle">能力边界的系统审视</text>
+  <line x1="600" y1="96" x2="1000" y2="96" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 左卡片：理论层面的硬约束 -->
+  <rect x="70" y="140" width="710" height="460" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <rect x="70" y="140" width="710" height="52" rx="14" fill="#E4EDF4"/>
+  <text x="100" y="176" font-size="27" font-weight="700" fill="#3F6486">理论层面的硬约束</text>
+  <text x="100" y="222" font-size="19" fill="#7A6A55">来自数学与计算机科学的底层定理，不随技术进步而改变</text>
+
+  <circle cx="112" cy="272" r="17" fill="#5A8AAA"/>
+  <text x="112" y="279" font-size="18" font-weight="700" fill="#FFF8E8" text-anchor="middle">1</text>
+  <text x="145" y="270" font-size="25" font-weight="700" fill="#6B4423">没有免费午餐定理</text>
+  <text x="145" y="301" font-size="19" fill="#7A6A55">对所有目标函数求平均，任意两种算法表现相同</text>
+  <text x="145" y="327" font-size="19" fill="#7A6A55">不存在在所有问题上都更优的通用学习器</text>
+
+  <circle cx="112" cy="382" r="17" fill="#5A8AAA"/>
+  <text x="112" y="389" font-size="18" font-weight="700" fill="#FFF8E8" text-anchor="middle">2</text>
+  <text x="145" y="380" font-size="25" font-weight="700" fill="#6B4423">PAC 学习框架</text>
+  <text x="145" y="411" font-size="19" fill="#7A6A55">样本复杂度由假设空间的复杂度决定</text>
+  <text x="145" y="437" font-size="19" fill="#7A6A55">有些概念即使样本无限，也无法在多项式时间内学习</text>
+
+  <circle cx="112" cy="492" r="17" fill="#5A8AAA"/>
+  <text x="112" y="499" font-size="18" font-weight="700" fill="#FFF8E8" text-anchor="middle">3</text>
+  <text x="145" y="490" font-size="25" font-weight="700" fill="#6B4423">哥德尔不完备与停机问题</text>
+  <text x="145" y="521" font-size="19" fill="#7A6A55">一致的形式系统内总存在不可证的真命题</text>
+  <text x="145" y="547" font-size="19" fill="#7A6A55">计算系统无法完美判断自身的终止状态</text>
+
+  <!-- 右卡片：工程与社会的软约束 -->
+  <rect x="820" y="140" width="710" height="460" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <rect x="820" y="140" width="710" height="52" rx="14" fill="#F6E2D4"/>
+  <text x="850" y="176" font-size="27" font-weight="700" fill="#B4592A">工程与社会的软约束</text>
+  <text x="850" y="222" font-size="19" fill="#7A6A55">当前条件下成立，可能随技术进步或社会共识演变</text>
+
+  <circle cx="862" cy="272" r="17" fill="#D97A47"/>
+  <text x="862" y="279" font-size="18" font-weight="700" fill="#FFF8E8" text-anchor="middle">1</text>
+  <text x="895" y="270" font-size="25" font-weight="700" fill="#6B4423">能源与算力可持续性</text>
+  <text x="895" y="301" font-size="19" fill="#7A6A55">训练能耗通常在数十至数千兆瓦时量级</text>
+  <text x="895" y="327" font-size="19" fill="#7A6A55">摩尔定律放缓，而算力需求仍在指数增长</text>
+
+  <circle cx="862" cy="382" r="17" fill="#D97A47"/>
+  <text x="862" y="389" font-size="18" font-weight="700" fill="#FFF8E8" text-anchor="middle">2</text>
+  <text x="895" y="380" font-size="25" font-weight="700" fill="#6B4423">数据版权与隐私</text>
+  <text x="895" y="411" font-size="19" fill="#7A6A55">受版权保护的语料已引发大量诉讼与争议</text>
+  <text x="895" y="437" font-size="19" fill="#7A6A55">高质量公开文本趋于饱和，数据瓶颈可能先到来</text>
+
+  <circle cx="862" cy="492" r="17" fill="#D97A47"/>
+  <text x="862" y="499" font-size="18" font-weight="700" fill="#FFF8E8" text-anchor="middle">3</text>
+  <text x="895" y="490" font-size="25" font-weight="700" fill="#6B4423">评估危机与 Goodhart 定律</text>
+  <text x="895" y="521" font-size="19" fill="#7A6A55">基准一旦公开，就会被针对性优化直至饱和</text>
+  <text x="895" y="547" font-size="19" fill="#7A6A55">指标一旦成为目标，就不再是一个好指标</text>
+
+  <!-- 底栏：开放问题 -->
+  <rect x="70" y="630" width="1460" height="190" rx="14" fill="#F0EFE6" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="100" y="672" font-size="25" font-weight="700" fill="#556B4C">开放问题：什么可能仍是禁区</text>
+
+  <rect x="80" y="692" width="450" height="110" rx="10" fill="#FFF8E8" stroke="#B9C4AE" stroke-width="2"/>
+  <text x="102" y="722" font-size="21" font-weight="700" fill="#6B4423">世界模型与物理常识</text>
+  <text x="102" y="752" font-size="18" fill="#7A6A55">学到的仍是统计模式，而非因果结构</text>
+  <text x="102" y="778" font-size="18" fill="#7A6A55">是否需要具身认知或因果建模才能突破</text>
+
+  <rect x="570" y="692" width="450" height="110" rx="10" fill="#FFF8E8" stroke="#B9C4AE" stroke-width="2"/>
+  <text x="592" y="722" font-size="21" font-weight="700" fill="#6B4423">主观体验与 Qualia</text>
+  <text x="592" y="752" font-size="18" fill="#7A6A55">行为上像有感受，不等于真的感受到了</text>
+  <text x="592" y="778" font-size="18" fill="#7A6A55">主流共识是哲学判断，而非科学结论</text>
+
+  <rect x="1060" y="692" width="450" height="110" rx="10" fill="#FFF8E8" stroke="#B9C4AE" stroke-width="2"/>
+  <text x="1082" y="722" font-size="21" font-weight="700" fill="#6B4423">创造性理解 vs. 统计重组</text>
+  <text x="1082" y="752" font-size="18" fill="#7A6A55">在分布空间里插值重组，还是理解本质</text>
+  <text x="1082" y="778" font-size="18" fill="#7A6A55">若创造力需要选择的意识，则仍很遥远</text>
+
+  <text x="800" y="872" font-size="19" font-style="italic" fill="#8A7355" text-anchor="middle">硬约束划定了原理上的上限，软约束决定了当前条件下的可行区间</text>
+</svg>

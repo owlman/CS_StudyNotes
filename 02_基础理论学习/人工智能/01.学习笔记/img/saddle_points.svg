@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="sp" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#8A6A4A"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="62" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">高维损失曲面的鞍点分布</text>
+  <line x1="580" y1="86" x2="1020" y2="86" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="120" font-size="19" fill="#8A6A4A" text-anchor="middle">在百万至十亿维的参数空间里，绝大多数临界点是鞍点，而不是局部最优（Dauphin et al., 2014）</text>
+
+  <!-- 左面板：等高线 -->
+  <rect x="40" y="142" width="750" height="410" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="68" y="174" font-size="19" font-weight="700" fill="#6B4423">高维损失曲面的等高线视图（自上而下俯视）</text>
+  <text x="68" y="200" font-size="15" fill="#8A6A4A">同心闭合曲线 = 等高线；中心 = 低损失（山谷），外扩 = 高损失（山脊）</text>
+
+  <ellipse cx="415" cy="355" rx="250" ry="118" fill="#EAF0E6" opacity="0.55" stroke="#B9C9D4" stroke-width="2"/>
+  <ellipse cx="415" cy="355" rx="195" ry="92" fill="none" stroke="#B9C9D4" stroke-width="2"/>
+  <ellipse cx="415" cy="355" rx="140" ry="66" fill="none" stroke="#B9C9D4" stroke-width="2"/>
+  <ellipse cx="415" cy="355" rx="88" ry="42" fill="none" stroke="#B9C9D4" stroke-width="2"/>
+
+  <ellipse cx="220" cy="290" rx="54" ry="28" fill="#FBEDE6" opacity="0.8" stroke="#C0553F" stroke-width="2"/>
+  <ellipse cx="220" cy="290" rx="30" ry="15" fill="none" stroke="#C0553F" stroke-width="1.6"/>
+  <ellipse cx="610" cy="290" rx="54" ry="28" fill="#FBEDE6" opacity="0.8" stroke="#C0553F" stroke-width="2"/>
+  <ellipse cx="610" cy="290" rx="30" ry="15" fill="none" stroke="#C0553F" stroke-width="1.6"/>
+
+  <ellipse cx="415" cy="497" rx="56" ry="24" fill="#EAF0E6" opacity="0.9" stroke="#7A8C6F" stroke-width="2"/>
+  <ellipse cx="415" cy="497" rx="30" ry="12" fill="none" stroke="#7A8C6F" stroke-width="1.6"/>
+
+  <line x1="200" y1="248" x2="213" y2="280" stroke="#8A6A4A" stroke-width="1.6"/>
+  <text x="120" y="240" font-size="16" font-weight="700" fill="#A2542A">A：局部最小</text>
+  <line x1="660" y1="248" x2="618" y2="280" stroke="#8A6A4A" stroke-width="1.6"/>
+  <text x="640" y="240" font-size="16" font-weight="700" fill="#A2542A">C：局部最小</text>
+
+  <line x1="232" y1="298" x2="382" y2="344" stroke="#8A6A4A" stroke-width="2" stroke-dasharray="7,6" marker-end="url(#sp)"/>
+  <text x="292" y="308" font-size="14" font-style="italic" fill="#8A6A4A">grad</text>
+  <line x1="598" y1="298" x2="448" y2="344" stroke="#8A6A4A" stroke-width="2" stroke-dasharray="7,6" marker-end="url(#sp)"/>
+  <text x="512" y="308" font-size="14" font-style="italic" fill="#8A6A4A">grad</text>
+
+  <circle cx="220" cy="290" r="9" fill="#C0553F"/>
+  <circle cx="610" cy="290" r="9" fill="#C0553F"/>
+  <circle cx="415" cy="355" r="10" fill="#D97A47" stroke="#A2542A" stroke-width="2"/>
+  <circle cx="415" cy="497" r="9" fill="#7A8C6F"/>
+
+  <rect x="268" y="398" width="296" height="46" rx="6" fill="#FFF8E8" opacity="0.9"/>
+  <text x="415" y="418" font-size="16" font-weight="700" fill="#A2542A" text-anchor="middle">B：鞍点（绝大多数临界点）</text>
+  <text x="415" y="437" font-size="14" fill="#8A6A4A" text-anchor="middle">某个方向上是谷，另一方向上是脊</text>
+
+  <text x="415" y="534" font-size="14" fill="#556B4C" text-anchor="middle">D：浅盆地（全局最小附近）</text>
+
+  <!-- 右面板：1D 切片 -->
+  <rect x="810" y="142" width="750" height="410" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="838" y="174" font-size="19" font-weight="700" fill="#6B4423">低维直觉（2D 山地）—— 几何直觉在这里会骗人</text>
+  <text x="838" y="200" font-size="15" fill="#8A6A4A">在二维图里 “局部最小” 很显眼；高维里鞍点远比局部最小常见</text>
+
+  <line x1="880" y1="500" x2="1520" y2="500" stroke="#6B4423" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="880" y1="500" x2="880" y2="230" stroke="#6B4423" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="868" y="250" font-size="15" fill="#A89B84">L(θ)</text>
+  <text x="1500" y="530" font-size="15" fill="#8A6A4A" text-anchor="end">参数 θ 在某一切片上的值</text>
+
+  <path d="M 900 470 C 960 462 1000 400 1040 372 C 1090 336 1130 262 1180 260 C 1240 258 1280 350 1330 396 C 1390 450 1450 466 1510 470"
+        fill="none" stroke="#6B4423" stroke-width="4" stroke-linecap="round"/>
+
+  <circle cx="1180" cy="262" r="7" fill="#6B4423"/>
+  <text x="1180" y="242" font-size="15" font-weight="700" fill="#6B4423" text-anchor="middle">peak</text>
+
+  <circle cx="1015" cy="386" r="8" fill="#C0553F"/>
+  <text x="1006" y="374" font-size="16" font-weight="700" fill="#A2542A">A</text>
+  <line x1="1015" y1="394" x2="1015" y2="500" stroke="#C0553F" stroke-width="1.6" stroke-dasharray="6,6"/>
+
+  <circle cx="1320" cy="390" r="8" fill="#7A8C6F"/>
+  <text x="1311" y="378" font-size="16" font-weight="700" fill="#556B4C">B</text>
+  <line x1="1320" y1="398" x2="1320" y2="500" stroke="#7A8C6F" stroke-width="1.6" stroke-dasharray="6,6"/>
+
+
+  <!-- 底部：左黄色提示 -->
+  <rect x="40" y="566" width="750" height="58" rx="8" fill="#F6E7C4" stroke="#C89B3C" stroke-width="2"/>
+  <text x="415" y="602" font-size="16" fill="#8A6A1E" text-anchor="middle">高维中鞍点 B 是常态、局部最小 A/C 是少数 —— 这是朴素 SGD 仍能工作的几何基础</text>
+
+  <rect x="810" y="566" width="750" height="58" rx="8" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="2"/>
+  <text x="1185" y="602" font-size="16" fill="#556B4C" text-anchor="middle">鞍点的工程含义：沿 “看起来平” 的方向仍能继续下降 —— 总有出口</text>
+
+  <!-- 核心结论 -->
+  <rect x="40" y="646" width="1520" height="150" rx="10" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="2.5"/>
+  <text x="70" y="682" font-size="20" font-weight="700" fill="#556B4C">核心结论</text>
+  <text x="70" y="716" font-size="17" fill="#6B4423">高维非凸损失面 ≈ 大量鞍点 + 少量局部最小 + 极少数全局最小。鞍点丰富 ≠ 优化器一定能到达全局最小，但梯度下降通常能从鞍点继续走。</text>
+  <text x="70" y="746" font-size="17" fill="#6B4423">“梯度必须有效传播” 是这条结论的前提 —— 一旦梯度消失，优化器就会卡在 “假局部最小” 上，这才是真正的工程陷阱。</text>
+  <text x="70" y="776" font-size="15" font-style="italic" fill="#8A6A4A">换句话说：高维空间把 “困住优化器” 的难度从「找不到出口」变成了「出口太远、梯度太弱」。</text>
+
+  <text x="800" y="850" font-size="16" font-style="italic" fill="#8A6A4A" text-anchor="middle">示意图，非实测；鞍点论证的定量依据见 Dauphin et al. 2014（NeurIPS）</text>
+</svg>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="fw" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#8A6A4A"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="64" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">多层感知机的前向传播</text>
+  <line x1="600" y1="88" x2="1000" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="124" font-size="19" fill="#8A6A4A" text-anchor="middle">以手写数字识别为例：输入 28×28 灰度图 → 输出 “这张图是数字几”</text>
+
+  <!-- 输入层 -->
+  <rect x="60" y="150" width="330" height="330" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <rect x="60" y="150" width="330" height="46" rx="10" fill="#E4EDF4"/>
+  <circle cx="88" cy="173" r="15" fill="#5A8AAA"/>
+  <text x="88" y="179" font-size="15" font-weight="700" fill="#FFF8E8" text-anchor="middle">1</text>
+  <text x="112" y="180" font-size="20" font-weight="700" fill="#3F6486">输入层（fixed）</text>
+  <text x="225" y="238" font-size="23" font-weight="700" fill="#6B4423" text-anchor="middle">x ∈ ℝ⁷⁸⁴</text>
+  <text x="225" y="270" font-size="16" fill="#6B4423" text-anchor="middle">28×28 灰度图拉平后的向量</text>
+  <rect x="100" y="296" width="250" height="34" rx="6" fill="none" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="118" y="319" font-size="15" fill="#3F6486">像素 1</text>
+  <line x1="178" y1="313" x2="272" y2="313" stroke="#B9C9D4" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="332" y="319" font-size="15" fill="#3F6486" text-anchor="end">像素 784</text>
+  <text x="225" y="380" font-size="16" font-style="italic" fill="#8A6A4A" text-anchor="middle">输入本身不参与更新</text>
+  <text x="225" y="440" font-size="16" fill="#6B4423" text-anchor="middle">784 个像素值逐一送入网络</text>
+
+  <line x1="394" y1="315" x2="432" y2="315" stroke="#8A6A4A" stroke-width="3" marker-end="url(#fw)"/>
+  <rect x="398" y="272" width="34" height="22" rx="4" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="1.5"/>
+  <text x="415" y="288" font-size="13" fill="#556B4C" text-anchor="middle">W⁽¹⁾</text>
+
+  <!-- 隐藏层 1 -->
+  <rect x="440" y="150" width="330" height="330" rx="10" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <rect x="440" y="150" width="330" height="46" rx="10" fill="#EFF3EA"/>
+  <circle cx="468" cy="173" r="15" fill="#7A8C6F"/>
+  <text x="468" y="179" font-size="15" font-weight="700" fill="#FFF8E8" text-anchor="middle">2</text>
+  <text x="492" y="180" font-size="20" font-weight="700" fill="#556B4C">隐藏层 1（learned）</text>
+  <text x="605" y="238" font-size="23" font-weight="700" fill="#6B4423" text-anchor="middle">h⁽¹⁾</text>
+  <text x="605" y="270" font-size="16" fill="#6B4423" text-anchor="middle">第一层隐藏表示</text>
+  <text x="605" y="314" font-size="19" fill="#3F6486" text-anchor="middle">h⁽¹⁾ = σ(W⁽¹⁾x + b⁽¹⁾)</text>
+  <text x="605" y="344" font-size="15" fill="#8A6A4A" text-anchor="middle">线性投影 → ReLU 非线性激活</text>
+  <circle cx="515" cy="392" r="9" fill="#7A8C6F"/><circle cx="550" cy="392" r="9" fill="#7A8C6F"/>
+  <circle cx="585" cy="392" r="9" fill="#7A8C6F"/><circle cx="620" cy="392" r="9" fill="#7A8C6F"/>
+  <circle cx="655" cy="392" r="9" fill="#7A8C6F"/><circle cx="690" cy="392" r="9" fill="#7A8C6F"/>
+  <text x="605" y="436" font-size="15" font-style="italic" fill="#8A6A4A" text-anchor="middle">（图为示意，实际维度通常为 64–512）</text>
+
+  <line x1="774" y1="315" x2="812" y2="315" stroke="#8A6A4A" stroke-width="3" marker-end="url(#fw)"/>
+  <rect x="778" y="272" width="34" height="22" rx="4" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="1.5"/>
+  <text x="795" y="288" font-size="13" fill="#556B4C" text-anchor="middle">W⁽²⁾</text>
+
+  <!-- 隐藏层 2 -->
+  <rect x="820" y="150" width="330" height="330" rx="10" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <rect x="820" y="150" width="330" height="46" rx="10" fill="#EFF3EA"/>
+  <circle cx="848" cy="173" r="15" fill="#7A8C6F"/>
+  <text x="848" y="179" font-size="15" font-weight="700" fill="#FFF8E8" text-anchor="middle">3</text>
+  <text x="872" y="180" font-size="20" font-weight="700" fill="#556B4C">隐藏层 2（learned）</text>
+  <text x="985" y="238" font-size="23" font-weight="700" fill="#6B4423" text-anchor="middle">h⁽²⁾</text>
+  <text x="985" y="270" font-size="16" fill="#6B4423" text-anchor="middle">第二层隐藏表示</text>
+  <text x="985" y="314" font-size="19" fill="#3F6486" text-anchor="middle">h⁽²⁾ = σ(W⁽²⁾h⁽¹⁾ + b⁽²⁾)</text>
+  <text x="985" y="344" font-size="15" fill="#8A6A4A" text-anchor="middle">线性投影 → ReLU 非线性激活</text>
+  <circle cx="895" cy="392" r="9" fill="#7A8C6F"/><circle cx="930" cy="392" r="9" fill="#7A8C6F"/>
+  <circle cx="965" cy="392" r="9" fill="#7A8C6F"/><circle cx="1000" cy="392" r="9" fill="#7A8C6F"/>
+  <circle cx="1035" cy="392" r="9" fill="#7A8C6F"/><circle cx="1070" cy="392" r="9" fill="#7A8C6F"/>
+  <text x="985" y="436" font-size="15" font-style="italic" fill="#8A6A4A" text-anchor="middle">（图为示意，实际维度通常为 64–512）</text>
+
+  <line x1="1154" y1="315" x2="1192" y2="315" stroke="#8A6A4A" stroke-width="3" marker-end="url(#fw)"/>
+  <rect x="1158" y="272" width="34" height="22" rx="4" fill="#F6E2D4" stroke="#D97A47" stroke-width="1.5"/>
+  <text x="1175" y="288" font-size="13" fill="#B4592A" text-anchor="middle">W⁽³⁾</text>
+
+  <!-- 输出层 -->
+  <rect x="1200" y="150" width="340" height="330" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <rect x="1200" y="150" width="340" height="46" rx="10" fill="#F6E2D4"/>
+  <circle cx="1228" cy="173" r="15" fill="#D97A47"/>
+  <text x="1228" y="179" font-size="15" font-weight="700" fill="#FFF8E8" text-anchor="middle">4</text>
+  <text x="1252" y="180" font-size="20" font-weight="700" fill="#B4592A">输出层（learned）</text>
+  <text x="1370" y="238" font-size="23" font-weight="700" fill="#6B4423" text-anchor="middle">ŷ ∈ ℝ¹⁰</text>
+  <text x="1370" y="270" font-size="16" fill="#6B4423" text-anchor="middle">10 个类别的预测概率</text>
+  <text x="1370" y="312" font-size="17" fill="#3F6486" text-anchor="middle">ŷ = softmax(W⁽³⁾h⁽²⁾ + b⁽³⁾)</text>
+  <text x="1370" y="340" font-size="15" fill="#8A6A4A" text-anchor="middle">线性投影 → Softmax 概率归一化</text>
+
+  <!-- 条形图 -->
+  <rect x="1228" y="404" width="28" height="14" rx="3" fill="#F0D8C6"/>
+  <rect x="1256" y="404" width="28" height="22" rx="3" fill="#F0D8C6"/>
+  <rect x="1284" y="404" width="28" height="18" rx="3" fill="#F0D8C6"/>
+  <rect x="1312" y="404" width="28" height="26" rx="3" fill="#F0D8C6"/>
+  <rect x="1340" y="404" width="28" height="12" rx="3" fill="#F0D8C6"/>
+  <rect x="1368" y="404" width="28" height="20" rx="3" fill="#F0D8C6"/>
+  <rect x="1396" y="404" width="28" height="16" rx="3" fill="#F0D8C6"/>
+  <rect x="1424" y="404" width="28" height="40" rx="3" fill="#D97A47"/>
+  <rect x="1452" y="404" width="28" height="14" rx="3" fill="#F0D8C6"/>
+  <rect x="1480" y="404" width="28" height="18" rx="3" fill="#F0D8C6"/>
+  <text x="1242" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">0</text>
+  <text x="1270" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">1</text>
+  <text x="1298" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">2</text>
+  <text x="1326" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">3</text>
+  <text x="1354" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">4</text>
+  <text x="1382" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">5</text>
+  <text x="1410" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">6</text>
+  <text x="1438" y="466" font-size="13" font-weight="700" fill="#B4592A" text-anchor="middle">7</text>
+  <text x="1466" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">8</text>
+  <text x="1494" y="466" font-size="13" fill="#8A6A4A" text-anchor="middle">9</text>
+
+  <!-- 图例 -->
+  <rect x="330" y="504" width="18" height="18" rx="3" fill="none" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="358" y="520" font-size="16" fill="#6B4423">输入层</text>
+  <rect x="470" y="504" width="18" height="18" rx="3" fill="none" stroke="#7A8C6F" stroke-width="2.5"/>
+  <text x="498" y="520" font-size="16" fill="#6B4423">隐藏层</text>
+  <rect x="610" y="504" width="18" height="18" rx="3" fill="none" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="638" y="520" font-size="16" fill="#6B4423">输出层</text>
+  <circle cx="790" cy="513" r="8" fill="#7A8C6F"/>
+  <text x="808" y="520" font-size="16" fill="#6B4423">神经元节点</text>
+
+  <!-- 补充说明 -->
+  <rect x="60" y="548" width="1470" height="152" rx="12" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="88" y="582" font-size="19" font-weight="700" fill="#A2542A">补充说明</text>
+
+  <text x="88" y="616" font-size="16" font-weight="700" fill="#3F6486">人脑类比</text>
+  <text x="88" y="642" font-size="15" fill="#6B4423">每个圆圈 ≈ 一个判断单元，每条线 ≈ 一条判断依据</text>
+  <text x="88" y="666" font-size="15" fill="#6B4423">大量单元协作，宏观行为才显现出智能</text>
+
+  <text x="580" y="616" font-size="16" font-weight="700" fill="#556B4C">生活类比</text>
+  <text x="580" y="642" font-size="15" fill="#6B4423">教孩子认字：见多了就学会区分 “2” 和 “7”</text>
+  <text x="580" y="666" font-size="15" fill="#6B4423">神经网络做的是同一件事，只是规模更大</text>
+
+  <text x="1070" y="616" font-size="16" font-weight="700" fill="#B4592A">注意</text>
+  <text x="1070" y="642" font-size="15" fill="#6B4423">灵感来自生物大脑，工作方式差异巨大</text>
+  <text x="1070" y="666" font-size="15" fill="#6B4423">它更接近统计模式识别，而非认知模拟</text>
+
+  <text x="800" y="754" font-size="20" fill="#6B4423" text-anchor="middle">神经网络 = 一张可微的计算图；训练 = 调整参数使整张图逼近目标函数</text>
+  <text x="800" y="800" font-size="20" fill="#6B4423" text-anchor="middle">每一层 = 一次「线性投影 + 非线性激活」—— 非线性激活正是「深度」有意义的关键</text>
+</svg>

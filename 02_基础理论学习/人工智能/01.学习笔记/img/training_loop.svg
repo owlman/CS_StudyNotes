@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#8A6A4A"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#7A8C6F"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="64" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">训练循环：前向 → 损失 → 反向 → 更新 → 评估</text>
+  <line x1="520" y1="88" x2="1080" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="124" font-size="19" fill="#8A6A4A" text-anchor="middle">四步循环迭代，直到满足停止条件后进入评估与诊断</text>
+
+  <!-- 1 初始化 -->
+  <rect x="50" y="150" width="270" height="140" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <circle cx="76" cy="174" r="13" fill="#5A8AAA"/>
+  <text x="76" y="180" font-size="14" font-weight="700" fill="#FFF8E8" text-anchor="middle">1</text>
+  <text x="98" y="181" font-size="19" font-weight="700" fill="#3F6486">初始化</text>
+  <text x="185" y="226" font-size="21" font-weight="700" fill="#6B4423" text-anchor="middle">θ₀</text>
+  <text x="185" y="258" font-size="14" fill="#8A6A4A" text-anchor="middle">随机初始化参数</text>
+
+  <line x1="324" y1="220" x2="340" y2="220" stroke="#8A6A4A" stroke-width="3" marker-end="url(#a1)"/>
+
+  <!-- 2 前向传播 -->
+  <rect x="345" y="150" width="270" height="140" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <circle cx="371" cy="174" r="13" fill="#D97A47"/>
+  <text x="371" y="180" font-size="14" font-weight="700" fill="#FFF8E8" text-anchor="middle">2</text>
+  <text x="393" y="181" font-size="19" font-weight="700" fill="#B4592A">前向传播</text>
+  <text x="480" y="226" font-size="20" font-weight="700" fill="#6B4423" text-anchor="middle">x → f_θ(x)</text>
+  <text x="480" y="258" font-size="14" fill="#8A6A4A" text-anchor="middle">逐层计算隐藏表示</text>
+
+  <line x1="619" y1="220" x2="635" y2="220" stroke="#8A6A4A" stroke-width="3" marker-end="url(#a1)"/>
+
+  <!-- 3 计算损失 -->
+  <rect x="640" y="150" width="270" height="140" rx="10" fill="#FFF8E8" stroke="#D97A47" stroke-width="2.5"/>
+  <circle cx="666" cy="174" r="13" fill="#D97A47"/>
+  <text x="666" y="180" font-size="14" font-weight="700" fill="#FFF8E8" text-anchor="middle">3</text>
+  <text x="688" y="181" font-size="19" font-weight="700" fill="#B4592A">计算损失</text>
+  <text x="775" y="226" font-size="19" font-weight="700" fill="#6B4423" text-anchor="middle">L(f_θ(x), y)</text>
+  <text x="775" y="258" font-size="14" fill="#8A6A4A" text-anchor="middle">预测与真值的偏差</text>
+
+  <line x1="914" y1="220" x2="930" y2="220" stroke="#8A6A4A" stroke-width="3" marker-end="url(#a1)"/>
+
+  <!-- 4 反向传播 -->
+  <rect x="935" y="150" width="270" height="140" rx="10" fill="#FFF8E8" stroke="#A2542A" stroke-width="2.5"/>
+  <circle cx="961" cy="174" r="13" fill="#A2542A"/>
+  <text x="961" y="180" font-size="14" font-weight="700" fill="#FFF8E8" text-anchor="middle">4</text>
+  <text x="983" y="181" font-size="19" font-weight="700" fill="#A2542A">反向传播</text>
+  <text x="1070" y="226" font-size="21" font-weight="700" fill="#6B4423" text-anchor="middle">∇_θ L</text>
+  <text x="1070" y="258" font-size="14" fill="#8A6A4A" text-anchor="middle">沿计算图反向求梯度</text>
+
+  <line x1="1209" y1="220" x2="1225" y2="220" stroke="#8A6A4A" stroke-width="3" marker-end="url(#a1)"/>
+
+  <!-- 5 更新参数 -->
+  <rect x="1230" y="150" width="290" height="140" rx="10" fill="#FFF8E8" stroke="#A2542A" stroke-width="2.5"/>
+  <circle cx="1256" cy="174" r="13" fill="#A2542A"/>
+  <text x="1256" y="180" font-size="14" font-weight="700" fill="#FFF8E8" text-anchor="middle">5</text>
+  <text x="1278" y="181" font-size="19" font-weight="700" fill="#A2542A">更新参数</text>
+  <text x="1375" y="226" font-size="18" font-weight="700" fill="#6B4423" text-anchor="middle">θ ← θ − η·∇_θ L</text>
+  <text x="1375" y="258" font-size="14" fill="#8A6A4A" text-anchor="middle">SGD / AdamW 沿负梯度方向调整</text>
+
+  <!-- 到判断 -->
+  <line x1="1375" y1="294" x2="1375" y2="366" stroke="#7A6A9A" stroke-width="3" marker-end="url(#a1)"/>
+
+  <!-- 判断菱形 -->
+  <polygon points="1375,370 1490,448 1375,526 1260,448" fill="#F0EAF4" stroke="#7A6A9A" stroke-width="2.5"/>
+  <text x="1375" y="440" font-size="18" font-weight="700" fill="#5E4E7E" text-anchor="middle">达到停止条件？</text>
+  <text x="1375" y="466" font-size="14" fill="#7A6A9A" text-anchor="middle">epoch 上限 / 早停 / 收敛</text>
+  <text x="1330" y="412" font-size="15" font-weight="700" fill="#7A6A9A">6</text>
+
+  <!-- 否：回环 -->
+  <path d="M 1256 448 H 480 V 300" fill="none" stroke="#A89B84" stroke-width="2.5" stroke-dasharray="11,8" marker-end="url(#a1)"/>
+  <text x="760" y="424" font-size="16" fill="#8A6A4A" text-anchor="middle">否：继续下一轮迭代</text>
+
+  <!-- 是：进入评估 -->
+  <path d="M 1375 526 V 600 H 1160 V 636" fill="none" stroke="#7A8C6F" stroke-width="3" marker-end="url(#ag)"/>
+  <text x="1290" y="586" font-size="16" font-weight="700" fill="#556B4C">是</text>
+
+  <!-- 评估与诊断 -->
+  <rect x="1040" y="640" width="250" height="130" rx="10" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <circle cx="1066" cy="664" r="13" fill="#7A8C6F"/>
+  <text x="1066" y="670" font-size="14" font-weight="700" fill="#FFF8E8" text-anchor="middle">7</text>
+  <text x="1088" y="671" font-size="19" font-weight="700" fill="#556B4C">评估与诊断</text>
+  <text x="1165" y="706" font-size="14" fill="#6B4423" text-anchor="middle">训练曲线 / 验证指标</text>
+  <text x="1165" y="730" font-size="14" fill="#6B4423" text-anchor="middle">误差分析与可解释性</text>
+  <text x="1165" y="754" font-size="14" fill="#8A6A4A" text-anchor="middle">判断过拟合 / 收敛情况</text>
+
+  <line x1="1294" y1="705" x2="1336" y2="705" stroke="#8A6A4A" stroke-width="3" marker-end="url(#a1)"/>
+
+  <!-- 输出参数 -->
+  <rect x="1340" y="640" width="210" height="130" rx="10" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="2.5"/>
+  <circle cx="1366" cy="664" r="13" fill="#5A8AAA"/>
+  <text x="1366" y="670" font-size="14" font-weight="700" fill="#FFF8E8" text-anchor="middle">8</text>
+  <text x="1388" y="671" font-size="19" font-weight="700" fill="#3F6486">输出参数</text>
+  <text x="1445" y="714" font-size="20" font-weight="700" fill="#6B4423" text-anchor="middle">θ*</text>
+  <text x="1445" y="744" font-size="14" fill="#8A6A4A" text-anchor="middle">训练好的模型，用于推理与部署</text>
+
+  <!-- 图例 -->
+  <rect x="200" y="820" width="20" height="20" rx="4" fill="none" stroke="#5A8AAA" stroke-width="2.5"/>
+  <text x="230" y="837" font-size="17" fill="#6B4423">初始化 / 输出</text>
+  <rect x="420" y="820" width="20" height="20" rx="4" fill="none" stroke="#D97A47" stroke-width="2.5"/>
+  <text x="450" y="837" font-size="17" fill="#6B4423">前向与损失</text>
+  <rect x="640" y="820" width="20" height="20" rx="4" fill="none" stroke="#A2542A" stroke-width="2.5"/>
+  <text x="670" y="837" font-size="17" fill="#6B4423">反向与更新</text>
+  <rect x="860" y="820" width="20" height="20" rx="4" fill="none" stroke="#7A6A9A" stroke-width="2.5"/>
+  <text x="890" y="837" font-size="17" fill="#6B4423">停止判断</text>
+  <rect x="1080" y="820" width="20" height="20" rx="4" fill="none" stroke="#7A8C6F" stroke-width="2.5"/>
+  <text x="1110" y="837" font-size="17" fill="#6B4423">评估诊断</text>
+</svg>

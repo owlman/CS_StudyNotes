@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="60" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">偏差-方差分解：四种拟合情况</text>
+  <line x1="580" y1="84" x2="1020" y2="84" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="118" font-size="18" fill="#8A6A4A" text-anchor="middle">红色靶心 = 真实函数 f*(x)；蓝点 = 不同训练集下训出的模型给出的预测</text>
+
+  <!-- ① 低偏差 低方差 -->
+  <rect x="90" y="150" width="680" height="300" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="120" y="188" font-size="20" font-weight="700" fill="#556B4C">① 低偏差 + 低方差（理想）</text>
+  <circle cx="290" cy="290" r="98" fill="none" stroke="#E5C4B8" stroke-width="2"/>
+  <circle cx="290" cy="290" r="62" fill="none" stroke="#D9A996" stroke-width="2"/>
+  <circle cx="290" cy="290" r="30" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <circle cx="290" cy="290" r="7" fill="#C0553F"/>
+  <circle cx="282" cy="284" r="5" fill="#5A8AAA"/><circle cx="296" cy="292" r="5" fill="#5A8AAA"/>
+  <circle cx="288" cy="299" r="5" fill="#5A8AAA"/><circle cx="299" cy="283" r="5" fill="#5A8AAA"/>
+  <circle cx="294" cy="303" r="5" fill="#5A8AAA"/><circle cx="280" cy="294" r="5" fill="#5A8AAA"/>
+  <text x="420" y="266" font-size="17" fill="#6B4423">预测集中在靶心附近</text>
+  <text x="420" y="296" font-size="17" fill="#6B4423">每次训练的偏差与波动都小</text>
+  <text x="420" y="334" font-size="16" font-style="italic" fill="#8A6A4A">这是调优想要的方向，但很难做到</text>
+
+  <!-- ② 低偏差 高方差 -->
+  <rect x="830" y="150" width="680" height="300" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="860" y="188" font-size="20" font-weight="700" fill="#B4592A">② 低偏差 + 高方差（过拟合）</text>
+  <circle cx="1030" cy="290" r="98" fill="none" stroke="#E5C4B8" stroke-width="2"/>
+  <circle cx="1030" cy="290" r="62" fill="none" stroke="#D9A996" stroke-width="2"/>
+  <circle cx="1030" cy="290" r="30" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <circle cx="1030" cy="290" r="7" fill="#C0553F"/>
+  <circle cx="1004" cy="248" r="5" fill="#5A8AAA"/><circle cx="1062" cy="256" r="5" fill="#5A8AAA"/>
+  <circle cx="1076" cy="300" r="5" fill="#5A8AAA"/><circle cx="1046" cy="340" r="5" fill="#5A8AAA"/>
+  <circle cx="998" cy="330" r="5" fill="#5A8AAA"/><circle cx="1150" cy="230" r="5" fill="#5A8AAA"/>
+  <circle cx="1152" cy="382" r="5" fill="#5A8AAA"/><circle cx="900" cy="372" r="5" fill="#5A8AAA"/>
+  <text x="1160" y="252" font-size="17" fill="#6B4423">预测围绕靶心但很分散</text>
+  <text x="1160" y="282" font-size="17" fill="#6B4423">换个训练集，结果波动很大</text>
+  <text x="1160" y="320" font-size="16" font-style="italic" fill="#8A6A4A">典型信号：训练低、验证高的剪刀差</text>
+
+  <!-- ③ 高偏差 低方差 -->
+  <rect x="90" y="480" width="680" height="300" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="120" y="518" font-size="20" font-weight="700" fill="#3F6486">③ 高偏差 + 低方差（系统偏离）</text>
+  <circle cx="290" cy="620" r="98" fill="none" stroke="#E5C4B8" stroke-width="2"/>
+  <circle cx="290" cy="620" r="62" fill="none" stroke="#D9A996" stroke-width="2"/>
+  <circle cx="290" cy="620" r="30" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <circle cx="290" cy="620" r="7" fill="#C0553F"/>
+  <circle cx="392" cy="694" r="5" fill="#5A8AAA"/><circle cx="404" cy="686" r="5" fill="#5A8AAA"/>
+  <circle cx="398" cy="702" r="5" fill="#5A8AAA"/><circle cx="410" cy="696" r="5" fill="#5A8AAA"/>
+  <circle cx="400" cy="678" r="5" fill="#5A8AAA"/>
+  <line x1="304" y1="634" x2="384" y2="682" stroke="#A2542A" stroke-width="2" stroke-dasharray="7,5"/>
+  <text x="330" y="664" font-size="15" font-weight="700" fill="#A2542A">偏差</text>
+  <text x="420" y="596" font-size="17" fill="#6B4423">预测彼此一致，但系统性偏离靶心</text>
+  <text x="420" y="626" font-size="17" fill="#6B4423">模型假设错了，训多少次都一样</text>
+  <text x="420" y="664" font-size="16" font-style="italic" fill="#8A6A4A">典型信号：训练与验证损失同步偏高</text>
+
+  <!-- ④ 高偏差 高方差 -->
+  <rect x="830" y="480" width="680" height="300" rx="10" fill="#FFF8E8" stroke="#D9C7A3" stroke-width="2"/>
+  <text x="860" y="518" font-size="20" font-weight="700" fill="#6B4423">④ 高偏差 + 高方差（最差）</text>
+  <circle cx="1030" cy="620" r="98" fill="none" stroke="#E5C4B8" stroke-width="2"/>
+  <circle cx="1030" cy="620" r="62" fill="none" stroke="#D9A996" stroke-width="2"/>
+  <circle cx="1030" cy="620" r="30" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <circle cx="1030" cy="620" r="7" fill="#C0553F"/>
+  <circle cx="1128" cy="690" r="5" fill="#5A8AAA"/><circle cx="1146" cy="678" r="5" fill="#5A8AAA"/>
+  <circle cx="1140" cy="702" r="5" fill="#5A8AAA"/><circle cx="1158" cy="694" r="5" fill="#5A8AAA"/>
+  <circle cx="1108" cy="712" r="5" fill="#5A8AAA"/><circle cx="1162" cy="672" r="5" fill="#5A8AAA"/>
+  <line x1="1044" y1="634" x2="1120" y2="680" stroke="#A2542A" stroke-width="2" stroke-dasharray="7,5"/>
+  <text x="1092" y="660" font-size="15" font-weight="700" fill="#A2542A">偏差</text>
+  <text x="1180" y="600" font-size="17" fill="#6B4423">既偏又散：模型没学到规律</text>
+  <text x="1180" y="630" font-size="17" fill="#6B4423">数据也不足以约束它</text>
+  <text x="1180" y="668" font-size="16" font-style="italic" fill="#8A6A4A">通常意味着数据或任务本身有问题</text>
+
+  <text x="800" y="822" font-size="18" fill="#6B4423" text-anchor="middle">偏差 = 预测期望与真实函数的系统性偏离；方差 = 换一个训练集带来的预测波动；通常二者此消彼长</text>
+  <text x="800" y="860" font-size="17" font-style="italic" fill="#8A6A4A" text-anchor="middle">示意：每格 5–8 个蓝点代表不同随机种子 / 不同训练集训出的同一套架构</text>
+</svg>

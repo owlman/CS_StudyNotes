@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="72" font-size="44" font-weight="700" fill="#6B4423" text-anchor="middle">演变规律：四个不变的核心问题</text>
+  <line x1="560" y1="96" x2="1040" y2="96" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 泛化 -->
+  <rect x="70" y="140" width="700" height="280" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="100" y="192" font-size="28" font-weight="700" fill="#3F6486">泛化 Generalization</text>
+  <line x1="100" y1="208" x2="290" y2="208" stroke="#5A8AAA" stroke-width="2" stroke-dasharray="10,8"/>
+  <text x="100" y="248" font-size="20" fill="#6B4423">在未见过的数据上表现如何，始终是</text>
+  <text x="100" y="282" font-size="20" fill="#6B4423">衡量 AI 能力的最终标准</text>
+  <text x="100" y="330" font-size="19" fill="#7A6A55">方法一直在变，问题从未变过：每一次</text>
+  <text x="100" y="362" font-size="19" fill="#7A6A55">范式革命，都只是换一种方式回答它</text>
+
+  <!-- 表示 -->
+  <rect x="830" y="140" width="700" height="280" rx="14" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="860" y="192" font-size="28" font-weight="700" fill="#556B4C">表示 Representation</text>
+  <line x1="860" y1="208" x2="1080" y2="208" stroke="#7A8C6F" stroke-width="2" stroke-dasharray="10,8"/>
+  <text x="860" y="248" font-size="20" fill="#6B4423">表示方式决定了能力的上限</text>
+  <text x="860" y="282" font-size="20" fill="#6B4423">整部演变史就是表示的进化史</text>
+  <text x="860" y="330" font-size="19" fill="#7A6A55">符号 → 概率图 → 手工特征 → 分层表示</text>
+  <text x="860" y="362" font-size="19" fill="#7A6A55">→ 预训练得到的上下文相关表示</text>
+
+  <!-- 数据规模与配比 -->
+  <rect x="70" y="450" width="700" height="280" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="100" y="502" font-size="28" font-weight="700" fill="#B4592A">数据规模与配比 Data</text>
+  <line x1="100" y1="518" x2="350" y2="518" stroke="#D97A47" stroke-width="2" stroke-dasharray="10,8"/>
+  <text x="100" y="558" font-size="20" fill="#6B4423">比单纯放大模型更关键</text>
+  <text x="100" y="592" font-size="20" fill="#6B4423">Chinchilla 修正了 “越大越好”</text>
+  <text x="100" y="640" font-size="19" fill="#7A6A55">同等算力下参数与 token 需同比增</text>
+  <text x="100" y="672" font-size="19" fill="#7A6A55">质量、覆盖度与配比决定能力天花板</text>
+
+  <!-- 约束 -->
+  <rect x="830" y="450" width="700" height="280" rx="14" fill="#FFF8E8" stroke="#B9A88E" stroke-width="3"/>
+  <text x="860" y="502" font-size="28" font-weight="700" fill="#6B4423">约束 Constraint</text>
+  <line x1="860" y1="518" x2="1030" y2="518" stroke="#B9A88E" stroke-width="2" stroke-dasharray="10,8"/>
+  <text x="860" y="558" font-size="20" fill="#6B4423">约束始终定义可行方案的边界</text>
+  <text x="860" y="592" font-size="20" fill="#6B4423">有限理性：信息、算力与时间都有限</text>
+  <text x="860" y="640" font-size="19" fill="#7A6A55">进步是在更高效的量级上重新面对约束，</text>
+  <text x="860" y="672" font-size="19" fill="#7A6A55">而不是约束的彻底消除</text>
+
+  <text x="800" y="800" font-size="22" font-style="italic" fill="#8A7355" text-anchor="middle">三次转向改变的是 “谁来做”，不变的是 “要解决什么”</text>
+</svg>

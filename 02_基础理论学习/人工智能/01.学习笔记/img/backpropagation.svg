@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <defs>
+    <marker id="grn" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#7A8C6F"/>
+    </marker>
+    <marker id="red" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L11,6 L0,11 z" fill="#C0553F"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+
+  <text x="800" y="62" font-size="42" font-weight="700" fill="#6B4423" text-anchor="middle">反向传播：沿计算图反向调用链式法则</text>
+  <line x1="520" y1="86" x2="1080" y2="86" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="120" font-size="19" fill="#8A6A4A" text-anchor="middle">前向传播得到损失 L，反向逐层算出所有参数的梯度 ∂L/∂θ</text>
+
+  <!-- ① 前向 -->
+  <text x="50" y="168" font-size="21" font-weight="700" fill="#556B4C">① 前向传播（Forward）：x → ŷ → L</text>
+  <text x="50" y="196" font-size="16" fill="#8A6A4A">沿计算图正向逐层计算，最终得到损失值（绿色实线 = 数据流动方向）</text>
+
+  <rect x="50" y="212" width="320" height="112" rx="8" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <rect x="50" y="212" width="320" height="30" rx="8" fill="#EFF3EA"/>
+  <text x="210" y="233" font-size="15" font-weight="700" fill="#556B4C" text-anchor="middle">输入</text>
+  <text x="210" y="278" font-size="21" font-weight="700" fill="#3F6486" text-anchor="middle">x</text>
+  <text x="210" y="304" font-size="13" fill="#8A6A4A" text-anchor="middle">前向值：x</text>
+
+  <line x1="374" y1="268" x2="437" y2="268" stroke="#7A8C6F" stroke-width="3" marker-end="url(#grn)"/>
+  <rect x="368" y="240" width="76" height="22" rx="4" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="1.5"/>
+  <text x="406" y="256" font-size="12" fill="#556B4C" text-anchor="middle">W, b, σ</text>
+
+  <rect x="445" y="212" width="320" height="112" rx="8" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <rect x="445" y="212" width="320" height="30" rx="8" fill="#EFF3EA"/>
+  <text x="605" y="233" font-size="15" font-weight="700" fill="#556B4C" text-anchor="middle">隐藏层</text>
+  <text x="605" y="278" font-size="19" font-weight="700" fill="#3F6486" text-anchor="middle">h = σ(Wx + b)</text>
+  <text x="605" y="304" font-size="13" fill="#8A6A4A" text-anchor="middle">前向值：h</text>
+
+  <line x1="769" y1="268" x2="832" y2="268" stroke="#7A8C6F" stroke-width="3" marker-end="url(#grn)"/>
+  <rect x="763" y="240" width="76" height="22" rx="4" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="1.5"/>
+  <text x="801" y="256" font-size="12" fill="#556B4C" text-anchor="middle">softmax</text>
+
+  <rect x="840" y="212" width="320" height="112" rx="8" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <rect x="840" y="212" width="320" height="30" rx="8" fill="#EFF3EA"/>
+  <text x="1000" y="233" font-size="15" font-weight="700" fill="#556B4C" text-anchor="middle">预测</text>
+  <text x="1000" y="278" font-size="19" font-weight="700" fill="#3F6486" text-anchor="middle">ŷ = softmax(Wh)</text>
+  <text x="1000" y="304" font-size="13" fill="#8A6A4A" text-anchor="middle">前向值：ŷ</text>
+
+  <line x1="1164" y1="268" x2="1227" y2="268" stroke="#7A8C6F" stroke-width="3" marker-end="url(#grn)"/>
+  <rect x="1158" y="240" width="76" height="22" rx="4" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="1.5"/>
+  <text x="1196" y="256" font-size="12" fill="#556B4C" text-anchor="middle">Loss</text>
+
+  <rect x="1235" y="212" width="320" height="112" rx="8" fill="#FFF8E8" stroke="#7A8C6F" stroke-width="2.5"/>
+  <rect x="1235" y="212" width="320" height="30" rx="8" fill="#EFF3EA"/>
+  <text x="1395" y="233" font-size="15" font-weight="700" fill="#556B4C" text-anchor="middle">损失</text>
+  <text x="1395" y="278" font-size="19" font-weight="700" fill="#3F6486" text-anchor="middle">L = Loss(ŷ, y)</text>
+  <text x="1395" y="304" font-size="13" fill="#8A6A4A" text-anchor="middle">前向值：L</text>
+
+  <!-- ② 反向 -->
+  <text x="50" y="382" font-size="21" font-weight="700" fill="#A2542A">② 反向传播（Backward）：∂L/∂x ← ∂L/∂h ← ∂L/∂ŷ ← 1</text>
+  <text x="50" y="410" font-size="16" fill="#8A6A4A">从损失出发（起点梯度 = 1），沿链式法则反向计算每个节点的梯度（红色虚线 = 梯度流动方向）</text>
+
+  <rect x="50" y="428" width="320" height="112" rx="8" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <rect x="50" y="428" width="320" height="30" rx="8" fill="#F6DCD0"/>
+  <text x="210" y="449" font-size="15" font-weight="700" fill="#A2542A" text-anchor="middle">输入的梯度</text>
+  <text x="210" y="494" font-size="21" font-weight="700" fill="#A2542A" text-anchor="middle">∂L/∂x</text>
+  <text x="210" y="520" font-size="13" fill="#8A6A4A" text-anchor="middle">末端的梯度</text>
+
+  <line x1="437" y1="484" x2="374" y2="484" stroke="#C0553F" stroke-width="3" stroke-dasharray="10,7" marker-end="url(#red)"/>
+
+  <rect x="445" y="428" width="320" height="112" rx="8" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <rect x="445" y="428" width="320" height="30" rx="8" fill="#F6DCD0"/>
+  <text x="605" y="449" font-size="15" font-weight="700" fill="#A2542A" text-anchor="middle">隐藏层的梯度</text>
+  <text x="605" y="494" font-size="21" font-weight="700" fill="#A2542A" text-anchor="middle">∂L/∂h</text>
+  <text x="605" y="520" font-size="13" fill="#8A6A4A" text-anchor="middle">用于更新 W</text>
+
+  <line x1="832" y1="484" x2="769" y2="484" stroke="#C0553F" stroke-width="3" stroke-dasharray="10,7" marker-end="url(#red)"/>
+  <rect x="763" y="456" width="76" height="22" rx="4" fill="#F6DCD0" stroke="#C0553F" stroke-width="1.5"/>
+  <text x="801" y="472" font-size="12" fill="#A2542A" text-anchor="middle">× ∂ŷ/∂h</text>
+
+  <rect x="840" y="428" width="320" height="112" rx="8" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <rect x="840" y="428" width="320" height="30" rx="8" fill="#F6DCD0"/>
+  <text x="1000" y="449" font-size="15" font-weight="700" fill="#A2542A" text-anchor="middle">预测的梯度</text>
+  <text x="1000" y="494" font-size="21" font-weight="700" fill="#A2542A" text-anchor="middle">∂L/∂ŷ</text>
+  <text x="1000" y="520" font-size="13" fill="#8A6A4A" text-anchor="middle">用于更新输出层权重</text>
+
+  <line x1="1227" y1="484" x2="1164" y2="484" stroke="#C0553F" stroke-width="3" stroke-dasharray="10,7" marker-end="url(#red)"/>
+
+  <rect x="1235" y="428" width="320" height="112" rx="8" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <rect x="1235" y="428" width="320" height="30" rx="8" fill="#F6DCD0"/>
+  <text x="1395" y="449" font-size="15" font-weight="700" fill="#A2542A" text-anchor="middle">起点 · 损失对自身的梯度</text>
+  <text x="1395" y="494" font-size="21" font-weight="700" fill="#A2542A" text-anchor="middle">∂L/∂L = 1</text>
+  <text x="1395" y="520" font-size="13" fill="#8A6A4A" text-anchor="middle">反向的起点</text>
+
+  <!-- 链式法则 -->
+  <rect x="50" y="584" width="1505" height="106" rx="10" fill="#FBEDE6" stroke="#C0553F" stroke-width="2.5"/>
+  <text x="80" y="620" font-size="20" font-weight="700" fill="#A2542A">核心：链式法则（Chain Rule）</text>
+  <text x="80" y="662" font-size="21" fill="#6B4423">∂L/∂h⁽ˡ⁻¹⁾ = ∂L/∂h⁽ˡ⁾ · ∂h⁽ˡ⁾/∂h⁽ˡ⁻¹⁾</text>
+  <text x="740" y="662" font-size="19" fill="#8A6A4A">每层梯度 = 上游梯度 × 局部导数</text>
+
+  <text x="800" y="748" font-size="20" fill="#6B4423" text-anchor="middle">1 次前向 + 1 次反向 = 拿到所有参数的梯度；额外开销约等于一次前向传播</text>
+  <text x="800" y="792" font-size="19" font-style="italic" fill="#8A6A4A" text-anchor="middle">这是反向传播成为深度学习「标配」的根本原因 —— 代价与参数量近似线性，而不是平方</text>
+</svg>
