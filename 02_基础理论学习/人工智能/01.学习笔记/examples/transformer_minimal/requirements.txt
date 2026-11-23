@@ -1,0 +1,10 @@
+# 《Transformer 架构详解》配套最小实现的依赖
+#
+# 安装（Windows + uv）：
+#   uv venv .venv --python 3.12
+#   uv pip install --python .venv/Scripts/python.exe torch numpy --index-url https://download.pytorch.org/whl/cpu
+#
+# 或者用 pip：
+#   pip install torch numpy
+torch>=2.0
+numpy>=1.24
