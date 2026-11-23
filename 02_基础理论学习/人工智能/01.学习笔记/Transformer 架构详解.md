@@ -47,7 +47,7 @@ categories: [基础理论学习, 人工智能]
 
     这意味着，第 1 个时间步的信息需要经过 $t-1$ 次矩阵乘法与激活函数的 “挤压” 才能传递到第 $t$ 步。这里有两个相关但并不等同的问题需要分开看：**信息保留**方面，早期信息在反复的乘法与激活中可能被衰减或放大；**梯度传播**方面，反向传播的梯度同样要沿这条路径连乘，于是容易出现梯度消失与梯度爆炸。前者是表示能力上的限制，后者是优化上的困难——LSTM 通过引入 “门控机制”（输入门、遗忘门、输出门）主要缓解了后者，对前者也只是部分缓解，而两者都没有消除 “信息必须沿路径逐级传播” 的本质约束。
 
-2. **串行计算无法并行**：RNN 的循环结构要求**第 $t$ 步必须等第 $t-1$ 步计算完成**。这意味着无论 GPU 多么强大，单个序列内的时间步无法被并行处理。当训练数据从几百个词扩展到几万个词时，训练时间会随序列长度线性增长。这一约束使得 RNN/LSTM 在大规模预训练场景下很快失去竞争力。
+2. **串行计算无法并行**：RNN 的循环结构要求**第 $t$ 步必须等第 $t-1$ 步计算完成**。这意味着无论 GPU 多么强大，单个序列内的时间步无法被并行处理。当序列长度从数百 token 扩展到数万 token 时，训练时间仍会随序列长度线性增长。这一约束使得 RNN/LSTM 在大规模预训练场景下很快失去竞争力。
 
 为了突破上述工程瓶颈，AI 研究者们提出了 “注意力（Attention）” 这个概念，并进行了一些不怎么成功的早期尝试。例如在 2014 年发表的论文（[注意力机制（arXiv 2014 / ICLR 2015）](https://arxiv.org/abs/1409.0473)）中，Dzmitry Bahdanau 等人就曾主张通过在 RNN 中加入注意力机制，让解码器在生成每个词时回看编码器的所有隐藏状态，从而**绕过固定长度向量**。但这种 “注意力机制 + RNN” 的混合结构仍然受制于 RNN 本身，无法彻底摆脱串行约束。
 
@@ -101,7 +101,7 @@ $$
 
 1. **相似度计算 $QK^\top$**：$QK^\top$ 的第 $i$ 行第 $j$ 列元素 $\langle q_i, k_j \rangle$ 表示 “位置 $i$ 的查询向量” 与 “位置 $j$ 的键向量” 之间的点积相似度。这一步相当于**让输入序列中的每个位置向所有位置发出查询，并接收所有元素返回的相关性分数**。为了方便理解，我们可以将这一过程想象成在图书馆找书。首先，我们会写下自己的需求（$q_i$），然后和图书馆所有书的索引标签（$k_j$）一一比对，看哪本书最相关。
 
-2. **缩放 $\frac{1}{\sqrt{d_k}}$**：直接用 $QK^\top$ 作为 softmax 的输入会出现一个问题：当 $d_k$ 较大时，点积的方差会随 $d_k$ 线性增长，导致 softmax 的输入值进入极端区间，**梯度变得极小**。除以 $\sqrt{d_k}$ 这一缩放操作正是为了控制点积的方差，使其无论 $d_k$ 多大都保持稳定的分布。这是 Transformer 训练稳定性的关键工程细节之一，**并非可省略的修饰**。
+2. **缩放 $\frac{1}{\sqrt{d_k}}$**：直接用 $QK^\top$ 作为 softmax 的输入会出现一个问题：在 $q$、$k$ 各分量独立同分布且零均值、单位方差的常见假设下，当 $d_k$ 较大时，点积的方差会随 $d_k$ 线性增长，导致 softmax 的输入值进入极端区间，**梯度变得极小**。除以 $\sqrt{d_k}$ 这一缩放操作正是为了控制点积的方差，使其无论 $d_k$ 多大都保持稳定的分布。这是 Transformer 训练稳定性的关键工程细节之一，**并非可省略的修饰**。
 
 3. **归一化 $\text{softmax}$**：对每一行（即每个查询位置）做 softmax，将相似度分数转换为**权重分布** $\alpha_{ij}$，满足 $\sum_j \alpha_{ij} = 1$。这一步等价于 “把相似度分数解释为概率：位置 $i$ 应该把多大比例的注意力分配给位置 $j$”。
 
@@ -277,7 +277,7 @@ $$
 | $h$ | 8 | 注意力头数|
 | $d_k = d_v$ | 64 | 单头键 / 值向量维度（$d_{\text{model}} / h$）|
 | $d_{\text{ff}}$ | 2048 | 前馈网络隐藏维度（$4 \times d_{\text{model}}$）|
-| 训练数据 | WMT 2014 英德 | 约 450 万句对，批大小约 25000 token|
+| 训练数据 | WMT 2014 英德 | 约 450 万句对，源端与目标端各约 25000 token|
 
 **表 2** 原始 Transformer 论文中的关键配置（以 base 模型为例）
 
@@ -405,7 +405,7 @@ $$
 
 可以看到，Transformer 内部**从头到尾都保持了 $n \times d$ 的形状**。位置维度 $n$ 只在注意力矩阵 $n \times n$ 的中间步骤里才发生膨胀，这也是后面讨论复杂度瓶颈时的关键。
 
-把上面这张表连起来看一遍会更直观。以一句 “猫 坐在 垫子上” 为例（假设分词后是 3 个 token）：查表得到 $3 \times d$ 的嵌入矩阵，加上位置编码后进入第一个块；此时 $Q$、$K$、$V$ 各为 $3 \times d$，注意力分数矩阵是 $3 \times 3$，加权聚合后的输出回到 $3 \times d$。
+把上面这张表连起来看一遍会更直观。以一句 “猫 坐在 垫子上” 为例（这里为演示形状，假设一个词就是一个 token，共 3 个）：查表得到 $3 \times d$ 的嵌入矩阵，加上位置编码后进入第一个块；此时 $Q$、$K$、$V$ 各为 $3 \times d$，注意力分数矩阵是 $3 \times 3$，加权聚合后的输出回到 $3 \times d$。
 
 多头拼接后经 $W^O$ 仍回到 $3 \times d$，加上残差、再归一化；FFN 把 $3 \times d$ 扩成 $3 \times 4d$ 再压回 $3 \times d$；如此堆叠 $N$ 层后，最后一层的 $3 \times d$ 经输出投影变成 $3 \times \lvert V \rvert$ 的 logits，取 softmax 后的最后一列，就是 “下一个 token” 的概率分布。整个过程中只有一个地方真正 “变胖”——注意力分数矩阵，而它恰好也是后面复杂度瓶颈的来源。
 
@@ -456,7 +456,7 @@ FFN 对序列中的每个位置**独立**作用，且所有位置共享同一套
 
 #### 为什么注意力与 FFN 要交替堆叠？
 
-两者做的本来就是两类不同的事——一层负责 “通信”，一层负责 “变换”。交替堆叠意味着每一层都先重新组织跨位置的信息，再对每个位置做非线性加工，使深层表示既携带全局上下文，又有足够的变换深度。实践中的堆叠比例并不固定，常见做法是注意力层与 FFN 层按 1:1 或 1:2 交替。
+两者做的本来就是两类不同的事——一层负责 “通信”，一层负责 “变换”。交替堆叠意味着每一层都先重新组织跨位置的信息，再对每个位置做非线性加工，使深层表示既携带全局上下文，又有足够的变换深度。标准做法是每层由一个注意力子层与一个 FFN 子层组成，即 1:1 交替；堆叠比例在实践中并不固定，但 1:1 是绝大多数模型的默认选择。
 
 #### Decoder-only 架构如何靠因果掩码实现自回归？
 
@@ -502,7 +502,7 @@ print(f"有缓存  投影 {proj_with_cache:5d}  注意力 {attn_with_cache:5d}")
 
 ### 训练目标：三种自监督学习信号
 
-- **自回归语言建模（causal LM）**：给定前文预测下一个 token，损失为 $-\sum_t \log P(x_t \mid x_{<t})$。由于因果掩码的存在，一次前向传播就能同时得到所有位置的监督信号，训练并行度高；目标与生成任务天然对齐。代价是每个 token 只提供 1 个监督信号，数据利用率偏低。
+- **自回归语言建模（causal LM）**：给定前文预测下一个 token，损失为 $-\sum_t \log P(x_t \mid x_{<t})$。由于因果掩码的存在，一次前向传播就能同时得到所有位置的监督信号，训练并行度高；目标与生成任务天然对齐。代价是每个位置只能利用单侧上下文，无法像 MLM 那样获得双向表示。
 - **掩码语言建模（MLM）**：随机遮住一部分 token，让模型结合左右上下文补全。BERT 的标准做法是遮住 15% 的 token，其中 80% 换成 `[MASK]`、10% 换成随机 token、10% 保持原样（后两项是为了防止模型只学到 “[MASK] 一定要被还原” 这一捷径）。它只在被遮住的位置上计算损失，且条件里同时含有左右两侧的可见 token，因此能得到双向表示；但预训练时存在的 `[MASK]` 在下游推理中并不存在，形成预训练与微调之间的不一致。
 - **Span corruption（跨度破坏）**：遮住连续的一段文本并让模型还原整段，T5 采用这一方案（被遮部分用 `<extra_id_0>` 一类的哨兵 token 标记，遮蔽比例约 15%、平均跨度约 3 个 token）。相比逐 token 的 MLM，它更接近翻译、摘要这类 “整段生成” 的任务形态，同时保留了部分双向信息。
 
@@ -589,7 +589,7 @@ Flash Attention 的收益来自对 **IO 复杂度** 的重新分析。设序列�
 | 稠密注意力（原始 Transformer） | 序列内所有位置两两相连 | 完整物化 $n \times n$ | $O(n^2 d)$ | $O(n^2)$ | 精确 |
 | Flash Attention | 分块计算 + 块间重算 | 不物化 | $O(n^2 d)$ | $O(n)$ | 精确 |
 | 稀疏注意力（Longformer / BigBird / NSA） | 只连接部分位置或块 | 部分物化 | $O(nwd)$ | $O(nw)$ | 对选中的连接精确 |
-| 线性注意力（Performer / Linformer） | 用核技巧（Performer）或低秩投影（Linformer）替代 softmax | 无需显式矩阵 | $O(nd^2)$ 量级（随实现而变） | $O(nd)$ | 近似 |
+| 线性注意力（Performer / Linformer） | 用核技巧近似 softmax（Performer），或对 K/V 做低秩投影并保留 softmax（Linformer） | 无需显式矩阵 | $O(nd^2)$（Linformer 为 $O(nkd)$） | $O(nd)$ | 近似 |
 | GQA（分组查询注意力） | 查询头分组，组内共享同一套 $K$、$V$ | 完整物化 $n \times n$ | $O(n^2 d)$ | 注意力矩阵 $O(n^2)$；KV Cache 份数降至 MHA 的 $1/g$ | 精确 |
 
 **表 4** 注意力变体的速查对照表
@@ -615,11 +615,11 @@ GQA 则属于另一个维度：它既不改变注意力矩阵本身，也不改�
 - Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. NAACL 2019 / arXiv:1810.04805. <https://arxiv.org/abs/1810.04805>（DOI: 10.18653/v1/N19-1423）
 - Radford, A., Narasimhan, K., Salimans, T., & Sutskever, I. (2018). *Improving Language Understanding by Generative Pre-Training*. OpenAI Technical Report. <https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf>
 - Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). *Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer*. JMLR 21(140) / arXiv:1910.10683. <https://arxiv.org/abs/1910.10683>（正式版：<https://jmlr.org/papers/v21/20-074.html>）（DOI: 10.48550/arXiv.1910.10683；JMLR 版无 DOI）
-- Su, J., Lu, Y., Pan, S., Bozeněc, A., et al. (2021). *RoFormer: Enhanced Transformer with Rotary Position Embedding*. arXiv:2104.09864. <https://arxiv.org/abs/2104.09864>（DOI: 10.48550/arXiv.2104.09864；期刊版 Neurocomputing 2024, DOI: 10.1016/j.neucom.2023.127063）
+- Su, J., Lu, Y., Pan, S., Murtadha, A., Wen, B., & Liu, Y. (2021). *RoFormer: Enhanced Transformer with Rotary Position Embedding*. arXiv:2104.09864. <https://arxiv.org/abs/2104.09864>（DOI: 10.48550/arXiv.2104.09864；期刊版 Neurocomputing 2024, DOI: 10.1016/j.neucom.2023.127063）
 - Press, O., Smith, N. A., & Lewis, M. (2022). *Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation* (ALiBi). ICLR 2022 / arXiv:2108.12409. <https://arxiv.org/abs/2108.12409>（DOI: 10.48550/arXiv.2108.12409）
 - Shazeer, N. (2020). *GLU Variants Improve Transformer* (SwiGLU). arXiv:2002.05202. <https://arxiv.org/abs/2002.05202>（DOI: 10.48550/arXiv.2002.05202）
-- Ainslie, J., Zhao, T., Onural, S., et al. (2023). *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*. EMNLP 2023 / arXiv:2305.13245. <https://arxiv.org/abs/2305.13245>（DOI: 10.18653/v1/2023.emnlp-main.298）
-- Dao, T., Fu, S., Fung, W. W., et al. (2022). *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135. <https://arxiv.org/abs/2205.14135>（DOI: 10.52202/068431-1189）
+- Ainslie, J., Lee-Thorp, J., de Jong, M., et al. (2023). *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*. EMNLP 2023 / arXiv:2305.13245. <https://arxiv.org/abs/2305.13245>（DOI: 10.18653/v1/2023.emnlp-main.298）
+- Dao, T., Fu, D. Y., Ermon, S., Rudra, A., & Ré, C. (2022). *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135. <https://arxiv.org/abs/2205.14135>（DOI: 10.52202/068431-1189）
 - Sennrich, R., Haddow, B., & Birch, A. (2016). *Neural Machine Translation of Rare Words with Subword Units*. ACL 2016 / arXiv:1508.07909. <https://arxiv.org/abs/1508.07909>（DOI: 10.18653/v1/P16-1162）
 - Google Research. *BERT: Tokenization*. BERT 官方仓库文档（WordPiece 分词算法的权威说明）. <https://github.com/google-research/bert/blob/master/README.md#tokenization>
 - Song, X., Salcianu, A., Song, Y., Dopson, D., & Zhou, D. (2021). *Fast WordPiece Tokenization*. EMNLP 2021 / arXiv:2012.15524. <https://aclanthology.org/2021.emnlp-main.160/>（预印本：<https://arxiv.org/abs/2012.15524>）（DOI: 10.18653/v1/2021.emnlp-main.160；预印本 DOI: 10.48550/arXiv.2012.15524）
@@ -629,7 +629,7 @@ GQA 则属于另一个维度：它既不改变注意力矩阵本身，也不改�
 - Beltagy, I., Peters, M. E., & Cohan, A. (2020). *Longformer: The Long-Document Transformer*. arXiv:2004.05150. <https://arxiv.org/abs/2004.05150>（DOI: 10.48550/arXiv.2004.05150）
 - Zaheer, M., et al. (2020). *Big Bird: Transformers for Longer Sequences*. NeurIPS 2020 / arXiv:2007.14062. <https://arxiv.org/abs/2007.14062>（DOI: 10.48550/arXiv.2007.14062）
 - Choromanski, K., Likhosherstov, V., Dohan, D., Song, X., Gane, A., & Sarlos, T. (2020). *Rethinking Attention with Performers*. ICLR 2021 / arXiv:2009.14794. <https://arxiv.org/abs/2009.14794>（DOI: 10.48550/arXiv.2009.14794）
-- Wang, S., Li, B. Z., Khabsa, M., Fang, H., & Jin, H. (2020). *Linformer: Self-Attention with Linear Complexity*. arXiv:2006.04768. <https://arxiv.org/abs/2006.04768>（DOI: 10.48550/arXiv.2006.04768）
+- Wang, S., Li, B. Z., Khabsa, M., Fang, H., & Ma, H. (2020). *Linformer: Self-Attention with Linear Complexity*. arXiv:2006.04768. <https://arxiv.org/abs/2006.04768>（DOI: 10.48550/arXiv.2006.04768）
 - Dao, T. (2023). *FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning*. arXiv:2307.08691. <https://arxiv.org/abs/2307.08691>（DOI: 10.48550/arXiv.2307.08691）
 - Touvron, H., et al. (2023). *Llama 2: Open Foundation and Fine-Tuned Chat Models*. arXiv:2307.09288. <https://arxiv.org/abs/2307.09288>（DOI: 10.48550/arXiv.2307.09288）
 - Dubey, S., et al. (2024). *The Llama 3 Herd of Models*. arXiv:2407.21783. <https://arxiv.org/abs/2407.21783>（DOI: 10.48550/arXiv.2407.21783）
