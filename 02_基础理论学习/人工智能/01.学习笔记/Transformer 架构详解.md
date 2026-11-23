@@ -53,7 +53,7 @@ categories: [基础理论学习, 人工智能]
 
 Transformer 架构所带来的革命性突破在于：**它彻底放弃了 RNN 的循环处理结构**，转而通过实现一种名为 “自注意力（Self-Attention）” 的机制直接建立序列中任意两个位置之间的连接。下面，让我们具体来了解一下该架构所基于的数学直觉。
 
-![图 1](./img/01-comparison-rnn-vs-self-attention.svg)
+![图 1](./img/transformer-01-comparison-rnn-vs-self-attention.svg)
 
 **图 1** 循环结构与自注意力：信息如何跨位置传递
 
@@ -91,11 +91,13 @@ $$
 Q = X W^Q,\quad K = X W^K,\quad V = X W^V
 $$
 
-其中，$X \in \mathbb{R}^{n \times d}$ 是输入序列矩阵，$n$ 为序列长度、$d$ 为模型维度。$W^Q, W^K \in \mathbb{R}^{d \times d_k}$ 与 $W^V \in \mathbb{R}^{d \times d_v}$ 是模型需要学习的参数矩阵。另外，$d_k$ 是 $Q$、$K$ 矩阵的列维度（即 “键向量” 的维度），$d_v$ 是 $V$ 矩阵的列维度（即 “值向量” 的维度）。因此 $Q$、$K$ 的形状是 $n \times d_k$，$V$ 的形状是 $n \times d_v$；自注意力中通常取 $d_v = d_k$。下面，让我们来逐步拆解这个公式的语义。
+其中，$X \in \mathbb{R}^{n \times d}$ 是输入序列矩阵，$n$ 为序列长度、$d$ 为模型维度。$W^Q, W^K \in \mathbb{R}^{d \times d_k}$ 与 $W^V \in \mathbb{R}^{d \times d_v}$ 是模型需要学习的参数矩阵。
+
+除此之外，$d_k$ 是 $Q$、$K$ 矩阵的列维度（即 “键向量” 的维度），$d_v$ 是 $V$ 矩阵的列维度（即 “值向量” 的维度）。因此 $Q$、$K$ 的形状是 $n \times d_k$，$V$ 的形状是 $n \times d_v$；自注意力中通常取 $d_v = d_k$。下面，让我们来逐步拆解这个公式的语义。
 
 ### 第一步：相似度计算 $QK^\top$
 
-$QK^\top$ 的第 $i$ 行第 $j$ 列元素 $\langle q_i, k_j \rangle$ 表示 “位置 $i$ 的查询向量” 与 “位置 $j$ 的键向量” 之间的点积相似度。这一步相当于**让每个位置向所有位置发出查询，并接收所有位置返回的相关性分数**。
+$QK^\top$ 的第 $i$ 行第 $j$ 列元素 $\langle q_i, k_j \rangle$ 表示 “位置 $i$ 的查询向量” 与 “位置 $j$ 的键向量” 之间的点积相似度。这一步相当于**让每个位置向所有位置发出查询，并接收所有位置返回的相关性分数**。为了方便理解，··
 
 直觉上可以理解为：在图书馆找书时，你写下你的需求（$q_i$），然后和图书馆所有书的索引标签（$k_j$）一一比对，看哪本书最相关。
 
@@ -121,7 +123,7 @@ $$
 
 至此，我们就完成了自注意力的完整计算。值得强调的是，自注意力的所有计算步骤都是**对序列内所有位置同时进行的**——这就是它能够高效利用 GPU 并行性的原因。
 
-![图 2](./img/02-flowchart-scaled-dot-product-attention.svg)
+![图 2](./img/transformer-02-flowchart-scaled-dot-product-attention.svg)
 
 **图 2** 缩放点积注意力的四个计算步骤
 
@@ -141,7 +143,7 @@ $$
 
 其中 $h$ 是头数（原始论文中 $h = 8$），$W_i^Q$、$W_i^K$、$W_i^V$ 是每个头**独立**的参数矩阵，$W^O$ 是最终的输出投影矩阵。
 
-![图 3](./img/03-framework-multi-head-attention.svg)
+![图 3](./img/transformer-03-framework-multi-head-attention.svg)
 
 **图 3** 多头注意力：把表示空间切成 h 份并行观察
 
@@ -163,7 +165,7 @@ $$
 
 ### 最小实现（PyTorch）
 
-把上面的公式翻译成代码，其实只有十几行。下面这段实现的是 **Decoder-only LLM 里最常见的因果掩码多头自注意力**（对应图 5 中 Decoder 的第一个子层）：
+把上面的公式翻译成代码，其实只有十几行。下面这段实现的是 **仅解码器模型（Decoder-only LLM）里最常见的因果掩码多头自注意力**（对应图 6 中 Decoder 的第一个子层）：
 
 ```python
 import math
@@ -211,7 +213,7 @@ class MultiHeadSelfAttention(nn.Module):
 
 ### 配套代码
 
-上面这段教学实现已经固化为可运行、可测试的工程，位于本文同目录的 `examples/transformer_minimal/`：
+在撰写这篇笔记的同时，我也将上面这段对于 transformer 架构的最小实现固化成了一个可运行、可测试的教学项目，保存在了这篇笔记所在目录下的 `examples/transformer_minimal/` 子目录中，以下是这个项目的相关说明：
 
 | 文件 | 内容 |
 |---|---|
@@ -220,7 +222,11 @@ class MultiHeadSelfAttention(nn.Module):
 | `tests/test_transformer_minimal.py` | 10 个用例，逐条验证因果性、Padding Mask、KV Cache 一致性、GQA 分组映射、RoPE 相对性质等 |
 | `README.md` | 安装运行方式、实现要点与踩坑记录 |
 
-在这个基础上补齐了上文列出的三项工程必备项——**Padding Mask**、**Attention Dropout**、**KV Cache**——并把正文其他章节提到的 **RoPE**、**GQA**、**RMSNorm**、**SwiGLU** 做成了可选开关（`use_rope`、`n_kv_head`、`norm="rms"`、`swiglu=True`）。实测结果：CPU 上约 2 秒完成 300 步训练，loss 从 3.46 降到 0.002，模型能稳定复现语料模式；10 个测试用例全部通过。
+在这个基础上补齐了上文列出的三项工程必备项——**Padding Mask**、**Attention Dropout**、**KV Cache**——并把正文其他章节提到的 **RoPE**、**GQA**、**RMSNorm**、**SwiGLU** 做成了可选开关（`use_rope`、`n_kv_head`、`norm="rms"`、`swiglu=True`）。实测结果：CPU 上约 2 秒完成 300 步训练，loss 从 3.46 降到 0.002，模型能稳定复现语料模式；10 个测试用例全部通过，具体如图 4 所示。
+
+![图 4](./img/transformer-04-framework-test-cases.png)
+
+**图 4** 测试用例：10 个用例全部通过
 
 其中几处容易写错、也最值得对照代码细看的地方是：
 
@@ -251,9 +257,9 @@ $$
 
 其中 $pos$ 是位置索引，$i$ 是维度索引，$d$ 是嵌入维度。分母中的 $10000^{2i/d}$ 使得**不同维度承载不同频率的波形**：低维频率高、波长短，负责区分邻近位置；高维频率低、波长长，负责编码较远处的绝对位置。
 
-![图 4](./img/04-infographic-positional-encoding.svg)
+![图 5](./img/transformer-05-infographic-positional-encoding.svg)
 
-**图 4** 正弦位置编码：不同维度承载不同频率
+**图 5** 正弦位置编码：不同维度承载不同频率
 
 这种设计的两个核心优势是：
 
@@ -270,9 +276,9 @@ $$
 
 把前面讨论的所有组件拼起来，我们就得到了原始 Transformer 的完整架构。它由 **Encoder** 和 **Decoder** 两部分组成，每部分各包含若干个相同的 “块（Block）”。
 
-![图 5](./img/05-framework-transformer-architecture.svg)
+![图 6](./img/transformer-06-framework-transformer-architecture.svg)
 
-**图 5** 原始 Transformer 的整体结构
+**图 6** 原始 Transformer 的整体结构
 
 | 配置项 | 取值 | 说明 |
 |---|---|---|
@@ -320,6 +326,36 @@ $$
 
 这里需要特别澄清一个高频混淆点：**原始 Transformer 的 Decoder 块**包含跨注意力（Cross-Attention），它依赖一个外部的 Encoder 输出；而现代 LLM 所说的 “Decoder-only”，虽然沿用了 “Decoder” 这个名字，却只保留因果掩码自注意力与 FFN 两个子层，**没有跨注意力**——因为它根本不存在编码器输出可以参考。后文提到的 GPT、LLaMA、Qwen 都属于后者，与原始翻译系统里的 Decoder 块在结构上并不相同。
 
+掩码在数值上是什么样子，可以直接跑一遍。下面这段代码先造一个随机的分数矩阵，再用下三角掩码屏蔽未来位置，最后做 softmax：
+
+```python
+import torch
+
+n = 4
+torch.manual_seed(0)
+scores = torch.randn(n, n)                                  # 假设的分数矩阵 QK^T / sqrt(d_k)
+causal = torch.triu(torch.ones(n, n, dtype=torch.bool), diagonal=1)  # 1 表示屏蔽未来
+attn = scores.masked_fill(causal, float("-inf")).softmax(dim=-1)
+
+print(causal.int())
+print(attn)
+```
+
+输出是：
+
+```text
+tensor([[0, 1, 1, 1],
+        [0, 0, 1, 1],
+        [0, 0, 0, 1],
+        [0, 0, 0, 0]], dtype=torch.int32)
+tensor([[1.0000, 0.0000, 0.0000, 0.0000],
+        [0.5391, 0.4609, 0.0000, 0.0000],
+        [0.4478, 0.0917, 0.4604, 0.0000],
+        [0.1340, 0.4099, 0.3632, 0.0928]])
+```
+
+两点值得注意：第 0 行只允许关注自己，权重自然就是 1.0000；最后一行可以看到全部 4 个位置，权重之和仍然是 1。而所有被屏蔽位置的权重都严格为 0——这正是公式中用 $-\infty$ 而不是某个大负数的原因：取负无穷时 softmax 的指数项直接为 0，梯度也不会从这些位置泄漏回无效位置。
+
 ### 分词与词表（Tokenizer）
 
 Transformer 面对的原始输入是文本，而模型内部的一切计算都发生在向量上。在两者之间还隔着一步：**分词（Tokenization）**。
@@ -328,13 +364,24 @@ Transformer 面对的原始输入是文本，而模型内部的一切计算都�
 
 - **BPE（Byte Pair Encoding）**：从字节或字符出发，反复合并出现频率最高的相邻符号对。GPT-2 及其后的 OpenAI 系列都基于它。
 - **SentencePiece / Unigram**：把 “子词切分” 建模为一个概率模型，直接学出词表，而不是依赖固定的合并规则。Llama 2 采用 SentencePiece，T5 采用 Unigram。
-- **WordPiece**：Google 为 BERT 开发的分词算法，合并规则与 BPE 类似，但以似然准则选择合并对象（算法细节见 BERT 官方仓库的 Tokenization 说明）。
+- **WordPiece**：Google 为 BERT 开发的分词算法，合并规则与 BPE 类似，但以似然准则选择合并对象（算法细节见 BERT 官方仓库的 Tokenization 说明；该算法在工程实现层面的分析与优化可参见 Song et al., 2021）。
 
 Llama 3 起改用 tiktoken 风格的 BPE，词表从 32000 扩到了 128256。
 
 词表大小 $\lvert V \rvert$ 直接决定了三件事：**嵌入表的行数**（$\lvert V \rvert \times d$）、**输出层投影的宽度**（$d \times \lvert V \rvert$），以及**同一段文本被切出的 token 数**。词表越大，序列越短，注意力矩阵的规模越小；但输出端的 softmax 需要在每个位置遍历整个词表，词表过大会直接推高显存占用与推理延迟。实践中的取值大致是：GPT-2 为 50257，Llama 2 为 32000，Llama 3 为 128256。
 
 还有一点与中文读者直接相关：**中文的 token 效率高度依赖预训练词表**。同一句中文，切分结果可能是一个 token，也可能被拆成十几个字节级碎片。主流做法是**字节级回退（byte-level fallback）**——保证任何字符都能被表示——代价是罕见字会占用远多于一个 token 的长度。
+
+这个代价有多大，可以实测。用 tiktoken 的 `cl100k_base` 词表（GPT-4 与 GPT-3.5 Turbo 使用的 BPE 词表）切几段文本，结果如下：
+
+- `Hello, world!` → 4 个 token；
+- `The quick brown fox jumps over the lazy dog.` → 10 个 token；
+- `深度学习的训练与评估`（10 个汉字）→ **15 个 token**，比字符数还多；
+- `猫 坐在 垫子上`（8 个字符，含两个空格）→ 12 个 token。
+
+差别来自词表对不同语言的覆盖程度：常用英文单词通常已在词表里，而常见汉字往往不在。字节级回退把一个汉字的 UTF-8 编码（3 字节）拆成字节级 token，实测中一个汉字会占 1–3 个 token 不等（`度`、`学`、`的` 等字恰好在词表里，只占 1 个；`猫`、`垫` 则被拆成 3 个），因此 token 数可能**超过**字符数。序列长度 $n$ 又直接决定注意力矩阵的 $n \times n$ 规模，因此词表对中文的覆盖程度，最终会转化为训练与推理成本上的差距——这正是面向中文的模型往往配更大词表、也更依赖字节级词表的原因。
+
+词表版本本身也在改善这一点：把上面那句中文换成较新的 `o200k_base` 词表，token 数从 15 降到 8。中文分词效率的提升最终要靠词表迭代来完成，而不只是靠算法。
 
 有了 token id，才能进入嵌入层，这正是下一节要处理的事情。
 
@@ -405,9 +452,9 @@ $$
 
 这里还有一个容易被忽略的细节。原论文采用的是 **post-LN**（先做残差相加、再做归一化，即上面写出的 $X' = \text{LayerNorm}(X + \text{MultiHead}(X))$）。而现代 LLM（如 LLaMA、Qwen 系列）普遍改用 **pre-LN**（先归一化、再做残差相加），并把 LayerNorm 换成**计算更省的 RMSNorm**（RMSNorm 省去了均值中心化与偏置项，只做均方根缩放，单层开销更小）。
 
-![图 6](./img/06-framework-prenorm-vs-postnorm.svg)
+![图 7](./img/transformer-07-framework-prenorm-vs-postnorm.svg)
 
-**图 6** post-LN 与 pre-LN：归一化与残差相加的先后顺序
+**图 7** post-LN 与 pre-LN：归一化与残差相加的先后顺序
 
 两者的差别只在 “先做哪一步”，但影响不小：post-LN 的残差通路上串联着归一化层，深层堆叠时梯度要连续穿过这些层，训练早期更不稳定，对学习率预热（warmup）的依赖也更明显；pre-LN 把归一化挪到子层之前，残差通路本身成为一条从输入直达输出的 “干净” 梯度通道，训练更稳定、可以少依赖甚至去掉学习率预热——这是深层堆叠能够成立的重要工程前提。现代 LLM 普遍选择 pre-LN，正是出于这层考虑。
 
@@ -429,15 +476,51 @@ FFN 对序列中的每个位置**独立**作用，且所有位置共享同一套
 
 自回归解码每生成一个 Token，都要把已有前缀重新过一遍注意力：若不使用缓存，第 $t$ 步需要把长度为 $t$ 的前缀整体重算。而前缀各位置的 $K$、$V$ 只取决于已生成的内容，生成之后便不再变化，因此可以把它们缓存下来。每步只为新 Token 计算一次 $K$、$V$，再与缓存的历史位置做一次注意力交互（第 $t$ 步为 $O(td)$，而不是 $O(t^2d)$）。KV Cache 并没有改变注意力的数学形式，它只是把 “重复计算” 换成了 “重复读取”。
 
+两者的差距可以直接用算术估出来。设当前前缀长度 $t = 8$、单头维度 $d = 64$：
+
+```python
+t, d = 8, 64
+
+# 无缓存：每一步都要重算前缀中每个位置的 K/V 投影，以及全部两两交互
+proj_no_cache = 2 * t * d      # K 与 V 两个投影张量
+attn_no_cache = 2 * t * t * d  # QK^T 与 (attn @ V) 两次矩阵乘
+
+# 有缓存：K/V 只在本步为新 token 计算一次，历史部分直接读缓存
+proj_with_cache = 2 * d
+attn_with_cache = 2 * t * d
+
+print(f"无缓存  投影 {proj_no_cache:5d}  注意力 {attn_no_cache:5d}")
+print(f"有缓存  投影 {proj_with_cache:5d}  注意力 {attn_with_cache:5d}")
+```
+
+输出是：
+
+```text
+无缓存  投影  1024  注意力  8192
+有缓存  投影   128  注意力  1024
+```
+
+投影开销从随 $t$ 线性增长降为常数，注意力交互从 $t^2$ 降为 $t$。前缀越长、序列越长，这个差距越大。
+
 顺带厘清三个常被混在一起的概念：**RoPE** 解决的是 “位置信息如何进入注意力分数”，**GQA** 解决的是 “缓存里要存几套 $K$、$V$”，**KV Cache** 解决的是 “推理时哪些 $K$、$V$ 可以复用”。三者作用在不同环节，可以同时使用而互不冲突——LLaMA 2 就是 RoPE + GQA + KV Cache 的组合。
 
 ## 典型变体
 
-原始 Transformer 是一个 Encoder-Decoder 的对称结构，主要面向机器翻译这类 “输入-输出” 任务。但实际工程中，更常见的做法是根据任务需求**只取 Encoder 或 Decoder 的一部分**。这种分化催生了现代 NLP 的三大主流架构。
+原始 Transformer 是一个 Encoder-Decoder 的对称结构，主要面向机器翻译这类 “输入-输出” 任务。但实际工程中，更常见的做法是根据任务需求**只取 Encoder 或 Decoder 的一部分**。这三种分化催生了现代 NLP 的三大主流架构。
+
+而架构的分化，很大程度上其实是**预训练目标**分化的直接投影：目标决定了模型 “看得到什么” 以及 “要预测什么”，进而决定了注意力的方向性与是否需要跨注意力子层。理解这一点，后面的三种架构就好记了。
+
+### 训练目标：三种自监督学习信号
+
+- **自回归语言建模（causal LM）**：给定前文预测下一个 token，损失为 $-\sum_t \log P(x_t \mid x_{<t})$。由于因果掩码的存在，一次前向传播就能同时得到所有位置的监督信号，训练并行度高；目标与生成任务天然对齐。代价是每个 token 只提供 1 个监督信号，数据利用率偏低。
+- **掩码语言建模（MLM）**：随机遮住一部分 token，让模型结合左右上下文补全。BERT 的标准做法是遮住 15% 的 token，其中 80% 换成 `[MASK]`、10% 换成随机 token、10% 保持原样（后两项是为了防止模型只学到 “[MASK] 一定要被还原” 这一捷径）。它能得到双向表示，但预训练时存在的 `[MASK]` 在下游推理中并不存在，形成预训练与微调之间的不一致。
+- **Span corruption（跨度破坏）**：遮住连续的一段文本并让模型还原整段，T5 采用这一方案（被遮部分用 `<extra_id_0>` 一类的哨兵 token 标记，遮蔽比例约 15%、平均跨度约 3 个 token）。相比逐 token 的 MLM，它更接近翻译、摘要这类 “整段生成” 的任务形态，同时保留了部分双向信息。
+
+三种目标与三种架构的对应关系因此很直接：**MLM 需要双向注意力 → Encoder-only；自回归需要因果掩码与逐 token 采样 → Decoder-only；span corruption 需要 “读懂输入、生成输出” → Encoder-Decoder**。理解这一点，就更容易明白为什么后来的 LLM 几乎都收敛到了 Decoder-only：自回归目标与生成任务对齐，且训练时能一次性并行计算整段序列的损失。
 
 ### BERT：仅编码器（Encoder-only）
 
-2018 年 Google 提出的 [BERT（arXiv:1810.04805）](https://arxiv.org/abs/1810.04805) 只使用了 Transformer 的 Encoder 部分。它在预训练阶段引入了两个自监督任务——**掩码语言模型（Masked Language Modeling, MLM）**和**下一句预测（Next Sentence Prediction, NSP）**。
+2018 年 Google 提出的 [BERT（arXiv:1810.04805）](https://arxiv.org/abs/1810.04805) 只使用了 Transformer 的 Encoder 部分。它在预训练阶段引入了两个自监督任务——**掩码语言模型（Masked Language Modeling, MLM）**和**下一句预测（Next Sentence Prediction, NSP）**（MLM 的具体做法见上文 “训练目标” 一节）。
 
 MLM 让模型学会 “双向” 理解上下文（既能看上文也能看下文），但代价是无法直接用于文本生成。BERT 架构特别适合需要 “理解” 的场景——文本分类、问答、命名实体识别、检索排序等。
 
@@ -465,9 +548,9 @@ MLM 让模型学会 “双向” 理解上下文（既能看上文也能看下�
 
 不过，原始 Transformer 还留下了一个著名的结构性瓶颈：**自注意力的计算量与显存占用都随序列长度 $n$ 呈平方增长**（注意力矩阵的规模是 $O(n^2)$）。当上下文从 2K 扩展到 128K 时，注意力矩阵的规模会膨胀约 4000 倍，这正是后来 Flash Attention、稀疏注意力、线性注意力等一系列工程与算法改进要解决的问题。
 
-![图 7](./img/07-framework-decoder-only-evolution.svg)
+![图 8](./img/transformer-08-framework-decoder-only-evolution.svg)
 
-**图 7** 从原始 Transformer 到现代 LLM：骨架未变，变的是规模与工程实现
+**图 8** 从原始 Transformer 到现代 LLM：骨架未变，变的是规模与工程实现
 
 理解了原始 Transformer 之后，我们就可以看清现代 LLM 的本质：**它们基本上都是 Decoder-only Transformer 的规模化与工程优化版本**。
 
@@ -519,8 +602,10 @@ GQA 则属于另一个维度：它既不改变注意力矩阵本身，也不改�
 - Dao, T., Fu, S., Fung, W. W., et al. (2022). *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135. <https://arxiv.org/abs/2205.14135>
 - Sennrich, R., Haddow, B., & Birch, A. (2016). *Neural Machine Translation of Rare Words with Subword Units*. ACL 2016 / arXiv:1508.07909. <https://arxiv.org/abs/1508.07909>
 - Google Research. *BERT: Tokenization*. BERT 官方仓库文档（WordPiece 分词算法的权威说明）. <https://github.com/google-research/bert/blob/master/README.md#tokenization>
+- Song, X., Salcianu, A., Song, Y., Dopson, D., & Zhou, D. (2021). *Fast WordPiece Tokenization*. EMNLP 2021 / arXiv:2012.15524. <https://aclanthology.org/2021.emnlp-main.160/>（预印本：<https://arxiv.org/abs/2012.15524>）
 - Kudo, T., & Richardson, J. (2018). *SentencePiece: A Simple and Language Independent Subword Tokenizer and Detokenizer for Neural Text Processing*. EMNLP 2018 System Demonstrations / <https://aclanthology.org/D18-2012/>
 - Radford, A., et al. (2019). *Language Models are Unsupervised Multitask Learners*. OpenAI Technical Report. <https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf>
+- OpenAI. *tiktoken*. GitHub 官方仓库（字节级 BPE 分词器的参考实现，本文分词粒度实测数据即由它产出）. <https://github.com/openai/tiktoken>
 - Beltagy, I., Peters, M. E., & Cohan, A. (2020). *Longformer: The Long-Document Transformer*. arXiv:2004.05150. <https://arxiv.org/abs/2004.05150>
 - Zaheer, M., et al. (2020). *Big Bird: Transformers for Longer Sequences*. NeurIPS 2020 / arXiv:2007.14062. <https://arxiv.org/abs/2007.14062>
 - Choromanski, K., et al. (2020). *Rethinking Attention with Performers*. ICLR 2021 / arXiv:2006.16684. <https://arxiv.org/abs/2006.16684>

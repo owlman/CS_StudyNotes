@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
-  <title>图 6　post-LN 与 pre-LN：归一化与残差相加的先后顺序</title>
+  <title>图 7　post-LN 与 pre-LN：归一化与残差相加的先后顺序</title>
   <desc>左栏为 post-LN（原论文）：残差相加后做归一化；右栏为 pre-LN（现代 LLM）：先归一化再做残差相加</desc>
   <defs>
     <marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
