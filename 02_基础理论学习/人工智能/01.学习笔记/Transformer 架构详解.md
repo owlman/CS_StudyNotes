@@ -99,7 +99,7 @@ $$
 
 下面，让我们根据上面这张图来逐步拆解这个计算式的具体语义。
 
-1. **相似度计算 $QK^\top$**：$QK^\top$ 的第 $i$ 行第 $j$ 列元素 $\langle q_i, k_j \rangle$ 表示 “位置 $i$ 的查询向量” 与 “位置 $j$ 的键向量” 之间的点积相似度。这一步相当于**让输入序列中的每个元素向所有元素发出查询，并接收所有元素返回的相关性分数**。为了方便理解，我们可以将这一过程想象成在图书馆找书。首先，我们会写下自己的需求（$q_i$），然后和图书馆所有书的索引标签（$k_j$）一一比对，看哪本书最相关。
+1. **相似度计算 $QK^\top$**：$QK^\top$ 的第 $i$ 行第 $j$ 列元素 $\langle q_i, k_j \rangle$ 表示 “位置 $i$ 的查询向量” 与 “位置 $j$ 的键向量” 之间的点积相似度。这一步相当于**让输入序列中的每个位置向所有位置发出查询，并接收所有元素返回的相关性分数**。为了方便理解，我们可以将这一过程想象成在图书馆找书。首先，我们会写下自己的需求（$q_i$），然后和图书馆所有书的索引标签（$k_j$）一一比对，看哪本书最相关。
 
 2. **缩放 $\frac{1}{\sqrt{d_k}}$**：直接用 $QK^\top$ 作为 softmax 的输入会出现一个问题：当 $d_k$ 较大时，点积的方差会随 $d_k$ 线性增长，导致 softmax 的输入值进入极端区间，**梯度变得极小**。除以 $\sqrt{d_k}$ 这一缩放操作正是为了控制点积的方差，使其无论 $d_k$ 多大都保持稳定的分布。这是 Transformer 训练稳定性的关键工程细节之一，**并非可省略的修饰**。
 
@@ -503,8 +503,32 @@ print(f"有缓存  投影 {proj_with_cache:5d}  注意力 {attn_with_cache:5d}")
 ### 训练目标：三种自监督学习信号
 
 - **自回归语言建模（causal LM）**：给定前文预测下一个 token，损失为 $-\sum_t \log P(x_t \mid x_{<t})$。由于因果掩码的存在，一次前向传播就能同时得到所有位置的监督信号，训练并行度高；目标与生成任务天然对齐。代价是每个 token 只提供 1 个监督信号，数据利用率偏低。
-- **掩码语言建模（MLM）**：随机遮住一部分 token，让模型结合左右上下文补全。BERT 的标准做法是遮住 15% 的 token，其中 80% 换成 `[MASK]`、10% 换成随机 token、10% 保持原样（后两项是为了防止模型只学到 “[MASK] 一定要被还原” 这一捷径）。它能得到双向表示，但预训练时存在的 `[MASK]` 在下游推理中并不存在，形成预训练与微调之间的不一致。
+- **掩码语言建模（MLM）**：随机遮住一部分 token，让模型结合左右上下文补全。BERT 的标准做法是遮住 15% 的 token，其中 80% 换成 `[MASK]`、10% 换成随机 token、10% 保持原样（后两项是为了防止模型只学到 “[MASK] 一定要被还原” 这一捷径）。它只在被遮住的位置上计算损失，且条件里同时含有左右两侧的可见 token，因此能得到双向表示；但预训练时存在的 `[MASK]` 在下游推理中并不存在，形成预训练与微调之间的不一致。
 - **Span corruption（跨度破坏）**：遮住连续的一段文本并让模型还原整段，T5 采用这一方案（被遮部分用 `<extra_id_0>` 一类的哨兵 token 标记，遮蔽比例约 15%、平均跨度约 3 个 token）。相比逐 token 的 MLM，它更接近翻译、摘要这类 “整段生成” 的任务形态，同时保留了部分双向信息。
+
+把三种目标的损失函数并排放在一起，差异会更直观。设序列为 $x_1, \dots, x_n$，$\mathcal{M}$ 为被遮住的位置集合、$\mathcal{U}$ 为其余可见位置：
+
+**自回归语言建模**：每个位置都预测下一个 token，
+
+$$
+\mathcal{L}_{\text{Causal}} = -\sum_{t=1}^{n} \log P(x_t \mid x_{<t})
+$$
+
+**掩码语言建模**：只在被遮住的位置上计算，条件是完整的可见上下文 $\mathcal{U}$（左右两侧都在内），
+
+$$
+\mathcal{L}_{\text{MLM}} = -\sum_{i \in \mathcal{M}} \log P(x_i \mid x_{\mathcal{U}})
+$$
+
+**Span corruption**：把一段连续 token 折叠成哨兵位置，预测的是整段内容，设哨兵位置集合为 $S$，
+
+$$
+\mathcal{L}_{\text{span}} = -\sum_{s \in S} \log P(\text{span}_s \mid x_{\setminus S})
+$$
+
+三者的差别可以归纳为两点：**监督信号打在哪里**（自回归是每个位置，MLM 是约 15% 的位置，span corruption 是少量哨兵位置）与 **条件里能看到什么**（自回归只能看过去，MLM 与 span corruption 能看两侧）。前者决定了并行度与数据效率，后者决定了注意力必须是因果的还是双向的——这正是三种目标与三种架构一一对应的原因。
+
+从监督信号密度的角度还可以补一句：在同等算力预算下，自回归目标的数据效率通常更高，而 span corruption 虽然信号密度最低，覆盖的上下文却最长。
 
 三种目标与三种架构的对应关系因此很直接：**MLM 需要双向注意力 → Encoder-only；自回归需要因果掩码与逐 token 采样 → Decoder-only；span corruption 需要 “读懂输入、生成输出” → Encoder-Decoder**。理解这一点，就更容易明白为什么后来的 LLM 几乎都收敛到了 Decoder-only：自回归目标与生成任务对齐，且训练时能一次性并行计算整段序列的损失。
 
@@ -552,6 +576,12 @@ MLM 让模型学会 “双向” 理解上下文（既能看上文也能看下�
 - GQA 的收益要看清楚它省的是哪一部分：例如 8 个查询头分成 2 组、各组共享一套 $K$、$V$ 时，在序列长度、头维与精度相同的前提下，KV Cache 的数据量约为 MHA（8 套 $K$/$V$）的 $1/4$。需要注意的是，这说的是**缓存部分**的开销，并不意味着整个模型的显存占用也降到 $1/4$。
 - [Flash Attention](https://arxiv.org/abs/2205.14135)（分块计算）：把注意力矩阵切成小块（tiling）分块计算，并在分块之间重算中间结果，从而避免在显存中物化完整的注意力矩阵；注意力结果在数学上仍是精确的，只是改变了计算与访存的组织方式。
 
+Flash Attention 的收益来自对 **IO 复杂度** 的重新分析。设序列长度为 $n$、单个头的维度为 $d_k$、片上 SRAM 容量为 $M$（按元素个数计）。标准注意力必须把 $n \times n$ 的注意力分数矩阵写回 HBM 再读出来，HBM 访问量的下界是 $\Omega(n d_k + n^2)$；FlashAttention 把整个矩阵始终留在 SRAM 内分块复用，只把 $Q$、$K$、$V$ 与输出流式地读入读出，HBM 访问量降为 $O(n^2 d_k^2 / M)$。
+
+论文还给出了一个下界证明：在一定 SRAM 容量区间内，任何精确注意力算法都无法再降低 HBM 访问次数，FlashAttention 在该区间内就是最优的。
+
+这就是它 “不改变数学、只改变访存组织” 却被主流实现广泛采纳的原因——**算得更快这件事本身，很大程度上取决于数据怎么在显存层级之间搬运**。注意表 4 中 Flash Attention 的时间复杂度仍是 $O(n^2 d)$：它优化的是访存而非计算量本身，所以加速幅度取决于具体硬件的显存带宽与算力之比。
+
 前面提到的几条改进路线，其实解决的是不同层面的问题。把它们放进一张表里对照，会更清楚：
 
 | 变体 | 核心思路 | 注意力矩阵 | 时间复杂度 | 显存占用 | 结果是否精确 |
@@ -580,27 +610,27 @@ GQA 则属于另一个维度：它既不改变注意力矩阵本身，也不改�
 
 ## 参考资料
 
-- Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). *Attention Is All You Need*. NeurIPS 2017 / arXiv:1706.03762. <https://arxiv.org/abs/1706.03762>
-- Bahdanau, D., Cho, K., & Bengio, Y. (2015). *Neural Machine Translation by Jointly Learning to Align and Translate*. ICLR 2015 / arXiv:1409.0473. <https://arxiv.org/abs/1409.0473>
-- Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. NAACL 2019 / arXiv:1810.04805. <https://arxiv.org/abs/1810.04805>
+- Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). *Attention Is All You Need*. NeurIPS 2017 / arXiv:1706.03762. <https://arxiv.org/abs/1706.03762>（DOI: 10.48550/arXiv.1706.03762）
+- Bahdanau, D., Cho, K., & Bengio, Y. (2015). *Neural Machine Translation by Jointly Learning to Align and Translate*. ICLR 2015 / arXiv:1409.0473. <https://arxiv.org/abs/1409.0473>（DOI: 10.48550/arXiv.1409.0473）
+- Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. NAACL 2019 / arXiv:1810.04805. <https://arxiv.org/abs/1810.04805>（DOI: 10.18653/v1/N19-1423）
 - Radford, A., Narasimhan, K., Salimans, T., & Sutskever, I. (2018). *Improving Language Understanding by Generative Pre-Training*. OpenAI Technical Report. <https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf>
-- Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). *Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer*. JMLR 21(140) / arXiv:1910.10683. <https://arxiv.org/abs/1910.10683>（正式版：<https://jmlr.org/papers/v21/20-074.html>）
-- Su, J., Lu, Y., Pan, S., Bozeněc, A., et al. (2021). *RoFormer: Enhanced Transformer with Rotary Position Embedding*. arXiv:2104.09864. <https://arxiv.org/abs/2104.09864>
-- Press, O., Smith, N. A., & Lewis, M. (2022). *Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation* (ALiBi). ICLR 2022 / arXiv:2108.12409. <https://arxiv.org/abs/2108.12409>
-- Shazeer, N. (2020). *GLU Variants Improve Transformer* (SwiGLU). arXiv:2002.05202. <https://arxiv.org/abs/2002.05202>
-- Ainslie, J., Zhao, T., Onural, S., et al. (2023). *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*. EMNLP 2023 / arXiv:2305.13245. <https://arxiv.org/abs/2305.13245>
-- Dao, T., Fu, S., Fung, W. W., et al. (2022). *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135. <https://arxiv.org/abs/2205.14135>
-- Sennrich, R., Haddow, B., & Birch, A. (2016). *Neural Machine Translation of Rare Words with Subword Units*. ACL 2016 / arXiv:1508.07909. <https://arxiv.org/abs/1508.07909>
+- Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). *Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer*. JMLR 21(140) / arXiv:1910.10683. <https://arxiv.org/abs/1910.10683>（正式版：<https://jmlr.org/papers/v21/20-074.html>）（DOI: 10.48550/arXiv.1910.10683；JMLR 版无 DOI）
+- Su, J., Lu, Y., Pan, S., Bozeněc, A., et al. (2021). *RoFormer: Enhanced Transformer with Rotary Position Embedding*. arXiv:2104.09864. <https://arxiv.org/abs/2104.09864>（DOI: 10.48550/arXiv.2104.09864；期刊版 Neurocomputing 2024, DOI: 10.1016/j.neucom.2023.127063）
+- Press, O., Smith, N. A., & Lewis, M. (2022). *Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation* (ALiBi). ICLR 2022 / arXiv:2108.12409. <https://arxiv.org/abs/2108.12409>（DOI: 10.48550/arXiv.2108.12409）
+- Shazeer, N. (2020). *GLU Variants Improve Transformer* (SwiGLU). arXiv:2002.05202. <https://arxiv.org/abs/2002.05202>（DOI: 10.48550/arXiv.2002.05202）
+- Ainslie, J., Zhao, T., Onural, S., et al. (2023). *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*. EMNLP 2023 / arXiv:2305.13245. <https://arxiv.org/abs/2305.13245>（DOI: 10.18653/v1/2023.emnlp-main.298）
+- Dao, T., Fu, S., Fung, W. W., et al. (2022). *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135. <https://arxiv.org/abs/2205.14135>（DOI: 10.52202/068431-1189）
+- Sennrich, R., Haddow, B., & Birch, A. (2016). *Neural Machine Translation of Rare Words with Subword Units*. ACL 2016 / arXiv:1508.07909. <https://arxiv.org/abs/1508.07909>（DOI: 10.18653/v1/P16-1162）
 - Google Research. *BERT: Tokenization*. BERT 官方仓库文档（WordPiece 分词算法的权威说明）. <https://github.com/google-research/bert/blob/master/README.md#tokenization>
-- Song, X., Salcianu, A., Song, Y., Dopson, D., & Zhou, D. (2021). *Fast WordPiece Tokenization*. EMNLP 2021 / arXiv:2012.15524. <https://aclanthology.org/2021.emnlp-main.160/>（预印本：<https://arxiv.org/abs/2012.15524>）
-- Kudo, T., & Richardson, J. (2018). *SentencePiece: A Simple and Language Independent Subword Tokenizer and Detokenizer for Neural Text Processing*. EMNLP 2018 System Demonstrations / <https://aclanthology.org/D18-2012/>
+- Song, X., Salcianu, A., Song, Y., Dopson, D., & Zhou, D. (2021). *Fast WordPiece Tokenization*. EMNLP 2021 / arXiv:2012.15524. <https://aclanthology.org/2021.emnlp-main.160/>（预印本：<https://arxiv.org/abs/2012.15524>）（DOI: 10.18653/v1/2021.emnlp-main.160；预印本 DOI: 10.48550/arXiv.2012.15524）
+- Kudo, T., & Richardson, J. (2018). *SentencePiece: A Simple and Language Independent Subword Tokenizer and Detokenizer for Neural Text Processing*. EMNLP 2018 System Demonstrations / <https://aclanthology.org/D18-2012/>（DOI: 10.18653/v1/D18-2012）
 - Radford, A., et al. (2019). *Language Models are Unsupervised Multitask Learners*. OpenAI Technical Report. <https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf>
 - OpenAI. *tiktoken*. GitHub 官方仓库（字节级 BPE 分词器的参考实现，本文分词粒度实测数据即由它产出）. <https://github.com/openai/tiktoken>
-- Beltagy, I., Peters, M. E., & Cohan, A. (2020). *Longformer: The Long-Document Transformer*. arXiv:2004.05150. <https://arxiv.org/abs/2004.05150>
-- Zaheer, M., et al. (2020). *Big Bird: Transformers for Longer Sequences*. NeurIPS 2020 / arXiv:2007.14062. <https://arxiv.org/abs/2007.14062>
-- Choromanski, K., et al. (2020). *Rethinking Attention with Performers*. ICLR 2021 / arXiv:2006.16684. <https://arxiv.org/abs/2006.16684>
-- Wang, S., Li, B. Z., Khabsa, M., Fang, H., & Jin, H. (2020). *Linformer: Self-Attention with Linear Complexity*. arXiv:2006.04768. <https://arxiv.org/abs/2006.04768>
-- Dao, T. (2023). *FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning*. arXiv:2307.08691. <https://arxiv.org/abs/2307.08691>
-- Touvron, H., et al. (2023). *Llama 2: Open Foundation and Fine-Tuned Chat Models*. arXiv:2307.09288. <https://arxiv.org/abs/2307.09288>
-- Dubey, S., et al. (2024). *The Llama 3 Herd of Models*. arXiv:2407.21783. <https://arxiv.org/abs/2407.21783>
-- Yuan, H., et al. (2025). *Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention*. arXiv:2412.06964. <https://arxiv.org/abs/2412.06964>
+- Beltagy, I., Peters, M. E., & Cohan, A. (2020). *Longformer: The Long-Document Transformer*. arXiv:2004.05150. <https://arxiv.org/abs/2004.05150>（DOI: 10.48550/arXiv.2004.05150）
+- Zaheer, M., et al. (2020). *Big Bird: Transformers for Longer Sequences*. NeurIPS 2020 / arXiv:2007.14062. <https://arxiv.org/abs/2007.14062>（DOI: 10.48550/arXiv.2007.14062）
+- Choromanski, K., Likhosherstov, V., Dohan, D., Song, X., Gane, A., & Sarlos, T. (2020). *Rethinking Attention with Performers*. ICLR 2021 / arXiv:2009.14794. <https://arxiv.org/abs/2009.14794>（DOI: 10.48550/arXiv.2009.14794）
+- Wang, S., Li, B. Z., Khabsa, M., Fang, H., & Jin, H. (2020). *Linformer: Self-Attention with Linear Complexity*. arXiv:2006.04768. <https://arxiv.org/abs/2006.04768>（DOI: 10.48550/arXiv.2006.04768）
+- Dao, T. (2023). *FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning*. arXiv:2307.08691. <https://arxiv.org/abs/2307.08691>（DOI: 10.48550/arXiv.2307.08691）
+- Touvron, H., et al. (2023). *Llama 2: Open Foundation and Fine-Tuned Chat Models*. arXiv:2307.09288. <https://arxiv.org/abs/2307.09288>（DOI: 10.48550/arXiv.2307.09288）
+- Dubey, S., et al. (2024). *The Llama 3 Herd of Models*. arXiv:2407.21783. <https://arxiv.org/abs/2407.21783>（DOI: 10.48550/arXiv.2407.21783）
+- Yuan, J., Gao, H., Dai, D., et al. (2025). *Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention*. arXiv:2502.11089. <https://arxiv.org/abs/2502.11089>（DOI: 10.48550/arXiv.2502.11089）
