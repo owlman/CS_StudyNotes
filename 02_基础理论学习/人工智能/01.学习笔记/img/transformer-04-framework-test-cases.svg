@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
+  <title>图 4　配套代码的实测结果：10 个用例全部通过，300 步训练 loss 3.46 → 0.002</title>
+  <desc>左侧为 tests/test_transformer_minimal.py 的 10 个用例逐条通过；右侧为 demo_train.py 训练 300 步的 loss 下降曲线（对数纵轴）</desc>
+  <defs>
+    <marker id="arwO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/></marker>
+    <marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5A8AAA"/></marker>
+  </defs>
+  <rect width="1600" height="900" fill="#F5E6C8"/>
+  <text x="800" y="66" font-size="40" font-weight="700" text-anchor="middle" fill="#6B4423">配套代码实测：10 个用例全部通过，300 步训练 loss 3.46 → 0.002</text>
+  <line x1="520" y1="88" x2="1080" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="122" font-size="22" text-anchor="middle" fill="#8B6F47">CPU 环境、无 GPU：全部验证均可复现</text>
+  <rect x="60" y="160" width="740" height="660" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="430" y="204" font-size="26" font-weight="700" text-anchor="middle" fill="#5A8AAA">tests/test_transformer_minimal.py</text>
+  <text x="430" y="238" font-size="20" text-anchor="middle" fill="#8A6A4F">10 / 10 PASS</text>
+  <circle cx="121" cy="280" r="11" fill="#7A8C6F"/>
+  <path d="M 114 280 L 119 285 L 129 273" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="286" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_causality</text>
+  <text x="782" y="286" font-size="16" fill="#8A6A4F" text-anchor="end">因果性正确</text>
+  <circle cx="121" cy="332" r="11" fill="#7A8C6F"/>
+  <path d="M 114 332 L 119 337 L 129 325" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="338" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_dropout_and_determinism</text>
+  <text x="782" y="338" font-size="16" fill="#8A6A4F" text-anchor="end">推理态确定</text>
+  <circle cx="121" cy="384" r="11" fill="#7A8C6F"/>
+  <path d="M 114 384 L 119 389 L 129 377" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="390" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_gqa_group_mapping</text>
+  <text x="782" y="390" font-size="16" fill="#8A6A4F" text-anchor="end">GQA 分组正确</text>
+  <circle cx="121" cy="436" r="11" fill="#7A8C6F"/>
+  <path d="M 114 436 L 119 441 L 129 429" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="442" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_gqa_kv_cache_shares_kv</text>
+  <text x="782" y="442" font-size="16" fill="#8A6A4F" text-anchor="end">组内共享 K/V</text>
+  <circle cx="121" cy="488" r="11" fill="#7A8C6F"/>
+  <path d="M 114 488 L 119 493 L 129 481" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="494" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_kv_cache_consistency</text>
+  <text x="782" y="494" font-size="16" fill="#8A6A4F" text-anchor="end">缓存与全量一致</text>
+  <circle cx="121" cy="540" r="11" fill="#7A8C6F"/>
+  <path d="M 114 540 L 119 545 L 129 533" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="546" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_mini_gpt_forward_and_generate</text>
+  <text x="782" y="546" font-size="16" fill="#8A6A4F" text-anchor="end">最小 LM 可生成</text>
+  <circle cx="121" cy="592" r="11" fill="#7A8C6F"/>
+  <path d="M 114 592 L 119 597 L 129 585" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="598" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_mini_gpt_kv_cache_matches_full_forward</text>
+  <text x="782" y="598" font-size="16" fill="#8A6A4F" text-anchor="end">整模型缓存一致</text>
+  <circle cx="121" cy="644" r="11" fill="#7A8C6F"/>
+  <path d="M 114 644 L 119 649 L 129 637" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="650" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_padding_mask</text>
+  <text x="782" y="650" font-size="16" fill="#8A6A4F" text-anchor="end">填充位被屏蔽</text>
+  <circle cx="121" cy="696" r="11" fill="#7A8C6F"/>
+  <path d="M 114 696 L 119 701 L 129 689" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="702" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_rope_relative_property</text>
+  <text x="782" y="702" font-size="16" fill="#8A6A4F" text-anchor="end">仅依赖相对位置</text>
+  <circle cx="121" cy="748" r="11" fill="#7A8C6F"/>
+  <path d="M 114 748 L 119 753 L 129 741" stroke="#FFF8E8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="754" font-size="18" fill="#6B4423" font-family="'Consolas', 'Menlo', monospace">test_shape_preservation</text>
+  <text x="782" y="754" font-size="16" fill="#8A6A4F" text-anchor="end">形状守恒</text>
+  <rect x="840" y="160" width="700" height="660" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1190" y="204" font-size="26" font-weight="700" text-anchor="middle" fill="#D97A47">demo_train.py --steps 300</text>
+  <text x="1190" y="238" font-size="19" text-anchor="middle" fill="#8A6A4F">词表 31 · 样本 30 · 序列长 32 · 参数量 101,760</text>
+  <line x1="920" y1="690" x2="1470" y2="690" stroke="#5A8AAA" stroke-width="2.5" marker-end="url(#arwB)"/>
+  <line x1="920" y1="690" x2="920" y2="300" stroke="#5A8AAA" stroke-width="2.5" marker-end="url(#arwB)"/>
+  <text x="1195" y="758" font-size="19" text-anchor="middle" fill="#8A6A4F">训练步数 step</text>
+  <text x="862" y="495" font-size="19" text-anchor="middle" fill="#8A6A4F" transform="rotate(-90 862 495)">loss（对数刻度）</text>
+  <line x1="920" y1="605.8" x2="1470" y2="605.8" stroke="#5A8AAA" stroke-width="1" stroke-dasharray="6 8" opacity="0.45"/>
+  <text x="908" y="612.8" font-size="17" text-anchor="end" fill="#8A6A4F">0.01</text>
+  <line x1="920" y1="485.4" x2="1470" y2="485.4" stroke="#5A8AAA" stroke-width="1" stroke-dasharray="6 8" opacity="0.45"/>
+  <text x="908" y="492.4" font-size="17" text-anchor="end" fill="#8A6A4F">0.1</text>
+  <line x1="920" y1="365.0" x2="1470" y2="365.0" stroke="#5A8AAA" stroke-width="1" stroke-dasharray="6 8" opacity="0.45"/>
+  <text x="908" y="372.0" font-size="17" text-anchor="end" fill="#8A6A4F">1.0</text>
+  <line x1="920" y1="307.5" x2="1470" y2="307.5" stroke="#5A8AAA" stroke-width="1" stroke-dasharray="6 8" opacity="0.45"/>
+  <text x="908" y="314.5" font-size="17" text-anchor="end" fill="#8A6A4F">3.0</text>
+  <line x1="920.0" y1="690" x2="920.0" y2="698" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="920.0" y="722" font-size="17" text-anchor="middle" fill="#8A6A4F">1</text>
+  <line x1="1010.1" y1="690" x2="1010.1" y2="698" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="1010.1" y="722" font-size="17" text-anchor="middle" fill="#8A6A4F">50</text>
+  <line x1="1102.1" y1="690" x2="1102.1" y2="698" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="1102.1" y="722" font-size="17" text-anchor="middle" fill="#8A6A4F">100</text>
+  <line x1="1194.1" y1="690" x2="1194.1" y2="698" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="1194.1" y="722" font-size="17" text-anchor="middle" fill="#8A6A4F">150</text>
+  <line x1="1286.1" y1="690" x2="1286.1" y2="698" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="1286.1" y="722" font-size="17" text-anchor="middle" fill="#8A6A4F">200</text>
+  <line x1="1378.0" y1="690" x2="1378.0" y2="698" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="1378.0" y="722" font-size="17" text-anchor="middle" fill="#8A6A4F">250</text>
+  <line x1="1470.0" y1="690" x2="1470.0" y2="698" stroke="#5A8AAA" stroke-width="2"/>
+  <text x="1470.0" y="722" font-size="17" text-anchor="middle" fill="#8A6A4F">300</text>
+  <polyline points="920.0,300.0 1010.1,308.1 1102.1,466.9 1194.1,609.1 1286.1,644.2 1378.0,667.1 1470.0,685.0" fill="none" stroke="#D97A47" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="920.0" cy="300.0" r="6" fill="#D97A47"/>
+  <circle cx="1010.1" cy="308.1" r="6" fill="#D97A47"/>
+  <circle cx="1102.1" cy="466.9" r="6" fill="#D97A47"/>
+  <circle cx="1194.1" cy="609.1" r="6" fill="#D97A47"/>
+  <circle cx="1286.1" cy="644.2" r="6" fill="#D97A47"/>
+  <circle cx="1378.0" cy="667.1" r="6" fill="#D97A47"/>
+  <circle cx="1470.0" cy="685.0" r="6" fill="#D97A47"/>
+  <text x="934.0" y="286.0" font-size="19" font-weight="700" fill="#D97A47">3.4623</text>
+  <text x="1462.0" y="667.0" font-size="19" font-weight="700" text-anchor="end" fill="#D97A47">0.0022</text>
+  <text x="1195" y="790" font-size="19" text-anchor="middle" fill="#6B4423">训练耗时约 2 秒（CPU），模型稳定复现语料模式</text>
+</svg>
