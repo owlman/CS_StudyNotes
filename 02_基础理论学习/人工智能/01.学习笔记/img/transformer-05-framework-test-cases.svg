@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
-  <title>图 4　配套代码的实测结果：10 个用例全部通过，300 步训练 loss 3.46 → 0.002</title>
+  <title>图 5　配套代码的实测结果：10 个用例全部通过，300 步训练 loss 3.46 → 0.002</title>
   <desc>左侧为 tests/test_transformer_minimal.py 的 10 个用例逐条通过；右侧为 demo_train.py 训练 300 步的 loss 下降曲线（对数纵轴）</desc>
   <defs>
     <marker id="arwO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/></marker>

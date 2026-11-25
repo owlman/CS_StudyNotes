@@ -153,7 +153,7 @@ $$
 
 ### 最小实现示范（PyTorch）
 
-如果我们将上面的公式翻译成具体的 Python 代码，就会发现它的核心部分其实只有二十多行。下面这段实现的是 **仅解码器模型（Decoder-only LLM）里最常见的因果掩码多头自注意力**（对应后文图 6 中 Decoder 的第一个子层）：
+如果我们将上面的公式翻译成具体的 Python 代码，就会发现它的核心部分其实只有二十多行。下面这段实现的是 **仅解码器模型（Decoder-only LLM）里最常见的因果掩码多头自注意力**（对应后文图 7 中 Decoder 的第一个子层）：
 
 ```python
 import math
@@ -212,9 +212,9 @@ class MultiHeadSelfAttention(nn.Module):
 
 在这个项目中，我为上一节演示的最小实现补齐了之前被刻意省略的**Padding Mask**、**Attention Dropout**、**KV Cache**这三个工程必备项，并把稍后会提到的 **RoPE**、**GQA**、**RMSNorm**、**SwiGLU** 做成了可选开关（`use_rope`、`n_kv_head`、`norm="rms"`、`swiglu=True`）。然后，该项目在我这台计算机（ASUS NUC 14 Pro）上的执行结果是：CPU 上约 2 秒完成 300 步训练，loss 从 3.46 降到 0.002，模型能稳定复现语料模式；10 个测试用例全部通过，具体如图 4 所示。
 
-![图 4](./img/transformer-04-framework-test-cases.svg)
+![图 4](./img/transformer-04-framework-test-cases.png)
 
-**图 4** 笔记配套代码的实测结果
+**图 4** 配套代码在 ASUS NUC 14 Pro 上的执行结果
 
 在这里，有几处容易写错、也最值得对照代码细看的地方需要特别留意，它们分别是：
 
@@ -223,7 +223,13 @@ class MultiHeadSelfAttention(nn.Module):
 - **GQA 的广播方向**：应把 KV 头复制到查询头（查询头 `i` 用 KV 头 `i // (h/h_kv)`），而不是把组内查询头求和——后者等价于 MQA，语义不同；
 - **RoPE 只能对原始 Q/K 施加一次**：对已旋转的张量再次旋转得到的不是位置平移结果。
 
-关于 KV Cache 在推理链路中的实际位置与性能影响，可参见《[[LLM 的部署与测试]]》。
+上面这四个易错点，只是 10 个用例覆盖范围的一部分。在这里，我们可以把整套用例整理成一张对照表（见图 5），每个用例验证什么、300 步训练的 loss 如何收敛，就一目了然了。
+
+![图 5](./img/transformer-05-framework-test-cases.svg)
+
+**图 5** 配套代码的实测汇总
+
+请注意，以上这些并不是抽象的提醒，而是各自对应到了测试用例中的一条断言——包括因果掩码的方向、KV Cache 下的位置偏移、GQA 的广播方向，都被逐条钉死。另外，关于 KV Cache 在推理链路中的实际位置与性能影响，我也将会在《[[LLM 的部署与测试]]》这篇笔记中展开讨论。
 
 ## 位置编码
 
@@ -245,9 +251,9 @@ $$
 
 其中 $pos$ 是位置索引，$i$ 是维度索引，$d$ 是嵌入维度。分母中的 $10000^{2i/d}$ 使得**不同维度承载不同频率的波形**：低维频率高、波长短，负责区分邻近位置；高维频率低、波长长，负责编码较远处的绝对位置。
 
-![图 5](./img/transformer-05-infographic-positional-encoding.svg)
+![图 6](./img/transformer-06-infographic-positional-encoding.svg)
 
-**图 5** 正弦位置编码：不同维度承载不同频率
+**图 6** 正弦位置编码：不同维度承载不同频率
 
 这种设计的两个核心优势是：
 
@@ -274,9 +280,9 @@ RoPE 虽然在原理上支持外推，直接外推却常常失败：位置变大
 
 把前面讨论的所有组件拼起来，我们就得到了原始 Transformer 的完整架构。它由 **Encoder** 和 **Decoder** 两部分组成，每部分各包含若干个相同的 “块（Block）”。
 
-![图 6](./img/transformer-06-framework-transformer-architecture.svg)
+![图 7](./img/transformer-07-framework-transformer-architecture.svg)
 
-**图 6** 原始 Transformer 的整体结构
+**图 7** 原始 Transformer 的整体结构
 
 | 配置项 | 取值 | 说明 |
 |---|---|---|
@@ -365,9 +371,9 @@ tensor([[1.0000, 0.0000, 0.0000, 0.0000],
 
 这里还有一个容易被忽略的细节。原论文采用的是 **post-LN**（先做残差相加、再做归一化，即上面写出的 $X' = \text{LayerNorm}(X + \text{MultiHead}(X))$）。而现代 LLM（如 LLaMA、Qwen 系列）普遍改用 **pre-LN**（先归一化、再做残差相加），并把 LayerNorm 换成**计算更省的 RMSNorm**（RMSNorm 省去了均值中心化与偏置项，只做均方根缩放，单层开销更小）。
 
-![图 7](./img/transformer-07-framework-prenorm-vs-postnorm.svg)
+![图 8](./img/transformer-08-framework-prenorm-vs-postnorm.svg)
 
-**图 7** post-LN 与 pre-LN：归一化与残差相加的先后顺序
+**图 8** post-LN 与 pre-LN：归一化与残差相加的先后顺序
 
 两者的差别只在 “先做哪一步”，但影响不小：post-LN 的残差通路上串联着归一化层，深层堆叠时梯度要连续穿过这些层，训练早期更不稳定，对学习率预热（warmup）的依赖也更明显；pre-LN 把归一化挪到子层之前，残差通路本身成为一条从输入直达输出的 “干净” 梯度通道，训练更稳定、可以少依赖甚至去掉学习率预热——这是深层堆叠能够成立的重要工程前提。现代 LLM 普遍选择 pre-LN，正是出于这层考虑。
 
@@ -574,9 +580,9 @@ MLM 让模型学会 “双向” 理解上下文（既能看上文也能看下�
 
 不过，原始 Transformer 还留下了一个著名的结构性瓶颈：**自注意力的计算量与显存占用都随序列长度 $n$ 呈平方增长**（注意力矩阵的规模是 $O(n^2)$）。当上下文从 2K 扩展到 128K 时，注意力矩阵的规模会膨胀约 4000 倍，这正是后来 Flash Attention、稀疏注意力、线性注意力等一系列工程与算法改进要解决的问题。
 
-![图 8](./img/transformer-08-framework-decoder-only-evolution.svg)
+![图 9](./img/transformer-09-framework-decoder-only-evolution.svg)
 
-**图 8** 从原始 Transformer 到现代 LLM：骨架未变，变的是规模与工程实现
+**图 9** 从原始 Transformer 到现代 LLM：骨架未变，变的是规模与工程实现
 
 理解了原始 Transformer 之后，我们就可以看清现代 LLM 的本质：**它们基本上都是 Decoder-only Transformer 的规模化与工程优化版本**。
 
