@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
-  <title>图 9　从原始 Transformer 到现代 LLM</title>
+  <title>图 7　从原始 Transformer 到现代 LLM</title>
   <desc>原始 Transformer 的 Encoder-Decoder 双塔分化为 BERT、GPT、T5 三种变体，其中 Decoder-only 一路演化为现代大语言模型</desc>
   <defs>
     <marker id="arw6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">

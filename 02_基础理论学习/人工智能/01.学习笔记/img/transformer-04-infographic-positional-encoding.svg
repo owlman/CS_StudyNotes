@@ -5,7 +5,7 @@
     </marker>
   </defs>
   <rect width="1600" height="900" fill="#F5E6C8"/>
-  <title>图 6　正弦与余弦位置编码：偶数维取 sin，奇数维取 cos</title>
+  <title>图 4　正弦与余弦位置编码：偶数维取 sin，奇数维取 cos</title>
   <desc>正弦与余弦位置编码：左图为偶数维的 sin 曲线族，右图为奇数维的 cos 曲线族，两者同频但相差四分之一周期</desc>
   <text x="800" y="66" font-size="40" font-weight="700" text-anchor="middle" fill="#6B4423">正弦与余弦位置编码：偶数维取 sin，奇数维取 cos</text>
   <line x1="560" y1="88" x2="1040" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
