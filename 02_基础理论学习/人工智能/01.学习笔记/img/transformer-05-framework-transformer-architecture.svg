@@ -1,60 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif">
-  <title>图 5　原始 Transformer 的整体结构</title>
-  <desc>原始 Transformer 的整体结构</desc>
+  <title>图 5　按照 Transformer 的原始定义实现的模型训练架构</title>
+  <desc>原始 Transformer 的模型训练架构：编码器与解码器双塔，编码器含多头自注意力与前馈网络，解码器另含编码器-解码器跨注意力。</desc>
   <defs>
     <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#D97A47"/>
     </marker>
   </defs>
   <rect width="1600" height="900" fill="#F5E6C8"/>
-  <text x="800" y="66" font-size="42" font-weight="700" text-anchor="middle" fill="#6B4423">原始 Transformer 的整体结构</text>
-  <line x1="600" y1="88" x2="1000" y2="88" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
-  <text x="800" y="122" font-size="22" text-anchor="middle" fill="#8B6F47">Encoder-Decoder 双塔 + 残差与层归一化</text>
-  <text x="350" y="152" font-size="28" font-weight="700" text-anchor="middle" fill="#5A8AAA">Encoder × 6</text>
-  <rect x="120" y="180" width="460" height="110" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
-  <text x="350" y="218" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
-  <text x="350" y="242" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
-  <text x="350" y="270" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward</text>
-  <line x1="350" y1="292" x2="350" y2="318" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <rect x="120" y="320" width="460" height="110" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
-  <text x="350" y="358" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
-  <text x="350" y="382" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
-  <text x="350" y="410" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward</text>
-  <line x1="350" y1="432" x2="350" y2="458" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <rect x="120" y="460" width="460" height="110" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
-  <text x="350" y="498" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
-  <text x="350" y="522" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
-  <text x="350" y="550" font-size="22" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward</text>
-  <rect x="120" y="620" width="460" height="70" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
-  <text x="350" y="663" font-size="24" text-anchor="middle" fill="#6B4423">Embedding + 位置编码</text>
-  <line x1="350" y1="600" x2="350" y2="616" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <rect x="120" y="720" width="460" height="60" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
-  <text x="350" y="758" font-size="23" text-anchor="middle" fill="#6B4423">源句子</text>
-  <line x1="350" y1="690" x2="350" y2="716" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <text x="1200" y="152" font-size="28" font-weight="700" text-anchor="middle" fill="#D97A47">Decoder × 6</text>
-  <rect x="920" y="180" width="560" height="110" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
-  <text x="1200" y="216" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
-  <text x="1200" y="240" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
-  <text x="1200" y="268" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（K、V 来自 Encoder）</text>
-  <line x1="1200" y1="292" x2="1200" y2="318" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <rect x="920" y="320" width="560" height="110" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
-  <text x="1200" y="356" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
-  <text x="1200" y="380" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
-  <text x="1200" y="408" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（K、V 来自 Encoder）</text>
-  <line x1="1200" y1="432" x2="1200" y2="458" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <rect x="920" y="460" width="560" height="110" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
-  <text x="1200" y="496" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
-  <text x="1200" y="520" font-size="17" text-anchor="middle" fill="#8B6F47">残差 + LayerNorm</text>
-  <text x="1200" y="548" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（K、V 来自 Encoder）</text>
-  <rect x="920" y="620" width="560" height="70" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
-  <text x="1200" y="663" font-size="24" text-anchor="middle" fill="#6B4423">Embedding + 位置编码</text>
-  <line x1="1200" y1="600" x2="1200" y2="616" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <rect x="920" y="720" width="560" height="60" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
-  <text x="1200" y="758" font-size="23" text-anchor="middle" fill="#6B4423">目标句子（自回归，右移一位）</text>
-  <line x1="1200" y1="690" x2="1200" y2="716" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <rect x="920" y="805" width="560" height="65" rx="14" fill="#FBE7D8" stroke="#D97A47" stroke-width="3"/>
-  <text x="1200" y="847" font-size="23" text-anchor="middle" fill="#6B4423">Linear + Softmax → 词表概率分布</text>
-  <path d="M 585 235 C 700 190 820 205 912 240" fill="none" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
-  <text x="748" y="180" font-size="20" text-anchor="middle" fill="#7A8C6F">Encoder 输出作为 K、V</text>
-  <text x="800" y="895" font-size="20" text-anchor="middle" fill="#8B6F47" font-style="italic">每个 Block 均含残差连接与层归一化</text>
+  <text x="800" y="58" font-size="38" font-weight="700" text-anchor="middle" fill="#6B4423">图 5　按照 Transformer 的原始定义实现的模型训练架构</text>
+  <line x1="700" y1="82" x2="900" y2="82" stroke="#D97A47" stroke-width="3" stroke-linecap="round"/>
+  <text x="800" y="112" font-size="20" text-anchor="middle" fill="#8B6F47">编码器（Encoder）与解码器（Decoder）双塔 + 残差连接与层归一化</text>
+  <text x="350" y="148" font-size="26" font-weight="700" text-anchor="middle" fill="#5A8AAA">Encoder（堆叠 N 层）</text>
+  <rect x="120" y="170" width="460" height="118" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="350" y="206" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
+  <text x="350" y="230" font-size="16" text-anchor="middle" fill="#8B6F47">残差连接 + LayerNorm</text>
+  <text x="350" y="260" font-size="20" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward Network（FFN）</text>
+  <rect x="120" y="300" width="460" height="118" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="350" y="336" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
+  <text x="350" y="360" font-size="16" text-anchor="middle" fill="#8B6F47">残差连接 + LayerNorm</text>
+  <text x="350" y="390" font-size="20" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward Network（FFN）</text>
+  <rect x="120" y="430" width="460" height="118" rx="14" fill="#FFF8E8" stroke="#5A8AAA" stroke-width="3"/>
+  <text x="350" y="466" font-size="21" font-weight="700" text-anchor="middle" fill="#6B4423">Multi-Head Self-Attention</text>
+  <text x="350" y="490" font-size="16" text-anchor="middle" fill="#8B6F47">残差连接 + LayerNorm</text>
+  <text x="350" y="520" font-size="20" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward Network（FFN）</text>
+  <line x1="350" y1="298" x2="350" y2="290" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="350" y1="428" x2="350" y2="420" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="350" y1="573" x2="350" y2="550" stroke="#5A8AAA" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="120" y="575" width="460" height="66" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="350" y="615" font-size="23" text-anchor="middle" fill="#6B4423">词嵌入 + 位置编码</text>
+  <line x1="350" y1="659" x2="350" y2="643" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="120" y="661" width="460" height="58" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="350" y="697" font-size="22" text-anchor="middle" fill="#6B4423">源序列</text>
+  <text x="1200" y="148" font-size="26" font-weight="700" text-anchor="middle" fill="#D97A47">Decoder（堆叠 N 层）</text>
+  <rect x="920" y="170" width="560" height="60" rx="14" fill="#FBE7D8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="207" font-size="22" text-anchor="middle" fill="#6B4423">输出投影 + Softmax → 词表概率分布</text>
+  <rect x="920" y="250" width="560" height="120" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="284" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
+  <text x="1200" y="306" font-size="15" text-anchor="middle" fill="#8B6F47">残差连接 + LayerNorm</text>
+  <text x="1200" y="332" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（Encoder-Decoder Attention）</text>
+  <text x="1200" y="356" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward Network（FFN）</text>
+  <rect x="920" y="380" width="560" height="120" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="414" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
+  <text x="1200" y="436" font-size="15" text-anchor="middle" fill="#8B6F47">残差连接 + LayerNorm</text>
+  <text x="1200" y="462" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（Encoder-Decoder Attention）</text>
+  <text x="1200" y="486" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward Network（FFN）</text>
+  <rect x="920" y="510" width="560" height="120" rx="14" fill="#FFF8E8" stroke="#D97A47" stroke-width="3"/>
+  <text x="1200" y="544" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Masked Multi-Head Self-Attention</text>
+  <text x="1200" y="566" font-size="15" text-anchor="middle" fill="#8B6F47">残差连接 + LayerNorm</text>
+  <text x="1200" y="592" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Cross-Attention（Encoder-Decoder Attention）</text>
+  <text x="1200" y="616" font-size="19" font-weight="700" text-anchor="middle" fill="#6B4423">Feed-Forward Network（FFN）</text>
+  <line x1="1200" y1="248" x2="1200" y2="233" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="1200" y1="378" x2="1200" y2="372" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="1200" y1="508" x2="1200" y2="502" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <line x1="1200" y1="648" x2="1200" y2="632" stroke="#D97A47" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="920" y="650" width="560" height="66" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="1200" y="690" font-size="23" text-anchor="middle" fill="#6B4423">词嵌入 + 位置编码</text>
+  <line x1="1200" y1="734" x2="1200" y2="718" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <rect x="920" y="736" width="560" height="58" rx="14" fill="#EFF3EA" stroke="#7A8C6F" stroke-width="3"/>
+  <text x="1200" y="772" font-size="22" text-anchor="middle" fill="#6B4423">目标序列（自回归，右移一位）</text>
+  <path d="M 585 229 C 700 190 820 215 912 262" fill="none" stroke="#7A8C6F" stroke-width="3" stroke-linecap="round" marker-end="url(#arw)"/>
+  <text x="748" y="180" font-size="19" text-anchor="middle" fill="#7A8C6F">Encoder 最终输出作为 K、V</text>
+  <text x="800" y="848" font-size="18" text-anchor="middle" fill="#8B6F47">每个子层后均接残差连接与层归一化（原论文为 post-LN，详见图 6）</text>
+  <text x="800" y="874" font-size="15" font-style="italic" text-anchor="middle" fill="#8B6F47">结构图不标注具体数值，N 的取值见表 2；Decoder 的自注意力施加下三角掩码</text>
 </svg>
