@@ -24,7 +24,6 @@ categories: [基础理论学习, 人工智能]
 | 自注意力机制的直觉 | 从循环聚合到全连接加权聚合的思路转变。|
 | 缩放点积注意力 | 注意力机制的数学形式化定义。|
 | 多头注意力 | 如何让 LLM 在不同子空间中实现并行观察。|
-| 配套代码 | 把注意力公式翻译成可运行的 PyTorch 实现，并用测试用例逐条验证。|
 | 位置编码 | 没有位置编码就没有顺序感，以及长度外推的具体做法。|
 | 整体架构 | 编码器块与解码器块的内部结构，残差连接与层归一化如何协作。|
 | 从文本到向量 | 分词与词表、输入嵌入与输出层。|
@@ -33,6 +32,7 @@ categories: [基础理论学习, 人工智能]
 | 典型变体 | BERT、GPT、T5 等变体是如何从同一架构分化出来的。|
 | 与现代 LLM 的关系 | Decoder-only Transformer 为何成为 LLM 的事实标准；注意力汇与投机解码等推理侧话题。|
 | 注意力变体与工程优化 | Flash Attention、稀疏/线性/滑动窗口注意力、GQA 等改进各自解决了哪一层问题，附速查对照表。|
+| 配套代码 | 把注意力公式翻译成可运行的 PyTorch 实现，并用测试用例逐条验证。|
 
 **表 1** 这篇笔记要讨论的主题及其内容
 
@@ -154,91 +154,7 @@ $$
 
 值得注意的是，与使用同样维度的单头注意力相比，多头机制**没有增加总计算量**。单个头的注意力计算复杂度为 $O(n^2 d_k)$（其中 $n$ 为序列长度，$d_k = d/h$ 为单头的键向量维度，$d$ 为模型维度）。而 $h$ 个头的计算复杂度总和为 $O(h \cdot n^2 d_k) = O(n^2 d)$——每个头的维度被相应缩小为 $d/h$，总计算量守恒。这是一种 “以结构换表达力” 的设计选择。
 
-把它翻译成代码时，多头的并行与守恒最终都落在一次 `view` 操作上，见下一章《配套代码》。
-
-## 配套代码：最小实现与实测
-
-前面几节的公式，最终都要落到可运行的代码上。这份配套实现对应 **仅解码器模型（Decoder-only LLM）里最常见的因果掩码多头自注意力**（对应后文图 7 中 Decoder 的第一个子层）。
-
-### 最小实现示范（PyTorch）
-
-如果我们将上面的公式翻译成具体的 Python 代码，就会发现它的核心部分其实只有二十多行。下面这段就是它的完整实现：
-
-```python
-import math
-import torch
-import torch.nn as nn
-
-
-class MultiHeadSelfAttention(nn.Module):
-    """因果掩码的多头自注意力，形状约定：X 为 (batch, seq_len, d_model)。
-
-    教学实现：未包含 padding mask / attention dropout / KV cache 等工程项。
-    """
-
-    def __init__(self, d_model: int, n_head: int):
-        super().__init__()
-        assert d_model % n_head == 0, "d_model 必须能被 n_head 整除"
-        self.n_head = n_head
-        self.d_k = d_model // n_head  # 单头维度 d_k = d_model / h
-        self.W_q = nn.Linear(d_model, d_model)
-        self.W_k = nn.Linear(d_model, d_model)
-        self.W_v = nn.Linear(d_model, d_model)
-        self.W_o = nn.Linear(d_model, d_model)
-
-    def forward(self, X: torch.Tensor) -> torch.Tensor:
-        B, n, d = X.shape  # (batch, seq_len, d_model)
-        # 投影 -> 拆成 h 个头 -> (B, h, n, d_k)
-        q = self.W_q(X).view(B, n, self.n_head, self.d_k).transpose(1, 2)
-        k = self.W_k(X).view(B, n, self.n_head, self.d_k).transpose(1, 2)
-        v = self.W_v(X).view(B, n, self.n_head, self.d_k).transpose(1, 2)
-
-        scores = q @ k.transpose(-2, -1) / math.sqrt(self.d_k)  # (B, h, n, n)
-        causal = torch.triu(torch.ones(n, n, dtype=torch.bool, device=X.device), diagonal=1)
-        scores = scores.masked_fill(causal, float("-inf"))  # 掩码 M：屏蔽未来位置
-        attn = scores.softmax(dim=-1)  # 每行权重和为 1
-
-        out = (attn @ v).transpose(1, 2).contiguous().view(B, n, d)  # 回到 (B, n, d_model)
-        return self.W_o(out)
-```
-
-对照来看，这段代码与我们前面介绍的计算式基本上是一一对应的关系，并且逐行可查。譬如，`W_q/W_k/W_v` 对应 $Q = XW^Q$。`q @ k.transpose(-2, -1) / sqrt(d_k)` 对应缩放点积注意力中的 $QK^\top/\sqrt{d_k}$。`masked_fill` 对应掩码矩阵 $M$；`softmax` 对应归一化步骤；`attn @ v` 对应加权求和。最后的 `transpose(...).view(...)` 则把多头的输出拼接回 $n \times d$ 的形状，与后文表 3 中的形状变化一致。
-
-这里需要特别留意的是 **`view(B, n, h, d_k)` 这一步**：它正是 “多头” 得以并行、又能在计算量上守恒的关键。每个头只负责 $d/h$ 维，$h$ 个头合起来仍然是 $d$ 维，与后文表 2 中 base 模型 $d_k = d_{\text{model}}/h$ 的取法一致（代码里取的是通用的 $d_{\text{model}} // n_{\text{head}}$）。
-
-另外，需要说明的是，上述代码是一份**教学演示**，目的是把抽象的数学计算式逐行翻译成可执行的代码。对于可直接用于生产的注意力模块来说，它毕竟还缺少了若干工程必备项。这其中至少要包含**Padding Mask**（用于区分有效 token 与填充位）、**Attention Dropout**（用于提高模型的泛化能力）、**KV Cache**（用于实现自回归推理）这三项。此外，混合精度与算子融合等优化也不在其中。同时它只处理了 “设备一致” 这一基本问题：掩码张量必须与输入张量位于同一设备，否则 `masked_fill` 会报设备不匹配。要补全这些内容，还需要更细的掩码语义与推理时的状态管理，我将会在《[[LLM 的部署与测试]]》这篇笔记中展开这部分的讨论。
-
-### 配套项目与实测结果
-
-在撰写这篇笔记的同时，我也将上面这段对于 Transformer 架构的最小实现固化成了一个可运行、可测试的教学项目，保存在了这篇笔记所在目录下的 `examples/transformer_minimal/` 子目录中，以下是这个项目的相关说明：
-
-| 文件 | 内容 |
-|---|---|
-| `model.py` | 注意力、FFN、RMSNorm、Decoder 块与最小语言模型 `MiniGPT` |
-| `demo_train.py` | 端到端演示：在字符级小语料上训练并自回归生成 |
-| `tests/test_transformer_minimal.py` | 10 个用例，逐条验证因果性、Padding Mask、KV Cache 一致性、GQA 分组映射、RoPE 相对性质等 |
-| `README.md` | 安装运行方式、实现要点与踩坑记录 |
-
-在这个项目中，我为上一节演示的最小实现补齐了之前被刻意省略的**Padding Mask**、**Attention Dropout**、**KV Cache**这三个工程必备项，并把稍后会提到的 **RoPE**、**GQA**、**RMSNorm**、**SwiGLU** 做成了可选开关（`use_rope`、`n_kv_head`、`norm="rms"`、`swiglu=True`）。然后，该项目在我这台计算机（ASUS NUC 14 Pro）上的执行结果是：CPU 上约 2 秒完成 300 步训练，loss 从 3.46 降到 0.002，模型能稳定复现语料模式；10 个测试用例全部通过，具体如图 4 所示。
-
-![图 4](./img/transformer-04-framework-test-cases.png)
-
-**图 4** 配套代码在 ASUS NUC 14 Pro 上的执行结果
-
-在这里，有四个容易写错、也最值得对照代码细看的地方是需要特别留意的，它们分别是：
-
-- **因果掩码的方向**：必须屏蔽 `query_pos < key_pos` 的 “未来位置”，写反会让模型看到未来——训练 loss 照样下降，但生成结果完全错乱；
-- **KV Cache 下的位置偏移**：启用缓存后查询位置不再是 `0..n-1`，因果掩码与 RoPE 的位置下标都要用 `total_kv - n` 起的偏移量；
-- **GQA 的广播方向**：应把 KV 头复制到查询头（查询头 `i` 用 KV 头 `i // (h/h_kv)`），而不是把组内查询头求和——后者等价于 MQA，语义不同；
-- **RoPE 只能对原始 Q/K 施加一次**：对已旋转的张量再次旋转得到的不是位置平移结果。
-
-当然了，上面所列的这些只是该项目 10 个测试用例覆盖范围的一部分。如果想了解每个用例验证的是什么，300 步训练的损失函数是如何收敛的，可以参考下面这张我为整套用例整理的对照表（见图 5）。
-
-![图 5](./img/transformer-05-framework-test-cases.svg)
-
-**图 5** 配套代码的实测汇总
-
-请注意，以上这些并不是抽象的提醒，它们各自对应到了测试用例中的一条断言：因果掩码的方向、KV Cache 下的位置偏移、GQA 的广播方向，以及 RoPE 只对原始 Q/K 施加一次，都被逐条钉死。顺带提一句，关于 KV Cache 在推理链路中的实际位置与性能影响，我会将它放到《[[LLM 的部署与测试]]》这篇笔记中去展开具体的讨论。
+把它翻译成代码时，多头的并行与守恒最终都落在一次 `view` 操作上，见后文《配套代码》一节。
 
 ## 位置编码
 
@@ -260,11 +176,11 @@ $$
 
 在这里，$pos$ 是位置索引，$i$ 是维度索引，$d$ 是嵌入维度。另外，分母中的 $10000^{2i/d}$ 使得**不同维度承载不同频率的波形**：低维频率高、波长短，负责区分邻近位置；高维频率低、波长长，负责编码较远处的绝对位置。
 
-需要留意的是，$\sin$ 与 $\cos$ 并不是各管一摊：同一个 $i$ 对应的偶数维与奇数维**共用同一个频率**，两条曲线之间恰好错开四分之一周期。图 6 把偶数维与奇数维的波形画在一起对照，可以直观看到不同维度之间频率由高到低的阶梯分布。
+需要留意的是，$\sin$ 与 $\cos$ 并不是各管一摊：同一个 $i$ 对应的偶数维与奇数维**共用同一个频率**，两条曲线之间恰好错开四分之一周期。图 4 把偶数维与奇数维的波形画在一起对照，可以直观看到不同维度之间频率由高到低的阶梯分布。
 
-![图 6](./img/transformer-06-infographic-positional-encoding.svg)
+![图 4](./img/transformer-04-infographic-positional-encoding.svg)
 
-**图 6** 正弦与余弦位置编码：偶数维取 sin，奇数维取 cos，不同维度承载不同频率
+**图 4** 正弦与余弦位置编码：偶数维取 sin，奇数维取 cos，不同维度承载不同频率
 
 上面这种正弦与余弦固定位置编码的设计，给我们带来了两个核心优势。
 
@@ -284,19 +200,21 @@ $$
 1. **位置插值（Position Interpolation, PI）**：不再让位置索引继续增长，而是把超出训练长度的位置索引**线性压缩**回原窗口范围（[Chen et al., 2023](https://arxiv.org/abs/2306.15595)）。这样模型见到的位置始终落在训练分布内，代价是相邻位置之间的分辨率被压低——原本 4K 的窗口扩到 32K 时，位置索引要整体压缩到原来的八分之一，每个位置只占原来八分之一的间隔。论文给出的理论分析是：插值方案的注意力分数上界比直接外推小约 600 倍，这正是它更稳定的原因。
 2. **NTK-aware 缩放与 YaRN**：前者最初是社区提出的做法而非正式论文，它从 RoPE 的频率基底入手，调整不同维度频率随位置缩放的比例，如今在主流推理框架中已实现为可配置的缩放选项；[YaRN](https://arxiv.org/abs/2309.00071) 则进一步把分段的频率缩放与**注意力温度**的调整结合起来，让短上下文与长上下文的表现尽量一致。论文报告它所需的训练 token 比此前的同类方法少 10 倍、训练步数少 2.5 倍。
 
-这两条路线都是 “改造位置表示以迁就已训练权重”，而 ALiBi 走了另一条路：干脆不编码绝对位置，而是给注意力分数加一个随相对距离线性衰减的偏置，用 “距离越远、影响越弱” 这一归纳偏置直接换取外推能力。三种思路的取舍，取决于更看重分辨率、稳定性，还是简洁性。
+当然，除了以上这两条主要设计思路为 “改造位置表示以迁就已训练权重” 的路线之外，[ALiBi（线性偏置位置编码）](https://arxiv.org/abs/2108.12409) 也提供另一条设计思路：干脆不编码绝对位置，而是给注意力分数加一个随相对距离线性衰减的偏置，用 “距离越远、影响越弱” 这一归纳偏置直接换取外推能力。三种思路的取舍，取决于更看重分辨率、稳定性，还是简洁性。
 
 ## 整体架构
 
-把前面讨论的所有组件拼起来，我们就得到了原始 Transformer 的完整架构。它由 **Encoder** 和 **Decoder** 两部分组成，每部分各包含若干个相同的 “块（Block）”。
+现在，只要把前面讨论的所有组件拼装起来，我们就得到了一份完整的、按照 Transformer 的原始定义来实现的模型训练架构。它主要由编码器（Encoder）和解码器（Decoder）两部分组成，每部分各包含若干个相同的 “块（Block）”，具体如图 5 所示。
 
-![图 7](./img/transformer-07-framework-transformer-architecture.svg)
+![图 5](./img/transformer-05-framework-transformer-architecture.svg)
 
-**图 7** 原始 Transformer 的整体结构
+**图 5** 按照 Transformer 的原始定义实现的模型训练架构
+
+图 5 标出的是各部分之间的相对位置与数据流向，但结构图本身并不标注具体数值。要让这份架构真正可实现，还得确定每个环节的维度与规模，下表给出的是原始论文 base 模型的答案：$N$ 决定堆叠层数，$d_{\text{model}}$ 决定 token 的表示宽度，$h$ 与 $d_k = d_v$ 决定注意力如何切分，$d_{\text{ff}}$ 决定前馈网络的中间宽度。
 
 | 配置项 | 取值 | 说明 |
 |---|---|---|
-| $N$ | 6 | Encoder / Decoder 各堆叠 6 层|
+| $N$ | 6 | 编码器/解码器各堆叠 6 层|
 | $d_{\text{model}}$ | 512 | 模型维度（隐藏层宽度）|
 | $h$ | 8 | 注意力头数|
 | $d_k = d_v$ | 64 | 单头键 / 值向量维度（$d_{\text{model}} / h$）|
@@ -381,9 +299,9 @@ tensor([[1.0000, 0.0000, 0.0000, 0.0000],
 
 这里还有一个容易被忽略的细节。原论文采用的是 **post-LN**（先做残差相加、再做归一化，即上面写出的 $X' = \text{LayerNorm}(X + \text{MultiHead}(X))$）。而现代 LLM（如 LLaMA、Qwen 系列）普遍改用 **pre-LN**（先归一化、再做残差相加），并把 LayerNorm 换成**计算更省的 RMSNorm**（RMSNorm 省去了均值中心化与偏置项，只做均方根缩放，单层开销更小）。
 
-![图 8](./img/transformer-08-framework-prenorm-vs-postnorm.svg)
+![图 6](./img/transformer-06-framework-prenorm-vs-postnorm.svg)
 
-**图 8** post-LN 与 pre-LN：归一化与残差相加的先后顺序
+**图 6** post-LN 与 pre-LN：归一化与残差相加的先后顺序
 
 两者的差别只在 “先做哪一步”，但影响不小：post-LN 的残差通路上串联着归一化层，深层堆叠时梯度要连续穿过这些层，训练早期更不稳定，对学习率预热（warmup）的依赖也更明显；pre-LN 把归一化挪到子层之前，残差通路本身成为一条从输入直达输出的 “干净” 梯度通道，训练更稳定、可以少依赖甚至去掉学习率预热——这是深层堆叠能够成立的重要工程前提。现代 LLM 普遍选择 pre-LN，正是出于这层考虑。
 
@@ -590,9 +508,9 @@ Google 提出的 T5（[arXiv:1910.10683](https://arxiv.org/abs/1910.10683)，202
 
 不过，原始 Transformer 还留下了一个著名的结构性瓶颈：**自注意力的计算量与显存占用都随序列长度 $n$ 呈平方增长**（注意力矩阵的规模是 $O(n^2)$）。当上下文从 2K 扩展到 128K 时，注意力矩阵的规模会膨胀约 4000 倍，这正是后来 Flash Attention、稀疏注意力、线性注意力等一系列工程与算法改进要解决的问题。
 
-![图 9](./img/transformer-09-framework-decoder-only-evolution.svg)
+![图 7](./img/transformer-07-framework-decoder-only-evolution.svg)
 
-**图 9** 从原始 Transformer 到现代 LLM：骨架未变，变的是规模与工程实现
+**图 7** 从原始 Transformer 到现代 LLM：骨架未变，变的是规模与工程实现
 
 理解了原始 Transformer 之后，我们就可以看清现代 LLM 的本质：**它们基本上都是 Decoder-only Transformer 的规模化与工程优化版本**。
 
@@ -618,7 +536,7 @@ Google 提出的 T5（[arXiv:1910.10683](https://arxiv.org/abs/1910.10683)，202
 
 ## 注意力变体与工程优化
 
-上一章提到的 Flash Attention、稀疏注意力、线性注意力等工程优化，具体包含下面这一系列改进：
+上一章末尾预告的这一系列工程优化，具体包含下面这些改进：
 
 - [RoPE](https://arxiv.org/abs/2104.09864)（旋转式位置编码）：用与位置相关的旋转矩阵作用于 $Q$、$K$，让注意力分数直接反映相对位置差。它不引入额外参数；但要特别注意，**把位置信息写进 $Q$、$K$ 不等于自动获得任意长度的外推能力**——超出训练长度后的表现还取决于训练时的长度分布，以及位置插值、NTK-aware 缩放等额外技巧（详见上文 “长度外推” 一节）。
 - [SwiGLU](https://arxiv.org/abs/2002.05202)（门控线性单元）：用门控激活替换前馈网络中的 ReLU，在同等参数下提升表达力。
@@ -655,6 +573,90 @@ Flash Attention 的收益来自对 **IO 复杂度** 的重新分析。设序列�
 GQA 则属于另一个维度：它既不改变注意力矩阵本身，也不改变连接关系，只是通过组内共享 $K$、$V$ 减少 KV Cache 的份数（详见上文关于 GQA 的讨论）。
 
 但**所有这些演进都没有改变 Decoder-only Transformer 的核心骨架**——自注意力 + 前馈网络 + 残差归一化 + 自回归语言模型。这意味着，掌握了原始 Transformer 的工作原理，就具备了阅读后续所有 LLM 相关文献的 “地基”。
+
+## 配套代码：最小实现与实测
+
+前面各章讨论过的公式，最终都要落到可运行的代码上。这份配套实现对应 **仅解码器模型（Decoder-only LLM）里最常见的因果掩码多头自注意力**（对应前文图 5 中 Decoder 的第一个子层）。
+
+### 最小实现示范（PyTorch）
+
+如果把前面各章的公式翻译成具体的 Python 代码，就会发现它的核心部分其实只有二十多行。下面这段就是它的完整实现：
+
+```python
+import math
+import torch
+import torch.nn as nn
+
+
+class MultiHeadSelfAttention(nn.Module):
+    """因果掩码的多头自注意力，形状约定：X 为 (batch, seq_len, d_model)。
+
+    教学实现：未包含 padding mask / attention dropout / KV cache 等工程项。
+    """
+
+    def __init__(self, d_model: int, n_head: int):
+        super().__init__()
+        assert d_model % n_head == 0, "d_model 必须能被 n_head 整除"
+        self.n_head = n_head
+        self.d_k = d_model // n_head  # 单头维度 d_k = d_model / h
+        self.W_q = nn.Linear(d_model, d_model)
+        self.W_k = nn.Linear(d_model, d_model)
+        self.W_v = nn.Linear(d_model, d_model)
+        self.W_o = nn.Linear(d_model, d_model)
+
+    def forward(self, X: torch.Tensor) -> torch.Tensor:
+        B, n, d = X.shape  # (batch, seq_len, d_model)
+        # 投影 -> 拆成 h 个头 -> (B, h, n, d_k)
+        q = self.W_q(X).view(B, n, self.n_head, self.d_k).transpose(1, 2)
+        k = self.W_k(X).view(B, n, self.n_head, self.d_k).transpose(1, 2)
+        v = self.W_v(X).view(B, n, self.n_head, self.d_k).transpose(1, 2)
+
+        scores = q @ k.transpose(-2, -1) / math.sqrt(self.d_k)  # (B, h, n, n)
+        causal = torch.triu(torch.ones(n, n, dtype=torch.bool, device=X.device), diagonal=1)
+        scores = scores.masked_fill(causal, float("-inf"))  # 掩码 M：屏蔽未来位置
+        attn = scores.softmax(dim=-1)  # 每行权重和为 1
+
+        out = (attn @ v).transpose(1, 2).contiguous().view(B, n, d)  # 回到 (B, n, d_model)
+        return self.W_o(out)
+```
+
+对照来看，这段代码与我们前面介绍的计算式基本上是一一对应的关系，并且逐行可查。譬如，`W_q/W_k/W_v` 对应 $Q = XW^Q$。`q @ k.transpose(-2, -1) / sqrt(d_k)` 对应缩放点积注意力中的 $QK^\top/\sqrt{d_k}$。`masked_fill` 对应掩码矩阵 $M$；`softmax` 对应归一化步骤；`attn @ v` 对应加权求和。最后的 `transpose(...).view(...)` 则把多头的输出拼接回 $n \times d$ 的形状，与前文表 3 中的形状变化一致。
+
+这里需要特别留意的是 **`view(B, n, h, d_k)` 这一步**：它正是 “多头” 得以并行、又能在计算量上守恒的关键。每个头只负责 $d/h$ 维，$h$ 个头合起来仍然是 $d$ 维，与前文表 2 中 base 模型 $d_k = d_{\text{model}}/h$ 的取法一致（代码里取的是通用的 $d_{\text{model}} // n_{\text{head}}$）。
+
+另外，需要说明的是，上述代码是一份**教学演示**，目的是把抽象的数学计算式逐行翻译成可执行的代码。对于可直接用于生产的注意力模块来说，它毕竟还缺少了若干工程必备项。这其中至少要包含**Padding Mask**（用于区分有效 token 与填充位）、**Attention Dropout**（用于提高模型的泛化能力）、**KV Cache**（用于实现自回归推理）这三项。此外，混合精度与算子融合等优化也不在其中。同时它只处理了 “设备一致” 这一基本问题：掩码张量必须与输入张量位于同一设备，否则 `masked_fill` 会报设备不匹配。要补全这些内容，还需要更细的掩码语义与推理时的状态管理，我将会在《[[LLM 的部署与测试]]》这篇笔记中展开这部分的讨论。
+
+### 配套项目与实测结果
+
+在撰写这篇笔记的同时，我也将上面这段对于 Transformer 架构的最小实现固化成了一个可运行、可测试的教学项目，保存在了这篇笔记所在目录下的 `examples/transformer_minimal/` 子目录中，以下是这个项目的相关说明：
+
+| 文件 | 内容 |
+|---|---|
+| `model.py` | 注意力、FFN、RMSNorm、Decoder 块与最小语言模型 `MiniGPT` |
+| `demo_train.py` | 端到端演示：在字符级小语料上训练并自回归生成 |
+| `tests/test_transformer_minimal.py` | 10 个用例，逐条验证因果性、Padding Mask、KV Cache 一致性、GQA 分组映射、RoPE 相对性质等 |
+| `README.md` | 安装运行方式、实现要点与踩坑记录 |
+
+在这个项目中，我为上一节演示的最小实现补齐了之前被刻意省略的**Padding Mask**、**Attention Dropout**、**KV Cache**这三个工程必备项，并把前面提到的 **RoPE**、**GQA**、**RMSNorm**、**SwiGLU** 做成了可选开关（`use_rope`、`n_kv_head`、`norm="rms"`、`swiglu=True`）。然后，该项目在我这台计算机（ASUS NUC 14 Pro）上的执行结果是：CPU 上约 2 秒完成 300 步训练，loss 从 3.46 降到 0.002，模型能稳定复现语料模式；10 个测试用例全部通过，具体如图 8 所示。
+
+![图 8](./img/transformer-08-framework-test-cases.png)
+
+**图 8** 配套代码在 ASUS NUC 14 Pro 上的执行结果
+
+在这里，有四个容易写错、也最值得对照代码细看的地方是需要特别留意的，它们分别是：
+
+- **因果掩码的方向**：必须屏蔽 `query_pos < key_pos` 的 “未来位置”，写反会让模型看到未来——训练 loss 照样下降，但生成结果完全错乱；
+- **KV Cache 下的位置偏移**：启用缓存后查询位置不再是 `0..n-1`，因果掩码与 RoPE 的位置下标都要用 `total_kv - n` 起的偏移量；
+- **GQA 的广播方向**：应把 KV 头复制到查询头（查询头 `i` 用 KV 头 `i // (h/h_kv)`），而不是把组内查询头求和——后者等价于 MQA，语义不同；
+- **RoPE 只能对原始 Q/K 施加一次**：对已旋转的张量再次旋转得到的不是位置平移结果。
+
+当然了，上面所列的这些只是该项目 10 个测试用例覆盖范围的一部分。如果想了解每个用例验证的是什么，300 步训练的损失函数是如何收敛的，可以参考下面这张我为整套用例整理的对照表（见图 9）。
+
+![图 9](./img/transformer-09-framework-test-cases.svg)
+
+**图 9** 配套代码的实测汇总
+
+请注意，以上这些并不是抽象的提醒，它们各自对应到了测试用例中的一条断言：因果掩码的方向、KV Cache 下的位置偏移、GQA 的广播方向，以及 RoPE 只对原始 Q/K 施加一次，都被逐条钉死。顺带提一句，关于 KV Cache 在推理链路中的实际位置与性能影响，我会将它放到《[[LLM 的部署与测试]]》这篇笔记中去展开具体的讨论。
 
 ## 结束语
 
